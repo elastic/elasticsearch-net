@@ -34,7 +34,9 @@ public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Request
 }
 
 /// <summary>
-/// <para>Previews the extracted features used by a data frame analytics config.</para>
+/// <para>
+/// Previews the extracted features used by a data frame analytics config.
+/// </para>
 /// </summary>
 public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<PreviewDataFrameAnalyticsRequestParameters>
 {
@@ -55,14 +57,20 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<Prev
 	internal override string OperationName => "ml.preview_data_frame_analytics";
 
 	/// <summary>
-	/// <para>A data frame analytics config as described in create data frame analytics<br/>jobs. Note that `id` and `dest` don’t need to be provided in the context of<br/>this API.</para>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframePreviewConfig? Config { get; set; }
 }
 
 /// <summary>
-/// <para>Previews the extracted features used by a data frame analytics config.</para>
+/// <para>
+/// Previews the extracted features used by a data frame analytics config.
+/// </para>
 /// </summary>
 public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<PreviewDataFrameAnalyticsRequestDescriptor<TDocument>, PreviewDataFrameAnalyticsRequestParameters>
 {
@@ -95,7 +103,11 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A data frame analytics config as described in create data frame analytics<br/>jobs. Note that `id` and `dest` don’t need to be provided in the context of<br/>this API.</para>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
 	/// </summary>
 	public PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframePreviewConfig? config)
 	{
@@ -145,7 +157,9 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument
 }
 
 /// <summary>
-/// <para>Previews the extracted features used by a data frame analytics config.</para>
+/// <para>
+/// Previews the extracted features used by a data frame analytics config.
+/// </para>
 /// </summary>
 public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor : RequestDescriptor<PreviewDataFrameAnalyticsRequestDescriptor, PreviewDataFrameAnalyticsRequestParameters>
 {
@@ -178,7 +192,11 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor : Request
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframePreviewConfigDescriptor> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A data frame analytics config as described in create data frame analytics<br/>jobs. Note that `id` and `dest` don’t need to be provided in the context of<br/>this API.</para>
+	/// <para>
+	/// A data frame analytics config as described in create data frame analytics
+	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+	/// this API.
+	/// </para>
 	/// </summary>
 	public PreviewDataFrameAnalyticsRequestDescriptor Config(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframePreviewConfig? config)
 	{

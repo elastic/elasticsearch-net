@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IdsQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
@@ -38,7 +43,9 @@ public sealed partial class IdsQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>An array of document IDs.</para>
+	/// <para>
+	/// An array of document IDs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
@@ -59,7 +66,12 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 	private Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public IdsQueryDescriptor Boost(float? boost)
 	{
@@ -74,7 +86,9 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 	}
 
 	/// <summary>
-	/// <para>An array of document IDs.</para>
+	/// <para>
+	/// An array of document IDs.
+	/// </para>
 	/// </summary>
 	public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values)
 	{

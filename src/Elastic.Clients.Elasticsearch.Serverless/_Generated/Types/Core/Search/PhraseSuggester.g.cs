@@ -30,31 +30,44 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class PhraseSuggester
 {
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.</para>
+	/// <para>
+	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collate")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollate? Collate { get; set; }
 
 	/// <summary>
-	/// <para>Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.<br/>Only candidates that score higher than the threshold will be included in the result.</para>
+	/// <para>
+	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
+	/// Only candidates that score higher than the threshold will be included in the result.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("confidence")]
 	public double? Confidence { get; set; }
 
 	/// <summary>
-	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
+	/// <para>
+	/// A list of candidate generators that produce a list of possible terms per term in the given text.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("direct_generator")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -62,55 +75,79 @@ public sealed partial class PhraseSuggester
 	public bool? ForceUnigrams { get; set; }
 
 	/// <summary>
-	/// <para>Sets max size of the n-grams (shingles) in the field.<br/>If the field doesn’t contain n-grams (shingles), this should be omitted or set to `1`.<br/>If the field uses a shingle filter, the `gram_size` is set to the `max_shingle_size` if not explicitly set.</para>
+	/// <para>
+	/// Sets max size of the n-grams (shingles) in the field.
+	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
+	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gram_size")]
 	public int? GramSize { get; set; }
 
 	/// <summary>
-	/// <para>Sets up suggestion highlighting.<br/>If not provided, no highlighted field is returned.</para>
+	/// <para>
+	/// Sets up suggestion highlighting.
+	/// If not provided, no highlighted field is returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestHighlight? Highlight { get; set; }
 
 	/// <summary>
-	/// <para>The maximum percentage of the terms considered to be misspellings in order to form a correction.<br/>This method accepts a float value in the range `[0..1)` as a fraction of the actual query terms or a number `>=1` as an absolute number of query terms.</para>
+	/// <para>
+	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
+	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_errors")]
 	public double? MaxErrors { get; set; }
 
 	/// <summary>
-	/// <para>The likelihood of a term being misspelled even if the term exists in the dictionary.</para>
+	/// <para>
+	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("real_word_error_likelihood")]
 	public double? RealWordErrorLikelihood { get; set; }
 
 	/// <summary>
-	/// <para>The separator that is used to separate terms in the bigram field.<br/>If not set, the whitespace character is used as a separator.</para>
+	/// <para>
+	/// The separator that is used to separate terms in the bigram field.
+	/// If not set, the whitespace character is used as a separator.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggested terms to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).<br/>The default model is Stupid Backoff.</para>
+	/// <para>
+	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
+	/// The default model is Stupid Backoff.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("smoothing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SmoothingModel? Smoothing { get; set; }
 
 	/// <summary>
-	/// <para>The text/query to provide suggestions for.</para>
+	/// <para>
+	/// The text/query to provide suggestions for.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
@@ -155,7 +192,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	private int? TokenLimitValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -164,7 +204,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.</para>
+	/// <para>
+	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Collate(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollate? collate)
 	{
@@ -191,7 +233,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.<br/>Only candidates that score higher than the threshold will be included in the result.</para>
+	/// <para>
+	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
+	/// Only candidates that score higher than the threshold will be included in the result.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Confidence(double? confidence)
 	{
@@ -200,7 +245,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
+	/// <para>
+	/// A list of candidate generators that produce a list of possible terms per term in the given text.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
 	{
@@ -239,7 +286,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -248,7 +298,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -257,7 +310,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -272,7 +328,11 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Sets max size of the n-grams (shingles) in the field.<br/>If the field doesn’t contain n-grams (shingles), this should be omitted or set to `1`.<br/>If the field uses a shingle filter, the `gram_size` is set to the `max_shingle_size` if not explicitly set.</para>
+	/// <para>
+	/// Sets max size of the n-grams (shingles) in the field.
+	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
+	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> GramSize(int? gramSize)
 	{
@@ -281,7 +341,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Sets up suggestion highlighting.<br/>If not provided, no highlighted field is returned.</para>
+	/// <para>
+	/// Sets up suggestion highlighting.
+	/// If not provided, no highlighted field is returned.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestHighlight? highlight)
 	{
@@ -308,7 +371,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The maximum percentage of the terms considered to be misspellings in order to form a correction.<br/>This method accepts a float value in the range `[0..1)` as a fraction of the actual query terms or a number `>=1` as an absolute number of query terms.</para>
+	/// <para>
+	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
+	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> MaxErrors(double? maxErrors)
 	{
@@ -317,7 +383,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The likelihood of a term being misspelled even if the term exists in the dictionary.</para>
+	/// <para>
+	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> RealWordErrorLikelihood(double? realWordErrorLikelihood)
 	{
@@ -326,7 +394,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The separator that is used to separate terms in the bigram field.<br/>If not set, the whitespace character is used as a separator.</para>
+	/// <para>
+	/// The separator that is used to separate terms in the bigram field.
+	/// If not set, the whitespace character is used as a separator.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Separator(string? separator)
 	{
@@ -335,7 +406,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggested terms to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -344,7 +417,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Size(int? size)
 	{
@@ -353,7 +428,10 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).<br/>The default model is Stupid Backoff.</para>
+	/// <para>
+	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
+	/// The default model is Stupid Backoff.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Smoothing(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SmoothingModel? smoothing)
 	{
@@ -380,7 +458,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The text/query to provide suggestions for.</para>
+	/// <para>
+	/// The text/query to provide suggestions for.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Text(string? text)
 	{
@@ -583,7 +663,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	private int? TokenLimitValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Analyzer(string? analyzer)
 	{
@@ -592,7 +675,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.</para>
+	/// <para>
+	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Collate(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollate? collate)
 	{
@@ -619,7 +704,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.<br/>Only candidates that score higher than the threshold will be included in the result.</para>
+	/// <para>
+	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
+	/// Only candidates that score higher than the threshold will be included in the result.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Confidence(double? confidence)
 	{
@@ -628,7 +716,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
+	/// <para>
+	/// A list of candidate generators that produce a list of possible terms per term in the given text.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
 	{
@@ -667,7 +757,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -676,7 +769,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -685,7 +781,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -700,7 +799,11 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>Sets max size of the n-grams (shingles) in the field.<br/>If the field doesn’t contain n-grams (shingles), this should be omitted or set to `1`.<br/>If the field uses a shingle filter, the `gram_size` is set to the `max_shingle_size` if not explicitly set.</para>
+	/// <para>
+	/// Sets max size of the n-grams (shingles) in the field.
+	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
+	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor GramSize(int? gramSize)
 	{
@@ -709,7 +812,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>Sets up suggestion highlighting.<br/>If not provided, no highlighted field is returned.</para>
+	/// <para>
+	/// Sets up suggestion highlighting.
+	/// If not provided, no highlighted field is returned.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestHighlight? highlight)
 	{
@@ -736,7 +842,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The maximum percentage of the terms considered to be misspellings in order to form a correction.<br/>This method accepts a float value in the range `[0..1)` as a fraction of the actual query terms or a number `>=1` as an absolute number of query terms.</para>
+	/// <para>
+	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
+	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor MaxErrors(double? maxErrors)
 	{
@@ -745,7 +854,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The likelihood of a term being misspelled even if the term exists in the dictionary.</para>
+	/// <para>
+	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor RealWordErrorLikelihood(double? realWordErrorLikelihood)
 	{
@@ -754,7 +865,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The separator that is used to separate terms in the bigram field.<br/>If not set, the whitespace character is used as a separator.</para>
+	/// <para>
+	/// The separator that is used to separate terms in the bigram field.
+	/// If not set, the whitespace character is used as a separator.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Separator(string? separator)
 	{
@@ -763,7 +877,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggested terms to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor ShardSize(int? shardSize)
 	{
@@ -772,7 +888,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Size(int? size)
 	{
@@ -781,7 +899,10 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).<br/>The default model is Stupid Backoff.</para>
+	/// <para>
+	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
+	/// The default model is Stupid Backoff.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SmoothingModel? smoothing)
 	{
@@ -808,7 +929,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	}
 
 	/// <summary>
-	/// <para>The text/query to provide suggestions for.</para>
+	/// <para>
+	/// The text/query to provide suggestions for.
+	/// </para>
 	/// </summary>
 	public PhraseSuggesterDescriptor Text(string? text)
 	{

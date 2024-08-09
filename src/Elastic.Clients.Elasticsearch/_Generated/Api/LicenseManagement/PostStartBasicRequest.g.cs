@@ -32,13 +32,18 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 public sealed partial class PostStartBasicRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>whether the user has acknowledged acknowledge messages (default: false)</para>
+	/// <para>
+	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 }
 
 /// <summary>
-/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
+/// <para>
+/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
+/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+/// </para>
 /// </summary>
 public sealed partial class PostStartBasicRequest : PlainRequest<PostStartBasicRequestParameters>
 {
@@ -51,14 +56,19 @@ public sealed partial class PostStartBasicRequest : PlainRequest<PostStartBasicR
 	internal override string OperationName => "license.post_start_basic";
 
 	/// <summary>
-	/// <para>whether the user has acknowledged acknowledge messages (default: false)</para>
+	/// <para>
+	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 }
 
 /// <summary>
-/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
+/// <para>
+/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
+/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+/// </para>
 /// </summary>
 public sealed partial class PostStartBasicRequestDescriptor : RequestDescriptor<PostStartBasicRequestDescriptor, PostStartBasicRequestParameters>
 {

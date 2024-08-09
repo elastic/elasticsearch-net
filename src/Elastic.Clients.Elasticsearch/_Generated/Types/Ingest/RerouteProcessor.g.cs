@@ -30,55 +30,88 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class RerouteProcessor
 {
 	/// <summary>
-	/// <para>Field references or a static value for the dataset part of the data stream name.<br/>In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.<br/>Example values are nginx.access and nginx.error.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <dataset> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.dataset}}</para>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dataset")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Dataset { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>A static value for the target. Can’t be set when the dataset or namespace option is set.</para>
+	/// <para>
+	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("destination")]
 	public string? Destination { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Field references or a static value for the namespace part of the data stream name. See the criteria for<br/>index names for allowed characters. Must be no longer than 100 characters.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <namespace> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.namespace}}</para>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("namespace")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Namespace { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -107,9 +140,19 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Field references or a static value for the dataset part of the data stream name.<br/>In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.<br/>Example values are nginx.access and nginx.error.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <dataset> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.dataset}}</para>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> Dataset(ICollection<string>? dataset)
 	{
@@ -118,7 +161,10 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -127,7 +173,9 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>A static value for the target. Can’t be set when the dataset or namespace option is set.</para>
+	/// <para>
+	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> Destination(string? destination)
 	{
@@ -136,7 +184,9 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -145,7 +195,9 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -154,9 +206,18 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Field references or a static value for the namespace part of the data stream name. See the criteria for<br/>index names for allowed characters. Must be no longer than 100 characters.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <namespace> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.namespace}}</para>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> Namespace(ICollection<string>? value)
 	{
@@ -165,7 +226,9 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -204,7 +267,10 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -313,9 +379,19 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Field references or a static value for the dataset part of the data stream name.<br/>In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.<br/>Example values are nginx.access and nginx.error.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <dataset> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.dataset}}</para>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor Dataset(ICollection<string>? dataset)
 	{
@@ -324,7 +400,10 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor Description(string? description)
 	{
@@ -333,7 +412,9 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>A static value for the target. Can’t be set when the dataset or namespace option is set.</para>
+	/// <para>
+	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor Destination(string? destination)
 	{
@@ -342,7 +423,9 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor If(string? value)
 	{
@@ -351,7 +434,9 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -360,9 +445,18 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Field references or a static value for the namespace part of the data stream name. See the criteria for<br/>index names for allowed characters. Must be no longer than 100 characters.</para>
-	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <namespace> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
-	/// <para>default {{data_stream.namespace}}</para>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor Namespace(ICollection<string>? value)
 	{
@@ -371,7 +465,9 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -410,7 +506,10 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RerouteProcessorDescriptor Tag(string? tag)
 	{

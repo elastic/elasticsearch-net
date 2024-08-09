@@ -32,13 +32,18 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetScriptRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
+/// <para>
+/// Get a script or search template.
+/// Retrieves a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestParameters>
 {
@@ -55,14 +60,19 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	internal override string OperationName => "get_script";
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
+/// <para>
+/// Get a script or search template.
+/// Retrieves a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescriptor<GetScriptRequestDescriptor<TDocument>, GetScriptRequestParameters>
 {
@@ -94,7 +104,10 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
+/// <para>
+/// Get a script or search template.
+/// Retrieves a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetScriptRequestDescriptor, GetScriptRequestParameters>
 {

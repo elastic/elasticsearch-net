@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.HealthReport;
 
 /// <summary>
-/// <para>ILM</para>
+/// <para>
+/// ILM
+/// </para>
 /// </summary>
 public sealed partial class IlmIndicator
 {

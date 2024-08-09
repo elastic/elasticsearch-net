@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class CleanupRepositoryResults
 {
 	/// <summary>
-	/// <para>Number of binary large objects (blobs) removed during cleanup.</para>
+	/// <para>
+	/// Number of binary large objects (blobs) removed during cleanup.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deleted_blobs")]
 	public long DeletedBlobs { get; init; }
 
 	/// <summary>
-	/// <para>Number of bytes freed by cleanup operations.</para>
+	/// <para>
+	/// Number of bytes freed by cleanup operations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deleted_bytes")]
 	public long DeletedBytes { get; init; }

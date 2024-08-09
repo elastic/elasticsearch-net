@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class GeoIpDownloadStatistics
 {
 	/// <summary>
-	/// <para>Current number of databases available for use.</para>
+	/// <para>
+	/// Current number of databases available for use.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("database_count")]
 	public int DatabaseCount { get; init; }
 
 	/// <summary>
-	/// <para>Total number of failed database downloads.</para>
+	/// <para>
+	/// Total number of failed database downloads.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("failed_downloads")]
 	public int FailedDownloads { get; init; }
 
 	/// <summary>
-	/// <para>Total number of database updates skipped.</para>
+	/// <para>
+	/// Total number of database updates skipped.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("skipped_updates")]
 	public int SkippedUpdates { get; init; }
 
 	/// <summary>
-	/// <para>Total number of successful database downloads.</para>
+	/// <para>
+	/// Total number of successful database downloads.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("successful_downloads")]
 	public int SuccessfulDownloads { get; init; }
 
 	/// <summary>
-	/// <para>Total milliseconds spent downloading databases.</para>
+	/// <para>
+	/// Total milliseconds spent downloading databases.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_download_time")]
 	public long TotalDownloadTime { get; init; }

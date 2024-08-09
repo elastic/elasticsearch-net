@@ -35,13 +35,17 @@ public sealed partial class IndexState
 	public Elastic.Clients.Elasticsearch.Serverless.DataStreamName? DataStream { get; set; }
 
 	/// <summary>
-	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// <para>
+	/// Default settings, included when the request's <c>include_default</c> is <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("defaults")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Defaults { get; set; }
 
 	/// <summary>
-	/// <para>Data stream lifecycle applicable if this is a data stream.</para>
+	/// <para>
+	/// Data stream lifecycle applicable if this is a data stream.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lifecycle")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
@@ -87,7 +91,9 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// <para>
+	/// Default settings, included when the request's <c>include_default</c> is <c>true</c>.
+	/// </para>
 	/// </summary>
 	public IndexStateDescriptor<TDocument> Defaults(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? defaults)
 	{
@@ -114,7 +120,9 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Data stream lifecycle applicable if this is a data stream.</para>
+	/// <para>
+	/// Data stream lifecycle applicable if this is a data stream.
+	/// </para>
 	/// </summary>
 	public IndexStateDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? lifecycle)
 	{
@@ -307,7 +315,9 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	}
 
 	/// <summary>
-	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
+	/// <para>
+	/// Default settings, included when the request's <c>include_default</c> is <c>true</c>.
+	/// </para>
 	/// </summary>
 	public IndexStateDescriptor Defaults(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? defaults)
 	{
@@ -334,7 +344,9 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	}
 
 	/// <summary>
-	/// <para>Data stream lifecycle applicable if this is a data stream.</para>
+	/// <para>
+	/// Data stream lifecycle applicable if this is a data stream.
+	/// </para>
 	/// </summary>
 	public IndexStateDescriptor Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? lifecycle)
 	{

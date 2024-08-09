@@ -30,49 +30,69 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class SortProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// <para>
+	/// The sort order to use.
+	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
@@ -101,7 +121,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -110,7 +133,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -119,7 +144,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -128,7 +155,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -137,7 +166,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -146,7 +177,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -155,7 +188,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -194,7 +229,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// <para>
+	/// The sort order to use.
+	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
@@ -203,7 +241,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -212,7 +253,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -221,7 +265,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -230,7 +277,10 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -335,7 +385,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Description(string? description)
 	{
@@ -344,7 +397,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -353,7 +408,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -362,7 +419,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to be sorted.</para>
+	/// <para>
+	/// The field to be sorted.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -371,7 +430,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor If(string? value)
 	{
@@ -380,7 +441,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -389,7 +452,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -428,7 +493,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// <para>
+	/// The sort order to use.
+	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
@@ -437,7 +505,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor Tag(string? tag)
 	{
@@ -446,7 +517,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -455,7 +529,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -464,7 +541,10 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 	}
 
 	/// <summary>
-	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the sorted value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SortProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

@@ -32,48 +32,75 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GetInfluencersRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, the results are sorted in descending order.</para>
+	/// <para>
+	/// If true, the results are sorted in descending order.
+	/// </para>
 	/// </summary>
 	public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with timestamps earlier than this time.<br/>The default value means it is unset and results are not limited to<br/>specific timestamps.</para>
+	/// <para>
+	/// Returns influencers with timestamps earlier than this time.
+	/// The default value means it is unset and results are not limited to
+	/// specific timestamps.
+	/// </para>
 	/// </summary>
 	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
-	/// <para>If true, the output excludes interim results. By default, interim results<br/>are included.</para>
+	/// <para>
+	/// If true, the output excludes interim results. By default, interim results
+	/// are included.
+	/// </para>
 	/// </summary>
 	public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of influencers.</para>
+	/// <para>
+	/// Skips the specified number of influencers.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with anomaly scores greater than or equal to this<br/>value.</para>
+	/// <para>
+	/// Returns influencers with anomaly scores greater than or equal to this
+	/// value.
+	/// </para>
 	/// </summary>
 	public double? InfluencerScore { get => Q<double?>("influencer_score"); set => Q("influencer_score", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of influencers to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of influencers to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Specifies the sort field for the requested influencers. By default, the<br/>influencers are sorted by the `influencer_score` value.</para>
+	/// <para>
+	/// Specifies the sort field for the requested influencers. By default, the
+	/// influencers are sorted by the <c>influencer_score</c> value.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Serverless.Field?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with timestamps after this time. The default value<br/>means it is unset and results are not limited to specific timestamps.</para>
+	/// <para>
+	/// Returns influencers with timestamps after this time. The default value
+	/// means it is unset and results are not limited to specific timestamps.
+	/// </para>
 	/// </summary>
 	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more influencers.<br/>Influencers are the entities that have contributed to, or are to blame for,<br/>the anomalies. Influencer results are available only if an<br/>`influencer_field_name` is specified in the job configuration.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more influencers.
+/// Influencers are the entities that have contributed to, or are to blame for,
+/// the anomalies. Influencer results are available only if an
+/// <c>influencer_field_name</c> is specified in the job configuration.
+/// </para>
 /// </summary>
 public sealed partial class GetInfluencersRequest : PlainRequest<GetInfluencersRequestParameters>
 {
@@ -90,62 +117,92 @@ public sealed partial class GetInfluencersRequest : PlainRequest<GetInfluencersR
 	internal override string OperationName => "ml.get_influencers";
 
 	/// <summary>
-	/// <para>If true, the results are sorted in descending order.</para>
+	/// <para>
+	/// If true, the results are sorted in descending order.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with timestamps earlier than this time.<br/>The default value means it is unset and results are not limited to<br/>specific timestamps.</para>
+	/// <para>
+	/// Returns influencers with timestamps earlier than this time.
+	/// The default value means it is unset and results are not limited to
+	/// specific timestamps.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
-	/// <para>If true, the output excludes interim results. By default, interim results<br/>are included.</para>
+	/// <para>
+	/// If true, the output excludes interim results. By default, interim results
+	/// are included.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of influencers.</para>
+	/// <para>
+	/// Skips the specified number of influencers.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with anomaly scores greater than or equal to this<br/>value.</para>
+	/// <para>
+	/// Returns influencers with anomaly scores greater than or equal to this
+	/// value.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public double? InfluencerScore { get => Q<double?>("influencer_score"); set => Q("influencer_score", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of influencers to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of influencers to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Specifies the sort field for the requested influencers. By default, the<br/>influencers are sorted by the `influencer_score` value.</para>
+	/// <para>
+	/// Specifies the sort field for the requested influencers. By default, the
+	/// influencers are sorted by the <c>influencer_score</c> value.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Serverless.Field?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>Returns influencers with timestamps after this time. The default value<br/>means it is unset and results are not limited to specific timestamps.</para>
+	/// <para>
+	/// Returns influencers with timestamps after this time. The default value
+	/// means it is unset and results are not limited to specific timestamps.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 
 	/// <summary>
-	/// <para>Configures pagination.<br/>This parameter has the `from` and `size` properties.</para>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Page? Page { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more influencers.<br/>Influencers are the entities that have contributed to, or are to blame for,<br/>the anomalies. Influencer results are available only if an<br/>`influencer_field_name` is specified in the job configuration.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more influencers.
+/// Influencers are the entities that have contributed to, or are to blame for,
+/// the anomalies. Influencer results are available only if an
+/// <c>influencer_field_name</c> is specified in the job configuration.
+/// </para>
 /// </summary>
 public sealed partial class GetInfluencersRequestDescriptor<TDocument> : RequestDescriptor<GetInfluencersRequestDescriptor<TDocument>, GetInfluencersRequestParameters>
 {
@@ -183,7 +240,10 @@ public sealed partial class GetInfluencersRequestDescriptor<TDocument> : Request
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Configures pagination.<br/>This parameter has the `from` and `size` properties.</para>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
 	/// </summary>
 	public GetInfluencersRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Page? page)
 	{
@@ -233,7 +293,12 @@ public sealed partial class GetInfluencersRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more influencers.<br/>Influencers are the entities that have contributed to, or are to blame for,<br/>the anomalies. Influencer results are available only if an<br/>`influencer_field_name` is specified in the job configuration.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more influencers.
+/// Influencers are the entities that have contributed to, or are to blame for,
+/// the anomalies. Influencer results are available only if an
+/// <c>influencer_field_name</c> is specified in the job configuration.
+/// </para>
 /// </summary>
 public sealed partial class GetInfluencersRequestDescriptor : RequestDescriptor<GetInfluencersRequestDescriptor, GetInfluencersRequestParameters>
 {
@@ -271,7 +336,10 @@ public sealed partial class GetInfluencersRequestDescriptor : RequestDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Configures pagination.<br/>This parameter has the `from` and `size` properties.</para>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
 	/// </summary>
 	public GetInfluencersRequestDescriptor Page(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Page? page)
 	{

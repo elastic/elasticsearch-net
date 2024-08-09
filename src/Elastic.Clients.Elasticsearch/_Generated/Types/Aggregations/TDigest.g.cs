@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TDigest
 {
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compression")]
 	public int? Compression { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class TDigestDescriptor : SerializableDescriptor<TDigestDe
 	private int? CompressionValue { get; set; }
 
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	public TDigestDescriptor Compression(int? compression)
 	{

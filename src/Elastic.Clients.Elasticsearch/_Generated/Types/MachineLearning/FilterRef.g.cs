@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class FilterRef
 {
 	/// <summary>
-	/// <para>The identifier for the filter.</para>
+	/// <para>
+	/// The identifier for the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter_id")]
 	public Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
 
 	/// <summary>
-	/// <para>If set to `include`, the rule applies for values in the filter. If set to `exclude`, the rule applies for values not in the filter.</para>
+	/// <para>
+	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter_type")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.FilterType? FilterType { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class FilterRefDescriptor : SerializableDescriptor<FilterR
 	private Elastic.Clients.Elasticsearch.MachineLearning.FilterType? FilterTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The identifier for the filter.</para>
+	/// <para>
+	/// The identifier for the filter.
+	/// </para>
 	/// </summary>
 	public FilterRefDescriptor FilterId(Elastic.Clients.Elasticsearch.Id filterId)
 	{
@@ -63,7 +69,9 @@ public sealed partial class FilterRefDescriptor : SerializableDescriptor<FilterR
 	}
 
 	/// <summary>
-	/// <para>If set to `include`, the rule applies for values in the filter. If set to `exclude`, the rule applies for values not in the filter.</para>
+	/// <para>
+	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
+	/// </para>
 	/// </summary>
 	public FilterRefDescriptor FilterType(Elastic.Clients.Elasticsearch.MachineLearning.FilterType? filterType)
 	{

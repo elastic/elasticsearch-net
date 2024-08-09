@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class BucketSummary
 {
 	/// <summary>
-	/// <para>The maximum anomaly score, between 0-100, for any of the bucket influencers. This is an overall, rate-limited<br/>score for the job. All the anomaly records in the bucket contribute to this score. This value might be updated as<br/>new data is analyzed.</para>
+	/// <para>
+	/// The maximum anomaly score, between 0-100, for any of the bucket influencers. This is an overall, rate-limited
+	/// score for the job. All the anomaly records in the bucket contribute to this score. This value might be updated as
+	/// new data is analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("anomaly_score")]
 	public double AnomalyScore { get; init; }
@@ -38,55 +42,76 @@ public sealed partial class BucketSummary
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> BucketInfluencers { get; init; }
 
 	/// <summary>
-	/// <para>The length of the bucket in seconds. This value matches the bucket span that is specified in the job.</para>
+	/// <para>
+	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_span")]
 	public long BucketSpan { get; init; }
 
 	/// <summary>
-	/// <para>The number of input data records processed in this bucket.</para>
+	/// <para>
+	/// The number of input data records processed in this bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("event_count")]
 	public long EventCount { get; init; }
 
 	/// <summary>
-	/// <para>The maximum anomaly score for any of the bucket influencers. This is the initial value that was calculated at the<br/>time the bucket was processed.</para>
+	/// <para>
+	/// The maximum anomaly score for any of the bucket influencers. This is the initial value that was calculated at the
+	/// time the bucket was processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initial_anomaly_score")]
 	public double InitialAnomalyScore { get; init; }
 
 	/// <summary>
-	/// <para>If true, this is an interim result. In other words, the results are calculated based on partial input data.</para>
+	/// <para>
+	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_interim")]
 	public bool IsInterim { get; init; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>The amount of time, in milliseconds, that it took to analyze the bucket contents and calculate results.</para>
+	/// <para>
+	/// The amount of time, in milliseconds, that it took to analyze the bucket contents and calculate results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("processing_time_ms")]
 	public long ProcessingTimeMs { get; init; }
 
 	/// <summary>
-	/// <para>Internal. This value is always set to bucket.</para>
+	/// <para>
+	/// Internal. This value is always set to bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result_type")]
 	public string ResultType { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the<br/>timestamp of the bucket are included in the results for the bucket.</para>
+	/// <para>
+	/// The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the
+	/// timestamp of the bucket are included in the results for the bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the<br/>timestamp of the bucket are included in the results for the bucket.</para>
+	/// <para>
+	/// The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the
+	/// timestamp of the bucket are included in the results for the bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp_string")]
 	public DateTimeOffset? TimestampString { get; init; }

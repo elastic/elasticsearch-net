@@ -34,7 +34,9 @@ public sealed partial class GetSlmStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves the status of snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Retrieves the status of snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class GetSlmStatusRequest : PlainRequest<GetSlmStatusRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetSlmStatusRequest : PlainRequest<GetSlmStatusReque
 }
 
 /// <summary>
-/// <para>Retrieves the status of snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Retrieves the status of snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class GetSlmStatusRequestDescriptor : RequestDescriptor<GetSlmStatusRequestDescriptor, GetSlmStatusRequestParameters>
 {

@@ -29,19 +29,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class GetRepositoriesMeteringInfoResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Name of the cluster. Based on the [Cluster name setting](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#cluster-name).</para>
+	/// <para>
+	/// Name of the cluster. Based on the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#cluster-name">Cluster name setting</a>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
-	/// <para>Contains repositories metering information for the nodes selected by the request.</para>
+	/// <para>
+	/// Contains repositories metering information for the nodes selected by the request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> Nodes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the number of nodes selected by the request’s node filters.</para>
+	/// <para>
+	/// Contains statistics about the number of nodes selected by the request’s node filters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }

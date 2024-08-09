@@ -50,13 +50,20 @@ public sealed partial class PinnedQuery
 	public static PinnedQuery Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Id> id) => new PinnedQuery("ids", id);
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("organic")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Organic { get; set; }
@@ -221,7 +228,12 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PinnedQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -230,7 +242,9 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
 	/// </summary>
 	public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query organic)
 	{
@@ -322,7 +336,12 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PinnedQueryDescriptor Boost(float? boost)
 	{
@@ -331,7 +350,9 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	}
 
 	/// <summary>
-	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
 	/// </summary>
 	public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query organic)
 	{

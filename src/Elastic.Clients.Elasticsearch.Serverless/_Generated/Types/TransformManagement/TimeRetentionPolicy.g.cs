@@ -30,13 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class TimeRetentionPolicy
 {
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the maximum age of a document in the destination index. Documents that are older than the configured<br/>value are removed from the destination index.</para>
+	/// <para>
+	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
+	/// value are removed from the destination index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_age")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration MaxAge { get; set; }
@@ -56,7 +61,9 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.Duration MaxAgeValue { get; set; }
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -65,7 +72,9 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -74,7 +83,9 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -83,7 +94,10 @@ public sealed partial class TimeRetentionPolicyDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Specifies the maximum age of a document in the destination index. Documents that are older than the configured<br/>value are removed from the destination index.</para>
+	/// <para>
+	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
+	/// value are removed from the destination index.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Serverless.Duration maxAge)
 	{
@@ -114,7 +128,9 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Duration MaxAgeValue { get; set; }
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -123,7 +139,9 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -132,7 +150,9 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to calculate the age of the document.</para>
+	/// <para>
+	/// The date field that is used to calculate the age of the document.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -141,7 +161,10 @@ public sealed partial class TimeRetentionPolicyDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the maximum age of a document in the destination index. Documents that are older than the configured<br/>value are removed from the destination index.</para>
+	/// <para>
+	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
+	/// value are removed from the destination index.
+	/// </para>
 	/// </summary>
 	public TimeRetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Serverless.Duration maxAge)
 	{

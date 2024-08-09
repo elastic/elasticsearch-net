@@ -35,31 +35,41 @@ public sealed partial class Memory
 	public string EphemeralId { get; init; }
 
 	/// <summary>
-	/// <para>Contains Java Virtual Machine (JVM) statistics for the node.</para>
+	/// <para>
+	/// Contains Java Virtual Machine (JVM) statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("jvm")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.JvmStats Jvm { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about memory usage for the node.</para>
+	/// <para>
+	/// Contains statistics about memory usage for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mem")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.MemStats Mem { get; init; }
 
 	/// <summary>
-	/// <para>Human-readable identifier for the node. Based on the Node name setting setting.</para>
+	/// <para>
+	/// Human-readable identifier for the node. Based on the Node name setting setting.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
-	/// <para>Roles assigned to the node.</para>
+	/// <para>
+	/// Roles assigned to the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("roles")]
 	public IReadOnlyCollection<string> Roles { get; init; }
 
 	/// <summary>
-	/// <para>The host and port where transport HTTP connections are accepted.</para>
+	/// <para>
+	/// The host and port where transport HTTP connections are accepted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_address")]
 	public string TransportAddress { get; init; }

@@ -34,7 +34,9 @@ public sealed partial class DeleteAutoFollowPatternRequestParameters : RequestPa
 }
 
 /// <summary>
-/// <para>Deletes auto-follow patterns.</para>
+/// <para>
+/// Deletes auto-follow patterns.
+/// </para>
 /// </summary>
 public sealed partial class DeleteAutoFollowPatternRequest : PlainRequest<DeleteAutoFollowPatternRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteAutoFollowPatternRequest : PlainRequest<Delete
 }
 
 /// <summary>
-/// <para>Deletes auto-follow patterns.</para>
+/// <para>
+/// Deletes auto-follow patterns.
+/// </para>
 /// </summary>
 public sealed partial class DeleteAutoFollowPatternRequestDescriptor : RequestDescriptor<DeleteAutoFollowPatternRequestDescriptor, DeleteAutoFollowPatternRequestParameters>
 {

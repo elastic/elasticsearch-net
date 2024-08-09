@@ -29,7 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class CleanupRepositoryResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Statistics for cleanup operations.</para>
+	/// <para>
+	/// Statistics for cleanup operations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results")]
 	public Elastic.Clients.Elasticsearch.Serverless.Snapshot.CleanupRepositoryResults Results { get; init; }

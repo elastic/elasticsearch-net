@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class DataPathStats
 {
 	/// <summary>
-	/// <para>Total amount of disk space available to this Java virtual machine on this file store.</para>
+	/// <para>
+	/// Total amount of disk space available to this Java virtual machine on this file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("available")]
 	public string? Available { get; init; }
 
 	/// <summary>
-	/// <para>Total number of bytes available to this Java virtual machine on this file store.</para>
+	/// <para>
+	/// Total number of bytes available to this Java virtual machine on this file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("available_in_bytes")]
 	public long? AvailableInBytes { get; init; }
@@ -56,43 +60,57 @@ public sealed partial class DataPathStats
 	public long? DiskWriteSizeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total amount of unallocated disk space in the file store.</para>
+	/// <para>
+	/// Total amount of unallocated disk space in the file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free")]
 	public string? Free { get; init; }
 
 	/// <summary>
-	/// <para>Total number of unallocated bytes in the file store.</para>
+	/// <para>
+	/// Total number of unallocated bytes in the file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free_in_bytes")]
 	public long? FreeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Mount point of the file store (for example: `/dev/sda2`).</para>
+	/// <para>
+	/// Mount point of the file store (for example: <c>/dev/sda2</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mount")]
 	public string? Mount { get; init; }
 
 	/// <summary>
-	/// <para>Path to the file store.</para>
+	/// <para>
+	/// Path to the file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public string? Path { get; init; }
 
 	/// <summary>
-	/// <para>Total size of the file store.</para>
+	/// <para>
+	/// Total size of the file store.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public string? Total { get; init; }
 
 	/// <summary>
-	/// <para>Total size of the file store in bytes.</para>
+	/// <para>
+	/// Total size of the file store in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_in_bytes")]
 	public long? TotalInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Type of the file store (ex: ext4).</para>
+	/// <para>
+	/// Type of the file store (ex: ext4).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; init; }

@@ -205,45 +205,64 @@ public sealed partial class DateRangeQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Gt { get; set; }
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Gte { get; set; }
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Lt { get; set; }
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public string? TimeZone { get; set; }
 	public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
@@ -271,7 +290,12 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -298,7 +322,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Format(string? format)
 	{
@@ -313,7 +339,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Gt(Elastic.Clients.Elasticsearch.DateMath? gt)
 	{
@@ -322,7 +350,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Gte(Elastic.Clients.Elasticsearch.DateMath? gte)
 	{
@@ -331,7 +361,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Lt(Elastic.Clients.Elasticsearch.DateMath? lt)
 	{
@@ -340,7 +372,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Lte(Elastic.Clients.Elasticsearch.DateMath? lte)
 	{
@@ -355,7 +389,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
@@ -364,7 +400,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -478,7 +516,12 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Boost(float? boost)
 	{
@@ -505,7 +548,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Format(string? format)
 	{
@@ -520,7 +565,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Gt(Elastic.Clients.Elasticsearch.DateMath? gt)
 	{
@@ -529,7 +576,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Gte(Elastic.Clients.Elasticsearch.DateMath? gte)
 	{
@@ -538,7 +587,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Lt(Elastic.Clients.Elasticsearch.DateMath? lt)
 	{
@@ -547,7 +598,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Lte(Elastic.Clients.Elasticsearch.DateMath? lte)
 	{
@@ -562,7 +615,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
@@ -571,7 +626,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public DateRangeQueryDescriptor TimeZone(string? timeZone)
 	{

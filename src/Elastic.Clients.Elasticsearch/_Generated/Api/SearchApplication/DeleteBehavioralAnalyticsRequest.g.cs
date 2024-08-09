@@ -34,7 +34,9 @@ public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Request
 }
 
 /// <summary>
-/// <para>Delete a behavioral analytics collection.</para>
+/// <para>
+/// Delete a behavioral analytics collection.
+/// </para>
 /// </summary>
 public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<DeleteBehavioralAnalyticsRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<Dele
 }
 
 /// <summary>
-/// <para>Delete a behavioral analytics collection.</para>
+/// <para>
+/// Delete a behavioral analytics collection.
+/// </para>
 /// </summary>
 public sealed partial class DeleteBehavioralAnalyticsRequestDescriptor : RequestDescriptor<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsRequestParameters>
 {

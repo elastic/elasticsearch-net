@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 public sealed partial class ExecutePolicyRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Creates the enrich index for an existing enrich policy.</para>
+/// <para>
+/// Creates the enrich index for an existing enrich policy.
+/// </para>
 /// </summary>
 public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyRequestParameters>
 {
@@ -55,14 +59,18 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 	internal override string OperationName => "enrich.execute_policy";
 
 	/// <summary>
-	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Creates the enrich index for an existing enrich policy.</para>
+/// <para>
+/// Creates the enrich index for an existing enrich policy.
+/// </para>
 /// </summary>
 public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<ExecutePolicyRequestDescriptor, ExecutePolicyRequestParameters>
 {

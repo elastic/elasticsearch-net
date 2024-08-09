@@ -34,33 +34,47 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class MultiSearchTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Maximum number of concurrent searches the API can run.</para>
+	/// <para>
+	/// Maximum number of concurrent searches the API can run.
+	/// </para>
 	/// </summary>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response returns `hits.total` as an integer.<br/>If `false`, it returns `hits.total` as an object.</para>
+	/// <para>
+	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
+	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
+	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
+	/// <para>
+	/// The type of the search operation.
+	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
 /// <summary>
-/// <para>Runs multiple templated searches with a single request.</para>
+/// <para>
+/// Runs multiple templated searches with a single request.
+/// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
@@ -81,31 +95,43 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	internal override string OperationName => "msearch_template";
 
 	/// <summary>
-	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Maximum number of concurrent searches the API can run.</para>
+	/// <para>
+	/// Maximum number of concurrent searches the API can run.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response returns `hits.total` as an integer.<br/>If `false`, it returns `hits.total` as an object.</para>
+	/// <para>
+	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
+	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
+	/// <para>
+	/// The type of the search operation.
+	/// Available options: <c>query_then_fetch</c>, <c>dfs_query_then_fetch</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -135,7 +161,9 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 }
 
 /// <summary>
-/// <para>Runs multiple templated searches with a single request.</para>
+/// <para>
+/// Runs multiple templated searches with a single request.
+/// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
@@ -205,7 +233,9 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 }
 
 /// <summary>
-/// <para>Runs multiple templated searches with a single request.</para>
+/// <para>
+/// Runs multiple templated searches with a single request.
+/// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {

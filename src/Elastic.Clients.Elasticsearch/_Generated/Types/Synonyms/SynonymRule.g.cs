@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 public sealed partial class SynonymRule
 {
 	/// <summary>
-	/// <para>Synonym Rule identifier</para>
+	/// <para>
+	/// Synonym Rule identifier
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2</para>
+	/// <para>
+	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public string Synonyms { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 	private string SynonymsValue { get; set; }
 
 	/// <summary>
-	/// <para>Synonym Rule identifier</para>
+	/// <para>
+	/// Synonym Rule identifier
+	/// </para>
 	/// </summary>
 	public SynonymRuleDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -63,7 +69,9 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 	}
 
 	/// <summary>
-	/// <para>Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2</para>
+	/// <para>
+	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// </para>
 	/// </summary>
 	public SynonymRuleDescriptor Synonyms(string synonyms)
 	{

@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class PutSearchApplicationRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing Search Applications.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
+	/// </para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a search application.</para>
+/// <para>
+/// Creates or updates a search application.
+/// </para>
 /// </summary>
 public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>, ISelfSerializable
 {
@@ -55,7 +59,9 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 	internal override string OperationName => "search_application.put";
 
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing Search Applications.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
@@ -69,7 +75,9 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 }
 
 /// <summary>
-/// <para>Creates or updates a search application.</para>
+/// <para>
+/// Creates or updates a search application.
+/// </para>
 /// </summary>
 public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescriptor<PutSearchApplicationRequestDescriptor, PutSearchApplicationRequestParameters>
 {

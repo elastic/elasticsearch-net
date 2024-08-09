@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ExtendedBoundsDate
 {
 	/// <summary>
-	/// <para>Maximum value for the bound.</para>
+	/// <para>
+	/// Maximum value for the bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? Max { get; set; }
 
 	/// <summary>
-	/// <para>Minimum value for the bound.</para>
+	/// <para>
+	/// Minimum value for the bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? Min { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class ExtendedBoundsDateDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? MinValue { get; set; }
 
 	/// <summary>
-	/// <para>Maximum value for the bound.</para>
+	/// <para>
+	/// Maximum value for the bound.
+	/// </para>
 	/// </summary>
 	public ExtendedBoundsDateDescriptor Max(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? max)
 	{
@@ -63,7 +69,9 @@ public sealed partial class ExtendedBoundsDateDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Minimum value for the bound.</para>
+	/// <para>
+	/// Minimum value for the bound.
+	/// </para>
 	/// </summary>
 	public ExtendedBoundsDateDescriptor Min(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? min)
 	{

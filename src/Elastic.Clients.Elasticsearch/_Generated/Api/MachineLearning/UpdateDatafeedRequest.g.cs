@@ -32,18 +32,52 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class UpdateDatafeedRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the<br/>`_all` string or when no indices are specified.</para>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines<br/>whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:</para>
-	/// <para>* `all`: Match any data stream or index, including hidden ones.<br/>* `closed`: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.<br/>* `hidden`: Match hidden data streams and hidden indices. Must be combined with `open`, `closed`, or both.<br/>* `none`: Wildcard patterns are not accepted.<br/>* `open`: Match open, non-hidden indices. Also matches any non-hidden data stream.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, unavailable indices (missing or closed) are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
@@ -229,7 +263,13 @@ internal sealed partial class UpdateDatafeedRequestConverter : JsonConverter<Upd
 }
 
 /// <summary>
-/// <para>Updates the properties of a datafeed.<br/>You must stop and start the datafeed for the changes to be applied.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at<br/>the time of the update and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.</para>
+/// <para>
+/// Updates the properties of a datafeed.
+/// You must stop and start the datafeed for the changes to be applied.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
+/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(UpdateDatafeedRequestConverter))]
 public sealed partial class UpdateDatafeedRequest : PlainRequest<UpdateDatafeedRequestParameters>
@@ -251,56 +291,114 @@ public sealed partial class UpdateDatafeedRequest : PlainRequest<UpdateDatafeedR
 	internal override string OperationName => "ml.update_datafeed";
 
 	/// <summary>
-	/// <para>If `true`, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the<br/>`_all` string or when no indices are specified.</para>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines<br/>whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:</para>
-	/// <para>* `all`: Match any data stream or index, including hidden ones.<br/>* `closed`: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.<br/>* `hidden`: Match hidden data streams and hidden indices. Must be combined with `open`, `closed`, or both.<br/>* `none`: Wildcard patterns are not accepted.<br/>* `open`: Match open, non-hidden indices. Also matches any non-hidden data stream.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, unavailable indices (missing or closed) are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only<br/>with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+	/// with low cardinality data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Datafeeds might search over long time periods, for several months or years. This search is split into time<br/>chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of<br/>these time chunks are calculated; it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
+	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
+	/// these time chunks are calculated; it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("chunking_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally<br/>search over indices that have already been read in an effort to determine whether any data has subsequently been<br/>added to the index. If missing data is found, it is a good indication that the `query_delay` is set too low and<br/>the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time<br/>datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
+	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
+	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
+	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
+	/// datafeeds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delayed_data_check_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is<br/>either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket<br/>span. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are<br/>written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value<br/>must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
+	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
+	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
+	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
+	/// must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public ICollection<string>? Indices { get; set; }
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_options")]
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
@@ -308,44 +406,76 @@ public sealed partial class UpdateDatafeedRequest : PlainRequest<UpdateDatafeedR
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_empty_searches")]
 	public int? MaxEmptySearches { get; set; }
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also<br/>changed. Therefore, the time required to learn might be long and the understandability of the results is<br/>unpredictable. If you want to make significant changes to the source data, it is recommended that you<br/>clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one<br/>when you are satisfied with the results of the job.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
+	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
+	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
+	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
+	/// when you are satisfied with the results of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_delay")]
 	public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_size")]
 	public int? ScrollSize { get; set; }
 }
 
 /// <summary>
-/// <para>Updates the properties of a datafeed.<br/>You must stop and start the datafeed for the changes to be applied.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at<br/>the time of the update and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.</para>
+/// <para>
+/// Updates the properties of a datafeed.
+/// You must stop and start the datafeed for the changes to be applied.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
+/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// </para>
 /// </summary>
 public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : RequestDescriptor<UpdateDatafeedRequestDescriptor<TDocument>, UpdateDatafeedRequestParameters>
 {
@@ -396,7 +526,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only<br/>with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+	/// with low cardinality data.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -405,7 +538,11 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might search over long time periods, for several months or years. This search is split into time<br/>chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of<br/>these time chunks are calculated; it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
+	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
+	/// these time chunks are calculated; it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -432,7 +569,13 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally<br/>search over indices that have already been read in an effort to determine whether any data has subsequently been<br/>added to the index. If missing data is found, it is a good indication that the `query_delay` is set too low and<br/>the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time<br/>datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
+	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
+	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
+	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
+	/// datafeeds.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -459,7 +602,13 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is<br/>either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket<br/>span. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are<br/>written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value<br/>must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
+	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
+	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
+	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
+	/// must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -468,7 +617,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> Indices(ICollection<string>? indices)
 	{
@@ -477,7 +629,9 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
 	{
@@ -510,7 +664,12 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -519,7 +678,15 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also<br/>changed. Therefore, the time required to learn might be long and the understandability of the results is<br/>unpredictable. If you want to make significant changes to the source data, it is recommended that you<br/>clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one<br/>when you are satisfied with the results of the job.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
+	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
+	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
+	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
+	/// when you are satisfied with the results of the job.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -546,7 +713,12 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 	{
@@ -555,7 +727,9 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -564,7 +738,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
 	{
@@ -573,7 +750,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor<TDocument> ScrollSize(int? scrollSize)
 	{
@@ -707,7 +887,13 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Updates the properties of a datafeed.<br/>You must stop and start the datafeed for the changes to be applied.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at<br/>the time of the update and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.</para>
+/// <para>
+/// Updates the properties of a datafeed.
+/// You must stop and start the datafeed for the changes to be applied.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
+/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// </para>
 /// </summary>
 public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<UpdateDatafeedRequestDescriptor, UpdateDatafeedRequestParameters>
 {
@@ -758,7 +944,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only<br/>with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+	/// with low cardinality data.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -767,7 +956,11 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might search over long time periods, for several months or years. This search is split into time<br/>chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of<br/>these time chunks are calculated; it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
+	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
+	/// these time chunks are calculated; it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -794,7 +987,13 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally<br/>search over indices that have already been read in an effort to determine whether any data has subsequently been<br/>added to the index. If missing data is found, it is a good indication that the `query_delay` is set too low and<br/>the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time<br/>datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
+	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
+	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
+	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
+	/// datafeeds.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -821,7 +1020,13 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is<br/>either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket<br/>span. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are<br/>written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value<br/>must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
+	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
+	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
+	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
+	/// must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -830,7 +1035,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor Indices(ICollection<string>? indices)
 	{
@@ -839,7 +1047,9 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
 	{
@@ -872,7 +1082,12 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -881,7 +1096,15 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also<br/>changed. Therefore, the time required to learn might be long and the understandability of the results is<br/>unpredictable. If you want to make significant changes to the source data, it is recommended that you<br/>clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one<br/>when you are satisfied with the results of the job.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
+	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
+	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
+	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
+	/// when you are satisfied with the results of the job.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -908,7 +1131,12 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 	{
@@ -917,7 +1145,9 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -926,7 +1156,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
 	{
@@ -935,7 +1168,10 @@ public sealed partial class UpdateDatafeedRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>.
+	/// </para>
 	/// </summary>
 	public UpdateDatafeedRequestDescriptor ScrollSize(int? scrollSize)
 	{

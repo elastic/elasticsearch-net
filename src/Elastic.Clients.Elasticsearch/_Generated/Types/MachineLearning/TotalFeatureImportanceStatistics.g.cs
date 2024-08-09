@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TotalFeatureImportanceStatistics
 {
 	/// <summary>
-	/// <para>The maximum importance value across all the training data for this feature.</para>
+	/// <para>
+	/// The maximum importance value across all the training data for this feature.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public int Max { get; init; }
 
 	/// <summary>
-	/// <para>The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.</para>
+	/// <para>
+	/// The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mean_magnitude")]
 	public double MeanMagnitude { get; init; }
 
 	/// <summary>
-	/// <para>The minimum importance value across all the training data for this feature.</para>
+	/// <para>
+	/// The minimum importance value across all the training data for this feature.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public int Min { get; init; }

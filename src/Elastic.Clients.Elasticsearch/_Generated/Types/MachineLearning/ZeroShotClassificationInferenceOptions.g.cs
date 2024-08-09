@@ -28,42 +28,57 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 /// <summary>
-/// <para>Zero shot classification configuration options</para>
+/// <para>
+/// Zero shot classification configuration options
+/// </para>
 /// </summary>
 public sealed partial class ZeroShotClassificationInferenceOptions
 {
 	/// <summary>
-	/// <para>The zero shot classification labels indicating entailment, neutral, and contradiction<br/>Must contain exactly and only entailment, neutral, and contradiction</para>
+	/// <para>
+	/// The zero shot classification labels indicating entailment, neutral, and contradiction
+	/// Must contain exactly and only entailment, neutral, and contradiction
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string> ClassificationLabels { get; set; }
 
 	/// <summary>
-	/// <para>Hypothesis template used when tokenizing labels for prediction</para>
+	/// <para>
+	/// Hypothesis template used when tokenizing labels for prediction
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hypothesis_template")]
 	public string? HypothesisTemplate { get; set; }
 
 	/// <summary>
-	/// <para>The labels to predict.</para>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string>? Labels { get; set; }
 
 	/// <summary>
-	/// <para>Indicates if more than one true label exists.</para>
+	/// <para>
+	/// Indicates if more than one true label exists.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -72,7 +87,9 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 }
 
 /// <summary>
-/// <para>Zero shot classification configuration options</para>
+/// <para>
+/// Zero shot classification configuration options
+/// </para>
 /// </summary>
 public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
 {
@@ -92,7 +109,10 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The zero shot classification labels indicating entailment, neutral, and contradiction<br/>Must contain exactly and only entailment, neutral, and contradiction</para>
+	/// <para>
+	/// The zero shot classification labels indicating entailment, neutral, and contradiction
+	/// Must contain exactly and only entailment, neutral, and contradiction
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string> classificationLabels)
 	{
@@ -101,7 +121,9 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>Hypothesis template used when tokenizing labels for prediction</para>
+	/// <para>
+	/// Hypothesis template used when tokenizing labels for prediction
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? hypothesisTemplate)
 	{
@@ -110,7 +132,9 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>The labels to predict.</para>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor Labels(ICollection<string>? labels)
 	{
@@ -119,7 +143,9 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>Indicates if more than one true label exists.</para>
+	/// <para>
+	/// Indicates if more than one true label exists.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? multiLabel = true)
 	{
@@ -128,7 +154,9 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -137,7 +165,9 @@ public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
 	{

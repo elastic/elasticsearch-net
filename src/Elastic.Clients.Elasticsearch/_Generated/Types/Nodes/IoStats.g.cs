@@ -30,13 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class IoStats
 {
 	/// <summary>
-	/// <para>Array of disk metrics for each device that is backing an Elasticsearch data path.<br/>These disk metrics are probed periodically and averages between the last probe and the current probe are computed.</para>
+	/// <para>
+	/// Array of disk metrics for each device that is backing an Elasticsearch data path.
+	/// These disk metrics are probed periodically and averages between the last probe and the current probe are computed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("devices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.IoStatDevice>? Devices { get; init; }
 
 	/// <summary>
-	/// <para>The sum of the disk metrics for all devices that back an Elasticsearch data path.</para>
+	/// <para>
+	/// The sum of the disk metrics for all devices that back an Elasticsearch data path.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Nodes.IoStatDevice? Total { get; init; }

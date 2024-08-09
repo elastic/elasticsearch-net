@@ -32,45 +32,86 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetTrainedModelsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>- Contains wildcard expressions and there are no models that match.<br/>- Contains the _all string or no identifiers and there are no matches.<br/>- Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If true, it returns an empty array when there are no matches and the<br/>subset of results when there are partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no models that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If true, it returns an empty array when there are no matches and the
+	/// subset of results when there are partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Specifies whether the included model definition should be returned as a<br/>JSON map (true) or in a custom compressed format (false).</para>
+	/// <para>
+	/// Specifies whether the included model definition should be returned as a
+	/// JSON map (true) or in a custom compressed format (false).
+	/// </para>
 	/// </summary>
 	public bool? DecompressDefinition { get => Q<bool?>("decompress_definition"); set => Q("decompress_definition", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of models.</para>
+	/// <para>
+	/// Skips the specified number of models.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>A comma delimited string of optional fields to include in the response<br/>body.</para>
+	/// <para>
+	/// A comma delimited string of optional fields to include in the response
+	/// body.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Include? Include { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.Include?>("include"); set => Q("include", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of models to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of models to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>A comma delimited string of tags. A trained model can have many tags, or<br/>none. When supplied, only trained models that contain all the supplied<br/>tags are returned.</para>
+	/// <para>
+	/// A comma delimited string of tags. A trained model can have many tags, or
+	/// none. When supplied, only trained models that contain all the supplied
+	/// tags are returned.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for a trained model.</para>
+/// <para>
+/// Retrieves configuration information for a trained model.
+/// </para>
 /// </summary>
 public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedModelsRequestParameters>
 {
@@ -91,52 +132,93 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	internal override string OperationName => "ml.get_trained_models";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>- Contains wildcard expressions and there are no models that match.<br/>- Contains the _all string or no identifiers and there are no matches.<br/>- Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If true, it returns an empty array when there are no matches and the<br/>subset of results when there are partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no models that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If true, it returns an empty array when there are no matches and the
+	/// subset of results when there are partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Specifies whether the included model definition should be returned as a<br/>JSON map (true) or in a custom compressed format (false).</para>
+	/// <para>
+	/// Specifies whether the included model definition should be returned as a
+	/// JSON map (true) or in a custom compressed format (false).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DecompressDefinition { get => Q<bool?>("decompress_definition"); set => Q("decompress_definition", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of models.</para>
+	/// <para>
+	/// Skips the specified number of models.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>A comma delimited string of optional fields to include in the response<br/>body.</para>
+	/// <para>
+	/// A comma delimited string of optional fields to include in the response
+	/// body.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Include? Include { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.Include?>("include"); set => Q("include", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of models to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of models to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>A comma delimited string of tags. A trained model can have many tags, or<br/>none. When supplied, only trained models that contain all the supplied<br/>tags are returned.</para>
+	/// <para>
+	/// A comma delimited string of tags. A trained model can have many tags, or
+	/// none. When supplied, only trained models that contain all the supplied
+	/// tags are returned.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for a trained model.</para>
+/// <para>
+/// Retrieves configuration information for a trained model.
+/// </para>
 /// </summary>
 public sealed partial class GetTrainedModelsRequestDescriptor : RequestDescriptor<GetTrainedModelsRequestDescriptor, GetTrainedModelsRequestParameters>
 {

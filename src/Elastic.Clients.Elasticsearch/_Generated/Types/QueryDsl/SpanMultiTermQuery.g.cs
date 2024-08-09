@@ -30,13 +30,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class SpanMultiTermQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Should be a multi term query (one of `wildcard`, `fuzzy`, `prefix`, `range`, or `regexp` query).</para>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
@@ -62,7 +69,12 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -71,7 +83,9 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Should be a multi term query (one of `wildcard`, `fuzzy`, `prefix`, `range`, or `regexp` query).</para>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
 	/// </summary>
 	public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
 	{
@@ -153,7 +167,12 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanMultiTermQueryDescriptor Boost(float? boost)
 	{
@@ -162,7 +181,9 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Should be a multi term query (one of `wildcard`, `fuzzy`, `prefix`, `range`, or `regexp` query).</para>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
 	/// </summary>
 	public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
 	{

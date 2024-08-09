@@ -759,7 +759,10 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 public enum SourceFieldMode
 {
 	/// <summary>
-	/// <para>Instead of storing source documents on disk exactly as you send them,<br/> Elasticsearch can reconstruct source content on the fly upon retrieval.</para>
+	/// <para>
+	/// Instead of storing source documents on disk exactly as you send them,
+	/// Elasticsearch can reconstruct source content on the fly upon retrieval.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "synthetic")]
 	Synthetic,

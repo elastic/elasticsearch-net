@@ -28,7 +28,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 
 /// <summary>
-/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// <para>
+/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
+/// and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapeProperty : IProperty
@@ -52,7 +55,9 @@ public sealed partial class GeoShapeProperty : IProperty
 	public bool? IgnoreZValue { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -72,7 +77,10 @@ public sealed partial class GeoShapeProperty : IProperty
 }
 
 /// <summary>
-/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// <para>
+/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
+/// and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptor<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
@@ -161,7 +169,9 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public GeoShapePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -325,7 +335,10 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 }
 
 /// <summary>
-/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// <para>
+/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
+/// and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
@@ -414,7 +427,9 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public GeoShapePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

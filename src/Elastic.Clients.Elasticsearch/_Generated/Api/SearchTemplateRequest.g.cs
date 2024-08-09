@@ -32,63 +32,94 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class SearchTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, specified concrete, expanded, or aliased indices are not included in the response when throttled.</para>
+	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on.
+	/// Random by default.
+	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If true, hits.total are rendered as an integer in the response.</para>
+	/// <para>
+	/// If true, hits.total are rendered as an integer in the response.
+	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies how long a consistent view of the index<br/>should be maintained for scrolled search.</para>
+	/// <para>
+	/// Specifies how long a consistent view of the index
+	/// should be maintained for scrolled search.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.</para>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
 /// <summary>
-/// <para>Runs a search with a search template.</para>
+/// <para>
+/// Runs a search with a search template.
+/// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateRequestParameters>
 {
@@ -109,104 +140,150 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	internal override string OperationName => "search_template";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, specified concrete, expanded, or aliased indices are not included in the response when throttled.</para>
+	/// <para>
+	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on.
+	/// Random by default.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If true, hits.total are rendered as an integer in the response.</para>
+	/// <para>
+	/// If true, hits.total are rendered as an integer in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies how long a consistent view of the index<br/>should be maintained for scrolled search.</para>
+	/// <para>
+	/// Specifies how long a consistent view of the index
+	/// should be maintained for scrolled search.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.</para>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
-	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// <para>
+	/// ID of the search template to use. If no source is specified,
+	/// this parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the query execution is profiled.</para>
+	/// <para>
+	/// If <c>true</c>, the query execution is profiled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
-	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// <para>
+	/// An inline search template. Supports the same parameters as the search API's
+	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 
 /// <summary>
-/// <para>Runs a search with a search template.</para>
+/// <para>
+/// Runs a search with a search template.
+/// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateRequestParameters>
 {
@@ -253,7 +330,9 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	private string? SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
@@ -262,7 +341,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// <para>
+	/// ID of the search template to use. If no source is specified,
+	/// this parameter is required.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -271,7 +353,11 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -280,7 +366,9 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query execution is profiled.</para>
+	/// <para>
+	/// If <c>true</c>, the query execution is profiled.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Profile(bool? profile = true)
 	{
@@ -289,7 +377,11 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	}
 
 	/// <summary>
-	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// <para>
+	/// An inline search template. Supports the same parameters as the search API's
+	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// parameter is required.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Source(string? source)
 	{
@@ -335,7 +427,9 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Runs a search with a search template.</para>
+/// <para>
+/// Runs a search with a search template.
+/// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<SearchTemplateRequestDescriptor, SearchTemplateRequestParameters>
 {
@@ -382,7 +476,9 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	private string? SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Explain(bool? explain = true)
 	{
@@ -391,7 +487,10 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// <para>
+	/// ID of the search template to use. If no source is specified,
+	/// this parameter is required.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -400,7 +499,11 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -409,7 +512,9 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query execution is profiled.</para>
+	/// <para>
+	/// If <c>true</c>, the query execution is profiled.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Profile(bool? profile = true)
 	{
@@ -418,7 +523,11 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	}
 
 	/// <summary>
-	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// <para>
+	/// An inline search template. Supports the same parameters as the search API's
+	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// parameter is required.
+	/// </para>
 	/// </summary>
 	public SearchTemplateRequestDescriptor Source(string? source)
 	{

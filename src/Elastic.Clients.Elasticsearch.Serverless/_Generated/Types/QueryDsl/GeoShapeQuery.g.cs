@@ -107,13 +107,21 @@ internal sealed partial class GeoShapeQueryConverter : JsonConverter<GeoShapeQue
 public sealed partial class GeoShapeQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
@@ -139,7 +147,12 @@ public sealed partial class GeoShapeQueryDescriptor<TDocument> : SerializableDes
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>> ShapeDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoShapeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -166,7 +179,10 @@ public sealed partial class GeoShapeQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -253,7 +269,12 @@ public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptor<Geo
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoShapeFieldQueryDescriptor> ShapeDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoShapeQueryDescriptor Boost(float? boost)
 	{
@@ -280,7 +301,10 @@ public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptor<Geo
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{

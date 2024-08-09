@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement;
 public sealed partial class Retention
 {
 	/// <summary>
-	/// <para>Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.</para>
+	/// <para>
+	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expire_after")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration ExpireAfter { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.</para>
+	/// <para>
+	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_count")]
 	public int MaxCount { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of snapshots to retain, even if the snapshots have expired.</para>
+	/// <para>
+	/// Minimum number of snapshots to retain, even if the snapshots have expired.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_count")]
 	public int MinCount { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class RetentionDescriptor : SerializableDescriptor<Retenti
 	private int MinCountValue { get; set; }
 
 	/// <summary>
-	/// <para>Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.</para>
+	/// <para>
+	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
+	/// </para>
 	/// </summary>
 	public RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Serverless.Duration expireAfter)
 	{
@@ -70,7 +78,9 @@ public sealed partial class RetentionDescriptor : SerializableDescriptor<Retenti
 	}
 
 	/// <summary>
-	/// <para>Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.</para>
+	/// <para>
+	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
+	/// </para>
 	/// </summary>
 	public RetentionDescriptor MaxCount(int maxCount)
 	{
@@ -79,7 +89,9 @@ public sealed partial class RetentionDescriptor : SerializableDescriptor<Retenti
 	}
 
 	/// <summary>
-	/// <para>Minimum number of snapshots to retain, even if the snapshots have expired.</para>
+	/// <para>
+	/// Minimum number of snapshots to retain, even if the snapshots have expired.
+	/// </para>
 	/// </summary>
 	public RetentionDescriptor MinCount(int minCount)
 	{

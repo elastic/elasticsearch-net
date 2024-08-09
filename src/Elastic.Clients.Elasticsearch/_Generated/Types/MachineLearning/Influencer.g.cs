@@ -30,67 +30,96 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Influencer
 {
 	/// <summary>
-	/// <para>The length of the bucket in seconds. This value matches the bucket span that is specified in the job.</para>
+	/// <para>
+	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_span")]
 	public long BucketSpan { get; init; }
 
 	/// <summary>
-	/// <para>Additional influencer properties are added, depending on the fields being analyzed. For example, if it’s<br/>analyzing `user_name` as an influencer, a field `user_name` is added to the result document. This<br/>information enables you to filter the anomaly results more easily.</para>
+	/// <para>
+	/// Additional influencer properties are added, depending on the fields being analyzed. For example, if it’s
+	/// analyzing <c>user_name</c> as an influencer, a field <c>user_name</c> is added to the result document. This
+	/// information enables you to filter the anomaly results more easily.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("foo")]
 	public string? Foo { get; init; }
 
 	/// <summary>
-	/// <para>The field name of the influencer.</para>
+	/// <para>
+	/// The field name of the influencer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencer_field_name")]
 	public string InfluencerFieldName { get; init; }
 
 	/// <summary>
-	/// <para>The entity that influenced, contributed to, or was to blame for the anomaly.</para>
+	/// <para>
+	/// The entity that influenced, contributed to, or was to blame for the anomaly.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencer_field_value")]
 	public string InfluencerFieldValue { get; init; }
 
 	/// <summary>
-	/// <para>A normalized score between 0-100, which is based on the probability of the influencer in this bucket aggregated<br/>across detectors. Unlike `initial_influencer_score`, this value is updated by a re-normalization process as new<br/>data is analyzed.</para>
+	/// <para>
+	/// A normalized score between 0-100, which is based on the probability of the influencer in this bucket aggregated
+	/// across detectors. Unlike <c>initial_influencer_score</c>, this value is updated by a re-normalization process as new
+	/// data is analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencer_score")]
 	public double InfluencerScore { get; init; }
 
 	/// <summary>
-	/// <para>A normalized score between 0-100, which is based on the probability of the influencer aggregated across detectors.<br/>This is the initial value that was calculated at the time the bucket was processed.</para>
+	/// <para>
+	/// A normalized score between 0-100, which is based on the probability of the influencer aggregated across detectors.
+	/// This is the initial value that was calculated at the time the bucket was processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initial_influencer_score")]
 	public double InitialInfluencerScore { get; init; }
 
 	/// <summary>
-	/// <para>If true, this is an interim result. In other words, the results are calculated based on partial input data.</para>
+	/// <para>
+	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_interim")]
 	public bool IsInterim { get; init; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>The probability that the influencer has this behavior, in the range 0 to 1. This value can be held to a high<br/>precision of over 300 decimal places, so the `influencer_score` is provided as a human-readable and friendly<br/>interpretation of this value.</para>
+	/// <para>
+	/// The probability that the influencer has this behavior, in the range 0 to 1. This value can be held to a high
+	/// precision of over 300 decimal places, so the <c>influencer_score</c> is provided as a human-readable and friendly
+	/// interpretation of this value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("probability")]
 	public double Probability { get; init; }
 
 	/// <summary>
-	/// <para>Internal. This value is always set to `influencer`.</para>
+	/// <para>
+	/// Internal. This value is always set to <c>influencer</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result_type")]
 	public string ResultType { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket for which these results were calculated.</para>
+	/// <para>
+	/// The start time of the bucket for which these results were calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }

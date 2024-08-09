@@ -28,18 +28,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.</para>
+/// <para>
+/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
+/// </para>
 /// </summary>
 public sealed partial class BucketCorrelationAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>The correlation function to execute.</para>
+	/// <para>
+	/// The correlation function to execute.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("function")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
@@ -48,7 +54,9 @@ public sealed partial class BucketCorrelationAggregation
 }
 
 /// <summary>
-/// <para>A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.</para>
+/// <para>
+/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
+/// </para>
 /// </summary>
 public sealed partial class BucketCorrelationAggregationDescriptor : SerializableDescriptor<BucketCorrelationAggregationDescriptor>
 {
@@ -64,7 +72,9 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> FunctionDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -73,7 +83,9 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The correlation function to execute.</para>
+	/// <para>
+	/// The correlation function to execute.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction function)
 	{

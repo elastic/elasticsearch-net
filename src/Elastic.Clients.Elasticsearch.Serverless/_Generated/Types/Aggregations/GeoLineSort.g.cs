@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class GeoLineSort
 {
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -56,7 +60,9 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -65,7 +71,9 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -93,7 +101,9 @@ public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLi
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -102,7 +112,9 @@ public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLi
 	}
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -111,7 +123,9 @@ public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLi
 	}
 
 	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// <para>
+	/// The name of the numeric field to use as the sort key for ordering the points.
+	/// </para>
 	/// </summary>
 	public GeoLineSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

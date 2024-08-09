@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class JvmStats
 {
 	/// <summary>
-	/// <para>Maximum amount of memory available for use by the heap.</para>
+	/// <para>
+	/// Maximum amount of memory available for use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_max")]
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; init; }
 
 	/// <summary>
-	/// <para>Maximum amount of memory, in bytes, available for use by the heap.</para>
+	/// <para>
+	/// Maximum amount of memory, in bytes, available for use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_max_in_bytes")]
 	public int HeapMaxInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Amount of Java heap currently being used for caching inference models.</para>
+	/// <para>
+	/// Amount of Java heap currently being used for caching inference models.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("java_inference")]
 	public Elastic.Clients.Elasticsearch.ByteSize? JavaInference { get; init; }
 
 	/// <summary>
-	/// <para>Amount of Java heap, in bytes, currently being used for caching inference models.</para>
+	/// <para>
+	/// Amount of Java heap, in bytes, currently being used for caching inference models.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("java_inference_in_bytes")]
 	public int JavaInferenceInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Maximum amount of Java heap to be used for caching inference models.</para>
+	/// <para>
+	/// Maximum amount of Java heap to be used for caching inference models.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("java_inference_max")]
 	public Elastic.Clients.Elasticsearch.ByteSize? JavaInferenceMax { get; init; }
 
 	/// <summary>
-	/// <para>Maximum amount of Java heap, in bytes, to be used for caching inference models.</para>
+	/// <para>
+	/// Maximum amount of Java heap, in bytes, to be used for caching inference models.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("java_inference_max_in_bytes")]
 	public int JavaInferenceMaxInBytes { get; init; }

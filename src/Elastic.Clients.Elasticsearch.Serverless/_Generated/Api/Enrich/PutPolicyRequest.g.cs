@@ -34,7 +34,10 @@ public sealed partial class PutPolicyRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
+/// <para>
+/// Create an enrich policy.
+/// Creates an enrich policy.
+/// </para>
 /// </summary>
 public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestParameters>
 {
@@ -51,26 +54,35 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	internal override string OperationName => "enrich.put_policy";
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("geo_match")]
 	public Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? GeoMatch { get; set; }
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `term` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? Match { get; set; }
 
 	/// <summary>
-	/// <para>Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a `term` query.</para>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("range")]
 	public Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? Range { get; set; }
 }
 
 /// <summary>
-/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
+/// <para>
+/// Create an enrich policy.
+/// Creates an enrich policy.
+/// </para>
 /// </summary>
 public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescriptor<PutPolicyRequestDescriptor<TDocument>, PutPolicyRequestParameters>
 {
@@ -105,7 +117,9 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> RangeDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? geoMatch)
 	{
@@ -132,7 +146,9 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `term` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? match)
 	{
@@ -159,7 +175,9 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a `term` query.</para>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? range)
 	{
@@ -241,7 +259,10 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
+/// <para>
+/// Create an enrich policy.
+/// Creates an enrich policy.
+/// </para>
 /// </summary>
 public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPolicyRequestDescriptor, PutPolicyRequestParameters>
 {
@@ -276,7 +297,9 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> RangeDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? geoMatch)
 	{
@@ -303,7 +326,9 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	}
 
 	/// <summary>
-	/// <para>Matches enrich data to incoming documents based on a `term` query.</para>
+	/// <para>
+	/// Matches enrich data to incoming documents based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? match)
 	{
@@ -330,7 +355,9 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	}
 
 	/// <summary>
-	/// <para>Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a `term` query.</para>
+	/// <para>
+	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+	/// </para>
 	/// </summary>
 	public PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? range)
 	{

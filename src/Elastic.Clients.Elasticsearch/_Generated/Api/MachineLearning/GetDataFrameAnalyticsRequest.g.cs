@@ -32,30 +32,67 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetDataFrameAnalyticsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no data frame analytics<br/>jobs that match.<br/>2. Contains the `_all` string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value returns an empty data_frame_analytics array when there<br/>are no matches and the subset of results when there are partial matches.<br/>If this parameter is `false`, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value returns an empty data_frame_analytics array when there
+	/// are no matches and the subset of results when there are partial matches.
+	/// If this parameter is <c>false</c>, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of data frame analytics jobs.</para>
+	/// <para>
+	/// Skips the specified number of data frame analytics jobs.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of data frame analytics jobs to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of data frame analytics jobs to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for data frame analytics jobs.<br/>You can get information for multiple data frame analytics jobs in a single<br/>API request by using a comma-separated list of data frame analytics jobs or a<br/>wildcard expression.</para>
+/// <para>
+/// Retrieves configuration information for data frame analytics jobs.
+/// You can get information for multiple data frame analytics jobs in a single
+/// API request by using a comma-separated list of data frame analytics jobs or a
+/// wildcard expression.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsRequest : PlainRequest<GetDataFrameAnalyticsRequestParameters>
 {
@@ -76,34 +113,71 @@ public sealed partial class GetDataFrameAnalyticsRequest : PlainRequest<GetDataF
 	internal override string OperationName => "ml.get_data_frame_analytics";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no data frame analytics<br/>jobs that match.<br/>2. Contains the `_all` string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value returns an empty data_frame_analytics array when there<br/>are no matches and the subset of results when there are partial matches.<br/>If this parameter is `false`, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value returns an empty data_frame_analytics array when there
+	/// are no matches and the subset of results when there are partial matches.
+	/// If this parameter is <c>false</c>, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of data frame analytics jobs.</para>
+	/// <para>
+	/// Skips the specified number of data frame analytics jobs.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of data frame analytics jobs to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of data frame analytics jobs to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for data frame analytics jobs.<br/>You can get information for multiple data frame analytics jobs in a single<br/>API request by using a comma-separated list of data frame analytics jobs or a<br/>wildcard expression.</para>
+/// <para>
+/// Retrieves configuration information for data frame analytics jobs.
+/// You can get information for multiple data frame analytics jobs in a single
+/// API request by using a comma-separated list of data frame analytics jobs or a
+/// wildcard expression.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsRequestParameters>
 {
@@ -142,7 +216,12 @@ public sealed partial class GetDataFrameAnalyticsRequestDescriptor<TDocument> : 
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for data frame analytics jobs.<br/>You can get information for multiple data frame analytics jobs in a single<br/>API request by using a comma-separated list of data frame analytics jobs or a<br/>wildcard expression.</para>
+/// <para>
+/// Retrieves configuration information for data frame analytics jobs.
+/// You can get information for multiple data frame analytics jobs in a single
+/// API request by using a comma-separated list of data frame analytics jobs or a
+/// wildcard expression.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsRequestDescriptor : RequestDescriptor<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsRequestParameters>
 {

@@ -34,7 +34,11 @@ public sealed partial class AsyncSearchStatusRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+/// <para>
+/// Get async search status
+/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+/// </para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchStatusRequestParameters>
 {
@@ -52,7 +56,11 @@ public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchS
 }
 
 /// <summary>
-/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+/// <para>
+/// Get async search status
+/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+/// </para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : RequestDescriptor<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusRequestParameters>
 {
@@ -82,7 +90,11 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+/// <para>
+/// Get async search status
+/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+/// </para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescriptor<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequestParameters>
 {

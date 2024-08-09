@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Filter
 {
 	/// <summary>
-	/// <para>A description of the filter.</para>
+	/// <para>
+	/// A description of the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
-	/// <para>A string that uniquely identifies a filter.</para>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter_id")]
 	public string FilterId { get; init; }
 
 	/// <summary>
-	/// <para>An array of strings which is the filter item list.</para>
+	/// <para>
+	/// An array of strings which is the filter item list.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("items")]
 	public IReadOnlyCollection<string> Items { get; init; }

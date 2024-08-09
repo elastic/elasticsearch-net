@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class RrfRank
 {
 	/// <summary>
-	/// <para>How much influence documents in individual result sets per query have over the final ranked result set</para>
+	/// <para>
+	/// How much influence documents in individual result sets per query have over the final ranked result set
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank_constant")]
 	public long? RankConstant { get; set; }
 
 	/// <summary>
-	/// <para>Size of the individual result sets per query</para>
+	/// <para>
+	/// Size of the individual result sets per query
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public long? RankWindowSize { get; set; }
@@ -56,7 +60,9 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 	private long? RankWindowSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>How much influence documents in individual result sets per query have over the final ranked result set</para>
+	/// <para>
+	/// How much influence documents in individual result sets per query have over the final ranked result set
+	/// </para>
 	/// </summary>
 	public RrfRankDescriptor RankConstant(long? rankConstant)
 	{
@@ -65,7 +71,9 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 	}
 
 	/// <summary>
-	/// <para>Size of the individual result sets per query</para>
+	/// <para>
+	/// Size of the individual result sets per query
+	/// </para>
 	/// </summary>
 	public RrfRankDescriptor RankWindowSize(long? rankWindowSize)
 	{

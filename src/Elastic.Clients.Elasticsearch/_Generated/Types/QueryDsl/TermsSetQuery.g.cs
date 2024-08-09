@@ -129,24 +129,35 @@ public sealed partial class TermsSetQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchField { get; set; }
 
 	/// <summary>
-	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Custom script containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScript { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Array of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public ICollection<string> Terms { get; set; }
 
@@ -171,7 +182,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	private ICollection<string> TermsValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -198,7 +214,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
 	{
@@ -207,7 +225,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
 	{
@@ -216,7 +236,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Expression<Func<TDocument, object>> minimumShouldMatchField)
 	{
@@ -225,7 +247,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Custom script containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript)
 	{
@@ -258,7 +282,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Array of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<string> terms)
 	{
@@ -332,7 +358,12 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	private ICollection<string> TermsValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor Boost(float? boost)
 	{
@@ -359,7 +390,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
 	{
@@ -368,7 +401,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument, TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
 	{
@@ -377,7 +412,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Numeric field containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument>(Expression<Func<TDocument, object>> minimumShouldMatchField)
 	{
@@ -386,7 +423,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// <para>
+	/// Custom script containing the number of matching terms required to return a document.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript)
 	{
@@ -419,7 +458,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Array of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public TermsSetQueryDescriptor Terms(ICollection<string> terms)
 	{

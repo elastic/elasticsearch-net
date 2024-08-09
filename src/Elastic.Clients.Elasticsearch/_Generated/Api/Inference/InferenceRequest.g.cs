@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class InferenceRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies the amount of time to wait for the inference request to complete.</para>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference request to complete.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Perform inference on the service</para>
+/// <para>
+/// Perform inference on the service
+/// </para>
 /// </summary>
 public sealed partial class InferenceRequest : PlainRequest<InferenceRequestParameters>
 {
@@ -59,33 +63,45 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	internal override string OperationName => "inference.inference";
 
 	/// <summary>
-	/// <para>Specifies the amount of time to wait for the inference request to complete.</para>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference request to complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Inference input.<br/>Either a string or an array of strings.</para>
+	/// <para>
+	/// Inference input.
+	/// Either a string or an array of strings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string> Input { get; set; }
 
 	/// <summary>
-	/// <para>Query input, required for rerank task.<br/>Not required for other tasks.</para>
+	/// <para>
+	/// Query input, required for rerank task.
+	/// Not required for other tasks.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
 
 	/// <summary>
-	/// <para>Optional task settings</para>
+	/// <para>
+	/// Optional task settings
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
 	public object? TaskSettings { get; set; }
 }
 
 /// <summary>
-/// <para>Perform inference on the service</para>
+/// <para>
+/// Perform inference on the service
+/// </para>
 /// </summary>
 public sealed partial class InferenceRequestDescriptor : RequestDescriptor<InferenceRequestDescriptor, InferenceRequestParameters>
 {
@@ -126,7 +142,10 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	private object? TaskSettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>Inference input.<br/>Either a string or an array of strings.</para>
+	/// <para>
+	/// Inference input.
+	/// Either a string or an array of strings.
+	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor Input(ICollection<string> input)
 	{
@@ -135,7 +154,10 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	}
 
 	/// <summary>
-	/// <para>Query input, required for rerank task.<br/>Not required for other tasks.</para>
+	/// <para>
+	/// Query input, required for rerank task.
+	/// Not required for other tasks.
+	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor Query(string? query)
 	{
@@ -144,7 +166,9 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	}
 
 	/// <summary>
-	/// <para>Optional task settings</para>
+	/// <para>
+	/// Optional task settings
+	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor TaskSettings(object? taskSettings)
 	{

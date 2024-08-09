@@ -237,69 +237,98 @@ public sealed partial class MatchQuery
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public string? FuzzyRewrite { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public bool? Lenient { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	public int? MaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? Operator { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public object Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
@@ -331,7 +360,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -340,7 +371,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -349,7 +382,12 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -376,7 +414,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -385,7 +425,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -394,7 +436,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -403,7 +447,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Lenient(bool? lenient = true)
 	{
@@ -412,7 +458,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
@@ -421,7 +469,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -430,7 +480,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -439,7 +491,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
@@ -448,7 +502,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> Query(object query)
 	{
@@ -463,7 +519,9 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
@@ -588,7 +646,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -597,7 +657,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -606,7 +668,12 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Boost(float? boost)
 	{
@@ -633,7 +700,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -642,7 +711,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -651,7 +722,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -660,7 +733,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Lenient(bool? lenient = true)
 	{
@@ -669,7 +744,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
@@ -678,7 +755,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -687,7 +766,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -696,7 +777,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor PrefixLength(int? prefixLength)
 	{
@@ -705,7 +788,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor Query(object query)
 	{
@@ -720,7 +805,9 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{

@@ -91,7 +91,9 @@ internal sealed partial class DoubleTermsBucketConverter : JsonConverter<DoubleT
 public sealed partial class DoubleTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
 /// <summary>
-/// <para>Result of a `terms` aggregation when the field is a string.</para>
+/// <para>
+/// Result of a <c>terms</c> aggregation when the field is a string.
+/// </para>
 /// </summary>
 public sealed partial class StringTermsAggregate : IAggregate
 {

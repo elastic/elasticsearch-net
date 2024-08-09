@@ -32,23 +32,35 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class CreateIndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Create an index.<br/>Creates a new index.</para>
+/// <para>
+/// Create an index.
+/// Creates a new index.
+/// </para>
 /// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
 {
@@ -65,44 +77,79 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	internal override string OperationName => "indices.create";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>Aliases for the index.</para>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
-	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
 /// <summary>
-/// <para>Create an index.<br/>Creates a new index.</para>
+/// <para>
+/// Create an index.
+/// Creates a new index.
+/// </para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 {
@@ -143,7 +190,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the index.</para>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
 	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
@@ -152,7 +201,26 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
 	{
@@ -179,7 +247,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
 	{
@@ -251,7 +321,10 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Create an index.<br/>Creates a new index.</para>
+/// <para>
+/// Create an index.
+/// Creates a new index.
+/// </para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 {
@@ -288,7 +361,9 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the index.</para>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
 	/// </summary>
 	public CreateIndexRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>> selector)
 	{
@@ -297,7 +372,26 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
 	{
@@ -324,7 +418,9 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
 	{

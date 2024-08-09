@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Features;
 public partial class FeaturesNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="FeaturesNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="FeaturesNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected FeaturesNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +119,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
@@ -116,7 +132,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+	/// <para>
+	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(Action<GetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -128,7 +146,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -139,7 +159,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequest request, CancellationToken cancellationToken = default)
@@ -149,7 +171,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -160,7 +184,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -172,7 +198,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -185,7 +213,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -195,7 +225,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(CancellationToken cancellationToken = default)
@@ -206,7 +238,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets the internal state of features, usually by deleting system indices</para>
+	/// <para>
+	/// Resets the internal state of features, usually by deleting system indices
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(Action<ResetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

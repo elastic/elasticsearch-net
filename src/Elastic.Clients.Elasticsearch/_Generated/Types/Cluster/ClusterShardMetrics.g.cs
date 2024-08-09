@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterShardMetrics
 {
 	/// <summary>
-	/// <para>Mean number of shards in an index, counting only shards assigned to selected nodes.</para>
+	/// <para>
+	/// Mean number of shards in an index, counting only shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("avg")]
 	public double Avg { get; init; }
 
 	/// <summary>
-	/// <para>Maximum number of shards in an index, counting only shards assigned to selected nodes.</para>
+	/// <para>
+	/// Maximum number of shards in an index, counting only shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public double Max { get; init; }
 
 	/// <summary>
-	/// <para>Minimum number of shards in an index, counting only shards assigned to selected nodes.</para>
+	/// <para>
+	/// Minimum number of shards in an index, counting only shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public double Min { get; init; }

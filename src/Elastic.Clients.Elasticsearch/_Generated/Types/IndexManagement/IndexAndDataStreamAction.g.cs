@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexAndDataStreamAction
 {
 	/// <summary>
-	/// <para>Data stream targeted by the action.</para>
+	/// <para>
+	/// Data stream targeted by the action.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.DataStreamName DataStream { get; set; }
 
 	/// <summary>
-	/// <para>Index for the action.</para>
+	/// <para>
+	/// Index for the action.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class IndexAndDataStreamActionDescriptor : SerializableDes
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
 
 	/// <summary>
-	/// <para>Data stream targeted by the action.</para>
+	/// <para>
+	/// Data stream targeted by the action.
+	/// </para>
 	/// </summary>
 	public IndexAndDataStreamActionDescriptor DataStream(Elastic.Clients.Elasticsearch.DataStreamName dataStream)
 	{
@@ -63,7 +69,9 @@ public sealed partial class IndexAndDataStreamActionDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Index for the action.</para>
+	/// <para>
+	/// Index for the action.
+	/// </para>
 	/// </summary>
 	public IndexAndDataStreamActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{

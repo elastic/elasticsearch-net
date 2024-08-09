@@ -30,37 +30,53 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class SpanNotQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// <para>
+	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
+	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dist")]
 	public int? Dist { get; set; }
 
 	/// <summary>
-	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
 
 	/// <summary>
-	/// <para>Span query whose matches are filtered.</para>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
 
 	/// <summary>
-	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens after the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("post")]
 	public int? Post { get; set; }
 
 	/// <summary>
-	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens before the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pre")]
 	public int? Pre { get; set; }
@@ -92,7 +108,12 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -101,7 +122,10 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// <para>
+	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
+	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Dist(int? dist)
 	{
@@ -110,7 +134,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
 	{
@@ -137,7 +163,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Span query whose matches are filtered.</para>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
 	{
@@ -164,7 +192,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens after the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Post(int? post)
 	{
@@ -173,7 +203,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens before the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Pre(int? pre)
 	{
@@ -277,7 +309,12 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Boost(float? boost)
 	{
@@ -286,7 +323,10 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	}
 
 	/// <summary>
-	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// <para>
+	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
+	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Dist(int? dist)
 	{
@@ -295,7 +335,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	}
 
 	/// <summary>
-	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
 	{
@@ -322,7 +364,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	}
 
 	/// <summary>
-	/// <para>Span query whose matches are filtered.</para>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
 	{
@@ -349,7 +393,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	}
 
 	/// <summary>
-	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens after the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Post(int? post)
 	{
@@ -358,7 +404,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	}
 
 	/// <summary>
-	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// <para>
+	/// The number of tokens before the include span that can’t have overlap with the exclude span.
+	/// </para>
 	/// </summary>
 	public SpanNotQueryDescriptor Pre(int? pre)
 	{

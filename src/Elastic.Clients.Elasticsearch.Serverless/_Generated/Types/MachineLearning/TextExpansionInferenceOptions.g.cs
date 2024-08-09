@@ -28,18 +28,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Text expansion inference options</para>
+/// <para>
+/// Text expansion inference options
+/// </para>
 /// </summary>
 public sealed partial class TextExpansionInferenceOptions
 {
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -48,7 +54,9 @@ public sealed partial class TextExpansionInferenceOptions
 }
 
 /// <summary>
-/// <para>Text expansion inference options</para>
+/// <para>
+/// Text expansion inference options
+/// </para>
 /// </summary>
 public sealed partial class TextExpansionInferenceOptionsDescriptor : SerializableDescriptor<TextExpansionInferenceOptionsDescriptor>
 {
@@ -64,7 +72,9 @@ public sealed partial class TextExpansionInferenceOptionsDescriptor : Serializab
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public TextExpansionInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -73,7 +83,9 @@ public sealed partial class TextExpansionInferenceOptionsDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	public TextExpansionInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? tokenization)
 	{

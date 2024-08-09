@@ -33,31 +33,41 @@ public sealed partial class AutoFollowPatternSummary
 	public bool Active { get; init; }
 
 	/// <summary>
-	/// <para>The name of follower index.</para>
+	/// <para>
+	/// The name of follower index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("follow_index_pattern")]
 	public string? FollowIndexPattern { get; init; }
 
 	/// <summary>
-	/// <para>An array of simple index patterns that can be used to exclude indices from being auto-followed.</para>
+	/// <para>
+	/// An array of simple index patterns that can be used to exclude indices from being auto-followed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index_exclusion_patterns")]
 	public IReadOnlyCollection<string> LeaderIndexExclusionPatterns { get; init; }
 
 	/// <summary>
-	/// <para>An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.</para>
+	/// <para>
+	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index_patterns")]
 	public IReadOnlyCollection<string> LeaderIndexPatterns { get; init; }
 
 	/// <summary>
-	/// <para>The maximum number of outstanding reads requests from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
 	public int MaxOutstandingReadRequests { get; init; }
 
 	/// <summary>
-	/// <para>The remote cluster containing the leader indices to match against.</para>
+	/// <para>
+	/// The remote cluster containing the leader indices to match against.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_cluster")]
 	public string RemoteCluster { get; init; }

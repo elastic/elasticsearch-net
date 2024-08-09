@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.MGet;
 public sealed partial class MultiGetOperation
 {
 	/// <summary>
-	/// <para>The unique document ID.</para>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id Id { get; set; }
 
 	/// <summary>
-	/// <para>The index that contains the document.</para>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// <para>
+	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>If `false`, excludes all _source fields.</para>
+	/// <para>
+	/// If <c>false</c>, excludes all _source fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
-	/// <para>The stored fields you want to retrieve.</para>
+	/// <para>
+	/// The stored fields you want to retrieve.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
@@ -82,7 +92,9 @@ public sealed partial class MultiGetOperationDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The unique document ID.</para>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
@@ -91,7 +103,9 @@ public sealed partial class MultiGetOperationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The index that contains the document.</para>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -100,7 +114,9 @@ public sealed partial class MultiGetOperationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// <para>
+	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -109,7 +125,9 @@ public sealed partial class MultiGetOperationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If `false`, excludes all _source fields.</para>
+	/// <para>
+	/// If <c>false</c>, excludes all _source fields.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -118,7 +136,9 @@ public sealed partial class MultiGetOperationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The stored fields you want to retrieve.</para>
+	/// <para>
+	/// The stored fields you want to retrieve.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{
@@ -200,7 +220,9 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The unique document ID.</para>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
@@ -209,7 +231,9 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The index that contains the document.</para>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -218,7 +242,9 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// <para>
+	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -227,7 +253,9 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If `false`, excludes all _source fields.</para>
+	/// <para>
+	/// If <c>false</c>, excludes all _source fields.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -236,7 +264,9 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The stored fields you want to retrieve.</para>
+	/// <para>
+	/// The stored fields you want to retrieve.
+	/// </para>
 	/// </summary>
 	public MultiGetOperationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{

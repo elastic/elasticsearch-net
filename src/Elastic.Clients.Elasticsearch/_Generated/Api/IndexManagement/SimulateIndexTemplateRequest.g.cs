@@ -32,18 +32,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SimulateIndexTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// <para>
+	/// If true, returns all relevant default configurations for the index template.
+	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
+/// <para>
+/// Simulate an index.
+/// Returns the index configuration that would be applied to the specified index from an existing index template.
+/// </para>
 /// </summary>
 public sealed partial class SimulateIndexTemplateRequest : PlainRequest<SimulateIndexTemplateRequestParameters>
 {
@@ -60,20 +67,27 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	internal override string OperationName => "indices.simulate_index_template";
 
 	/// <summary>
-	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// <para>
+	/// If true, returns all relevant default configurations for the index template.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
+/// <para>
+/// Simulate an index.
+/// Returns the index configuration that would be applied to the specified index from an existing index template.
+/// </para>
 /// </summary>
 public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDescriptor<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateRequestParameters>
 {

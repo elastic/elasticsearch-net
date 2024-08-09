@@ -34,7 +34,9 @@ public sealed partial class PauseAutoFollowPatternRequestParameters : RequestPar
 }
 
 /// <summary>
-/// <para>Pauses an auto-follow pattern</para>
+/// <para>
+/// Pauses an auto-follow pattern
+/// </para>
 /// </summary>
 public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAutoFollowPatternRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAu
 }
 
 /// <summary>
-/// <para>Pauses an auto-follow pattern</para>
+/// <para>
+/// Pauses an auto-follow pattern
+/// </para>
 /// </summary>
 public sealed partial class PauseAutoFollowPatternRequestDescriptor : RequestDescriptor<PauseAutoFollowPatternRequestDescriptor, PauseAutoFollowPatternRequestParameters>
 {

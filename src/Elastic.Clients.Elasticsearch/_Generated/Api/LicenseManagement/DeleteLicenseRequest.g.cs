@@ -34,7 +34,9 @@ public sealed partial class DeleteLicenseRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes licensing information for the cluster</para>
+/// <para>
+/// Deletes licensing information for the cluster
+/// </para>
 /// </summary>
 public sealed partial class DeleteLicenseRequest : PlainRequest<DeleteLicenseRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class DeleteLicenseRequest : PlainRequest<DeleteLicenseReq
 }
 
 /// <summary>
-/// <para>Deletes licensing information for the cluster</para>
+/// <para>
+/// Deletes licensing information for the cluster
+/// </para>
 /// </summary>
 public sealed partial class DeleteLicenseRequestDescriptor : RequestDescriptor<DeleteLicenseRequestDescriptor, DeleteLicenseRequestParameters>
 {

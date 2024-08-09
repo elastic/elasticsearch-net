@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class DeleteScriptRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
+/// <para>
+/// Delete a script or search template.
+/// Deletes a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptRequestParameters>
 {
@@ -60,20 +69,29 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	internal override string OperationName => "delete_script";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
+/// <para>
+/// Delete a script or search template.
+/// Deletes a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDescriptor<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptRequestParameters>
 {
@@ -106,7 +124,10 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
+/// <para>
+/// Delete a script or search template.
+/// Deletes a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<DeleteScriptRequestDescriptor, DeleteScriptRequestParameters>
 {

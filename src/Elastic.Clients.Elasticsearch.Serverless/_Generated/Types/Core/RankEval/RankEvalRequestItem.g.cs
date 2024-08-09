@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 public sealed partial class RankEvalRequestItem
 {
 	/// <summary>
-	/// <para>The search request’s ID, used to group result details later.</para>
+	/// <para>
+	/// The search request’s ID, used to group result details later.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id Id { get; set; }
 
 	/// <summary>
-	/// <para>The search template parameters.</para>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>List of document ratings</para>
+	/// <para>
+	/// List of document ratings
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ratings")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.DocumentRating> Ratings { get; set; }
 
 	/// <summary>
-	/// <para>The query being evaluated.</para>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("request")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? Request { get; set; }
 
 	/// <summary>
-	/// <para>The search template Id</para>
+	/// <para>
+	/// The search template Id
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? TemplateId { get; set; }
@@ -80,7 +90,9 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.Id? TemplateIdValue { get; set; }
 
 	/// <summary>
-	/// <para>The search request’s ID, used to group result details later.</para>
+	/// <para>
+	/// The search request’s ID, used to group result details later.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
@@ -89,7 +101,9 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The search template parameters.</para>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -98,7 +112,9 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>List of document ratings</para>
+	/// <para>
+	/// List of document ratings
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> Ratings(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.DocumentRating> ratings)
 	{
@@ -137,7 +153,9 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The query being evaluated.</para>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
 	{
@@ -164,7 +182,9 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The search template Id</para>
+	/// <para>
+	/// The search template Id
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> TemplateId(Elastic.Clients.Elasticsearch.Serverless.Id? templateId)
 	{
@@ -260,7 +280,9 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Id? TemplateIdValue { get; set; }
 
 	/// <summary>
-	/// <para>The search request’s ID, used to group result details later.</para>
+	/// <para>
+	/// The search request’s ID, used to group result details later.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
@@ -269,7 +291,9 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The search template parameters.</para>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -278,7 +302,9 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>List of document ratings</para>
+	/// <para>
+	/// List of document ratings
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor Ratings(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.DocumentRating> ratings)
 	{
@@ -317,7 +343,9 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The query being evaluated.</para>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
 	{
@@ -344,7 +372,9 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The search template Id</para>
+	/// <para>
+	/// The search template Id
+	/// </para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor TemplateId(Elastic.Clients.Elasticsearch.Serverless.Id? templateId)
 	{

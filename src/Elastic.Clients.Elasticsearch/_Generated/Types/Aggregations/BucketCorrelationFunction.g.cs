@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class BucketCorrelationFunction
 {
 	/// <summary>
-	/// <para>The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.</para>
+	/// <para>
+	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count_correlation")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class BucketCorrelationFunctionDescriptor : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> CountCorrelationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.</para>
+	/// <para>
+	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationFunctionDescriptor CountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation countCorrelation)
 	{

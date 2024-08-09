@@ -28,26 +28,34 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 
 /// <summary>
-/// <para>Expected Reciprocal Rank (ERR)</para>
+/// <para>
+/// Expected Reciprocal Rank (ERR)
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
 	/// <summary>
-	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// <para>
+	/// The highest relevance grade used in the user-supplied relevance judgments.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("maximum_relevance")]
 	public int MaximumRelevance { get; set; }
 }
 
 /// <summary>
-/// <para>Expected Reciprocal Rank (ERR)</para>
+/// <para>
+/// Expected Reciprocal Rank (ERR)
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricExpectedReciprocalRankDescriptor>
@@ -62,7 +70,9 @@ public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : Ser
 	private int MaximumRelevanceValue { get; set; }
 
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	public RankEvalMetricExpectedReciprocalRankDescriptor k(int? k)
 	{
@@ -71,7 +81,9 @@ public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : Ser
 	}
 
 	/// <summary>
-	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// <para>
+	/// The highest relevance grade used in the user-supplied relevance judgments.
+	/// </para>
 	/// </summary>
 	public RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int maximumRelevance)
 	{

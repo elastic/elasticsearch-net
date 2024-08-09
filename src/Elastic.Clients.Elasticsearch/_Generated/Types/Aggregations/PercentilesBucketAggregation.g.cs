@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class PercentilesBucketAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The list of percentiles to calculate.</para>
+	/// <para>
+	/// The list of percentiles to calculate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("percents")]
 	public ICollection<double>? Percents { get; set; }
@@ -70,7 +79,9 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	private ICollection<double>? PercentsValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public PercentilesBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -79,7 +90,10 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public PercentilesBucketAggregationDescriptor Format(string? format)
 	{
@@ -88,7 +102,9 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -97,7 +113,9 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The list of percentiles to calculate.</para>
+	/// <para>
+	/// The list of percentiles to calculate.
+	/// </para>
 	/// </summary>
 	public PercentilesBucketAggregationDescriptor Percents(ICollection<double>? percents)
 	{

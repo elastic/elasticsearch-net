@@ -32,28 +32,41 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class GetComponentTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Return all default configurations for the component template (default: false)</para>
+	/// <para>
+	/// Return all default configurations for the component template (default: false)
+	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// If <c>false</c>, information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
+/// <para>
+/// Get component templates.
+/// Retrieves information about component templates.
+/// </para>
 /// </summary>
 public sealed partial class GetComponentTemplateRequest : PlainRequest<GetComponentTemplateRequestParameters>
 {
@@ -74,32 +87,45 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 	internal override string OperationName => "cluster.get_component_template";
 
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Return all default configurations for the component template (default: false)</para>
+	/// <para>
+	/// Return all default configurations for the component template (default: false)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// If <c>false</c>, information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
+/// <para>
+/// Get component templates.
+/// Retrieves information about component templates.
+/// </para>
 /// </summary>
 public sealed partial class GetComponentTemplateRequestDescriptor : RequestDescriptor<GetComponentTemplateRequestDescriptor, GetComponentTemplateRequestParameters>
 {

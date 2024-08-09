@@ -34,7 +34,9 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : 
 }
 
 /// <summary>
-/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
+/// <para>
+/// You can use this API to clear the archived repositories metering information in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainRequest<ClearRepositoriesMeteringArchiveRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : PlainReque
 }
 
 /// <summary>
-/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
+/// <para>
+/// You can use this API to clear the archived repositories metering information in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ClearRepositoriesMeteringArchiveRequestDescriptor : RequestDescriptor<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveRequestParameters>
 {

@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class BucketSortAggregation
 {
 	/// <summary>
-	/// <para>Buckets in positions prior to `from` will be truncated.</para>
+	/// <para>
+	/// Buckets in positions prior to <c>from</c> will be truncated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
-	/// <para>The policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// The policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
+	/// <para>
+	/// The number of buckets to return.
+	/// Defaults to all buckets of the parent aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The list of fields to sort on.</para>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
@@ -74,7 +83,9 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Buckets in positions prior to `from` will be truncated.</para>
+	/// <para>
+	/// Buckets in positions prior to <c>from</c> will be truncated.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor<TDocument> From(int? from)
 	{
@@ -83,7 +94,9 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// The policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -92,7 +105,10 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
+	/// <para>
+	/// The number of buckets to return.
+	/// Defaults to all buckets of the parent aggregation.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -101,7 +117,9 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The list of fields to sort on.</para>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -210,7 +228,9 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Buckets in positions prior to `from` will be truncated.</para>
+	/// <para>
+	/// Buckets in positions prior to <c>from</c> will be truncated.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor From(int? from)
 	{
@@ -219,7 +239,9 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// The policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -228,7 +250,10 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
+	/// <para>
+	/// The number of buckets to return.
+	/// Defaults to all buckets of the parent aggregation.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor Size(int? size)
 	{
@@ -237,7 +262,9 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The list of fields to sort on.</para>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
 	/// </summary>
 	public BucketSortAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{

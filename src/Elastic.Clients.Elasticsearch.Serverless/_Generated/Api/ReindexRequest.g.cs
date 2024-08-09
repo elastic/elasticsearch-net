@@ -32,48 +32,70 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class ReindexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, the request refreshes affected shards to make this operation visible to search.</para>
+	/// <para>
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
+	/// </para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.<br/>Defaults to no throttle.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// Defaults to no throttle.
+	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
-	/// <para>If `true`, the destination must be an index alias.</para>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
 	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
-	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
+	/// <para>
+	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The number of slices this task should be divided into.<br/>Defaults to 1 slice, meaning the task isn’t sliced into subtasks.</para>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Serverless.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
-	/// <para>Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.</para>
+	/// <para>
+	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the operation is complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
+/// <para>
+/// Reindex documents.
+/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
 /// </summary>
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
@@ -86,73 +108,100 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	internal override string OperationName => "reindex";
 
 	/// <summary>
-	/// <para>If `true`, the request refreshes affected shards to make this operation visible to search.</para>
+	/// <para>
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.<br/>Defaults to no throttle.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// Defaults to no throttle.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
-	/// <para>If `true`, the destination must be an index alias.</para>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
-	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
+	/// <para>
+	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The number of slices this task should be divided into.<br/>Defaults to 1 slice, meaning the task isn’t sliced into subtasks.</para>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Serverless.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
-	/// <para>Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.</para>
+	/// <para>
+	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the operation is complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
-	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// <para>
+	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Serverless.Conflicts? Conflicts { get; set; }
 
 	/// <summary>
-	/// <para>The destination you are copying to.</para>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination Dest { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of documents to reindex.</para>
+	/// <para>
+	/// The maximum number of documents to reindex.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
 	/// <summary>
-	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
@@ -160,14 +209,19 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	public long? Size { get; set; }
 
 	/// <summary>
-	/// <para>The source you are copying from.</para>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source Source { get; set; }
 }
 
 /// <summary>
-/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
+/// <para>
+/// Reindex documents.
+/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
 {
@@ -208,7 +262,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// <para>
+	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
 	{
@@ -217,7 +273,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>The destination you are copying to.</para>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination dest)
 	{
@@ -244,7 +302,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>The maximum number of documents to reindex.</para>
+	/// <para>
+	/// The maximum number of documents to reindex.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
 	{
@@ -253,7 +313,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -286,7 +348,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>The source you are copying from.</para>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
 	{
@@ -386,7 +450,10 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
+/// <para>
+/// Reindex documents.
+/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
 {
@@ -427,7 +494,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// <para>
+	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
 	{
@@ -436,7 +505,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	}
 
 	/// <summary>
-	/// <para>The destination you are copying to.</para>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination dest)
 	{
@@ -463,7 +534,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	}
 
 	/// <summary>
-	/// <para>The maximum number of documents to reindex.</para>
+	/// <para>
+	/// The maximum number of documents to reindex.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor MaxDocs(long? maxDocs)
 	{
@@ -472,7 +545,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	}
 
 	/// <summary>
-	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -505,7 +580,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	}
 
 	/// <summary>
-	/// <para>The source you are copying from.</para>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
 	/// </summary>
 	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
 	{

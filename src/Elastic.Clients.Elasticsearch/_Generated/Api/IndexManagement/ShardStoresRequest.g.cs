@@ -32,28 +32,42 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardStoresRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all<br/>value targets only missing or closed indices. This behavior applies even if the request<br/>targets other open indices.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all
+	/// value targets only missing or closed indices. This behavior applies even if the request
+	/// targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams,<br/>this argument determines whether wildcard expressions match hidden data streams.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>List of shard health statuses used to limit the request.</para>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
 /// <summary>
-/// <para>Retrieves store information about replica shards in one or more indices.<br/>For data streams, the API retrieves store information for the stream’s backing indices.</para>
+/// <para>
+/// Retrieves store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequestParameters>
 {
@@ -74,32 +88,46 @@ public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequest
 	internal override string OperationName => "indices.shard_stores";
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all<br/>value targets only missing or closed indices. This behavior applies even if the request<br/>targets other open indices.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all
+	/// value targets only missing or closed indices. This behavior applies even if the request
+	/// targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams,<br/>this argument determines whether wildcard expressions match hidden data streams.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams,
+	/// this argument determines whether wildcard expressions match hidden data streams.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>List of shard health statuses used to limit the request.</para>
+	/// <para>
+	/// List of shard health statuses used to limit the request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
 /// <summary>
-/// <para>Retrieves store information about replica shards in one or more indices.<br/>For data streams, the API retrieves store information for the stream’s backing indices.</para>
+/// <para>
+/// Retrieves store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDescriptor<ShardStoresRequestDescriptor<TDocument>, ShardStoresRequestParameters>
 {
@@ -138,7 +166,10 @@ public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Retrieves store information about replica shards in one or more indices.<br/>For data streams, the API retrieves store information for the stream’s backing indices.</para>
+/// <para>
+/// Retrieves store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ShardStoresRequestDescriptor : RequestDescriptor<ShardStoresRequestDescriptor, ShardStoresRequestParameters>
 {

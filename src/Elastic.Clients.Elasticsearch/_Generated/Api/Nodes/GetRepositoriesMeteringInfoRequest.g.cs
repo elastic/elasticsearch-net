@@ -34,7 +34,12 @@ public sealed partial class GetRepositoriesMeteringInfoRequestParameters : Reque
 }
 
 /// <summary>
-/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
+/// <para>
+/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
+/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
+/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
+/// API is volatile, meaning that it won’t be present after node restarts.
+/// </para>
 /// </summary>
 public sealed partial class GetRepositoriesMeteringInfoRequest : PlainRequest<GetRepositoriesMeteringInfoRequestParameters>
 {
@@ -52,7 +57,12 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : PlainRequest<Ge
 }
 
 /// <summary>
-/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
+/// <para>
+/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
+/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
+/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
+/// API is volatile, meaning that it won’t be present after node restarts.
+/// </para>
 /// </summary>
 public sealed partial class GetRepositoriesMeteringInfoRequestDescriptor : RequestDescriptor<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoRequestParameters>
 {

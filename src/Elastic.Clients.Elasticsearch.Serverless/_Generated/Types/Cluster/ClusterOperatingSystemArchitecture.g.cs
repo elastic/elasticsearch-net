@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterOperatingSystemArchitecture
 {
 	/// <summary>
-	/// <para>Name of an architecture used by one or more selected nodes.</para>
+	/// <para>
+	/// Name of an architecture used by one or more selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("arch")]
 	public string Arch { get; init; }
 
 	/// <summary>
-	/// <para>Number of selected nodes using the architecture.</para>
+	/// <para>
+	/// Number of selected nodes using the architecture.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }

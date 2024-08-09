@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TermsAggregation
 {
 	/// <summary>
-	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
+	/// <para>
+	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 	/// <summary>
-	/// <para>Values to exclude.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
-	/// <para>Determines whether the aggregation will use field values directly or global ordinals.</para>
+	/// <para>
+	/// Determines whether the aggregation will use field values directly or global ordinals.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -56,19 +65,27 @@ public sealed partial class TermsAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Values to include.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to include.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
 	/// <summary>
-	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
+	/// <para>
+	/// Only return values that are found in more than <c>min_doc_count</c> hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -78,7 +95,10 @@ public sealed partial class TermsAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
@@ -87,31 +107,43 @@ public sealed partial class TermsAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// <para>
+	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
+	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
-	/// <para>Set to `true` to return the `doc_count_error_upper_bound`, which is an upper bound to the error on the `doc_count` returned by each shard.</para>
+	/// <para>
+	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
-	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of buckets returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Coerced unmapped fields into the specified type.</para>
+	/// <para>
+	/// Coerced unmapped fields into the specified type.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value_type")]
 	public string? ValueType { get; set; }
@@ -149,7 +181,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	private string? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
+	/// <para>
+	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
 	{
@@ -158,7 +192,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Values to exclude.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
@@ -167,7 +204,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Determines whether the aggregation will use field values directly or global ordinals.</para>
+	/// <para>
+	/// Determines whether the aggregation will use field values directly or global ordinals.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
 	{
@@ -176,7 +215,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -185,7 +226,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -194,7 +237,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -209,7 +254,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Values to include.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to include.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
@@ -218,7 +266,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
+	/// <para>
+	/// Only return values that are found in more than <c>min_doc_count</c> hits.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
@@ -227,7 +277,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -248,7 +301,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
@@ -281,7 +337,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// <para>
+	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
+	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
 	{
@@ -290,7 +349,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -299,7 +361,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to return the `doc_count_error_upper_bound`, which is an upper bound to the error on the `doc_count` returned by each shard.</para>
+	/// <para>
+	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true)
 	{
@@ -308,7 +372,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of buckets returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -317,7 +383,9 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Coerced unmapped fields into the specified type.</para>
+	/// <para>
+	/// Coerced unmapped fields into the specified type.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ValueType(string? valueType)
 	{
@@ -473,7 +541,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	private string? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
+	/// <para>
+	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
 	{
@@ -482,7 +552,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Values to exclude.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
@@ -491,7 +564,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Determines whether the aggregation will use field values directly or global ordinals.</para>
+	/// <para>
+	/// Determines whether the aggregation will use field values directly or global ordinals.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
 	{
@@ -500,7 +575,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -509,7 +586,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -518,7 +597,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field from which to return terms.</para>
+	/// <para>
+	/// The field from which to return terms.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -533,7 +614,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Values to include.<br/>Accepts regular expressions and partitions.</para>
+	/// <para>
+	/// Values to include.
+	/// Accepts regular expressions and partitions.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
@@ -542,7 +626,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
+	/// <para>
+	/// Only return values that are found in more than <c>min_doc_count</c> hits.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor MinDocCount(int? minDocCount)
 	{
@@ -551,7 +637,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -572,7 +661,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
@@ -605,7 +697,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// <para>
+	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
+	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor ShardMinDocCount(long? shardMinDocCount)
 	{
@@ -614,7 +709,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor ShardSize(int? shardSize)
 	{
@@ -623,7 +721,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to return the `doc_count_error_upper_bound`, which is an upper bound to the error on the `doc_count` returned by each shard.</para>
+	/// <para>
+	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor ShowTermDocCountError(bool? showTermDocCountError = true)
 	{
@@ -632,7 +732,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of buckets returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor Size(int? size)
 	{
@@ -641,7 +743,9 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Coerced unmapped fields into the specified type.</para>
+	/// <para>
+	/// Coerced unmapped fields into the specified type.
+	/// </para>
 	/// </summary>
 	public TermsAggregationDescriptor ValueType(string? valueType)
 	{

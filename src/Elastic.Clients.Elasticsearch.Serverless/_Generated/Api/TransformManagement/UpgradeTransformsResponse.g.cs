@@ -29,19 +29,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The number of transforms that need to be upgraded.</para>
+	/// <para>
+	/// The number of transforms that need to be upgraded.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("needs_update")]
 	public int NeedsUpdate { get; init; }
 
 	/// <summary>
-	/// <para>The number of transforms that don’t require upgrading.</para>
+	/// <para>
+	/// The number of transforms that don’t require upgrading.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("no_action")]
 	public int NoAction { get; init; }
 
 	/// <summary>
-	/// <para>The number of transforms that have been upgraded.</para>
+	/// <para>
+	/// The number of transforms that have been upgraded.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated")]
 	public int Updated { get; init; }

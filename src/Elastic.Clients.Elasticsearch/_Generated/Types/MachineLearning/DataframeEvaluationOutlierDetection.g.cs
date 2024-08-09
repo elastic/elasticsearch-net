@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeEvaluationOutlierDetection
 {
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual_field")]
 	public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("predicted_probability_field")]
 	public Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
@@ -65,7 +71,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	private Elastic.Clients.Elasticsearch.Field PredictedProbabilityFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field actualField)
 	{
@@ -74,7 +82,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -83,7 +93,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
 	{
@@ -92,7 +104,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? metrics)
 	{
@@ -119,7 +133,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field predictedProbabilityField)
 	{
@@ -128,7 +144,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField<TValue>(Expression<Func<TDocument, TValue>> predictedProbabilityField)
 	{
@@ -137,7 +155,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor<TDocum
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Expression<Func<TDocument, object>> predictedProbabilityField)
 	{
@@ -187,7 +207,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	private Elastic.Clients.Elasticsearch.Field PredictedProbabilityFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field actualField)
 	{
@@ -196,7 +218,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -205,7 +229,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
 	{
@@ -214,7 +240,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? metrics)
 	{
@@ -241,7 +269,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field predictedProbabilityField)
 	{
@@ -250,7 +280,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedProbabilityField)
 	{
@@ -259,7 +291,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionDescriptor : Seri
 	}
 
 	/// <summary>
-	/// <para>The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.</para>
+	/// <para>
+	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<TDocument>(Expression<Func<TDocument, object>> predictedProbabilityField)
 	{

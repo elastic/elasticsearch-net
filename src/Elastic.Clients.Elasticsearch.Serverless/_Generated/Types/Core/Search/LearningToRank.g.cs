@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class LearningToRank
 {
 	/// <summary>
-	/// <para>The unique identifier of the trained model uploaded to Elasticsearch</para>
+	/// <para>
+	/// The unique identifier of the trained model uploaded to Elasticsearch
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public string ModelId { get; set; }
 
 	/// <summary>
-	/// <para>Named parameters to be passed to the query templates used for feature</para>
+	/// <para>
+	/// Named parameters to be passed to the query templates used for feature
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
@@ -56,7 +60,9 @@ public sealed partial class LearningToRankDescriptor : SerializableDescriptor<Le
 	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	/// <summary>
-	/// <para>The unique identifier of the trained model uploaded to Elasticsearch</para>
+	/// <para>
+	/// The unique identifier of the trained model uploaded to Elasticsearch
+	/// </para>
 	/// </summary>
 	public LearningToRankDescriptor ModelId(string modelId)
 	{
@@ -65,7 +71,9 @@ public sealed partial class LearningToRankDescriptor : SerializableDescriptor<Le
 	}
 
 	/// <summary>
-	/// <para>Named parameters to be passed to the query templates used for feature</para>
+	/// <para>
+	/// Named parameters to be passed to the query templates used for feature
+	/// </para>
 	/// </summary>
 	public LearningToRankDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

@@ -30,44 +30,58 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class KnnRetriever
 {
 	/// <summary>
-	/// <para>The name of the vector field to search against.</para>
+	/// <para>
+	/// The name of the vector field to search against.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public string Field { get; set; }
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Number of nearest neighbors to return as top hits.</para>
+	/// <para>
+	/// Number of nearest neighbors to return as top hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int k { get; set; }
 
 	/// <summary>
-	/// <para>Number of nearest neighbor candidates to consider per shard.</para>
+	/// <para>
+	/// Number of nearest neighbor candidates to consider per shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_candidates")]
 	public int NumCandidates { get; set; }
 
 	/// <summary>
-	/// <para>Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<float>? QueryVector { get; set; }
 
 	/// <summary>
-	/// <para>Defines a model to build a query vector.</para>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector_builder")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
 	/// <summary>
-	/// <para>The minimum similarity required for a document to be considered a match.</para>
+	/// <para>
+	/// The minimum similarity required for a document to be considered a match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("similarity")]
 	public float? Similarity { get; set; }
@@ -97,7 +111,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the vector field to search against.</para>
+	/// <para>
+	/// The name of the vector field to search against.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> Field(string field)
 	{
@@ -106,7 +122,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -145,7 +163,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Number of nearest neighbors to return as top hits.</para>
+	/// <para>
+	/// Number of nearest neighbors to return as top hits.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> k(int k)
 	{
@@ -154,7 +174,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Number of nearest neighbor candidates to consider per shard.</para>
+	/// <para>
+	/// Number of nearest neighbor candidates to consider per shard.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> NumCandidates(int numCandidates)
 	{
@@ -163,7 +185,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> QueryVector(ICollection<float>? queryVector)
 	{
@@ -172,7 +196,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Defines a model to build a query vector.</para>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? queryVectorBuilder)
 	{
@@ -199,7 +225,9 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The minimum similarity required for a document to be considered a match.</para>
+	/// <para>
+	/// The minimum similarity required for a document to be considered a match.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor<TDocument> Similarity(float? similarity)
 	{
@@ -299,7 +327,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the vector field to search against.</para>
+	/// <para>
+	/// The name of the vector field to search against.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor Field(string field)
 	{
@@ -308,7 +338,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -347,7 +379,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>Number of nearest neighbors to return as top hits.</para>
+	/// <para>
+	/// Number of nearest neighbors to return as top hits.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor k(int k)
 	{
@@ -356,7 +390,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>Number of nearest neighbor candidates to consider per shard.</para>
+	/// <para>
+	/// Number of nearest neighbor candidates to consider per shard.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor NumCandidates(int numCandidates)
 	{
@@ -365,7 +401,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor QueryVector(ICollection<float>? queryVector)
 	{
@@ -374,7 +412,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>Defines a model to build a query vector.</para>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? queryVectorBuilder)
 	{
@@ -401,7 +441,9 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	}
 
 	/// <summary>
-	/// <para>The minimum similarity required for a document to be considered a match.</para>
+	/// <para>
+	/// The minimum similarity required for a document to be considered a match.
+	/// </para>
 	/// </summary>
 	public KnnRetrieverDescriptor Similarity(float? similarity)
 	{

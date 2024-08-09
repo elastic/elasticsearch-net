@@ -30,37 +30,51 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class StoreStats
 {
 	/// <summary>
-	/// <para>A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.</para>
+	/// <para>
+	/// A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reserved")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? Reserved { get; init; }
 
 	/// <summary>
-	/// <para>A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.</para>
+	/// <para>
+	/// A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reserved_in_bytes")]
 	public long ReservedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total size of all shards assigned to selected nodes.</para>
+	/// <para>
+	/// Total size of all shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? Size { get; init; }
 
 	/// <summary>
-	/// <para>Total size, in bytes, of all shards assigned to selected nodes.</para>
+	/// <para>
+	/// Total size, in bytes, of all shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total data set size of all shards assigned to selected nodes.<br/>This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.</para>
+	/// <para>
+	/// Total data set size of all shards assigned to selected nodes.
+	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_data_set_size")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? TotalDataSetSize { get; init; }
 
 	/// <summary>
-	/// <para>Total data set size, in bytes, of all shards assigned to selected nodes.<br/>This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.</para>
+	/// <para>
+	/// Total data set size, in bytes, of all shards assigned to selected nodes.
+	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_data_set_size_in_bytes")]
 	public long? TotalDataSetSizeInBytes { get; init; }

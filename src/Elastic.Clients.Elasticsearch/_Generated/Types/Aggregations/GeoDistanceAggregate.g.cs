@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>Result of a `geo_distance` aggregation. The unit for `from` and `to` is meters by default.</para>
+/// <para>
+/// Result of a <c>geo_distance</c> aggregation. The unit for <c>from</c> and <c>to</c> is meters by default.
+/// </para>
 /// </summary>
 public sealed partial class GeoDistanceAggregate : IAggregate
 {

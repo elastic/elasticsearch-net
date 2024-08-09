@@ -34,7 +34,9 @@ public sealed partial class PutInferenceRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Create an inference endpoint</para>
+/// <para>
+/// Create an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceRequestParameters>, ISelfSerializable
 {
@@ -64,7 +66,9 @@ public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceReque
 }
 
 /// <summary>
-/// <para>Create an inference endpoint</para>
+/// <para>
+/// Create an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class PutInferenceRequestDescriptor : RequestDescriptor<PutInferenceRequestDescriptor, PutInferenceRequestParameters>
 {

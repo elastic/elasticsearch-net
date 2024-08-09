@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class SemanticQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The field to query, which must be a semantic_text field type</para>
+	/// <para>
+	/// The field to query, which must be a semantic_text field type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public string Field { get; set; }
 
 	/// <summary>
-	/// <para>The query text</para>
+	/// <para>
+	/// The query text
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -66,7 +75,12 @@ public sealed partial class SemanticQueryDescriptor : SerializableDescriptor<Sem
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SemanticQueryDescriptor Boost(float? boost)
 	{
@@ -75,7 +89,9 @@ public sealed partial class SemanticQueryDescriptor : SerializableDescriptor<Sem
 	}
 
 	/// <summary>
-	/// <para>The field to query, which must be a semantic_text field type</para>
+	/// <para>
+	/// The field to query, which must be a semantic_text field type
+	/// </para>
 	/// </summary>
 	public SemanticQueryDescriptor Field(string field)
 	{
@@ -84,7 +100,9 @@ public sealed partial class SemanticQueryDescriptor : SerializableDescriptor<Sem
 	}
 
 	/// <summary>
-	/// <para>The query text</para>
+	/// <para>
+	/// The query text
+	/// </para>
 	/// </summary>
 	public SemanticQueryDescriptor Query(string query)
 	{

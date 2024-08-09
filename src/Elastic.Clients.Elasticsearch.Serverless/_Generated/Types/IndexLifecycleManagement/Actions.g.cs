@@ -30,73 +30,97 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 public sealed partial class Actions
 {
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocate")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.AllocateAction? Allocate { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delete")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.DeleteAction? Delete { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("downsample")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.DownsampleAction? Downsample { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("forcemerge")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.ForceMergeAction? Forcemerge { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("migrate")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.MigrateAction? Migrate { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("readonly")]
 	public Elastic.Clients.Elasticsearch.Serverless.EmptyObject? Readonly { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot.</para>
+	/// <para>
+	/// Phases allowed: hot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rollover")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.RolloverAction? Rollover { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, cold, frozen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("searchable_snapshot")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.SearchableSnapshotAction? SearchableSnapshot { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("set_priority")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.SetPriorityAction? SetPriority { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shrink")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.ShrinkAction? Shrink { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold, frozen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unfollow")]
 	public Elastic.Clients.Elasticsearch.Serverless.EmptyObject? Unfollow { get; init; }
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("wait_for_snapshot")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.WaitForSnapshotAction? WaitForSnapshot { get; init; }

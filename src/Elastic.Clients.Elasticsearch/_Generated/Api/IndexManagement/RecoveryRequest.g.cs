@@ -32,18 +32,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class RecoveryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, the response only includes ongoing shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response only includes ongoing shard recoveries.
+	/// </para>
 	/// </summary>
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes detailed information about shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// </para>
 	/// </summary>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 }
 
 /// <summary>
-/// <para>Returns information about ongoing and completed shard recoveries for one or more indices.<br/>For data streams, the API returns information for the stream’s backing indices.</para>
+/// <para>
+/// Returns information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParameters>
 {
@@ -64,20 +71,27 @@ public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParame
 	internal override string OperationName => "indices.recovery";
 
 	/// <summary>
-	/// <para>If `true`, the response only includes ongoing shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response only includes ongoing shard recoveries.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes detailed information about shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 }
 
 /// <summary>
-/// <para>Returns information about ongoing and completed shard recoveries for one or more indices.<br/>For data streams, the API returns information for the stream’s backing indices.</para>
+/// <para>
+/// Returns information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescriptor<RecoveryRequestDescriptor<TDocument>, RecoveryRequestParameters>
 {
@@ -114,7 +128,10 @@ public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Returns information about ongoing and completed shard recoveries for one or more indices.<br/>For data streams, the API returns information for the stream’s backing indices.</para>
+/// <para>
+/// Returns information about ongoing and completed shard recoveries for one or more indices.
+/// For data streams, the API returns information for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class RecoveryRequestDescriptor : RequestDescriptor<RecoveryRequestDescriptor, RecoveryRequestParameters>
 {

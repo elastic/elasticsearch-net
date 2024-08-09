@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetTrainedModelsStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The total number of trained model statistics that matched the requested ID patterns. Could be higher than the number of items in the trained_model_stats array as the size of the array is restricted by the supplied size parameter.</para>
+	/// <para>
+	/// The total number of trained model statistics that matched the requested ID patterns. Could be higher than the number of items in the trained_model_stats array as the size of the array is restricted by the supplied size parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>An array of trained model statistics, which are sorted by the model_id value in ascending order.</para>
+	/// <para>
+	/// An array of trained model statistics, which are sorted by the model_id value in ascending order.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trained_model_stats")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats> TrainedModelStats { get; init; }

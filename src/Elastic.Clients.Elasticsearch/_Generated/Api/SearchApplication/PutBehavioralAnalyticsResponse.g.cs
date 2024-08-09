@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class PutBehavioralAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
+	/// <para>
+	/// For a successful response, this value is always true. On failure, an exception is returned instead.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 
 	/// <summary>
-	/// <para>The name of the analytics collection created or updated</para>
+	/// <para>
+	/// The name of the analytics collection created or updated
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }

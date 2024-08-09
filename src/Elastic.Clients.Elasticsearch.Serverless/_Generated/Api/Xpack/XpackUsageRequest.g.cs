@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Xpack;
 public sealed partial class XpackUsageRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+/// <para>
+/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+/// </para>
 /// </summary>
 public sealed partial class XpackUsageRequest : PlainRequest<XpackUsageRequestParameters>
 {
@@ -51,14 +55,18 @@ public sealed partial class XpackUsageRequest : PlainRequest<XpackUsageRequestPa
 	internal override string OperationName => "xpack.usage";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+/// <para>
+/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+/// </para>
 /// </summary>
 public sealed partial class XpackUsageRequestDescriptor : RequestDescriptor<XpackUsageRequestDescriptor, XpackUsageRequestParameters>
 {

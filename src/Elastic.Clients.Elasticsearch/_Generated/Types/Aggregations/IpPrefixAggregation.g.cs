@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class IpPrefixAggregation
 {
 	/// <summary>
-	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
+	/// <para>
+	/// Defines whether the prefix length is appended to IP address keys in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("append_prefix_length")]
 	public bool? AppendPrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Defines whether the prefix applies to IPv6 addresses.</para>
+	/// <para>
+	/// Defines whether the prefix applies to IPv6 addresses.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_ipv6")]
 	public bool? IsIpv6 { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
+	/// <para>
+	/// Minimum number of documents in a bucket for it to be included in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
+	/// <para>
+	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
+	/// For IPv6 addresses the accepted range is [0, 128].
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int PrefixLength { get; set; }
@@ -77,7 +88,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	private int PrefixLengthValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
+	/// <para>
+	/// Defines whether the prefix length is appended to IP address keys in the response.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> AppendPrefixLength(bool? appendPrefixLength = true)
 	{
@@ -86,7 +99,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -95,7 +110,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -104,7 +121,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -113,7 +132,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Defines whether the prefix applies to IPv6 addresses.</para>
+	/// <para>
+	/// Defines whether the prefix applies to IPv6 addresses.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> IsIpv6(bool? isIpv6 = true)
 	{
@@ -122,7 +143,9 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
+	/// <para>
+	/// Minimum number of documents in a bucket for it to be included in the response.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
@@ -131,7 +154,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
+	/// <para>
+	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
+	/// For IPv6 addresses the accepted range is [0, 128].
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> PrefixLength(int prefixLength)
 	{
@@ -183,7 +209,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	private int PrefixLengthValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
+	/// <para>
+	/// Defines whether the prefix length is appended to IP address keys in the response.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor AppendPrefixLength(bool? appendPrefixLength = true)
 	{
@@ -192,7 +220,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -201,7 +231,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -210,7 +242,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// <para>
+	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -219,7 +253,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Defines whether the prefix applies to IPv6 addresses.</para>
+	/// <para>
+	/// Defines whether the prefix applies to IPv6 addresses.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor IsIpv6(bool? isIpv6 = true)
 	{
@@ -228,7 +264,9 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
+	/// <para>
+	/// Minimum number of documents in a bucket for it to be included in the response.
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor MinDocCount(long? minDocCount)
 	{
@@ -237,7 +275,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
+	/// <para>
+	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
+	/// For IPv6 addresses the accepted range is [0, 128].
+	/// </para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor PrefixLength(int prefixLength)
 	{

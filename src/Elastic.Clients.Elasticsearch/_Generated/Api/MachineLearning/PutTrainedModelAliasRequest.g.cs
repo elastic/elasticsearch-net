@@ -32,13 +32,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class PutTrainedModelAliasRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether the alias gets reassigned to the specified trained<br/>model if it is already assigned to a different model. If the alias is<br/>already assigned and this parameter is false, the API returns an error.</para>
+	/// <para>
+	/// Specifies whether the alias gets reassigned to the specified trained
+	/// model if it is already assigned to a different model. If the alias is
+	/// already assigned and this parameter is false, the API returns an error.
+	/// </para>
 	/// </summary>
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a trained model alias. A trained model alias is a logical<br/>name used to reference a single trained model.<br/>You can use aliases instead of trained model identifiers to make it easier to<br/>reference your models. For example, you can use aliases in inference<br/>aggregations and processors.<br/>An alias must be unique and refer to only a single trained model. However,<br/>you can have multiple aliases for each trained model.<br/>If you use this API to update an alias such that it references a different<br/>trained model ID and the model uses a different type of data frame analytics,<br/>an error occurs. For example, this situation occurs if you have a trained<br/>model for regression analysis and a trained model for classification<br/>analysis; you cannot reassign an alias from one type of trained model to<br/>another.<br/>If you use this API to update an alias and there are very few input fields in<br/>common between the old and new trained models for the model alias, the API<br/>returns a warning.</para>
+/// <para>
+/// Creates or updates a trained model alias. A trained model alias is a logical
+/// name used to reference a single trained model.
+/// You can use aliases instead of trained model identifiers to make it easier to
+/// reference your models. For example, you can use aliases in inference
+/// aggregations and processors.
+/// An alias must be unique and refer to only a single trained model. However,
+/// you can have multiple aliases for each trained model.
+/// If you use this API to update an alias such that it references a different
+/// trained model ID and the model uses a different type of data frame analytics,
+/// an error occurs. For example, this situation occurs if you have a trained
+/// model for regression analysis and a trained model for classification
+/// analysis; you cannot reassign an alias from one type of trained model to
+/// another.
+/// If you use this API to update an alias and there are very few input fields in
+/// common between the old and new trained models for the model alias, the API
+/// returns a warning.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelAliasRequest : PlainRequest<PutTrainedModelAliasRequestParameters>
 {
@@ -55,14 +76,35 @@ public sealed partial class PutTrainedModelAliasRequest : PlainRequest<PutTraine
 	internal override string OperationName => "ml.put_trained_model_alias";
 
 	/// <summary>
-	/// <para>Specifies whether the alias gets reassigned to the specified trained<br/>model if it is already assigned to a different model. If the alias is<br/>already assigned and this parameter is false, the API returns an error.</para>
+	/// <para>
+	/// Specifies whether the alias gets reassigned to the specified trained
+	/// model if it is already assigned to a different model. If the alias is
+	/// already assigned and this parameter is false, the API returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a trained model alias. A trained model alias is a logical<br/>name used to reference a single trained model.<br/>You can use aliases instead of trained model identifiers to make it easier to<br/>reference your models. For example, you can use aliases in inference<br/>aggregations and processors.<br/>An alias must be unique and refer to only a single trained model. However,<br/>you can have multiple aliases for each trained model.<br/>If you use this API to update an alias such that it references a different<br/>trained model ID and the model uses a different type of data frame analytics,<br/>an error occurs. For example, this situation occurs if you have a trained<br/>model for regression analysis and a trained model for classification<br/>analysis; you cannot reassign an alias from one type of trained model to<br/>another.<br/>If you use this API to update an alias and there are very few input fields in<br/>common between the old and new trained models for the model alias, the API<br/>returns a warning.</para>
+/// <para>
+/// Creates or updates a trained model alias. A trained model alias is a logical
+/// name used to reference a single trained model.
+/// You can use aliases instead of trained model identifiers to make it easier to
+/// reference your models. For example, you can use aliases in inference
+/// aggregations and processors.
+/// An alias must be unique and refer to only a single trained model. However,
+/// you can have multiple aliases for each trained model.
+/// If you use this API to update an alias such that it references a different
+/// trained model ID and the model uses a different type of data frame analytics,
+/// an error occurs. For example, this situation occurs if you have a trained
+/// model for regression analysis and a trained model for classification
+/// analysis; you cannot reassign an alias from one type of trained model to
+/// another.
+/// If you use this API to update an alias and there are very few input fields in
+/// common between the old and new trained models for the model alias, the API
+/// returns a warning.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelAliasRequestDescriptor : RequestDescriptor<PutTrainedModelAliasRequestDescriptor, PutTrainedModelAliasRequestParameters>
 {

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeAnalyticsDestination
 {
 	/// <summary>
-	/// <para>Defines the destination index to store the results of the data frame analytics job.</para>
+	/// <para>
+	/// Defines the destination index to store the results of the data frame analytics job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the destination index to store the results of the data frame analytics job.</para>
+	/// <para>
+	/// Defines the destination index to store the results of the data frame analytics job.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -63,7 +69,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
@@ -72,7 +80,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
@@ -81,7 +91,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
 	{
@@ -116,7 +128,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the destination index to store the results of the data frame analytics job.</para>
+	/// <para>
+	/// Defines the destination index to store the results of the data frame analytics job.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -125,7 +139,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
@@ -134,7 +150,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
@@ -143,7 +161,9 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Defines the name of the field in which to store the results of the analysis. Defaults to `ml`.</para>
+	/// <para>
+	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalyticsDestinationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 	{

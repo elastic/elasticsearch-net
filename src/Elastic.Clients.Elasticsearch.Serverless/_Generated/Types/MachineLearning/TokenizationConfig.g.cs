@@ -29,7 +29,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Tokenization options stored in inference configuration</para>
+/// <para>
+/// Tokenization options stored in inference configuration
+/// </para>
 /// </summary>
 [JsonConverter(typeof(TokenizationConfigConverter))]
 public sealed partial class TokenizationConfig

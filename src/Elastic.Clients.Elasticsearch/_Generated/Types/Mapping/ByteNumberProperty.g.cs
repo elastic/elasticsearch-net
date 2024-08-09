@@ -50,7 +50,9 @@ public sealed partial class ByteNumberProperty : IProperty
 	public bool? Index { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -68,13 +70,17 @@ public sealed partial class ByteNumberProperty : IProperty
 	public bool? Store { get; set; }
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
@@ -181,7 +187,9 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -258,7 +266,9 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
@@ -267,7 +277,9 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
@@ -546,7 +558,9 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -623,7 +637,9 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
@@ -632,7 +648,9 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ByteNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{

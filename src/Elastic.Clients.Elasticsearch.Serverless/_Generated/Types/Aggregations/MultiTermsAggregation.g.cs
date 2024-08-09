@@ -30,50 +30,68 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class MultiTermsAggregation
 {
 	/// <summary>
-	/// <para>Specifies the strategy for data collection.</para>
+	/// <para>
+	/// Specifies the strategy for data collection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket for it to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket on each shard for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket on each shard for it to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
-	/// <para>Calculates the doc count error on per term basis.</para>
+	/// <para>
+	/// Calculates the doc count error on per term basis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
-	/// <para>The number of term buckets should be returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of term buckets should be returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The field from which to generate sets of terms.</para>
+	/// <para>
+	/// The field from which to generate sets of terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MultiTermLookup> Terms { get; set; }
@@ -102,7 +120,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the strategy for data collection.</para>
+	/// <para>
+	/// Specifies the strategy for data collection.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? collectMode)
 	{
@@ -111,7 +131,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket for it to be returned.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
@@ -120,7 +142,10 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
@@ -129,7 +154,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket on each shard for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket on each shard for it to be returned.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
 	{
@@ -138,7 +165,10 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -147,7 +177,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Calculates the doc count error on per term basis.</para>
+	/// <para>
+	/// Calculates the doc count error on per term basis.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true)
 	{
@@ -156,7 +188,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The number of term buckets should be returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of term buckets should be returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -165,7 +199,9 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The field from which to generate sets of terms.</para>
+	/// <para>
+	/// The field from which to generate sets of terms.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> Terms(ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MultiTermLookup> terms)
 	{
@@ -304,7 +340,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the strategy for data collection.</para>
+	/// <para>
+	/// Specifies the strategy for data collection.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? collectMode)
 	{
@@ -313,7 +351,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket for it to be returned.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor MinDocCount(long? minDocCount)
 	{
@@ -322,7 +362,10 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
+	/// <para>
+	/// Specifies the sort order of the buckets.
+	/// Defaults to sorting by descending document count.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
@@ -331,7 +374,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The minimum number of documents in a bucket on each shard for it to be returned.</para>
+	/// <para>
+	/// The minimum number of documents in a bucket on each shard for it to be returned.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor ShardMinDocCount(long? shardMinDocCount)
 	{
@@ -340,7 +385,10 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// <para>
+	/// The number of candidate terms produced by each shard.
+	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor ShardSize(int? shardSize)
 	{
@@ -349,7 +397,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Calculates the doc count error on per term basis.</para>
+	/// <para>
+	/// Calculates the doc count error on per term basis.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor ShowTermDocCountError(bool? showTermDocCountError = true)
 	{
@@ -358,7 +408,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The number of term buckets should be returned out of the overall terms list.</para>
+	/// <para>
+	/// The number of term buckets should be returned out of the overall terms list.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor Size(int? size)
 	{
@@ -367,7 +419,9 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The field from which to generate sets of terms.</para>
+	/// <para>
+	/// The field from which to generate sets of terms.
+	/// </para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor Terms(ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MultiTermLookup> terms)
 	{

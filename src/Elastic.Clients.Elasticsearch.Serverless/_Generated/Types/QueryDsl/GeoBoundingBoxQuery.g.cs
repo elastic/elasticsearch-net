@@ -119,20 +119,31 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 public sealed partial class GeoBoundingBoxQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBox { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
@@ -155,7 +166,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -188,7 +204,10 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -203,7 +222,10 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
 	{
@@ -265,7 +287,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor Boost(float? boost)
 	{
@@ -298,7 +325,10 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -313,7 +343,10 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
 	{

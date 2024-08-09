@@ -30,13 +30,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Translog
 {
 	/// <summary>
-	/// <para>Whether or not to `fsync` and commit the translog after every index, delete, update, or bulk request.</para>
+	/// <para>
+	/// Whether or not to <c>fsync</c> and commit the translog after every index, delete, update, or bulk request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("durability")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
 
 	/// <summary>
-	/// <para>The translog stores all operations that are not yet safely persisted in Lucene (i.e., are not<br/>part of a Lucene commit point). Although these operations are available for reads, they will need<br/>to be replayed if the shard was stopped and had to be recovered. This setting controls the<br/>maximum total size of these operations, to prevent recoveries from taking too long. Once the<br/>maximum size has been reached a flush will happen, generating a new Lucene commit point.</para>
+	/// <para>
+	/// The translog stores all operations that are not yet safely persisted in Lucene (i.e., are not
+	/// part of a Lucene commit point). Although these operations are available for reads, they will need
+	/// to be replayed if the shard was stopped and had to be recovered. This setting controls the
+	/// maximum total size of these operations, to prevent recoveries from taking too long. Once the
+	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flush_threshold_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
@@ -44,7 +52,10 @@ public sealed partial class Translog
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
 
 	/// <summary>
-	/// <para>How often the translog is fsynced to disk and committed, regardless of write operations.<br/>Values less than 100ms are not allowed.</para>
+	/// <para>
+	/// How often the translog is fsynced to disk and committed, regardless of write operations.
+	/// Values less than 100ms are not allowed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sync_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
@@ -66,7 +77,9 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
 
 	/// <summary>
-	/// <para>Whether or not to `fsync` and commit the translog after every index, delete, update, or bulk request.</para>
+	/// <para>
+	/// Whether or not to <c>fsync</c> and commit the translog after every index, delete, update, or bulk request.
+	/// </para>
 	/// </summary>
 	public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)
 	{
@@ -75,7 +88,13 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	}
 
 	/// <summary>
-	/// <para>The translog stores all operations that are not yet safely persisted in Lucene (i.e., are not<br/>part of a Lucene commit point). Although these operations are available for reads, they will need<br/>to be replayed if the shard was stopped and had to be recovered. This setting controls the<br/>maximum total size of these operations, to prevent recoveries from taking too long. Once the<br/>maximum size has been reached a flush will happen, generating a new Lucene commit point.</para>
+	/// <para>
+	/// The translog stores all operations that are not yet safely persisted in Lucene (i.e., are not
+	/// part of a Lucene commit point). Although these operations are available for reads, they will need
+	/// to be replayed if the shard was stopped and had to be recovered. This setting controls the
+	/// maximum total size of these operations, to prevent recoveries from taking too long. Once the
+	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
+	/// </para>
 	/// </summary>
 	public TranslogDescriptor FlushThresholdSize(Elastic.Clients.Elasticsearch.ByteSize? flushThresholdSize)
 	{
@@ -108,7 +127,10 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	}
 
 	/// <summary>
-	/// <para>How often the translog is fsynced to disk and committed, regardless of write operations.<br/>Values less than 100ms are not allowed.</para>
+	/// <para>
+	/// How often the translog is fsynced to disk and committed, regardless of write operations.
+	/// Values less than 100ms are not allowed.
+	/// </para>
 	/// </summary>
 	public TranslogDescriptor SyncInterval(Elastic.Clients.Elasticsearch.Duration? syncInterval)
 	{

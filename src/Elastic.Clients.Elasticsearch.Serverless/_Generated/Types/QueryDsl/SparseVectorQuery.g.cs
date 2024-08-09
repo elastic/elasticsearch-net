@@ -49,19 +49,30 @@ public sealed partial class SparseVectorQuery
 	public static SparseVectorQuery InferenceId(Elastic.Clients.Elasticsearch.Serverless.Id id) => new SparseVectorQuery("inference_id", id);
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The query text you want to use for search.<br/>If inference_id is specified, query must also be specified.</para>
+	/// <para>
+	/// The query text you want to use for search.
+	/// If inference_id is specified, query must also be specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
@@ -231,7 +242,12 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -240,7 +256,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -249,7 +268,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -258,7 +280,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -267,7 +292,10 @@ public sealed partial class SparseVectorQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The query text you want to use for search.<br/>If inference_id is specified, query must also be specified.</para>
+	/// <para>
+	/// The query text you want to use for search.
+	/// If inference_id is specified, query must also be specified.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor<TDocument> Query(string? query)
 	{
@@ -364,7 +392,12 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor Boost(float? boost)
 	{
@@ -373,7 +406,10 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -382,7 +418,10 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -391,7 +430,10 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the token-weight pairs to be searched against.<br/>This field must be a mapped sparse_vector field.</para>
+	/// <para>
+	/// The name of the field that contains the token-weight pairs to be searched against.
+	/// This field must be a mapped sparse_vector field.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -400,7 +442,10 @@ public sealed partial class SparseVectorQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The query text you want to use for search.<br/>If inference_id is specified, query must also be specified.</para>
+	/// <para>
+	/// The query text you want to use for search.
+	/// If inference_id is specified, query must also be specified.
+	/// </para>
 	/// </summary>
 	public SparseVectorQueryDescriptor Query(string? query)
 	{

@@ -30,13 +30,22 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class ConstantScoreQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// <para>
+	/// Filter query you wish to run. Any returned documents must match this query.
+	/// Filter queries do not calculate relevance scores.
+	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Filter { get; set; }
@@ -61,7 +70,12 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -70,7 +84,11 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// <para>
+	/// Filter query you wish to run. Any returned documents must match this query.
+	/// Filter queries do not calculate relevance scores.
+	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
+	/// </para>
 	/// </summary>
 	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query filter)
 	{
@@ -152,7 +170,12 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ConstantScoreQueryDescriptor Boost(float? boost)
 	{
@@ -161,7 +184,11 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// <para>
+	/// Filter query you wish to run. Any returned documents must match this query.
+	/// Filter queries do not calculate relevance scores.
+	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
+	/// </para>
 	/// </summary>
 	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query filter)
 	{

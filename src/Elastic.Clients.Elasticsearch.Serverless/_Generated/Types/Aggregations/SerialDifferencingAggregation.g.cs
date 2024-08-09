@@ -30,25 +30,35 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class SerialDifferencingAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The historical bucket to subtract from the current value.<br/>Must be a positive, non-zero integer.</para>
+	/// <para>
+	/// The historical bucket to subtract from the current value.
+	/// Must be a positive, non-zero integer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lag")]
 	public int? Lag { get; set; }
@@ -70,7 +80,9 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 	private int? LagValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public SerialDifferencingAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -79,7 +91,10 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public SerialDifferencingAggregationDescriptor Format(string? format)
 	{
@@ -88,7 +103,9 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public SerialDifferencingAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -97,7 +114,10 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The historical bucket to subtract from the current value.<br/>Must be a positive, non-zero integer.</para>
+	/// <para>
+	/// The historical bucket to subtract from the current value.
+	/// Must be a positive, non-zero integer.
+	/// </para>
 	/// </summary>
 	public SerialDifferencingAggregationDescriptor Lag(int? lag)
 	{

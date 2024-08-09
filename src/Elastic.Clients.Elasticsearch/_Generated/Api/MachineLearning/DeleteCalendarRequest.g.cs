@@ -34,7 +34,10 @@ public sealed partial class DeleteCalendarRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
+/// <para>
+/// Delete a calendar.
+/// Removes all scheduled events from a calendar, then deletes it.
+/// </para>
 /// </summary>
 public sealed partial class DeleteCalendarRequest : PlainRequest<DeleteCalendarRequestParameters>
 {
@@ -52,7 +55,10 @@ public sealed partial class DeleteCalendarRequest : PlainRequest<DeleteCalendarR
 }
 
 /// <summary>
-/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
+/// <para>
+/// Delete a calendar.
+/// Removes all scheduled events from a calendar, then deletes it.
+/// </para>
 /// </summary>
 public sealed partial class DeleteCalendarRequestDescriptor : RequestDescriptor<DeleteCalendarRequestDescriptor, DeleteCalendarRequestParameters>
 {

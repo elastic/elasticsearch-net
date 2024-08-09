@@ -34,7 +34,9 @@ public sealed partial class GetRulesetRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns the details about a query ruleset</para>
+/// <para>
+/// Returns the details about a query ruleset
+/// </para>
 /// </summary>
 public sealed partial class GetRulesetRequest : PlainRequest<GetRulesetRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class GetRulesetRequest : PlainRequest<GetRulesetRequestPa
 }
 
 /// <summary>
-/// <para>Returns the details about a query ruleset</para>
+/// <para>
+/// Returns the details about a query ruleset
+/// </para>
 /// </summary>
 public sealed partial class GetRulesetRequestDescriptor : RequestDescriptor<GetRulesetRequestDescriptor, GetRulesetRequestParameters>
 {

@@ -30,61 +30,85 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class GrokProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.<br/>Patterns matching existing names will override the pre-existing definition.</para>
+	/// <para>
+	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
+	/// Patterns matching existing names will override the pre-existing definition.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern_definitions")]
 	public IDictionary<string, string>? PatternDefinitions { get; set; }
 
 	/// <summary>
-	/// <para>An ordered list of grok expression to match and extract named captures with.<br/>Returns on the first expression in the list that matches.</para>
+	/// <para>
+	/// An ordered list of grok expression to match and extract named captures with.
+	/// Returns on the first expression in the list that matches.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>When `true`, `_ingest._grok_match_index` will be inserted into your matched document’s metadata with the index into the pattern found in `patterns` that matched.</para>
+	/// <para>
+	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trace_match")]
 	public bool? TraceMatch { get; set; }
@@ -115,7 +139,10 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	private bool? TraceMatchValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -124,7 +151,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -133,7 +162,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -142,7 +173,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -151,7 +184,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -160,7 +195,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -169,7 +206,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -178,7 +217,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -217,7 +258,10 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.<br/>Patterns matching existing names will override the pre-existing definition.</para>
+	/// <para>
+	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
+	/// Patterns matching existing names will override the pre-existing definition.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -226,7 +270,10 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>An ordered list of grok expression to match and extract named captures with.<br/>Returns on the first expression in the list that matches.</para>
+	/// <para>
+	/// An ordered list of grok expression to match and extract named captures with.
+	/// Returns on the first expression in the list that matches.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Patterns(ICollection<string> patterns)
 	{
@@ -235,7 +282,10 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -244,7 +294,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>When `true`, `_ingest._grok_match_index` will be inserted into your matched document’s metadata with the index into the pattern found in `patterns` that matched.</para>
+	/// <para>
+	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor<TDocument> TraceMatch(bool? traceMatch = true)
 	{
@@ -359,7 +411,10 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	private bool? TraceMatchValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Description(string? description)
 	{
@@ -368,7 +423,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -377,7 +434,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -386,7 +445,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>The field to use for grok expression parsing.</para>
+	/// <para>
+	/// The field to use for grok expression parsing.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -395,7 +456,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor If(string? value)
 	{
@@ -404,7 +467,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -413,7 +478,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -422,7 +489,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -461,7 +530,10 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.<br/>Patterns matching existing names will override the pre-existing definition.</para>
+	/// <para>
+	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
+	/// Patterns matching existing names will override the pre-existing definition.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -470,7 +542,10 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>An ordered list of grok expression to match and extract named captures with.<br/>Returns on the first expression in the list that matches.</para>
+	/// <para>
+	/// An ordered list of grok expression to match and extract named captures with.
+	/// Returns on the first expression in the list that matches.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Patterns(ICollection<string> patterns)
 	{
@@ -479,7 +554,10 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor Tag(string? tag)
 	{
@@ -488,7 +566,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	/// <summary>
-	/// <para>When `true`, `_ingest._grok_match_index` will be inserted into your matched document’s metadata with the index into the pattern found in `patterns` that matched.</para>
+	/// <para>
+	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
+	/// </para>
 	/// </summary>
 	public GrokProcessorDescriptor TraceMatch(bool? traceMatch = true)
 	{

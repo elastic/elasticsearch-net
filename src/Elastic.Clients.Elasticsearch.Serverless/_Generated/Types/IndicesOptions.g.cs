@@ -28,38 +28,56 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
 /// <summary>
-/// <para>Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded<br/>to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.</para>
+/// <para>
+/// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
+/// to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
+/// </para>
 /// </summary>
 public sealed partial class IndicesOptions
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or `_all` value targets only<br/>missing or closed indices. This behavior applies even if the request targets other open indices. For example,<br/>a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only
+	/// missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+	/// a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_no_indices")]
 	public bool? AllowNoIndices { get; set; }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expand_wildcards")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get; set; }
 
 	/// <summary>
-	/// <para>If true, concrete, expanded or aliased indices are ignored when frozen.</para>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_throttled")]
 	public bool? IgnoreThrottled { get; set; }
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
 }
 
 /// <summary>
-/// <para>Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded<br/>to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.</para>
+/// <para>
+/// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
+/// to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
+/// </para>
 /// </summary>
 public sealed partial class IndicesOptionsDescriptor : SerializableDescriptor<IndicesOptionsDescriptor>
 {
@@ -75,7 +93,11 @@ public sealed partial class IndicesOptionsDescriptor : SerializableDescriptor<In
 	private bool? IgnoreUnavailableValue { get; set; }
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or `_all` value targets only<br/>missing or closed indices. This behavior applies even if the request targets other open indices. For example,<br/>a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only
+	/// missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+	/// a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public IndicesOptionsDescriptor AllowNoIndices(bool? allowNoIndices = true)
 	{
@@ -84,7 +106,11 @@ public sealed partial class IndicesOptionsDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public IndicesOptionsDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards)
 	{
@@ -93,7 +119,9 @@ public sealed partial class IndicesOptionsDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>If true, concrete, expanded or aliased indices are ignored when frozen.</para>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
 	/// </summary>
 	public IndicesOptionsDescriptor IgnoreThrottled(bool? ignoreThrottled = true)
 	{
@@ -102,7 +130,9 @@ public sealed partial class IndicesOptionsDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public IndicesOptionsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
 	{

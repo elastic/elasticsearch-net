@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class Storage
 {
 	/// <summary>
-	/// <para>You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.<br/>This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This<br/>setting is useful, for example, if you are in an environment where you can not control the ability to create a lot<br/>of memory maps so you need disable the ability to use memory-mapping.</para>
+	/// <para>
+	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
+	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
+	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
+	/// of memory maps so you need disable the ability to use memory-mapping.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_mmap")]
 	public bool? AllowMmap { get; set; }
@@ -50,7 +55,12 @@ public sealed partial class StorageDescriptor : SerializableDescriptor<StorageDe
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.StorageType TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.<br/>This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This<br/>setting is useful, for example, if you are in an environment where you can not control the ability to create a lot<br/>of memory maps so you need disable the ability to use memory-mapping.</para>
+	/// <para>
+	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
+	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
+	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
+	/// of memory maps so you need disable the ability to use memory-mapping.
+	/// </para>
 	/// </summary>
 	public StorageDescriptor AllowMmap(bool? allowMmap = true)
 	{

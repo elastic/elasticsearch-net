@@ -30,45 +30,59 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class StandardRetriever
 {
 	/// <summary>
-	/// <para>Collapses the top documents by a specified key into a single top document per key.</para>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
-	/// <para>Defines a query to retrieve a set of top documents.</para>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Defines a search after object parameter used for pagination.</para>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
-	/// <para>A sort object that that specifies the order of matching documents.</para>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terminate_after")]
 	public int? TerminateAfter { get; set; }
@@ -103,7 +117,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	private int? TerminateAfterValue { get; set; }
 
 	/// <summary>
-	/// <para>Collapses the top documents by a specified key into a single top document per key.</para>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
 	{
@@ -130,7 +146,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
@@ -169,7 +187,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> MinScore(float? minScore)
 	{
@@ -178,7 +198,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Defines a query to retrieve a set of top documents.</para>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -205,7 +227,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Defines a search after object parameter used for pagination.</para>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
@@ -214,7 +238,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>A sort object that that specifies the order of matching documents.</para>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -253,7 +279,9 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor<TDocument> TerminateAfter(int? terminateAfter)
 	{
@@ -403,7 +431,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	private int? TerminateAfterValue { get; set; }
 
 	/// <summary>
-	/// <para>Collapses the top documents by a specified key into a single top document per key.</para>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
 	{
@@ -430,7 +460,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
@@ -469,7 +501,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor MinScore(float? minScore)
 	{
@@ -478,7 +512,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines a query to retrieve a set of top documents.</para>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -505,7 +541,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines a search after object parameter used for pagination.</para>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
 	{
@@ -514,7 +552,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>A sort object that that specifies the order of matching documents.</para>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -553,7 +593,9 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// </para>
 	/// </summary>
 	public StandardRetrieverDescriptor TerminateAfter(int? terminateAfter)
 	{

@@ -84,7 +84,9 @@ internal sealed partial class StringTermsBucketConverter : JsonConverter<StringT
 public sealed partial class StringTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

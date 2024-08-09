@@ -34,7 +34,9 @@ public sealed partial class ResetFeaturesRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Resets the internal state of features, usually by deleting system indices</para>
+/// <para>
+/// Resets the internal state of features, usually by deleting system indices
+/// </para>
 /// </summary>
 public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesReq
 }
 
 /// <summary>
-/// <para>Resets the internal state of features, usually by deleting system indices</para>
+/// <para>
+/// Resets the internal state of features, usually by deleting system indices
+/// </para>
 /// </summary>
 public sealed partial class ResetFeaturesRequestDescriptor : RequestDescriptor<ResetFeaturesRequestDescriptor, ResetFeaturesRequestParameters>
 {

@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeOutlierDetectionSummary
 {
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; init; }
 
 	/// <summary>
-	/// <para>Set the different thresholds of the outlier score at where the metrics (`tp` - true positive, `fp` - false positive, `tn` - true negative, `fn` - false negative) are calculated.</para>
+	/// <para>
+	/// Set the different thresholds of the outlier score at where the metrics (<c>tp</c> - true positive, <c>fp</c> - false positive, <c>tn</c> - true negative, <c>fn</c> - false negative) are calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("confusion_matrix")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ConfusionMatrixThreshold>? ConfusionMatrix { get; init; }
 
 	/// <summary>
-	/// <para>Set the different thresholds of the outlier score at where the metric is calculated.</para>
+	/// <para>
+	/// Set the different thresholds of the outlier score at where the metric is calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public IReadOnlyDictionary<string, double>? Precision { get; init; }
 
 	/// <summary>
-	/// <para>Set the different thresholds of the outlier score at where the metric is calculated.</para>
+	/// <para>
+	/// Set the different thresholds of the outlier score at where the metric is calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("recall")]
 	public IReadOnlyDictionary<string, double>? Recall { get; init; }

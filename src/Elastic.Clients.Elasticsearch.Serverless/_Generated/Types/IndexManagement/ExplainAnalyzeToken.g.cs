@@ -121,7 +121,9 @@ internal sealed partial class ExplainAnalyzeTokenConverter : JsonConverter<Expla
 public sealed partial class ExplainAnalyzeToken
 {
 	/// <summary>
-	/// <para>Additional tokenizer-specific attributes</para>
+	/// <para>
+	/// Additional tokenizer-specific attributes
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Attributes { get; init; }
 	public string Bytes { get; init; }

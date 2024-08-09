@@ -34,7 +34,9 @@ public sealed partial class GetFeaturesRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+/// <para>
+/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+/// </para>
 /// </summary>
 public sealed partial class GetFeaturesRequest : PlainRequest<GetFeaturesRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetFeaturesRequest : PlainRequest<GetFeaturesRequest
 }
 
 /// <summary>
-/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
+/// <para>
+/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+/// </para>
 /// </summary>
 public sealed partial class GetFeaturesRequestDescriptor : RequestDescriptor<GetFeaturesRequestDescriptor, GetFeaturesRequestParameters>
 {

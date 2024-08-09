@@ -34,7 +34,13 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequestParameters : 
 }
 
 /// <summary>
-/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+/// <para>
+/// Clear trained model deployment cache.
+/// Cache will be cleared on all nodes where the trained model is assigned.
+/// A trained model deployment may have an inference cache enabled.
+/// As requests are handled by each allocated node, their responses may be cached on that individual node.
+/// Calling this API clears the caches without restarting the deployment.
+/// </para>
 /// </summary>
 public sealed partial class ClearTrainedModelDeploymentCacheRequest : PlainRequest<ClearTrainedModelDeploymentCacheRequestParameters>
 {
@@ -52,7 +58,13 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequest : PlainReque
 }
 
 /// <summary>
-/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+/// <para>
+/// Clear trained model deployment cache.
+/// Cache will be cleared on all nodes where the trained model is assigned.
+/// A trained model deployment may have an inference cache enabled.
+/// As requests are handled by each allocated node, their responses may be cached on that individual node.
+/// Calling this API clears the caches without restarting the deployment.
+/// </para>
 /// </summary>
 public sealed partial class ClearTrainedModelDeploymentCacheRequestDescriptor : RequestDescriptor<ClearTrainedModelDeploymentCacheRequestDescriptor, ClearTrainedModelDeploymentCacheRequestParameters>
 {

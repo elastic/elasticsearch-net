@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Definition
 {
 	/// <summary>
-	/// <para>Collection of preprocessors</para>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("preprocessors")]
 	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? Preprocessors { get; set; }
 
 	/// <summary>
-	/// <para>The definition of the trained model.</para>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trained_model")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
@@ -59,7 +63,9 @@ public sealed partial class DefinitionDescriptor : SerializableDescriptor<Defini
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor> TrainedModelDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Collection of preprocessors</para>
+	/// <para>
+	/// Collection of preprocessors
+	/// </para>
 	/// </summary>
 	public DefinitionDescriptor Preprocessors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? preprocessors)
 	{
@@ -98,7 +104,9 @@ public sealed partial class DefinitionDescriptor : SerializableDescriptor<Defini
 	}
 
 	/// <summary>
-	/// <para>The definition of the trained model.</para>
+	/// <para>
+	/// The definition of the trained model.
+	/// </para>
 	/// </summary>
 	public DefinitionDescriptor TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel trainedModel)
 	{
