@@ -11,9 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Metric;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
-#pragma warning restore CS0618 // Type or member is obsolete
 {
 	public MedianAbsoluteDeviationAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

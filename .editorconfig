@@ -203,6 +203,10 @@ resharper_redundant_argument_default_value_highlighting=do_not_show
 spelling_languages=en-us,en-gb
 spelling_exclusion_path=exclusion.dic
 
+[{tests/**.cs}]
+# CS0618: Type or member is obsolete, tests are testing methods we have marked as obsolete that are still bundled in the client
+dotnet_diagnostic.CS0618.severity = none
+
 [Jenkinsfile]
 indent_style = space
 indent_size = 2
