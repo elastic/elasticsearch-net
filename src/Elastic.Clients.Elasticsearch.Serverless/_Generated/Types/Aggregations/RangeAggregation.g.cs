@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class RangeAggregation
 {
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
@@ -38,13 +40,18 @@ public sealed partial class RangeAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public int? Missing { get; set; }
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ranges")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? Ranges { get; set; }
@@ -74,7 +81,9 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -83,7 +92,9 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -92,7 +103,9 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -107,7 +120,10 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Missing(int? missing)
 	{
@@ -116,7 +132,9 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? ranges)
 	{
@@ -270,7 +288,9 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -279,7 +299,9 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -288,7 +310,9 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build ranges.</para>
+	/// <para>
+	/// The date field whose values are use to build ranges.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -303,7 +327,10 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor Missing(int? missing)
 	{
@@ -312,7 +339,9 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	public RangeAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? ranges)
 	{

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class CpuAcct
 {
 	/// <summary>
-	/// <para>The `cpuacct` control group to which the Elasticsearch process belongs.</para>
+	/// <para>
+	/// The <c>cpuacct</c> control group to which the Elasticsearch process belongs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("control_group")]
 	public string? ControlGroup { get; init; }
 
 	/// <summary>
-	/// <para>The total CPU time, in nanoseconds, consumed by all tasks in the same cgroup as the Elasticsearch process.</para>
+	/// <para>
+	/// The total CPU time, in nanoseconds, consumed by all tasks in the same cgroup as the Elasticsearch process.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("usage_nanos")]
 	public long? UsageNanos { get; init; }

@@ -32,18 +32,37 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class SetUpgradeModeRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>When `true`, it enables `upgrade_mode` which temporarily halts all job<br/>and datafeed tasks and prohibits new job and datafeed tasks from<br/>starting.</para>
+	/// <para>
+	/// When <c>true</c>, it enables <c>upgrade_mode</c> which temporarily halts all job
+	/// and datafeed tasks and prohibits new job and datafeed tasks from
+	/// starting.
+	/// </para>
 	/// </summary>
 	public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
 	/// <summary>
-	/// <para>The time to wait for the request to be completed.</para>
+	/// <para>
+	/// The time to wait for the request to be completed.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Sets a cluster wide upgrade_mode setting that prepares machine learning<br/>indices for an upgrade.<br/>When upgrading your cluster, in some circumstances you must restart your<br/>nodes and reindex your machine learning indices. In those circumstances,<br/>there must be no machine learning jobs running. You can close the machine<br/>learning jobs, do the upgrade, then open all the jobs again. Alternatively,<br/>you can use this API to temporarily halt tasks associated with the jobs and<br/>datafeeds and prevent new jobs from opening. You can also use this API<br/>during upgrades that do not require you to reindex your machine learning<br/>indices, though stopping jobs is not a requirement in that case.<br/>You can see the current value for the upgrade_mode setting by using the get<br/>machine learning info API.</para>
+/// <para>
+/// Sets a cluster wide upgrade_mode setting that prepares machine learning
+/// indices for an upgrade.
+/// When upgrading your cluster, in some circumstances you must restart your
+/// nodes and reindex your machine learning indices. In those circumstances,
+/// there must be no machine learning jobs running. You can close the machine
+/// learning jobs, do the upgrade, then open all the jobs again. Alternatively,
+/// you can use this API to temporarily halt tasks associated with the jobs and
+/// datafeeds and prevent new jobs from opening. You can also use this API
+/// during upgrades that do not require you to reindex your machine learning
+/// indices, though stopping jobs is not a requirement in that case.
+/// You can see the current value for the upgrade_mode setting by using the get
+/// machine learning info API.
+/// </para>
 /// </summary>
 public sealed partial class SetUpgradeModeRequest : PlainRequest<SetUpgradeModeRequestParameters>
 {
@@ -56,20 +75,39 @@ public sealed partial class SetUpgradeModeRequest : PlainRequest<SetUpgradeModeR
 	internal override string OperationName => "ml.set_upgrade_mode";
 
 	/// <summary>
-	/// <para>When `true`, it enables `upgrade_mode` which temporarily halts all job<br/>and datafeed tasks and prohibits new job and datafeed tasks from<br/>starting.</para>
+	/// <para>
+	/// When <c>true</c>, it enables <c>upgrade_mode</c> which temporarily halts all job
+	/// and datafeed tasks and prohibits new job and datafeed tasks from
+	/// starting.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
 	/// <summary>
-	/// <para>The time to wait for the request to be completed.</para>
+	/// <para>
+	/// The time to wait for the request to be completed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Sets a cluster wide upgrade_mode setting that prepares machine learning<br/>indices for an upgrade.<br/>When upgrading your cluster, in some circumstances you must restart your<br/>nodes and reindex your machine learning indices. In those circumstances,<br/>there must be no machine learning jobs running. You can close the machine<br/>learning jobs, do the upgrade, then open all the jobs again. Alternatively,<br/>you can use this API to temporarily halt tasks associated with the jobs and<br/>datafeeds and prevent new jobs from opening. You can also use this API<br/>during upgrades that do not require you to reindex your machine learning<br/>indices, though stopping jobs is not a requirement in that case.<br/>You can see the current value for the upgrade_mode setting by using the get<br/>machine learning info API.</para>
+/// <para>
+/// Sets a cluster wide upgrade_mode setting that prepares machine learning
+/// indices for an upgrade.
+/// When upgrading your cluster, in some circumstances you must restart your
+/// nodes and reindex your machine learning indices. In those circumstances,
+/// there must be no machine learning jobs running. You can close the machine
+/// learning jobs, do the upgrade, then open all the jobs again. Alternatively,
+/// you can use this API to temporarily halt tasks associated with the jobs and
+/// datafeeds and prevent new jobs from opening. You can also use this API
+/// during upgrades that do not require you to reindex your machine learning
+/// indices, though stopping jobs is not a requirement in that case.
+/// You can see the current value for the upgrade_mode setting by using the get
+/// machine learning info API.
+/// </para>
 /// </summary>
 public sealed partial class SetUpgradeModeRequestDescriptor : RequestDescriptor<SetUpgradeModeRequestDescriptor, SetUpgradeModeRequestParameters>
 {

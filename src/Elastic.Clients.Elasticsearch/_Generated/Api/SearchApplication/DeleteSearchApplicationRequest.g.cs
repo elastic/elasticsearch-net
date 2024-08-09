@@ -34,7 +34,9 @@ public sealed partial class DeleteSearchApplicationRequestParameters : RequestPa
 }
 
 /// <summary>
-/// <para>Deletes a search application.</para>
+/// <para>
+/// Deletes a search application.
+/// </para>
 /// </summary>
 public sealed partial class DeleteSearchApplicationRequest : PlainRequest<DeleteSearchApplicationRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteSearchApplicationRequest : PlainRequest<Delete
 }
 
 /// <summary>
-/// <para>Deletes a search application.</para>
+/// <para>
+/// Deletes a search application.
+/// </para>
 /// </summary>
 public sealed partial class DeleteSearchApplicationRequestDescriptor : RequestDescriptor<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationRequestParameters>
 {

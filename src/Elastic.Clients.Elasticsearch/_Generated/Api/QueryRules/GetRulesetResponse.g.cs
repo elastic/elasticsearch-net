@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 public sealed partial class GetRulesetResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Rules associated with the query ruleset</para>
+	/// <para>
+	/// Rules associated with the query ruleset
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rules")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; init; }
 
 	/// <summary>
-	/// <para>Query Ruleset unique identifier</para>
+	/// <para>
+	/// Query Ruleset unique identifier
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ruleset_id")]
 	public string RulesetId { get; init; }

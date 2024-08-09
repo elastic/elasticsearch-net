@@ -34,25 +34,33 @@ public sealed partial class HitsEvent<TEvent>
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 
 	/// <summary>
-	/// <para>Unique identifier for the event. This ID is only unique within the index.</para>
+	/// <para>
+	/// Unique identifier for the event. This ID is only unique within the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
 	/// <summary>
-	/// <para>Name of the index containing the event.</para>
+	/// <para>
+	/// Name of the index containing the event.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
 	/// <summary>
-	/// <para>Set to `true` for events in a timespan-constrained sequence that do not meet a given condition.</para>
+	/// <para>
+	/// Set to <c>true</c> for events in a timespan-constrained sequence that do not meet a given condition.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public bool? Missing { get; init; }
 
 	/// <summary>
-	/// <para>Original JSON body passed for the event at index time.</para>
+	/// <para>
+	/// Original JSON body passed for the event at index time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	[SourceConverter]

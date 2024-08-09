@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 {
 	/// <summary>
-	/// <para>Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.</para>
+	/// <para>
+	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("class_name")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name? ClassName { get; set; }
 
 	/// <summary>
-	/// <para>Whether or not the curve should be returned in addition to the score. Default value is false.</para>
+	/// <para>
+	/// Whether or not the curve should be returned in addition to the score. Default value is false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include_curve")]
 	public bool? IncludeCurve { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescri
 	private bool? IncludeCurveValue { get; set; }
 
 	/// <summary>
-	/// <para>Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.</para>
+	/// <para>
+	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsAucRocDescriptor ClassName(Elastic.Clients.Elasticsearch.Serverless.Name? className)
 	{
@@ -63,7 +69,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescri
 	}
 
 	/// <summary>
-	/// <para>Whether or not the curve should be returned in addition to the score. Default value is false.</para>
+	/// <para>
+	/// Whether or not the curve should be returned in addition to the score. Default value is false.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsAucRocDescriptor IncludeCurve(bool? includeCurve = true)
 	{

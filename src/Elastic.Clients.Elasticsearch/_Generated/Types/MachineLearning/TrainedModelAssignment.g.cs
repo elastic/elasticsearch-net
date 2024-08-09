@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelAssignment
 {
 	/// <summary>
-	/// <para>The overall assignment state.</para>
+	/// <para>
+	/// The overall assignment state.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("assignment_state")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; init; }
@@ -38,13 +40,17 @@ public sealed partial class TrainedModelAssignment
 	public int? MaxAssignedAllocations { get; init; }
 
 	/// <summary>
-	/// <para>The allocation state for each node.</para>
+	/// <para>
+	/// The allocation state for each node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing_table")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; init; }
 
 	/// <summary>
-	/// <para>The timestamp when the deployment started.</para>
+	/// <para>
+	/// The timestamp when the deployment started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset StartTime { get; init; }

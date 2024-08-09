@@ -30,49 +30,70 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class QueryStringQuery
 {
 	/// <summary>
-	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_leading_wildcard")]
 	public bool? AllowLeadingWildcard { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("default_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? DefaultField { get; set; }
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperator { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, enable position increments in queries constructed from a `query_string` search.</para>
+	/// <para>
+	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("enable_position_increments")]
 	public bool? EnablePositionIncrements { get; set; }
@@ -80,68 +101,90 @@ public sealed partial class QueryStringQuery
 	public bool? Escape { get; set; }
 
 	/// <summary>
-	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
+	/// <para>
+	/// Array of fields to search. Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for fuzzy matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens for phrases.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens for phrases.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("phrase_slop")]
 	public double? PhraseSlop { get; set; }
 
 	/// <summary>
-	/// <para>Query string you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -149,37 +192,51 @@ public sealed partial class QueryStringQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
+	/// <para>
+	/// Analyzer used to convert quoted text in the query string into tokens.
+	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("quote_analyzer")]
 	public string? QuoteAnalyzer { get; set; }
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.<br/>You can use this suffix to use a different analysis method for exact matches.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// You can use this suffix to use a different analysis method for exact matches.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rewrite")]
 	public string? Rewrite { get; set; }
 
 	/// <summary>
-	/// <para>How to combine the queries generated from the individual search terms in the resulting `dis_max` query.</para>
+	/// <para>
+	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
 	/// <summary>
-	/// <para>Determines how the query matches and scores documents.</para>
+	/// <para>
+	/// Determines how the query matches and scores documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? Type { get; set; }
@@ -224,7 +281,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> AllowLeadingWildcard(bool? allowLeadingWildcard = true)
 	{
@@ -233,7 +292,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -242,7 +303,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
@@ -251,7 +314,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -260,7 +325,12 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -269,7 +339,11 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> DefaultField(Elastic.Clients.Elasticsearch.Serverless.Field? defaultField)
 	{
@@ -278,7 +352,11 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> DefaultField<TValue>(Expression<Func<TDocument, TValue>> defaultField)
 	{
@@ -287,7 +365,11 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> DefaultField(Expression<Func<TDocument, object>> defaultField)
 	{
@@ -296,7 +378,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator)
 	{
@@ -305,7 +389,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, enable position increments in queries constructed from a `query_string` search.</para>
+	/// <para>
+	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> EnablePositionIncrements(bool? enablePositionIncrements = true)
 	{
@@ -320,7 +406,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
+	/// <para>
+	/// Array of fields to search. Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -329,7 +417,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for fuzzy matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -338,7 +428,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions)
 	{
@@ -347,7 +439,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength)
 	{
@@ -356,7 +450,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -365,7 +461,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -374,7 +472,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true)
 	{
@@ -383,7 +483,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
@@ -392,7 +494,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -401,7 +505,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens for phrases.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens for phrases.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> PhraseSlop(double? phraseSlop)
 	{
@@ -410,7 +516,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Query string you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Query(string query)
 	{
@@ -425,7 +533,10 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
+	/// <para>
+	/// Analyzer used to convert quoted text in the query string into tokens.
+	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> QuoteAnalyzer(string? quoteAnalyzer)
 	{
@@ -434,7 +545,10 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.<br/>You can use this suffix to use a different analysis method for exact matches.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// You can use this suffix to use a different analysis method for exact matches.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix)
 	{
@@ -443,7 +557,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -452,7 +568,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>How to combine the queries generated from the individual search terms in the resulting `dis_max` query.</para>
+	/// <para>
+	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
 	{
@@ -461,7 +579,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -470,7 +590,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Determines how the query matches and scores documents.</para>
+	/// <para>
+	/// Determines how the query matches and scores documents.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? type)
 	{
@@ -680,7 +802,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor AllowLeadingWildcard(bool? allowLeadingWildcard = true)
 	{
@@ -689,7 +813,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -698,7 +824,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
@@ -707,7 +835,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -716,7 +846,12 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Boost(float? boost)
 	{
@@ -725,7 +860,11 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor DefaultField(Elastic.Clients.Elasticsearch.Serverless.Field? defaultField)
 	{
@@ -734,7 +873,11 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor DefaultField<TDocument, TValue>(Expression<Func<TDocument, TValue>> defaultField)
 	{
@@ -743,7 +886,11 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Default field to search if no field is provided in the query string.
+	/// Supports wildcards (<c>*</c>).
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor DefaultField<TDocument>(Expression<Func<TDocument, object>> defaultField)
 	{
@@ -752,7 +899,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator)
 	{
@@ -761,7 +910,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, enable position increments in queries constructed from a `query_string` search.</para>
+	/// <para>
+	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor EnablePositionIncrements(bool? enablePositionIncrements = true)
 	{
@@ -776,7 +927,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
+	/// <para>
+	/// Array of fields to search. Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -785,7 +938,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for fuzzy matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -794,7 +949,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions)
 	{
@@ -803,7 +960,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength)
 	{
@@ -812,7 +971,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -821,7 +982,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -830,7 +993,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Lenient(bool? lenient = true)
 	{
@@ -839,7 +1004,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
@@ -848,7 +1015,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -857,7 +1026,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens for phrases.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens for phrases.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor PhraseSlop(double? phraseSlop)
 	{
@@ -866,7 +1037,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Query string you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Query(string query)
 	{
@@ -881,7 +1054,10 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
+	/// <para>
+	/// Analyzer used to convert quoted text in the query string into tokens.
+	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor QuoteAnalyzer(string? quoteAnalyzer)
 	{
@@ -890,7 +1066,10 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.<br/>You can use this suffix to use a different analysis method for exact matches.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// You can use this suffix to use a different analysis method for exact matches.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix)
 	{
@@ -899,7 +1078,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Rewrite(string? rewrite)
 	{
@@ -908,7 +1089,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>How to combine the queries generated from the individual search terms in the resulting `dis_max` query.</para>
+	/// <para>
+	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor TieBreaker(double? tieBreaker)
 	{
@@ -917,7 +1100,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor TimeZone(string? timeZone)
 	{
@@ -926,7 +1111,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Determines how the query matches and scores documents.</para>
+	/// <para>
+	/// Determines how the query matches and scores documents.
+	/// </para>
 	/// </summary>
 	public QueryStringQueryDescriptor Type(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? type)
 	{

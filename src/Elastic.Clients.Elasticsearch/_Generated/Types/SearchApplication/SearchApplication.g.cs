@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class SearchApplication
 {
 	/// <summary>
-	/// <para>Analytics collection associated to the Search Application.</para>
+	/// <para>
+	/// Analytics collection associated to the Search Application.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analytics_collection_name")]
 	public Elastic.Clients.Elasticsearch.Name? AnalyticsCollectionName { get; set; }
 
 	/// <summary>
-	/// <para>Indices that are part of the Search Application.</para>
+	/// <para>
+	/// Indices that are part of the Search Application.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; set; }
 
 	/// <summary>
-	/// <para>Search Application name.</para>
+	/// <para>
+	/// Search Application name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	/// <summary>
-	/// <para>Search template to use on search operations.</para>
+	/// <para>
+	/// Search template to use on search operations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; set; }
 
 	/// <summary>
-	/// <para>Last time the Search Application was updated.</para>
+	/// <para>
+	/// Last time the Search Application was updated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated_at_millis")]
 	public long UpdatedAtMillis { get; set; }
@@ -77,7 +87,9 @@ public sealed partial class SearchApplicationDescriptor : SerializableDescriptor
 	private long UpdatedAtMillisValue { get; set; }
 
 	/// <summary>
-	/// <para>Analytics collection associated to the Search Application.</para>
+	/// <para>
+	/// Analytics collection associated to the Search Application.
+	/// </para>
 	/// </summary>
 	public SearchApplicationDescriptor AnalyticsCollectionName(Elastic.Clients.Elasticsearch.Name? analyticsCollectionName)
 	{
@@ -86,7 +98,9 @@ public sealed partial class SearchApplicationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Indices that are part of the Search Application.</para>
+	/// <para>
+	/// Indices that are part of the Search Application.
+	/// </para>
 	/// </summary>
 	public SearchApplicationDescriptor Indices(ICollection<Elastic.Clients.Elasticsearch.IndexName> indices)
 	{
@@ -95,7 +109,9 @@ public sealed partial class SearchApplicationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Search Application name.</para>
+	/// <para>
+	/// Search Application name.
+	/// </para>
 	/// </summary>
 	public SearchApplicationDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -104,7 +120,9 @@ public sealed partial class SearchApplicationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Search template to use on search operations.</para>
+	/// <para>
+	/// Search template to use on search operations.
+	/// </para>
 	/// </summary>
 	public SearchApplicationDescriptor Template(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? template)
 	{
@@ -131,7 +149,9 @@ public sealed partial class SearchApplicationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Last time the Search Application was updated.</para>
+	/// <para>
+	/// Last time the Search Application was updated.
+	/// </para>
 	/// </summary>
 	public SearchApplicationDescriptor UpdatedAtMillis(long updatedAtMillis)
 	{

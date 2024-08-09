@@ -34,7 +34,9 @@ public sealed partial class CcrStatsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Gets all stats related to cross-cluster replication.</para>
+/// <para>
+/// Gets all stats related to cross-cluster replication.
+/// </para>
 /// </summary>
 public sealed partial class CcrStatsRequest : PlainRequest<CcrStatsRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class CcrStatsRequest : PlainRequest<CcrStatsRequestParame
 }
 
 /// <summary>
-/// <para>Gets all stats related to cross-cluster replication.</para>
+/// <para>
+/// Gets all stats related to cross-cluster replication.
+/// </para>
 /// </summary>
 public sealed partial class CcrStatsRequestDescriptor : RequestDescriptor<CcrStatsRequestDescriptor, CcrStatsRequestParameters>
 {

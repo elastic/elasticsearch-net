@@ -34,7 +34,12 @@ public sealed partial class EstimateModelMemoryRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>
+/// Estimate job model memory usage.
+/// Makes an estimation of the memory usage for an anomaly detection job model.
+/// It is based on analysis configuration details for the job and cardinality
+/// estimates for the fields it references.
+/// </para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateModelMemoryRequestParameters>
 {
@@ -47,26 +52,48 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 	internal override string OperationName => "ml.estimate_model_memory";
 
 	/// <summary>
-	/// <para>For a list of the properties that you can specify in the<br/>`analysis_config` component of the body of this API.</para>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig? AnalysisConfig { get; set; }
 
 	/// <summary>
-	/// <para>Estimates of the highest cardinality in a single bucket that is observed<br/>for influencer fields over the time period that the job analyzes data.<br/>To produce a good answer, values must be provided for all influencer<br/>fields. Providing values for fields that are not listed as `influencers`<br/>has no effect on the estimation.</para>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_bucket_cardinality")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>? MaxBucketCardinality { get; set; }
 
 	/// <summary>
-	/// <para>Estimates of the cardinality that is observed for fields over the whole<br/>time period that the job analyzes data. To produce a good answer, values<br/>must be provided for fields referenced in the `by_field_name`,<br/>`over_field_name` and `partition_field_name` of any detectors. Providing<br/>values for other fields has no effect on the estimation. It can be<br/>omitted from the request if no detectors have a `by_field_name`,<br/>`over_field_name` or `partition_field_name`.</para>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("overall_cardinality")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>? OverallCardinality { get; set; }
 }
 
 /// <summary>
-/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>
+/// Estimate job model memory usage.
+/// Makes an estimation of the memory usage for an anomaly detection job model.
+/// It is based on analysis configuration details for the job and cardinality
+/// estimates for the fields it references.
+/// </para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : RequestDescriptor<EstimateModelMemoryRequestDescriptor<TDocument>, EstimateModelMemoryRequestParameters>
 {
@@ -91,7 +118,10 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>? OverallCardinalityValue { get; set; }
 
 	/// <summary>
-	/// <para>For a list of the properties that you can specify in the<br/>`analysis_config` component of the body of this API.</para>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig? analysisConfig)
 	{
@@ -118,7 +148,13 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 	}
 
 	/// <summary>
-	/// <para>Estimates of the highest cardinality in a single bucket that is observed<br/>for influencer fields over the time period that the job analyzes data.<br/>To produce a good answer, values must be provided for all influencer<br/>fields. Providing values for fields that are not listed as `influencers`<br/>has no effect on the estimation.</para>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>> selector)
 	{
@@ -127,7 +163,15 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 	}
 
 	/// <summary>
-	/// <para>Estimates of the cardinality that is observed for fields over the whole<br/>time period that the job analyzes data. To produce a good answer, values<br/>must be provided for fields referenced in the `by_field_name`,<br/>`over_field_name` and `partition_field_name` of any detectors. Providing<br/>values for other fields has no effect on the estimation. It can be<br/>omitted from the request if no detectors have a `by_field_name`,<br/>`over_field_name` or `partition_field_name`.</para>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>> selector)
 	{
@@ -171,7 +215,12 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 }
 
 /// <summary>
-/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>
+/// Estimate job model memory usage.
+/// Makes an estimation of the memory usage for an anomaly detection job model.
+/// It is based on analysis configuration details for the job and cardinality
+/// estimates for the fields it references.
+/// </para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescriptor<EstimateModelMemoryRequestDescriptor, EstimateModelMemoryRequestParameters>
 {
@@ -196,7 +245,10 @@ public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescri
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>? OverallCardinalityValue { get; set; }
 
 	/// <summary>
-	/// <para>For a list of the properties that you can specify in the<br/>`analysis_config` component of the body of this API.</para>
+	/// <para>
+	/// For a list of the properties that you can specify in the
+	/// <c>analysis_config</c> component of the body of this API.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig? analysisConfig)
 	{
@@ -223,7 +275,13 @@ public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Estimates of the highest cardinality in a single bucket that is observed<br/>for influencer fields over the time period that the job analyzes data.<br/>To produce a good answer, values must be provided for all influencer<br/>fields. Providing values for fields that are not listed as `influencers`<br/>has no effect on the estimation.</para>
+	/// <para>
+	/// Estimates of the highest cardinality in a single bucket that is observed
+	/// for influencer fields over the time period that the job analyzes data.
+	/// To produce a good answer, values must be provided for all influencer
+	/// fields. Providing values for fields that are not listed as <c>influencers</c>
+	/// has no effect on the estimation.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor MaxBucketCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>> selector)
 	{
@@ -232,7 +290,15 @@ public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Estimates of the cardinality that is observed for fields over the whole<br/>time period that the job analyzes data. To produce a good answer, values<br/>must be provided for fields referenced in the `by_field_name`,<br/>`over_field_name` and `partition_field_name` of any detectors. Providing<br/>values for other fields has no effect on the estimation. It can be<br/>omitted from the request if no detectors have a `by_field_name`,<br/>`over_field_name` or `partition_field_name`.</para>
+	/// <para>
+	/// Estimates of the cardinality that is observed for fields over the whole
+	/// time period that the job analyzes data. To produce a good answer, values
+	/// must be provided for fields referenced in the <c>by_field_name</c>,
+	/// <c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+	/// values for other fields has no effect on the estimation. It can be
+	/// omitted from the request if no detectors have a <c>by_field_name</c>,
+	/// <c>over_field_name</c> or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	public EstimateModelMemoryRequestDescriptor OverallCardinality(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, long>> selector)
 	{

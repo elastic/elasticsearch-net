@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IntervalsAllOf
 {
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
 	/// <summary>
-	/// <para>An array of rules to combine. All rules must produce a match in a document for the overall source to match.</para>
+	/// <para>
+	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("intervals")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of positions between the matching terms.<br/>Intervals produced by the rules further apart than this are not considered matches.</para>
+	/// <para>
+	/// Maximum number of positions between the matching terms.
+	/// Intervals produced by the rules further apart than this are not considered matches.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, intervals produced by the rules should appear in the order in which they are specified.</para>
+	/// <para>
+	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
@@ -76,7 +85,9 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	private bool? OrderedValue { get; set; }
 
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 	{
@@ -103,7 +114,9 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>An array of rules to combine. All rules must produce a match in a document for the overall source to match.</para>
+	/// <para>
+	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
 	{
@@ -142,7 +155,10 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions between the matching terms.<br/>Intervals produced by the rules further apart than this are not considered matches.</para>
+	/// <para>
+	/// Maximum number of positions between the matching terms.
+	/// Intervals produced by the rules further apart than this are not considered matches.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor<TDocument> MaxGaps(int? maxGaps)
 	{
@@ -151,7 +167,9 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If `true`, intervals produced by the rules should appear in the order in which they are specified.</para>
+	/// <para>
+	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor<TDocument> Ordered(bool? ordered = true)
 	{
@@ -244,7 +262,9 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	private bool? OrderedValue { get; set; }
 
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 	{
@@ -271,7 +291,9 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>An array of rules to combine. All rules must produce a match in a document for the overall source to match.</para>
+	/// <para>
+	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
 	{
@@ -310,7 +332,10 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions between the matching terms.<br/>Intervals produced by the rules further apart than this are not considered matches.</para>
+	/// <para>
+	/// Maximum number of positions between the matching terms.
+	/// Intervals produced by the rules further apart than this are not considered matches.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor MaxGaps(int? maxGaps)
 	{
@@ -319,7 +344,9 @@ public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>If `true`, intervals produced by the rules should appear in the order in which they are specified.</para>
+	/// <para>
+	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
+	/// </para>
 	/// </summary>
 	public IntervalsAllOfDescriptor Ordered(bool? ordered = true)
 	{

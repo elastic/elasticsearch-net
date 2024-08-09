@@ -32,22 +32,53 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class PutTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>When the transform is created, a series of validations occur to ensure its success. For example, there is a<br/>check for the existence of the source indices and a check that the destination index is not part of the source<br/>index pattern. You can use this parameter to skip the checks, for example when the source index does not exist<br/>until after the transform is created. The validations are always run when you start the transform, however, with<br/>the exception of privilege checks.</para>
+	/// <para>
+	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
+	/// check for the existence of the source indices and a check that the destination index is not part of the source
+	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
+	/// until after the transform is created. The validations are always run when you start the transform, however, with
+	/// the exception of privilege checks.
+	/// </para>
 	/// </summary>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create a transform.<br/>Creates a transform.</para>
-/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
-/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
-/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
-/// <para>NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any<br/>`.transform-internal*` indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do<br/>not give users any privileges on `.transform-internal*` indices. If you used transforms prior to 7.5, also do not<br/>give users any privileges on `.data-frame-internal*` indices.</para>
+/// <para>
+/// Create a transform.
+/// Creates a transform.
+/// </para>
+/// <para>
+/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
+/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
+/// unique row per entity.
+/// </para>
+/// <para>
+/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
+/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
+/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
+/// in the latest object.
+/// </para>
+/// <para>
+/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
+/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
+/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
+/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
+/// attempts unauthorized operations.
+/// </para>
+/// <para>
+/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
+/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
+/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
+/// give users any privileges on <c>.data-frame-internal*</c> indices.
+/// </para>
 /// </summary>
 public sealed partial class PutTransformRequest : PlainRequest<PutTransformRequestParameters>
 {
@@ -64,84 +95,139 @@ public sealed partial class PutTransformRequest : PlainRequest<PutTransformReque
 	internal override string OperationName => "transform.put_transform";
 
 	/// <summary>
-	/// <para>When the transform is created, a series of validations occur to ensure its success. For example, there is a<br/>check for the existence of the source indices and a check that the destination index is not part of the source<br/>index pattern. You can use this parameter to skip the checks, for example when the source index does not exist<br/>until after the transform is created. The validations are always run when you start the transform, however, with<br/>the exception of privilege checks.</para>
+	/// <para>
+	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
+	/// check for the existence of the source indices and a check that the destination index is not part of the source
+	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
+	/// until after the transform is created. The validations are always run when you start the transform, however, with
+	/// the exception of privilege checks.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the transform is running continuously. Also<br/>determines the retry interval in the event of transient failures while the transform is searching or indexing.<br/>The minimum value is `1s` and the maximum is `1h`.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
+	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
+	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for each unique key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("latest")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields<br/>and the aggregation to reduce the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
+	/// and the aggregation to reduce the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the<br/>destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
+	/// destination index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retention_policy")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Source Source { get; set; }
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sync")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
 /// <summary>
-/// <para>Create a transform.<br/>Creates a transform.</para>
-/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
-/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
-/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
-/// <para>NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any<br/>`.transform-internal*` indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do<br/>not give users any privileges on `.transform-internal*` indices. If you used transforms prior to 7.5, also do not<br/>give users any privileges on `.data-frame-internal*` indices.</para>
+/// <para>
+/// Create a transform.
+/// Creates a transform.
+/// </para>
+/// <para>
+/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
+/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
+/// unique row per entity.
+/// </para>
+/// <para>
+/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
+/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
+/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
+/// in the latest object.
+/// </para>
+/// <para>
+/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
+/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
+/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
+/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
+/// attempts unauthorized operations.
+/// </para>
+/// <para>
+/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
+/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
+/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
+/// give users any privileges on <c>.data-frame-internal*</c> indices.
+/// </para>
 /// </summary>
 public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDescriptor<PutTransformRequestDescriptor<TDocument>, PutTransformRequestParameters>
 {
@@ -194,7 +280,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -203,7 +291,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination dest)
 	{
@@ -230,7 +320,11 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the transform is running continuously. Also<br/>determines the retry interval in the event of transient failures while the transform is searching or indexing.<br/>The minimum value is `1s` and the maximum is `1h`.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
+	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
+	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -239,7 +333,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for each unique key.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? latest)
 	{
@@ -266,7 +362,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -275,7 +373,10 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields<br/>and the aggregation to reduce the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
+	/// and the aggregation to reduce the data.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? pivot)
 	{
@@ -302,7 +403,10 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the<br/>destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
+	/// destination index.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -329,7 +433,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
 	{
@@ -356,7 +462,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source source)
 	{
@@ -383,7 +491,9 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
 	{
@@ -547,11 +657,34 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Create a transform.<br/>Creates a transform.</para>
-/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
-/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
-/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
-/// <para>NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any<br/>`.transform-internal*` indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do<br/>not give users any privileges on `.transform-internal*` indices. If you used transforms prior to 7.5, also do not<br/>give users any privileges on `.data-frame-internal*` indices.</para>
+/// <para>
+/// Create a transform.
+/// Creates a transform.
+/// </para>
+/// <para>
+/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
+/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
+/// unique row per entity.
+/// </para>
+/// <para>
+/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
+/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
+/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
+/// in the latest object.
+/// </para>
+/// <para>
+/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
+/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
+/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
+/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
+/// attempts unauthorized operations.
+/// </para>
+/// <para>
+/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
+/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
+/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
+/// give users any privileges on <c>.data-frame-internal*</c> indices.
+/// </para>
 /// </summary>
 public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<PutTransformRequestDescriptor, PutTransformRequestParameters>
 {
@@ -604,7 +737,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Description(string? description)
 	{
@@ -613,7 +748,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination dest)
 	{
@@ -640,7 +777,11 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the transform is running continuously. Also<br/>determines the retry interval in the event of transient failures while the transform is searching or indexing.<br/>The minimum value is `1s` and the maximum is `1h`.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
+	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
+	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -649,7 +790,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for each unique key.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? latest)
 	{
@@ -676,7 +819,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -685,7 +830,10 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields<br/>and the aggregation to reduce the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
+	/// and the aggregation to reduce the data.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? pivot)
 	{
@@ -712,7 +860,10 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the<br/>destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
+	/// destination index.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -739,7 +890,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
 	{
@@ -766,7 +919,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source source)
 	{
@@ -793,7 +948,9 @@ public sealed partial class PutTransformRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public PutTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
 	{

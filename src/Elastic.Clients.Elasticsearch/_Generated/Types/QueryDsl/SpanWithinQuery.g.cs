@@ -30,19 +30,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class SpanWithinQuery
 {
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("big")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("little")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
@@ -71,7 +82,10 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
 	{
@@ -98,7 +112,12 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -107,7 +126,10 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
 	{
@@ -208,7 +230,10 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
 	{
@@ -235,7 +260,12 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor Boost(float? boost)
 	{
@@ -244,7 +274,10 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
 	/// </summary>
 	public SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
 	{

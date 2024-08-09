@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class PublishedClusterStates
 {
 	/// <summary>
-	/// <para>Number of compatible differences between published cluster states.</para>
+	/// <para>
+	/// Number of compatible differences between published cluster states.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compatible_diffs")]
 	public long? CompatibleDiffs { get; init; }
 
 	/// <summary>
-	/// <para>Number of published cluster states.</para>
+	/// <para>
+	/// Number of published cluster states.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("full_states")]
 	public long? FullStates { get; init; }
 
 	/// <summary>
-	/// <para>Number of incompatible differences between published cluster states.</para>
+	/// <para>
+	/// Number of incompatible differences between published cluster states.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("incompatible_diffs")]
 	public long? IncompatibleDiffs { get; init; }

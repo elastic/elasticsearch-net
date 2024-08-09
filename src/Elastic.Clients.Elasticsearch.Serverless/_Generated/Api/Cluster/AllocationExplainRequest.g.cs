@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class AllocationExplainRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, returns information about disk usage and shard sizes.</para>
+	/// <para>
+	/// If true, returns information about disk usage and shard sizes.
+	/// </para>
 	/// </summary>
 	public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
 	/// <summary>
-	/// <para>If true, returns YES decisions in explanation.</para>
+	/// <para>
+	/// If true, returns YES decisions in explanation.
+	/// </para>
 	/// </summary>
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 }
 
 /// <summary>
-/// <para>Provides explanations for shard allocations in the cluster.</para>
+/// <para>
+/// Provides explanations for shard allocations in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class AllocationExplainRequest : PlainRequest<AllocationExplainRequestParameters>
 {
@@ -56,44 +62,58 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	internal override string OperationName => "cluster.allocation_explain";
 
 	/// <summary>
-	/// <para>If true, returns information about disk usage and shard sizes.</para>
+	/// <para>
+	/// If true, returns information about disk usage and shard sizes.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
 	/// <summary>
-	/// <para>If true, returns YES decisions in explanation.</para>
+	/// <para>
+	/// If true, returns YES decisions in explanation.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
 	/// <summary>
-	/// <para>Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.</para>
+	/// <para>
+	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current_node")]
 	public string? CurrentNode { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the name of the index that you would like an explanation for.</para>
+	/// <para>
+	/// Specifies the name of the index that you would like an explanation for.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns explanation for the primary shard for the given shard ID.</para>
+	/// <para>
+	/// If true, returns explanation for the primary shard for the given shard ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("primary")]
 	public bool? Primary { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the ID of the shard that you would like an explanation for.</para>
+	/// <para>
+	/// Specifies the ID of the shard that you would like an explanation for.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard")]
 	public int? Shard { get; set; }
 }
 
 /// <summary>
-/// <para>Provides explanations for shard allocations in the cluster.</para>
+/// <para>
+/// Provides explanations for shard allocations in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class AllocationExplainRequestDescriptor : RequestDescriptor<AllocationExplainRequestDescriptor, AllocationExplainRequestParameters>
 {
@@ -120,7 +140,9 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	private int? ShardValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.</para>
+	/// <para>
+	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
+	/// </para>
 	/// </summary>
 	public AllocationExplainRequestDescriptor CurrentNode(string? currentNode)
 	{
@@ -129,7 +151,9 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the name of the index that you would like an explanation for.</para>
+	/// <para>
+	/// Specifies the name of the index that you would like an explanation for.
+	/// </para>
 	/// </summary>
 	public AllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -138,7 +162,9 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>If true, returns explanation for the primary shard for the given shard ID.</para>
+	/// <para>
+	/// If true, returns explanation for the primary shard for the given shard ID.
+	/// </para>
 	/// </summary>
 	public AllocationExplainRequestDescriptor Primary(bool? primary = true)
 	{
@@ -147,7 +173,9 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the ID of the shard that you would like an explanation for.</para>
+	/// <para>
+	/// Specifies the ID of the shard that you would like an explanation for.
+	/// </para>
 	/// </summary>
 	public AllocationExplainRequestDescriptor Shard(int? shard)
 	{

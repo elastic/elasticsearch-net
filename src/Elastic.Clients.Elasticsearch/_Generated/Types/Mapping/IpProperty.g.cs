@@ -48,7 +48,9 @@ public sealed partial class IpProperty : IProperty
 	public bool? Index { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -66,7 +68,9 @@ public sealed partial class IpProperty : IProperty
 	public bool? Store { get; set; }
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
@@ -165,7 +169,9 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -242,7 +248,9 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
@@ -499,7 +507,9 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -576,7 +586,9 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{

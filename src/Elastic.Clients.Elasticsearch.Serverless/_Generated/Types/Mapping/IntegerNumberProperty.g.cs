@@ -50,7 +50,9 @@ public sealed partial class IntegerNumberProperty : IProperty
 	public bool? Index { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -167,7 +169,9 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IntegerNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -498,7 +502,9 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IntegerNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

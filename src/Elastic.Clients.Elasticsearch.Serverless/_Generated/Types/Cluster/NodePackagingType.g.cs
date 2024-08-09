@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class NodePackagingType
 {
 	/// <summary>
-	/// <para>Number of selected nodes using the distribution flavor and file type.</para>
+	/// <para>
+	/// Number of selected nodes using the distribution flavor and file type.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>Type of Elasticsearch distribution. This is always `default`.</para>
+	/// <para>
+	/// Type of Elasticsearch distribution. This is always <c>default</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flavor")]
 	public string Flavor { get; init; }
 
 	/// <summary>
-	/// <para>File type (such as `tar` or `zip`) used for the distribution package.</para>
+	/// <para>
+	/// File type (such as <c>tar</c> or <c>zip</c>) used for the distribution package.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }

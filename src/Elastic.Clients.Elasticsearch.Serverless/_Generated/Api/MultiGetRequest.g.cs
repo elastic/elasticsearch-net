@@ -32,48 +32,69 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class MultiGetRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
+	/// <para>
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
+	/// </para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request refreshes relevant shards before retrieving documents.</para>
+	/// <para>
+	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
+	/// </para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>True or false to return the `_source` field or not, or a list of fields to return.</para>
+	/// <para>
+	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to exclude from the response.<br/>You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.</para>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to include in the response.<br/>If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>If `true`, retrieves the document fields stored in the index rather than the document `_source`.</para>
+	/// <para>
+	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 }
 
 /// <summary>
-/// <para>Allows to get multiple documents in one request.</para>
+/// <para>
+/// Allows to get multiple documents in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParameters>
 {
@@ -94,68 +115,93 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	internal override string OperationName => "mget";
 
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on. Random by default.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
+	/// <para>
+	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request refreshes relevant shards before retrieving documents.</para>
+	/// <para>
+	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>True or false to return the `_source` field or not, or a list of fields to return.</para>
+	/// <para>
+	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to exclude from the response.<br/>You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.</para>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to include in the response.<br/>If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>If `true`, retrieves the document fields stored in the index rather than the document `_source`.</para>
+	/// <para>
+	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
-	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// <para>
+	/// The documents you want to retrieve. Required if no index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperation>? Docs { get; set; }
 
 	/// <summary>
-	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// <para>
+	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
 	public Elastic.Clients.Elasticsearch.Serverless.Ids? Ids { get; set; }
 }
 
 /// <summary>
-/// <para>Allows to get multiple documents in one request.</para>
+/// <para>
+/// Allows to get multiple documents in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescriptor<MultiGetRequestDescriptor<TDocument>, MultiGetRequestParameters>
 {
@@ -199,7 +245,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	private Elastic.Clients.Elasticsearch.Serverless.Ids? IdsValue { get; set; }
 
 	/// <summary>
-	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// <para>
+	/// The documents you want to retrieve. Required if no index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	public MultiGetRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperation>? docs)
 	{
@@ -238,7 +286,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// <para>
+	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	public MultiGetRequestDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.Serverless.Ids? ids)
 	{
@@ -291,7 +341,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Allows to get multiple documents in one request.</para>
+/// <para>
+/// Allows to get multiple documents in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiGetRequestDescriptor, MultiGetRequestParameters>
 {
@@ -335,7 +387,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	private Elastic.Clients.Elasticsearch.Serverless.Ids? IdsValue { get; set; }
 
 	/// <summary>
-	/// <para>The documents you want to retrieve. Required if no index is specified in the request URI.</para>
+	/// <para>
+	/// The documents you want to retrieve. Required if no index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	public MultiGetRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperation>? docs)
 	{
@@ -374,7 +428,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	}
 
 	/// <summary>
-	/// <para>The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.</para>
+	/// <para>
+	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
+	/// </para>
 	/// </summary>
 	public MultiGetRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Serverless.Ids? ids)
 	{

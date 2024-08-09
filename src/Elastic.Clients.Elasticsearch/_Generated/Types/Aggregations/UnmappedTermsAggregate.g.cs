@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>Result of a `terms` aggregation when the field is unmapped. `buckets` is always empty.</para>
+/// <para>
+/// Result of a <c>terms</c> aggregation when the field is unmapped. <c>buckets</c> is always empty.
+/// </para>
 /// </summary>
 public sealed partial class UnmappedTermsAggregate : IAggregate
 {

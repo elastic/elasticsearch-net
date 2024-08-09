@@ -30,43 +30,59 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class CompletionSuggester
 {
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("contexts")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? Contexts { get; set; }
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
 
 	/// <summary>
-	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("regex")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// <para>
+	/// Whether duplicate suggestions should be filtered out.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
@@ -95,7 +111,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	private bool? SkipDuplicatesValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -104,7 +123,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
 	{
@@ -113,7 +134,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -122,7 +146,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -131,7 +158,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -140,7 +170,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
 	{
@@ -167,7 +199,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
@@ -194,7 +228,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Size(int? size)
 	{
@@ -203,7 +239,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// <para>
+	/// Whether duplicate suggestions should be filtered out.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> SkipDuplicates(bool? skipDuplicates = true)
 	{
@@ -297,7 +335,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	private bool? SkipDuplicatesValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Analyzer(string? analyzer)
 	{
@@ -306,7 +347,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
 	{
@@ -315,7 +358,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -324,7 +370,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -333,7 +382,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -342,7 +394,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
 	{
@@ -369,7 +423,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
@@ -396,7 +452,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor Size(int? size)
 	{
@@ -405,7 +463,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// <para>
+	/// Whether duplicate suggestions should be filtered out.
+	/// </para>
 	/// </summary>
 	public CompletionSuggesterDescriptor SkipDuplicates(bool? skipDuplicates = true)
 	{

@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetCategoriesRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of categories.</para>
+	/// <para>
+	/// Skips the specified number of categories.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Only return categories for the specified partition.</para>
+	/// <para>
+	/// Only return categories for the specified partition.
+	/// </para>
 	/// </summary>
 	public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of categories to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of categories to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more categories.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more categories.
+/// </para>
 /// </summary>
 public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesRequestParameters>
 {
@@ -69,32 +77,43 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	internal override string OperationName => "ml.get_categories";
 
 	/// <summary>
-	/// <para>Skips the specified number of categories.</para>
+	/// <para>
+	/// Skips the specified number of categories.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Only return categories for the specified partition.</para>
+	/// <para>
+	/// Only return categories for the specified partition.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of categories to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of categories to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Configures pagination.<br/>This parameter has the `from` and `size` properties.</para>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more categories.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more categories.
+/// </para>
 /// </summary>
 public sealed partial class GetCategoriesRequestDescriptor : RequestDescriptor<GetCategoriesRequestDescriptor, GetCategoriesRequestParameters>
 {
@@ -137,7 +156,10 @@ public sealed partial class GetCategoriesRequestDescriptor : RequestDescriptor<G
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Configures pagination.<br/>This parameter has the `from` and `size` properties.</para>
+	/// <para>
+	/// Configures pagination.
+	/// This parameter has the <c>from</c> and <c>size</c> properties.
+	/// </para>
 	/// </summary>
 	public GetCategoriesRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
 	{

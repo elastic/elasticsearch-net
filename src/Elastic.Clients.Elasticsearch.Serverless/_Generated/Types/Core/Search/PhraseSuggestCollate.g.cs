@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class PhraseSuggestCollate
 {
 	/// <summary>
-	/// <para>Parameters to use if the query is templated.</para>
+	/// <para>
+	/// Parameters to use if the query is templated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>Returns all suggestions with an extra `collate_match` option indicating whether the generated phrase matched any document.</para>
+	/// <para>
+	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prune")]
 	public bool? Prune { get; set; }
 
 	/// <summary>
-	/// <para>A collate query that is run once for every suggestion.</para>
+	/// <para>
+	/// A collate query that is run once for every suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollateQuery Query { get; set; }
@@ -63,7 +69,9 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Parameters to use if the query is templated.</para>
+	/// <para>
+	/// Parameters to use if the query is templated.
+	/// </para>
 	/// </summary>
 	public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -72,7 +80,9 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Returns all suggestions with an extra `collate_match` option indicating whether the generated phrase matched any document.</para>
+	/// <para>
+	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
+	/// </para>
 	/// </summary>
 	public PhraseSuggestCollateDescriptor Prune(bool? prune = true)
 	{
@@ -81,7 +91,9 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>A collate query that is run once for every suggestion.</para>
+	/// <para>
+	/// A collate query that is run once for every suggestion.
+	/// </para>
 	/// </summary>
 	public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollateQuery query)
 	{

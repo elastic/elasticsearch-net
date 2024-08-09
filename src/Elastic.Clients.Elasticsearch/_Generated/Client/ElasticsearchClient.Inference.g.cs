@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public partial class InferenceNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="InferenceNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="InferenceNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected InferenceNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -107,7 +121,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -120,7 +136,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -130,7 +148,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -141,7 +161,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -153,7 +175,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -164,7 +188,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete an inference endpoint</para>
+	/// <para>
+	/// Delete an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -176,7 +202,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -187,7 +215,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequest request, CancellationToken cancellationToken = default)
@@ -197,7 +227,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -208,7 +240,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -220,7 +254,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -233,7 +269,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -245,7 +283,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -258,7 +298,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -268,7 +310,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
@@ -279,7 +323,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -291,7 +337,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(CancellationToken cancellationToken = default)
@@ -302,7 +350,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get an inference endpoint</para>
+	/// <para>
+	/// Get an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -314,7 +364,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -325,7 +377,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequest request, CancellationToken cancellationToken = default)
@@ -335,7 +389,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -346,7 +402,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -358,7 +416,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -371,7 +431,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -383,7 +445,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -396,7 +460,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -406,7 +472,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -417,7 +485,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -429,7 +499,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -440,7 +512,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on the service</para>
+	/// <para>
+	/// Perform inference on the service
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -452,7 +526,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -463,7 +539,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequest request, CancellationToken cancellationToken = default)
@@ -473,7 +551,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -484,7 +564,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -496,7 +578,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -509,7 +593,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -521,7 +607,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -534,7 +622,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -544,7 +634,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -555,7 +647,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -567,7 +661,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -578,7 +674,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Create an inference endpoint</para>
+	/// <para>
+	/// Create an inference endpoint
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

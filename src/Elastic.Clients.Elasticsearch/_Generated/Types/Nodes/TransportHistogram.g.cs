@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class TransportHistogram
 {
 	/// <summary>
-	/// <para>The number of times a transport thread took a period of time within the bounds of this bucket to handle an inbound message.</para>
+	/// <para>
+	/// The number of times a transport thread took a period of time within the bounds of this bucket to handle an inbound message.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long? Count { get; init; }
 
 	/// <summary>
-	/// <para>The inclusive lower bound of the bucket in milliseconds. May be omitted on the first bucket if this bucket has no lower bound.</para>
+	/// <para>
+	/// The inclusive lower bound of the bucket in milliseconds. May be omitted on the first bucket if this bucket has no lower bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ge_millis")]
 	public long? GeMillis { get; init; }
 
 	/// <summary>
-	/// <para>The exclusive upper bound of the bucket in milliseconds.<br/>May be omitted on the last bucket if this bucket has no upper bound.</para>
+	/// <para>
+	/// The exclusive upper bound of the bucket in milliseconds.
+	/// May be omitted on the last bucket if this bucket has no upper bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lt_millis")]
 	public long? LtMillis { get; init; }

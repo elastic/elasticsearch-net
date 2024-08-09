@@ -34,7 +34,9 @@ public sealed partial class UpdateFilterRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Updates the description of a filter, adds items, or removes items from the list.</para>
+/// <para>
+/// Updates the description of a filter, adds items, or removes items from the list.
+/// </para>
 /// </summary>
 public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterRequestParameters>
 {
@@ -51,26 +53,34 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 	internal override string OperationName => "ml.update_filter";
 
 	/// <summary>
-	/// <para>The items to add to the filter.</para>
+	/// <para>
+	/// The items to add to the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("add_items")]
 	public ICollection<string>? AddItems { get; set; }
 
 	/// <summary>
-	/// <para>A description for the filter.</para>
+	/// <para>
+	/// A description for the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The items to remove from the filter.</para>
+	/// <para>
+	/// The items to remove from the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remove_items")]
 	public ICollection<string>? RemoveItems { get; set; }
 }
 
 /// <summary>
-/// <para>Updates the description of a filter, adds items, or removes items from the list.</para>
+/// <para>
+/// Updates the description of a filter, adds items, or removes items from the list.
+/// </para>
 /// </summary>
 public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<UpdateFilterRequestDescriptor, UpdateFilterRequestParameters>
 {
@@ -99,7 +109,9 @@ public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<Up
 	private ICollection<string>? RemoveItemsValue { get; set; }
 
 	/// <summary>
-	/// <para>The items to add to the filter.</para>
+	/// <para>
+	/// The items to add to the filter.
+	/// </para>
 	/// </summary>
 	public UpdateFilterRequestDescriptor AddItems(ICollection<string>? addItems)
 	{
@@ -108,7 +120,9 @@ public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<Up
 	}
 
 	/// <summary>
-	/// <para>A description for the filter.</para>
+	/// <para>
+	/// A description for the filter.
+	/// </para>
 	/// </summary>
 	public UpdateFilterRequestDescriptor Description(string? description)
 	{
@@ -117,7 +131,9 @@ public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<Up
 	}
 
 	/// <summary>
-	/// <para>The items to remove from the filter.</para>
+	/// <para>
+	/// The items to remove from the filter.
+	/// </para>
 	/// </summary>
 	public UpdateFilterRequestDescriptor RemoveItems(ICollection<string>? removeItems)
 	{

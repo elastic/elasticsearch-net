@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class VariableWidthHistogramAggregation
 {
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets")]
 	public int? Buckets { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// <para>
+	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
+	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initial_buffer")]
 	public int? InitialBuffer { get; set; }
@@ -50,7 +57,10 @@ public sealed partial class VariableWidthHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// <para>
+	/// The number of buckets that the coordinating node will request from each shard.
+	/// Defaults to <c>buckets * 50</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
@@ -75,7 +85,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	private int? ShardSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
 	{
@@ -84,7 +96,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -93,7 +107,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -102,7 +118,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -111,7 +129,10 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// <para>
+	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
+	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer)
 	{
@@ -144,7 +165,10 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// <para>
+	/// The number of buckets that the coordinating node will request from each shard.
+	/// Defaults to <c>buckets * 50</c>.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -216,7 +240,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	private int? ShardSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Buckets(int? buckets)
 	{
@@ -225,7 +251,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -234,7 +262,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -243,7 +273,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -252,7 +284,10 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// <para>
+	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
+	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor InitialBuffer(int? initialBuffer)
 	{
@@ -285,7 +320,10 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// <para>
+	/// The number of buckets that the coordinating node will request from each shard.
+	/// Defaults to <c>buckets * 50</c>.
+	/// </para>
 	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor ShardSize(int? shardSize)
 	{

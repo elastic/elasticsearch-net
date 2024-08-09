@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Scripting
 {
 	/// <summary>
-	/// <para>Total number of times the script cache has evicted old data.</para>
+	/// <para>
+	/// Total number of times the script cache has evicted old data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cache_evictions")]
 	public long? CacheEvictions { get; init; }
 
 	/// <summary>
-	/// <para>Total number of times the script compilation circuit breaker has limited inline script compilations.</para>
+	/// <para>
+	/// Total number of times the script compilation circuit breaker has limited inline script compilations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compilation_limit_triggered")]
 	public long? CompilationLimitTriggered { get; init; }
 
 	/// <summary>
-	/// <para>Total number of inline script compilations performed by the node.</para>
+	/// <para>
+	/// Total number of inline script compilations performed by the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compilations")]
 	public long? Compilations { get; init; }
 
 	/// <summary>
-	/// <para>Contains this recent history of script compilations.</para>
+	/// <para>
+	/// Contains this recent history of script compilations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compilations_history")]
 	public IReadOnlyDictionary<string, long>? CompilationsHistory { get; init; }

@@ -30,13 +30,19 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class Destination
 {
 	/// <summary>
-	/// <para>The destination index for the transform. The mappings of the destination index are deduced based on the source<br/>fields when possible. If alternate mappings are required, use the create index API prior to starting the<br/>transform.</para>
+	/// <para>
+	/// The destination index for the transform. The mappings of the destination index are deduced based on the source
+	/// fields when possible. If alternate mappings are required, use the create index API prior to starting the
+	/// transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>The unique identifier for an ingest pipeline.</para>
+	/// <para>
+	/// The unique identifier for an ingest pipeline.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
@@ -54,7 +60,11 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	private string? PipelineValue { get; set; }
 
 	/// <summary>
-	/// <para>The destination index for the transform. The mappings of the destination index are deduced based on the source<br/>fields when possible. If alternate mappings are required, use the create index API prior to starting the<br/>transform.</para>
+	/// <para>
+	/// The destination index for the transform. The mappings of the destination index are deduced based on the source
+	/// fields when possible. If alternate mappings are required, use the create index API prior to starting the
+	/// transform.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -63,7 +73,9 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	}
 
 	/// <summary>
-	/// <para>The unique identifier for an ingest pipeline.</para>
+	/// <para>
+	/// The unique identifier for an ingest pipeline.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor Pipeline(string? pipeline)
 	{

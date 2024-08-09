@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class HistogramAggregation
 {
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("extended_bounds")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? ExtendedBounds { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
@@ -44,37 +48,55 @@ public sealed partial class HistogramAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hard_bounds")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? HardBounds { get; set; }
 
 	/// <summary>
-	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// <para>
+	/// The interval for the buckets.
+	/// Must be a positive decimal.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("interval")]
 	public double? Interval { get; set; }
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, the response will fill gaps in the histogram with empty buckets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
 	/// <summary>
-	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// <para>
+	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
+	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("offset")]
 	public double? Offset { get; set; }
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
@@ -112,7 +134,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? extendedBounds)
 	{
@@ -139,7 +163,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -148,7 +174,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -157,7 +185,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -172,7 +202,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? hardBounds)
 	{
@@ -199,7 +232,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// <para>
+	/// The interval for the buckets.
+	/// Must be a positive decimal.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Interval(double? interval)
 	{
@@ -208,7 +244,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, the response will fill gaps in the histogram with empty buckets.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
@@ -217,7 +256,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Missing(double? missing)
 	{
@@ -226,7 +268,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// <para>
+	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
+	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Offset(double? offset)
 	{
@@ -235,7 +280,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
@@ -390,7 +438,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? extendedBounds)
 	{
@@ -417,7 +467,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -426,7 +478,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -435,7 +489,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the field to aggregate on.</para>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -450,7 +506,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? hardBounds)
 	{
@@ -477,7 +536,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// <para>
+	/// The interval for the buckets.
+	/// Must be a positive decimal.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Interval(double? interval)
 	{
@@ -486,7 +548,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, the response will fill gaps in the histogram with empty buckets.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor MinDocCount(int? minDocCount)
 	{
@@ -495,7 +560,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Missing(double? missing)
 	{
@@ -504,7 +572,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// <para>
+	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
+	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Offset(double? offset)
 	{
@@ -513,7 +584,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
 	/// </summary>
 	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{

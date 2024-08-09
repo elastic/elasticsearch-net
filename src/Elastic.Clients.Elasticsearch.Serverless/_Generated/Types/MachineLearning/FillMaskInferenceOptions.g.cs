@@ -28,30 +28,44 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Fill mask inference options</para>
+/// <para>
+/// Fill mask inference options
+/// </para>
 /// </summary>
 public sealed partial class FillMaskInferenceOptions
 {
 	/// <summary>
-	/// <para>The string/token which will be removed from incoming documents and replaced with the inference prediction(s).<br/>In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer<br/>has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.<br/>However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,<br/>otherwise the request will fail.</para>
+	/// <para>
+	/// The string/token which will be removed from incoming documents and replaced with the inference prediction(s).
+	/// In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer
+	/// has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.
+	/// However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,
+	/// otherwise the request will fail.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mask_token")]
 	public string? MaskToken { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -60,7 +74,9 @@ public sealed partial class FillMaskInferenceOptions
 }
 
 /// <summary>
-/// <para>Fill mask inference options</para>
+/// <para>
+/// Fill mask inference options
+/// </para>
 /// </summary>
 public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDescriptor<FillMaskInferenceOptionsDescriptor>
 {
@@ -78,7 +94,13 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The string/token which will be removed from incoming documents and replaced with the inference prediction(s).<br/>In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer<br/>has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.<br/>However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,<br/>otherwise the request will fail.</para>
+	/// <para>
+	/// The string/token which will be removed from incoming documents and replaced with the inference prediction(s).
+	/// In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer
+	/// has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.
+	/// However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,
+	/// otherwise the request will fail.
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceOptionsDescriptor MaskToken(string? maskToken)
 	{
@@ -87,7 +109,9 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
@@ -96,7 +120,9 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -105,7 +131,9 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? tokenization)
 	{

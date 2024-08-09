@@ -32,28 +32,38 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class RankEvalRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Search operation type</para>
+	/// <para>
+	/// Search operation type
+	/// </para>
 	/// </summary>
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 }
 
 /// <summary>
-/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// <para>
+/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// </para>
 /// </summary>
 public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
 {
@@ -74,44 +84,58 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	internal override string OperationName => "rank_eval";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Search operation type</para>
+	/// <para>
+	/// Search operation type
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? Metric { get; set; }
 
 	/// <summary>
-	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("requests")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 }
 
 /// <summary>
-/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// <para>
+/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// </para>
 /// </summary>
 public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescriptor<RankEvalRequestDescriptor<TDocument>, RankEvalRequestParameters>
 {
@@ -153,7 +177,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] RequestsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
 	{
@@ -180,7 +206,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Requests(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> requests)
 	{
@@ -273,7 +301,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// <para>
+/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// </para>
 /// </summary>
 public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEvalRequestDescriptor, RankEvalRequestParameters>
 {
@@ -315,7 +345,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItemDescriptor>[] RequestsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
 	{
@@ -342,7 +374,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	}
 
 	/// <summary>
-	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
 	/// </summary>
 	public RankEvalRequestDescriptor Requests(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> requests)
 	{

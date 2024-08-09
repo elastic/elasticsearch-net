@@ -30,79 +30,110 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class AttachmentProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// <para>
+	/// The number of chars being used for extraction to prevent huge fields.
+	/// Use <c>-1</c> for no limit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_chars")]
 	public long? IndexedChars { get; set; }
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_chars_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? IndexedCharsField { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// <para>
+	/// Array of properties to select to be stored.
+	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
 
 	/// <summary>
-	/// <para>If true, the binary field will be removed from the document</para>
+	/// <para>
+	/// If true, the binary field will be removed from the document
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remove_binary")]
 	public bool? RemoveBinary { get; set; }
 
 	/// <summary>
-	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// <para>
+	/// Field containing the name of the resource to decode.
+	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("resource_name")]
 	public string? ResourceName { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
@@ -136,7 +167,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -145,7 +179,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -154,7 +190,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -163,7 +201,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -172,7 +212,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -181,7 +223,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -190,7 +234,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -199,7 +245,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// <para>
+	/// The number of chars being used for extraction to prevent huge fields.
+	/// Use <c>-1</c> for no limit.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedChars(long? indexedChars)
 	{
@@ -208,7 +257,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Serverless.Field? indexedCharsField)
 	{
@@ -217,7 +268,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField<TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
 	{
@@ -226,7 +279,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Expression<Func<TDocument, object>> indexedCharsField)
 	{
@@ -235,7 +290,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -274,7 +331,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// <para>
+	/// Array of properties to select to be stored.
+	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
@@ -283,7 +343,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>If true, the binary field will be removed from the document</para>
+	/// <para>
+	/// If true, the binary field will be removed from the document
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> RemoveBinary(bool? removeBinary = true)
 	{
@@ -292,7 +354,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// <para>
+	/// Field containing the name of the resource to decode.
+	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> ResourceName(string? resourceName)
 	{
@@ -301,7 +366,10 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -310,7 +378,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -319,7 +389,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -328,7 +400,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -468,7 +542,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Description(string? description)
 	{
@@ -477,7 +554,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -486,7 +565,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -495,7 +576,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field to get the base64 encoded field from.</para>
+	/// <para>
+	/// The field to get the base64 encoded field from.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -504,7 +587,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor If(string? value)
 	{
@@ -513,7 +598,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -522,7 +609,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -531,7 +620,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// <para>
+	/// The number of chars being used for extraction to prevent huge fields.
+	/// Use <c>-1</c> for no limit.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IndexedChars(long? indexedChars)
 	{
@@ -540,7 +632,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField(Elastic.Clients.Elasticsearch.Serverless.Field? indexedCharsField)
 	{
@@ -549,7 +643,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
 	{
@@ -558,7 +654,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// <para>
+	/// Field name from which you can overwrite the number of chars being used for extraction.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField<TDocument>(Expression<Func<TDocument, object>> indexedCharsField)
 	{
@@ -567,7 +665,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -606,7 +706,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// <para>
+	/// Array of properties to select to be stored.
+	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Properties(ICollection<string>? properties)
 	{
@@ -615,7 +718,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>If true, the binary field will be removed from the document</para>
+	/// <para>
+	/// If true, the binary field will be removed from the document
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor RemoveBinary(bool? removeBinary = true)
 	{
@@ -624,7 +729,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// <para>
+	/// Field containing the name of the resource to decode.
+	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor ResourceName(string? resourceName)
 	{
@@ -633,7 +741,10 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor Tag(string? tag)
 	{
@@ -642,7 +753,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -651,7 +764,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -660,7 +775,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the attachment information.</para>
+	/// <para>
+	/// The field that will hold the attachment information.
+	/// </para>
 	/// </summary>
 	public AttachmentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

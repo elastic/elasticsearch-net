@@ -30,68 +30,99 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class AddAction
 {
 	/// <summary>
-	/// <para>Alias for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Alias for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexAlias? Alias { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data stream or index for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRouting { get; set; }
 
 	/// <summary>
-	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data streams or indices for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Serverless.Indices? Indices { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the alias is hidden.</para>
+	/// <para>
+	/// If <c>true</c>, the alias is hidden.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// <para>
+	/// If <c>true</c>, the alias must exist to perform the action.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRouting { get; set; }
@@ -122,7 +153,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>Alias for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Alias for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.Serverless.IndexAlias? alias)
 	{
@@ -131,7 +165,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Aliases(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexAlias>? aliases)
 	{
@@ -140,7 +177,9 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -167,7 +206,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data stream or index for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -176,7 +218,11 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? indexRouting)
 	{
@@ -185,7 +231,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data streams or indices for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -194,7 +243,9 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>If `true`, the alias is hidden.</para>
+	/// <para>
+	/// If <c>true</c>, the alias is hidden.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> IsHidden(bool? isHidden = true)
 	{
@@ -203,7 +254,9 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
 	{
@@ -212,7 +265,9 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// <para>
+	/// If <c>true</c>, the alias must exist to perform the action.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> MustExist(bool? mustExist = true)
 	{
@@ -221,7 +276,10 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -230,7 +288,11 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? searchRouting)
 	{
@@ -344,7 +406,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>Alias for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Alias for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Alias(Elastic.Clients.Elasticsearch.Serverless.IndexAlias? alias)
 	{
@@ -353,7 +418,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Aliases(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexAlias>? aliases)
 	{
@@ -362,7 +430,9 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -389,7 +459,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data stream or index for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -398,7 +471,11 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? indexRouting)
 	{
@@ -407,7 +484,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data streams or indices for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -416,7 +496,9 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>If `true`, the alias is hidden.</para>
+	/// <para>
+	/// If <c>true</c>, the alias is hidden.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor IsHidden(bool? isHidden = true)
 	{
@@ -425,7 +507,9 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor IsWriteIndex(bool? isWriteIndex = true)
 	{
@@ -434,7 +518,9 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// <para>
+	/// If <c>true</c>, the alias must exist to perform the action.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor MustExist(bool? mustExist = true)
 	{
@@ -443,7 +529,10 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -452,7 +541,11 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	}
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public AddActionDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? searchRouting)
 	{

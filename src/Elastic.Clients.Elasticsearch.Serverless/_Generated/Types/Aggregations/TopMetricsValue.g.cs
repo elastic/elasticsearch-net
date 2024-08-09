@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class TopMetricsValue
 {
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -56,7 +60,9 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -65,7 +71,9 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -93,7 +101,9 @@ public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<T
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -102,7 +112,9 @@ public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<T
 	}
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -111,7 +123,9 @@ public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<T
 	}
 
 	/// <summary>
-	/// <para>A field to return as a metric.</para>
+	/// <para>
+	/// A field to return as a metric.
+	/// </para>
 	/// </summary>
 	public TopMetricsValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

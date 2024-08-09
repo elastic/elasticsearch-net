@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class ExtendedMemoryStats
 {
 	/// <summary>
-	/// <para>If the amount of physical memory has been overridden using the `es`.`total_memory_bytes` system property then this reports the overridden value in bytes.<br/>Otherwise it reports the same value as `total_in_bytes`.</para>
+	/// <para>
+	/// If the amount of physical memory has been overridden using the <c>es</c>.<c>total_memory_bytes</c> system property then this reports the overridden value in bytes.
+	/// Otherwise it reports the same value as <c>total_in_bytes</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("adjusted_total_in_bytes")]
 	public long? AdjustedTotalInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Amount of free physical memory in bytes.</para>
+	/// <para>
+	/// Amount of free physical memory in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free_in_bytes")]
 	public long? FreeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Percentage of free memory.</para>
+	/// <para>
+	/// Percentage of free memory.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free_percent")]
 	public int? FreePercent { get; init; }
@@ -56,7 +63,9 @@ public sealed partial class ExtendedMemoryStats
 	public long? ShareInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total amount of physical memory in bytes.</para>
+	/// <para>
+	/// Total amount of physical memory in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_in_bytes")]
 	public long? TotalInBytes { get; init; }
@@ -66,13 +75,17 @@ public sealed partial class ExtendedMemoryStats
 	public long? TotalVirtualInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Amount of used physical memory in bytes.</para>
+	/// <para>
+	/// Amount of used physical memory in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("used_in_bytes")]
 	public long? UsedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Percentage of used memory.</para>
+	/// <para>
+	/// Percentage of used memory.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("used_percent")]
 	public int? UsedPercent { get; init; }

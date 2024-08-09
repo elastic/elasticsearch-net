@@ -31,10 +31,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class PromoteDataStreamRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Promotes a data stream from a replicated data stream managed by CCR to a regular data stream</para>
+/// <para>
+/// Promotes a data stream from a replicated data stream managed by CCR to a regular data stream
+/// </para>
 /// </summary>
 public sealed partial class PromoteDataStreamRequest : PlainRequest<PromoteDataStreamRequestParameters>
 {
@@ -49,10 +57,20 @@ public sealed partial class PromoteDataStreamRequest : PlainRequest<PromoteDataS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.promote_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Promotes a data stream from a replicated data stream managed by CCR to a regular data stream</para>
+/// <para>
+/// Promotes a data stream from a replicated data stream managed by CCR to a regular data stream
+/// </para>
 /// </summary>
 public sealed partial class PromoteDataStreamRequestDescriptor : RequestDescriptor<PromoteDataStreamRequestDescriptor, PromoteDataStreamRequestParameters>
 {
@@ -69,6 +87,8 @@ public sealed partial class PromoteDataStreamRequestDescriptor : RequestDescript
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.promote_data_stream";
+
+	public PromoteDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public PromoteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
 	{

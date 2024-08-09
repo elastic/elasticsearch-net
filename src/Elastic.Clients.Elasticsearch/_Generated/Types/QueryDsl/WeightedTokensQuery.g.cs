@@ -117,19 +117,28 @@ public sealed partial class WeightedTokensQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Token pruning configurations</para>
+	/// <para>
+	/// Token pruning configurations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? PruningConfig { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>The tokens representing this query</para>
+	/// <para>
+	/// The tokens representing this query
+	/// </para>
 	/// </summary>
 	public IDictionary<string, float> Tokens { get; set; }
 
@@ -153,7 +162,12 @@ public sealed partial class WeightedTokensQueryDescriptor<TDocument> : Serializa
 	private IDictionary<string, float> TokensValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -180,7 +194,9 @@ public sealed partial class WeightedTokensQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Token pruning configurations</para>
+	/// <para>
+	/// Token pruning configurations
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfig)
 	{
@@ -213,7 +229,9 @@ public sealed partial class WeightedTokensQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The tokens representing this query</para>
+	/// <para>
+	/// The tokens representing this query
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor<TDocument> Tokens(Func<FluentDictionary<string, float>, FluentDictionary<string, float>> selector)
 	{
@@ -280,7 +298,12 @@ public sealed partial class WeightedTokensQueryDescriptor : SerializableDescript
 	private IDictionary<string, float> TokensValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor Boost(float? boost)
 	{
@@ -307,7 +330,9 @@ public sealed partial class WeightedTokensQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Token pruning configurations</para>
+	/// <para>
+	/// Token pruning configurations
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfig)
 	{
@@ -340,7 +365,9 @@ public sealed partial class WeightedTokensQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The tokens representing this query</para>
+	/// <para>
+	/// The tokens representing this query
+	/// </para>
 	/// </summary>
 	public WeightedTokensQueryDescriptor Tokens(Func<FluentDictionary<string, float>, FluentDictionary<string, float>> selector)
 	{

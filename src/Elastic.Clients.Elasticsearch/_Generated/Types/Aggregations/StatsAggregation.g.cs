@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class StatsAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -38,7 +40,10 @@ public sealed partial class StatsAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -64,7 +69,9 @@ public sealed partial class StatsAggregationDescriptor<TDocument> : Serializable
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -73,7 +80,9 @@ public sealed partial class StatsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -82,7 +91,9 @@ public sealed partial class StatsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -97,7 +108,10 @@ public sealed partial class StatsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -186,7 +200,9 @@ public sealed partial class StatsAggregationDescriptor : SerializableDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -195,7 +211,9 @@ public sealed partial class StatsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -204,7 +222,9 @@ public sealed partial class StatsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -219,7 +239,10 @@ public sealed partial class StatsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public StatsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{

@@ -32,43 +32,66 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class CreateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>
+	/// <para>
+	/// ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
+	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// </para>
 	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
-	/// <para>If `true`, Elasticsearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.<br/>Valid values: `true`, `false`, `wait_for`.</para>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
+	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Serverless.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.</para>
+	/// <para>
+	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
+	/// <para>
+	/// Explicit version number for concurrency control.
+	/// The specified version must match the current version of the document for the request to succeed.
+	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type: `external`, `external_gte`.</para>
+	/// <para>
+	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+/// <para>
+/// Index a document.
+/// Adds a JSON document to the specified data stream or index and makes it searchable.
+/// If the target is an index and the document already exists, the request updates the document and increments its version.
+/// </para>
 /// </summary>
 public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>, ISelfSerializable
 {
@@ -85,43 +108,62 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	internal override string OperationName => "create";
 
 	/// <summary>
-	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>
+	/// <para>
+	/// ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
+	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
-	/// <para>If `true`, Elasticsearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.<br/>Valid values: `true`, `false`, `wait_for`.</para>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> do nothing with refreshes.
+	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Serverless.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.</para>
+	/// <para>
+	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
+	/// <para>
+	/// Explicit version number for concurrency control.
+	/// The specified version must match the current version of the document for the request to succeed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type: `external`, `external_gte`.</para>
+	/// <para>
+	/// Specific version type: <c>external</c>, <c>external_gte</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -135,7 +177,11 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 }
 
 /// <summary>
-/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+/// <para>
+/// Index a document.
+/// Adds a JSON document to the specified data stream or index and makes it searchable.
+/// If the target is an index and the document already exists, the request updates the document and increments its version.
+/// </para>
 /// </summary>
 public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptor<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
 {

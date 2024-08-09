@@ -34,7 +34,9 @@ public sealed partial class GetRollupCapsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+/// <para>
+/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// </para>
 /// </summary>
 public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsRequestParameters>
 {
@@ -56,7 +58,9 @@ public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsReq
 }
 
 /// <summary>
-/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+/// <para>
+/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// </para>
 /// </summary>
 public sealed partial class GetRollupCapsRequestDescriptor<TDocument> : RequestDescriptor<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsRequestParameters>
 {
@@ -90,7 +94,9 @@ public sealed partial class GetRollupCapsRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+/// <para>
+/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// </para>
 /// </summary>
 public sealed partial class GetRollupCapsRequestDescriptor : RequestDescriptor<GetRollupCapsRequestDescriptor, GetRollupCapsRequestParameters>
 {

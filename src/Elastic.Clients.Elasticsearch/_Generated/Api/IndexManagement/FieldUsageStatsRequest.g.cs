@@ -32,43 +32,66 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class FieldUsageStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Returns field usage information for each shard and field of an index.</para>
+/// <para>
+/// Returns field usage information for each shard and field of an index.
+/// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStatsRequestParameters>
 {
@@ -85,50 +108,73 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 	internal override string OperationName => "indices.field_usage_stats";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Returns field usage information for each shard and field of an index.</para>
+/// <para>
+/// Returns field usage information for each shard and field of an index.
+/// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : RequestDescriptor<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsRequestParameters>
 {
@@ -170,7 +216,9 @@ public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : Reques
 }
 
 /// <summary>
-/// <para>Returns field usage information for each shard and field of an index.</para>
+/// <para>
+/// Returns field usage information for each shard and field of an index.
+/// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor : RequestDescriptor<FieldUsageStatsRequestDescriptor, FieldUsageStatsRequestParameters>
 {

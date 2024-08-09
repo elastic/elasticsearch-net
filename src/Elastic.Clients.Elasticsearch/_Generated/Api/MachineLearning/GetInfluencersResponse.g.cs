@@ -32,7 +32,9 @@ public sealed partial class GetInfluencersResponse : ElasticsearchResponse
 	public long Count { get; init; }
 
 	/// <summary>
-	/// <para>Array of influencer objects</para>
+	/// <para>
+	/// Array of influencer objects
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencers")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> Influencers { get; init; }

@@ -32,7 +32,10 @@ public sealed partial class FlushJobResponse : ElasticsearchResponse
 	public bool Flushed { get; init; }
 
 	/// <summary>
-	/// <para>Provides the timestamp (in milliseconds since the epoch) of the end of<br/>the last bucket that was processed.</para>
+	/// <para>
+	/// Provides the timestamp (in milliseconds since the epoch) of the end of
+	/// the last bucket that was processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("last_finalized_bucket_end")]
 	public int? LastFinalizedBucketEnd { get; init; }

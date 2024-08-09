@@ -30,43 +30,57 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class JvmMemoryStats
 {
 	/// <summary>
-	/// <para>Amount of memory, in bytes, available for use by the heap.</para>
+	/// <para>
+	/// Amount of memory, in bytes, available for use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_committed_in_bytes")]
 	public long? HeapCommittedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Maximum amount of memory, in bytes, available for use by the heap.</para>
+	/// <para>
+	/// Maximum amount of memory, in bytes, available for use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_max_in_bytes")]
 	public long? HeapMaxInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Memory, in bytes, currently in use by the heap.</para>
+	/// <para>
+	/// Memory, in bytes, currently in use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_used_in_bytes")]
 	public long? HeapUsedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Percentage of memory currently in use by the heap.</para>
+	/// <para>
+	/// Percentage of memory currently in use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_used_percent")]
 	public long? HeapUsedPercent { get; init; }
 
 	/// <summary>
-	/// <para>Amount of non-heap memory available, in bytes.</para>
+	/// <para>
+	/// Amount of non-heap memory available, in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_heap_committed_in_bytes")]
 	public long? NonHeapCommittedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Non-heap memory used, in bytes.</para>
+	/// <para>
+	/// Non-heap memory used, in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_heap_used_in_bytes")]
 	public long? NonHeapUsedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about heap memory usage for the node.</para>
+	/// <para>
+	/// Contains statistics about heap memory usage for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pools")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Pool>? Pools { get; init; }

@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class UpgradeJobSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>When true, this means the task is complete. When false, it is still running.</para>
+	/// <para>
+	/// When true, this means the task is complete. When false, it is still running.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completed")]
 	public bool Completed { get; init; }
 
 	/// <summary>
-	/// <para>The ID of the node that the upgrade task was started on if it is still running. In serverless this will be the "serverless".</para>
+	/// <para>
+	/// The ID of the node that the upgrade task was started on if it is still running. In serverless this will be the "serverless".
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }

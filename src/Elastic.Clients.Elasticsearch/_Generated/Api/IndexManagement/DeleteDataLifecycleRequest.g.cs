@@ -32,23 +32,32 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DeleteDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>
+	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit timestamp for the document</para>
+	/// <para>
+	/// Explicit timestamp for the document
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete data stream lifecycles.<br/>Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.</para>
+/// <para>
+/// Delete data stream lifecycles.
+/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteDataLifecycleRequestParameters>
 {
@@ -65,26 +74,35 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 	internal override string OperationName => "indices.delete_data_lifecycle";
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>
+	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit timestamp for the document</para>
+	/// <para>
+	/// Explicit timestamp for the document
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete data stream lifecycles.<br/>Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.</para>
+/// <para>
+/// Delete data stream lifecycles.
+/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequestDescriptor : RequestDescriptor<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleRequestParameters>
 {

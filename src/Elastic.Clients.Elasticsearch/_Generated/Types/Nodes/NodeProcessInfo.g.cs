@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class NodeProcessInfo
 {
 	/// <summary>
-	/// <para>Process identifier (PID)</para>
+	/// <para>
+	/// Process identifier (PID)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public long Id { get; init; }
 
 	/// <summary>
-	/// <para>Indicates if the process address space has been successfully locked in memory</para>
+	/// <para>
+	/// Indicates if the process address space has been successfully locked in memory
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mlockall")]
 	public bool Mlockall { get; init; }
 
 	/// <summary>
-	/// <para>Refresh interval for the process statistics</para>
+	/// <para>
+	/// Refresh interval for the process statistics
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh_interval_in_millis")]
 	public long RefreshIntervalInMillis { get; init; }

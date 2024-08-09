@@ -31,7 +31,31 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>A latitude/longitude as a 2 dimensional point. It can be represented in various ways:<br/>- as a `{lat, long}` object<br/>- as a geo hash value<br/>- as a `[lon, lat]` array<br/>- as a string in `"<lat>, <lon>"` or WKT point formats</para>
+/// <para>
+/// A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// as a <c>{lat, long}</c> object
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// as a geo hash value
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// as a <c>[lon, lat]</c> array
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// as a string in <c>"&lt;lat>, &lt;lon>"</c> or WKT point formats
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 [JsonConverter(typeof(GeoLocationConverter))]
 public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>

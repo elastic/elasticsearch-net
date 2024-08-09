@@ -32,13 +32,21 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class ResetTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If this value is `true`, the transform is reset regardless of its current state. If it's `false`, the transform<br/>must be stopped before it can be reset.</para>
+	/// <para>
+	/// If this value is <c>true</c>, the transform is reset regardless of its current state. If it's <c>false</c>, the transform
+	/// must be stopped before it can be reset.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+/// <para>
+/// Reset a transform.
+/// Resets a transform.
+/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
+/// If the destination index was created by the transform, it is deleted.
+/// </para>
 /// </summary>
 public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformRequestParameters>
 {
@@ -55,14 +63,22 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 	internal override string OperationName => "transform.reset_transform";
 
 	/// <summary>
-	/// <para>If this value is `true`, the transform is reset regardless of its current state. If it's `false`, the transform<br/>must be stopped before it can be reset.</para>
+	/// <para>
+	/// If this value is <c>true</c>, the transform is reset regardless of its current state. If it's <c>false</c>, the transform
+	/// must be stopped before it can be reset.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+/// <para>
+/// Reset a transform.
+/// Resets a transform.
+/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
+/// If the destination index was created by the transform, it is deleted.
+/// </para>
 /// </summary>
 public sealed partial class ResetTransformRequestDescriptor : RequestDescriptor<ResetTransformRequestDescriptor, ResetTransformRequestParameters>
 {

@@ -32,18 +32,28 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class StopTrainedModelDeploymentRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;<br/>contains the  `_all` string or no identifiers and there are no matches; or contains wildcard expressions and<br/>there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.<br/>If `false`, the request returns a 404 status code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
+	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
+	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
+	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you<br/>restart the model deployment.</para>
+	/// <para>
+	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
+	/// restart the model deployment.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Stops a trained model deployment.</para>
+/// <para>
+/// Stops a trained model deployment.
+/// </para>
 /// </summary>
 public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<StopTrainedModelDeploymentRequestParameters>
 {
@@ -60,20 +70,30 @@ public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<Sto
 	internal override string OperationName => "ml.stop_trained_model_deployment";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;<br/>contains the  `_all` string or no identifiers and there are no matches; or contains wildcard expressions and<br/>there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.<br/>If `false`, the request returns a 404 status code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
+	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
+	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
+	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you<br/>restart the model deployment.</para>
+	/// <para>
+	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
+	/// restart the model deployment.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Stops a trained model deployment.</para>
+/// <para>
+/// Stops a trained model deployment.
+/// </para>
 /// </summary>
 public sealed partial class StopTrainedModelDeploymentRequestDescriptor : RequestDescriptor<StopTrainedModelDeploymentRequestDescriptor, StopTrainedModelDeploymentRequestParameters>
 {

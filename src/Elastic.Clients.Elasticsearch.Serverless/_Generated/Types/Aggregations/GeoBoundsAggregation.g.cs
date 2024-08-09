@@ -30,13 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class GeoBoundsAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
@@ -44,7 +49,9 @@ public sealed partial class GeoBoundsAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// <para>
+	/// Specifies whether the bounding box should be allowed to overlap the international date line.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("wrap_longitude")]
 	public bool? WrapLongitude { get; set; }
@@ -68,7 +75,9 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 	private bool? WrapLongitudeValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -77,7 +86,9 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -86,7 +97,9 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -95,7 +108,10 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -128,7 +144,9 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// <para>
+	/// Specifies whether the bounding box should be allowed to overlap the international date line.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> WrapLongitude(bool? wrapLongitude = true)
 	{
@@ -193,7 +211,9 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 	private bool? WrapLongitudeValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -202,7 +222,9 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -211,7 +233,9 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -220,7 +244,10 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -253,7 +280,9 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// <para>
+	/// Specifies whether the bounding box should be allowed to overlap the international date line.
+	/// </para>
 	/// </summary>
 	public GeoBoundsAggregationDescriptor WrapLongitude(bool? wrapLongitude = true)
 	{

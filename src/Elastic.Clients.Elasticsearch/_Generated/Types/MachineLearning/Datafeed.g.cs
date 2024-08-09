@@ -167,7 +167,9 @@ public sealed partial class Datafeed
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; init; }
 
 	/// <summary>
-	/// <para>The security privileges that the datafeed uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the datafeed, this property is omitted.</para>
+	/// <para>
+	/// The security privileges that the datafeed uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the datafeed, this property is omitted.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization? Authorization { get; init; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; init; }

@@ -30,13 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class AdjacencyMatrixAggregation
 {
 	/// <summary>
-	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// <para>
+	/// Filters used to create buckets.
+	/// At least one filter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filters")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filters { get; set; }
 
 	/// <summary>
-	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// <para>
+	/// Separator used to concatenate filter names. Defaults to &amp;.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
@@ -56,7 +61,10 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 	private string? SeparatorValue { get; set; }
 
 	/// <summary>
-	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// <para>
+	/// Filters used to create buckets.
+	/// At least one filter is required.
+	/// </para>
 	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor<TDocument> Filters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>> selector)
 	{
@@ -65,7 +73,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// <para>
+	/// Separator used to concatenate filter names. Defaults to &amp;.
+	/// </para>
 	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor<TDocument> Separator(string? separator)
 	{
@@ -104,7 +114,10 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 	private string? SeparatorValue { get; set; }
 
 	/// <summary>
-	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// <para>
+	/// Filters used to create buckets.
+	/// At least one filter is required.
+	/// </para>
 	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>> selector)
 	{
@@ -113,7 +126,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// <para>
+	/// Separator used to concatenate filter names. Defaults to &amp;.
+	/// </para>
 	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor Separator(string? separator)
 	{

@@ -30,37 +30,50 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class UserAgentProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
@@ -68,19 +81,26 @@ public sealed partial class UserAgentProcessor
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? Options { get; set; }
 
 	/// <summary>
-	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// <para>
+	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("regex_file")]
 	public string? RegexFile { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
@@ -111,7 +131,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -120,7 +143,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -129,7 +154,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -138,7 +165,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -147,7 +176,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -156,7 +187,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -165,7 +198,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -174,7 +209,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -219,7 +256,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// <para>
+	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> RegexFile(string? regexFile)
 	{
@@ -228,7 +267,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -237,7 +279,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -246,7 +290,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -255,7 +301,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -374,7 +422,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor Description(string? description)
 	{
@@ -383,7 +434,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -392,7 +445,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -401,7 +456,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field containing the user agent string.</para>
+	/// <para>
+	/// The field containing the user agent string.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -410,7 +467,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor If(string? value)
 	{
@@ -419,7 +478,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -428,7 +489,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -437,7 +500,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -482,7 +547,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// <para>
+	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor RegexFile(string? regexFile)
 	{
@@ -491,7 +558,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor Tag(string? tag)
 	{
@@ -500,7 +570,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -509,7 +581,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -518,7 +592,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field that will be filled with the user agent details.</para>
+	/// <para>
+	/// The field that will be filled with the user agent details.
+	/// </para>
 	/// </summary>
 	public UserAgentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

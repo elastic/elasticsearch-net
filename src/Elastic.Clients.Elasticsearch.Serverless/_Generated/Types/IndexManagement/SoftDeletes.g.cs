@@ -30,13 +30,20 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class SoftDeletes
 {
 	/// <summary>
-	/// <para>Indicates whether soft deletes are enabled on the index.</para>
+	/// <para>
+	/// Indicates whether soft deletes are enabled on the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
-	/// <para>The maximum period to retain a shard history retention lease before it is considered expired.<br/>Shard history retention leases ensure that soft deletes are retained during merges on the Lucene<br/>index. If a soft delete is merged away before it can be replicated to a follower the following<br/>process will fail due to incomplete history on the leader.</para>
+	/// <para>
+	/// The maximum period to retain a shard history retention lease before it is considered expired.
+	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
+	/// index. If a soft delete is merged away before it can be replicated to a follower the following
+	/// process will fail due to incomplete history on the leader.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retention_lease")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RetentionLease? RetentionLease { get; set; }
@@ -56,7 +63,9 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether soft deletes are enabled on the index.</para>
+	/// <para>
+	/// Indicates whether soft deletes are enabled on the index.
+	/// </para>
 	/// </summary>
 	public SoftDeletesDescriptor Enabled(bool? enabled = true)
 	{
@@ -65,7 +74,12 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 	}
 
 	/// <summary>
-	/// <para>The maximum period to retain a shard history retention lease before it is considered expired.<br/>Shard history retention leases ensure that soft deletes are retained during merges on the Lucene<br/>index. If a soft delete is merged away before it can be replicated to a follower the following<br/>process will fail due to incomplete history on the leader.</para>
+	/// <para>
+	/// The maximum period to retain a shard history retention lease before it is considered expired.
+	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
+	/// index. If a soft delete is merged away before it can be replicated to a follower the following
+	/// process will fail due to incomplete history on the leader.
+	/// </para>
 	/// </summary>
 	public SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RetentionLease? retentionLease)
 	{

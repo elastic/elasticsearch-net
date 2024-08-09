@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public partial class TasksNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="TasksNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="TasksNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected TasksNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -107,7 +121,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -120,7 +136,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -130,7 +148,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, CancellationToken cancellationToken = default)
@@ -141,7 +161,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -153,7 +175,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
@@ -164,7 +188,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para>
+	/// Cancels a task, if it can be cancelled through an API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -176,7 +202,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -187,7 +216,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequest request, CancellationToken cancellationToken = default)
@@ -197,7 +229,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -208,7 +243,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -220,7 +258,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -233,7 +274,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -243,7 +287,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
@@ -254,7 +301,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+	/// <para>
+	/// Get task information.
+	/// Returns information about the tasks currently executing in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, Action<GetTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -266,7 +316,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -277,7 +329,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequest request, CancellationToken cancellationToken = default)
@@ -287,7 +341,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -298,7 +354,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -310,7 +368,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -323,7 +383,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -333,7 +395,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
@@ -344,7 +408,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+	/// <para>
+	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(Action<ListRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 {
 	/// <summary>
-	/// <para>The ordered array of custom processors to execute. Must be more than 1.</para>
+	/// <para>
+	/// The ordered array of custom processors to execute. Must be more than 1.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("processors")]
 	public ICollection<int> Processors { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorMultiEncodingDescri
 	private ICollection<int> ProcessorsValue { get; set; }
 
 	/// <summary>
-	/// <para>The ordered array of custom processors to execute. Must be more than 1.</para>
+	/// <para>
+	/// The ordered array of custom processors to execute. Must be more than 1.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors(ICollection<int> processors)
 	{

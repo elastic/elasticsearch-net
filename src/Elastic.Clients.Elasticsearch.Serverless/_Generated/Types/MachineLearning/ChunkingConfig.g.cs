@@ -30,13 +30,20 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class ChunkingConfig
 {
 	/// <summary>
-	/// <para>If the mode is `auto`, the chunk size is dynamically calculated;<br/>this is the recommended value when the datafeed does not use aggregations.<br/>If the mode is `manual`, chunking is applied according to the specified `time_span`;<br/>use this mode when the datafeed uses aggregations. If the mode is `off`, no chunking is applied.</para>
+	/// <para>
+	/// If the mode is <c>auto</c>, the chunk size is dynamically calculated;
+	/// this is the recommended value when the datafeed does not use aggregations.
+	/// If the mode is <c>manual</c>, chunking is applied according to the specified <c>time_span</c>;
+	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ChunkingMode Mode { get; set; }
 
 	/// <summary>
-	/// <para>The time span that each search will be querying. This setting is applicable only when the `mode` is set to `manual`.</para>
+	/// <para>
+	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_span")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? TimeSpan { get; set; }
@@ -54,7 +61,12 @@ public sealed partial class ChunkingConfigDescriptor : SerializableDescriptor<Ch
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? TimeSpanValue { get; set; }
 
 	/// <summary>
-	/// <para>If the mode is `auto`, the chunk size is dynamically calculated;<br/>this is the recommended value when the datafeed does not use aggregations.<br/>If the mode is `manual`, chunking is applied according to the specified `time_span`;<br/>use this mode when the datafeed uses aggregations. If the mode is `off`, no chunking is applied.</para>
+	/// <para>
+	/// If the mode is <c>auto</c>, the chunk size is dynamically calculated;
+	/// this is the recommended value when the datafeed does not use aggregations.
+	/// If the mode is <c>manual</c>, chunking is applied according to the specified <c>time_span</c>;
+	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
+	/// </para>
 	/// </summary>
 	public ChunkingConfigDescriptor Mode(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ChunkingMode mode)
 	{
@@ -63,7 +75,9 @@ public sealed partial class ChunkingConfigDescriptor : SerializableDescriptor<Ch
 	}
 
 	/// <summary>
-	/// <para>The time span that each search will be querying. This setting is applicable only when the `mode` is set to `manual`.</para>
+	/// <para>
+	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
+	/// </para>
 	/// </summary>
 	public ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Serverless.Duration? timeSpan)
 	{

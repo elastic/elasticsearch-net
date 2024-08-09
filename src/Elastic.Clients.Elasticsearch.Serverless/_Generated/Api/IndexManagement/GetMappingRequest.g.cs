@@ -32,33 +32,52 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class GetMappingRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more indices.<br/>For data streams, the API retrieves mappings for the stream’s backing indices.</para>
+/// <para>
+/// Get mapping definitions.
+/// Retrieves mapping definitions for one or more indices.
+/// For data streams, the API retrieves mappings for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestParameters>
 {
@@ -79,38 +98,57 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 	internal override string OperationName => "indices.get_mapping";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more indices.<br/>For data streams, the API retrieves mappings for the stream’s backing indices.</para>
+/// <para>
+/// Get mapping definitions.
+/// Retrieves mapping definitions for one or more indices.
+/// For data streams, the API retrieves mappings for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDescriptor<GetMappingRequestDescriptor<TDocument>, GetMappingRequestParameters>
 {
@@ -150,7 +188,11 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more indices.<br/>For data streams, the API retrieves mappings for the stream’s backing indices.</para>
+/// <para>
+/// Get mapping definitions.
+/// Retrieves mapping definitions for one or more indices.
+/// For data streams, the API retrieves mappings for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetMappingRequestDescriptor : RequestDescriptor<GetMappingRequestDescriptor, GetMappingRequestParameters>
 {

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 {
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The one hot map mapping the field value with the column name.</para>
+	/// <para>
+	/// The one hot map mapping the field value with the column name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hot_map")]
 	public string HotMap { get; set; }
@@ -56,7 +60,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	private string HotMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -65,7 +71,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -74,7 +82,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -83,7 +93,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The one hot map mapping the field value with the column name.</para>
+	/// <para>
+	/// The one hot map mapping the field value with the column name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> HotMap(string hotMap)
 	{
@@ -114,7 +126,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	private string HotMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -123,7 +137,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -132,7 +148,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -141,7 +159,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	}
 
 	/// <summary>
-	/// <para>The one hot map mapping the field value with the column name.</para>
+	/// <para>
+	/// The one hot map mapping the field value with the column name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor HotMap(string hotMap)
 	{

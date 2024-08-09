@@ -34,7 +34,9 @@ public sealed partial class NodesStatsResponse : ElasticsearchResponse
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the number of nodes selected by the request’s node filters.</para>
+	/// <para>
+	/// Contains statistics about the number of nodes selected by the request’s node filters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }

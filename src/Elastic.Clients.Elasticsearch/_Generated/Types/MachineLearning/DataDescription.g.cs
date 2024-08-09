@@ -33,19 +33,25 @@ public sealed partial class DataDescription
 	public string? FieldDelimiter { get; set; }
 
 	/// <summary>
-	/// <para>Only JSON format is supported at this time.</para>
+	/// <para>
+	/// Only JSON format is supported at this time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimeField { get; set; }
 
 	/// <summary>
-	/// <para>The time format, which can be `epoch`, `epoch_ms`, or a custom pattern. The value `epoch` refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value `epoch_ms` indicates that time is measured in milliseconds since the epoch. The `epoch` and `epoch_ms` time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: `yyyy-MM-dd'T'HH:mm:ssX`. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.</para>
+	/// <para>
+	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_format")]
 	public string? TimeFormat { get; set; }
@@ -71,7 +77,9 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Only JSON format is supported at this time.</para>
+	/// <para>
+	/// Only JSON format is supported at this time.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor<TDocument> Format(string? format)
 	{
@@ -80,7 +88,9 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor<TDocument> TimeField(Elastic.Clients.Elasticsearch.Field? timeField)
 	{
@@ -89,7 +99,9 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor<TDocument> TimeField<TValue>(Expression<Func<TDocument, TValue>> timeField)
 	{
@@ -98,7 +110,9 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor<TDocument> TimeField(Expression<Func<TDocument, object>> timeField)
 	{
@@ -107,7 +121,9 @@ public sealed partial class DataDescriptionDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The time format, which can be `epoch`, `epoch_ms`, or a custom pattern. The value `epoch` refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value `epoch_ms` indicates that time is measured in milliseconds since the epoch. The `epoch` and `epoch_ms` time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: `yyyy-MM-dd'T'HH:mm:ssX`. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.</para>
+	/// <para>
+	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor<TDocument> TimeFormat(string? timeFormat)
 	{
@@ -166,7 +182,9 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	}
 
 	/// <summary>
-	/// <para>Only JSON format is supported at this time.</para>
+	/// <para>
+	/// Only JSON format is supported at this time.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor Format(string? format)
 	{
@@ -175,7 +193,9 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor TimeField(Elastic.Clients.Elasticsearch.Field? timeField)
 	{
@@ -184,7 +204,9 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor TimeField<TDocument, TValue>(Expression<Func<TDocument, TValue>> timeField)
 	{
@@ -193,7 +215,9 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	}
 
 	/// <summary>
-	/// <para>The name of the field that contains the timestamp.</para>
+	/// <para>
+	/// The name of the field that contains the timestamp.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor TimeField<TDocument>(Expression<Func<TDocument, object>> timeField)
 	{
@@ -202,7 +226,9 @@ public sealed partial class DataDescriptionDescriptor : SerializableDescriptor<D
 	}
 
 	/// <summary>
-	/// <para>The time format, which can be `epoch`, `epoch_ms`, or a custom pattern. The value `epoch` refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value `epoch_ms` indicates that time is measured in milliseconds since the epoch. The `epoch` and `epoch_ms` time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: `yyyy-MM-dd'T'HH:mm:ssX`. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.</para>
+	/// <para>
+	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
+	/// </para>
 	/// </summary>
 	public DataDescriptionDescriptor TimeFormat(string? timeFormat)
 	{

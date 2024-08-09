@@ -32,14 +32,18 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 public sealed partial class PostStartTrialRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>whether the user has acknowledged acknowledge messages (default: false)</para>
+	/// <para>
+	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
 }
 
 /// <summary>
-/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
+/// <para>
+/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+/// </para>
 /// </summary>
 public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialRequestParameters>
 {
@@ -52,7 +56,9 @@ public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialR
 	internal override string OperationName => "license.post_start_trial";
 
 	/// <summary>
-	/// <para>whether the user has acknowledged acknowledge messages (default: false)</para>
+	/// <para>
+	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -61,7 +67,9 @@ public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialR
 }
 
 /// <summary>
-/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
+/// <para>
+/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
+/// </para>
 /// </summary>
 public sealed partial class PostStartTrialRequestDescriptor : RequestDescriptor<PostStartTrialRequestDescriptor, PostStartTrialRequestParameters>
 {

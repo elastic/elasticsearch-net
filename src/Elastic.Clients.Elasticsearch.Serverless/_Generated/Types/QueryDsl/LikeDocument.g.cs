@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class LikeDocument
 {
 	/// <summary>
-	/// <para>A document not present in the index.</para>
+	/// <para>
+	/// A document not present in the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
@@ -39,19 +41,25 @@ public sealed partial class LikeDocument
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>ID of a document.</para>
+	/// <para>
+	/// ID of a document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Index of a document.</para>
+	/// <para>
+	/// Index of a document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>? PerFieldAnalyzer { get; set; }
@@ -81,7 +89,9 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>A document not present in the index.</para>
+	/// <para>
+	/// A document not present in the index.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Doc(object? doc)
 	{
@@ -96,7 +106,9 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>ID of a document.</para>
+	/// <para>
+	/// ID of a document.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id? id)
 	{
@@ -105,7 +117,9 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Index of a document.</para>
+	/// <para>
+	/// Index of a document.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -114,7 +128,9 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>> selector)
 	{
@@ -213,7 +229,9 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>A document not present in the index.</para>
+	/// <para>
+	/// A document not present in the index.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor Doc(object? doc)
 	{
@@ -228,7 +246,9 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	}
 
 	/// <summary>
-	/// <para>ID of a document.</para>
+	/// <para>
+	/// ID of a document.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id? id)
 	{
@@ -237,7 +257,9 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	}
 
 	/// <summary>
-	/// <para>Index of a document.</para>
+	/// <para>
+	/// Index of a document.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
@@ -246,7 +268,9 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	}
 
 	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
+	/// <para>
+	/// Overrides the default analyzer.
+	/// </para>
 	/// </summary>
 	public LikeDocumentDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>> selector)
 	{

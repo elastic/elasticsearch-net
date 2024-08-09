@@ -32,23 +32,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class PostVotingConfigExclusionsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>A comma-separated list of the persistent ids of the nodes to exclude<br/>from the voting configuration. If specified, you may not also specify node_names.</para>
+	/// <para>
+	/// A comma-separated list of the persistent ids of the nodes to exclude
+	/// from the voting configuration. If specified, you may not also specify node_names.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ids? NodeIds { get => Q<Elastic.Clients.Elasticsearch.Ids?>("node_ids"); set => Q("node_ids", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of the names of the nodes to exclude from the<br/>voting configuration. If specified, you may not also specify node_ids.</para>
+	/// <para>
+	/// A comma-separated list of the names of the nodes to exclude from the
+	/// voting configuration. If specified, you may not also specify node_ids.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Names? NodeNames { get => Q<Elastic.Clients.Elasticsearch.Names?>("node_names"); set => Q("node_names", value); }
 
 	/// <summary>
-	/// <para>When adding a voting configuration exclusion, the API waits for the<br/>specified nodes to be excluded from the voting configuration before<br/>returning. If the timeout expires before the appropriate condition<br/>is satisfied, the request fails and returns an error.</para>
+	/// <para>
+	/// When adding a voting configuration exclusion, the API waits for the
+	/// specified nodes to be excluded from the voting configuration before
+	/// returning. If the timeout expires before the appropriate condition
+	/// is satisfied, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+/// <para>
+/// Updates the cluster voting config exclusions by node ids or node names.
+/// </para>
 /// </summary>
 public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<PostVotingConfigExclusionsRequestParameters>
 {
@@ -61,26 +74,39 @@ public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<Pos
 	internal override string OperationName => "cluster.post_voting_config_exclusions";
 
 	/// <summary>
-	/// <para>A comma-separated list of the persistent ids of the nodes to exclude<br/>from the voting configuration. If specified, you may not also specify node_names.</para>
+	/// <para>
+	/// A comma-separated list of the persistent ids of the nodes to exclude
+	/// from the voting configuration. If specified, you may not also specify node_names.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Ids? NodeIds { get => Q<Elastic.Clients.Elasticsearch.Ids?>("node_ids"); set => Q("node_ids", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of the names of the nodes to exclude from the<br/>voting configuration. If specified, you may not also specify node_ids.</para>
+	/// <para>
+	/// A comma-separated list of the names of the nodes to exclude from the
+	/// voting configuration. If specified, you may not also specify node_ids.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Names? NodeNames { get => Q<Elastic.Clients.Elasticsearch.Names?>("node_names"); set => Q("node_names", value); }
 
 	/// <summary>
-	/// <para>When adding a voting configuration exclusion, the API waits for the<br/>specified nodes to be excluded from the voting configuration before<br/>returning. If the timeout expires before the appropriate condition<br/>is satisfied, the request fails and returns an error.</para>
+	/// <para>
+	/// When adding a voting configuration exclusion, the API waits for the
+	/// specified nodes to be excluded from the voting configuration before
+	/// returning. If the timeout expires before the appropriate condition
+	/// is satisfied, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+/// <para>
+/// Updates the cluster voting config exclusions by node ids or node names.
+/// </para>
 /// </summary>
 public sealed partial class PostVotingConfigExclusionsRequestDescriptor : RequestDescriptor<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsRequestParameters>
 {

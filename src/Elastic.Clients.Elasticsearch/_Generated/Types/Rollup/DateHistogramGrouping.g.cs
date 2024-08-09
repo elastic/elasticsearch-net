@@ -30,25 +30,37 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class DateHistogramGrouping
 {
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; set; }
 
 	/// <summary>
-	/// <para>How long to wait before rolling up new documents.<br/>By default, the indexer attempts to roll up all data that is available.<br/>However, it is not uncommon for data to arrive out of order.<br/>The indexer is unable to deal with data that arrives after a time-span has been rolled up.<br/>You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.</para>
+	/// <para>
+	/// How long to wait before rolling up new documents.
+	/// By default, the indexer attempts to roll up all data that is available.
+	/// However, it is not uncommon for data to arrive out of order.
+	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
+	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delay")]
 	public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
@@ -58,7 +70,11 @@ public sealed partial class DateHistogramGrouping
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get; set; }
 
 	/// <summary>
-	/// <para>Defines what `time_zone` the rollup documents are stored as.<br/>Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.<br/>By default, rollup documents are stored in `UTC`.</para>
+	/// <para>
+	/// Defines what <c>time_zone</c> the rollup documents are stored as.
+	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
+	/// By default, rollup documents are stored in <c>UTC</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
@@ -81,7 +97,9 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Duration? calendarInterval)
 	{
@@ -90,7 +108,13 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>How long to wait before rolling up new documents.<br/>By default, the indexer attempts to roll up all data that is available.<br/>However, it is not uncommon for data to arrive out of order.<br/>The indexer is unable to deal with data that arrives after a time-span has been rolled up.<br/>You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.</para>
+	/// <para>
+	/// How long to wait before rolling up new documents.
+	/// By default, the indexer attempts to roll up all data that is available.
+	/// However, it is not uncommon for data to arrive out of order.
+	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
+	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? delay)
 	{
@@ -99,7 +123,9 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -108,7 +134,9 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -117,7 +145,9 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -126,7 +156,9 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 	{
@@ -147,7 +179,11 @@ public sealed partial class DateHistogramGroupingDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Defines what `time_zone` the rollup documents are stored as.<br/>Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.<br/>By default, rollup documents are stored in `UTC`.</para>
+	/// <para>
+	/// Defines what <c>time_zone</c> the rollup documents are stored as.
+	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
+	/// By default, rollup documents are stored in <c>UTC</c>.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -217,7 +253,9 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Duration? calendarInterval)
 	{
@@ -226,7 +264,13 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>How long to wait before rolling up new documents.<br/>By default, the indexer attempts to roll up all data that is available.<br/>However, it is not uncommon for data to arrive out of order.<br/>The indexer is unable to deal with data that arrives after a time-span has been rolled up.<br/>You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.</para>
+	/// <para>
+	/// How long to wait before rolling up new documents.
+	/// By default, the indexer attempts to roll up all data that is available.
+	/// However, it is not uncommon for data to arrive out of order.
+	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
+	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? delay)
 	{
@@ -235,7 +279,9 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -244,7 +290,9 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -253,7 +301,9 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The date field that is to be rolled up.</para>
+	/// <para>
+	/// The date field that is to be rolled up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -262,7 +312,9 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The interval of time buckets to be generated when rolling up.</para>
+	/// <para>
+	/// The interval of time buckets to be generated when rolling up.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 	{
@@ -283,7 +335,11 @@ public sealed partial class DateHistogramGroupingDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Defines what `time_zone` the rollup documents are stored as.<br/>Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.<br/>By default, rollup documents are stored in `UTC`.</para>
+	/// <para>
+	/// Defines what <c>time_zone</c> the rollup documents are stored as.
+	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
+	/// By default, rollup documents are stored in <c>UTC</c>.
+	/// </para>
 	/// </summary>
 	public DateHistogramGroupingDescriptor TimeZone(string? timeZone)
 	{

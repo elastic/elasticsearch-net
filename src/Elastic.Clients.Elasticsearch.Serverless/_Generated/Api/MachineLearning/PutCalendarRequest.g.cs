@@ -34,7 +34,9 @@ public sealed partial class PutCalendarRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a calendar.</para>
+/// <para>
+/// Creates a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequestParameters>
 {
@@ -51,20 +53,26 @@ public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequest
 	internal override string OperationName => "ml.put_calendar";
 
 	/// <summary>
-	/// <para>A description of the calendar.</para>
+	/// <para>
+	/// A description of the calendar.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>An array of anomaly detection job identifiers.</para>
+	/// <para>
+	/// An array of anomaly detection job identifiers.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_ids")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? JobIds { get; set; }
 }
 
 /// <summary>
-/// <para>Creates a calendar.</para>
+/// <para>
+/// Creates a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PutCalendarRequestDescriptor : RequestDescriptor<PutCalendarRequestDescriptor, PutCalendarRequestParameters>
 {
@@ -92,7 +100,9 @@ public sealed partial class PutCalendarRequestDescriptor : RequestDescriptor<Put
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? JobIdsValue { get; set; }
 
 	/// <summary>
-	/// <para>A description of the calendar.</para>
+	/// <para>
+	/// A description of the calendar.
+	/// </para>
 	/// </summary>
 	public PutCalendarRequestDescriptor Description(string? description)
 	{
@@ -101,7 +111,9 @@ public sealed partial class PutCalendarRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>An array of anomaly detection job identifiers.</para>
+	/// <para>
+	/// An array of anomaly detection job identifiers.
+	/// </para>
 	/// </summary>
 	public PutCalendarRequestDescriptor JobIds(ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? jobIds)
 	{

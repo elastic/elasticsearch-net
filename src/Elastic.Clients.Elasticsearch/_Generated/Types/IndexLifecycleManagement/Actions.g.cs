@@ -30,73 +30,97 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public sealed partial class Actions
 {
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocate")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? Allocate { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delete")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? Delete { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("downsample")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? Downsample { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("forcemerge")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? Forcemerge { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("migrate")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? Migrate { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("readonly")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Readonly { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot.</para>
+	/// <para>
+	/// Phases allowed: hot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rollover")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? Rollover { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, cold, frozen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("searchable_snapshot")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? SearchableSnapshot { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("set_priority")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? SetPriority { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shrink")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? Shrink { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold, frozen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unfollow")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Unfollow { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("wait_for_snapshot")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? WaitForSnapshot { get; set; }
@@ -148,7 +172,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> WaitForSnapshotDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Allocate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? allocate)
 	{
@@ -175,7 +201,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? delete)
 	{
@@ -202,7 +230,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Downsample(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? downsample)
 	{
@@ -229,7 +259,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Forcemerge(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? forcemerge)
 	{
@@ -256,7 +288,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: warm, cold.</para>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Migrate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? migrate)
 	{
@@ -283,7 +317,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Readonly(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
@@ -310,7 +346,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot.</para>
+	/// <para>
+	/// Phases allowed: hot.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? rollover)
 	{
@@ -337,7 +375,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, cold, frozen.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor SearchableSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? searchableSnapshot)
 	{
@@ -364,7 +404,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor SetPriority(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? setPriority)
 	{
@@ -391,7 +433,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm.</para>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Shrink(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? shrink)
 	{
@@ -418,7 +462,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: hot, warm, cold, frozen.</para>
+	/// <para>
+	/// Phases allowed: hot, warm, cold, frozen.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor Unfollow(Elastic.Clients.Elasticsearch.EmptyObject? unfollow)
 	{
@@ -445,7 +491,9 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	}
 
 	/// <summary>
-	/// <para>Phases allowed: delete.</para>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
 	/// </summary>
 	public ActionsDescriptor WaitForSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? waitForSnapshot)
 	{

@@ -30,80 +30,112 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class SimpleQueryStringQuery
 {
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the parser creates a match_phrase query for each multi-position token.</para>
+	/// <para>
+	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperator { get; set; }
 
 	/// <summary>
-	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Array of fields you wish to search.
+	/// Accepts wildcard expressions.
+	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
+	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>List of enabled operators for the simple query string syntax.</para>
+	/// <para>
+	/// List of enabled operators for the simple query string syntax.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flags")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringFlag? Flags { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Query string in the simple query string syntax you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string in the simple query string syntax you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -111,7 +143,9 @@ public sealed partial class SimpleQueryStringQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
@@ -144,7 +178,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	private string? QuoteFieldSuffixValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -153,7 +189,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
@@ -162,7 +200,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>If `true`, the parser creates a match_phrase query for each multi-position token.</para>
+	/// <para>
+	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -171,7 +211,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -180,7 +225,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator)
 	{
@@ -189,7 +236,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Array of fields you wish to search.
+	/// Accepts wildcard expressions.
+	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
+	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -198,7 +250,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>List of enabled operators for the simple query string syntax.</para>
+	/// <para>
+	/// List of enabled operators for the simple query string syntax.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringFlag? flags)
 	{
@@ -207,7 +261,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions)
 	{
@@ -216,7 +272,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength)
 	{
@@ -225,7 +283,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -234,7 +294,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true)
 	{
@@ -243,7 +305,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -252,7 +316,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Query string in the simple query string syntax you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string in the simple query string syntax you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Query(string query)
 	{
@@ -267,7 +333,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix)
 	{
@@ -393,7 +461,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	private string? QuoteFieldSuffixValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query string into tokens.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -402,7 +472,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// <para>
+	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
@@ -411,7 +483,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>If `true`, the parser creates a match_phrase query for each multi-position token.</para>
+	/// <para>
+	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -420,7 +494,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Boost(float? boost)
 	{
@@ -429,7 +508,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Default boolean logic used to interpret text in the query string if no operators are specified.</para>
+	/// <para>
+	/// Default boolean logic used to interpret text in the query string if no operators are specified.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator)
 	{
@@ -438,7 +519,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
+	/// <para>
+	/// Array of fields you wish to search.
+	/// Accepts wildcard expressions.
+	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
+	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -447,7 +533,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>List of enabled operators for the simple query string syntax.</para>
+	/// <para>
+	/// List of enabled operators for the simple query string syntax.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringFlag? flags)
 	{
@@ -456,7 +544,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
+	/// <para>
+	/// Maximum number of terms to which the query expands for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions)
 	{
@@ -465,7 +555,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength)
 	{
@@ -474,7 +566,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -483,7 +577,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Lenient(bool? lenient = true)
 	{
@@ -492,7 +588,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -501,7 +599,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Query string in the simple query string syntax you wish to parse and use for search.</para>
+	/// <para>
+	/// Query string in the simple query string syntax you wish to parse and use for search.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor Query(string query)
 	{
@@ -516,7 +616,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Suffix appended to quoted text in the query string.</para>
+	/// <para>
+	/// Suffix appended to quoted text in the query string.
+	/// </para>
 	/// </summary>
 	public SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix)
 	{

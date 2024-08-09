@@ -84,7 +84,9 @@ internal sealed partial class DateHistogramBucketConverter : JsonConverter<DateH
 public sealed partial class DateHistogramBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

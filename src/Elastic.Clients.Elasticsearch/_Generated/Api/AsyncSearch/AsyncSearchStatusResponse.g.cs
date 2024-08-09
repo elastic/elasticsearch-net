@@ -29,19 +29,29 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Metadata about clusters involved in the cross-cluster search.<br/>Not shown for local-only searches.</para>
+	/// <para>
+	/// Metadata about clusters involved in the cross-cluster search.
+	/// Not shown for local-only searches.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_clusters")]
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 
 	/// <summary>
-	/// <para>If the async search completed, this field shows the status code of the search.<br/>For example, 200 indicates that the async search was successfully completed.<br/>503 indicates that the async search was completed with an error.</para>
+	/// <para>
+	/// If the async search completed, this field shows the status code of the search.
+	/// For example, 200 indicates that the async search was successfully completed.
+	/// 503 indicates that the async search was completed with an error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
 	public int? CompletionStatus { get; init; }
 
 	/// <summary>
-	/// <para>Indicates when the async search completed. Only present<br/>when the search has completed.</para>
+	/// <para>
+	/// Indicates when the async search completed. Only present
+	/// when the search has completed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_time")]
 	public DateTimeOffset? CompletionTime { get; init; }
@@ -49,7 +59,9 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	public long? CompletionTimeInMillis { get; init; }
 
 	/// <summary>
-	/// <para>Indicates when the async search will expire.</para>
+	/// <para>
+	/// Indicates when the async search will expire.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
@@ -59,19 +71,27 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	public string? Id { get; init; }
 
 	/// <summary>
-	/// <para>When the query is no longer running, this property indicates whether the search failed or was successfully completed on all shards.<br/>While the query is running, `is_partial` is always set to `true`.</para>
+	/// <para>
+	/// When the query is no longer running, this property indicates whether the search failed or was successfully completed on all shards.
+	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
 
 	/// <summary>
-	/// <para>Indicates whether the search is still running or has completed.<br/>NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though `is_running` is `false`.</para>
+	/// <para>
+	/// Indicates whether the search is still running or has completed.
+	/// NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
 
 	/// <summary>
-	/// <para>Indicates how many shards have run the query so far.</para>
+	/// <para>
+	/// Indicates how many shards have run the query so far.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }

@@ -77,7 +77,9 @@ internal sealed partial class SamplerAggregateConverter : JsonConverter<SamplerA
 public sealed partial class SamplerAggregate : IAggregate
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

@@ -30,13 +30,23 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class MappingLimitSettingsTotalFields
 {
 	/// <summary>
-	/// <para>This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set<br/>to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail<br/>with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.<br/>Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.<br/>The fields that were not added to the mapping will be added to the _ignored field.</para>
+	/// <para>
+	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
+	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
+	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
+	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
+	/// The fields that were not added to the mapping will be added to the _ignored field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_dynamic_beyond_limit")]
 	public bool? IgnoreDynamicBeyondLimit { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
+	/// <para>
+	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
+	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
+	/// degradations and memory issues, especially in clusters with a high load or few resources.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
@@ -54,7 +64,13 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	private long? LimitValue { get; set; }
 
 	/// <summary>
-	/// <para>This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set<br/>to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail<br/>with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.<br/>Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.<br/>The fields that were not added to the mapping will be added to the _ignored field.</para>
+	/// <para>
+	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
+	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
+	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
+	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
+	/// The fields that were not added to the mapping will be added to the _ignored field.
+	/// </para>
 	/// </summary>
 	public MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(bool? ignoreDynamicBeyondLimit = true)
 	{
@@ -63,7 +79,11 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
+	/// <para>
+	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
+	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
+	/// degradations and memory issues, especially in clusters with a high load or few resources.
+	/// </para>
 	/// </summary>
 	public MappingLimitSettingsTotalFieldsDescriptor Limit(long? limit)
 	{

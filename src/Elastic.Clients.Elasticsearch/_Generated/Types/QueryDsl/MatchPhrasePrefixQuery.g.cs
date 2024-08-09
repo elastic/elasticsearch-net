@@ -153,34 +153,49 @@ public sealed partial class MatchPhrasePrefixQuery
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the last provided term of the query value will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the last provided term of the query value will expand.
+	/// </para>
 	/// </summary>
 	public int? MaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Text you wish to find in the provided field.</para>
+	/// <para>
+	/// Text you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	public int? Slop { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
@@ -205,7 +220,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -214,7 +231,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -241,7 +263,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the last provided term of the query value will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the last provided term of the query value will expand.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
@@ -250,7 +274,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Text you wish to find in the provided field.</para>
+	/// <para>
+	/// Text you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> Query(string query)
 	{
@@ -265,7 +291,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> Slop(int? slop)
 	{
@@ -274,7 +302,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
@@ -350,7 +380,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -359,7 +391,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor Boost(float? boost)
 	{
@@ -386,7 +423,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the last provided term of the query value will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the last provided term of the query value will expand.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
@@ -395,7 +434,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Text you wish to find in the provided field.</para>
+	/// <para>
+	/// Text you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor Query(string query)
 	{
@@ -410,7 +451,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor Slop(int? slop)
 	{
@@ -419,7 +462,9 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{

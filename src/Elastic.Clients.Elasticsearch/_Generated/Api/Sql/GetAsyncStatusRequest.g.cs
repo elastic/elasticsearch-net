@@ -34,7 +34,9 @@ public sealed partial class GetAsyncStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// <para>
+/// Returns the current status of an async SQL search or a stored synchronous SQL search
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusR
 }
 
 /// <summary>
-/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// <para>
+/// Returns the current status of an async SQL search or a stored synchronous SQL search
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusRequestParameters>
 {
@@ -82,7 +86,9 @@ public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// <para>
+/// Returns the current status of an async SQL search or a stored synchronous SQL search
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncStatusRequestDescriptor : RequestDescriptor<GetAsyncStatusRequestDescriptor, GetAsyncStatusRequestParameters>
 {

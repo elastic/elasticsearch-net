@@ -32,48 +32,71 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class HotThreadsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, known idle threads (e.g. waiting in a socket select, or to get<br/>a task from an empty queue) are filtered out.</para>
+	/// <para>
+	/// If true, known idle threads (e.g. waiting in a socket select, or to get
+	/// a task from an empty queue) are filtered out.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
 	/// <summary>
-	/// <para>The interval to do the second sampling of threads.</para>
+	/// <para>
+	/// The interval to do the second sampling of threads.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("interval"); set => Q("interval", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response<br/>is received before the timeout expires, the request fails and<br/>returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response
+	/// is received before the timeout expires, the request fails and
+	/// returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Number of samples of thread stacktrace.</para>
+	/// <para>
+	/// Number of samples of thread stacktrace.
+	/// </para>
 	/// </summary>
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 	/// <summary>
-	/// <para>The sort order for 'cpu' type (default: total)</para>
+	/// <para>
+	/// The sort order for 'cpu' type (default: total)
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.Serverless.ThreadType?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>Specifies the number of hot threads to provide information for.</para>
+	/// <para>
+	/// Specifies the number of hot threads to provide information for.
+	/// </para>
 	/// </summary>
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received<br/>before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received
+	/// before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The type to sample.</para>
+	/// <para>
+	/// The type to sample.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.Serverless.ThreadType?>("type"); set => Q("type", value); }
 }
 
 /// <summary>
-/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+/// <para>
+/// This API yields a breakdown of the hot threads on each selected node in the cluster.
+/// The output is plain text with a breakdown of each node’s top hot threads.
+/// </para>
 /// </summary>
 public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestParameters>
 {
@@ -94,56 +117,79 @@ public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestPa
 	internal override string OperationName => "nodes.hot_threads";
 
 	/// <summary>
-	/// <para>If true, known idle threads (e.g. waiting in a socket select, or to get<br/>a task from an empty queue) are filtered out.</para>
+	/// <para>
+	/// If true, known idle threads (e.g. waiting in a socket select, or to get
+	/// a task from an empty queue) are filtered out.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
 	/// <summary>
-	/// <para>The interval to do the second sampling of threads.</para>
+	/// <para>
+	/// The interval to do the second sampling of threads.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("interval"); set => Q("interval", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response<br/>is received before the timeout expires, the request fails and<br/>returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response
+	/// is received before the timeout expires, the request fails and
+	/// returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Number of samples of thread stacktrace.</para>
+	/// <para>
+	/// Number of samples of thread stacktrace.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 	/// <summary>
-	/// <para>The sort order for 'cpu' type (default: total)</para>
+	/// <para>
+	/// The sort order for 'cpu' type (default: total)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.Serverless.ThreadType?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>Specifies the number of hot threads to provide information for.</para>
+	/// <para>
+	/// Specifies the number of hot threads to provide information for.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received<br/>before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received
+	/// before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The type to sample.</para>
+	/// <para>
+	/// The type to sample.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.Serverless.ThreadType?>("type"); set => Q("type", value); }
 }
 
 /// <summary>
-/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+/// <para>
+/// This API yields a breakdown of the hot threads on each selected node in the cluster.
+/// The output is plain text with a breakdown of each node’s top hot threads.
+/// </para>
 /// </summary>
 public sealed partial class HotThreadsRequestDescriptor : RequestDescriptor<HotThreadsRequestDescriptor, HotThreadsRequestParameters>
 {

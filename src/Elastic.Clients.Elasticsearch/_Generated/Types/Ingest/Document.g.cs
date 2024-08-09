@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class Document
 {
 	/// <summary>
-	/// <para>Unique identifier for the document.<br/>This ID must be unique within the `_index`.</para>
+	/// <para>
+	/// Unique identifier for the document.
+	/// This ID must be unique within the <c>_index</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Name of the index containing the document.</para>
+	/// <para>
+	/// Name of the index containing the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>JSON body for the document.</para>
+	/// <para>
+	/// JSON body for the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public object Source { get; set; }
@@ -61,7 +68,10 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	private object SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>Unique identifier for the document.<br/>This ID must be unique within the `_index`.</para>
+	/// <para>
+	/// Unique identifier for the document.
+	/// This ID must be unique within the <c>_index</c>.
+	/// </para>
 	/// </summary>
 	public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -70,7 +80,9 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	}
 
 	/// <summary>
-	/// <para>Name of the index containing the document.</para>
+	/// <para>
+	/// Name of the index containing the document.
+	/// </para>
 	/// </summary>
 	public DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -79,7 +91,9 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	}
 
 	/// <summary>
-	/// <para>JSON body for the document.</para>
+	/// <para>
+	/// JSON body for the document.
+	/// </para>
 	/// </summary>
 	public DocumentDescriptor Source(object source)
 	{

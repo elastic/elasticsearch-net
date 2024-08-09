@@ -34,7 +34,9 @@ public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an existing snapshot lifecycle policy.</para>
+/// <para>
+/// Deletes an existing snapshot lifecycle policy.
+/// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycleRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 }
 
 /// <summary>
-/// <para>Deletes an existing snapshot lifecycle policy.</para>
+/// <para>
+/// Deletes an existing snapshot lifecycle policy.
+/// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequestDescriptor : RequestDescriptor<DeleteLifecycleRequestDescriptor, DeleteLifecycleRequestParameters>
 {

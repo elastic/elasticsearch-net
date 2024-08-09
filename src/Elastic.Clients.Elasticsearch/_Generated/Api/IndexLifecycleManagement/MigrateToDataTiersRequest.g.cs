@@ -32,13 +32,20 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public sealed partial class MigrateToDataTiersRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.<br/>This provides a way to retrieve the indices and ILM policies that need to be migrated.</para>
+	/// <para>
+	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
+	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
+	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 }
 
 /// <summary>
-/// <para>Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and<br/>attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+<br/>Using node roles enables ILM to automatically move the indices between data tiers.</para>
+/// <para>
+/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
+/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Using node roles enables ILM to automatically move the indices between data tiers.
+/// </para>
 /// </summary>
 public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDataTiersRequestParameters>
 {
@@ -51,7 +58,10 @@ public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDa
 	internal override string OperationName => "ilm.migrate_to_data_tiers";
 
 	/// <summary>
-	/// <para>If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.<br/>This provides a way to retrieve the indices and ILM policies that need to be migrated.</para>
+	/// <para>
+	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
+	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -62,7 +72,11 @@ public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDa
 }
 
 /// <summary>
-/// <para>Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and<br/>attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+<br/>Using node roles enables ILM to automatically move the indices between data tiers.</para>
+/// <para>
+/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
+/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Using node roles enables ILM to automatically move the indices between data tiers.
+/// </para>
 /// </summary>
 public sealed partial class MigrateToDataTiersRequestDescriptor : RequestDescriptor<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersRequestParameters>
 {

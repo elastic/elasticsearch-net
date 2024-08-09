@@ -32,147 +32,241 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class SearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.</para>
+	/// <para>
+	/// If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.
+	/// </para>
 	/// </summary>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
-	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>If true, wildcard and prefix queries are analyzed.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// If true, wildcard and prefix queries are analyzed.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The number of shard results that should be reduced at once on the coordinating node.<br/>This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</para>
+	/// <para>
+	/// The number of shard results that should be reduced at once on the coordinating node.
+	/// This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+	/// </para>
 	/// </summary>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 	/// <summary>
-	/// <para>If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.</para>
+	/// <para>
+	/// If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.
+	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query: AND or OR.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// The default operator for query string query: AND or OR.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, concrete, expanded or aliased indices will be ignored when frozen.</para>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Defines the number of concurrent shard requests per node this search executes concurrently.<br/>This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.</para>
+	/// <para>
+	/// Defines the number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
+	/// </para>
 	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
-	/// <para>The minimum version of the node that can handle the request<br/>Any handling node with a lower version will fail the request.</para>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
 	/// </summary>
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
-	/// <para>Nodes and shards used for the search.<br/>By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:<br/>`_only_local` to run the search only on shards on the local node;<br/>`_local` to, if possible, run the search on shards on the local node, or if not, select shards using the default method;<br/>`_only_nodes:<node-id>,<node-id>` to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;<br/>`_prefer_nodes:<node-id>,<node-id>` to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;<br/>`_shards:<shard>,<shard>` to run the search only on the specified shards;<br/>`<custom-string>` (any string that does not start with `_`) to route searches with the same `<custom-string>` to the same shards in the same order.</para>
+	/// <para>
+	/// Nodes and shards used for the search.
+	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// <c>_only_local</c> to run the search only on shards on the local node;
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
+	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
+	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.<br/>This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).<br/>When unspecified, the pre-filter phase is executed if any of these conditions is met:<br/>the request targets more than 128 shards;<br/>the request targets one or more read-only index;<br/>the primary sort of the query targets an indexed field.</para>
+	/// <para>
+	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
+	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
+	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
+	/// the request targets more than 128 shards;
+	/// the request targets one or more read-only index;
+	/// the primary sort of the query targets an indexed field.
+	/// </para>
 	/// </summary>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax using query parameter search.<br/>Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax using query parameter search.
+	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
+	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>If `true`, the caching of search results is enabled for requests where `size` is `0`.<br/>Defaults to index level settings.</para>
+	/// <para>
+	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
+	/// Defaults to index level settings.
+	/// </para>
 	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 	/// <summary>
-	/// <para>Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response.</para>
+	/// <para>
+	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
+	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period to retain the search context for scrolling. See Scroll search results.<br/>By default, this value cannot exceed `1d` (24 hours).<br/>You can change this limit using the `search.max_keep_alive` cluster-level setting.</para>
+	/// <para>
+	/// Period to retain the search context for scrolling. See Scroll search results.
+	/// By default, this value cannot exceed <c>1d</c> (24 hours).
+	/// You can change this limit using the <c>search.max_keep_alive</c> cluster-level setting.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>How distributed term frequencies are calculated for relevance scoring.</para>
+	/// <para>
+	/// How distributed term frequencies are calculated for relevance scoring.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.Serverless.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to exclude from the response.<br/>You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to include in the response.<br/>If this parameter is specified, only these source fields are returned.<br/>You can exclude fields from this subset using the `_source_excludes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>Specifies which field to use for suggestions.</para>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Serverless.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 	/// <summary>
-	/// <para>Specifies the suggest mode.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// Specifies the suggest mode.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.Serverless.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 	/// <summary>
-	/// <para>Number of suggestions to return.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// Number of suggestions to return.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 	/// <summary>
-	/// <para>The source text for which the suggestions should be returned.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// The source text for which the suggestions should be returned.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 	/// <summary>
-	/// <para>If `true`, aggregation and suggester names are be prefixed by their respective types in the response.</para>
+	/// <para>
+	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
@@ -610,7 +704,11 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 }
 
 /// <summary>
-/// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
+/// <para>
+/// Returns search hits that match the query defined in the request.
+/// You can provide search queries using the <c>q</c> query string parameter or the request body.
+/// If both are specified, only the query parameter is used.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(SearchRequestConverter))]
 public partial class SearchRequest : PlainRequest<SearchRequestParameters>
@@ -632,390 +730,586 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	internal override string OperationName => "search";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.</para>
+	/// <para>
+	/// If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
-	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>If true, wildcard and prefix queries are analyzed.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// If true, wildcard and prefix queries are analyzed.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The number of shard results that should be reduced at once on the coordinating node.<br/>This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</para>
+	/// <para>
+	/// The number of shard results that should be reduced at once on the coordinating node.
+	/// This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 	/// <summary>
-	/// <para>If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.</para>
+	/// <para>
+	/// If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query: AND or OR.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// The default operator for query string query: AND or OR.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the q query string parameter is specified.</para>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the q query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, concrete, expanded or aliased indices will be ignored when frozen.</para>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Defines the number of concurrent shard requests per node this search executes concurrently.<br/>This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.</para>
+	/// <para>
+	/// Defines the number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
-	/// <para>The minimum version of the node that can handle the request<br/>Any handling node with a lower version will fail the request.</para>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
-	/// <para>Nodes and shards used for the search.<br/>By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:<br/>`_only_local` to run the search only on shards on the local node;<br/>`_local` to, if possible, run the search on shards on the local node, or if not, select shards using the default method;<br/>`_only_nodes:<node-id>,<node-id>` to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;<br/>`_prefer_nodes:<node-id>,<node-id>` to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;<br/>`_shards:<shard>,<shard>` to run the search only on the specified shards;<br/>`<custom-string>` (any string that does not start with `_`) to route searches with the same `<custom-string>` to the same shards in the same order.</para>
+	/// <para>
+	/// Nodes and shards used for the search.
+	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// <c>_only_local</c> to run the search only on shards on the local node;
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
+	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.<br/>This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).<br/>When unspecified, the pre-filter phase is executed if any of these conditions is met:<br/>the request targets more than 128 shards;<br/>the request targets one or more read-only index;<br/>the primary sort of the query targets an indexed field.</para>
+	/// <para>
+	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
+	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
+	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
+	/// the request targets more than 128 shards;
+	/// the request targets one or more read-only index;
+	/// the primary sort of the query targets an indexed field.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax using query parameter search.<br/>Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax using query parameter search.
+	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>If `true`, the caching of search results is enabled for requests where `size` is `0`.<br/>Defaults to index level settings.</para>
+	/// <para>
+	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
+	/// Defaults to index level settings.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 	/// <summary>
-	/// <para>Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response.</para>
+	/// <para>
+	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period to retain the search context for scrolling. See Scroll search results.<br/>By default, this value cannot exceed `1d` (24 hours).<br/>You can change this limit using the `search.max_keep_alive` cluster-level setting.</para>
+	/// <para>
+	/// Period to retain the search context for scrolling. See Scroll search results.
+	/// By default, this value cannot exceed <c>1d</c> (24 hours).
+	/// You can change this limit using the <c>search.max_keep_alive</c> cluster-level setting.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>How distributed term frequencies are calculated for relevance scoring.</para>
+	/// <para>
+	/// How distributed term frequencies are calculated for relevance scoring.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.Serverless.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to exclude from the response.<br/>You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of source fields to include in the response.<br/>If this parameter is specified, only these source fields are returned.<br/>You can exclude fields from this subset using the `_source_excludes` query parameter.<br/>If the `_source` parameter is `false`, this parameter is ignored.</para>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>Specifies which field to use for suggestions.</para>
+	/// <para>
+	/// Specifies which field to use for suggestions.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Serverless.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 	/// <summary>
-	/// <para>Specifies the suggest mode.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// Specifies the suggest mode.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.Serverless.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 	/// <summary>
-	/// <para>Number of suggestions to return.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// Number of suggestions to return.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 	/// <summary>
-	/// <para>The source text for which the suggestions should be returned.<br/>This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.</para>
+	/// <para>
+	/// The source text for which the suggestions should be returned.
+	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 	/// <summary>
-	/// <para>If `true`, aggregation and suggester names are be prefixed by their respective types in the response.</para>
+	/// <para>
+	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>Defines the aggregations that are run as part of the search request.</para>
+	/// <para>
+	/// Defines the aggregations that are run as part of the search request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Collapses search results the values of the specified field.</para>
+	/// <para>
+	/// Collapses search results the values of the specified field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns doc values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ext")]
 	public IDictionary<string, object>? Ext { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Starting document offset.<br/>Needs to be non-negative.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// Starting document offset.
+	/// Needs to be non-negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.</para>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("knn")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.KnnSearch))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? Knn { get; set; }
 
 	/// <summary>
-	/// <para>Minimum `_score` for matching documents.<br/>Documents with a lower `_score` are not included in the search results.</para>
+	/// <para>
+	/// Minimum <c>_score</c> for matching documents.
+	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT).<br/>If you provide a PIT, you cannot specify an `<index>` in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT).
+	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? Pit { get; set; }
 
 	/// <summary>
-	/// <para>Use the `post_filter` parameter to filter search results.<br/>The search hits are filtered after the aggregations are calculated.<br/>A post filter has no impact on the aggregation results.</para>
+	/// <para>
+	/// Use the <c>post_filter</c> parameter to filter search results.
+	/// The search hits are filtered after the aggregations are calculated.
+	/// A post filter has no impact on the aggregation results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilter { get; set; }
 
 	/// <summary>
-	/// <para>Set to `true` to return detailed timing information about the execution of individual components in a search request.<br/>NOTE: This is a debugging tool and adds significant overhead to search execution.</para>
+	/// <para>
+	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
+	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use.</para>
+	/// <para>
+	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank")]
 	public Elastic.Clients.Elasticsearch.Serverless.Rank? Rank { get; set; }
 
 	/// <summary>
-	/// <para>Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rescore")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
-	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// <para>
+	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retriever")]
 	public Elastic.Clients.Elasticsearch.Serverless.Retriever? Retriever { get; set; }
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request.<br/>These fields take precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request.
+	/// These fields take precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
-	/// <para>Used to retrieve the next page of hits using a set of sort values from the previous page.</para>
+	/// <para>
+	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
-	/// <para>The number of hits to return.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// The number of hits to return.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Can be used to split a scrolled search into multiple slices that can be consumed independently.</para>
+	/// <para>
+	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? Slice { get; set; }
 
 	/// <summary>
-	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents.<br/>These fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents.
+	/// These fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search.<br/>Each group maintains a statistics aggregation for its associated searches.<br/>You can retrieve these stats using the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search.
+	/// Each group maintains a statistics aggregation for its associated searches.
+	/// You can retrieve these stats using the indices stats API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stats")]
 	public ICollection<string>? Stats { get; set; }
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to `false`.<br/>You can pass `_source: true` to return both source fields and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit.
+	/// If no fields are specified, no stored fields are included in the response.
+	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
 
 	/// <summary>
-	/// <para>Defines a suggester that provides similar looking terms based on a provided text.</para>
+	/// <para>
+	/// Defines a suggester that provides similar looking terms based on a provided text.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? Suggest { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.<br/>Use with caution.<br/>Elasticsearch applies this parameter to each shard handling the request.<br/>When possible, let Elasticsearch perform early termination automatically.<br/>Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.<br/>If set to `0` (default), the query does not terminate early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// If a query reaches this limit, Elasticsearch terminates the query early.
+	/// Elasticsearch collects documents before sorting.
+	/// Use with caution.
+	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// When possible, let Elasticsearch perform early termination automatically.
+	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard.<br/>If no response is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately.<br/>If `true`, the exact number of hits is returned at the cost of some performance.<br/>If `false`, the  response does not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately.
+	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
+	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 
 /// <summary>
-/// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
+/// <para>
+/// Returns search hits that match the query defined in the request.
+/// You can provide search queries using the <c>q</c> query string parameter or the request body.
+/// If both are specified, only the query parameter is used.
+/// </para>
 /// </summary>
 public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescriptor<SearchRequestDescriptor<TDocument>, SearchRequestParameters>
 {
@@ -1142,7 +1436,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	private bool? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the aggregations that are run as part of the search request.</para>
+	/// <para>
+	/// Defines the aggregations that are run as part of the search request.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -1151,7 +1447,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Collapses search results the values of the specified field.</para>
+	/// <para>
+	/// Collapses search results the values of the specified field.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? collapse)
 	{
@@ -1178,7 +1476,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns doc values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
@@ -1217,7 +1518,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
@@ -1226,7 +1529,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -1235,7 +1540,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -1274,7 +1582,12 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Starting document offset.<br/>Needs to be non-negative.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// Starting document offset.
+	/// Needs to be non-negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> From(int? from)
 	{
@@ -1283,7 +1596,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.</para>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
@@ -1310,7 +1625,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
 	{
@@ -1319,7 +1636,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? knn)
 	{
@@ -1358,7 +1677,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Minimum `_score` for matching documents.<br/>Documents with a lower `_score` are not included in the search results.</para>
+	/// <para>
+	/// Minimum <c>_score</c> for matching documents.
+	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> MinScore(double? minScore)
 	{
@@ -1367,7 +1689,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT).<br/>If you provide a PIT, you cannot specify an `<index>` in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT).
+	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
 	{
@@ -1394,7 +1719,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Use the `post_filter` parameter to filter search results.<br/>The search hits are filtered after the aggregations are calculated.<br/>A post filter has no impact on the aggregation results.</para>
+	/// <para>
+	/// Use the <c>post_filter</c> parameter to filter search results.
+	/// The search hits are filtered after the aggregations are calculated.
+	/// A post filter has no impact on the aggregation results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
@@ -1421,7 +1750,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to return detailed timing information about the execution of individual components in a search request.<br/>NOTE: This is a debugging tool and adds significant overhead to search execution.</para>
+	/// <para>
+	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
+	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Profile(bool? profile = true)
 	{
@@ -1430,7 +1762,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -1457,7 +1791,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use.</para>
+	/// <para>
+	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Serverless.Rank? rank)
 	{
@@ -1484,7 +1820,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Rescore(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? rescore)
 	{
@@ -1523,7 +1861,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// <para>
+	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Serverless.Retriever? retriever)
 	{
@@ -1550,7 +1890,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request.<br/>These fields take precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request.
+	/// These fields take precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -1559,7 +1902,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -1568,7 +1913,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Used to retrieve the next page of hits using a set of sort values from the previous page.</para>
+	/// <para>
+	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
 	{
@@ -1577,7 +1924,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
@@ -1586,7 +1935,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>The number of hits to return.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// The number of hits to return.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Size(int? size)
 	{
@@ -1595,7 +1948,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Can be used to split a scrolled search into multiple slices that can be consumed independently.</para>
+	/// <para>
+	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? slice)
 	{
@@ -1622,7 +1977,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? sort)
 	{
@@ -1661,7 +2018,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents.<br/>These fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents.
+	/// These fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -1670,7 +2030,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search.<br/>Each group maintains a statistics aggregation for its associated searches.<br/>You can retrieve these stats using the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search.
+	/// Each group maintains a statistics aggregation for its associated searches.
+	/// You can retrieve these stats using the indices stats API.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Stats(ICollection<string>? stats)
 	{
@@ -1679,7 +2043,12 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to `false`.<br/>You can pass `_source: true` to return both source fields and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit.
+	/// If no fields are specified, no stored fields are included in the response.
+	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{
@@ -1688,7 +2057,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines a suggester that provides similar looking terms based on a provided text.</para>
+	/// <para>
+	/// Defines a suggester that provides similar looking terms based on a provided text.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? suggest)
 	{
@@ -1715,7 +2086,16 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.<br/>Use with caution.<br/>Elasticsearch applies this parameter to each shard handling the request.<br/>When possible, let Elasticsearch perform early termination automatically.<br/>Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.<br/>If set to `0` (default), the query does not terminate early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// If a query reaches this limit, Elasticsearch terminates the query early.
+	/// Elasticsearch collects documents before sorting.
+	/// Use with caution.
+	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// When possible, let Elasticsearch perform early termination automatically.
+	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter)
 	{
@@ -1724,7 +2104,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard.<br/>If no response is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Timeout(string? timeout)
 	{
@@ -1733,7 +2117,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
 	{
@@ -1742,7 +2128,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately.<br/>If `true`, the exact number of hits is returned at the cost of some performance.<br/>If `false`, the  response does not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately.
+	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
+	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -1751,7 +2141,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> Version(bool? version = true)
 	{
@@ -2180,7 +2572,11 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
+/// <para>
+/// Returns search hits that match the query defined in the request.
+/// You can provide search queries using the <c>q</c> query string parameter or the request body.
+/// If both are specified, only the query parameter is used.
+/// </para>
 /// </summary>
 public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRequestDescriptor, SearchRequestParameters>
 {
@@ -2307,7 +2703,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	private bool? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the aggregations that are run as part of the search request.</para>
+	/// <para>
+	/// Defines the aggregations that are run as part of the search request.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -2316,7 +2714,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Collapses search results the values of the specified field.</para>
+	/// <para>
+	/// Collapses search results the values of the specified field.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? collapse)
 	{
@@ -2343,7 +2743,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns doc values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
@@ -2382,7 +2785,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Explain(bool? explain = true)
 	{
@@ -2391,7 +2796,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -2400,7 +2807,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (`*`) patterns.<br/>The request returns values for field names matching these patterns in the `hits.fields` property of the response.</para>
+	/// <para>
+	/// Array of wildcard (<c>*</c>) patterns.
+	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -2439,7 +2849,12 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Starting document offset.<br/>Needs to be non-negative.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// Starting document offset.
+	/// Needs to be non-negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor From(int? from)
 	{
@@ -2448,7 +2863,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.</para>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
@@ -2475,7 +2892,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
 	{
@@ -2484,7 +2903,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? knn)
 	{
@@ -2523,7 +2944,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Minimum `_score` for matching documents.<br/>Documents with a lower `_score` are not included in the search results.</para>
+	/// <para>
+	/// Minimum <c>_score</c> for matching documents.
+	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor MinScore(double? minScore)
 	{
@@ -2532,7 +2956,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT).<br/>If you provide a PIT, you cannot specify an `<index>` in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT).
+	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
 	{
@@ -2559,7 +2986,11 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Use the `post_filter` parameter to filter search results.<br/>The search hits are filtered after the aggregations are calculated.<br/>A post filter has no impact on the aggregation results.</para>
+	/// <para>
+	/// Use the <c>post_filter</c> parameter to filter search results.
+	/// The search hits are filtered after the aggregations are calculated.
+	/// A post filter has no impact on the aggregation results.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
@@ -2586,7 +3017,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to return detailed timing information about the execution of individual components in a search request.<br/>NOTE: This is a debugging tool and adds significant overhead to search execution.</para>
+	/// <para>
+	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
+	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Profile(bool? profile = true)
 	{
@@ -2595,7 +3029,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -2622,7 +3058,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use.</para>
+	/// <para>
+	/// Defines the Reciprocal Rank Fusion (RRF) to use.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Serverless.Rank? rank)
 	{
@@ -2649,7 +3087,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Rescore(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? rescore)
 	{
@@ -2688,7 +3128,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// <para>
+	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Retriever(Elastic.Clients.Elasticsearch.Serverless.Retriever? retriever)
 	{
@@ -2715,7 +3157,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request.<br/>These fields take precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request.
+	/// These fields take precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -2724,7 +3169,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -2733,7 +3180,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Used to retrieve the next page of hits using a set of sort values from the previous page.</para>
+	/// <para>
+	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
 	{
@@ -2742,7 +3191,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
@@ -2751,7 +3202,11 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>The number of hits to return.<br/>By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.<br/>To page through more hits, use the `search_after` parameter.</para>
+	/// <para>
+	/// The number of hits to return.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Size(int? size)
 	{
@@ -2760,7 +3215,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Can be used to split a scrolled search into multiple slices that can be consumed independently.</para>
+	/// <para>
+	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? slice)
 	{
@@ -2787,7 +3244,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? sort)
 	{
@@ -2826,7 +3285,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents.<br/>These fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents.
+	/// These fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -2835,7 +3297,11 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search.<br/>Each group maintains a statistics aggregation for its associated searches.<br/>You can retrieve these stats using the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search.
+	/// Each group maintains a statistics aggregation for its associated searches.
+	/// You can retrieve these stats using the indices stats API.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Stats(ICollection<string>? stats)
 	{
@@ -2844,7 +3310,12 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to `false`.<br/>You can pass `_source: true` to return both source fields and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit.
+	/// If no fields are specified, no stored fields are included in the response.
+	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
+	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{
@@ -2853,7 +3324,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Defines a suggester that provides similar looking terms based on a provided text.</para>
+	/// <para>
+	/// Defines a suggester that provides similar looking terms based on a provided text.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? suggest)
 	{
@@ -2880,7 +3353,16 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.<br/>Use with caution.<br/>Elasticsearch applies this parameter to each shard handling the request.<br/>When possible, let Elasticsearch perform early termination automatically.<br/>Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.<br/>If set to `0` (default), the query does not terminate early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// If a query reaches this limit, Elasticsearch terminates the query early.
+	/// Elasticsearch collects documents before sorting.
+	/// Use with caution.
+	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// When possible, let Elasticsearch perform early termination automatically.
+	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor TerminateAfter(long? terminateAfter)
 	{
@@ -2889,7 +3371,11 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard.<br/>If no response is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Timeout(string? timeout)
 	{
@@ -2898,7 +3384,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor TrackScores(bool? trackScores = true)
 	{
@@ -2907,7 +3395,11 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately.<br/>If `true`, the exact number of hits is returned at the cost of some performance.<br/>If `false`, the  response does not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately.
+	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
+	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -2916,7 +3408,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public SearchRequestDescriptor Version(bool? version = true)
 	{

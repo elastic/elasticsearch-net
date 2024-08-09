@@ -30,43 +30,57 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 public sealed partial class RuntimeField
 {
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFields>? FetchFields { get; set; }
 
 	/// <summary>
-	/// <para>A custom format for `date` type runtime fields.</para>
+	/// <para>
+	/// A custom format for <c>date</c> type runtime fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? InputField { get; set; }
 
 	/// <summary>
-	/// <para>Painless script executed at query time.</para>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? TargetIndex { get; set; }
 
 	/// <summary>
-	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// <para>
+	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType Type { get; set; }
@@ -94,7 +108,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> FetchFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFields>? fetchFields)
 	{
@@ -133,7 +149,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>A custom format for `date` type runtime fields.</para>
+	/// <para>
+	/// A custom format for <c>date</c> type runtime fields.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Format(string? format)
 	{
@@ -142,7 +160,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> InputField(Elastic.Clients.Elasticsearch.Serverless.Field? inputField)
 	{
@@ -151,7 +171,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> InputField<TValue>(Expression<Func<TDocument, TValue>> inputField)
 	{
@@ -160,7 +182,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> InputField(Expression<Func<TDocument, object>> inputField)
 	{
@@ -169,7 +193,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Painless script executed at query time.</para>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -196,7 +222,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -205,7 +233,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -214,7 +244,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -223,7 +255,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.Serverless.IndexName? targetIndex)
 	{
@@ -232,7 +266,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// <para>
+	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType type)
 	{
@@ -342,7 +378,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor FetchFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFields>? fetchFields)
 	{
@@ -381,7 +419,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>A custom format for `date` type runtime fields.</para>
+	/// <para>
+	/// A custom format for <c>date</c> type runtime fields.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor Format(string? format)
 	{
@@ -390,7 +430,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor InputField(Elastic.Clients.Elasticsearch.Serverless.Field? inputField)
 	{
@@ -399,7 +441,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor InputField<TDocument, TValue>(Expression<Func<TDocument, TValue>> inputField)
 	{
@@ -408,7 +452,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor InputField<TDocument>(Expression<Func<TDocument, object>> inputField)
 	{
@@ -417,7 +463,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>Painless script executed at query time.</para>
+	/// <para>
+	/// Painless script executed at query time.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -444,7 +492,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -453,7 +503,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -462,7 +514,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
@@ -471,7 +525,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>For type `lookup`</para>
+	/// <para>
+	/// For type <c>lookup</c>
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor TargetIndex(Elastic.Clients.Elasticsearch.Serverless.IndexName? targetIndex)
 	{
@@ -480,7 +536,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	}
 
 	/// <summary>
-	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// <para>
+	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
+	/// </para>
 	/// </summary>
 	public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType type)
 	{

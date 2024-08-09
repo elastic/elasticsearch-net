@@ -30,67 +30,91 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class RequestCounts
 {
 	/// <summary>
-	/// <para>Number of Get Blob requests (Azure)</para>
+	/// <para>
+	/// Number of Get Blob requests (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("GetBlob")]
 	public long? Getblob { get; init; }
 
 	/// <summary>
-	/// <para>Number of Get Blob Properties requests (Azure)</para>
+	/// <para>
+	/// Number of Get Blob Properties requests (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("GetBlobProperties")]
 	public long? Getblobproperties { get; init; }
 
 	/// <summary>
-	/// <para>Number of get object requests (GCP, S3)</para>
+	/// <para>
+	/// Number of get object requests (GCP, S3)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("GetObject")]
 	public long? Getobject { get; init; }
 
 	/// <summary>
-	/// <para>Number of insert object requests, including simple, multipart and resumable uploads. Resumable uploads<br/>can perform multiple http requests to insert a single object but they are considered as a single request<br/>since they are billed as an individual operation. (GCP)</para>
+	/// <para>
+	/// Number of insert object requests, including simple, multipart and resumable uploads. Resumable uploads
+	/// can perform multiple http requests to insert a single object but they are considered as a single request
+	/// since they are billed as an individual operation. (GCP)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("InsertObject")]
 	public long? Insertobject { get; init; }
 
 	/// <summary>
-	/// <para>Number of List Blobs requests (Azure)</para>
+	/// <para>
+	/// Number of List Blobs requests (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ListBlobs")]
 	public long? Listblobs { get; init; }
 
 	/// <summary>
-	/// <para>Number of list objects requests (GCP, S3)</para>
+	/// <para>
+	/// Number of list objects requests (GCP, S3)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ListObjects")]
 	public long? Listobjects { get; init; }
 
 	/// <summary>
-	/// <para>Number of Put Blob requests (Azure)</para>
+	/// <para>
+	/// Number of Put Blob requests (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("PutBlob")]
 	public long? Putblob { get; init; }
 
 	/// <summary>
-	/// <para>Number of Put Block (Azure)</para>
+	/// <para>
+	/// Number of Put Block (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("PutBlock")]
 	public long? Putblock { get; init; }
 
 	/// <summary>
-	/// <para>Number of Put Block List requests</para>
+	/// <para>
+	/// Number of Put Block List requests
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("PutBlockList")]
 	public long? Putblocklist { get; init; }
 
 	/// <summary>
-	/// <para>Number of Multipart requests, including CreateMultipartUpload, UploadPart and CompleteMultipartUpload requests (S3)</para>
+	/// <para>
+	/// Number of Multipart requests, including CreateMultipartUpload, UploadPart and CompleteMultipartUpload requests (S3)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("PutMultipartObject")]
 	public long? Putmultipartobject { get; init; }
 
 	/// <summary>
-	/// <para>Number of PutObject requests (S3)</para>
+	/// <para>
+	/// Number of PutObject requests (S3)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("PutObject")]
 	public long? Putobject { get; init; }

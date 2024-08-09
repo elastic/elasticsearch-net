@@ -82,7 +82,9 @@ public sealed partial class NodeInfoDiscover
 	public IReadOnlyCollection<string>? SeedProviders { get; init; }
 
 	/// <summary>
-	/// <para>Additional or alternative settings</para>
+	/// <para>
+	/// Additional or alternative settings
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Settings { get; init; }
 	public string? Type { get; init; }

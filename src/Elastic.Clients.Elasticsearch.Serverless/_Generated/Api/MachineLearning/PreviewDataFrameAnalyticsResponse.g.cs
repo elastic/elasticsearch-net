@@ -29,7 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class PreviewDataFrameAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>An array of objects that contain feature name and value pairs. The features have been processed and indicate what will be sent to the model for training.</para>
+	/// <para>
+	/// An array of objects that contain feature name and value pairs. The features have been processed and indicate what will be sent to the model for training.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_values")]
 	public IReadOnlyCollection<IReadOnlyDictionary<string, string>> FeatureValues { get; init; }

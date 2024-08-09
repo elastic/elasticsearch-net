@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class NestedAggregation
 {
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
@@ -58,7 +62,9 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -67,7 +73,9 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
 	{
@@ -99,7 +107,9 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
@@ -108,7 +118,9 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -117,7 +129,9 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The path to the field of type `nested`.</para>
+	/// <para>
+	/// The path to the field of type <c>nested</c>.
+	/// </para>
 	/// </summary>
 	public NestedAggregationDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
 	{

@@ -29,31 +29,41 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class HealthResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The number of active primary shards.</para>
+	/// <para>
+	/// The number of active primary shards.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("active_primary_shards")]
 	public int ActivePrimaryShards { get; init; }
 
 	/// <summary>
-	/// <para>The total number of active primary and replica shards.</para>
+	/// <para>
+	/// The total number of active primary and replica shards.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("active_shards")]
 	public int ActiveShards { get; init; }
 
 	/// <summary>
-	/// <para>The ratio of active shards in the cluster expressed as a percentage.</para>
+	/// <para>
+	/// The ratio of active shards in the cluster expressed as a percentage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("active_shards_percent_as_number")]
 	public double ActiveShardsPercentAsNumber { get; init; }
 
 	/// <summary>
-	/// <para>The name of the cluster.</para>
+	/// <para>
+	/// The name of the cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
-	/// <para>The number of shards whose allocation has been delayed by the timeout settings.</para>
+	/// <para>
+	/// The number of shards whose allocation has been delayed by the timeout settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delayed_unassigned_shards")]
 	public int DelayedUnassignedShards { get; init; }
@@ -62,37 +72,49 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.Cluster.IndexHealthStats>? Indices { get; init; }
 
 	/// <summary>
-	/// <para>The number of shards that are under initialization.</para>
+	/// <para>
+	/// The number of shards that are under initialization.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initializing_shards")]
 	public int InitializingShards { get; init; }
 
 	/// <summary>
-	/// <para>The number of nodes that are dedicated data nodes.</para>
+	/// <para>
+	/// The number of nodes that are dedicated data nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_data_nodes")]
 	public int NumberOfDataNodes { get; init; }
 
 	/// <summary>
-	/// <para>The number of unfinished fetches.</para>
+	/// <para>
+	/// The number of unfinished fetches.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_in_flight_fetch")]
 	public int NumberOfInFlightFetch { get; init; }
 
 	/// <summary>
-	/// <para>The number of nodes within the cluster.</para>
+	/// <para>
+	/// The number of nodes within the cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_nodes")]
 	public int NumberOfNodes { get; init; }
 
 	/// <summary>
-	/// <para>The number of cluster-level changes that have not yet been executed.</para>
+	/// <para>
+	/// The number of cluster-level changes that have not yet been executed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_pending_tasks")]
 	public int NumberOfPendingTasks { get; init; }
 
 	/// <summary>
-	/// <para>The number of shards that are under relocation.</para>
+	/// <para>
+	/// The number of shards that are under relocation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("relocating_shards")]
 	public int RelocatingShards { get; init; }
@@ -100,25 +122,33 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	public Elastic.Clients.Elasticsearch.Serverless.HealthStatus Status { get; init; }
 
 	/// <summary>
-	/// <para>The time since the earliest initiated task is waiting for being performed.</para>
+	/// <para>
+	/// The time since the earliest initiated task is waiting for being performed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? TaskMaxWaitingInQueue { get; init; }
 
 	/// <summary>
-	/// <para>The time expressed in milliseconds since the earliest initiated task is waiting for being performed.</para>
+	/// <para>
+	/// The time expressed in milliseconds since the earliest initiated task is waiting for being performed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue_millis")]
 	public long TaskMaxWaitingInQueueMillis { get; init; }
 
 	/// <summary>
-	/// <para>If false the response returned within the period of time that is specified by the timeout parameter (30s by default)</para>
+	/// <para>
+	/// If false the response returned within the period of time that is specified by the timeout parameter (30s by default)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
 
 	/// <summary>
-	/// <para>The number of shards that are not allocated.</para>
+	/// <para>
+	/// The number of shards that are not allocated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }

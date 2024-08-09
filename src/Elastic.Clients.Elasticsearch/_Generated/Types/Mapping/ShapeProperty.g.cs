@@ -28,7 +28,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
 /// <summary>
-/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para>
+/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
+/// rectangles and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapeProperty : IProperty
@@ -52,7 +55,9 @@ public sealed partial class ShapeProperty : IProperty
 	public bool? IgnoreZValue { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -70,7 +75,10 @@ public sealed partial class ShapeProperty : IProperty
 }
 
 /// <summary>
-/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para>
+/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
+/// rectangles and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptor<ShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<ShapeProperty>
@@ -158,7 +166,9 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ShapePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -309,7 +319,10 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 }
 
 /// <summary>
-/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para>
+/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
+/// rectangles and polygons.
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
@@ -397,7 +410,9 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ShapePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalysisAnalyzedFields
 {
 	/// <summary>
-	/// <para>An array of strings that defines the fields that will be included in the analysis.</para>
+	/// <para>
+	/// An array of strings that defines the fields that will be included in the analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("excludes")]
 	public ICollection<string> Excludes { get; set; }
 
 	/// <summary>
-	/// <para>An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.</para>
+	/// <para>
+	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("includes")]
 	public ICollection<string> Includes { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class DataframeAnalysisAnalyzedFieldsDescriptor : Serializ
 	private ICollection<string> IncludesValue { get; set; }
 
 	/// <summary>
-	/// <para>An array of strings that defines the fields that will be included in the analysis.</para>
+	/// <para>
+	/// An array of strings that defines the fields that will be included in the analysis.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisAnalyzedFieldsDescriptor Excludes(ICollection<string> excludes)
 	{
@@ -63,7 +69,9 @@ public sealed partial class DataframeAnalysisAnalyzedFieldsDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.</para>
+	/// <para>
+	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisAnalyzedFieldsDescriptor Includes(ICollection<string> includes)
 	{

@@ -34,7 +34,9 @@ public sealed partial class ValidateDetectorRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Validates an anomaly detection detector.</para>
+/// <para>
+/// Validates an anomaly detection detector.
+/// </para>
 /// </summary>
 public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetectorRequestParameters>, ISelfSerializable
 {
@@ -56,7 +58,9 @@ public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetec
 }
 
 /// <summary>
-/// <para>Validates an anomaly detection detector.</para>
+/// <para>
+/// Validates an anomaly detection detector.
+/// </para>
 /// </summary>
 public sealed partial class ValidateDetectorRequestDescriptor<TDocument> : RequestDescriptor<ValidateDetectorRequestDescriptor<TDocument>, ValidateDetectorRequestParameters>
 {
@@ -106,7 +110,9 @@ public sealed partial class ValidateDetectorRequestDescriptor<TDocument> : Reque
 }
 
 /// <summary>
-/// <para>Validates an anomaly detection detector.</para>
+/// <para>
+/// Validates an anomaly detection detector.
+/// </para>
 /// </summary>
 public sealed partial class ValidateDetectorRequestDescriptor : RequestDescriptor<ValidateDetectorRequestDescriptor, ValidateDetectorRequestParameters>
 {

@@ -129,24 +129,36 @@ public sealed partial class PrefixQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public string? Rewrite { get; set; }
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public string Value { get; set; }
 
@@ -169,7 +181,12 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	private string ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -178,7 +195,10 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -211,7 +231,9 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -220,7 +242,9 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Value(string value)
 	{
@@ -282,7 +306,12 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	private string ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor Boost(float? boost)
 	{
@@ -291,7 +320,10 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	}
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -324,7 +356,9 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor Rewrite(string? rewrite)
 	{
@@ -333,7 +367,9 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	}
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public PrefixQueryDescriptor Value(string value)
 	{

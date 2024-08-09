@@ -34,7 +34,9 @@ public sealed partial class PauseFollowRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+/// <para>
+/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// </para>
 /// </summary>
 public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequest
 }
 
 /// <summary>
-/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+/// <para>
+/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// </para>
 /// </summary>
 public sealed partial class PauseFollowRequestDescriptor<TDocument> : RequestDescriptor<PauseFollowRequestDescriptor<TDocument>, PauseFollowRequestParameters>
 {
@@ -86,7 +90,9 @@ public sealed partial class PauseFollowRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+/// <para>
+/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// </para>
 /// </summary>
 public sealed partial class PauseFollowRequestDescriptor : RequestDescriptor<PauseFollowRequestDescriptor, PauseFollowRequestParameters>
 {

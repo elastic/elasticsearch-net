@@ -30,61 +30,84 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class GsubProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>The pattern to be replaced.</para>
+	/// <para>
+	/// The pattern to be replaced.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
 	/// <summary>
-	/// <para>The string to replace the matching patterns with.</para>
+	/// <para>
+	/// The string to replace the matching patterns with.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string Replacement { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
@@ -115,7 +138,10 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -124,7 +150,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -133,7 +161,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -142,7 +172,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -151,7 +183,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -160,7 +194,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -169,7 +205,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -178,7 +216,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -217,7 +257,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The pattern to be replaced.</para>
+	/// <para>
+	/// The pattern to be replaced.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Pattern(string pattern)
 	{
@@ -226,7 +268,9 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The string to replace the matching patterns with.</para>
+	/// <para>
+	/// The string to replace the matching patterns with.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Replacement(string replacement)
 	{
@@ -235,7 +279,10 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -244,7 +291,10 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -253,7 +303,10 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -262,7 +315,10 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -373,7 +429,10 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Description(string? description)
 	{
@@ -382,7 +441,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -391,7 +452,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -400,7 +463,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to apply the replacement to.</para>
+	/// <para>
+	/// The field to apply the replacement to.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -409,7 +474,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor If(string? value)
 	{
@@ -418,7 +485,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -427,7 +496,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -436,7 +507,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -475,7 +548,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The pattern to be replaced.</para>
+	/// <para>
+	/// The pattern to be replaced.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Pattern(string pattern)
 	{
@@ -484,7 +559,9 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The string to replace the matching patterns with.</para>
+	/// <para>
+	/// The string to replace the matching patterns with.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Replacement(string replacement)
 	{
@@ -493,7 +570,10 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor Tag(string? tag)
 	{
@@ -502,7 +582,10 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -511,7 +594,10 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -520,7 +606,10 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public GsubProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

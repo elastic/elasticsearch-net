@@ -30,25 +30,43 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class UntypedDistanceFeatureQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Date or point of origin used to calculate distances.<br/>If the `field` value is a `date` or `date_nanos` field, the `origin` value must be a date.<br/>Date Math, such as `now-1h`, is supported.<br/>If the field value is a `geo_point` field, the `origin` value must be a geopoint.</para>
+	/// <para>
+	/// Date or point of origin used to calculate distances.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
+	/// Date Math, such as <c>now-1h</c>, is supported.
+	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("origin")]
 	public object Origin { get; set; }
 
 	/// <summary>
-	/// <para>Distance from the `origin` at which relevance scores receive half of the `boost` value.<br/>If the `field` value is a `date` or `date_nanos` field, the `pivot` value must be a time unit, such as `1h` or `10d`. If the `field` value is a `geo_point` field, the `pivot` value must be a distance unit, such as `1km` or `12m`.</para>
+	/// <para>
+	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public object Pivot { get; set; }
@@ -71,7 +89,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -80,7 +103,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -89,7 +117,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -98,7 +131,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -107,7 +145,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Date or point of origin used to calculate distances.<br/>If the `field` value is a `date` or `date_nanos` field, the `origin` value must be a date.<br/>Date Math, such as `now-1h`, is supported.<br/>If the field value is a `geo_point` field, the `origin` value must be a geopoint.</para>
+	/// <para>
+	/// Date or point of origin used to calculate distances.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
+	/// Date Math, such as <c>now-1h</c>, is supported.
+	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Origin(object origin)
 	{
@@ -116,7 +159,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Distance from the `origin` at which relevance scores receive half of the `boost` value.<br/>If the `field` value is a `date` or `date_nanos` field, the `pivot` value must be a time unit, such as `1h` or `10d`. If the `field` value is a `geo_point` field, the `pivot` value must be a distance unit, such as `1km` or `12m`.</para>
+	/// <para>
+	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor<TDocument> Pivot(object pivot)
 	{
@@ -170,7 +216,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Boost(float? boost)
 	{
@@ -179,7 +230,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -188,7 +244,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -197,7 +258,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Name of the field used to calculate distances. This field must meet the following criteria:<br/>be a `date`, `date_nanos` or `geo_point` field;<br/>have an `index` mapping parameter value of `true`, which is the default;<br/>have an `doc_values` mapping parameter value of `true`, which is the default.</para>
+	/// <para>
+	/// Name of the field used to calculate distances. This field must meet the following criteria:
+	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
+	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
+	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -206,7 +272,12 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Date or point of origin used to calculate distances.<br/>If the `field` value is a `date` or `date_nanos` field, the `origin` value must be a date.<br/>Date Math, such as `now-1h`, is supported.<br/>If the field value is a `geo_point` field, the `origin` value must be a geopoint.</para>
+	/// <para>
+	/// Date or point of origin used to calculate distances.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
+	/// Date Math, such as <c>now-1h</c>, is supported.
+	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Origin(object origin)
 	{
@@ -215,7 +286,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Distance from the `origin` at which relevance scores receive half of the `boost` value.<br/>If the `field` value is a `date` or `date_nanos` field, the `pivot` value must be a time unit, such as `1h` or `10d`. If the `field` value is a `geo_point` field, the `pivot` value must be a distance unit, such as `1km` or `12m`.</para>
+	/// <para>
+	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
+	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
+	/// </para>
 	/// </summary>
 	public UntypedDistanceFeatureQueryDescriptor Pivot(object pivot)
 	{

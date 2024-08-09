@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class DeleteInferenceRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned</para>
+	/// <para>
+	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields</para>
+	/// <para>
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete an inference endpoint</para>
+/// <para>
+/// Delete an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenceRequestParameters>
 {
@@ -64,20 +70,26 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 	internal override string OperationName => "inference.delete";
 
 	/// <summary>
-	/// <para>When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned</para>
+	/// <para>
+	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields</para>
+	/// <para>
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete an inference endpoint</para>
+/// <para>
+/// Delete an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class DeleteInferenceRequestDescriptor : RequestDescriptor<DeleteInferenceRequestDescriptor, DeleteInferenceRequestParameters>
 {

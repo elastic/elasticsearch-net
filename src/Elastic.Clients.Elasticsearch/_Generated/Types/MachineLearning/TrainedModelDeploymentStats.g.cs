@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelDeploymentStats
 {
 	/// <summary>
-	/// <para>The detailed allocation status for the deployment.</para>
+	/// <para>
+	/// The detailed allocation status for the deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocation_status")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus AllocationStatus { get; init; }
@@ -38,79 +40,110 @@ public sealed partial class TrainedModelDeploymentStats
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; init; }
 
 	/// <summary>
-	/// <para>The unique identifier for the trained model deployment.</para>
+	/// <para>
+	/// The unique identifier for the trained model deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deployment_id")]
 	public string DeploymentId { get; init; }
 
 	/// <summary>
-	/// <para>The sum of `error_count` for all nodes in the deployment.</para>
+	/// <para>
+	/// The sum of <c>error_count</c> for all nodes in the deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error_count")]
 	public int ErrorCount { get; init; }
 
 	/// <summary>
-	/// <para>The sum of `inference_count` for all nodes in the deployment.</para>
+	/// <para>
+	/// The sum of <c>inference_count</c> for all nodes in the deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_count")]
 	public int InferenceCount { get; init; }
 
 	/// <summary>
-	/// <para>The unique identifier for the trained model.</para>
+	/// <para>
+	/// The unique identifier for the trained model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public string ModelId { get; init; }
 
 	/// <summary>
-	/// <para>The deployment stats for each node that currently has the model allocated.<br/>In serverless, stats are reported for a single unnamed virtual node.</para>
+	/// <para>
+	/// The deployment stats for each node that currently has the model allocated.
+	/// In serverless, stats are reported for a single unnamed virtual node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> Nodes { get; init; }
 
 	/// <summary>
-	/// <para>The number of allocations requested.</para>
+	/// <para>
+	/// The number of allocations requested.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
 	public int NumberOfAllocations { get; init; }
 
 	/// <summary>
-	/// <para>The number of inference requests that can be queued before new requests are rejected.</para>
+	/// <para>
+	/// The number of inference requests that can be queued before new requests are rejected.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("queue_capacity")]
 	public int QueueCapacity { get; init; }
 
 	/// <summary>
-	/// <para>The reason for the current deployment state. Usually only populated when<br/>the model is not deployed to a node.</para>
+	/// <para>
+	/// The reason for the current deployment state. Usually only populated when
+	/// the model is not deployed to a node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reason")]
 	public string Reason { get; init; }
 
 	/// <summary>
-	/// <para>The sum of `rejected_execution_count` for all nodes in the deployment.<br/>Individual nodes reject an inference request if the inference queue is full.<br/>The queue size is controlled by the `queue_capacity` setting in the start<br/>trained model deployment API.</para>
+	/// <para>
+	/// The sum of <c>rejected_execution_count</c> for all nodes in the deployment.
+	/// Individual nodes reject an inference request if the inference queue is full.
+	/// The queue size is controlled by the <c>queue_capacity</c> setting in the start
+	/// trained model deployment API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rejected_execution_count")]
 	public int RejectedExecutionCount { get; init; }
 
 	/// <summary>
-	/// <para>The epoch timestamp when the deployment started.</para>
+	/// <para>
+	/// The epoch timestamp when the deployment started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time")]
 	public long StartTime { get; init; }
 
 	/// <summary>
-	/// <para>The overall state of the deployment.</para>
+	/// <para>
+	/// The overall state of the deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentState State { get; init; }
 
 	/// <summary>
-	/// <para>The number of threads used be each allocation during inference.</para>
+	/// <para>
+	/// The number of threads used be each allocation during inference.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("threads_per_allocation")]
 	public int ThreadsPerAllocation { get; init; }
 
 	/// <summary>
-	/// <para>The sum of `timeout_count` for all nodes in the deployment.</para>
+	/// <para>
+	/// The sum of <c>timeout_count</c> for all nodes in the deployment.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout_count")]
 	public int TimeoutCount { get; init; }

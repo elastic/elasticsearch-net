@@ -32,33 +32,51 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DiskUsageRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the API performs a flush before analysis.<br/>If `false`, the response may not include uncommitted data.</para>
+	/// <para>
+	/// If <c>true</c>, the API performs a flush before analysis.
+	/// If <c>false</c>, the response may not include uncommitted data.
+	/// </para>
 	/// </summary>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Analyzing field disk usage is resource-intensive.<br/>To use the API, this parameter must be set to `true`.</para>
+	/// <para>
+	/// Analyzing field disk usage is resource-intensive.
+	/// To use the API, this parameter must be set to <c>true</c>.
+	/// </para>
 	/// </summary>
 	public bool? RunExpensiveTasks { get => Q<bool?>("run_expensive_tasks"); set => Q("run_expensive_tasks", value); }
 }
 
 /// <summary>
-/// <para>Analyzes the disk usage of each field of an index or data stream.</para>
+/// <para>
+/// Analyzes the disk usage of each field of an index or data stream.
+/// </para>
 /// </summary>
 public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestParameters>
 {
@@ -75,38 +93,56 @@ public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestPara
 	internal override string OperationName => "indices.disk_usage";
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the API performs a flush before analysis.<br/>If `false`, the response may not include uncommitted data.</para>
+	/// <para>
+	/// If <c>true</c>, the API performs a flush before analysis.
+	/// If <c>false</c>, the response may not include uncommitted data.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Analyzing field disk usage is resource-intensive.<br/>To use the API, this parameter must be set to `true`.</para>
+	/// <para>
+	/// Analyzing field disk usage is resource-intensive.
+	/// To use the API, this parameter must be set to <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RunExpensiveTasks { get => Q<bool?>("run_expensive_tasks"); set => Q("run_expensive_tasks", value); }
 }
 
 /// <summary>
-/// <para>Analyzes the disk usage of each field of an index or data stream.</para>
+/// <para>
+/// Analyzes the disk usage of each field of an index or data stream.
+/// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescriptor<DiskUsageRequestDescriptor<TDocument>, DiskUsageRequestParameters>
 {
@@ -146,7 +182,9 @@ public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Analyzes the disk usage of each field of an index or data stream.</para>
+/// <para>
+/// Analyzes the disk usage of each field of an index or data stream.
+/// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor : RequestDescriptor<DiskUsageRequestDescriptor, DiskUsageRequestParameters>
 {

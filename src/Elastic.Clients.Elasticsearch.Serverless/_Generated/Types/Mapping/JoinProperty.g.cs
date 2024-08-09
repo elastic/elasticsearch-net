@@ -39,7 +39,9 @@ public sealed partial class JoinProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -107,7 +109,9 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public JoinPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -258,7 +262,9 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public JoinPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

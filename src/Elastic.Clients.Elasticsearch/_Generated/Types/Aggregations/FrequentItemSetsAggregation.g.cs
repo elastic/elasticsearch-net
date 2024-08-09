@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class FrequentItemSetsAggregation
 {
 	/// <summary>
-	/// <para>Fields to analyze.</para>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
 
 	/// <summary>
-	/// <para>Query that filters documents from analysis.</para>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>The minimum size of one item set.</para>
+	/// <para>
+	/// The minimum size of one item set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_set_size")]
 	public int? MinimumSetSize { get; set; }
 
 	/// <summary>
-	/// <para>The minimum support of one item set.</para>
+	/// <para>
+	/// The minimum support of one item set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_support")]
 	public double? MinimumSupport { get; set; }
 
 	/// <summary>
-	/// <para>The number of top item sets to return.</para>
+	/// <para>
+	/// The number of top item sets to return.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
@@ -82,7 +92,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Fields to analyze.</para>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> fields)
 	{
@@ -121,7 +133,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>Query that filters documents from analysis.</para>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
@@ -148,7 +162,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>The minimum size of one item set.</para>
+	/// <para>
+	/// The minimum size of one item set.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor<TDocument> MinimumSetSize(int? minimumSetSize)
 	{
@@ -157,7 +173,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>The minimum support of one item set.</para>
+	/// <para>
+	/// The minimum support of one item set.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor<TDocument> MinimumSupport(double? minimumSupport)
 	{
@@ -166,7 +184,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor<TDocument> : S
 	}
 
 	/// <summary>
-	/// <para>The number of top item sets to return.</para>
+	/// <para>
+	/// The number of top item sets to return.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -266,7 +286,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Fields to analyze.</para>
+	/// <para>
+	/// Fields to analyze.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> fields)
 	{
@@ -305,7 +327,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>Query that filters documents from analysis.</para>
+	/// <para>
+	/// Query that filters documents from analysis.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
@@ -332,7 +356,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>The minimum size of one item set.</para>
+	/// <para>
+	/// The minimum size of one item set.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor MinimumSetSize(int? minimumSetSize)
 	{
@@ -341,7 +367,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>The minimum support of one item set.</para>
+	/// <para>
+	/// The minimum support of one item set.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor MinimumSupport(double? minimumSupport)
 	{
@@ -350,7 +378,9 @@ public sealed partial class FrequentItemSetsAggregationDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>The number of top item sets to return.</para>
+	/// <para>
+	/// The number of top item sets to return.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsAggregationDescriptor Size(int? size)
 	{

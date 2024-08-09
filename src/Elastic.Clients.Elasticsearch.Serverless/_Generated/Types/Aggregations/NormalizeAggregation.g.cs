@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class NormalizeAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The specific method to apply.</para>
+	/// <para>
+	/// The specific method to apply.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("method")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? Method { get; set; }
@@ -70,7 +79,9 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? MethodValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public NormalizeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -79,7 +90,10 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public NormalizeAggregationDescriptor Format(string? format)
 	{
@@ -88,7 +102,9 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public NormalizeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -97,7 +113,9 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The specific method to apply.</para>
+	/// <para>
+	/// The specific method to apply.
+	/// </para>
 	/// </summary>
 	public NormalizeAggregationDescriptor Method(Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? method)
 	{

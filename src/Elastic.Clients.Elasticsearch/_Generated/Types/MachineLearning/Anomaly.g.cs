@@ -30,145 +30,193 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Anomaly
 {
 	/// <summary>
-	/// <para>The actual value for the bucket.</para>
+	/// <para>
+	/// The actual value for the bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual")]
 	public IReadOnlyCollection<double>? Actual { get; init; }
 
 	/// <summary>
-	/// <para>Information about the factors impacting the initial anomaly score.</para>
+	/// <para>
+	/// Information about the factors impacting the initial anomaly score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("anomaly_score_explanation")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation? AnomalyScoreExplanation { get; init; }
 
 	/// <summary>
-	/// <para>The length of the bucket in seconds. This value matches the `bucket_span` that is specified in the job.</para>
+	/// <para>
+	/// The length of the bucket in seconds. This value matches the <c>bucket_span</c> that is specified in the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_span")]
 	public long BucketSpan { get; init; }
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("by_field_name")]
 	public string? ByFieldName { get; init; }
 
 	/// <summary>
-	/// <para>The value of `by_field_name`.</para>
+	/// <para>
+	/// The value of <c>by_field_name</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("by_field_value")]
 	public string? ByFieldValue { get; init; }
 
 	/// <summary>
-	/// <para>For population analysis, an over field must be specified in the detector. This property contains an array of anomaly records that are the causes for the anomaly that has been identified for the over field. This sub-resource contains the most anomalous records for the `over_field_name`. For scalability reasons, a maximum of the 10 most significant causes of the anomaly are returned. As part of the core analytical modeling, these low-level anomaly records are aggregated for their parent over field record. The `causes` resource contains similar elements to the record resource, namely `actual`, `typical`, `geo_results.actual_point`, `geo_results.typical_point`, `*_field_name` and `*_field_value`. Probability and scores are not applicable to causes.</para>
+	/// <para>
+	/// For population analysis, an over field must be specified in the detector. This property contains an array of anomaly records that are the causes for the anomaly that has been identified for the over field. This sub-resource contains the most anomalous records for the <c>over_field_name</c>. For scalability reasons, a maximum of the 10 most significant causes of the anomaly are returned. As part of the core analytical modeling, these low-level anomaly records are aggregated for their parent over field record. The <c>causes</c> resource contains similar elements to the record resource, namely <c>actual</c>, <c>typical</c>, <c>geo_results.actual_point</c>, <c>geo_results.typical_point</c>, <c>*_field_name</c> and <c>*_field_value</c>. Probability and scores are not applicable to causes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("causes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyCause>? Causes { get; init; }
 
 	/// <summary>
-	/// <para>A unique identifier for the detector.</para>
+	/// <para>
+	/// A unique identifier for the detector.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detector_index")]
 	public int DetectorIndex { get; init; }
 
 	/// <summary>
-	/// <para>Certain functions require a field to operate on, for example, `sum()`. For those functions, this value is the name of the field to be analyzed.</para>
+	/// <para>
+	/// Certain functions require a field to operate on, for example, <c>sum()</c>. For those functions, this value is the name of the field to be analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_name")]
 	public string? FieldName { get; init; }
 
 	/// <summary>
-	/// <para>The function in which the anomaly occurs, as specified in the detector configuration. For example, `max`.</para>
+	/// <para>
+	/// The function in which the anomaly occurs, as specified in the detector configuration. For example, <c>max</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("function")]
 	public string? Function { get; init; }
 
 	/// <summary>
-	/// <para>The description of the function in which the anomaly occurs, as specified in the detector configuration.</para>
+	/// <para>
+	/// The description of the function in which the anomaly occurs, as specified in the detector configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("function_description")]
 	public string? FunctionDescription { get; init; }
 
 	/// <summary>
-	/// <para>If the detector function is `lat_long`, this object contains comma delimited strings for the latitude and longitude of the actual and typical values.</para>
+	/// <para>
+	/// If the detector function is <c>lat_long</c>, this object contains comma delimited strings for the latitude and longitude of the actual and typical values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("geo_results")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.GeoResults? GeoResults { get; init; }
 
 	/// <summary>
-	/// <para>If influencers were specified in the detector configuration, this array contains influencers that contributed to or were to blame for an anomaly.</para>
+	/// <para>
+	/// If influencers were specified in the detector configuration, this array contains influencers that contributed to or were to blame for an anomaly.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencers")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influence>? Influencers { get; init; }
 
 	/// <summary>
-	/// <para>A normalized score between 0-100, which is based on the probability of the anomalousness of this record. This is the initial value that was calculated at the time the bucket was processed.</para>
+	/// <para>
+	/// A normalized score between 0-100, which is based on the probability of the anomalousness of this record. This is the initial value that was calculated at the time the bucket was processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initial_record_score")]
 	public double InitialRecordScore { get; init; }
 
 	/// <summary>
-	/// <para>If true, this is an interim result. In other words, the results are calculated based on partial input data.</para>
+	/// <para>
+	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_interim")]
 	public bool IsInterim { get; init; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("over_field_name")]
 	public string? OverFieldName { get; init; }
 
 	/// <summary>
-	/// <para>The value of `over_field_name`.</para>
+	/// <para>
+	/// The value of <c>over_field_name</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("over_field_value")]
 	public string? OverFieldValue { get; init; }
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("partition_field_name")]
 	public string? PartitionFieldName { get; init; }
 
 	/// <summary>
-	/// <para>The value of `partition_field_name`.</para>
+	/// <para>
+	/// The value of <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("partition_field_value")]
 	public string? PartitionFieldValue { get; init; }
 
 	/// <summary>
-	/// <para>The probability of the individual anomaly occurring, in the range 0 to 1. For example, `0.0000772031`. This value can be held to a high precision of over 300 decimal places, so the `record_score` is provided as a human-readable and friendly interpretation of this.</para>
+	/// <para>
+	/// The probability of the individual anomaly occurring, in the range 0 to 1. For example, <c>0.0000772031</c>. This value can be held to a high precision of over 300 decimal places, so the <c>record_score</c> is provided as a human-readable and friendly interpretation of this.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("probability")]
 	public double Probability { get; init; }
 
 	/// <summary>
-	/// <para>A normalized score between 0-100, which is based on the probability of the anomalousness of this record. Unlike `initial_record_score`, this value will be updated by a re-normalization process as new data is analyzed.</para>
+	/// <para>
+	/// A normalized score between 0-100, which is based on the probability of the anomalousness of this record. Unlike <c>initial_record_score</c>, this value will be updated by a re-normalization process as new data is analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("record_score")]
 	public double RecordScore { get; init; }
 
 	/// <summary>
-	/// <para>Internal. This is always set to `record`.</para>
+	/// <para>
+	/// Internal. This is always set to <c>record</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result_type")]
 	public string ResultType { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket for which these results were calculated.</para>
+	/// <para>
+	/// The start time of the bucket for which these results were calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }
 
 	/// <summary>
-	/// <para>The typical value for the bucket, according to analytical modeling.</para>
+	/// <para>
+	/// The typical value for the bucket, according to analytical modeling.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("typical")]
 	public IReadOnlyCollection<double>? Typical { get; init; }

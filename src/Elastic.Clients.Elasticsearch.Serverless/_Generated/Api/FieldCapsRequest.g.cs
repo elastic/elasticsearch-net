@@ -32,43 +32,63 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class FieldCapsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias,<br/>or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias,
+	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// <para>
+	/// An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
+	/// </para>
 	/// </summary>
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If false, empty fields are not included in the response.</para>
+	/// <para>
+	/// If false, empty fields are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
 	/// <summary>
-	/// <para>If true, unmapped fields are included in the response.</para>
+	/// <para>
+	/// If true, unmapped fields are included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
 	/// <summary>
-	/// <para>Only return results for fields that have one of the types in the list</para>
+	/// <para>
+	/// Only return results for fields that have one of the types in the list
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 }
 
 /// <summary>
-/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// <para>
+/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
+/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
+/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// </para>
 /// </summary>
 public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
 {
@@ -89,69 +109,96 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	internal override string OperationName => "field_caps";
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias,<br/>or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias,
+	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// <para>
+	/// An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
-	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If false, empty fields are not included in the response.</para>
+	/// <para>
+	/// If false, empty fields are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
 	/// <summary>
-	/// <para>If true, unmapped fields are included in the response.</para>
+	/// <para>
+	/// If true, unmapped fields are included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
 	/// <summary>
-	/// <para>Only return results for fields that have one of the types in the list</para>
+	/// <para>
+	/// Only return results for fields that have one of the types in the list
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 
 	/// <summary>
-	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// <para>
+	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? IndexFilter { get; set; }
 
 	/// <summary>
-	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// <para>
+	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
 /// <summary>
-/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// <para>
+/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
+/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
+/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// </para>
 /// </summary>
 public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescriptor<FieldCapsRequestDescriptor<TDocument>, FieldCapsRequestParameters>
 {
@@ -194,7 +241,9 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
 
 	/// <summary>
-	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// <para>
+	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -203,7 +252,9 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
 	{
@@ -230,7 +281,10 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// <para>
+	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -274,7 +328,11 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// <para>
+/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
+/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
+/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// </para>
 /// </summary>
 public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<FieldCapsRequestDescriptor, FieldCapsRequestParameters>
 {
@@ -317,7 +375,9 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
 
 	/// <summary>
-	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// <para>
+	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -326,7 +386,9 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
 	{
@@ -353,7 +415,10 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
+	/// <para>
+	/// Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.
+	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+	/// </para>
 	/// </summary>
 	public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{

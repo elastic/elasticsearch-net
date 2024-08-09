@@ -145,29 +145,42 @@ public sealed partial class WildcardQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public string? Rewrite { get; set; }
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
+	/// </para>
 	/// </summary>
 	public string? Value { get; set; }
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
+	/// </para>
 	/// </summary>
 	public string? Wildcard { get; set; }
 
@@ -191,7 +204,12 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	private string? WildcardValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -200,7 +218,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -233,7 +253,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -242,7 +264,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Value(string? value)
 	{
@@ -251,7 +275,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
 	{
@@ -324,7 +350,12 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	private string? WildcardValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor Boost(float? boost)
 	{
@@ -333,7 +364,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -366,7 +399,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor Rewrite(string? rewrite)
 	{
@@ -375,7 +410,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor Value(string? value)
 	{
@@ -384,7 +421,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// <para>
+	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
+	/// </para>
 	/// </summary>
 	public WildcardQueryDescriptor Wildcard(string? wildcard)
 	{

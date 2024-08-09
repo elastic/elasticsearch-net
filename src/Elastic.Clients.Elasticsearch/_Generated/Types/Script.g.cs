@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class Script
 {
 	/// <summary>
-	/// <para>The `id` for a stored script.</para>
+	/// <para>
+	/// The <c>id</c> for a stored script.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the language the script is written in.</para>
+	/// <para>
+	/// Specifies the language the script is written in.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
@@ -44,13 +48,18 @@ public sealed partial class Script
 	public IDictionary<string, string>? Options { get; set; }
 
 	/// <summary>
-	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// <para>
+	/// Specifies any named parameters that are passed into the script as variables.
+	/// Use parameters instead of hard-coded values to decrease compile time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>The script source.</para>
+	/// <para>
+	/// The script source.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
@@ -73,7 +82,9 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	private string? SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>The `id` for a stored script.</para>
+	/// <para>
+	/// The <c>id</c> for a stored script.
+	/// </para>
 	/// </summary>
 	public ScriptDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -82,7 +93,9 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies the language the script is written in.</para>
+	/// <para>
+	/// Specifies the language the script is written in.
+	/// </para>
 	/// </summary>
 	public ScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang)
 	{
@@ -97,7 +110,10 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// <para>
+	/// Specifies any named parameters that are passed into the script as variables.
+	/// Use parameters instead of hard-coded values to decrease compile time.
+	/// </para>
 	/// </summary>
 	public ScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -106,7 +122,9 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	}
 
 	/// <summary>
-	/// <para>The script source.</para>
+	/// <para>
+	/// The script source.
+	/// </para>
 	/// </summary>
 	public ScriptDescriptor Source(string? source)
 	{

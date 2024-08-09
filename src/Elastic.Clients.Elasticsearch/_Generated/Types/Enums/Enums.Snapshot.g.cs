@@ -32,27 +32,37 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public enum ShardsStatsStage
 {
 	/// <summary>
-	/// <para>Number of shards in the snapshot that are in the started stage of being stored in the repository.</para>
+	/// <para>
+	/// Number of shards in the snapshot that are in the started stage of being stored in the repository.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "STARTED")]
 	Started,
 	/// <summary>
-	/// <para>Number of shards in the snapshot that are in the initializing stage of being stored in the repository.</para>
+	/// <para>
+	/// Number of shards in the snapshot that are in the initializing stage of being stored in the repository.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "INIT")]
 	Init,
 	/// <summary>
-	/// <para>Number of shards in the snapshot that are in the finalizing stage of being stored in the repository.</para>
+	/// <para>
+	/// Number of shards in the snapshot that are in the finalizing stage of being stored in the repository.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "FINALIZE")]
 	Finalize,
 	/// <summary>
-	/// <para>Number of shards in the snapshot that were not successfully stored in the repository.</para>
+	/// <para>
+	/// Number of shards in the snapshot that were not successfully stored in the repository.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "FAILURE")]
 	Failure,
 	/// <summary>
-	/// <para>Number of shards in the snapshot that were successfully stored in the repository.</para>
+	/// <para>
+	/// Number of shards in the snapshot that were successfully stored in the repository.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "DONE")]
 	Done

@@ -30,13 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class StringStatsAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
@@ -44,7 +49,9 @@ public sealed partial class StringStatsAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Shows the probability distribution for all characters.</para>
+	/// <para>
+	/// Shows the probability distribution for all characters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("show_distribution")]
 	public bool? ShowDistribution { get; set; }
@@ -68,7 +75,9 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 	private bool? ShowDistributionValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -77,7 +86,9 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -86,7 +97,9 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -95,7 +108,10 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -128,7 +144,9 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Shows the probability distribution for all characters.</para>
+	/// <para>
+	/// Shows the probability distribution for all characters.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
 	{
@@ -193,7 +211,9 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 	private bool? ShowDistributionValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -202,7 +222,9 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -211,7 +233,9 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -220,7 +244,10 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -253,7 +280,9 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Shows the probability distribution for all characters.</para>
+	/// <para>
+	/// Shows the probability distribution for all characters.
+	/// </para>
 	/// </summary>
 	public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
 	{

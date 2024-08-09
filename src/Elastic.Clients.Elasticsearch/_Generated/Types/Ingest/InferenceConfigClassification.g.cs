@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class InferenceConfigClassification
 {
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// <para>
+	/// Specifies the maximum number of feature importance values per document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// <para>
+	/// Specifies the type of the predicted field to write.
+	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
@@ -77,7 +88,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? numTopClasses)
 	{
@@ -86,7 +99,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// <para>
+	/// Specifies the maximum number of feature importance values per document.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
@@ -95,7 +110,10 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// <para>
+	/// Specifies the type of the predicted field to write.
+	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> PredictionFieldType(string? predictionFieldType)
 	{
@@ -104,7 +122,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
@@ -113,7 +133,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
@@ -122,7 +144,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
 	{
@@ -131,7 +155,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
 	{
@@ -140,7 +166,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField<TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
 	{
@@ -149,7 +177,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Expression<Func<TDocument, object>> topClassesResultsField)
 	{
@@ -209,7 +239,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor NumTopClasses(int? numTopClasses)
 	{
@@ -218,7 +250,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// <para>
+	/// Specifies the maximum number of feature importance values per document.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
@@ -227,7 +261,10 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// <para>
+	/// Specifies the type of the predicted field to write.
+	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor PredictionFieldType(string? predictionFieldType)
 	{
@@ -236,7 +273,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
@@ -245,7 +284,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
@@ -254,7 +295,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 	{
@@ -263,7 +306,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
 	{
@@ -272,7 +317,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
 	{
@@ -281,7 +328,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
+	/// <para>
+	/// Specifies the field to which the top classes are written.
+	/// </para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument>(Expression<Func<TDocument, object>> topClassesResultsField)
 	{

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class LatLonGeoLocation
 {
 	/// <summary>
-	/// <para>Latitude</para>
+	/// <para>
+	/// Latitude
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lat")]
 	public double Lat { get; set; }
 
 	/// <summary>
-	/// <para>Longitude</para>
+	/// <para>
+	/// Longitude
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lon")]
 	public double Lon { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class LatLonGeoLocationDescriptor : SerializableDescriptor
 	private double LonValue { get; set; }
 
 	/// <summary>
-	/// <para>Latitude</para>
+	/// <para>
+	/// Latitude
+	/// </para>
 	/// </summary>
 	public LatLonGeoLocationDescriptor Lat(double lat)
 	{
@@ -63,7 +69,9 @@ public sealed partial class LatLonGeoLocationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Longitude</para>
+	/// <para>
+	/// Longitude
+	/// </para>
 	/// </summary>
 	public LatLonGeoLocationDescriptor Lon(double lon)
 	{

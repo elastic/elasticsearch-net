@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeEvaluationOutlierDetectionMetrics
 {
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
 	/// <summary>
-	/// <para>Accuracy of predictions (per-class and overall).</para>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("confusion_matrix")]
 	public IDictionary<string, object>? ConfusionMatrix { get; set; }
 
 	/// <summary>
-	/// <para>Precision of predictions (per-class and average).</para>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public IDictionary<string, object>? Precision { get; set; }
 
 	/// <summary>
-	/// <para>Recall of predictions (per-class and average).</para>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("recall")]
 	public IDictionary<string, object>? Recall { get; set; }
@@ -70,7 +78,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	private IDictionary<string, object>? RecallValue { get; set; }
 
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? aucRoc)
 	{
@@ -97,7 +107,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	}
 
 	/// <summary>
-	/// <para>Accuracy of predictions (per-class and overall).</para>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -106,7 +118,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	}
 
 	/// <summary>
-	/// <para>Precision of predictions (per-class and average).</para>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -115,7 +129,9 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	}
 
 	/// <summary>
-	/// <para>Recall of predictions (per-class and average).</para>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

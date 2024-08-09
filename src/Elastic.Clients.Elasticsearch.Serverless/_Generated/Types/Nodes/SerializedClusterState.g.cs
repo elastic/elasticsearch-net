@@ -33,7 +33,9 @@ public sealed partial class SerializedClusterState
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.SerializedClusterStateDetail? Diffs { get; init; }
 
 	/// <summary>
-	/// <para>Number of published cluster states.</para>
+	/// <para>
+	/// Number of published cluster states.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("full_states")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.SerializedClusterStateDetail? FullStates { get; init; }

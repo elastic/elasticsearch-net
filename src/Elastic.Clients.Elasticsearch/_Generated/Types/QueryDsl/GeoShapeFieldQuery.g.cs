@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class GeoShapeFieldQuery
 {
 	/// <summary>
-	/// <para>Query using an indexed shape retrieved from the the specified document and path.</para>
+	/// <para>
+	/// Query using an indexed shape retrieved from the the specified document and path.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_shape")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? IndexedShape { get; set; }
 
 	/// <summary>
-	/// <para>Spatial relation operator used to search a geo field.</para>
+	/// <para>
+	/// Spatial relation operator used to search a geo field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("relation")]
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? Relation { get; set; }
@@ -59,7 +63,9 @@ public sealed partial class GeoShapeFieldQueryDescriptor<TDocument> : Serializab
 	private object? ShapeValue { get; set; }
 
 	/// <summary>
-	/// <para>Query using an indexed shape retrieved from the the specified document and path.</para>
+	/// <para>
+	/// Query using an indexed shape retrieved from the the specified document and path.
+	/// </para>
 	/// </summary>
 	public GeoShapeFieldQueryDescriptor<TDocument> IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? indexedShape)
 	{
@@ -86,7 +92,9 @@ public sealed partial class GeoShapeFieldQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Spatial relation operator used to search a geo field.</para>
+	/// <para>
+	/// Spatial relation operator used to search a geo field.
+	/// </para>
 	/// </summary>
 	public GeoShapeFieldQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? relation)
 	{
@@ -150,7 +158,9 @@ public sealed partial class GeoShapeFieldQueryDescriptor : SerializableDescripto
 	private object? ShapeValue { get; set; }
 
 	/// <summary>
-	/// <para>Query using an indexed shape retrieved from the the specified document and path.</para>
+	/// <para>
+	/// Query using an indexed shape retrieved from the the specified document and path.
+	/// </para>
 	/// </summary>
 	public GeoShapeFieldQueryDescriptor IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? indexedShape)
 	{
@@ -177,7 +187,9 @@ public sealed partial class GeoShapeFieldQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Spatial relation operator used to search a geo field.</para>
+	/// <para>
+	/// Spatial relation operator used to search a geo field.
+	/// </para>
 	/// </summary>
 	public GeoShapeFieldQueryDescriptor Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? relation)
 	{
