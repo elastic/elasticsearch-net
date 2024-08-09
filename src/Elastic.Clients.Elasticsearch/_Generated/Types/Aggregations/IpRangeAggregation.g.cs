@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class IpRangeAggregation
 {
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Array of IP ranges.</para>
+	/// <para>
+	/// Array of IP ranges.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ranges")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
@@ -59,7 +63,9 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -68,7 +74,9 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -77,7 +85,9 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -86,7 +96,9 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>Array of IP ranges.</para>
+	/// <para>
+	/// Array of IP ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{
@@ -183,7 +195,9 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -192,7 +206,9 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -201,7 +217,9 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are used to build ranges.</para>
+	/// <para>
+	/// The date field whose values are used to build ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -210,7 +228,9 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Array of IP ranges.</para>
+	/// <para>
+	/// Array of IP ranges.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{

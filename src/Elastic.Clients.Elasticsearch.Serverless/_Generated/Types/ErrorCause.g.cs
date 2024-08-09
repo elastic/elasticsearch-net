@@ -97,7 +97,10 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 }
 
 /// <summary>
-/// <para>Cause and details about a request failure. This class defines the properties common to all error types.<br/>Additional details are also provided, that depend on the error type.</para>
+/// <para>
+/// Cause and details about a request failure. This class defines the properties common to all error types.
+/// Additional details are also provided, that depend on the error type.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(ErrorCauseConverter))]
 public sealed partial class ErrorCause
@@ -105,24 +108,32 @@ public sealed partial class ErrorCause
 	public Elastic.Clients.Elasticsearch.Serverless.ErrorCause? CausedBy { get; init; }
 
 	/// <summary>
-	/// <para>Additional details about the error</para>
+	/// <para>
+	/// Additional details about the error
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 
 	/// <summary>
-	/// <para>A human-readable explanation of the error, in english</para>
+	/// <para>
+	/// A human-readable explanation of the error, in english
+	/// </para>
 	/// </summary>
 	public string? Reason { get; init; }
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ErrorCause>? RootCause { get; init; }
 
 	/// <summary>
-	/// <para>The server stack trace. Present only if the `error_trace=true` parameter was sent with the request.</para>
+	/// <para>
+	/// The server stack trace. Present only if the <c>error_trace=true</c> parameter was sent with the request.
+	/// </para>
 	/// </summary>
 	public string? StackTrace { get; init; }
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ErrorCause>? Suppressed { get; init; }
 
 	/// <summary>
-	/// <para>The type of error</para>
+	/// <para>
+	/// The type of error
+	/// </para>
 	/// </summary>
 	public string Type { get; init; }
 }

@@ -30,61 +30,85 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class DateHistogramAggregation
 {
 	/// <summary>
-	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// <para>
+	/// Calendar-aware interval.
+	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? CalendarInterval { get; set; }
 
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("extended_bounds")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? ExtendedBounds { get; set; }
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// <para>
+	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? FixedInterval { get; set; }
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Limits the histogram to specified bounds.</para>
+	/// <para>
+	/// Limits the histogram to specified bounds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hard_bounds")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? HardBounds { get; set; }
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public DateTimeOffset? Missing { get; set; }
 
 	/// <summary>
-	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// <para>
+	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("offset")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Offset { get; set; }
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
@@ -95,7 +119,10 @@ public sealed partial class DateHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// <para>
+	/// Time zone used for bucketing and rounding.
+	/// Defaults to Coordinated Universal Time (UTC).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
@@ -133,7 +160,10 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// <para>
+	/// Calendar-aware interval.
+	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? calendarInterval)
 	{
@@ -142,7 +172,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? extendedBounds)
 	{
@@ -169,7 +201,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -178,7 +212,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -187,7 +223,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -196,7 +234,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// <para>
+	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? fixedInterval)
 	{
@@ -205,7 +245,10 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
 	{
@@ -214,7 +257,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Limits the histogram to specified bounds.</para>
+	/// <para>
+	/// Limits the histogram to specified bounds.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? hardBounds)
 	{
@@ -241,7 +286,10 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
@@ -250,7 +298,10 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 	{
@@ -259,7 +310,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// <para>
+	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Serverless.Duration? offset)
 	{
@@ -268,7 +321,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
@@ -307,7 +362,10 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// <para>
+	/// Time zone used for bucketing and rounding.
+	/// Defaults to Coordinated Universal Time (UTC).
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -459,7 +517,10 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// <para>
+	/// Calendar-aware interval.
+	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? calendarInterval)
 	{
@@ -468,7 +529,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? extendedBounds)
 	{
@@ -495,7 +558,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -504,7 +569,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -513,7 +580,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The date field whose values are use to build a histogram.</para>
+	/// <para>
+	/// The date field whose values are use to build a histogram.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -522,7 +591,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// <para>
+	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? fixedInterval)
 	{
@@ -531,7 +602,10 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Format(string? format)
 	{
@@ -540,7 +614,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Limits the histogram to specified bounds.</para>
+	/// <para>
+	/// Limits the histogram to specified bounds.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? hardBounds)
 	{
@@ -567,7 +643,10 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor MinDocCount(int? minDocCount)
 	{
@@ -576,7 +655,10 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 	{
@@ -585,7 +667,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// <para>
+	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Serverless.Duration? offset)
 	{
@@ -594,7 +678,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The sort order of the returned buckets.</para>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
@@ -633,7 +719,10 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// <para>
+	/// Time zone used for bucketing and rounding.
+	/// Defaults to Coordinated Universal Time (UTC).
+	/// </para>
 	/// </summary>
 	public DateHistogramAggregationDescriptor TimeZone(string? timeZone)
 	{

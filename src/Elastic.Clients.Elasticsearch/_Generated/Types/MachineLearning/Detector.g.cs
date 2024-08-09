@@ -30,61 +30,81 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Detector
 {
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("by_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? ByFieldName { get; set; }
 
 	/// <summary>
-	/// <para>Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.</para>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("custom_rules")]
 	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
 	/// <summary>
-	/// <para>A description of the detector.</para>
+	/// <para>
+	/// A description of the detector.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detector_description")]
 	public string? DetectorDescription { get; set; }
 
 	/// <summary>
-	/// <para>A unique identifier for the detector. This identifier is based on the order of the detectors in the `analysis_config`, starting at zero. If you specify a value for this property, it is ignored.</para>
+	/// <para>
+	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detector_index")]
 	public int? DetectorIndex { get; set; }
 
 	/// <summary>
-	/// <para>If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set `exclude_frequent` to `all` for both fields, or to `by` or `over` for those specific fields.</para>
+	/// <para>
+	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_frequent")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_name")]
 	public Elastic.Clients.Elasticsearch.Field? FieldName { get; set; }
 
 	/// <summary>
-	/// <para>The analysis function that is used. For example, `count`, `rare`, `mean`, `min`, `max`, or `sum`.</para>
+	/// <para>
+	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("function")]
 	public string? Function { get; set; }
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("over_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? OverFieldName { get; set; }
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("partition_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? PartitionFieldName { get; set; }
 
 	/// <summary>
-	/// <para>Defines whether a new series is used as the null series when there is no value for the by or partition fields.</para>
+	/// <para>
+	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_null")]
 	public bool? UseNull { get; set; }
@@ -113,7 +133,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	private bool? UseNullValue { get; set; }
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> ByFieldName(Elastic.Clients.Elasticsearch.Field? byFieldName)
 	{
@@ -122,7 +144,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> ByFieldName<TValue>(Expression<Func<TDocument, TValue>> byFieldName)
 	{
@@ -131,7 +155,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> ByFieldName(Expression<Func<TDocument, object>> byFieldName)
 	{
@@ -140,7 +166,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.</para>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
 	{
@@ -179,7 +207,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>A description of the detector.</para>
+	/// <para>
+	/// A description of the detector.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> DetectorDescription(string? detectorDescription)
 	{
@@ -188,7 +218,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>A unique identifier for the detector. This identifier is based on the order of the detectors in the `analysis_config`, starting at zero. If you specify a value for this property, it is ignored.</para>
+	/// <para>
+	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> DetectorIndex(int? detectorIndex)
 	{
@@ -197,7 +229,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set `exclude_frequent` to `all` for both fields, or to `by` or `over` for those specific fields.</para>
+	/// <para>
+	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? excludeFrequent)
 	{
@@ -206,7 +240,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> FieldName(Elastic.Clients.Elasticsearch.Field? fieldName)
 	{
@@ -215,7 +251,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> FieldName<TValue>(Expression<Func<TDocument, TValue>> fieldName)
 	{
@@ -224,7 +262,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> FieldName(Expression<Func<TDocument, object>> fieldName)
 	{
@@ -233,7 +273,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The analysis function that is used. For example, `count`, `rare`, `mean`, `min`, `max`, or `sum`.</para>
+	/// <para>
+	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> Function(string? function)
 	{
@@ -242,7 +284,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> OverFieldName(Elastic.Clients.Elasticsearch.Field? overFieldName)
 	{
@@ -251,7 +295,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> OverFieldName<TValue>(Expression<Func<TDocument, TValue>> overFieldName)
 	{
@@ -260,7 +306,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> OverFieldName(Expression<Func<TDocument, object>> overFieldName)
 	{
@@ -269,7 +317,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> PartitionFieldName(Elastic.Clients.Elasticsearch.Field? partitionFieldName)
 	{
@@ -278,7 +328,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> PartitionFieldName<TValue>(Expression<Func<TDocument, TValue>> partitionFieldName)
 	{
@@ -287,7 +339,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> PartitionFieldName(Expression<Func<TDocument, object>> partitionFieldName)
 	{
@@ -296,7 +350,9 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Defines whether a new series is used as the null series when there is no value for the by or partition fields.</para>
+	/// <para>
+	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor<TDocument> UseNull(bool? useNull = true)
 	{
@@ -419,7 +475,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	private bool? UseNullValue { get; set; }
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor ByFieldName(Elastic.Clients.Elasticsearch.Field? byFieldName)
 	{
@@ -428,7 +486,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor ByFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> byFieldName)
 	{
@@ -437,7 +497,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor ByFieldName<TDocument>(Expression<Func<TDocument, object>> byFieldName)
 	{
@@ -446,7 +508,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.</para>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
 	{
@@ -485,7 +549,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>A description of the detector.</para>
+	/// <para>
+	/// A description of the detector.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor DetectorDescription(string? detectorDescription)
 	{
@@ -494,7 +560,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>A unique identifier for the detector. This identifier is based on the order of the detectors in the `analysis_config`, starting at zero. If you specify a value for this property, it is ignored.</para>
+	/// <para>
+	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor DetectorIndex(int? detectorIndex)
 	{
@@ -503,7 +571,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set `exclude_frequent` to `all` for both fields, or to `by` or `over` for those specific fields.</para>
+	/// <para>
+	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? excludeFrequent)
 	{
@@ -512,7 +582,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor FieldName(Elastic.Clients.Elasticsearch.Field? fieldName)
 	{
@@ -521,7 +593,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor FieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> fieldName)
 	{
@@ -530,7 +604,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The `field_name` cannot contain double quotes or backslashes.</para>
+	/// <para>
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor FieldName<TDocument>(Expression<Func<TDocument, object>> fieldName)
 	{
@@ -539,7 +615,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The analysis function that is used. For example, `count`, `rare`, `mean`, `min`, `max`, or `sum`.</para>
+	/// <para>
+	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor Function(string? function)
 	{
@@ -548,7 +626,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor OverFieldName(Elastic.Clients.Elasticsearch.Field? overFieldName)
 	{
@@ -557,7 +637,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor OverFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> overFieldName)
 	{
@@ -566,7 +648,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.</para>
+	/// <para>
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor OverFieldName<TDocument>(Expression<Func<TDocument, object>> overFieldName)
 	{
@@ -575,7 +659,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor PartitionFieldName(Elastic.Clients.Elasticsearch.Field? partitionFieldName)
 	{
@@ -584,7 +670,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor PartitionFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> partitionFieldName)
 	{
@@ -593,7 +681,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.</para>
+	/// <para>
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor PartitionFieldName<TDocument>(Expression<Func<TDocument, object>> partitionFieldName)
 	{
@@ -602,7 +692,9 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	}
 
 	/// <summary>
-	/// <para>Defines whether a new series is used as the null series when there is no value for the by or partition fields.</para>
+	/// <para>
+	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
+	/// </para>
 	/// </summary>
 	public DetectorDescriptor UseNull(bool? useNull = true)
 	{

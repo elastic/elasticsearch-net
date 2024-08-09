@@ -32,48 +32,66 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public sealed partial class ListRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes detailed information about shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// </para>
 	/// </summary>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
 	/// <summary>
-	/// <para>Key used to group tasks in the response.</para>
+	/// <para>
+	/// Key used to group tasks in the response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of node IDs or names used to limit returned information.</para>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? NodeId { get => Q<ICollection<string>?>("node_id"); set => Q("node_id", value); }
 
 	/// <summary>
-	/// <para>Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.</para>
+	/// <para>
+	/// Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the operation is complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+/// <para>
+/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 {
@@ -86,56 +104,74 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	internal override string OperationName => "tasks.list";
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes detailed information about shard recoveries.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
 	/// <summary>
-	/// <para>Key used to group tasks in the response.</para>
+	/// <para>
+	/// Key used to group tasks in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of node IDs or names used to limit returned information.</para>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? NodeId { get => Q<ICollection<string>?>("node_id"); set => Q("node_id", value); }
 
 	/// <summary>
-	/// <para>Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.</para>
+	/// <para>
+	/// Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of <c>-1</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the operation is complete.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
+/// <para>
+/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>
 {

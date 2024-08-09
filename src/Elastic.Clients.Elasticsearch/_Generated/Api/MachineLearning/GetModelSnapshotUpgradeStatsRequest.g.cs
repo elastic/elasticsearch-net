@@ -32,15 +32,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para> -  Contains wildcard expressions and there are no jobs that match.<br/> -  Contains the _all string or no identifiers and there are no matches.<br/> -  Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value is true, which returns an empty jobs array when there are no matches and the subset of results<br/>when there are partial matches. If this parameter is false, the request returns a 404 status code when there are<br/>no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
+	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
+	/// no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for anomaly detection job model snapshot upgrades.</para>
+/// <para>
+/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+/// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<GetModelSnapshotUpgradeStatsRequestParameters>
 {
@@ -57,16 +81,40 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<G
 	internal override string OperationName => "ml.get_model_snapshot_upgrade_stats";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para> -  Contains wildcard expressions and there are no jobs that match.<br/> -  Contains the _all string or no identifiers and there are no matches.<br/> -  Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value is true, which returns an empty jobs array when there are no matches and the subset of results<br/>when there are partial matches. If this parameter is false, the request returns a 404 status code when there are<br/>no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
+	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
+	/// no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for anomaly detection job model snapshot upgrades.</para>
+/// <para>
+/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+/// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotUpgradeStatsRequestDescriptor : RequestDescriptor<GetModelSnapshotUpgradeStatsRequestDescriptor, GetModelSnapshotUpgradeStatsRequestParameters>
 {

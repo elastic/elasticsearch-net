@@ -85,7 +85,9 @@ public sealed partial class GeoDecayFunction
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.Serverless.GeoLocation, string> Placement { get; set; }
@@ -122,7 +124,9 @@ public sealed partial class GeoDecayFunctionDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public GeoDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? multiValueMode)
 	{
@@ -187,7 +191,9 @@ public sealed partial class GeoDecayFunctionDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public GeoDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? multiValueMode)
 	{

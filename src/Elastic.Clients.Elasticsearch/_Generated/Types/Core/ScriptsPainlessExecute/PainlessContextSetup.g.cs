@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 public sealed partial class PainlessContextSetup
 {
 	/// <summary>
-	/// <para>Document that’s temporarily indexed in-memory and accessible from the script.</para>
+	/// <para>
+	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("document")]
 	public object Document { get; set; }
 
 	/// <summary>
-	/// <para>Index containing a mapping that’s compatible with the indexed document.<br/>You may specify a remote index by prefixing the index with the remote cluster alias.</para>
+	/// <para>
+	/// Index containing a mapping that’s compatible with the indexed document.
+	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
-	/// <para>Use this parameter to specify a query for computing a score.</para>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
@@ -63,7 +70,9 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Document that’s temporarily indexed in-memory and accessible from the script.</para>
+	/// <para>
+	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor<TDocument> Document(object document)
 	{
@@ -72,7 +81,10 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Index containing a mapping that’s compatible with the indexed document.<br/>You may specify a remote index by prefixing the index with the remote cluster alias.</para>
+	/// <para>
+	/// Index containing a mapping that’s compatible with the indexed document.
+	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -81,7 +93,9 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Use this parameter to specify a query for computing a score.</para>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -149,7 +163,9 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Document that’s temporarily indexed in-memory and accessible from the script.</para>
+	/// <para>
+	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor Document(object document)
 	{
@@ -158,7 +174,10 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Index containing a mapping that’s compatible with the indexed document.<br/>You may specify a remote index by prefixing the index with the remote cluster alias.</para>
+	/// <para>
+	/// Index containing a mapping that’s compatible with the indexed document.
+	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -167,7 +186,9 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Use this parameter to specify a query for computing a score.</para>
+	/// <para>
+	/// Use this parameter to specify a query for computing a score.
+	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{

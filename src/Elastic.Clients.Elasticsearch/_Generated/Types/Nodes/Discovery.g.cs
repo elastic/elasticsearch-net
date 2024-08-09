@@ -33,19 +33,28 @@ public sealed partial class Discovery
 	public Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats? ClusterApplierStats { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics for the cluster state queue of the node.</para>
+	/// <para>
+	/// Contains statistics for the cluster state queue of the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_state_queue")]
 	public Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue? ClusterStateQueue { get; init; }
 
 	/// <summary>
-	/// <para>Contains low-level statistics about how long various activities took during cluster state updates while the node was the elected master.<br/>Omitted if the node is not master-eligible.<br/>Every field whose name ends in `_time` within this object is also represented as a raw number of milliseconds in a field whose name ends in `_time_millis`.<br/>The human-readable fields with a `_time` suffix are only returned if requested with the `?human=true` query parameter.</para>
+	/// <para>
+	/// Contains low-level statistics about how long various activities took during cluster state updates while the node was the elected master.
+	/// Omitted if the node is not master-eligible.
+	/// Every field whose name ends in <c>_time</c> within this object is also represented as a raw number of milliseconds in a field whose name ends in <c>_time_millis</c>.
+	/// The human-readable fields with a <c>_time</c> suffix are only returned if requested with the <c>?human=true</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_state_update")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? ClusterStateUpdate { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics for the published cluster states of the node.</para>
+	/// <para>
+	/// Contains statistics for the published cluster states of the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("published_cluster_states")]
 	public Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates? PublishedClusterStates { get; init; }

@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class DeleteSnapshotRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes one or more snapshots.</para>
+/// <para>
+/// Deletes one or more snapshots.
+/// </para>
 /// </summary>
 public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotRequestParameters>
 {
@@ -55,14 +59,18 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 	internal override string OperationName => "snapshot.delete";
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes one or more snapshots.</para>
+/// <para>
+/// Deletes one or more snapshots.
+/// </para>
 /// </summary>
 public sealed partial class DeleteSnapshotRequestDescriptor : RequestDescriptor<DeleteSnapshotRequestDescriptor, DeleteSnapshotRequestParameters>
 {

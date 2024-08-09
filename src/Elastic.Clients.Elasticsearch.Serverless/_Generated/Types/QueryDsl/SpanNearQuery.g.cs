@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class SpanNearQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Array of one or more other span type queries.</para>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> Clauses { get; set; }
 
 	/// <summary>
-	/// <para>Controls whether matches are required to be in-order.</para>
+	/// <para>
+	/// Controls whether matches are required to be in-order.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
@@ -50,7 +59,9 @@ public sealed partial class SpanNearQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// <para>
+	/// Controls the maximum number of intervening unmatched positions permitted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
@@ -77,7 +88,12 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	private int? SlopValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -86,7 +102,9 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Array of one or more other span type queries.</para>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> clauses)
 	{
@@ -125,7 +143,9 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Controls whether matches are required to be in-order.</para>
+	/// <para>
+	/// Controls whether matches are required to be in-order.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> InOrder(bool? inOrder = true)
 	{
@@ -140,7 +160,9 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// <para>
+	/// Controls the maximum number of intervening unmatched positions permitted.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Slop(int? slop)
 	{
@@ -228,7 +250,12 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	private int? SlopValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor Boost(float? boost)
 	{
@@ -237,7 +264,9 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	}
 
 	/// <summary>
-	/// <para>Array of one or more other span type queries.</para>
+	/// <para>
+	/// Array of one or more other span type queries.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> clauses)
 	{
@@ -276,7 +305,9 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	}
 
 	/// <summary>
-	/// <para>Controls whether matches are required to be in-order.</para>
+	/// <para>
+	/// Controls whether matches are required to be in-order.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor InOrder(bool? inOrder = true)
 	{
@@ -291,7 +322,9 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	}
 
 	/// <summary>
-	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// <para>
+	/// Controls the maximum number of intervening unmatched positions permitted.
+	/// </para>
 	/// </summary>
 	public SpanNearQueryDescriptor Slop(int? slop)
 	{

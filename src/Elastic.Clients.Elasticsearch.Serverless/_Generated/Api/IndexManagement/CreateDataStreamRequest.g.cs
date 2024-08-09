@@ -31,10 +31,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
 public sealed partial class CreateDataStreamRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create a data stream.<br/>Creates a data stream.<br/>You must have a matching index template with data stream enabled.</para>
+/// <para>
+/// Create a data stream.
+/// Creates a data stream.
+/// You must have a matching index template with data stream enabled.
+/// </para>
 /// </summary>
 public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStreamRequestParameters>
 {
@@ -49,10 +66,30 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.create_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create a data stream.<br/>Creates a data stream.<br/>You must have a matching index template with data stream enabled.</para>
+/// <para>
+/// Create a data stream.
+/// Creates a data stream.
+/// You must have a matching index template with data stream enabled.
+/// </para>
 /// </summary>
 public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptor<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
 {
@@ -69,6 +106,9 @@ public sealed partial class CreateDataStreamRequestDescriptor : RequestDescripto
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.create_data_stream";
+
+	public CreateDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public CreateDataStreamRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
 	public CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.DataStreamName name)
 	{

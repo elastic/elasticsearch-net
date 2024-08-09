@@ -35,7 +35,9 @@ public sealed partial class CacheStatsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieve node-level cache statistics about searchable snapshots.</para>
+/// <para>
+/// Retrieve node-level cache statistics about searchable snapshots.
+/// </para>
 /// </summary>
 public sealed partial class CacheStatsRequest : PlainRequest<CacheStatsRequestParameters>
 {
@@ -60,7 +62,9 @@ public sealed partial class CacheStatsRequest : PlainRequest<CacheStatsRequestPa
 }
 
 /// <summary>
-/// <para>Retrieve node-level cache statistics about searchable snapshots.</para>
+/// <para>
+/// Retrieve node-level cache statistics about searchable snapshots.
+/// </para>
 /// </summary>
 public sealed partial class CacheStatsRequestDescriptor : RequestDescriptor<CacheStatsRequestDescriptor, CacheStatsRequestParameters>
 {

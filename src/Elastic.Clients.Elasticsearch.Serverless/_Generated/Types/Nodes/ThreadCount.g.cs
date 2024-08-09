@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class ThreadCount
 {
 	/// <summary>
-	/// <para>Number of active threads in the thread pool.</para>
+	/// <para>
+	/// Number of active threads in the thread pool.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("active")]
 	public long? Active { get; init; }
 
 	/// <summary>
-	/// <para>Number of tasks completed by the thread pool executor.</para>
+	/// <para>
+	/// Number of tasks completed by the thread pool executor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completed")]
 	public long? Completed { get; init; }
 
 	/// <summary>
-	/// <para>Highest number of active threads in the thread pool.</para>
+	/// <para>
+	/// Highest number of active threads in the thread pool.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("largest")]
 	public long? Largest { get; init; }
 
 	/// <summary>
-	/// <para>Number of tasks in queue for the thread pool.</para>
+	/// <para>
+	/// Number of tasks in queue for the thread pool.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("queue")]
 	public long? Queue { get; init; }
 
 	/// <summary>
-	/// <para>Number of tasks rejected by the thread pool executor.</para>
+	/// <para>
+	/// Number of tasks rejected by the thread pool executor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rejected")]
 	public long? Rejected { get; init; }
 
 	/// <summary>
-	/// <para>Number of threads in the thread pool.</para>
+	/// <para>
+	/// Number of threads in the thread pool.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("threads")]
 	public long? Threads { get; init; }

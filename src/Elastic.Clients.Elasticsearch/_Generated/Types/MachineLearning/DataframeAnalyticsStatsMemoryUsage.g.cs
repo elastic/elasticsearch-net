@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeAnalyticsStatsMemoryUsage
 {
 	/// <summary>
-	/// <para>This value is present when the status is hard_limit and it is a new estimate of how much memory the job needs.</para>
+	/// <para>
+	/// This value is present when the status is hard_limit and it is a new estimate of how much memory the job needs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("memory_reestimate_bytes")]
 	public long? MemoryReestimateBytes { get; init; }
 
 	/// <summary>
-	/// <para>The number of bytes used at the highest peak of memory usage.</para>
+	/// <para>
+	/// The number of bytes used at the highest peak of memory usage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("peak_usage_bytes")]
 	public long PeakUsageBytes { get; init; }
 
 	/// <summary>
-	/// <para>The memory usage status.</para>
+	/// <para>
+	/// The memory usage status.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public string Status { get; init; }
 
 	/// <summary>
-	/// <para>The timestamp when memory usage was calculated.</para>
+	/// <para>
+	/// The timestamp when memory usage was calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long? Timestamp { get; init; }

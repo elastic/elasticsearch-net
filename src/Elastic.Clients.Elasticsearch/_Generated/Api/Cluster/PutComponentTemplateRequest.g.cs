@@ -32,22 +32,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class PutComponentTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing component templates.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing component templates.
+	/// </para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
-/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
-/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
-/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
-/// <para>You can use C-style `/* *\/` block comments in component templates.<br/>You can include comments anywhere in the request body except before the opening curly bracket.</para>
+/// <para>
+/// Create or update a component template.
+/// Creates or updates a component template.
+/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+/// </para>
+/// <para>
+/// An index template can be composed of multiple component templates.
+/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
+/// Component templates are only applied to new data streams and indices as part of a matching index template.
+/// </para>
+/// <para>
+/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+/// </para>
+/// <para>
+/// Component templates are only used during index creation.
+/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
+/// </para>
+/// <para>
+/// You can use C-style <c>/* *\/</c> block comments in component templates.
+/// You can include comments anywhere in the request body except before the opening curly bracket.
+/// </para>
 /// </summary>
 public sealed partial class PutComponentTemplateRequest : PlainRequest<PutComponentTemplateRequestParameters>
 {
@@ -64,48 +86,84 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	internal override string OperationName => "cluster.put_component_template";
 
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing component templates.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing component templates.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deprecated")]
 	public bool? Deprecated { get; set; }
 
 	/// <summary>
-	/// <para>Optional user metadata about the component template.<br/>May have any contents. This map is not automatically generated by Elasticsearch.<br/>This information is stored in the cluster state, so keeping it short is preferable.<br/>To unset `_meta`, replace the template without specifying this information.</para>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// May have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>The template to be applied which includes mappings, settings, or aliases configuration.</para>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
 
 	/// <summary>
-	/// <para>Version number used to manage component templates externally.<br/>This number isn't automatically generated or incremented by Elasticsearch.<br/>To unset a version, replace the template without specifying a version.</para>
+	/// <para>
+	/// Version number used to manage component templates externally.
+	/// This number isn't automatically generated or incremented by Elasticsearch.
+	/// To unset a version, replace the template without specifying a version.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
 /// <summary>
-/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
-/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
-/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
-/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
-/// <para>You can use C-style `/* *\/` block comments in component templates.<br/>You can include comments anywhere in the request body except before the opening curly bracket.</para>
+/// <para>
+/// Create or update a component template.
+/// Creates or updates a component template.
+/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+/// </para>
+/// <para>
+/// An index template can be composed of multiple component templates.
+/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
+/// Component templates are only applied to new data streams and indices as part of a matching index template.
+/// </para>
+/// <para>
+/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+/// </para>
+/// <para>
+/// Component templates are only used during index creation.
+/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
+/// </para>
+/// <para>
+/// You can use C-style <c>/* *\/</c> block comments in component templates.
+/// You can include comments anywhere in the request body except before the opening curly bracket.
+/// </para>
 /// </summary>
 public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateRequestParameters>
 {
@@ -140,7 +198,10 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor<TDocument> Deprecated(bool? deprecated = true)
 	{
@@ -149,7 +210,12 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	}
 
 	/// <summary>
-	/// <para>Optional user metadata about the component template.<br/>May have any contents. This map is not automatically generated by Elasticsearch.<br/>This information is stored in the cluster state, so keeping it short is preferable.<br/>To unset `_meta`, replace the template without specifying this information.</para>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// May have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -158,7 +224,9 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	}
 
 	/// <summary>
-	/// <para>The template to be applied which includes mappings, settings, or aliases configuration.</para>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
 	{
@@ -185,7 +253,11 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	}
 
 	/// <summary>
-	/// <para>Version number used to manage component templates externally.<br/>This number isn't automatically generated or incremented by Elasticsearch.<br/>To unset a version, replace the template without specifying a version.</para>
+	/// <para>
+	/// Version number used to manage component templates externally.
+	/// This number isn't automatically generated or incremented by Elasticsearch.
+	/// To unset a version, replace the template without specifying a version.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor<TDocument> Version(long? version)
 	{
@@ -235,11 +307,28 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 }
 
 /// <summary>
-/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
-/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
-/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
-/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
-/// <para>You can use C-style `/* *\/` block comments in component templates.<br/>You can include comments anywhere in the request body except before the opening curly bracket.</para>
+/// <para>
+/// Create or update a component template.
+/// Creates or updates a component template.
+/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+/// </para>
+/// <para>
+/// An index template can be composed of multiple component templates.
+/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
+/// Component templates are only applied to new data streams and indices as part of a matching index template.
+/// </para>
+/// <para>
+/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+/// </para>
+/// <para>
+/// Component templates are only used during index creation.
+/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
+/// </para>
+/// <para>
+/// You can use C-style <c>/* *\/</c> block comments in component templates.
+/// You can include comments anywhere in the request body except before the opening curly bracket.
+/// </para>
 /// </summary>
 public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescriptor<PutComponentTemplateRequestDescriptor, PutComponentTemplateRequestParameters>
 {
@@ -274,7 +363,10 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor Deprecated(bool? deprecated = true)
 	{
@@ -283,7 +375,12 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Optional user metadata about the component template.<br/>May have any contents. This map is not automatically generated by Elasticsearch.<br/>This information is stored in the cluster state, so keeping it short is preferable.<br/>To unset `_meta`, replace the template without specifying this information.</para>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// May have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -292,7 +389,9 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The template to be applied which includes mappings, settings, or aliases configuration.</para>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
 	{
@@ -319,7 +418,11 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Version number used to manage component templates externally.<br/>This number isn't automatically generated or incremented by Elasticsearch.<br/>To unset a version, replace the template without specifying a version.</para>
+	/// <para>
+	/// Version number used to manage component templates externally.
+	/// This number isn't automatically generated or incremented by Elasticsearch.
+	/// To unset a version, replace the template without specifying a version.
+	/// </para>
 	/// </summary>
 	public PutComponentTemplateRequestDescriptor Version(long? version)
 	{

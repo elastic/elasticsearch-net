@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class RescoreQuery
 {
 	/// <summary>
-	/// <para>The query to use for rescoring.<br/>This query is only run on the Top-K results returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rescore_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
-	/// <para>Relative importance of the original query versus the rescore query.</para>
+	/// <para>
+	/// Relative importance of the original query versus the rescore query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_weight")]
 	public double? QueryWeight { get; set; }
 
 	/// <summary>
-	/// <para>Relative importance of the rescore query versus the original query.</para>
+	/// <para>
+	/// Relative importance of the rescore query versus the original query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rescore_query_weight")]
 	public double? RescoreQueryWeight { get; set; }
 
 	/// <summary>
-	/// <para>Determines how scores are combined.</para>
+	/// <para>
+	/// Determines how scores are combined.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
@@ -72,7 +81,10 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
 
 	/// <summary>
-	/// <para>The query to use for rescoring.<br/>This query is only run on the Top-K results returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -99,7 +111,9 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Relative importance of the original query versus the rescore query.</para>
+	/// <para>
+	/// Relative importance of the original query versus the rescore query.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor<TDocument> QueryWeight(double? queryWeight)
 	{
@@ -108,7 +122,9 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Relative importance of the rescore query versus the original query.</para>
+	/// <para>
+	/// Relative importance of the rescore query versus the original query.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor<TDocument> RescoreQueryWeight(double? rescoreQueryWeight)
 	{
@@ -117,7 +133,9 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Determines how scores are combined.</para>
+	/// <para>
+	/// Determines how scores are combined.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? scoreMode)
 	{
@@ -182,7 +200,10 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
 
 	/// <summary>
-	/// <para>The query to use for rescoring.<br/>This query is only run on the Top-K results returned by the `query` and `post_filter` phases.</para>
+	/// <para>
+	/// The query to use for rescoring.
+	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -209,7 +230,9 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	}
 
 	/// <summary>
-	/// <para>Relative importance of the original query versus the rescore query.</para>
+	/// <para>
+	/// Relative importance of the original query versus the rescore query.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor QueryWeight(double? queryWeight)
 	{
@@ -218,7 +241,9 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	}
 
 	/// <summary>
-	/// <para>Relative importance of the rescore query versus the original query.</para>
+	/// <para>
+	/// Relative importance of the rescore query versus the original query.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor RescoreQueryWeight(double? rescoreQueryWeight)
 	{
@@ -227,7 +252,9 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	}
 
 	/// <summary>
-	/// <para>Determines how scores are combined.</para>
+	/// <para>
+	/// Determines how scores are combined.
+	/// </para>
 	/// </summary>
 	public RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? scoreMode)
 	{

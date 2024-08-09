@@ -34,7 +34,9 @@ public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Req
 }
 
 /// <summary>
-/// <para>Creates part of a trained model definition.</para>
+/// <para>
+/// Creates part of a trained model definition.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<PutTrainedModelDefinitionPartRequestParameters>
 {
@@ -51,26 +53,34 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 	internal override string OperationName => "ml.put_trained_model_definition_part";
 
 	/// <summary>
-	/// <para>The definition part for the model. Must be a base64 encoded string.</para>
+	/// <para>
+	/// The definition part for the model. Must be a base64 encoded string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("definition")]
 	public string Definition { get; set; }
 
 	/// <summary>
-	/// <para>The total uncompressed definition length in bytes. Not base64 encoded.</para>
+	/// <para>
+	/// The total uncompressed definition length in bytes. Not base64 encoded.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_definition_length")]
 	public long TotalDefinitionLength { get; set; }
 
 	/// <summary>
-	/// <para>The total number of parts that will be uploaded. Must be greater than 0.</para>
+	/// <para>
+	/// The total number of parts that will be uploaded. Must be greater than 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_parts")]
 	public int TotalParts { get; set; }
 }
 
 /// <summary>
-/// <para>Creates part of a trained model definition.</para>
+/// <para>
+/// Creates part of a trained model definition.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : RequestDescriptor<PutTrainedModelDefinitionPartRequestDescriptor, PutTrainedModelDefinitionPartRequestParameters>
 {
@@ -105,7 +115,9 @@ public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : Req
 	private int TotalPartsValue { get; set; }
 
 	/// <summary>
-	/// <para>The definition part for the model. Must be a base64 encoded string.</para>
+	/// <para>
+	/// The definition part for the model. Must be a base64 encoded string.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelDefinitionPartRequestDescriptor Definition(string definition)
 	{
@@ -114,7 +126,9 @@ public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : Req
 	}
 
 	/// <summary>
-	/// <para>The total uncompressed definition length in bytes. Not base64 encoded.</para>
+	/// <para>
+	/// The total uncompressed definition length in bytes. Not base64 encoded.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelDefinitionPartRequestDescriptor TotalDefinitionLength(long totalDefinitionLength)
 	{
@@ -123,7 +137,9 @@ public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : Req
 	}
 
 	/// <summary>
-	/// <para>The total number of parts that will be uploaded. Must be greater than 0.</para>
+	/// <para>
+	/// The total number of parts that will be uploaded. Must be greater than 0.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelDefinitionPartRequestDescriptor TotalParts(int totalParts)
 	{

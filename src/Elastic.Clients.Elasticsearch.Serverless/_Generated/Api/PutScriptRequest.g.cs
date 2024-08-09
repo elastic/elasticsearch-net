@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class PutScriptRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
+/// <para>
+/// Create or update a script or search template.
+/// Creates or updates a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestParameters>
 {
@@ -64,26 +73,37 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	internal override string OperationName => "put_script";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// <para>
+	/// Contains the script or search template, its parameters, and its language.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.StoredScript Script { get; set; }
 }
 
 /// <summary>
-/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
+/// <para>
+/// Create or update a script or search template.
+/// Creates or updates a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescriptor<PutScriptRequestDescriptor<TDocument>, PutScriptRequestParameters>
 {
@@ -125,7 +145,9 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	private Action<Elastic.Clients.Elasticsearch.Serverless.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// <para>
+	/// Contains the script or search template, its parameters, and its language.
+	/// </para>
 	/// </summary>
 	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.StoredScript script)
 	{
@@ -175,7 +197,10 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
+/// <para>
+/// Create or update a script or search template.
+/// Creates or updates a stored script or search template.
+/// </para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutScriptRequestDescriptor, PutScriptRequestParameters>
 {
@@ -217,7 +242,9 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	private Action<Elastic.Clients.Elasticsearch.Serverless.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// <para>
+	/// Contains the script or search template, its parameters, and its language.
+	/// </para>
 	/// </summary>
 	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.StoredScript script)
 	{

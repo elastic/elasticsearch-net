@@ -30,25 +30,35 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class IndexingPressureMemory
 {
 	/// <summary>
-	/// <para>Contains statistics for current indexing load.</para>
+	/// <para>
+	/// Contains statistics for current indexing load.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.PressureMemory? Current { get; init; }
 
 	/// <summary>
-	/// <para>Configured memory limit for the indexing requests.<br/>Replica requests have an automatic limit that is 1.5x this value.</para>
+	/// <para>
+	/// Configured memory limit for the indexing requests.
+	/// Replica requests have an automatic limit that is 1.5x this value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? Limit { get; init; }
 
 	/// <summary>
-	/// <para>Configured memory limit, in bytes, for the indexing requests.<br/>Replica requests have an automatic limit that is 1.5x this value.</para>
+	/// <para>
+	/// Configured memory limit, in bytes, for the indexing requests.
+	/// Replica requests have an automatic limit that is 1.5x this value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit_in_bytes")]
 	public long? LimitInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics for the cumulative indexing load since the node started.</para>
+	/// <para>
+	/// Contains statistics for the cumulative indexing load since the node started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.PressureMemory? Total { get; init; }

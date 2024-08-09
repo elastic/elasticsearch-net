@@ -30,67 +30,89 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterIndices
 {
 	/// <summary>
-	/// <para>Contains statistics about analyzers and analyzer components used in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about analyzers and analyzer components used in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis")]
 	public Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes Analysis { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about memory used for completion in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about memory used for completion in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion")]
 	public Elastic.Clients.Elasticsearch.CompletionStats Completion { get; init; }
 
 	/// <summary>
-	/// <para>Total number of indices with shards assigned to selected nodes.</para>
+	/// <para>
+	/// Total number of indices with shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 
 	/// <summary>
-	/// <para>Contains counts for documents in selected nodes.</para>
+	/// <para>
+	/// Contains counts for documents in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public Elastic.Clients.Elasticsearch.DocStats Docs { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the field data cache of selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the field data cache of selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fielddata")]
 	public Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about field mappings in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about field mappings in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings Mappings { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the query cache of selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the query cache of selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_cache")]
 	public Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about segments in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about segments in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("segments")]
 	public Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about indices with shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about indices with shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shards")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the size of shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the size of shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats Store { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about analyzers and analyzer components used in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about analyzers and analyzer components used in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("versions")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? Versions { get; init; }

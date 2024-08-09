@@ -91,7 +91,9 @@ internal sealed partial class MultiTermsBucketConverter : JsonConverter<MultiTer
 public sealed partial class MultiTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

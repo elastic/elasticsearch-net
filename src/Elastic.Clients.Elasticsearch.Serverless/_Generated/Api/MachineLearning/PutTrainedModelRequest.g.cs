@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class PutTrainedModelRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If set to `true` and a `compressed_definition` is provided,<br/>the request defers definition decompression and skips relevant<br/>validations.</para>
+	/// <para>
+	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
+	/// the request defers definition decompression and skips relevant
+	/// validations.
+	/// </para>
 	/// </summary>
 	public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 
 	/// <summary>
-	/// <para>Whether to wait for all child operations (e.g. model download)<br/>to complete.</para>
+	/// <para>
+	/// Whether to wait for all child operations (e.g. model download)
+	/// to complete.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Enables you to supply a trained model that is not created by data frame analytics.</para>
+/// <para>
+/// Enables you to supply a trained model that is not created by data frame analytics.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedModelRequestParameters>
 {
@@ -60,86 +69,131 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 	internal override string OperationName => "ml.put_trained_model";
 
 	/// <summary>
-	/// <para>If set to `true` and a `compressed_definition` is provided,<br/>the request defers definition decompression and skips relevant<br/>validations.</para>
+	/// <para>
+	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
+	/// the request defers definition decompression and skips relevant
+	/// validations.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 
 	/// <summary>
-	/// <para>Whether to wait for all child operations (e.g. model download)<br/>to complete.</para>
+	/// <para>
+	/// Whether to wait for all child operations (e.g. model download)
+	/// to complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
-	/// <para>The compressed (GZipped and Base64 encoded) inference definition of the<br/>model. If compressed_definition is specified, then definition cannot be<br/>specified.</para>
+	/// <para>
+	/// The compressed (GZipped and Base64 encoded) inference definition of the
+	/// model. If compressed_definition is specified, then definition cannot be
+	/// specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compressed_definition")]
 	public string? CompressedDefinition { get; set; }
 
 	/// <summary>
-	/// <para>The inference definition for the model. If definition is specified, then<br/>compressed_definition cannot be specified.</para>
+	/// <para>
+	/// The inference definition for the model. If definition is specified, then
+	/// compressed_definition cannot be specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("definition")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Definition? Definition { get; set; }
 
 	/// <summary>
-	/// <para>A human-readable description of the inference trained model.</para>
+	/// <para>
+	/// A human-readable description of the inference trained model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The default configuration for inference. This can be either a regression<br/>or classification configuration. It must match the underlying<br/>definition.trained_model's target_type. For pre-packaged models such as<br/>ELSER the config is not required.</para>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.InferenceConfigCreate? InferenceConfig { get; set; }
 
 	/// <summary>
-	/// <para>The input field names for the model definition.</para>
+	/// <para>
+	/// The input field names for the model definition.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Input? Input { get; set; }
 
 	/// <summary>
-	/// <para>An object map that contains metadata about the model.</para>
+	/// <para>
+	/// An object map that contains metadata about the model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
 	public object? Metadata { get; set; }
 
 	/// <summary>
-	/// <para>The estimated memory usage in bytes to keep the trained model in memory.<br/>This property is supported only if defer_definition_decompression is true<br/>or the model definition is not supplied.</para>
+	/// <para>
+	/// The estimated memory usage in bytes to keep the trained model in memory.
+	/// This property is supported only if defer_definition_decompression is true
+	/// or the model definition is not supplied.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_size_bytes")]
 	public long? ModelSizeBytes { get; set; }
 
 	/// <summary>
-	/// <para>The model type.</para>
+	/// <para>
+	/// The model type.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_type")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelType? ModelType { get; set; }
 
 	/// <summary>
-	/// <para>The platform architecture (if applicable) of the trained mode. If the model<br/>only works on one platform, because it is heavily optimized for a particular<br/>processor architecture and OS combination, then this field specifies which.<br/>The format of the string must match the platform identifiers used by Elasticsearch,<br/>so one of, `linux-x86_64`, `linux-aarch64`, `darwin-x86_64`, `darwin-aarch64`,<br/>or `windows-x86_64`. For portable models (those that work independent of processor<br/>architecture or OS features), leave this field unset.</para>
+	/// <para>
+	/// The platform architecture (if applicable) of the trained mode. If the model
+	/// only works on one platform, because it is heavily optimized for a particular
+	/// processor architecture and OS combination, then this field specifies which.
+	/// The format of the string must match the platform identifiers used by Elasticsearch,
+	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
+	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
+	/// architecture or OS features), leave this field unset.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("platform_architecture")]
 	public string? PlatformArchitecture { get; set; }
 
 	/// <summary>
-	/// <para>Optional prefix strings applied at inference</para>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_strings")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
 
 	/// <summary>
-	/// <para>An array of tags to organize the model.</para>
+	/// <para>
+	/// An array of tags to organize the model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tags")]
 	public ICollection<string>? Tags { get; set; }
 }
 
 /// <summary>
-/// <para>Enables you to supply a trained model that is not created by data frame analytics.</para>
+/// <para>
+/// Enables you to supply a trained model that is not created by data frame analytics.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<PutTrainedModelRequestDescriptor<TDocument>, PutTrainedModelRequestParameters>
 {
@@ -187,7 +241,11 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	private ICollection<string>? TagsValue { get; set; }
 
 	/// <summary>
-	/// <para>The compressed (GZipped and Base64 encoded) inference definition of the<br/>model. If compressed_definition is specified, then definition cannot be<br/>specified.</para>
+	/// <para>
+	/// The compressed (GZipped and Base64 encoded) inference definition of the
+	/// model. If compressed_definition is specified, then definition cannot be
+	/// specified.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> CompressedDefinition(string? compressedDefinition)
 	{
@@ -196,7 +254,10 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The inference definition for the model. If definition is specified, then<br/>compressed_definition cannot be specified.</para>
+	/// <para>
+	/// The inference definition for the model. If definition is specified, then
+	/// compressed_definition cannot be specified.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Definition? definition)
 	{
@@ -223,7 +284,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>A human-readable description of the inference trained model.</para>
+	/// <para>
+	/// A human-readable description of the inference trained model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -232,7 +295,12 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The default configuration for inference. This can be either a regression<br/>or classification configuration. It must match the underlying<br/>definition.trained_model's target_type. For pre-packaged models such as<br/>ELSER the config is not required.</para>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.InferenceConfigCreate? inferenceConfig)
 	{
@@ -259,7 +327,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The input field names for the model definition.</para>
+	/// <para>
+	/// The input field names for the model definition.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> Input(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Input? input)
 	{
@@ -286,7 +356,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>An object map that contains metadata about the model.</para>
+	/// <para>
+	/// An object map that contains metadata about the model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> Metadata(object? metadata)
 	{
@@ -295,7 +367,11 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The estimated memory usage in bytes to keep the trained model in memory.<br/>This property is supported only if defer_definition_decompression is true<br/>or the model definition is not supplied.</para>
+	/// <para>
+	/// The estimated memory usage in bytes to keep the trained model in memory.
+	/// This property is supported only if defer_definition_decompression is true
+	/// or the model definition is not supplied.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> ModelSizeBytes(long? modelSizeBytes)
 	{
@@ -304,7 +380,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The model type.</para>
+	/// <para>
+	/// The model type.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> ModelType(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelType? modelType)
 	{
@@ -313,7 +391,15 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The platform architecture (if applicable) of the trained mode. If the model<br/>only works on one platform, because it is heavily optimized for a particular<br/>processor architecture and OS combination, then this field specifies which.<br/>The format of the string must match the platform identifiers used by Elasticsearch,<br/>so one of, `linux-x86_64`, `linux-aarch64`, `darwin-x86_64`, `darwin-aarch64`,<br/>or `windows-x86_64`. For portable models (those that work independent of processor<br/>architecture or OS features), leave this field unset.</para>
+	/// <para>
+	/// The platform architecture (if applicable) of the trained mode. If the model
+	/// only works on one platform, because it is heavily optimized for a particular
+	/// processor architecture and OS combination, then this field specifies which.
+	/// The format of the string must match the platform identifiers used by Elasticsearch,
+	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
+	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
+	/// architecture or OS features), leave this field unset.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> PlatformArchitecture(string? platformArchitecture)
 	{
@@ -322,7 +408,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>Optional prefix strings applied at inference</para>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelPrefixStrings? prefixStrings)
 	{
@@ -349,7 +437,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>An array of tags to organize the model.</para>
+	/// <para>
+	/// An array of tags to organize the model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor<TDocument> Tags(ICollection<string>? tags)
 	{
@@ -471,7 +561,9 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 }
 
 /// <summary>
-/// <para>Enables you to supply a trained model that is not created by data frame analytics.</para>
+/// <para>
+/// Enables you to supply a trained model that is not created by data frame analytics.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor<PutTrainedModelRequestDescriptor, PutTrainedModelRequestParameters>
 {
@@ -519,7 +611,11 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	private ICollection<string>? TagsValue { get; set; }
 
 	/// <summary>
-	/// <para>The compressed (GZipped and Base64 encoded) inference definition of the<br/>model. If compressed_definition is specified, then definition cannot be<br/>specified.</para>
+	/// <para>
+	/// The compressed (GZipped and Base64 encoded) inference definition of the
+	/// model. If compressed_definition is specified, then definition cannot be
+	/// specified.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor CompressedDefinition(string? compressedDefinition)
 	{
@@ -528,7 +624,10 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The inference definition for the model. If definition is specified, then<br/>compressed_definition cannot be specified.</para>
+	/// <para>
+	/// The inference definition for the model. If definition is specified, then
+	/// compressed_definition cannot be specified.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Definition? definition)
 	{
@@ -555,7 +654,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>A human-readable description of the inference trained model.</para>
+	/// <para>
+	/// A human-readable description of the inference trained model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor Description(string? description)
 	{
@@ -564,7 +665,12 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The default configuration for inference. This can be either a regression<br/>or classification configuration. It must match the underlying<br/>definition.trained_model's target_type. For pre-packaged models such as<br/>ELSER the config is not required.</para>
+	/// <para>
+	/// The default configuration for inference. This can be either a regression
+	/// or classification configuration. It must match the underlying
+	/// definition.trained_model's target_type. For pre-packaged models such as
+	/// ELSER the config is not required.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.InferenceConfigCreate? inferenceConfig)
 	{
@@ -591,7 +697,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The input field names for the model definition.</para>
+	/// <para>
+	/// The input field names for the model definition.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor Input(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Input? input)
 	{
@@ -618,7 +726,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>An object map that contains metadata about the model.</para>
+	/// <para>
+	/// An object map that contains metadata about the model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor Metadata(object? metadata)
 	{
@@ -627,7 +737,11 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The estimated memory usage in bytes to keep the trained model in memory.<br/>This property is supported only if defer_definition_decompression is true<br/>or the model definition is not supplied.</para>
+	/// <para>
+	/// The estimated memory usage in bytes to keep the trained model in memory.
+	/// This property is supported only if defer_definition_decompression is true
+	/// or the model definition is not supplied.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor ModelSizeBytes(long? modelSizeBytes)
 	{
@@ -636,7 +750,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The model type.</para>
+	/// <para>
+	/// The model type.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor ModelType(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelType? modelType)
 	{
@@ -645,7 +761,15 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The platform architecture (if applicable) of the trained mode. If the model<br/>only works on one platform, because it is heavily optimized for a particular<br/>processor architecture and OS combination, then this field specifies which.<br/>The format of the string must match the platform identifiers used by Elasticsearch,<br/>so one of, `linux-x86_64`, `linux-aarch64`, `darwin-x86_64`, `darwin-aarch64`,<br/>or `windows-x86_64`. For portable models (those that work independent of processor<br/>architecture or OS features), leave this field unset.</para>
+	/// <para>
+	/// The platform architecture (if applicable) of the trained mode. If the model
+	/// only works on one platform, because it is heavily optimized for a particular
+	/// processor architecture and OS combination, then this field specifies which.
+	/// The format of the string must match the platform identifiers used by Elasticsearch,
+	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
+	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
+	/// architecture or OS features), leave this field unset.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor PlatformArchitecture(string? platformArchitecture)
 	{
@@ -654,7 +778,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Optional prefix strings applied at inference</para>
+	/// <para>
+	/// Optional prefix strings applied at inference
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor PrefixStrings(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelPrefixStrings? prefixStrings)
 	{
@@ -681,7 +807,9 @@ public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>An array of tags to organize the model.</para>
+	/// <para>
+	/// An array of tags to organize the model.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelRequestDescriptor Tags(ICollection<string>? tags)
 	{

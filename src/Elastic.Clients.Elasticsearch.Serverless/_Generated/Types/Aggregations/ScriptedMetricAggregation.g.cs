@@ -30,43 +30,63 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class ScriptedMetricAggregation
 {
 	/// <summary>
-	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("combine_script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? CombineScript { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("init_script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? InitScript { get; set; }
 
 	/// <summary>
-	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("map_script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? MapScript { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
 
 	/// <summary>
-	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reduce_script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? ReduceScript { get; set; }
@@ -104,7 +124,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Serverless.Script? combineScript)
 	{
@@ -131,7 +154,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -140,7 +165,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -149,7 +176,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -158,7 +187,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Serverless.Script? initScript)
 	{
@@ -185,7 +217,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Serverless.Script? mapScript)
 	{
@@ -212,7 +247,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -221,7 +259,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -230,7 +271,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Serverless.Script? reduceScript)
 	{
@@ -413,7 +457,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Serverless.Script? combineScript)
 	{
@@ -440,7 +487,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -449,7 +498,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -458,7 +509,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -467,7 +520,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Serverless.Script? initScript)
 	{
@@ -494,7 +550,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Serverless.Script? mapScript)
 	{
@@ -521,7 +580,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -530,7 +592,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -539,7 +604,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
 	/// </summary>
 	public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Serverless.Script? reduceScript)
 	{

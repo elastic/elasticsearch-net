@@ -32,68 +32,101 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ValidateQueryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If `true`, the validation is executed on all shards instead of one random shard per index.</para>
+	/// <para>
+	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
+	/// </para>
 	/// </summary>
 	public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 
 	/// <summary>
-	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>If `true`, wildcard and prefix queries are analyzed.</para>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query: `AND` or `OR`.</para>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response returns detailed information if an error has occurred.</para>
+	/// <para>
+	/// If <c>true</c>, the response returns detailed information if an error has occurred.
+	/// </para>
 	/// </summary>
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// </para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns a more detailed explanation showing the actual Lucene query that will be executed.</para>
+	/// <para>
+	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
+	/// </para>
 	/// </summary>
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 }
 
 /// <summary>
-/// <para>Validate a query.<br/>Validates a query without running it.</para>
+/// <para>
+/// Validate a query.
+/// Validates a query without running it.
+/// </para>
 /// </summary>
 public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryRequestParameters>
 {
@@ -114,86 +147,121 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	internal override string OperationName => "indices.validate_query";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>If `true`, the validation is executed on all shards instead of one random shard per index.</para>
+	/// <para>
+	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 
 	/// <summary>
-	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>If `true`, wildcard and prefix queries are analyzed.</para>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query: `AND` or `OR`.</para>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response returns detailed information if an error has occurred.</para>
+	/// <para>
+	/// If <c>true</c>, the response returns detailed information if an error has occurred.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns a more detailed explanation showing the actual Lucene query that will be executed.</para>
+	/// <para>
+	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
 /// <summary>
-/// <para>Validate a query.<br/>Validates a query without running it.</para>
+/// <para>
+/// Validate a query.
+/// Validates a query without running it.
+/// </para>
 /// </summary>
 public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestDescriptor<ValidateQueryRequestDescriptor<TDocument>, ValidateQueryRequestParameters>
 {
@@ -239,7 +307,9 @@ public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestD
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	public ValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -289,7 +359,10 @@ public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Validate a query.<br/>Validates a query without running it.</para>
+/// <para>
+/// Validate a query.
+/// Validates a query without running it.
+/// </para>
 /// </summary>
 public sealed partial class ValidateQueryRequestDescriptor : RequestDescriptor<ValidateQueryRequestDescriptor, ValidateQueryRequestParameters>
 {
@@ -335,7 +408,9 @@ public sealed partial class ValidateQueryRequestDescriptor : RequestDescriptor<V
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	public ValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{

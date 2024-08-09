@@ -139,30 +139,47 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 public sealed partial class GeoDistanceQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// <para>
+	/// The radius of the circle centred on the specified location.
+	/// Points which fall into this circle are considered to be matches.
+	/// </para>
 	/// </summary>
 	public string Distance { get; set; }
 
 	/// <summary>
-	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// <para>
+	/// How to compute the distance.
+	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
@@ -187,7 +204,12 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -196,7 +218,10 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// <para>
+	/// The radius of the circle centred on the specified location.
+	/// Points which fall into this circle are considered to be matches.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> Distance(string distance)
 	{
@@ -205,7 +230,10 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// <para>
+	/// How to compute the distance.
+	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
@@ -232,7 +260,10 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -253,7 +284,10 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
@@ -325,7 +359,12 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor Boost(float? boost)
 	{
@@ -334,7 +373,10 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// <para>
+	/// The radius of the circle centred on the specified location.
+	/// Points which fall into this circle are considered to be matches.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor Distance(string distance)
 	{
@@ -343,7 +385,10 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// <para>
+	/// How to compute the distance.
+	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
@@ -370,7 +415,10 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// <para>
+	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
+	/// Set to <c>false</c> to throw an exception if the field is not mapped.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -391,7 +439,10 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// <para>
+	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
+	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
+	/// </para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{

@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 public sealed partial class Source
 {
 	/// <summary>
-	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
+	/// <para>
+	/// The name of the data stream, index, or alias you are copying from.
+	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the documents to reindex using the Query DSL.</para>
+	/// <para>
+	/// Specifies the documents to reindex using the Query DSL.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
+	/// <para>
+	/// A remote instance of Elasticsearch that you want to index from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remote")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? Remote { get; set; }
@@ -50,13 +57,18 @@ public sealed partial class Source
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
+	/// <para>
+	/// The number of documents to index per batch.
+	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Slice the reindex request manually using the provided slice ID and total number of slices.</para>
+	/// <para>
+	/// Slice the reindex request manually using the provided slice ID and total number of slices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
@@ -65,7 +77,10 @@ public sealed partial class Source
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
-	/// <para>If `true` reindexes all source fields.<br/>Set to a list to reindex select fields.</para>
+	/// <para>
+	/// If <c>true</c> reindexes all source fields.
+	/// Set to a list to reindex select fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
@@ -99,7 +114,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
+	/// <para>
+	/// The name of the data stream, index, or alias you are copying from.
+	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -108,7 +126,9 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies the documents to reindex using the Query DSL.</para>
+	/// <para>
+	/// Specifies the documents to reindex using the Query DSL.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -135,7 +155,9 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
+	/// <para>
+	/// A remote instance of Elasticsearch that you want to index from.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
 	{
@@ -168,7 +190,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
+	/// <para>
+	/// The number of documents to index per batch.
+	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Size(int? size)
 	{
@@ -177,7 +202,9 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Slice the reindex request manually using the provided slice ID and total number of slices.</para>
+	/// <para>
+	/// Slice the reindex request manually using the provided slice ID and total number of slices.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 	{
@@ -240,7 +267,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If `true` reindexes all source fields.<br/>Set to a list to reindex select fields.</para>
+	/// <para>
+	/// If <c>true</c> reindexes all source fields.
+	/// Set to a list to reindex select fields.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
 	{
@@ -379,7 +409,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
+	/// <para>
+	/// The name of the data stream, index, or alias you are copying from.
+	/// Accepts a comma-separated list to reindex from multiple sources.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -388,7 +421,9 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies the documents to reindex using the Query DSL.</para>
+	/// <para>
+	/// Specifies the documents to reindex using the Query DSL.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -415,7 +450,9 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
+	/// <para>
+	/// A remote instance of Elasticsearch that you want to index from.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
 	{
@@ -448,7 +485,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
+	/// <para>
+	/// The number of documents to index per batch.
+	/// Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Size(int? size)
 	{
@@ -457,7 +497,9 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>Slice the reindex request manually using the provided slice ID and total number of slices.</para>
+	/// <para>
+	/// Slice the reindex request manually using the provided slice ID and total number of slices.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 	{
@@ -520,7 +562,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>If `true` reindexes all source fields.<br/>Set to a list to reindex select fields.</para>
+	/// <para>
+	/// If <c>true</c> reindexes all source fields.
+	/// Set to a list to reindex select fields.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields)
 	{

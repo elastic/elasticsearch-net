@@ -30,31 +30,43 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Reindex;
 public sealed partial class Destination
 {
 	/// <summary>
-	/// <para>The name of the data stream, index, or index alias you are copying to.</para>
+	/// <para>
+	/// The name of the data stream, index, or index alias you are copying to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName Index { get; set; }
 
 	/// <summary>
-	/// <para>Set to `create` to only index documents that do not already exist.<br/>Important: To reindex to a data stream destination, this argument must be `create`.</para>
+	/// <para>
+	/// Set to <c>create</c> to only index documents that do not already exist.
+	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("op_type")]
 	public Elastic.Clients.Elasticsearch.Serverless.OpType? OpType { get; set; }
 
 	/// <summary>
-	/// <para>The name of the pipeline to use.</para>
+	/// <para>
+	/// The name of the pipeline to use.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
 
 	/// <summary>
-	/// <para>By default, a document's routing is preserved unless it’s changed by the script.<br/>Set to `discard` to set routing to `null`,  or `=value` to route using the specified `value`.</para>
+	/// <para>
+	/// By default, a document's routing is preserved unless it’s changed by the script.
+	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>The versioning to use for the indexing operation.</para>
+	/// <para>
+	/// The versioning to use for the indexing operation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get; set; }
@@ -75,7 +87,9 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the data stream, index, or index alias you are copying to.</para>
+	/// <para>
+	/// The name of the data stream, index, or index alias you are copying to.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName index)
 	{
@@ -84,7 +98,10 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	}
 
 	/// <summary>
-	/// <para>Set to `create` to only index documents that do not already exist.<br/>Important: To reindex to a data stream destination, this argument must be `create`.</para>
+	/// <para>
+	/// Set to <c>create</c> to only index documents that do not already exist.
+	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor OpType(Elastic.Clients.Elasticsearch.Serverless.OpType? opType)
 	{
@@ -93,7 +110,9 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	}
 
 	/// <summary>
-	/// <para>The name of the pipeline to use.</para>
+	/// <para>
+	/// The name of the pipeline to use.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor Pipeline(string? pipeline)
 	{
@@ -102,7 +121,10 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	}
 
 	/// <summary>
-	/// <para>By default, a document's routing is preserved unless it’s changed by the script.<br/>Set to `discard` to set routing to `null`,  or `=value` to route using the specified `value`.</para>
+	/// <para>
+	/// By default, a document's routing is preserved unless it’s changed by the script.
+	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -111,7 +133,9 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	}
 
 	/// <summary>
-	/// <para>The versioning to use for the indexing operation.</para>
+	/// <para>
+	/// The versioning to use for the indexing operation.
+	/// </para>
 	/// </summary>
 	public DestinationDescriptor VersionType(Elastic.Clients.Elasticsearch.Serverless.VersionType? versionType)
 	{

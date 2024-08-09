@@ -32,18 +32,26 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 public sealed partial class ExploreRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard.<br/>If no response is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.</para>
+/// <para>
+/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// </para>
 /// </summary>
 public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParameters>
 {
@@ -60,44 +68,60 @@ public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParamete
 	internal override string OperationName => "graph.explore";
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard.<br/>If no response is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Specifies or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("connections")]
 	public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
 	/// <summary>
-	/// <para>Direct the Graph API how to build the graph.</para>
+	/// <para>
+	/// Direct the Graph API how to build the graph.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("controls")]
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
 
 	/// <summary>
-	/// <para>A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.</para>
+	/// <para>
+	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Specifies one or more fields that contain the terms you want to include in the graph as vertices.</para>
+	/// <para>
+	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vertices")]
 	public ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
 }
 
 /// <summary>
-/// <para>Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.</para>
+/// <para>
+/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// </para>
 /// </summary>
 public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescriptor<ExploreRequestDescriptor<TDocument>, ExploreRequestParameters>
 {
@@ -143,7 +167,9 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 	{
@@ -170,7 +196,9 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>Direct the Graph API how to build the graph.</para>
+	/// <para>
+	/// Direct the Graph API how to build the graph.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor<TDocument> Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? controls)
 	{
@@ -197,7 +225,9 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.</para>
+	/// <para>
+	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -224,7 +254,9 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	/// <summary>
-	/// <para>Specifies one or more fields that contain the terms you want to include in the graph as vertices.</para>
+	/// <para>
+	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor<TDocument> Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices)
 	{
@@ -349,7 +381,9 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.</para>
+/// <para>
+/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// </para>
 /// </summary>
 public sealed partial class ExploreRequestDescriptor : RequestDescriptor<ExploreRequestDescriptor, ExploreRequestParameters>
 {
@@ -391,7 +425,9 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 	{
@@ -418,7 +454,9 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	}
 
 	/// <summary>
-	/// <para>Direct the Graph API how to build the graph.</para>
+	/// <para>
+	/// Direct the Graph API how to build the graph.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? controls)
 	{
@@ -445,7 +483,9 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	}
 
 	/// <summary>
-	/// <para>A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.</para>
+	/// <para>
+	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -472,7 +512,9 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	}
 
 	/// <summary>
-	/// <para>Specifies one or more fields that contain the terms you want to include in the graph as vertices.</para>
+	/// <para>
+	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
+	/// </para>
 	/// </summary>
 	public ExploreRequestDescriptor Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices)
 	{

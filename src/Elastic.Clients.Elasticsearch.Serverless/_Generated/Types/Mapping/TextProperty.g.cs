@@ -58,7 +58,9 @@ public sealed partial class TextProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -247,7 +249,9 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public TextPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -716,7 +720,9 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public TextPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

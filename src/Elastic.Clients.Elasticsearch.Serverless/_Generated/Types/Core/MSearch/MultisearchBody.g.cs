@@ -430,119 +430,186 @@ public sealed partial class MultisearchBody
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	public bool? Explain { get; set; }
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, object>? Ext { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// <para>
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
+	/// </para>
 	/// </summary>
 	public int? From { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? Knn { get; set; }
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are
+	/// not included in the search results.
+	/// </para>
 	/// </summary>
 	public double? MinScore { get; set; }
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? Pit { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilter { get; set; }
 	public bool? Profile { get; set; }
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFields { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// <para>
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
+	/// </para>
 	/// </summary>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// <para>
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
+	/// </para>
 	/// </summary>
 	public int? Size { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Stats { get; set; }
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? Suggest { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
+	/// </para>
 	/// </summary>
 	public long? TerminateAfter { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public string? Timeout { get; set; }
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public bool? Version { get; set; }
 }
@@ -645,7 +712,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
@@ -684,7 +754,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Explain(bool? explain = true)
 	{
@@ -693,7 +765,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -702,7 +776,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -741,7 +818,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// <para>
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> From(int? from)
 	{
@@ -774,7 +855,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
 	{
@@ -783,7 +866,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? knn)
 	{
@@ -822,7 +907,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are
+	/// not included in the search results.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> MinScore(double? minScore)
 	{
@@ -831,7 +919,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
 	{
@@ -888,7 +979,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -951,7 +1044,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -960,7 +1056,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -975,7 +1073,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// <para>
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
@@ -984,7 +1085,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// <para>
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Size(int? size)
 	{
@@ -1029,7 +1134,10 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -1038,7 +1146,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Stats(ICollection<string>? stats)
 	{
@@ -1047,7 +1159,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{
@@ -1080,7 +1197,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> TerminateAfter(long? terminateAfter)
 	{
@@ -1089,7 +1210,11 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Timeout(string? timeout)
 	{
@@ -1098,7 +1223,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> TrackScores(bool? trackScores = true)
 	{
@@ -1107,7 +1234,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -1116,7 +1248,9 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Version(bool? version = true)
 	{
@@ -1594,7 +1728,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
@@ -1633,7 +1770,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// <para>
+	/// If true, returns detailed information about score computation as part of a hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Explain(bool? explain = true)
 	{
@@ -1642,7 +1781,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// <para>
+	/// Configuration of search extensions defined by Elasticsearch plugins.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -1651,7 +1792,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -1690,7 +1834,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// <para>
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor From(int? from)
 	{
@@ -1723,7 +1871,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// <para>
+	/// Boosts the _score of documents from specified indices.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
 	{
@@ -1732,7 +1882,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Defines the approximate kNN search to run.</para>
+	/// <para>
+	/// Defines the approximate kNN search to run.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnSearch>? knn)
 	{
@@ -1771,7 +1923,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are
+	/// not included in the search results.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor MinScore(double? minScore)
 	{
@@ -1780,7 +1935,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// <para>
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
 	{
@@ -1837,7 +1995,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Defines the search definition using the Query DSL.</para>
+	/// <para>
+	/// Defines the search definition using the Query DSL.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -1900,7 +2060,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -1909,7 +2072,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// <para>
+	/// Retrieve a script evaluation (based on different fields) for each hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -1924,7 +2089,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// <para>
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
@@ -1933,7 +2101,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// <para>
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Size(int? size)
 	{
@@ -1978,7 +2150,10 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// <para>
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
@@ -1987,7 +2162,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// <para>
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Stats(ICollection<string>? stats)
 	{
@@ -1996,7 +2175,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// <para>
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields)
 	{
@@ -2029,7 +2213,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// <para>
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor TerminateAfter(long? terminateAfter)
 	{
@@ -2038,7 +2226,11 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// <para>
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
+	/// Defaults to no timeout.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Timeout(string? timeout)
 	{
@@ -2047,7 +2239,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// <para>
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor TrackScores(bool? trackScores = true)
 	{
@@ -2056,7 +2250,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -2065,7 +2264,9 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If true, returns document version as part of a hit.</para>
+	/// <para>
+	/// If true, returns document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public MultisearchBodyDescriptor Version(bool? version = true)
 	{

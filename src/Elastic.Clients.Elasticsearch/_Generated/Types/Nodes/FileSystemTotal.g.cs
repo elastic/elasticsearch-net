@@ -30,37 +30,53 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class FileSystemTotal
 {
 	/// <summary>
-	/// <para>Total disk space available to this Java virtual machine on all file stores.<br/>Depending on OS or process level restrictions, this might appear less than `free`.<br/>This is the actual amount of free disk space the Elasticsearch node can utilise.</para>
+	/// <para>
+	/// Total disk space available to this Java virtual machine on all file stores.
+	/// Depending on OS or process level restrictions, this might appear less than <c>free</c>.
+	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("available")]
 	public string? Available { get; init; }
 
 	/// <summary>
-	/// <para>Total number of bytes available to this Java virtual machine on all file stores.<br/>Depending on OS or process level restrictions, this might appear less than `free_in_bytes`.<br/>This is the actual amount of free disk space the Elasticsearch node can utilise.</para>
+	/// <para>
+	/// Total number of bytes available to this Java virtual machine on all file stores.
+	/// Depending on OS or process level restrictions, this might appear less than <c>free_in_bytes</c>.
+	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("available_in_bytes")]
 	public long? AvailableInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total unallocated disk space in all file stores.</para>
+	/// <para>
+	/// Total unallocated disk space in all file stores.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free")]
 	public string? Free { get; init; }
 
 	/// <summary>
-	/// <para>Total number of unallocated bytes in all file stores.</para>
+	/// <para>
+	/// Total number of unallocated bytes in all file stores.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("free_in_bytes")]
 	public long? FreeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total size of all file stores.</para>
+	/// <para>
+	/// Total size of all file stores.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public string? Total { get; init; }
 
 	/// <summary>
-	/// <para>Total size of all file stores in bytes.</para>
+	/// <para>
+	/// Total size of all file stores in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_in_bytes")]
 	public long? TotalInBytes { get; init; }

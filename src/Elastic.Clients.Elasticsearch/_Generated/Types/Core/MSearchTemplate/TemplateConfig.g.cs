@@ -30,31 +30,46 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 public sealed partial class TemplateConfig
 {
 	/// <summary>
-	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; init; }
 
 	/// <summary>
-	/// <para>ID of the search template to use. If no source is specified,<br/>this parameter is required.</para>
+	/// <para>
+	/// ID of the search template to use. If no source is specified,
+	/// this parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IReadOnlyDictionary<string, object>? Params { get; init; }
 
 	/// <summary>
-	/// <para>If `true`, the query execution is profiled.</para>
+	/// <para>
+	/// If <c>true</c>, the query execution is profiled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; init; }
 
 	/// <summary>
-	/// <para>An inline search template. Supports the same parameters as the search API's<br/>request body. Also supports Mustache variables. If no id is specified, this<br/>parameter is required.</para>
+	/// <para>
+	/// An inline search template. Supports the same parameters as the search API's
+	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; init; }

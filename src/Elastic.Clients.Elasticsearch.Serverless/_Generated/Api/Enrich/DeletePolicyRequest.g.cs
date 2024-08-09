@@ -34,7 +34,10 @@ public sealed partial class DeletePolicyRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
+/// <para>
+/// Delete an enrich policy.
+/// Deletes an existing enrich policy and its enrich index.
+/// </para>
 /// </summary>
 public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyRequestParameters>
 {
@@ -52,7 +55,10 @@ public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyReque
 }
 
 /// <summary>
-/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
+/// <para>
+/// Delete an enrich policy.
+/// Deletes an existing enrich policy and its enrich index.
+/// </para>
 /// </summary>
 public sealed partial class DeletePolicyRequestDescriptor : RequestDescriptor<DeletePolicyRequestDescriptor, DeletePolicyRequestParameters>
 {

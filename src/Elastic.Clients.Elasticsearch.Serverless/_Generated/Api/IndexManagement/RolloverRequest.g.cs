@@ -32,28 +32,42 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class RolloverRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover.</para>
+	/// <para>
+	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
+	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
+/// <para>
+/// Roll over to a new index.
+/// Creates a new index for a data stream or index alias.
+/// </para>
 /// </summary>
 public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParameters>
 {
@@ -74,56 +88,85 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	internal override string OperationName => "indices.rollover";
 
 	/// <summary>
-	/// <para>If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover.</para>
+	/// <para>
+	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>Aliases for the target index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
-	/// <para>Conditions for the rollover.<br/>If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.<br/>If this parameter is not specified, Elasticsearch performs the rollover unconditionally.<br/>If conditions are specified, at least one of them must be a `max_*` condition.<br/>The index will rollover if any `max_*` condition is satisfied and all `min_*` conditions are satisfied.</para>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("conditions")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RolloverConditions? Conditions { get; set; }
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping paramaters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
-	/// <para>Configuration options for the index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
-/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
+/// <para>
+/// Roll over to a new index.
+/// Creates a new index for a data stream or index alias.
+/// </para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescriptor<RolloverRequestDescriptor<TDocument>, RolloverRequestParameters>
 {
@@ -172,7 +215,10 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the target index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
@@ -181,7 +227,13 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Conditions for the rollover.<br/>If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.<br/>If this parameter is not specified, Elasticsearch performs the rollover unconditionally.<br/>If conditions are specified, at least one of them must be a `max_*` condition.<br/>The index will rollover if any `max_*` condition is satisfied and all `min_*` conditions are satisfied.</para>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RolloverConditions? conditions)
 	{
@@ -208,7 +260,10 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping paramaters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
 	{
@@ -235,7 +290,10 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor<TDocument> Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -295,7 +353,10 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
+/// <para>
+/// Roll over to a new index.
+/// Creates a new index for a data stream or index alias.
+/// </para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>
 {
@@ -344,7 +405,10 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the target index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Aliases for the target index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>> selector)
 	{
@@ -353,7 +417,13 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	/// <summary>
-	/// <para>Conditions for the rollover.<br/>If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.<br/>If this parameter is not specified, Elasticsearch performs the rollover unconditionally.<br/>If conditions are specified, at least one of them must be a `max_*` condition.<br/>The index will rollover if any `max_*` condition is satisfied and all `min_*` conditions are satisfied.</para>
+	/// <para>
+	/// Conditions for the rollover.
+	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
+	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RolloverConditions? conditions)
 	{
@@ -380,7 +450,10 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping paramaters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
 	{
@@ -407,7 +480,10 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.<br/>Data streams do not support this parameter.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// Data streams do not support this parameter.
+	/// </para>
 	/// </summary>
 	public RolloverRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

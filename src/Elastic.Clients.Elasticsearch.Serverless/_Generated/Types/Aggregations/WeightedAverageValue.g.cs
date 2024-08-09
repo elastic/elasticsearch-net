@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class WeightedAverageValue
 {
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>A value or weight to use if the field is missing.</para>
+	/// <para>
+	/// A value or weight to use if the field is missing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
@@ -59,7 +63,9 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -68,7 +74,9 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -77,7 +85,9 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -86,7 +96,9 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>A value or weight to use if the field is missing.</para>
+	/// <para>
+	/// A value or weight to use if the field is missing.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)
 	{
@@ -168,7 +180,9 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -177,7 +191,9 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -186,7 +202,9 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
+	/// <para>
+	/// The field from which to extract the values or weights.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -195,7 +213,9 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>A value or weight to use if the field is missing.</para>
+	/// <para>
+	/// A value or weight to use if the field is missing.
+	/// </para>
 	/// </summary>
 	public WeightedAverageValueDescriptor Missing(double? missing)
 	{

@@ -34,7 +34,9 @@ public sealed partial class GetSearchApplicationRequestParameters : RequestParam
 }
 
 /// <summary>
-/// <para>Returns the details about a search application</para>
+/// <para>
+/// Returns the details about a search application
+/// </para>
 /// </summary>
 public sealed partial class GetSearchApplicationRequest : PlainRequest<GetSearchApplicationRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class GetSearchApplicationRequest : PlainRequest<GetSearch
 }
 
 /// <summary>
-/// <para>Returns the details about a search application</para>
+/// <para>
+/// Returns the details about a search application
+/// </para>
 /// </summary>
 public sealed partial class GetSearchApplicationRequestDescriptor : RequestDescriptor<GetSearchApplicationRequestDescriptor, GetSearchApplicationRequestParameters>
 {

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class GeoIpNodeDatabaseName
 {
 	/// <summary>
-	/// <para>Name of the database.</para>
+	/// <para>
+	/// Name of the database.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }

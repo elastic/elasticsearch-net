@@ -32,12 +32,16 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class RollupSearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</para>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
@@ -103,7 +107,9 @@ internal sealed partial class RollupSearchRequestConverter : JsonConverter<Rollu
 }
 
 /// <summary>
-/// <para>Enables searching rolled-up data using the standard Query DSL.</para>
+/// <para>
+/// Enables searching rolled-up data using the standard Query DSL.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(RollupSearchRequestConverter))]
 public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchRequestParameters>
@@ -125,38 +131,50 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 	internal override string OperationName => "rollup.rollup_search";
 
 	/// <summary>
-	/// <para>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</para>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>Specifies aggregations.</para>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Specifies a DSL query.</para>
+	/// <para>
+	/// Specifies a DSL query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Must be zero if set, as rollups work on pre-aggregated data.</para>
+	/// <para>
+	/// Must be zero if set, as rollups work on pre-aggregated data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
 
 /// <summary>
-/// <para>Enables searching rolled-up data using the standard Query DSL.</para>
+/// <para>
+/// Enables searching rolled-up data using the standard Query DSL.
+/// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDescriptor<RollupSearchRequestDescriptor<TDocument>, RollupSearchRequestParameters>
 {
@@ -194,7 +212,9 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies aggregations.</para>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -203,7 +223,9 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Specifies a DSL query.</para>
+	/// <para>
+	/// Specifies a DSL query.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -230,7 +252,9 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Must be zero if set, as rollups work on pre-aggregated data.</para>
+	/// <para>
+	/// Must be zero if set, as rollups work on pre-aggregated data.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor<TDocument> Size(int? size)
 	{
@@ -274,7 +298,9 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Enables searching rolled-up data using the standard Query DSL.</para>
+/// <para>
+/// Enables searching rolled-up data using the standard Query DSL.
+/// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<RollupSearchRequestDescriptor, RollupSearchRequestParameters>
 {
@@ -308,7 +334,9 @@ public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<Ro
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies aggregations.</para>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -317,7 +345,9 @@ public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<Ro
 	}
 
 	/// <summary>
-	/// <para>Specifies a DSL query.</para>
+	/// <para>
+	/// Specifies a DSL query.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -344,7 +374,9 @@ public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<Ro
 	}
 
 	/// <summary>
-	/// <para>Must be zero if set, as rollups work on pre-aggregated data.</para>
+	/// <para>
+	/// Must be zero if set, as rollups work on pre-aggregated data.
+	/// </para>
 	/// </summary>
 	public RollupSearchRequestDescriptor Size(int? size)
 	{

@@ -30,13 +30,22 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class DisMaxQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>One or more query clauses.<br/>Returned documents must match one or more of these queries.<br/>If a document matches multiple queries, Elasticsearch uses the highest relevance score.</para>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("queries")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> Queries { get; set; }
@@ -44,7 +53,9 @@ public sealed partial class DisMaxQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
@@ -69,7 +80,12 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	private double? TieBreakerValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -78,7 +94,11 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>One or more query clauses.<br/>Returned documents must match one or more of these queries.<br/>If a document matches multiple queries, Elasticsearch uses the highest relevance score.</para>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> queries)
 	{
@@ -123,7 +143,9 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
 	{
@@ -204,7 +226,12 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	private double? TieBreakerValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor Boost(float? boost)
 	{
@@ -213,7 +240,11 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	}
 
 	/// <summary>
-	/// <para>One or more query clauses.<br/>Returned documents must match one or more of these queries.<br/>If a document matches multiple queries, Elasticsearch uses the highest relevance score.</para>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> queries)
 	{
@@ -258,7 +289,9 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	}
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
+	/// </para>
 	/// </summary>
 	public DisMaxQueryDescriptor TieBreaker(double? tieBreaker)
 	{

@@ -29,7 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class OpenJobResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The ID of the node that the job was started on. In serverless this will be the "serverless".<br/>If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.</para>
+	/// <para>
+	/// The ID of the node that the job was started on. In serverless this will be the "serverless".
+	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }

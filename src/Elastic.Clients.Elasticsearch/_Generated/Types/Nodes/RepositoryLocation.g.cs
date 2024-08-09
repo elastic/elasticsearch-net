@@ -33,13 +33,17 @@ public sealed partial class RepositoryLocation
 	public string BasePath { get; init; }
 
 	/// <summary>
-	/// <para>Bucket name (GCP, S3)</para>
+	/// <para>
+	/// Bucket name (GCP, S3)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket")]
 	public string? Bucket { get; init; }
 
 	/// <summary>
-	/// <para>Container name (Azure)</para>
+	/// <para>
+	/// Container name (Azure)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("container")]
 	public string? Container { get; init; }

@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DeleteDataFrameAnalyticsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.</para>
+	/// <para>
+	/// If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>The time to wait for the job to be deleted.</para>
+	/// <para>
+	/// The time to wait for the job to be deleted.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a data frame analytics job.</para>
+/// <para>
+/// Delete a data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<DeleteDataFrameAnalyticsRequestParameters>
 {
@@ -60,20 +66,26 @@ public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<Delet
 	internal override string OperationName => "ml.delete_data_frame_analytics";
 
 	/// <summary>
-	/// <para>If `true`, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.</para>
+	/// <para>
+	/// If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>The time to wait for the job to be deleted.</para>
+	/// <para>
+	/// The time to wait for the job to be deleted.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a data frame analytics job.</para>
+/// <para>
+/// Delete a data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>, DeleteDataFrameAnalyticsRequestParameters>
 {
@@ -106,7 +118,9 @@ public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor<TDocument>
 }
 
 /// <summary>
-/// <para>Delete a data frame analytics job.</para>
+/// <para>
+/// Delete a data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor : RequestDescriptor<DeleteDataFrameAnalyticsRequestDescriptor, DeleteDataFrameAnalyticsRequestParameters>
 {

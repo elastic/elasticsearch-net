@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class CompositeAggregationSource
 {
 	/// <summary>
-	/// <para>A date histogram aggregation.</para>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeDateHistogramAggregation? DateHistogram { get; set; }
 
 	/// <summary>
-	/// <para>A geotile grid aggregation.</para>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("geotile_grid")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeGeoTileGridAggregation? GeotileGrid { get; set; }
 
 	/// <summary>
-	/// <para>A histogram aggregation.</para>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeHistogramAggregation? Histogram { get; set; }
 
 	/// <summary>
-	/// <para>A terms aggregation.</para>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeTermsAggregation? Terms { get; set; }
@@ -76,7 +84,9 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeTermsAggregationDescriptor<TDocument>> TermsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A date histogram aggregation.</para>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeDateHistogramAggregation? dateHistogram)
 	{
@@ -103,7 +113,9 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>A geotile grid aggregation.</para>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeGeoTileGridAggregation? geotileGrid)
 	{
@@ -130,7 +142,9 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>A histogram aggregation.</para>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeHistogramAggregation? histogram)
 	{
@@ -157,7 +171,9 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>A terms aggregation.</para>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeTermsAggregation? terms)
 	{
@@ -276,7 +292,9 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeTermsAggregationDescriptor> TermsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A date histogram aggregation.</para>
+	/// <para>
+	/// A date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeDateHistogramAggregation? dateHistogram)
 	{
@@ -303,7 +321,9 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A geotile grid aggregation.</para>
+	/// <para>
+	/// A geotile grid aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeGeoTileGridAggregation? geotileGrid)
 	{
@@ -330,7 +350,9 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A histogram aggregation.</para>
+	/// <para>
+	/// A histogram aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeHistogramAggregation? histogram)
 	{
@@ -357,7 +379,9 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A terms aggregation.</para>
+	/// <para>
+	/// A terms aggregation.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeTermsAggregation? terms)
 	{

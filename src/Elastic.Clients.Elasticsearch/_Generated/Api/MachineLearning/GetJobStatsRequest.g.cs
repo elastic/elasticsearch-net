@@ -32,15 +32,40 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetJobStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no jobs that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If `true`, the API returns an empty `jobs` array when<br/>there are no matches and the subset of results when there are partial<br/>matches. If `false`, the API returns a `404` status<br/>code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If <c>true</c>, the API returns an empty <c>jobs</c> array when
+	/// there are no matches and the subset of results when there are partial
+	/// matches. If <c>false</c>, the API returns a <c>404</c> status
+	/// code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for anomaly detection jobs.</para>
+/// <para>
+/// Retrieves usage information for anomaly detection jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetJobStatsRequest : PlainRequest<GetJobStatsRequestParameters>
 {
@@ -61,16 +86,41 @@ public sealed partial class GetJobStatsRequest : PlainRequest<GetJobStatsRequest
 	internal override string OperationName => "ml.get_job_stats";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no jobs that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If `true`, the API returns an empty `jobs` array when<br/>there are no matches and the subset of results when there are partial<br/>matches. If `false`, the API returns a `404` status<br/>code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If <c>true</c>, the API returns an empty <c>jobs</c> array when
+	/// there are no matches and the subset of results when there are partial
+	/// matches. If <c>false</c>, the API returns a <c>404</c> status
+	/// code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for anomaly detection jobs.</para>
+/// <para>
+/// Retrieves usage information for anomaly detection jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetJobStatsRequestDescriptor : RequestDescriptor<GetJobStatsRequestDescriptor, GetJobStatsRequestParameters>
 {

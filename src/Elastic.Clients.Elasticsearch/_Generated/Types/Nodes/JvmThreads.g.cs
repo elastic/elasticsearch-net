@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class JvmThreads
 {
 	/// <summary>
-	/// <para>Number of active threads in use by JVM.</para>
+	/// <para>
+	/// Number of active threads in use by JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long? Count { get; init; }
 
 	/// <summary>
-	/// <para>Highest number of threads used by JVM.</para>
+	/// <para>
+	/// Highest number of threads used by JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("peak_count")]
 	public long? PeakCount { get; init; }

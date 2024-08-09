@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class SuggestFuzziness
 {
 	/// <summary>
-	/// <para>The fuzziness factor.</para>
+	/// <para>
+	/// The fuzziness factor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Minimum length of the input before fuzzy suggestions are returned.</para>
+	/// <para>
+	/// Minimum length of the input before fuzzy suggestions are returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_length")]
 	public int? MinLength { get; set; }
 
 	/// <summary>
-	/// <para>Minimum length of the input, which is not checked for fuzzy alternatives.</para>
+	/// <para>
+	/// Minimum length of the input, which is not checked for fuzzy alternatives.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>If set to `true`, transpositions are counted as one change instead of two.</para>
+	/// <para>
+	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.<br/>This is slightly slower than raw bytes.</para>
+	/// <para>
+	/// If <c>true</c>, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.
+	/// This is slightly slower than raw bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unicode_aware")]
 	public bool? UnicodeAware { get; set; }
@@ -75,7 +86,9 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	private bool? UnicodeAwareValue { get; set; }
 
 	/// <summary>
-	/// <para>The fuzziness factor.</para>
+	/// <para>
+	/// The fuzziness factor.
+	/// </para>
 	/// </summary>
 	public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -84,7 +97,9 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Minimum length of the input before fuzzy suggestions are returned.</para>
+	/// <para>
+	/// Minimum length of the input before fuzzy suggestions are returned.
+	/// </para>
 	/// </summary>
 	public SuggestFuzzinessDescriptor MinLength(int? minLength)
 	{
@@ -93,7 +108,9 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Minimum length of the input, which is not checked for fuzzy alternatives.</para>
+	/// <para>
+	/// Minimum length of the input, which is not checked for fuzzy alternatives.
+	/// </para>
 	/// </summary>
 	public SuggestFuzzinessDescriptor PrefixLength(int? prefixLength)
 	{
@@ -102,7 +119,9 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If set to `true`, transpositions are counted as one change instead of two.</para>
+	/// <para>
+	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
+	/// </para>
 	/// </summary>
 	public SuggestFuzzinessDescriptor Transpositions(bool? transpositions = true)
 	{
@@ -111,7 +130,10 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.<br/>This is slightly slower than raw bytes.</para>
+	/// <para>
+	/// If <c>true</c>, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.
+	/// This is slightly slower than raw bytes.
+	/// </para>
 	/// </summary>
 	public SuggestFuzzinessDescriptor UnicodeAware(bool? unicodeAware = true)
 	{

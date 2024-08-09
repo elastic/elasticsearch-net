@@ -36,7 +36,9 @@ public sealed partial class StartIlmRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Start the index lifecycle management (ILM) plugin.</para>
+/// <para>
+/// Start the index lifecycle management (ILM) plugin.
+/// </para>
 /// </summary>
 public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParameters>
 {
@@ -55,7 +57,9 @@ public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParame
 }
 
 /// <summary>
-/// <para>Start the index lifecycle management (ILM) plugin.</para>
+/// <para>
+/// Start the index lifecycle management (ILM) plugin.
+/// </para>
 /// </summary>
 public sealed partial class StartIlmRequestDescriptor : RequestDescriptor<StartIlmRequestDescriptor, StartIlmRequestParameters>
 {

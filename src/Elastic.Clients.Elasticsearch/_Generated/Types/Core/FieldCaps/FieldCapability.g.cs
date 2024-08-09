@@ -30,70 +30,95 @@ namespace Elastic.Clients.Elasticsearch.Core.FieldCaps;
 public sealed partial class FieldCapability
 {
 	/// <summary>
-	/// <para>Whether this field can be aggregated on all indices.</para>
+	/// <para>
+	/// Whether this field can be aggregated on all indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregatable")]
 	public bool Aggregatable { get; init; }
 
 	/// <summary>
-	/// <para>The list of indices where this field has the same type family, or null if all indices have the same type family for the field.</para>
+	/// <para>
+	/// The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string>? Indices { get; init; }
 
 	/// <summary>
-	/// <para>Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.</para>
+	/// <para>
+	/// Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	/// <summary>
-	/// <para>Whether this field is registered as a metadata field.</para>
+	/// <para>
+	/// Whether this field is registered as a metadata field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata_field")]
 	public bool? MetadataField { get; init; }
 
 	/// <summary>
-	/// <para>The list of indices where this field is present if these indices<br/>don’t have the same `time_series_metric` value for this field.</para>
+	/// <para>
+	/// The list of indices where this field is present if these indices
+	/// don’t have the same <c>time_series_metric</c> value for this field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_conflicts_indices")]
 	public IReadOnlyCollection<string>? MetricConflictsIndices { get; init; }
 
 	/// <summary>
-	/// <para>The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.</para>
+	/// <para>
+	/// The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_aggregatable_indices")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string>? NonAggregatableIndices { get; init; }
 
 	/// <summary>
-	/// <para>If this list is present in response then some indices have the<br/>field marked as a dimension and other indices, the ones in this list, do not.</para>
+	/// <para>
+	/// If this list is present in response then some indices have the
+	/// field marked as a dimension and other indices, the ones in this list, do not.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_dimension_indices")]
 	public IReadOnlyCollection<string>? NonDimensionIndices { get; init; }
 
 	/// <summary>
-	/// <para>The list of indices where this field is not searchable, or null if all indices have the same definition for the field.</para>
+	/// <para>
+	/// The list of indices where this field is not searchable, or null if all indices have the same definition for the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_searchable_indices")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string>? NonSearchableIndices { get; init; }
 
 	/// <summary>
-	/// <para>Whether this field is indexed for search on all indices.</para>
+	/// <para>
+	/// Whether this field is indexed for search on all indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("searchable")]
 	public bool Searchable { get; init; }
 
 	/// <summary>
-	/// <para>Whether this field is used as a time series dimension.</para>
+	/// <para>
+	/// Whether this field is used as a time series dimension.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; init; }
 
 	/// <summary>
-	/// <para>Contains metric type if this fields is used as a time series<br/>metrics, absent if the field is not used as metric.</para>
+	/// <para>
+	/// Contains metric type if this fields is used as a time series
+	/// metrics, absent if the field is not used as metric.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; init; }

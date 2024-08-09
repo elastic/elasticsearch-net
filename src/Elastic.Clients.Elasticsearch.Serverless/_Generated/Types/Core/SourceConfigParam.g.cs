@@ -31,7 +31,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
 /// <summary>
-/// <para>Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.<br/>Used as a query parameter along with the `_source_includes` and `_source_excludes` parameters.</para>
+/// <para>
+/// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
+/// Used as a query parameter along with the <c>_source_includes</c> and <c>_source_excludes</c> parameters.
+/// </para>
 /// </summary>
 public sealed partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Serverless.Fields>
 {

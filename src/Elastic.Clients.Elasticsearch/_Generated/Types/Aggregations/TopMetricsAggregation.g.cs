@@ -30,20 +30,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TopMetricsAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The fields of the top document to return.</para>
+	/// <para>
+	/// The fields of the top document to return.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue))]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -51,13 +58,17 @@ public sealed partial class TopMetricsAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>The number of top documents from which to return metrics.</para>
+	/// <para>
+	/// The number of top documents from which to return metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The sort order of the documents.</para>
+	/// <para>
+	/// The sort order of the documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
@@ -90,7 +101,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -99,7 +112,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -108,7 +123,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -117,7 +134,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The fields of the top document to return.</para>
+	/// <para>
+	/// The fields of the top document to return.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
@@ -156,7 +175,10 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -189,7 +211,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The number of top documents from which to return metrics.</para>
+	/// <para>
+	/// The number of top documents from which to return metrics.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -198,7 +222,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>The sort order of the documents.</para>
+	/// <para>
+	/// The sort order of the documents.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -359,7 +385,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -368,7 +396,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -377,7 +407,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -386,7 +418,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The fields of the top document to return.</para>
+	/// <para>
+	/// The fields of the top document to return.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
@@ -425,7 +459,10 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -458,7 +495,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The number of top documents from which to return metrics.</para>
+	/// <para>
+	/// The number of top documents from which to return metrics.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Size(int? size)
 	{
@@ -467,7 +506,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>The sort order of the documents.</para>
+	/// <para>
+	/// The sort order of the documents.
+	/// </para>
 	/// </summary>
 	public TopMetricsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{

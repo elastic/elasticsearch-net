@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class RateAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -38,13 +40,18 @@ public sealed partial class RateAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	/// <summary>
-	/// <para>How the rate is calculated.</para>
+	/// <para>
+	/// How the rate is calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
@@ -52,7 +59,10 @@ public sealed partial class RateAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// <para>
+	/// The interval used to calculate the rate.
+	/// By default, the interval of the <c>date_histogram</c> is used.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unit")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
@@ -78,7 +88,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -87,7 +99,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -96,7 +110,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -111,7 +127,10 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -120,7 +139,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>How the rate is calculated.</para>
+	/// <para>
+	/// How the rate is calculated.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
 	{
@@ -153,7 +174,10 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// <para>
+	/// The interval used to calculate the rate.
+	/// By default, the interval of the <c>date_histogram</c> is used.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 	{
@@ -232,7 +256,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -241,7 +267,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -250,7 +278,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -265,7 +295,10 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -274,7 +307,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>How the rate is calculated.</para>
+	/// <para>
+	/// How the rate is calculated.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
 	{
@@ -307,7 +342,10 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// <para>
+	/// The interval used to calculate the rate.
+	/// By default, the interval of the <c>date_histogram</c> is used.
+	/// </para>
 	/// </summary>
 	public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 	{

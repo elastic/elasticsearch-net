@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 {
 	/// <summary>
-	/// <para>The labels to predict.</para>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string> Labels { get; set; }
 
 	/// <summary>
-	/// <para>Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.</para>
+	/// <para>
+	/// Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
@@ -72,7 +80,9 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The labels to predict.</para>
+	/// <para>
+	/// The labels to predict.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(ICollection<string> labels)
 	{
@@ -81,7 +91,9 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	}
 
 	/// <summary>
-	/// <para>Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.</para>
+	/// <para>
+	/// Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor MultiLabel(bool? multiLabel = true)
 	{
@@ -90,7 +102,9 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -99,7 +113,9 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescript
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? tokenization)
 	{

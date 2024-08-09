@@ -34,7 +34,10 @@ public sealed partial class ModifyDataStreamRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Update data streams.<br/>Performs one or more data stream modification actions in a single atomic operation.</para>
+/// <para>
+/// Update data streams.
+/// Performs one or more data stream modification actions in a single atomic operation.
+/// </para>
 /// </summary>
 public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStreamRequestParameters>
 {
@@ -47,14 +50,19 @@ public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStr
 	internal override string OperationName => "indices.modify_data_stream";
 
 	/// <summary>
-	/// <para>Actions to perform.</para>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> Actions { get; set; }
 }
 
 /// <summary>
-/// <para>Update data streams.<br/>Performs one or more data stream modification actions in a single atomic operation.</para>
+/// <para>
+/// Update data streams.
+/// Performs one or more data stream modification actions in a single atomic operation.
+/// </para>
 /// </summary>
 public sealed partial class ModifyDataStreamRequestDescriptor : RequestDescriptor<ModifyDataStreamRequestDescriptor, ModifyDataStreamRequestParameters>
 {
@@ -78,7 +86,9 @@ public sealed partial class ModifyDataStreamRequestDescriptor : RequestDescripto
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Actions to perform.</para>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
 	/// </summary>
 	public ModifyDataStreamRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> actions)
 	{

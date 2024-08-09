@@ -34,7 +34,10 @@ public sealed partial class ScriptsPainlessExecuteRequestParameters : RequestPar
 }
 
 /// <summary>
-/// <para>Run a script.<br/>Runs a script and returns a result.</para>
+/// <para>
+/// Run a script.
+/// Runs a script and returns a result.
+/// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<ScriptsPainlessExecuteRequestParameters>
 {
@@ -47,26 +50,35 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 	internal override string OperationName => "scripts_painless_execute";
 
 	/// <summary>
-	/// <para>The context that the script should run in.</para>
+	/// <para>
+	/// The context that the script should run in.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("context")]
 	public string? Context { get; set; }
 
 	/// <summary>
-	/// <para>Additional parameters for the `context`.</para>
+	/// <para>
+	/// Additional parameters for the <c>context</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("context_setup")]
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
 
 	/// <summary>
-	/// <para>The Painless script to execute.</para>
+	/// <para>
+	/// The Painless script to execute.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 /// <summary>
-/// <para>Run a script.<br/>Runs a script and returns a result.</para>
+/// <para>
+/// Run a script.
+/// Runs a script and returns a result.
+/// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor<TDocument>, ScriptsPainlessExecuteRequestParameters>
 {
@@ -93,7 +105,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The context that the script should run in.</para>
+	/// <para>
+	/// The context that the script should run in.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(string? context)
 	{
@@ -102,7 +116,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Additional parameters for the `context`.</para>
+	/// <para>
+	/// Additional parameters for the <c>context</c>.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
 	{
@@ -129,7 +145,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The Painless script to execute.</para>
+	/// <para>
+	/// The Painless script to execute.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
@@ -201,7 +219,10 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 }
 
 /// <summary>
-/// <para>Run a script.<br/>Runs a script and returns a result.</para>
+/// <para>
+/// Run a script.
+/// Runs a script and returns a result.
+/// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteRequestParameters>
 {
@@ -228,7 +249,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The context that the script should run in.</para>
+	/// <para>
+	/// The context that the script should run in.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor Context(string? context)
 	{
@@ -237,7 +260,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Additional parameters for the `context`.</para>
+	/// <para>
+	/// Additional parameters for the <c>context</c>.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
 	{
@@ -264,7 +289,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	}
 
 	/// <summary>
-	/// <para>The Painless script to execute.</para>
+	/// <para>
+	/// The Painless script to execute.
+	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{

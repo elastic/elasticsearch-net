@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterIndicesShardsIndex
 {
 	/// <summary>
-	/// <para>Contains statistics about the number of primary shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the number of primary shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("primaries")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Primaries { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the number of replication shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the number of replication shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replication")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Replication { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the number of shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the number of shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shards")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Shards { get; init; }

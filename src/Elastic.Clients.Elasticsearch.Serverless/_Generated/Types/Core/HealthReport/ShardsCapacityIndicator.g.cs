@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.HealthReport;
 
 /// <summary>
-/// <para>SHARDS_CAPACITY</para>
+/// <para>
+/// SHARDS_CAPACITY
+/// </para>
 /// </summary>
 public sealed partial class ShardsCapacityIndicator
 {

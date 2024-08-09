@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class IoStatDevice
 {
 	/// <summary>
-	/// <para>The Linux device name.</para>
+	/// <para>
+	/// The Linux device name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("device_name")]
 	public string? DeviceName { get; init; }
 
 	/// <summary>
-	/// <para>The total number of read and write operations for the device completed since starting Elasticsearch.</para>
+	/// <para>
+	/// The total number of read and write operations for the device completed since starting Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("operations")]
 	public long? Operations { get; init; }
 
 	/// <summary>
-	/// <para>The total number of kilobytes read for the device since starting Elasticsearch.</para>
+	/// <para>
+	/// The total number of kilobytes read for the device since starting Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("read_kilobytes")]
 	public long? ReadKilobytes { get; init; }
 
 	/// <summary>
-	/// <para>The total number of read operations for the device completed since starting Elasticsearch.</para>
+	/// <para>
+	/// The total number of read operations for the device completed since starting Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("read_operations")]
 	public long? ReadOperations { get; init; }
 
 	/// <summary>
-	/// <para>The total number of kilobytes written for the device since starting Elasticsearch.</para>
+	/// <para>
+	/// The total number of kilobytes written for the device since starting Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("write_kilobytes")]
 	public long? WriteKilobytes { get; init; }
 
 	/// <summary>
-	/// <para>The total number of write operations for the device completed since starting Elasticsearch.</para>
+	/// <para>
+	/// The total number of write operations for the device completed since starting Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("write_operations")]
 	public long? WriteOperations { get; init; }

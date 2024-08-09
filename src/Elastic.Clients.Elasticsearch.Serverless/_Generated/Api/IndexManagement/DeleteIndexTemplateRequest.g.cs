@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DeleteIndexTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+/// <para>
+/// Delete an index template.
+/// The provided &lt;index-template> may contain multiple template names separated by a comma. If multiple template
+/// names are specified then there is no wildcard support and the provided names should match completely with
+/// existing templates.
+/// </para>
 /// </summary>
 public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteIndexTemplateRequestParameters>
 {
@@ -60,20 +69,29 @@ public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteInde
 	internal override string OperationName => "indices.delete_index_template";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+/// <para>
+/// Delete an index template.
+/// The provided &lt;index-template> may contain multiple template names separated by a comma. If multiple template
+/// names are specified then there is no wildcard support and the provided names should match completely with
+/// existing templates.
+/// </para>
 /// </summary>
 public sealed partial class DeleteIndexTemplateRequestDescriptor : RequestDescriptor<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateRequestParameters>
 {

@@ -34,7 +34,9 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a rollup job.</para>
+/// <para>
+/// Creates a rollup job.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
 {
@@ -51,13 +53,25 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	internal override string OperationName => "rollup.put_job";
 
 	/// <summary>
-	/// <para>A cron string which defines the intervals when the rollup job should be executed. When the interval<br/>triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated<br/>to the time interval of the data being rolled up. For example, you may wish to create hourly rollups<br/>of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The<br/>cron pattern is defined just like a Watcher cron schedule.</para>
+	/// <para>
+	/// A cron string which defines the intervals when the rollup job should be executed. When the interval
+	/// triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated
+	/// to the time interval of the data being rolled up. For example, you may wish to create hourly rollups
+	/// of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The
+	/// cron pattern is defined just like a Watcher cron schedule.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cron")]
 	public string Cron { get; set; }
 
 	/// <summary>
-	/// <para>Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be<br/>available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of<br/>the groups configuration as defining a set of tools that can later be used in aggregations to partition the<br/>data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide<br/>enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.</para>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("groups")]
 	public Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
@@ -65,38 +79,55 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	public IDictionary<string, Union<string, ICollection<string>>>? Headers { get; set; }
 
 	/// <summary>
-	/// <para>The index or index pattern to roll up. Supports wildcard-style patterns (`logstash-*`). The job attempts to<br/>rollup the entire index or index-pattern.</para>
+	/// <para>
+	/// The index or index pattern to roll up. Supports wildcard-style patterns (<c>logstash-*</c>). The job attempts to
+	/// rollup the entire index or index-pattern.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_pattern")]
 	public string IndexPattern { get; set; }
 
 	/// <summary>
-	/// <para>Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each<br/>group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined<br/>on a per-field basis and for each field you configure which metric should be collected.</para>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	public ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
 
 	/// <summary>
-	/// <para>The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends<br/>to execute faster, but requires more memory during processing. This value has no effect on how the data is<br/>rolled up; it is merely used for tweaking the speed or memory cost of the indexer.</para>
+	/// <para>
+	/// The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends
+	/// to execute faster, but requires more memory during processing. This value has no effect on how the data is
+	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("page_size")]
 	public int PageSize { get; set; }
 
 	/// <summary>
-	/// <para>The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.</para>
+	/// <para>
+	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rollup_index")]
 	public Elastic.Clients.Elasticsearch.IndexName RollupIndex { get; set; }
 
 	/// <summary>
-	/// <para>Time to wait for the request to complete.</para>
+	/// <para>
+	/// Time to wait for the request to complete.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>
-/// <para>Creates a rollup job.</para>
+/// <para>
+/// Creates a rollup job.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
 {
@@ -135,7 +166,13 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>A cron string which defines the intervals when the rollup job should be executed. When the interval<br/>triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated<br/>to the time interval of the data being rolled up. For example, you may wish to create hourly rollups<br/>of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The<br/>cron pattern is defined just like a Watcher cron schedule.</para>
+	/// <para>
+	/// A cron string which defines the intervals when the rollup job should be executed. When the interval
+	/// triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated
+	/// to the time interval of the data being rolled up. For example, you may wish to create hourly rollups
+	/// of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The
+	/// cron pattern is defined just like a Watcher cron schedule.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Cron(string cron)
 	{
@@ -144,7 +181,13 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be<br/>available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of<br/>the groups configuration as defining a set of tools that can later be used in aggregations to partition the<br/>data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide<br/>enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.</para>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings groups)
 	{
@@ -177,7 +220,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>The index or index pattern to roll up. Supports wildcard-style patterns (`logstash-*`). The job attempts to<br/>rollup the entire index or index-pattern.</para>
+	/// <para>
+	/// The index or index pattern to roll up. Supports wildcard-style patterns (<c>logstash-*</c>). The job attempts to
+	/// rollup the entire index or index-pattern.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> IndexPattern(string indexPattern)
 	{
@@ -186,7 +232,11 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each<br/>group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined<br/>on a per-field basis and for each field you configure which metric should be collected.</para>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? metrics)
 	{
@@ -225,7 +275,11 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends<br/>to execute faster, but requires more memory during processing. This value has no effect on how the data is<br/>rolled up; it is merely used for tweaking the speed or memory cost of the indexer.</para>
+	/// <para>
+	/// The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends
+	/// to execute faster, but requires more memory during processing. This value has no effect on how the data is
+	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> PageSize(int pageSize)
 	{
@@ -234,7 +288,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.</para>
+	/// <para>
+	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> RollupIndex(Elastic.Clients.Elasticsearch.IndexName rollupIndex)
 	{
@@ -243,7 +299,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Time to wait for the request to complete.</para>
+	/// <para>
+	/// Time to wait for the request to complete.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{
@@ -326,7 +384,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Creates a rollup job.</para>
+/// <para>
+/// Creates a rollup job.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>
 {
@@ -365,7 +425,13 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>A cron string which defines the intervals when the rollup job should be executed. When the interval<br/>triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated<br/>to the time interval of the data being rolled up. For example, you may wish to create hourly rollups<br/>of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The<br/>cron pattern is defined just like a Watcher cron schedule.</para>
+	/// <para>
+	/// A cron string which defines the intervals when the rollup job should be executed. When the interval
+	/// triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated
+	/// to the time interval of the data being rolled up. For example, you may wish to create hourly rollups
+	/// of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The
+	/// cron pattern is defined just like a Watcher cron schedule.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Cron(string cron)
 	{
@@ -374,7 +440,13 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be<br/>available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of<br/>the groups configuration as defining a set of tools that can later be used in aggregations to partition the<br/>data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide<br/>enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.</para>
+	/// <para>
+	/// Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+	/// available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+	/// the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+	/// data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings groups)
 	{
@@ -407,7 +479,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>The index or index pattern to roll up. Supports wildcard-style patterns (`logstash-*`). The job attempts to<br/>rollup the entire index or index-pattern.</para>
+	/// <para>
+	/// The index or index pattern to roll up. Supports wildcard-style patterns (<c>logstash-*</c>). The job attempts to
+	/// rollup the entire index or index-pattern.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor IndexPattern(string indexPattern)
 	{
@@ -416,7 +491,11 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each<br/>group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined<br/>on a per-field basis and for each field you configure which metric should be collected.</para>
+	/// <para>
+	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+	/// on a per-field basis and for each field you configure which metric should be collected.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? metrics)
 	{
@@ -455,7 +534,11 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends<br/>to execute faster, but requires more memory during processing. This value has no effect on how the data is<br/>rolled up; it is merely used for tweaking the speed or memory cost of the indexer.</para>
+	/// <para>
+	/// The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends
+	/// to execute faster, but requires more memory during processing. This value has no effect on how the data is
+	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor PageSize(int pageSize)
 	{
@@ -464,7 +547,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.</para>
+	/// <para>
+	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor RollupIndex(Elastic.Clients.Elasticsearch.IndexName rollupIndex)
 	{
@@ -473,7 +558,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Time to wait for the request to complete.</para>
+	/// <para>
+	/// Time to wait for the request to complete.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{

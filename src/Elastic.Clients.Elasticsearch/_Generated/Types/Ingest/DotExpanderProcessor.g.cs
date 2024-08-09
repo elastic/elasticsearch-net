@@ -30,43 +30,61 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class DotExpanderProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// <para>
+	/// The field that contains the field to expand.
+	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public string? Path { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -94,7 +112,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -103,7 +124,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -112,7 +136,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -121,7 +148,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -130,7 +160,9 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -139,7 +171,9 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -148,7 +182,9 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -187,7 +223,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// <para>
+	/// The field that contains the field to expand.
+	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Path(string? path)
 	{
@@ -196,7 +235,10 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -294,7 +336,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Description(string? description)
 	{
@@ -303,7 +348,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -312,7 +360,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -321,7 +372,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// <para>
+	/// The field to expand into an object field.
+	/// If set to <c>*</c>, all top-level fields will be expanded.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -330,7 +384,9 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor If(string? value)
 	{
@@ -339,7 +395,9 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -348,7 +406,9 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -387,7 +447,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// <para>
+	/// The field that contains the field to expand.
+	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Path(string? path)
 	{
@@ -396,7 +459,10 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DotExpanderProcessorDescriptor Tag(string? tag)
 	{

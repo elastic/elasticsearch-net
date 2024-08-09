@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class RegexOptions
 {
 	/// <summary>
-	/// <para>Optional operators for the regular expression.</para>
+	/// <para>
+	/// Optional operators for the regular expression.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flags")]
 	public object? Flags { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class RegexOptionsDescriptor : SerializableDescriptor<Rege
 	private int? MaxDeterminizedStatesValue { get; set; }
 
 	/// <summary>
-	/// <para>Optional operators for the regular expression.</para>
+	/// <para>
+	/// Optional operators for the regular expression.
+	/// </para>
 	/// </summary>
 	public RegexOptionsDescriptor Flags(object? flags)
 	{
@@ -63,7 +69,9 @@ public sealed partial class RegexOptionsDescriptor : SerializableDescriptor<Rege
 	}
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public RegexOptionsDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
 	{

@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class ScriptScoreQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// <para>
+	/// Documents with a score lower than this floating point number are excluded from the search results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
-	/// <para>Query used to return documents.</para>
+	/// <para>
+	/// Query used to return documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
@@ -50,7 +59,10 @@ public sealed partial class ScriptScoreQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// <para>
+	/// Script used to compute the score of documents returned by the query.
+	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
@@ -77,7 +89,12 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -86,7 +103,9 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// <para>
+	/// Documents with a score lower than this floating point number are excluded from the search results.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
 	{
@@ -95,7 +114,9 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Query used to return documents.</para>
+	/// <para>
+	/// Query used to return documents.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -128,7 +149,10 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// <para>
+	/// Script used to compute the score of documents returned by the query.
+	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
 	{
@@ -230,7 +254,12 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor Boost(float? boost)
 	{
@@ -239,7 +268,9 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// <para>
+	/// Documents with a score lower than this floating point number are excluded from the search results.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor MinScore(float? minScore)
 	{
@@ -248,7 +279,9 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Query used to return documents.</para>
+	/// <para>
+	/// Query used to return documents.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -281,7 +314,10 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// <para>
+	/// Script used to compute the score of documents returned by the query.
+	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
+	/// </para>
 	/// </summary>
 	public ScriptScoreQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{

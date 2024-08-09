@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class ExplainDataFrameAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>An array of objects that explain selection for each field, sorted by the field names.</para>
+	/// <para>
+	/// An array of objects that explain selection for each field, sorted by the field names.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_selection")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> FieldSelection { get; init; }
 
 	/// <summary>
-	/// <para>An array of objects that explain selection for each field, sorted by the field names.</para>
+	/// <para>
+	/// An array of objects that explain selection for each field, sorted by the field names.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("memory_estimation")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation MemoryEstimation { get; init; }

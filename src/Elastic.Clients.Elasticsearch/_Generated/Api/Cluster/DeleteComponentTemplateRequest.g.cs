@@ -32,18 +32,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class DeleteComponentTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>
+/// Delete component templates.
+/// Deletes component templates.
+/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+/// </para>
 /// </summary>
 public sealed partial class DeleteComponentTemplateRequest : PlainRequest<DeleteComponentTemplateRequestParameters>
 {
@@ -60,20 +70,30 @@ public sealed partial class DeleteComponentTemplateRequest : PlainRequest<Delete
 	internal override string OperationName => "cluster.delete_component_template";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>
+/// Delete component templates.
+/// Deletes component templates.
+/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+/// </para>
 /// </summary>
 public sealed partial class DeleteComponentTemplateRequestDescriptor : RequestDescriptor<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateRequestParameters>
 {

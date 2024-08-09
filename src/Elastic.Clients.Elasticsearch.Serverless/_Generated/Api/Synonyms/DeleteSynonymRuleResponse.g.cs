@@ -29,13 +29,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Synonyms;
 public sealed partial class DeleteSynonymRuleResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Updating synonyms in a synonym set reloads the associated analyzers.<br/>This is the analyzers reloading result</para>
+	/// <para>
+	/// Updating synonyms in a synonym set reloads the associated analyzers.
+	/// This is the analyzers reloading result
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reload_analyzers_details")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; init; }
 
 	/// <summary>
-	/// <para>Update operation result</para>
+	/// <para>
+	/// Update operation result
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Serverless.Result Result { get; init; }

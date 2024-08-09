@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class IntervalsAnyOf
 {
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsFilter? Filter { get; set; }
 
 	/// <summary>
-	/// <para>An array of rules to match.</para>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("intervals")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Intervals> Intervals { get; set; }
@@ -62,7 +66,9 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	public IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsFilter? filter)
 	{
@@ -89,7 +95,9 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>An array of rules to match.</para>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
 	/// </summary>
 	public IntervalsAnyOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Intervals> intervals)
 	{
@@ -198,7 +206,9 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
+	/// <para>
+	/// Rule used to filter returned intervals.
+	/// </para>
 	/// </summary>
 	public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsFilter? filter)
 	{
@@ -225,7 +235,9 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 	}
 
 	/// <summary>
-	/// <para>An array of rules to match.</para>
+	/// <para>
+	/// An array of rules to match.
+	/// </para>
 	/// </summary>
 	public IntervalsAnyOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Intervals> intervals)
 	{

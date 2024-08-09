@@ -34,7 +34,25 @@ public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Request
 }
 
 /// <summary>
-/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>
+/// Explain data frame analytics config.
+/// This API provides explanations for a data frame analytics config that either
+/// exists already or one that has not been created yet. The following
+/// explanations are provided:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// which fields are included or not in the analysis and why,
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.
+/// If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<ExplainDataFrameAnalyticsRequestParameters>
 {
@@ -55,56 +73,106 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	internal override string OperationName => "ml.explain_data_frame_analytics";
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool? AllowLazyStart { get; set; }
 
 	/// <summary>
-	/// <para>The analysis configuration, which contains the information necessary to<br/>perform one of the following types of analysis: classification, outlier<br/>detection, or regression.</para>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? Analysis { get; set; }
 
 	/// <summary>
-	/// <para>Specify includes and/or excludes patterns to select which fields will be<br/>included in the analysis. The patterns specified in excludes are applied<br/>last, therefore excludes takes precedence. In other words, if the same<br/>field is specified in both includes and excludes, then the field will not<br/>be included in the analysis.</para>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzed_fields")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The destination configuration, consisting of index and optionally<br/>results_field (ml by default).</para>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? Dest { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try to<br/>create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to
+	/// create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
 
 	/// <summary>
-	/// <para>The configuration of how to source the analysis data. It requires an<br/>index. Optionally, query and _source may be specified.</para>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? Source { get; set; }
 }
 
 /// <summary>
-/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>
+/// Explain data frame analytics config.
+/// This API provides explanations for a data frame analytics config that either
+/// exists already or one that has not been created yet. The following
+/// explanations are provided:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// which fields are included or not in the analysis and why,
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.
+/// If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>, ExplainDataFrameAnalyticsRequestParameters>
 {
@@ -150,7 +218,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
 	{
@@ -159,7 +230,11 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>The analysis configuration, which contains the information necessary to<br/>perform one of the following types of analysis: classification, outlier<br/>detection, or regression.</para>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? analysis)
 	{
@@ -186,7 +261,13 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>Specify includes and/or excludes patterns to select which fields will be<br/>included in the analysis. The patterns specified in excludes are applied<br/>last, therefore excludes takes precedence. In other words, if the same<br/>field is specified in both includes and excludes, then the field will not<br/>be included in the analysis.</para>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
 	{
@@ -213,7 +294,9 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -222,7 +305,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>The destination configuration, consisting of index and optionally<br/>results_field (ml by default).</para>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? dest)
 	{
@@ -249,7 +335,12 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
 	{
@@ -258,7 +349,13 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try to<br/>create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to
+	/// create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
 	{
@@ -267,7 +364,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 	}
 
 	/// <summary>
-	/// <para>The configuration of how to source the analysis data. It requires an<br/>index. Optionally, query and _source may be specified.</para>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? source)
 	{
@@ -389,7 +489,25 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 }
 
 /// <summary>
-/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>
+/// Explain data frame analytics config.
+/// This API provides explanations for a data frame analytics config that either
+/// exists already or one that has not been created yet. The following
+/// explanations are provided:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// which fields are included or not in the analysis and why,
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.
+/// If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor, ExplainDataFrameAnalyticsRequestParameters>
 {
@@ -435,7 +553,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
 	{
@@ -444,7 +565,11 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The analysis configuration, which contains the information necessary to<br/>perform one of the following types of analysis: classification, outlier<br/>detection, or regression.</para>
+	/// <para>
+	/// The analysis configuration, which contains the information necessary to
+	/// perform one of the following types of analysis: classification, outlier
+	/// detection, or regression.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis? analysis)
 	{
@@ -471,7 +596,13 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>Specify includes and/or excludes patterns to select which fields will be<br/>included in the analysis. The patterns specified in excludes are applied<br/>last, therefore excludes takes precedence. In other words, if the same<br/>field is specified in both includes and excludes, then the field will not<br/>be included in the analysis.</para>
+	/// <para>
+	/// Specify includes and/or excludes patterns to select which fields will be
+	/// included in the analysis. The patterns specified in excludes are applied
+	/// last, therefore excludes takes precedence. In other words, if the same
+	/// field is specified in both includes and excludes, then the field will not
+	/// be included in the analysis.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
 	{
@@ -498,7 +629,9 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor Description(string? description)
 	{
@@ -507,7 +640,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The destination configuration, consisting of index and optionally<br/>results_field (ml by default).</para>
+	/// <para>
+	/// The destination configuration, consisting of index and optionally
+	/// results_field (ml by default).
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination? dest)
 	{
@@ -534,7 +670,12 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? maxNumThreads)
 	{
@@ -543,7 +684,13 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try to<br/>create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to
+	/// create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? modelMemoryLimit)
 	{
@@ -552,7 +699,10 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The configuration of how to source the analysis data. It requires an<br/>index. Optionally, query and _source may be specified.</para>
+	/// <para>
+	/// The configuration of how to source the analysis data. It requires an
+	/// index. Optionally, query and _source may be specified.
+	/// </para>
 	/// </summary>
 	public ExplainDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource? source)
 	{

@@ -30,37 +30,51 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelStats
 {
 	/// <summary>
-	/// <para>A collection of deployment stats, which is present when the models are deployed.</para>
+	/// <para>
+	/// A collection of deployment stats, which is present when the models are deployed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deployment_stats")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats? DeploymentStats { get; init; }
 
 	/// <summary>
-	/// <para>A collection of inference stats fields.</para>
+	/// <para>
+	/// A collection of inference stats fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_stats")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats? InferenceStats { get; init; }
 
 	/// <summary>
-	/// <para>A collection of ingest stats for the model across all nodes.<br/>The values are summations of the individual node statistics.<br/>The format matches the ingest section in the nodes stats API.</para>
+	/// <para>
+	/// A collection of ingest stats for the model across all nodes.
+	/// The values are summations of the individual node statistics.
+	/// The format matches the ingest section in the nodes stats API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ingest")]
 	public IReadOnlyDictionary<string, object>? Ingest { get; init; }
 
 	/// <summary>
-	/// <para>The unique identifier of the trained model.</para>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public string ModelId { get; init; }
 
 	/// <summary>
-	/// <para>A collection of model size stats.</para>
+	/// <para>
+	/// A collection of model size stats.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_size_stats")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; init; }
 
 	/// <summary>
-	/// <para>The number of ingest pipelines that currently refer to the model.</para>
+	/// <para>
+	/// The number of ingest pipelines that currently refer to the model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipeline_count")]
 	public int PipelineCount { get; init; }

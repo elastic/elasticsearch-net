@@ -30,26 +30,34 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class RRFRetriever
 {
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
-	/// <para>This value determines how much influence documents in individual result sets per query have over the final ranked result set.</para>
+	/// <para>
+	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank_constant")]
 	public int? RankConstant { get; set; }
 
 	/// <summary>
-	/// <para>This value determines the size of the individual result sets per query.</para>
+	/// <para>
+	/// This value determines the size of the individual result sets per query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rank_window_size")]
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
-	/// <para>A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.</para>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retrievers")]
 	public ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
@@ -77,7 +85,9 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>>[] RetrieversDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
@@ -116,7 +126,9 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>This value determines how much influence documents in individual result sets per query have over the final ranked result set.</para>
+	/// <para>
+	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor<TDocument> RankConstant(int? rankConstant)
 	{
@@ -125,7 +137,9 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>This value determines the size of the individual result sets per query.</para>
+	/// <para>
+	/// This value determines the size of the individual result sets per query.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor<TDocument> RankWindowSize(int? rankWindowSize)
 	{
@@ -134,7 +148,9 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.</para>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor<TDocument> Retrievers(ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
 	{
@@ -271,7 +287,9 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor>[] RetrieversDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Query to filter the documents that can match.</para>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
@@ -310,7 +328,9 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	}
 
 	/// <summary>
-	/// <para>This value determines how much influence documents in individual result sets per query have over the final ranked result set.</para>
+	/// <para>
+	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor RankConstant(int? rankConstant)
 	{
@@ -319,7 +339,9 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	}
 
 	/// <summary>
-	/// <para>This value determines the size of the individual result sets per query.</para>
+	/// <para>
+	/// This value determines the size of the individual result sets per query.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor RankWindowSize(int? rankWindowSize)
 	{
@@ -328,7 +350,9 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	}
 
 	/// <summary>
-	/// <para>A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.</para>
+	/// <para>
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// </para>
 	/// </summary>
 	public RRFRetrieverDescriptor Retrievers(ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
 	{

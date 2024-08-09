@@ -30,55 +30,76 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class ConvertProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
 
 	/// <summary>
-	/// <para>The type to convert the existing value to.</para>
+	/// <para>
+	/// The type to convert the existing value to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertType Type { get; set; }
@@ -108,7 +129,10 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertType TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -117,7 +141,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -126,7 +152,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -135,7 +163,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -144,7 +174,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -153,7 +185,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -162,7 +196,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -171,7 +207,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -210,7 +248,10 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -219,7 +260,10 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -228,7 +272,10 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -237,7 +284,10 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -246,7 +296,9 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The type to convert the existing value to.</para>
+	/// <para>
+	/// The type to convert the existing value to.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertType type)
 	{
@@ -354,7 +406,10 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertType TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Description(string? description)
 	{
@@ -363,7 +418,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -372,7 +429,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -381,7 +440,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field whose value is to be converted.</para>
+	/// <para>
+	/// The field whose value is to be converted.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -390,7 +451,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor If(string? value)
 	{
@@ -399,7 +462,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -408,7 +473,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -417,7 +484,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -456,7 +525,10 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Tag(string? tag)
 	{
@@ -465,7 +537,10 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -474,7 +549,10 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -483,7 +561,10 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The field to assign the converted value to.<br/>By default, the `field` is updated in-place.</para>
+	/// <para>
+	/// The field to assign the converted value to.
+	/// By default, the <c>field</c> is updated in-place.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
@@ -492,7 +573,9 @@ public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The type to convert the existing value to.</para>
+	/// <para>
+	/// The type to convert the existing value to.
+	/// </para>
 	/// </summary>
 	public ConvertProcessorDescriptor Type(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertType type)
 	{

@@ -28,26 +28,34 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 /// <summary>
-/// <para>Mean Reciprocal Rank</para>
+/// <para>
+/// Mean Reciprocal Rank
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
 	/// <summary>
-	/// <para>Sets the rating threshold above which documents are considered to be "relevant".</para>
+	/// <para>
+	/// Sets the rating threshold above which documents are considered to be "relevant".
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 
 /// <summary>
-/// <para>Mean Reciprocal Rank</para>
+/// <para>
+/// Mean Reciprocal Rank
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricMeanReciprocalRankDescriptor>
@@ -62,7 +70,9 @@ public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : Seriali
 	private int? RelevantRatingThresholdValue { get; set; }
 
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	public RankEvalMetricMeanReciprocalRankDescriptor k(int? k)
 	{
@@ -71,7 +81,9 @@ public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : Seriali
 	}
 
 	/// <summary>
-	/// <para>Sets the rating threshold above which documents are considered to be "relevant".</para>
+	/// <para>
+	/// Sets the rating threshold above which documents are considered to be "relevant".
+	/// </para>
 	/// </summary>
 	public RankEvalMetricMeanReciprocalRankDescriptor RelevantRatingThreshold(int? relevantRatingThreshold)
 	{

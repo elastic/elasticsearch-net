@@ -40,7 +40,9 @@ public sealed partial class InnerHits
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Inner hit starting document offset.</para>
+	/// <para>
+	/// Inner hit starting document offset.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
@@ -50,7 +52,10 @@ public sealed partial class InnerHits
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
-	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
+	/// <para>
+	/// The name for the particular inner hit definition in the response.
+	/// Useful when a search request contains multiple inner hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
@@ -60,13 +65,18 @@ public sealed partial class InnerHits
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of hits to return per `inner_hits`.</para>
+	/// <para>
+	/// The maximum number of hits to return per <c>inner_hits</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>How the inner hits should be sorted per `inner_hits`.<br/>By default, inner hits are sorted by score.</para>
+	/// <para>
+	/// How the inner hits should be sorted per <c>inner_hits</c>.
+	/// By default, inner hits are sorted by score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
@@ -190,7 +200,9 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Inner hit starting document offset.</para>
+	/// <para>
+	/// Inner hit starting document offset.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor<TDocument> From(int? from)
 	{
@@ -229,7 +241,10 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
+	/// <para>
+	/// The name for the particular inner hit definition in the response.
+	/// Useful when a search request contains multiple inner hits.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
 	{
@@ -250,7 +265,9 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The maximum number of hits to return per `inner_hits`.</para>
+	/// <para>
+	/// The maximum number of hits to return per <c>inner_hits</c>.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor<TDocument> Size(int? size)
 	{
@@ -259,7 +276,10 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>How the inner hits should be sorted per `inner_hits`.<br/>By default, inner hits are sorted by score.</para>
+	/// <para>
+	/// How the inner hits should be sorted per <c>inner_hits</c>.
+	/// By default, inner hits are sorted by score.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -600,7 +620,9 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	}
 
 	/// <summary>
-	/// <para>Inner hit starting document offset.</para>
+	/// <para>
+	/// Inner hit starting document offset.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor From(int? from)
 	{
@@ -639,7 +661,10 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	}
 
 	/// <summary>
-	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
+	/// <para>
+	/// The name for the particular inner hit definition in the response.
+	/// Useful when a search request contains multiple inner hits.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 	{
@@ -660,7 +685,9 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	}
 
 	/// <summary>
-	/// <para>The maximum number of hits to return per `inner_hits`.</para>
+	/// <para>
+	/// The maximum number of hits to return per <c>inner_hits</c>.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor Size(int? size)
 	{
@@ -669,7 +696,10 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	}
 
 	/// <summary>
-	/// <para>How the inner hits should be sorted per `inner_hits`.<br/>By default, inner hits are sorted by score.</para>
+	/// <para>
+	/// How the inner hits should be sorted per <c>inner_hits</c>.
+	/// By default, inner hits are sorted by score.
+	/// </para>
 	/// </summary>
 	public InnerHitsDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{

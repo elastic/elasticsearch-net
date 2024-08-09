@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class CgroupMemory
 {
 	/// <summary>
-	/// <para>The `memory` control group to which the Elasticsearch process belongs.</para>
+	/// <para>
+	/// The <c>memory</c> control group to which the Elasticsearch process belongs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("control_group")]
 	public string? ControlGroup { get; init; }
 
 	/// <summary>
-	/// <para>The maximum amount of user memory (including file cache) allowed for all tasks in the same cgroup as the Elasticsearch process.<br/>This value can be too big to store in a `long`, so is returned as a string so that the value returned can exactly match what the underlying operating system interface returns.<br/>Any value that is too large to parse into a `long` almost certainly means no limit has been set for the cgroup.</para>
+	/// <para>
+	/// The maximum amount of user memory (including file cache) allowed for all tasks in the same cgroup as the Elasticsearch process.
+	/// This value can be too big to store in a <c>long</c>, so is returned as a string so that the value returned can exactly match what the underlying operating system interface returns.
+	/// Any value that is too large to parse into a <c>long</c> almost certainly means no limit has been set for the cgroup.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit_in_bytes")]
 	public string? LimitInBytes { get; init; }
 
 	/// <summary>
-	/// <para>The total current memory usage by processes in the cgroup, in bytes, by all tasks in the same cgroup as the Elasticsearch process.<br/>This value is stored as a string for consistency with `limit_in_bytes`.</para>
+	/// <para>
+	/// The total current memory usage by processes in the cgroup, in bytes, by all tasks in the same cgroup as the Elasticsearch process.
+	/// This value is stored as a string for consistency with <c>limit_in_bytes</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("usage_in_bytes")]
 	public string? UsageInBytes { get; init; }

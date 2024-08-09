@@ -98,7 +98,9 @@ internal sealed partial class IpPrefixBucketConverter : JsonConverter<IpPrefixBu
 public sealed partial class IpPrefixBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

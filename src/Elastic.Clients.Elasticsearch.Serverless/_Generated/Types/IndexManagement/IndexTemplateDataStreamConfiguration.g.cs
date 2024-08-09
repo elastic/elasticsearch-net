@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class IndexTemplateDataStreamConfiguration
 {
 	/// <summary>
-	/// <para>If true, the data stream supports custom routing.</para>
+	/// <para>
+	/// If true, the data stream supports custom routing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_custom_routing")]
 	public bool? AllowCustomRouting { get; init; }
 
 	/// <summary>
-	/// <para>If true, the data stream is hidden.</para>
+	/// <para>
+	/// If true, the data stream is hidden.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hidden")]
 	public bool? Hidden { get; init; }

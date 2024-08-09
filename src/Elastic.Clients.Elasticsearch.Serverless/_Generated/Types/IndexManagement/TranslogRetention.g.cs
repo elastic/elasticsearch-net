@@ -30,13 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class TranslogRetention
 {
 	/// <summary>
-	/// <para>This controls the maximum duration for which translog files are kept by each shard. Keeping more<br/>translog files increases the chance of performing an operation based sync when recovering replicas. If<br/>the translog files are not sufficient, replica recovery will fall back to a file based sync. This setting<br/>is ignored, and should not be set, if soft deletes are enabled. Soft deletes are enabled by default in<br/>indices created in Elasticsearch versions 7.0.0 and later.</para>
+	/// <para>
+	/// This controls the maximum duration for which translog files are kept by each shard. Keeping more
+	/// translog files increases the chance of performing an operation based sync when recovering replicas. If
+	/// the translog files are not sufficient, replica recovery will fall back to a file based sync. This setting
+	/// is ignored, and should not be set, if soft deletes are enabled. Soft deletes are enabled by default in
+	/// indices created in Elasticsearch versions 7.0.0 and later.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("age")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Age { get; set; }
 
 	/// <summary>
-	/// <para>This controls the total size of translog files to keep for each shard. Keeping more translog files increases<br/>the chance of performing an operation based sync when recovering a replica. If the translog files are not<br/>sufficient, replica recovery will fall back to a file based sync. This setting is ignored, and should not be<br/>set, if soft deletes are enabled. Soft deletes are enabled by default in indices created in Elasticsearch<br/>versions 7.0.0 and later.</para>
+	/// <para>
+	/// This controls the total size of translog files to keep for each shard. Keeping more translog files increases
+	/// the chance of performing an operation based sync when recovering a replica. If the translog files are not
+	/// sufficient, replica recovery will fall back to a file based sync. This setting is ignored, and should not be
+	/// set, if soft deletes are enabled. Soft deletes are enabled by default in indices created in Elasticsearch
+	/// versions 7.0.0 and later.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? Size { get; set; }
@@ -54,7 +66,13 @@ public sealed partial class TranslogRetentionDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.ByteSize? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>This controls the maximum duration for which translog files are kept by each shard. Keeping more<br/>translog files increases the chance of performing an operation based sync when recovering replicas. If<br/>the translog files are not sufficient, replica recovery will fall back to a file based sync. This setting<br/>is ignored, and should not be set, if soft deletes are enabled. Soft deletes are enabled by default in<br/>indices created in Elasticsearch versions 7.0.0 and later.</para>
+	/// <para>
+	/// This controls the maximum duration for which translog files are kept by each shard. Keeping more
+	/// translog files increases the chance of performing an operation based sync when recovering replicas. If
+	/// the translog files are not sufficient, replica recovery will fall back to a file based sync. This setting
+	/// is ignored, and should not be set, if soft deletes are enabled. Soft deletes are enabled by default in
+	/// indices created in Elasticsearch versions 7.0.0 and later.
+	/// </para>
 	/// </summary>
 	public TranslogRetentionDescriptor Age(Elastic.Clients.Elasticsearch.Serverless.Duration? age)
 	{
@@ -63,7 +81,13 @@ public sealed partial class TranslogRetentionDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>This controls the total size of translog files to keep for each shard. Keeping more translog files increases<br/>the chance of performing an operation based sync when recovering a replica. If the translog files are not<br/>sufficient, replica recovery will fall back to a file based sync. This setting is ignored, and should not be<br/>set, if soft deletes are enabled. Soft deletes are enabled by default in indices created in Elasticsearch<br/>versions 7.0.0 and later.</para>
+	/// <para>
+	/// This controls the total size of translog files to keep for each shard. Keeping more translog files increases
+	/// the chance of performing an operation based sync when recovering a replica. If the translog files are not
+	/// sufficient, replica recovery will fall back to a file based sync. This setting is ignored, and should not be
+	/// set, if soft deletes are enabled. Soft deletes are enabled by default in indices created in Elasticsearch
+	/// versions 7.0.0 and later.
+	/// </para>
 	/// </summary>
 	public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.Serverless.ByteSize? size)
 	{

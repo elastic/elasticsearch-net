@@ -30,55 +30,77 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class ScriptProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>ID of a stored script.<br/>If no `source` is specified, this parameter is required.</para>
+	/// <para>
+	/// ID of a stored script.
+	/// If no <c>source</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Script language.</para>
+	/// <para>
+	/// Script language.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lang")]
 	public string? Lang { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Object containing parameters for the script.</para>
+	/// <para>
+	/// Object containing parameters for the script.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>Inline script.<br/>If no `id` is specified, this parameter is required.</para>
+	/// <para>
+	/// Inline script.
+	/// If no <c>id</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -108,7 +130,10 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -117,7 +142,10 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>ID of a stored script.<br/>If no `source` is specified, this parameter is required.</para>
+	/// <para>
+	/// ID of a stored script.
+	/// If no <c>source</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -126,7 +154,9 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -135,7 +165,9 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -144,7 +176,9 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Script language.</para>
+	/// <para>
+	/// Script language.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Lang(string? lang)
 	{
@@ -153,7 +187,9 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -192,7 +228,9 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Object containing parameters for the script.</para>
+	/// <para>
+	/// Object containing parameters for the script.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -201,7 +239,10 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Inline script.<br/>If no `id` is specified, this parameter is required.</para>
+	/// <para>
+	/// Inline script.
+	/// If no <c>id</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Source(string? source)
 	{
@@ -210,7 +251,10 @@ public sealed partial class ScriptProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -326,7 +370,10 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Description(string? description)
 	{
@@ -335,7 +382,10 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>ID of a stored script.<br/>If no `source` is specified, this parameter is required.</para>
+	/// <para>
+	/// ID of a stored script.
+	/// If no <c>source</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -344,7 +394,9 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor If(string? value)
 	{
@@ -353,7 +405,9 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -362,7 +416,9 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Script language.</para>
+	/// <para>
+	/// Script language.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Lang(string? lang)
 	{
@@ -371,7 +427,9 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -410,7 +468,9 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Object containing parameters for the script.</para>
+	/// <para>
+	/// Object containing parameters for the script.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -419,7 +479,10 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Inline script.<br/>If no `id` is specified, this parameter is required.</para>
+	/// <para>
+	/// Inline script.
+	/// If no <c>id</c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Source(string? source)
 	{
@@ -428,7 +491,10 @@ public sealed partial class ScriptProcessorDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ScriptProcessorDescriptor Tag(string? tag)
 	{

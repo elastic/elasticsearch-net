@@ -30,61 +30,84 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class SplitProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Preserves empty trailing fields, if any.</para>
+	/// <para>
+	/// Preserves empty trailing fields, if any.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_trailing")]
 	public bool? PreserveTrailing { get; set; }
 
 	/// <summary>
-	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// <para>
+	/// A regex which matches the separator, for example, <c>,</c> or <c>\s+</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
@@ -115,7 +138,10 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -124,7 +150,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -133,7 +161,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -142,7 +172,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -151,7 +183,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -160,7 +194,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -169,7 +205,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -178,7 +216,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -217,7 +257,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Preserves empty trailing fields, if any.</para>
+	/// <para>
+	/// Preserves empty trailing fields, if any.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> PreserveTrailing(bool? preserveTrailing = true)
 	{
@@ -226,7 +268,9 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// <para>
+	/// A regex which matches the separator, for example, <c>,</c> or <c>\s+</c>.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Separator(string separator)
 	{
@@ -235,7 +279,10 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -244,7 +291,10 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -253,7 +303,10 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -262,7 +315,10 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -377,7 +433,10 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Description(string? description)
 	{
@@ -386,7 +445,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -395,7 +456,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -404,7 +467,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to split.</para>
+	/// <para>
+	/// The field to split.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -413,7 +478,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor If(string? value)
 	{
@@ -422,7 +489,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -431,7 +500,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -440,7 +511,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -479,7 +552,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Preserves empty trailing fields, if any.</para>
+	/// <para>
+	/// Preserves empty trailing fields, if any.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor PreserveTrailing(bool? preserveTrailing = true)
 	{
@@ -488,7 +563,9 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// <para>
+	/// A regex which matches the separator, for example, <c>,</c> or <c>\s+</c>.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Separator(string separator)
 	{
@@ -497,7 +574,10 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor Tag(string? tag)
 	{
@@ -506,7 +586,10 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -515,7 +598,10 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -524,7 +610,10 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the split value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public SplitProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

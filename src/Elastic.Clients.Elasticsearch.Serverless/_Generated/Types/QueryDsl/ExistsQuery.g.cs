@@ -30,13 +30,20 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class ExistsQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -59,7 +66,12 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -68,7 +80,9 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -77,7 +91,9 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -86,7 +102,9 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -134,7 +152,12 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor Boost(float? boost)
 	{
@@ -143,7 +166,9 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -152,7 +177,9 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -161,7 +188,9 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	}
 
 	/// <summary>
-	/// <para>Name of the field you wish to search.</para>
+	/// <para>
+	/// Name of the field you wish to search.
+	/// </para>
 	/// </summary>
 	public ExistsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

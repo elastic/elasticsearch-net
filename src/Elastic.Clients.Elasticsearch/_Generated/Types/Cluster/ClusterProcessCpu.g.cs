@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterProcessCpu
 {
 	/// <summary>
-	/// <para>Percentage of CPU used across all selected nodes.<br/>Returns `-1` if not supported.</para>
+	/// <para>
+	/// Percentage of CPU used across all selected nodes.
+	/// Returns <c>-1</c> if not supported.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("percent")]
 	public int Percent { get; init; }

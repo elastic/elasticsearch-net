@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalyticsFieldSelection
 {
 	/// <summary>
-	/// <para>The feature type of this field for the analysis. May be categorical or numerical.</para>
+	/// <para>
+	/// The feature type of this field for the analysis. May be categorical or numerical.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_type")]
 	public string? FeatureType { get; init; }
 
 	/// <summary>
-	/// <para>Whether the field is selected to be included in the analysis.</para>
+	/// <para>
+	/// Whether the field is selected to be included in the analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_included")]
 	public bool IsIncluded { get; init; }
 
 	/// <summary>
-	/// <para>Whether the field is required.</para>
+	/// <para>
+	/// Whether the field is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_required")]
 	public bool IsRequired { get; init; }
 
 	/// <summary>
-	/// <para>The mapping types of the field.</para>
+	/// <para>
+	/// The mapping types of the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mapping_types")]
 	public IReadOnlyCollection<string> MappingTypes { get; init; }
 
 	/// <summary>
-	/// <para>The field name.</para>
+	/// <para>
+	/// The field name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
-	/// <para>The reason a field is not selected to be included in the analysis.</para>
+	/// <para>
+	/// The reason a field is not selected to be included in the analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reason")]
 	public string? Reason { get; init; }

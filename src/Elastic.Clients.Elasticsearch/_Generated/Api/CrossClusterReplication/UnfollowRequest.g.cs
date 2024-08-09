@@ -34,7 +34,9 @@ public sealed partial class UnfollowRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+/// <para>
+/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+/// </para>
 /// </summary>
 public sealed partial class UnfollowRequest : PlainRequest<UnfollowRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class UnfollowRequest : PlainRequest<UnfollowRequestParame
 }
 
 /// <summary>
-/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+/// <para>
+/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+/// </para>
 /// </summary>
 public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescriptor<UnfollowRequestDescriptor<TDocument>, UnfollowRequestParameters>
 {
@@ -86,7 +90,9 @@ public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+/// <para>
+/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+/// </para>
 /// </summary>
 public sealed partial class UnfollowRequestDescriptor : RequestDescriptor<UnfollowRequestDescriptor, UnfollowRequestParameters>
 {

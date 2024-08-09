@@ -28,36 +28,50 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 /// <summary>
-/// <para>Provides information about each cluster request relevant to doing a cross-cluster search.</para>
+/// <para>
+/// Provides information about each cluster request relevant to doing a cross-cluster search.
+/// </para>
 /// </summary>
 public sealed partial class ResolveClusterInfo
 {
 	/// <summary>
-	/// <para>Whether the remote cluster is connected to the local (querying) cluster.</para>
+	/// <para>
+	/// Whether the remote cluster is connected to the local (querying) cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("connected")]
 	public bool Connected { get; init; }
 
 	/// <summary>
-	/// <para>Provides error messages that are likely to occur if you do a search with this index expression<br/>on the specified cluster (e.g., lack of security privileges to query an index).</para>
+	/// <para>
+	/// Provides error messages that are likely to occur if you do a search with this index expression
+	/// on the specified cluster (e.g., lack of security privileges to query an index).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error")]
 	public string? Error { get; init; }
 
 	/// <summary>
-	/// <para>Whether the index expression provided in the request matches any indices, aliases or data streams<br/>on the cluster.</para>
+	/// <para>
+	/// Whether the index expression provided in the request matches any indices, aliases or data streams
+	/// on the cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("matching_indices")]
 	public bool? MatchingIndices { get; init; }
 
 	/// <summary>
-	/// <para>The skip_unavailable setting for a remote cluster.</para>
+	/// <para>
+	/// The skip_unavailable setting for a remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("skip_unavailable")]
 	public bool SkipUnavailable { get; init; }
 
 	/// <summary>
-	/// <para>Provides version information about the cluster.</para>
+	/// <para>
+	/// Provides version information about the cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo? Version { get; init; }

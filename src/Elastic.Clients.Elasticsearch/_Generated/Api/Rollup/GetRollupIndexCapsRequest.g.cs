@@ -34,7 +34,9 @@ public sealed partial class GetRollupIndexCapsRequestParameters : RequestParamet
 }
 
 /// <summary>
-/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).</para>
+/// <para>
+/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// </para>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIndexCapsRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIn
 }
 
 /// <summary>
-/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).</para>
+/// <para>
+/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// </para>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequestDescriptor<TDocument> : RequestDescriptor<GetRollupIndexCapsRequestDescriptor<TDocument>, GetRollupIndexCapsRequestParameters>
 {
@@ -82,7 +86,9 @@ public sealed partial class GetRollupIndexCapsRequestDescriptor<TDocument> : Req
 }
 
 /// <summary>
-/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).</para>
+/// <para>
+/// Returns the rollup capabilities of all jobs inside of a rollup index (for example, the index where rollup data is stored).
+/// </para>
 /// </summary>
 public sealed partial class GetRollupIndexCapsRequestDescriptor : RequestDescriptor<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsRequestParameters>
 {

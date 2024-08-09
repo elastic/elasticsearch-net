@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class Http
 {
 	/// <summary>
-	/// <para>Information on current and recently-closed HTTP client connections.<br/>Clients that have been closed longer than the `http.client_stats.closed_channels.max_age` setting will not be represented here.</para>
+	/// <para>
+	/// Information on current and recently-closed HTTP client connections.
+	/// Clients that have been closed longer than the <c>http.client_stats.closed_channels.max_age</c> setting will not be represented here.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("clients")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? Clients { get; init; }
 
 	/// <summary>
-	/// <para>Current number of open HTTP connections for the node.</para>
+	/// <para>
+	/// Current number of open HTTP connections for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current_open")]
 	public int? CurrentOpen { get; init; }
 
 	/// <summary>
-	/// <para>Total number of HTTP connections opened for the node.</para>
+	/// <para>
+	/// Total number of HTTP connections opened for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_opened")]
 	public long? TotalOpened { get; init; }

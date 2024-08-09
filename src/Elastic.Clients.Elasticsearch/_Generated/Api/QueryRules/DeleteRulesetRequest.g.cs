@@ -34,7 +34,9 @@ public sealed partial class DeleteRulesetRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes a query ruleset.</para>
+/// <para>
+/// Deletes a query ruleset.
+/// </para>
 /// </summary>
 public sealed partial class DeleteRulesetRequest : PlainRequest<DeleteRulesetRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteRulesetRequest : PlainRequest<DeleteRulesetReq
 }
 
 /// <summary>
-/// <para>Deletes a query ruleset.</para>
+/// <para>
+/// Deletes a query ruleset.
+/// </para>
 /// </summary>
 public sealed partial class DeleteRulesetRequestDescriptor : RequestDescriptor<DeleteRulesetRequestDescriptor, DeleteRulesetRequestParameters>
 {

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class MutualInformationHeuristic
 {
 	/// <summary>
-	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// <para>
+	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("background_is_superset")]
 	public bool? BackgroundIsSuperset { get; set; }
 
 	/// <summary>
-	/// <para>Set to `false` to filter out the terms that appear less often in the subset than in documents outside the subset.</para>
+	/// <para>
+	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include_negatives")]
 	public bool? IncludeNegatives { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class MutualInformationHeuristicDescriptor : SerializableD
 	private bool? IncludeNegativesValue { get; set; }
 
 	/// <summary>
-	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// <para>
+	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
+	/// </para>
 	/// </summary>
 	public MutualInformationHeuristicDescriptor BackgroundIsSuperset(bool? backgroundIsSuperset = true)
 	{
@@ -63,7 +69,9 @@ public sealed partial class MutualInformationHeuristicDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Set to `false` to filter out the terms that appear less often in the subset than in documents outside the subset.</para>
+	/// <para>
+	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
+	/// </para>
 	/// </summary>
 	public MutualInformationHeuristicDescriptor IncludeNegatives(bool? includeNegatives = true)
 	{

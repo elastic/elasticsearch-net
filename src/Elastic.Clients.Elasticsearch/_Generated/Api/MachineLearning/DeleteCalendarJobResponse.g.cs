@@ -29,19 +29,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DeleteCalendarJobResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>A string that uniquely identifies a calendar.</para>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("calendar_id")]
 	public string CalendarId { get; init; }
 
 	/// <summary>
-	/// <para>A description of the calendar.</para>
+	/// <para>
+	/// A description of the calendar.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
-	/// <para>A list of anomaly detection job identifiers or group names.</para>
+	/// <para>
+	/// A list of anomaly detection job identifiers or group names.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_ids")]
 	[SingleOrManyCollectionConverter(typeof(string))]

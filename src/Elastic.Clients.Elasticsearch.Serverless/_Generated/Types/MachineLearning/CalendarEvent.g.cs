@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class CalendarEvent
 {
 	/// <summary>
-	/// <para>A string that uniquely identifies a calendar.</para>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("calendar_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? CalendarId { get; set; }
 
 	/// <summary>
-	/// <para>A description of the scheduled event.</para>
+	/// <para>
+	/// A description of the scheduled event.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; set; }
 
 	/// <summary>
-	/// <para>The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.</para>
+	/// <para>
+	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end_time")]
 	public DateTimeOffset EndTime { get; set; }
@@ -50,7 +56,9 @@ public sealed partial class CalendarEvent
 	public Elastic.Clients.Elasticsearch.Serverless.Id? EventId { get; set; }
 
 	/// <summary>
-	/// <para>The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.</para>
+	/// <para>
+	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset StartTime { get; set; }
@@ -71,7 +79,9 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 	private DateTimeOffset StartTimeValue { get; set; }
 
 	/// <summary>
-	/// <para>A string that uniquely identifies a calendar.</para>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
 	/// </summary>
 	public CalendarEventDescriptor CalendarId(Elastic.Clients.Elasticsearch.Serverless.Id? calendarId)
 	{
@@ -80,7 +90,9 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 	}
 
 	/// <summary>
-	/// <para>A description of the scheduled event.</para>
+	/// <para>
+	/// A description of the scheduled event.
+	/// </para>
 	/// </summary>
 	public CalendarEventDescriptor Description(string description)
 	{
@@ -89,7 +101,9 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 	}
 
 	/// <summary>
-	/// <para>The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.</para>
+	/// <para>
+	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+	/// </para>
 	/// </summary>
 	public CalendarEventDescriptor EndTime(DateTimeOffset endTime)
 	{
@@ -104,7 +118,9 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 	}
 
 	/// <summary>
-	/// <para>The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.</para>
+	/// <para>
+	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+	/// </para>
 	/// </summary>
 	public CalendarEventDescriptor StartTime(DateTimeOffset startTime)
 	{

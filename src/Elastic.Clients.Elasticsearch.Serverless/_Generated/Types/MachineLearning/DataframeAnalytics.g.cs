@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalytics
 {
 	/// <summary>
-	/// <para>For running jobs only, contains messages relating to the selection of a node to run the job.</para>
+	/// <para>
+	/// For running jobs only, contains messages relating to the selection of a node to run the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("assignment_explanation")]
 	public string? AssignmentExplanation { get; init; }
 
 	/// <summary>
-	/// <para>An object that provides counts for the quantity of documents skipped, used in training, or available for testing.</para>
+	/// <para>
+	/// An object that provides counts for the quantity of documents skipped, used in training, or available for testing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_counts")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalyticsStatsDataCounts DataCounts { get; init; }
 
 	/// <summary>
-	/// <para>The unique identifier of the data frame analytics job.</para>
+	/// <para>
+	/// The unique identifier of the data frame analytics job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
 	/// <summary>
-	/// <para>An object describing memory usage of the analytics. It is present only after the job is started and memory usage is reported.</para>
+	/// <para>
+	/// An object describing memory usage of the analytics. It is present only after the job is started and memory usage is reported.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("memory_usage")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalyticsStatsMemoryUsage MemoryUsage { get; init; }
 
 	/// <summary>
-	/// <para>The progress report of the data frame analytics job by phase.</para>
+	/// <para>
+	/// The progress report of the data frame analytics job by phase.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("progress")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalyticsStatsProgress> Progress { get; init; }
 
 	/// <summary>
-	/// <para>The status of the data frame analytics job, which can be one of the following values: failed, started, starting, stopping, stopped.</para>
+	/// <para>
+	/// The status of the data frame analytics job, which can be one of the following values: failed, started, starting, stopping, stopped.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeState State { get; init; }

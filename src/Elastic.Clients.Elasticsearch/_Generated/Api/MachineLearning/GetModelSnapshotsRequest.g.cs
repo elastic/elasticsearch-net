@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetModelSnapshotsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of snapshots.</para>
+	/// <para>
+	/// Skips the specified number of snapshots.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of snapshots to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of snapshots to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves information about model snapshots.</para>
+/// <para>
+/// Retrieves information about model snapshots.
+/// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnapshotsRequestParameters>
 {
@@ -64,25 +70,33 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	internal override string OperationName => "ml.get_model_snapshots";
 
 	/// <summary>
-	/// <para>Skips the specified number of snapshots.</para>
+	/// <para>
+	/// Skips the specified number of snapshots.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of snapshots to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of snapshots to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("desc")]
 	public bool? Desc { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public DateTimeOffset? End { get; set; }
@@ -90,20 +104,26 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves information about model snapshots.</para>
+/// <para>
+/// Retrieves information about model snapshots.
+/// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : RequestDescriptor<GetModelSnapshotsRequestDescriptor<TDocument>, GetModelSnapshotsRequestParameters>
 {
@@ -149,7 +169,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> Desc(bool? desc = true)
 	{
@@ -158,7 +180,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> End(DateTimeOffset? end)
 	{
@@ -191,7 +215,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? sort)
 	{
@@ -200,7 +226,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -209,7 +237,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
 	{
@@ -218,7 +248,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 	{
@@ -274,7 +306,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Retrieves information about model snapshots.</para>
+/// <para>
+/// Retrieves information about model snapshots.
+/// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescriptor<GetModelSnapshotsRequestDescriptor, GetModelSnapshotsRequestParameters>
 {
@@ -320,7 +354,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor Desc(bool? desc = true)
 	{
@@ -329,7 +365,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor End(DateTimeOffset? end)
 	{
@@ -362,7 +400,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort)
 	{
@@ -371,7 +411,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -380,7 +422,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
 	{
@@ -389,7 +433,9 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetModelSnapshotsRequestDescriptor Start(DateTimeOffset? start)
 	{

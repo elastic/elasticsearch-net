@@ -32,58 +32,80 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class NodesStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of search groups to include in the search statistics.</para>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
 	/// </summary>
 	public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
-	/// <para>If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).</para>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
 	/// </summary>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes information from segments that are not loaded into memory.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
+	/// </para>
 	/// </summary>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
 	/// <summary>
-	/// <para>Indicates whether statistics are aggregated at the cluster, index, or shard level.</para>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Serverless.Level?>("level"); set => Q("level", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of document types for the indexing index metric.</para>
+	/// <para>
+	/// A comma-separated list of document types for the indexing index metric.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster nodes statistics.</para>
+/// <para>
+/// Returns cluster nodes statistics.
+/// </para>
 /// </summary>
 public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestParameters>
 {
@@ -120,68 +142,90 @@ public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestPa
 	internal override string OperationName => "nodes.stats";
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of search groups to include in the search statistics.</para>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
-	/// <para>If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).</para>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes information from segments that are not loaded into memory.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
 	/// <summary>
-	/// <para>Indicates whether statistics are aggregated at the cluster, index, or shard level.</para>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Serverless.Level?>("level"); set => Q("level", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of document types for the indexing index metric.</para>
+	/// <para>
+	/// A comma-separated list of document types for the indexing index metric.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster nodes statistics.</para>
+/// <para>
+/// Returns cluster nodes statistics.
+/// </para>
 /// </summary>
 public sealed partial class NodesStatsRequestDescriptor<TDocument> : RequestDescriptor<NodesStatsRequestDescriptor<TDocument>, NodesStatsRequestParameters>
 {
@@ -238,7 +282,9 @@ public sealed partial class NodesStatsRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Returns cluster nodes statistics.</para>
+/// <para>
+/// Returns cluster nodes statistics.
+/// </para>
 /// </summary>
 public sealed partial class NodesStatsRequestDescriptor : RequestDescriptor<NodesStatsRequestDescriptor, NodesStatsRequestParameters>
 {

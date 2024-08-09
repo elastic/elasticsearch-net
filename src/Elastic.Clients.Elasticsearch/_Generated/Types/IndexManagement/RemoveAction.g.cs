@@ -30,32 +30,46 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class RemoveAction
 {
 	/// <summary>
-	/// <para>Alias for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Alias for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
 	/// <summary>
-	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>
-	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data stream or index for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data streams or indices for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// <para>
+	/// If <c>true</c>, the alias must exist to perform the action.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
@@ -78,7 +92,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	private bool? MustExistValue { get; set; }
 
 	/// <summary>
-	/// <para>Alias for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Alias for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias)
 	{
@@ -87,7 +104,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	}
 
 	/// <summary>
-	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
+	/// <para>
+	/// Aliases for the action.
+	/// Index alias names support date math.
+	/// </para>
 	/// </summary>
 	public RemoveActionDescriptor Aliases(ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? aliases)
 	{
@@ -96,7 +116,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	}
 
 	/// <summary>
-	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data stream or index for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -105,7 +128,10 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	}
 
 	/// <summary>
-	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// <para>
+	/// Data streams or indices for the action.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
 	/// </summary>
 	public RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
@@ -114,7 +140,9 @@ public sealed partial class RemoveActionDescriptor : SerializableDescriptor<Remo
 	}
 
 	/// <summary>
-	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// <para>
+	/// If <c>true</c>, the alias must exist to perform the action.
+	/// </para>
 	/// </summary>
 	public RemoveActionDescriptor MustExist(bool? mustExist = true)
 	{

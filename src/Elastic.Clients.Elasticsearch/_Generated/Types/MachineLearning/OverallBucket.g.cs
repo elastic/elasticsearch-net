@@ -30,43 +30,57 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class OverallBucket
 {
 	/// <summary>
-	/// <para>The length of the bucket in seconds. Matches the job with the longest bucket_span value.</para>
+	/// <para>
+	/// The length of the bucket in seconds. Matches the job with the longest bucket_span value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_span")]
 	public long BucketSpan { get; init; }
 
 	/// <summary>
-	/// <para>If true, this is an interim result. In other words, the results are calculated based on partial input data.</para>
+	/// <para>
+	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_interim")]
 	public bool IsInterim { get; init; }
 
 	/// <summary>
-	/// <para>An array of objects that contain the max_anomaly_score per job_id.</para>
+	/// <para>
+	/// An array of objects that contain the max_anomaly_score per job_id.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("jobs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob> Jobs { get; init; }
 
 	/// <summary>
-	/// <para>The top_n average of the maximum bucket anomaly_score per job.</para>
+	/// <para>
+	/// The top_n average of the maximum bucket anomaly_score per job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("overall_score")]
 	public double OverallScore { get; init; }
 
 	/// <summary>
-	/// <para>Internal. This is always set to overall_bucket.</para>
+	/// <para>
+	/// Internal. This is always set to overall_bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("result_type")]
 	public string ResultType { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket for which these results were calculated.</para>
+	/// <para>
+	/// The start time of the bucket for which these results were calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }
 
 	/// <summary>
-	/// <para>The start time of the bucket for which these results were calculated.</para>
+	/// <para>
+	/// The start time of the bucket for which these results were calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp_string")]
 	public DateTimeOffset TimestampString { get; init; }

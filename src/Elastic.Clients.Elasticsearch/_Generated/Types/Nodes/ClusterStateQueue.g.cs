@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class ClusterStateQueue
 {
 	/// <summary>
-	/// <para>Number of committed cluster states in queue.</para>
+	/// <para>
+	/// Number of committed cluster states in queue.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("committed")]
 	public long? Committed { get; init; }
 
 	/// <summary>
-	/// <para>Number of pending cluster states in queue.</para>
+	/// <para>
+	/// Number of pending cluster states in queue.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pending")]
 	public long? Pending { get; init; }
 
 	/// <summary>
-	/// <para>Total number of cluster states in queue.</para>
+	/// <para>
+	/// Total number of cluster states in queue.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public long? Total { get; init; }

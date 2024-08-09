@@ -79,12 +79,20 @@ internal sealed partial class PivotConverter : JsonConverter<Pivot>
 public sealed partial class Pivot
 {
 	/// <summary>
-	/// <para>Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket<br/>script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,<br/>min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted<br/>average.</para>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are<br/>currently supported: date histogram, geotile grid, histogram, terms.</para>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupBy>? GroupBy { get; set; }
 }
@@ -101,7 +109,12 @@ public sealed partial class PivotDescriptor<TDocument> : SerializableDescriptor<
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor<TDocument>> GroupByValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket<br/>script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,<br/>min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted<br/>average.</para>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
 	/// </summary>
 	public PivotDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -110,7 +123,10 @@ public sealed partial class PivotDescriptor<TDocument> : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are<br/>currently supported: date histogram, geotile grid, histogram, terms.</para>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
 	/// </summary>
 	public PivotDescriptor<TDocument> GroupBy(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor<TDocument>>> selector)
 	{
@@ -149,7 +165,12 @@ public sealed partial class PivotDescriptor : SerializableDescriptor<PivotDescri
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor> GroupByValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket<br/>script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,<br/>min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted<br/>average.</para>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
 	/// </summary>
 	public PivotDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -158,7 +179,10 @@ public sealed partial class PivotDescriptor : SerializableDescriptor<PivotDescri
 	}
 
 	/// <summary>
-	/// <para>Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are<br/>currently supported: date histogram, geotile grid, histogram, terms.</para>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
 	/// </summary>
 	public PivotDescriptor GroupBy(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.TransformManagement.PivotGroupByDescriptor>> selector)
 	{

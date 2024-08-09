@@ -32,13 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class ReloadSecureSettingsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Reloads the keystore on nodes in the cluster.</para>
+/// <para>
+/// Reloads the keystore on nodes in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSecureSettingsRequestParameters>
 {
@@ -59,20 +64,27 @@ public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSec
 	internal override string OperationName => "nodes.reload_secure_settings";
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The password for the Elasticsearch keystore.</para>
+	/// <para>
+	/// The password for the Elasticsearch keystore.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("secure_settings_password")]
 	public string? SecureSettingsPassword { get; set; }
 }
 
 /// <summary>
-/// <para>Reloads the keystore on nodes in the cluster.</para>
+/// <para>
+/// Reloads the keystore on nodes in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ReloadSecureSettingsRequestDescriptor : RequestDescriptor<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsRequestParameters>
 {
@@ -105,7 +117,9 @@ public sealed partial class ReloadSecureSettingsRequestDescriptor : RequestDescr
 	private string? SecureSettingsPasswordValue { get; set; }
 
 	/// <summary>
-	/// <para>The password for the Elasticsearch keystore.</para>
+	/// <para>
+	/// The password for the Elasticsearch keystore.
+	/// </para>
 	/// </summary>
 	public ReloadSecureSettingsRequestDescriptor SecureSettingsPassword(string? secureSettingsPassword)
 	{

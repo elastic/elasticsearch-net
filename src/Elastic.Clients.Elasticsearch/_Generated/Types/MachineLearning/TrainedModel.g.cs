@@ -30,19 +30,38 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModel
 {
 	/// <summary>
-	/// <para>The definition for an ensemble model</para>
+	/// <para>
+	/// The definition for an ensemble model
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ensemble")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? Ensemble { get; set; }
 
 	/// <summary>
-	/// <para>The definition for a binary decision tree.</para>
+	/// <para>
+	/// The definition for a binary decision tree.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tree")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? Tree { get; set; }
 
 	/// <summary>
-	/// <para>The definition of a node in a tree.<br/>There are two major types of nodes: leaf nodes and not-leaf nodes.<br/>- Leaf nodes only need node_index and leaf_value defined.<br/>- All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.</para>
+	/// <para>
+	/// The definition of a node in a tree.
+	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Leaf nodes only need node_index and leaf_value defined.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tree_node")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? TreeNode { get; set; }
@@ -67,7 +86,9 @@ public sealed partial class TrainedModelDescriptor : SerializableDescriptor<Trai
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> TreeNodeDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The definition for an ensemble model</para>
+	/// <para>
+	/// The definition for an ensemble model
+	/// </para>
 	/// </summary>
 	public TrainedModelDescriptor Ensemble(Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? ensemble)
 	{
@@ -94,7 +115,9 @@ public sealed partial class TrainedModelDescriptor : SerializableDescriptor<Trai
 	}
 
 	/// <summary>
-	/// <para>The definition for a binary decision tree.</para>
+	/// <para>
+	/// The definition for a binary decision tree.
+	/// </para>
 	/// </summary>
 	public TrainedModelDescriptor Tree(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? tree)
 	{
@@ -121,7 +144,22 @@ public sealed partial class TrainedModelDescriptor : SerializableDescriptor<Trai
 	}
 
 	/// <summary>
-	/// <para>The definition of a node in a tree.<br/>There are two major types of nodes: leaf nodes and not-leaf nodes.<br/>- Leaf nodes only need node_index and leaf_value defined.<br/>- All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.</para>
+	/// <para>
+	/// The definition of a node in a tree.
+	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Leaf nodes only need node_index and leaf_value defined.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public TrainedModelDescriptor TreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? treeNode)
 	{

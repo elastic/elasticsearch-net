@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class StoredScript
 {
 	/// <summary>
-	/// <para>Specifies the language the script is written in.</para>
+	/// <para>
+	/// Specifies the language the script is written in.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; set; }
@@ -38,7 +40,9 @@ public sealed partial class StoredScript
 	public IDictionary<string, string>? Options { get; set; }
 
 	/// <summary>
-	/// <para>The script source.</para>
+	/// <para>
+	/// The script source.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; set; }
@@ -57,7 +61,9 @@ public sealed partial class StoredScriptDescriptor : SerializableDescriptor<Stor
 	private string SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the language the script is written in.</para>
+	/// <para>
+	/// Specifies the language the script is written in.
+	/// </para>
 	/// </summary>
 	public StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage language)
 	{
@@ -72,7 +78,9 @@ public sealed partial class StoredScriptDescriptor : SerializableDescriptor<Stor
 	}
 
 	/// <summary>
-	/// <para>The script source.</para>
+	/// <para>
+	/// The script source.
+	/// </para>
 	/// </summary>
 	public StoredScriptDescriptor Source(string source)
 	{

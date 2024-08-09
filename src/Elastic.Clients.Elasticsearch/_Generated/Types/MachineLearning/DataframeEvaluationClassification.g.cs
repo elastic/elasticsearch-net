@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeEvaluationClassification
 {
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual_field")]
 	public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? Metrics { get; set; }
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("predicted_field")]
 	public Elastic.Clients.Elasticsearch.Field? PredictedField { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("top_classes_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
@@ -72,7 +80,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	private Elastic.Clients.Elasticsearch.Field? TopClassesFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field actualField)
 	{
@@ -81,7 +91,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -90,7 +102,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
 	{
@@ -99,7 +113,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? metrics)
 	{
@@ -126,7 +142,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field? predictedField)
 	{
@@ -135,7 +153,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField<TValue>(Expression<Func<TDocument, TValue>> predictedField)
 	{
@@ -144,7 +164,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Expression<Func<TDocument, object>> predictedField)
 	{
@@ -153,7 +175,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Elastic.Clients.Elasticsearch.Field? topClassesField)
 	{
@@ -162,7 +186,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField<TValue>(Expression<Func<TDocument, TValue>> topClassesField)
 	{
@@ -171,7 +197,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Expression<Func<TDocument, object>> topClassesField)
 	{
@@ -232,7 +260,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	private Elastic.Clients.Elasticsearch.Field? TopClassesFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor ActualField(Elastic.Clients.Elasticsearch.Field actualField)
 	{
@@ -241,7 +271,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -250,7 +282,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
 	{
@@ -259,7 +293,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? metrics)
 	{
@@ -286,7 +322,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field? predictedField)
 	{
@@ -295,7 +333,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor PredictedField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedField)
 	{
@@ -304,7 +344,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field in the index which contains the predicted value, in other words the results of the classification analysis.</para>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor PredictedField<TDocument>(Expression<Func<TDocument, object>> predictedField)
 	{
@@ -313,7 +355,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor TopClassesField(Elastic.Clients.Elasticsearch.Field? topClassesField)
 	{
@@ -322,7 +366,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor TopClassesField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesField)
 	{
@@ -331,7 +377,9 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.</para>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationDescriptor TopClassesField<TDocument>(Expression<Func<TDocument, object>> topClassesField)
 	{

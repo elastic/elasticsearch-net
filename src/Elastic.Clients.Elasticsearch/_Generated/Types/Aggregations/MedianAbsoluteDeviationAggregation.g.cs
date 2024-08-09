@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class MedianAbsoluteDeviationAggregation
 {
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compression")]
 	public double? Compression { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -44,7 +48,10 @@ public sealed partial class MedianAbsoluteDeviationAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -71,7 +78,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression)
 	{
@@ -80,7 +89,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -89,7 +100,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -98,7 +111,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -113,7 +128,10 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -209,7 +227,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Compression(double? compression)
 	{
@@ -218,7 +238,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -227,7 +249,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -236,7 +260,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -251,7 +277,10 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{

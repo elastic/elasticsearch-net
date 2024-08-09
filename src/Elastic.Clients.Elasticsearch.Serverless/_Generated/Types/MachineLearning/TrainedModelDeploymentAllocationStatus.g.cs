@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class TrainedModelDeploymentAllocationStatus
 {
 	/// <summary>
-	/// <para>The current number of nodes where the model is allocated.</para>
+	/// <para>
+	/// The current number of nodes where the model is allocated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocation_count")]
 	public int AllocationCount { get; init; }
 
 	/// <summary>
-	/// <para>The detailed allocation state related to the nodes.</para>
+	/// <para>
+	/// The detailed allocation state related to the nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAllocationState State { get; init; }
 
 	/// <summary>
-	/// <para>The desired number of nodes for model allocation.</para>
+	/// <para>
+	/// The desired number of nodes for model allocation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_allocation_count")]
 	public int TargetAllocationCount { get; init; }

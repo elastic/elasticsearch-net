@@ -32,17 +32,29 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public enum BoundaryScanner
 {
 	/// <summary>
-	/// <para>Break highlighted fragments at the next word boundary, as determined by Java’s `BreakIterator`.<br/>You can specify the locale to use with `boundary_scanner_locale`.</para>
+	/// <para>
+	/// Break highlighted fragments at the next word boundary, as determined by Java’s <c>BreakIterator</c>.
+	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "word")]
 	Word,
 	/// <summary>
-	/// <para>Break highlighted fragments at the next sentence boundary, as determined by Java’s `BreakIterator`.<br/>You can specify the locale to use with `boundary_scanner_locale`.<br/>When used with the `unified` highlighter, the `sentence` scanner splits sentences bigger than `fragment_size` at the first word boundary next to fragment_size.<br/>You can set `fragment_size` to `0` to never split any sentence.</para>
+	/// <para>
+	/// Break highlighted fragments at the next sentence boundary, as determined by Java’s <c>BreakIterator</c>.
+	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
+	/// When used with the <c>unified</c> highlighter, the <c>sentence</c> scanner splits sentences bigger than <c>fragment_size</c> at the first word boundary next to fragment_size.
+	/// You can set <c>fragment_size</c> to <c>0</c> to never split any sentence.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "sentence")]
 	Sentence,
 	/// <summary>
-	/// <para>Use the characters specified by `boundary_chars` as highlighting boundaries.<br/>The `boundary_max_scan` setting controls how far to scan for boundary characters.<br/>Only valid for the `fvh` highlighter.</para>
+	/// <para>
+	/// Use the characters specified by <c>boundary_chars</c> as highlighting boundaries.
+	/// The <c>boundary_max_scan</c> setting controls how far to scan for boundary characters.
+	/// Only valid for the <c>fvh</c> highlighter.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "chars")]
 	Chars
@@ -250,17 +262,23 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 	public readonly string Value { get; }
 
 	/// <summary>
-	/// <para>The unified highlighter uses the Lucene Unified Highlighter.</para>
+	/// <para>
+	/// The unified highlighter uses the Lucene Unified Highlighter.
+	/// </para>
 	/// </summary>
 	public static HighlighterType Unified { get; } = new HighlighterType("unified");
 
 	/// <summary>
-	/// <para>The `plain` highlighter uses the standard Lucene highlighter</para>
+	/// <para>
+	/// The <c>plain</c> highlighter uses the standard Lucene highlighter
+	/// </para>
 	/// </summary>
 	public static HighlighterType Plain { get; } = new HighlighterType("plain");
 
 	/// <summary>
-	/// <para>The fvh highlighter uses the Lucene Fast Vector highlighter.</para>
+	/// <para>
+	/// The fvh highlighter uses the Lucene Fast Vector highlighter.
+	/// </para>
 	/// </summary>
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
 
@@ -281,27 +299,38 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 public enum ScoreMode
 {
 	/// <summary>
-	/// <para>Add the original score and the rescore query score.</para>
+	/// <para>
+	/// Add the original score and the rescore query score.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "total")]
 	Total,
 	/// <summary>
-	/// <para>Multiply the original score by the rescore query score.<br/>Useful for `function` query rescores.</para>
+	/// <para>
+	/// Multiply the original score by the rescore query score.
+	/// Useful for <c>function</c> query rescores.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "multiply")]
 	Multiply,
 	/// <summary>
-	/// <para>Take the min of the original score and the rescore query score.</para>
+	/// <para>
+	/// Take the min of the original score and the rescore query score.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "min")]
 	Min,
 	/// <summary>
-	/// <para>Take the max of original score and the rescore query score.</para>
+	/// <para>
+	/// Take the max of original score and the rescore query score.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "max")]
 	Max,
 	/// <summary>
-	/// <para>Average the original score and the rescore query score.</para>
+	/// <para>
+	/// Average the original score and the rescore query score.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "avg")]
 	Avg
@@ -359,27 +388,37 @@ internal sealed class ScoreModeConverter : JsonConverter<ScoreMode>
 public enum StringDistance
 {
 	/// <summary>
-	/// <para>String distance algorithm based on character n-grams.</para>
+	/// <para>
+	/// String distance algorithm based on character n-grams.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "ngram")]
 	Ngram,
 	/// <summary>
-	/// <para>String distance algorithm based on the Levenshtein edit distance algorithm.</para>
+	/// <para>
+	/// String distance algorithm based on the Levenshtein edit distance algorithm.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "levenshtein")]
 	Levenshtein,
 	/// <summary>
-	/// <para>String distance algorithm based on Jaro-Winkler algorithm.</para>
+	/// <para>
+	/// String distance algorithm based on Jaro-Winkler algorithm.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "jaro_winkler")]
 	JaroWinkler,
 	/// <summary>
-	/// <para>Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.</para>
+	/// <para>
+	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
 	/// <summary>
-	/// <para>String distance algorithm based on Damerau-Levenshtein algorithm.</para>
+	/// <para>
+	/// String distance algorithm based on Damerau-Levenshtein algorithm.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "damerau_levenshtein")]
 	DamerauLevenshtein
@@ -437,12 +476,16 @@ internal sealed class StringDistanceConverter : JsonConverter<StringDistance>
 public enum SuggestSort
 {
 	/// <summary>
-	/// <para>Sort by score first, then document frequency and then the term itself.</para>
+	/// <para>
+	/// Sort by score first, then document frequency and then the term itself.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "score")]
 	Score,
 	/// <summary>
-	/// <para>Sort by document frequency first, then similarity score and then the term itself.</para>
+	/// <para>
+	/// Sort by document frequency first, then similarity score and then the term itself.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "frequency")]
 	Frequency
@@ -485,12 +528,16 @@ internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
 public enum TotalHitsRelation
 {
 	/// <summary>
-	/// <para>Lower bound, including returned events or sequences</para>
+	/// <para>
+	/// Lower bound, including returned events or sequences
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "gte")]
 	Gte,
 	/// <summary>
-	/// <para>Accurate</para>
+	/// <para>
+	/// Accurate
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "eq")]
 	Eq

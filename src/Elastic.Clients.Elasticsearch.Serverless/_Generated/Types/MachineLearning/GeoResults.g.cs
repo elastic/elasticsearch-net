@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GeoResults
 {
 	/// <summary>
-	/// <para>The actual value for the bucket formatted as a `geo_point`.</para>
+	/// <para>
+	/// The actual value for the bucket formatted as a <c>geo_point</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual_point")]
 	public string ActualPoint { get; init; }
 
 	/// <summary>
-	/// <para>The typical value for the bucket formatted as a `geo_point`.</para>
+	/// <para>
+	/// The typical value for the bucket formatted as a <c>geo_point</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("typical_point")]
 	public string TypicalPoint { get; init; }

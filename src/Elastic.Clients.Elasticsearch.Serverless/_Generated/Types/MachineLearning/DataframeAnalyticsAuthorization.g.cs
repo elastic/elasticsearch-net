@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalyticsAuthorization
 {
 	/// <summary>
-	/// <para>If an API key was used for the most recent update to the job, its name and identifier are listed in the response.</para>
+	/// <para>
+	/// If an API key was used for the most recent update to the job, its name and identifier are listed in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("api_key")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ApiKeyAuthorization? ApiKey { get; init; }
 
 	/// <summary>
-	/// <para>If a user ID was used for the most recent update to the job, its roles at the time of the update are listed in the response.</para>
+	/// <para>
+	/// If a user ID was used for the most recent update to the job, its roles at the time of the update are listed in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("roles")]
 	public IReadOnlyCollection<string>? Roles { get; init; }
 
 	/// <summary>
-	/// <para>If a service account was used for the most recent update to the job, the account name is listed in the response.</para>
+	/// <para>
+	/// If a service account was used for the most recent update to the job, the account name is listed in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("service_account")]
 	public string? ServiceAccount { get; init; }

@@ -32,18 +32,26 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public sealed partial class GetTasksRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the task has completed.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the task has completed.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+/// <para>
+/// Get task information.
+/// Returns information about the tasks currently executing in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParameters>
 {
@@ -60,20 +68,28 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 	internal override string OperationName => "tasks.get";
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request blocks until the task has completed.</para>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the task has completed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
+/// <para>
+/// Get task information.
+/// Returns information about the tasks currently executing in the cluster.
+/// </para>
 /// </summary>
 public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTasksRequestDescriptor, GetTasksRequestParameters>
 {

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStreamLifecycleDownsampling
 {
 	/// <summary>
-	/// <para>The list of downsampling rounds to execute as part of this downsampling configuration</para>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rounds")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRound> Rounds { get; set; }
@@ -50,7 +52,9 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor>[] RoundsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The list of downsampling rounds to execute as part of this downsampling configuration</para>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
 	/// </summary>
 	public DataStreamLifecycleDownsamplingDescriptor Rounds(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRound> rounds)
 	{

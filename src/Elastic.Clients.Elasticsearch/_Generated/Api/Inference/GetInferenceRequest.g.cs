@@ -34,7 +34,9 @@ public sealed partial class GetInferenceRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Get an inference endpoint</para>
+/// <para>
+/// Get an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceRequestParameters>
 {
@@ -60,7 +62,9 @@ public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceReque
 }
 
 /// <summary>
-/// <para>Get an inference endpoint</para>
+/// <para>
+/// Get an inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class GetInferenceRequestDescriptor : RequestDescriptor<GetInferenceRequestDescriptor, GetInferenceRequestParameters>
 {

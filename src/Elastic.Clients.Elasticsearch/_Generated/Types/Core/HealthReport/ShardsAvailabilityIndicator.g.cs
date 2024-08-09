@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 /// <summary>
-/// <para>SHARDS_AVAILABILITY</para>
+/// <para>
+/// SHARDS_AVAILABILITY
+/// </para>
 /// </summary>
 public sealed partial class ShardsAvailabilityIndicator
 {

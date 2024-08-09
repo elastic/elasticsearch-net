@@ -29,7 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class GetSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the next field value.</para>
+	/// <para>
+	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the next field value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remaining")]
 	public int Remaining { get; init; }
@@ -39,7 +41,9 @@ public sealed partial class GetSnapshotResponse : ElasticsearchResponse
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Snapshot.SnapshotInfo>? Snapshots { get; init; }
 
 	/// <summary>
-	/// <para>The total number of snapshots that match the request when ignoring size limit or after query parameter.</para>
+	/// <para>
+	/// The total number of snapshots that match the request when ignoring size limit or after query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }

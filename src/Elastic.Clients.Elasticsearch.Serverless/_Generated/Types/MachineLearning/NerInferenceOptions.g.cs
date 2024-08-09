@@ -28,24 +28,32 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Named entity recognition options</para>
+/// <para>
+/// Named entity recognition options
+/// </para>
 /// </summary>
 public sealed partial class NerInferenceOptions
 {
 	/// <summary>
-	/// <para>The token classification labels. Must be IOB formatted tags</para>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -56,7 +64,9 @@ public sealed partial class NerInferenceOptions
 }
 
 /// <summary>
-/// <para>Named entity recognition options</para>
+/// <para>
+/// Named entity recognition options
+/// </para>
 /// </summary>
 public sealed partial class NerInferenceOptionsDescriptor : SerializableDescriptor<NerInferenceOptionsDescriptor>
 {
@@ -76,7 +86,9 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The token classification labels. Must be IOB formatted tags</para>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
 	/// </summary>
 	public NerInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
@@ -85,7 +97,9 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public NerInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -94,7 +108,9 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? tokenization)
 	{

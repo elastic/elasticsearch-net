@@ -30,25 +30,40 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Job
 {
 	/// <summary>
-	/// <para>Advanced configuration option.<br/>Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Advanced configuration option.
+	/// Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool AllowLazyOpen { get; init; }
 
 	/// <summary>
-	/// <para>The analysis configuration, which specifies how to analyze the data.<br/>After you create a job, you cannot change the analysis configuration; all the properties are informational.</para>
+	/// <para>
+	/// The analysis configuration, which specifies how to analyze the data.
+	/// After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; init; }
 
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory.<br/>These limits are approximate and can be set per job.<br/>They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory.
+	/// These limits are approximate and can be set per job.
+	/// They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis_limits")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? AnalysisLimits { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option.<br/>The time between each periodic persistence of the model.<br/>The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time.<br/>The smallest allowed value is 1 hour.</para>
+	/// <para>
+	/// Advanced configuration option.
+	/// The time between each periodic persistence of the model.
+	/// The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time.
+	/// The smallest allowed value is 1 hour.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; init; }
@@ -58,73 +73,112 @@ public sealed partial class Job
 	public DateTimeOffset? CreateTime { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option.<br/>Contains custom metadata about the job.</para>
+	/// <para>
+	/// Advanced configuration option.
+	/// Contains custom metadata about the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("custom_settings")]
 	public object? CustomSettings { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job.<br/>It specifies a period of time (in days) after which only the first snapshot per day is retained.<br/>This period is relative to the timestamp of the most recent snapshot for this job.<br/>Valid values range from 0 to `model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job.
+	/// It specifies a period of time (in days) after which only the first snapshot per day is retained.
+	/// This period is relative to the timestamp of the most recent snapshot for this job.
+	/// Valid values range from 0 to <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long? DailyModelSnapshotRetentionAfterDays { get; init; }
 
 	/// <summary>
-	/// <para>The data description defines the format of the input data when you send data to the job by using the post data API.<br/>Note that when configuring a datafeed, these properties are automatically set.<br/>When data is received via the post data API, it is not stored in Elasticsearch.<br/>Only the results for anomaly detection are retained.</para>
+	/// <para>
+	/// The data description defines the format of the input data when you send data to the job by using the post data API.
+	/// Note that when configuring a datafeed, these properties are automatically set.
+	/// When data is received via the post data API, it is not stored in Elasticsearch.
+	/// Only the results for anomaly detection are retained.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_description")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; init; }
 
 	/// <summary>
-	/// <para>The datafeed, which retrieves data from Elasticsearch for analysis by the job.<br/>You can associate only one datafeed with each anomaly detection job.</para>
+	/// <para>
+	/// The datafeed, which retrieves data from Elasticsearch for analysis by the job.
+	/// You can associate only one datafeed with each anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("datafeed_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Datafeed? DatafeedConfig { get; init; }
 
 	/// <summary>
-	/// <para>Indicates that the process of deleting the job is in progress but not yet completed.<br/>It is only reported when `true`.</para>
+	/// <para>
+	/// Indicates that the process of deleting the job is in progress but not yet completed.
+	/// It is only reported when <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deleting")]
 	public bool? Deleting { get; init; }
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
-	/// <para>If the job closed or failed, this is the time the job finished, otherwise it is `null`.<br/>This property is informational; you cannot change its value.</para>
+	/// <para>
+	/// If the job closed or failed, this is the time the job finished, otherwise it is <c>null</c>.
+	/// This property is informational; you cannot change its value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("finished_time")]
 	public DateTimeOffset? FinishedTime { get; init; }
 
 	/// <summary>
-	/// <para>A list of job groups.<br/>A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups.
+	/// A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("groups")]
 	public IReadOnlyCollection<string>? Groups { get; init; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.<br/>This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.<br/>It must start and end with alphanumeric characters.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+	/// It must start and end with alphanumeric characters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>Reserved for future use, currently set to `anomaly_detector`.</para>
+	/// <para>
+	/// Reserved for future use, currently set to <c>anomaly_detector</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_type")]
 	public string? JobType { get; init; }
 
 	/// <summary>
-	/// <para>The machine learning configuration version number at which the the job was created.</para>
+	/// <para>
+	/// The machine learning configuration version number at which the the job was created.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_version")]
 	public string? JobVersion { get; init; }
 
 	/// <summary>
-	/// <para>This advanced configuration option stores model information along with the results.<br/>It provides a more detailed view into anomaly detection.<br/>Model plot provides a simplified and indicative view of the model and its bounds.</para>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results.
+	/// It provides a more detailed view into anomaly detection.
+	/// Model plot provides a simplified and indicative view of the model and its bounds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_plot_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; init; }
@@ -132,25 +186,45 @@ public sealed partial class Job
 	public string? ModelSnapshotId { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job.<br/>It specifies the maximum period of time (in days) that snapshots are retained.<br/>This period is relative to the timestamp of the most recent snapshot for this job.<br/>By default, snapshots ten days older than the newest snapshot are deleted.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job.
+	/// It specifies the maximum period of time (in days) that snapshots are retained.
+	/// This period is relative to the timestamp of the most recent snapshot for this job.
+	/// By default, snapshots ten days older than the newest snapshot are deleted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long ModelSnapshotRetentionDays { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option.<br/>The period over which adjustments to the score are applied, as new data is seen.<br/>The default value is the longer of 30 days or 100 `bucket_spans`.</para>
+	/// <para>
+	/// Advanced configuration option.
+	/// The period over which adjustments to the score are applied, as new data is seen.
+	/// The default value is the longer of 30 days or 100 <c>bucket_spans</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; init; }
 
 	/// <summary>
-	/// <para>A text string that affects the name of the machine learning results index.<br/>The default value is `shared`, which generates an index named `.ml-anomalies-shared`.</para>
+	/// <para>
+	/// A text string that affects the name of the machine learning results index.
+	/// The default value is <c>shared</c>, which generates an index named <c>.ml-anomalies-shared</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_index_name")]
 	public string ResultsIndexName { get; init; }
 
 	/// <summary>
-	/// <para>Advanced configuration option.<br/>The period of time (in days) that results are retained.<br/>Age is calculated relative to the timestamp of the latest bucket result.<br/>If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch.<br/>The default value is null, which means all results are retained.<br/>Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results.<br/>Annotations added by users are retained forever.</para>
+	/// <para>
+	/// Advanced configuration option.
+	/// The period of time (in days) that results are retained.
+	/// Age is calculated relative to the timestamp of the latest bucket result.
+	/// If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch.
+	/// The default value is null, which means all results are retained.
+	/// Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results.
+	/// Annotations added by users are retained forever.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; init; }

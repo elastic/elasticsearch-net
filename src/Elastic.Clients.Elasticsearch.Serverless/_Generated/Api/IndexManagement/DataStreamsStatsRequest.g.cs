@@ -32,13 +32,19 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStreamsStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Get data stream stats.<br/>Retrieves statistics for one or more data streams.</para>
+/// <para>
+/// Get data stream stats.
+/// Retrieves statistics for one or more data streams.
+/// </para>
 /// </summary>
 public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsStatsRequestParameters>
 {
@@ -59,14 +65,20 @@ public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsSt
 	internal override string OperationName => "indices.data_streams_stats";
 
 	/// <summary>
-	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.</para>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Get data stream stats.<br/>Retrieves statistics for one or more data streams.</para>
+/// <para>
+/// Get data stream stats.
+/// Retrieves statistics for one or more data streams.
+/// </para>
 /// </summary>
 public sealed partial class DataStreamsStatsRequestDescriptor : RequestDescriptor<DataStreamsStatsRequestDescriptor, DataStreamsStatsRequestParameters>
 {

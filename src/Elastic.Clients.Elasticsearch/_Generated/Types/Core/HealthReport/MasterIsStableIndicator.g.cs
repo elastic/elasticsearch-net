@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 /// <summary>
-/// <para>MASTER_IS_STABLE</para>
+/// <para>
+/// MASTER_IS_STABLE
+/// </para>
 /// </summary>
 public sealed partial class MasterIsStableIndicator
 {

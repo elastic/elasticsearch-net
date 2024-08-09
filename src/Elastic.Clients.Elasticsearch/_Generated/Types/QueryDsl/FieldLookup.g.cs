@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class FieldLookup
 {
 	/// <summary>
-	/// <para>`id` of the document.</para>
+	/// <para>
+	/// <c>id</c> of the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
-	/// <para>Index from which to retrieve the document.</para>
+	/// <para>
+	/// Index from which to retrieve the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
 	/// <summary>
-	/// <para>Custom routing value.</para>
+	/// <para>
+	/// Custom routing value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
@@ -68,7 +76,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>`id` of the document.</para>
+	/// <para>
+	/// <c>id</c> of the document.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -77,7 +87,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Index from which to retrieve the document.</para>
+	/// <para>
+	/// Index from which to retrieve the document.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -86,7 +98,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
@@ -95,7 +109,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -104,7 +120,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
 	{
@@ -113,7 +131,9 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Custom routing value.</para>
+	/// <para>
+	/// Custom routing value.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
@@ -162,7 +182,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>`id` of the document.</para>
+	/// <para>
+	/// <c>id</c> of the document.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -171,7 +193,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Index from which to retrieve the document.</para>
+	/// <para>
+	/// Index from which to retrieve the document.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -180,7 +204,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
@@ -189,7 +215,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -198,7 +226,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Name of the field.</para>
+	/// <para>
+	/// Name of the field.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
 	{
@@ -207,7 +237,9 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>Custom routing value.</para>
+	/// <para>
+	/// Custom routing value.
+	/// </para>
 	/// </summary>
 	public FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{

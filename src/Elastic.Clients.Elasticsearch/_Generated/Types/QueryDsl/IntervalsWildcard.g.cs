@@ -30,19 +30,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IntervalsWildcard
 {
 	/// <summary>
-	/// <para>Analyzer used to analyze the `pattern`.<br/>Defaults to the top-level field's analyzer.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>pattern</c>.
+	/// Defaults to the top-level field's analyzer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Wildcard pattern used to find matching terms.</para>
+	/// <para>
+	/// Wildcard pattern used to find matching terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
@@ -64,7 +72,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to analyze the `pattern`.<br/>Defaults to the top-level field's analyzer.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>pattern</c>.
+	/// Defaults to the top-level field's analyzer.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -73,7 +84,9 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern used to find matching terms.</para>
+	/// <para>
+	/// Wildcard pattern used to find matching terms.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> Pattern(string pattern)
 	{
@@ -82,7 +95,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
@@ -91,7 +107,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
@@ -100,7 +119,10 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
 	{
@@ -142,7 +164,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to analyze the `pattern`.<br/>Defaults to the top-level field's analyzer.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>pattern</c>.
+	/// Defaults to the top-level field's analyzer.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor Analyzer(string? analyzer)
 	{
@@ -151,7 +176,9 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern used to find matching terms.</para>
+	/// <para>
+	/// Wildcard pattern used to find matching terms.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor Pattern(string pattern)
 	{
@@ -160,7 +187,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
@@ -169,7 +199,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
@@ -178,7 +211,10 @@ public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsWildcardDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
 	{

@@ -117,19 +117,29 @@ public sealed partial class TermQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue Value { get; set; }
 
@@ -151,7 +161,12 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -160,7 +175,10 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -193,7 +211,9 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Serverless.FieldValue value)
 	{
@@ -248,7 +268,12 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor Boost(float? boost)
 	{
@@ -257,7 +282,10 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 	}
 
 	/// <summary>
-	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -290,7 +318,9 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 	}
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public TermQueryDescriptor Value(Elastic.Clients.Elasticsearch.Serverless.FieldValue value)
 	{

@@ -30,43 +30,58 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterJvmVersion
 {
 	/// <summary>
-	/// <para>Always `true`. All distributions come with a bundled Java Development Kit (JDK).</para>
+	/// <para>
+	/// Always <c>true</c>. All distributions come with a bundled Java Development Kit (JDK).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bundled_jdk")]
 	public bool BundledJdk { get; init; }
 
 	/// <summary>
-	/// <para>Total number of selected nodes using JVM.</para>
+	/// <para>
+	/// Total number of selected nodes using JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>If `true`, a bundled JDK is in use by JVM.</para>
+	/// <para>
+	/// If <c>true</c>, a bundled JDK is in use by JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("using_bundled_jdk")]
 	public bool UsingBundledJdk { get; init; }
 
 	/// <summary>
-	/// <para>Version of JVM used by one or more selected nodes.</para>
+	/// <para>
+	/// Version of JVM used by one or more selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public string Version { get; init; }
 
 	/// <summary>
-	/// <para>Name of the JVM.</para>
+	/// <para>
+	/// Name of the JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vm_name")]
 	public string VmName { get; init; }
 
 	/// <summary>
-	/// <para>Vendor of the JVM.</para>
+	/// <para>
+	/// Vendor of the JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vm_vendor")]
 	public string VmVendor { get; init; }
 
 	/// <summary>
-	/// <para>Full version number of JVM.<br/>The full version number includes a plus sign (+) followed by the build number.</para>
+	/// <para>
+	/// Full version number of JVM.
+	/// The full version number includes a plus sign (+) followed by the build number.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vm_version")]
 	public string VmVersion { get; init; }

@@ -32,7 +32,9 @@ public sealed partial class GetTrainedModelsResponse : ElasticsearchResponse
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>An array of trained model resources, which are sorted by the model_id value in ascending order.</para>
+	/// <para>
+	/// An array of trained model resources, which are sorted by the model_id value in ascending order.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trained_model_configs")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainedModelConfig> TrainedModelConfigs { get; init; }

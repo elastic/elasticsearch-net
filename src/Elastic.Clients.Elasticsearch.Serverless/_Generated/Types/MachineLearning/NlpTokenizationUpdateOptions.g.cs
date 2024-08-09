@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class NlpTokenizationUpdateOptions
 {
 	/// <summary>
-	/// <para>Span options to apply</para>
+	/// <para>
+	/// Span options to apply
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
 	/// <summary>
-	/// <para>Truncate options to apply</para>
+	/// <para>
+	/// Truncate options to apply
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationTruncate? Truncate { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class NlpTokenizationUpdateOptionsDescriptor : Serializabl
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationTruncate? TruncateValue { get; set; }
 
 	/// <summary>
-	/// <para>Span options to apply</para>
+	/// <para>
+	/// Span options to apply
+	/// </para>
 	/// </summary>
 	public NlpTokenizationUpdateOptionsDescriptor Span(int? span)
 	{
@@ -63,7 +69,9 @@ public sealed partial class NlpTokenizationUpdateOptionsDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Truncate options to apply</para>
+	/// <para>
+	/// Truncate options to apply
+	/// </para>
 	/// </summary>
 	public NlpTokenizationUpdateOptionsDescriptor Truncate(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationTruncate? truncate)
 	{

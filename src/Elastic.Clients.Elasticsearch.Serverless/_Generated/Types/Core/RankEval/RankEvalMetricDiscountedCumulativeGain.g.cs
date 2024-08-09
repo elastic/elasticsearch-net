@@ -28,26 +28,34 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 
 /// <summary>
-/// <para>Discounted cumulative gain (DCG)</para>
+/// <para>
+/// Discounted cumulative gain (DCG)
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
 	/// <summary>
-	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// <para>
+	/// If set to true, this metric will calculate the Normalized DCG.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("normalize")]
 	public bool? Normalize { get; set; }
 }
 
 /// <summary>
-/// <para>Discounted cumulative gain (DCG)</para>
+/// <para>
+/// Discounted cumulative gain (DCG)
+/// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptor<RankEvalMetricDiscountedCumulativeGainDescriptor>
@@ -62,7 +70,9 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : S
 	private bool? NormalizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
 	/// </summary>
 	public RankEvalMetricDiscountedCumulativeGainDescriptor k(int? k)
 	{
@@ -71,7 +81,9 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : S
 	}
 
 	/// <summary>
-	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// <para>
+	/// If set to true, this metric will calculate the Normalized DCG.
+	/// </para>
 	/// </summary>
 	public RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? normalize = true)
 	{

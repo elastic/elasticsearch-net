@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class TrainedModelConfigMetadata
 {
 	/// <summary>
-	/// <para>An object that contains the baseline for feature importance values. For regression analysis, it is a single value. For classification analysis, there is a value for each class.</para>
+	/// <para>
+	/// An object that contains the baseline for feature importance values. For regression analysis, it is a single value. For classification analysis, there is a value for each class.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_importance_baseline")]
 	public IReadOnlyDictionary<string, string>? FeatureImportanceBaseline { get; init; }
 
 	/// <summary>
-	/// <para>List of the available hyperparameters optimized during the fine_parameter_tuning phase as well as specified by the user.</para>
+	/// <para>
+	/// List of the available hyperparameters optimized during the fine_parameter_tuning phase as well as specified by the user.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hyperparameters")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Hyperparameter>? Hyperparameters { get; init; }
@@ -44,7 +48,9 @@ public sealed partial class TrainedModelConfigMetadata
 	public IReadOnlyCollection<string>? ModelAliases { get; init; }
 
 	/// <summary>
-	/// <para>An array of the total feature importance for each feature used from the training data set. This array of objects is returned if data frame analytics trained the model and the request includes total_feature_importance in the include request parameter.</para>
+	/// <para>
+	/// An array of the total feature importance for each feature used from the training data set. This array of objects is returned if data frame analytics trained the model and the request includes total_feature_importance in the include request parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_feature_importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TotalFeatureImportance>? TotalFeatureImportance { get; init; }

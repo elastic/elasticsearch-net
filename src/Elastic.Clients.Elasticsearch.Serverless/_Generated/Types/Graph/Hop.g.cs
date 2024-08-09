@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Graph;
 public sealed partial class Hop
 {
 	/// <summary>
-	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("connections")]
 	public Elastic.Clients.Elasticsearch.Serverless.Graph.Hop? Connections { get; set; }
 
 	/// <summary>
-	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
-	/// <para>Contains the fields you are interested in.</para>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vertices")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinition> Vertices { get; set; }
@@ -68,7 +74,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	public HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Serverless.Graph.Hop? connections)
 	{
@@ -95,7 +103,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 	}
 
 	/// <summary>
-	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
 	/// </summary>
 	public HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
 	{
@@ -122,7 +132,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 	}
 
 	/// <summary>
-	/// <para>Contains the fields you are interested in.</para>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
 	/// </summary>
 	public HopDescriptor<TDocument> Vertices(ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinition> vertices)
 	{
@@ -250,7 +262,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
 	/// </summary>
 	public HopDescriptor Connections(Elastic.Clients.Elasticsearch.Serverless.Graph.Hop? connections)
 	{
@@ -277,7 +291,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	}
 
 	/// <summary>
-	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
 	/// </summary>
 	public HopDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
 	{
@@ -304,7 +320,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	}
 
 	/// <summary>
-	/// <para>Contains the fields you are interested in.</para>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
 	/// </summary>
 	public HopDescriptor Vertices(ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinition> vertices)
 	{

@@ -32,18 +32,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GetFiltersRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of filters.</para>
+	/// <para>
+	/// Skips the specified number of filters.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of filters to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of filters to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves filters.<br/>You can get a single filter or all filters.</para>
+/// <para>
+/// Retrieves filters.
+/// You can get a single filter or all filters.
+/// </para>
 /// </summary>
 public sealed partial class GetFiltersRequest : PlainRequest<GetFiltersRequestParameters>
 {
@@ -64,20 +71,27 @@ public sealed partial class GetFiltersRequest : PlainRequest<GetFiltersRequestPa
 	internal override string OperationName => "ml.get_filters";
 
 	/// <summary>
-	/// <para>Skips the specified number of filters.</para>
+	/// <para>
+	/// Skips the specified number of filters.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of filters to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of filters to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves filters.<br/>You can get a single filter or all filters.</para>
+/// <para>
+/// Retrieves filters.
+/// You can get a single filter or all filters.
+/// </para>
 /// </summary>
 public sealed partial class GetFiltersRequestDescriptor : RequestDescriptor<GetFiltersRequestDescriptor, GetFiltersRequestParameters>
 {

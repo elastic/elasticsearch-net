@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
 /// <summary>
-/// <para>Result of the `rare_terms` aggregation when the field is some kind of whole number like a integer, long, or a date.</para>
+/// <para>
+/// Result of the <c>rare_terms</c> aggregation when the field is some kind of whole number like a integer, long, or a date.
+/// </para>
 /// </summary>
 public sealed partial class LongRareTermsAggregate : IAggregate
 {

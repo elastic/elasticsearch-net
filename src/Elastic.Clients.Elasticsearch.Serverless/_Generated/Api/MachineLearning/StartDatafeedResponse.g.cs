@@ -29,14 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class StartDatafeedResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The ID of the node that the job was started on. In serverless this will be the "serverless".<br/>If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.</para>
+	/// <para>
+	/// The ID of the node that the job was started on. In serverless this will be the "serverless".
+	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Node { get; init; }
 
 	/// <summary>
-	/// <para>For a successful response, this value is always `true`. On failure, an exception is returned instead.</para>
+	/// <para>
+	/// For a successful response, this value is always <c>true</c>. On failure, an exception is returned instead.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("started")]
 	public bool Started { get; init; }

@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 /// <summary>
-/// <para>REPOSITORY_INTEGRITY</para>
+/// <para>
+/// REPOSITORY_INTEGRITY
+/// </para>
 /// </summary>
 public sealed partial class RepositoryIntegrityIndicator
 {

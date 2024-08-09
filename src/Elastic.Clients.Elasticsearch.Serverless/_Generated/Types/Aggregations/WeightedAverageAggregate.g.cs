@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
 /// <summary>
-/// <para>Weighted average aggregation result. `value` is missing if the weight was set to zero.</para>
+/// <para>
+/// Weighted average aggregation result. <c>value</c> is missing if the weight was set to zero.
+/// </para>
 /// </summary>
 public sealed partial class WeightedAverageAggregate : IAggregate
 {
@@ -36,7 +38,10 @@ public sealed partial class WeightedAverageAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	/// <summary>
-	/// <para>The metric value. A missing value generally means that there was no data to aggregate,<br/>unless specified otherwise.</para>
+	/// <para>
+	/// The metric value. A missing value generally means that there was no data to aggregate,
+	/// unless specified otherwise.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }

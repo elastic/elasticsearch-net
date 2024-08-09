@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 public sealed partial class QueryRulesetListItem
 {
 	/// <summary>
-	/// <para>A map of criteria type to the number of rules of that type</para>
+	/// <para>
+	/// A map of criteria type to the number of rules of that type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_criteria_types_counts")]
 	public IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; init; }
 
 	/// <summary>
-	/// <para>Ruleset unique identifier</para>
+	/// <para>
+	/// Ruleset unique identifier
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ruleset_id")]
 	public string RulesetId { get; init; }
 
 	/// <summary>
-	/// <para>The number of rules associated with this ruleset</para>
+	/// <para>
+	/// The number of rules associated with this ruleset
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_total_count")]
 	public int RuleTotalCount { get; init; }

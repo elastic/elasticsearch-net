@@ -36,7 +36,9 @@ public sealed partial class StopIlmRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin</para>
+/// <para>
+/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+/// </para>
 /// </summary>
 public sealed partial class StopIlmRequest : PlainRequest<StopIlmRequestParameters>
 {
@@ -55,7 +57,9 @@ public sealed partial class StopIlmRequest : PlainRequest<StopIlmRequestParamete
 }
 
 /// <summary>
-/// <para>Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin</para>
+/// <para>
+/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+/// </para>
 /// </summary>
 public sealed partial class StopIlmRequestDescriptor : RequestDescriptor<StopIlmRequestDescriptor, StopIlmRequestParameters>
 {

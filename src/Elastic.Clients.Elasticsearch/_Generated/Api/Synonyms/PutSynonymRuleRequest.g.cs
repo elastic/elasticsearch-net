@@ -34,7 +34,9 @@ public sealed partial class PutSynonymRuleRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates or updates a synonym rule in a synonym set</para>
+/// <para>
+/// Creates or updates a synonym rule in a synonym set
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleRequestParameters>
 {
@@ -55,7 +57,9 @@ public sealed partial class PutSynonymRuleRequest : PlainRequest<PutSynonymRuleR
 }
 
 /// <summary>
-/// <para>Creates or updates a synonym rule in a synonym set</para>
+/// <para>
+/// Creates or updates a synonym rule in a synonym set
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRuleRequestDescriptor : RequestDescriptor<PutSynonymRuleRequestDescriptor, PutSynonymRuleRequestParameters>
 {

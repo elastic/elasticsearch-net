@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeEvaluationRegressionMetrics
 {
 	/// <summary>
-	/// <para>Pseudo Huber loss function.</para>
+	/// <para>
+	/// Pseudo Huber loss function.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("huber")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
 
 	/// <summary>
-	/// <para>Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.</para>
+	/// <para>
+	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mse")]
 	public IDictionary<string, object>? Mse { get; set; }
 
 	/// <summary>
-	/// <para>Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.</para>
+	/// <para>
+	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("msle")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
 
 	/// <summary>
-	/// <para>Proportion of the variance in the dependent variable that is predictable from the independent variables.</para>
+	/// <para>
+	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("r_squared")]
 	public IDictionary<string, object>? RSquared { get; set; }
@@ -72,7 +80,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	private IDictionary<string, object>? RSquaredValue { get; set; }
 
 	/// <summary>
-	/// <para>Pseudo Huber loss function.</para>
+	/// <para>
+	/// Pseudo Huber loss function.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsDescriptor Huber(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetricsHuber? huber)
 	{
@@ -99,7 +109,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	}
 
 	/// <summary>
-	/// <para>Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.</para>
+	/// <para>
+	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsDescriptor Mse(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -108,7 +120,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	}
 
 	/// <summary>
-	/// <para>Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.</para>
+	/// <para>
+	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsDescriptor Msle(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetricsMsle? msle)
 	{
@@ -135,7 +149,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	}
 
 	/// <summary>
-	/// <para>Proportion of the variance in the dependent variable that is predictable from the independent variables.</para>
+	/// <para>
+	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsDescriptor RSquared(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

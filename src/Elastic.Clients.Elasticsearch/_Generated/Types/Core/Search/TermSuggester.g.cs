@@ -30,13 +30,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class TermSuggester
 {
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -44,73 +50,106 @@ public sealed partial class TermSuggester
 	public bool? LowercaseTerms { get; set; }
 
 	/// <summary>
-	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// <para>
+	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
+	/// Can only be <c>1</c> or <c>2</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
 
 	/// <summary>
-	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// <para>
+	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
+	/// Can improve accuracy at the cost of performance.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_inspections")]
 	public int? MaxInspections { get; set; }
 
 	/// <summary>
-	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// <para>
+	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
+	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
+	/// If a value higher than 1 is specified, then fractional can not be specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
 
 	/// <summary>
-	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, then the number cannot be fractional.</para>
+	/// <para>
+	/// The minimal threshold in number of documents a suggestion should appear in.
+	/// This can improve quality by only suggesting high frequency terms.
+	/// Can be specified as an absolute number or as a relative percentage of number of documents.
+	/// If a value higher than 1 is specified, then the number cannot be fractional.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
 
 	/// <summary>
-	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// <para>
+	/// The minimum length a suggest text term must have in order to be included.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
 	/// <summary>
-	/// <para>The number of minimal prefix characters that must match in order be a candidate for suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// <para>
+	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
+	/// Increasing this number improves spellcheck performance.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggestions to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Defines how suggestions should be sorted per suggest text term.</para>
+	/// <para>
+	/// Defines how suggestions should be sorted per suggest text term.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? Sort { get; set; }
 
 	/// <summary>
-	/// <para>The string distance implementation to use for comparing how similar suggested terms are.</para>
+	/// <para>
+	/// The string distance implementation to use for comparing how similar suggested terms are.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("string_distance")]
 	public Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistance { get; set; }
 
 	/// <summary>
-	/// <para>Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.</para>
+	/// <para>
+	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 
 	/// <summary>
-	/// <para>The suggest text.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The suggest text.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
@@ -143,7 +182,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -152,7 +194,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -161,7 +206,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -170,7 +218,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -185,7 +236,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// <para>
+	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
+	/// Can only be <c>1</c> or <c>2</c>.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> MaxEdits(int? maxEdits)
 	{
@@ -194,7 +248,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// <para>
+	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
+	/// Can improve accuracy at the cost of performance.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> MaxInspections(int? maxInspections)
 	{
@@ -203,7 +260,11 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// <para>
+	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
+	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
+	/// If a value higher than 1 is specified, then fractional can not be specified.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> MaxTermFreq(float? maxTermFreq)
 	{
@@ -212,7 +273,12 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, then the number cannot be fractional.</para>
+	/// <para>
+	/// The minimal threshold in number of documents a suggestion should appear in.
+	/// This can improve quality by only suggesting high frequency terms.
+	/// Can be specified as an absolute number or as a relative percentage of number of documents.
+	/// If a value higher than 1 is specified, then the number cannot be fractional.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> MinDocFreq(float? minDocFreq)
 	{
@@ -221,7 +287,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// <para>
+	/// The minimum length a suggest text term must have in order to be included.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> MinWordLength(int? minWordLength)
 	{
@@ -230,7 +298,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The number of minimal prefix characters that must match in order be a candidate for suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// <para>
+	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
+	/// Increasing this number improves spellcheck performance.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
@@ -239,7 +310,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggestions to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -248,7 +321,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Size(int? size)
 	{
@@ -257,7 +332,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Defines how suggestions should be sorted per suggest text term.</para>
+	/// <para>
+	/// Defines how suggestions should be sorted per suggest text term.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? sort)
 	{
@@ -266,7 +343,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The string distance implementation to use for comparing how similar suggested terms are.</para>
+	/// <para>
+	/// The string distance implementation to use for comparing how similar suggested terms are.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? stringDistance)
 	{
@@ -275,7 +354,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.</para>
+	/// <para>
+	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
 	{
@@ -284,7 +365,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The suggest text.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The suggest text.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Text(string? text)
 	{
@@ -410,7 +494,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// <para>
+	/// The analyzer to analyze the suggest text with.
+	/// Defaults to the search analyzer of the suggest field.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Analyzer(string? analyzer)
 	{
@@ -419,7 +506,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -428,7 +518,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -437,7 +530,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The field to fetch the candidate suggestions from.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -452,7 +548,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// <para>
+	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
+	/// Can only be <c>1</c> or <c>2</c>.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor MaxEdits(int? maxEdits)
 	{
@@ -461,7 +560,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// <para>
+	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
+	/// Can improve accuracy at the cost of performance.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor MaxInspections(int? maxInspections)
 	{
@@ -470,7 +572,11 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// <para>
+	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
+	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
+	/// If a value higher than 1 is specified, then fractional can not be specified.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor MaxTermFreq(float? maxTermFreq)
 	{
@@ -479,7 +585,12 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, then the number cannot be fractional.</para>
+	/// <para>
+	/// The minimal threshold in number of documents a suggestion should appear in.
+	/// This can improve quality by only suggesting high frequency terms.
+	/// Can be specified as an absolute number or as a relative percentage of number of documents.
+	/// If a value higher than 1 is specified, then the number cannot be fractional.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor MinDocFreq(float? minDocFreq)
 	{
@@ -488,7 +599,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// <para>
+	/// The minimum length a suggest text term must have in order to be included.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor MinWordLength(int? minWordLength)
 	{
@@ -497,7 +610,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The number of minimal prefix characters that must match in order be a candidate for suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// <para>
+	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
+	/// Increasing this number improves spellcheck performance.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor PrefixLength(int? prefixLength)
 	{
@@ -506,7 +622,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Sets the maximum number of suggestions to be retrieved from each individual shard.</para>
+	/// <para>
+	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor ShardSize(int? shardSize)
 	{
@@ -515,7 +633,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// <para>
+	/// The maximum corrections to be returned per suggest text token.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Size(int? size)
 	{
@@ -524,7 +644,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Defines how suggestions should be sorted per suggest text term.</para>
+	/// <para>
+	/// Defines how suggestions should be sorted per suggest text term.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? sort)
 	{
@@ -533,7 +655,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The string distance implementation to use for comparing how similar suggested terms are.</para>
+	/// <para>
+	/// The string distance implementation to use for comparing how similar suggested terms are.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? stringDistance)
 	{
@@ -542,7 +666,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.</para>
+	/// <para>
+	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
 	{
@@ -551,7 +677,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	}
 
 	/// <summary>
-	/// <para>The suggest text.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The suggest text.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public TermSuggesterDescriptor Text(string? text)
 	{

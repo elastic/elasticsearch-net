@@ -50,7 +50,9 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 	public bool? Index { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -70,13 +72,17 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 	public bool? Store { get; set; }
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
@@ -184,7 +190,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -267,7 +275,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
@@ -276,7 +286,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
@@ -563,7 +575,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -646,7 +660,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
@@ -655,7 +671,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
 	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{

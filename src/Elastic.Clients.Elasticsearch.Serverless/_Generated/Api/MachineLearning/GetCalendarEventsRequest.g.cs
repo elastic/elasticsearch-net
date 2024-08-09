@@ -32,33 +32,45 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GetCalendarEventsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies to get events with timestamps earlier than this time.</para>
+	/// <para>
+	/// Specifies to get events with timestamps earlier than this time.
+	/// </para>
 	/// </summary>
 	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of events.</para>
+	/// <para>
+	/// Skips the specified number of events.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of `_all` or `*`.</para>
+	/// <para>
+	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Id? JobId { get => Q<Elastic.Clients.Elasticsearch.Serverless.Id?>("job_id"); set => Q("job_id", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of events to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of events to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Specifies to get events with timestamps after this time.</para>
+	/// <para>
+	/// Specifies to get events with timestamps after this time.
+	/// </para>
 	/// </summary>
 	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 /// <summary>
-/// <para>Retrieves information about the scheduled events in calendars.</para>
+/// <para>
+/// Retrieves information about the scheduled events in calendars.
+/// </para>
 /// </summary>
 public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarEventsRequestParameters>
 {
@@ -75,38 +87,50 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	internal override string OperationName => "ml.get_calendar_events";
 
 	/// <summary>
-	/// <para>Specifies to get events with timestamps earlier than this time.</para>
+	/// <para>
+	/// Specifies to get events with timestamps earlier than this time.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of events.</para>
+	/// <para>
+	/// Skips the specified number of events.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of `_all` or `*`.</para>
+	/// <para>
+	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? JobId { get => Q<Elastic.Clients.Elasticsearch.Serverless.Id?>("job_id"); set => Q("job_id", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of events to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of events to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Specifies to get events with timestamps after this time.</para>
+	/// <para>
+	/// Specifies to get events with timestamps after this time.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 /// <summary>
-/// <para>Retrieves information about the scheduled events in calendars.</para>
+/// <para>
+/// Retrieves information about the scheduled events in calendars.
+/// </para>
 /// </summary>
 public sealed partial class GetCalendarEventsRequestDescriptor : RequestDescriptor<GetCalendarEventsRequestDescriptor, GetCalendarEventsRequestParameters>
 {

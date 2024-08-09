@@ -32,14 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class CloneSnapshotRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
+/// <para>
+/// Clones indices from one snapshot into another snapshot in the same repository.
+/// </para>
 /// </summary>
 public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotRequestParameters>
 {
@@ -56,7 +60,9 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 	internal override string OperationName => "snapshot.clone";
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -67,7 +73,9 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 }
 
 /// <summary>
-/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
+/// <para>
+/// Clones indices from one snapshot into another snapshot in the same repository.
+/// </para>
 /// </summary>
 public sealed partial class CloneSnapshotRequestDescriptor : RequestDescriptor<CloneSnapshotRequestDescriptor, CloneSnapshotRequestParameters>
 {

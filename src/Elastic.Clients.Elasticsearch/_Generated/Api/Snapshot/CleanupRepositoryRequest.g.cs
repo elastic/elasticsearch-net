@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class CleanupRepositoryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
+/// <para>
+/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+/// </para>
 /// </summary>
 public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepositoryRequestParameters>
 {
@@ -60,20 +66,26 @@ public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepos
 	internal override string OperationName => "snapshot.cleanup_repository";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
+/// <para>
+/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+/// </para>
 /// </summary>
 public sealed partial class CleanupRepositoryRequestDescriptor : RequestDescriptor<CleanupRepositoryRequestDescriptor, CleanupRepositoryRequestParameters>
 {

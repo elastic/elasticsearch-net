@@ -32,7 +32,9 @@ public sealed partial class ListResponse : ElasticsearchResponse
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; init; }
 
 	/// <summary>
-	/// <para>Task information grouped by node, if `group_by` was set to `node` (the default).</para>
+	/// <para>
+	/// Task information grouped by node, if <c>group_by</c> was set to <c>node</c> (the default).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; init; }
@@ -40,7 +42,10 @@ public sealed partial class ListResponse : ElasticsearchResponse
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; init; }
 
 	/// <summary>
-	/// <para>Either a flat list of tasks if `group_by` was set to `none`, or grouped by parents if<br/>`group_by` was set to `parents`.</para>
+	/// <para>
+	/// Either a flat list of tasks if <c>group_by</c> was set to <c>none</c>, or grouped by parents if
+	/// <c>group_by</c> was set to <c>parents</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tasks")]
 	public Elastic.Clients.Elasticsearch.Tasks.TaskInfos? Tasks { get; init; }

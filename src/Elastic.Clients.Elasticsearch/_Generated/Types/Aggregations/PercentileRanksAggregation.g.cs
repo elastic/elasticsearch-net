@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class PercentileRanksAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -38,13 +40,18 @@ public sealed partial class PercentileRanksAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hdr")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -52,13 +59,17 @@ public sealed partial class PercentileRanksAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentile ranks.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tdigest")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
 
 	/// <summary>
-	/// <para>An array of values for which to calculate the percentile ranks.</para>
+	/// <para>
+	/// An array of values for which to calculate the percentile ranks.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("values")]
 	public ICollection<double>? Values { get; set; }
@@ -89,7 +100,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	private ICollection<double>? ValuesValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -98,7 +111,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -107,7 +122,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -122,7 +139,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 	{
@@ -149,7 +168,10 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -182,7 +204,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentile ranks.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 	{
@@ -209,7 +233,9 @@ public sealed partial class PercentileRanksAggregationDescriptor<TDocument> : Se
 	}
 
 	/// <summary>
-	/// <para>An array of values for which to calculate the percentile ranks.</para>
+	/// <para>
+	/// An array of values for which to calculate the percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor<TDocument> Values(ICollection<double>? values)
 	{
@@ -319,7 +345,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	private ICollection<double>? ValuesValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -328,7 +356,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -337,7 +367,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -352,7 +384,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 	{
@@ -379,7 +413,10 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -412,7 +449,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentile ranks.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 	{
@@ -439,7 +478,9 @@ public sealed partial class PercentileRanksAggregationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>An array of values for which to calculate the percentile ranks.</para>
+	/// <para>
+	/// An array of values for which to calculate the percentile ranks.
+	/// </para>
 	/// </summary>
 	public PercentileRanksAggregationDescriptor Values(ICollection<double>? values)
 	{

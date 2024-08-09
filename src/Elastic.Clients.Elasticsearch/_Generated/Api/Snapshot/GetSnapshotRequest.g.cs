@@ -32,73 +32,101 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class GetSnapshotRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Offset identifier to start pagination from as returned by the next field in the response body.</para>
+	/// <para>
+	/// Offset identifier to start pagination from as returned by the next field in the response body.
+	/// </para>
 	/// </summary>
 	public string? After { get => Q<string?>("after"); set => Q("after", value); }
 
 	/// <summary>
-	/// <para>Value of the current sort column at which to start retrieval. Can either be a string snapshot- or repository name when sorting by snapshot or repository name, a millisecond time value or a number when sorting by index- or shard count.</para>
+	/// <para>
+	/// Value of the current sort column at which to start retrieval. Can either be a string snapshot- or repository name when sorting by snapshot or repository name, a millisecond time value or a number when sorting by index- or shard count.
+	/// </para>
 	/// </summary>
 	public string? FromSortValue { get => Q<string?>("from_sort_value"); set => Q("from_sort_value", value); }
 
 	/// <summary>
-	/// <para>If false, the request returns an error for any snapshots that are unavailable.</para>
+	/// <para>
+	/// If false, the request returns an error for any snapshots that are unavailable.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If true, returns the repository name in each snapshot.</para>
+	/// <para>
+	/// If true, returns the repository name in each snapshot.
+	/// </para>
 	/// </summary>
 	public bool? IncludeRepository { get => Q<bool?>("include_repository"); set => Q("include_repository", value); }
 
 	/// <summary>
-	/// <para>If true, returns additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index. Defaults to false, meaning that this information is omitted.</para>
+	/// <para>
+	/// If true, returns additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index. Defaults to false, meaning that this information is omitted.
+	/// </para>
 	/// </summary>
 	public bool? IndexDetails { get => Q<bool?>("index_details"); set => Q("index_details", value); }
 
 	/// <summary>
-	/// <para>If true, returns the name of each index in each snapshot.</para>
+	/// <para>
+	/// If true, returns the name of each index in each snapshot.
+	/// </para>
 	/// </summary>
 	public bool? IndexNames { get => Q<bool?>("index_names"); set => Q("index_names", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.</para>
+	/// <para>
+	/// Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public int? Offset { get => Q<int?>("offset"); set => Q("offset", value); }
 
 	/// <summary>
-	/// <para>Sort order. Valid values are asc for ascending and desc for descending order. Defaults to asc, meaning ascending order.</para>
+	/// <para>
+	/// Sort order. Valid values are asc for ascending and desc for descending order. Defaults to asc, meaning ascending order.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get => Q<Elastic.Clients.Elasticsearch.SortOrder?>("order"); set => Q("order", value); }
 
 	/// <summary>
-	/// <para>Maximum number of snapshots to return. Defaults to 0 which means return all that match the request without limit.</para>
+	/// <para>
+	/// Maximum number of snapshots to return. Defaults to 0 which means return all that match the request without limit.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Filter snapshots by a comma-separated list of SLM policy names that snapshots belong to. Also accepts wildcards (*) and combinations of wildcards followed by exclude patterns starting with -. To include snapshots not created by an SLM policy you can use the special pattern _none that will match all snapshots without an SLM policy.</para>
+	/// <para>
+	/// Filter snapshots by a comma-separated list of SLM policy names that snapshots belong to. Also accepts wildcards (*) and combinations of wildcards followed by exclude patterns starting with -. To include snapshots not created by an SLM policy you can use the special pattern _none that will match all snapshots without an SLM policy.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Name? SlmPolicyFilter { get => Q<Elastic.Clients.Elasticsearch.Name?>("slm_policy_filter"); set => Q("slm_policy_filter", value); }
 
 	/// <summary>
-	/// <para>Allows setting a sort order for the result. Defaults to start_time, i.e. sorting by snapshot start time stamp.</para>
+	/// <para>
+	/// Allows setting a sort order for the result. Defaults to start_time, i.e. sorting by snapshot start time stamp.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort? Sort { get => Q<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>If true, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.</para>
+	/// <para>
+	/// If true, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns information about a snapshot.</para>
+/// <para>
+/// Returns information about a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequestParameters>
 {
@@ -115,86 +143,114 @@ public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequest
 	internal override string OperationName => "snapshot.get";
 
 	/// <summary>
-	/// <para>Offset identifier to start pagination from as returned by the next field in the response body.</para>
+	/// <para>
+	/// Offset identifier to start pagination from as returned by the next field in the response body.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? After { get => Q<string?>("after"); set => Q("after", value); }
 
 	/// <summary>
-	/// <para>Value of the current sort column at which to start retrieval. Can either be a string snapshot- or repository name when sorting by snapshot or repository name, a millisecond time value or a number when sorting by index- or shard count.</para>
+	/// <para>
+	/// Value of the current sort column at which to start retrieval. Can either be a string snapshot- or repository name when sorting by snapshot or repository name, a millisecond time value or a number when sorting by index- or shard count.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? FromSortValue { get => Q<string?>("from_sort_value"); set => Q("from_sort_value", value); }
 
 	/// <summary>
-	/// <para>If false, the request returns an error for any snapshots that are unavailable.</para>
+	/// <para>
+	/// If false, the request returns an error for any snapshots that are unavailable.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If true, returns the repository name in each snapshot.</para>
+	/// <para>
+	/// If true, returns the repository name in each snapshot.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeRepository { get => Q<bool?>("include_repository"); set => Q("include_repository", value); }
 
 	/// <summary>
-	/// <para>If true, returns additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index. Defaults to false, meaning that this information is omitted.</para>
+	/// <para>
+	/// If true, returns additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index. Defaults to false, meaning that this information is omitted.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IndexDetails { get => Q<bool?>("index_details"); set => Q("index_details", value); }
 
 	/// <summary>
-	/// <para>If true, returns the name of each index in each snapshot.</para>
+	/// <para>
+	/// If true, returns the name of each index in each snapshot.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IndexNames { get => Q<bool?>("index_names"); set => Q("index_names", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.</para>
+	/// <para>
+	/// Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Offset { get => Q<int?>("offset"); set => Q("offset", value); }
 
 	/// <summary>
-	/// <para>Sort order. Valid values are asc for ascending and desc for descending order. Defaults to asc, meaning ascending order.</para>
+	/// <para>
+	/// Sort order. Valid values are asc for ascending and desc for descending order. Defaults to asc, meaning ascending order.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get => Q<Elastic.Clients.Elasticsearch.SortOrder?>("order"); set => Q("order", value); }
 
 	/// <summary>
-	/// <para>Maximum number of snapshots to return. Defaults to 0 which means return all that match the request without limit.</para>
+	/// <para>
+	/// Maximum number of snapshots to return. Defaults to 0 which means return all that match the request without limit.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Filter snapshots by a comma-separated list of SLM policy names that snapshots belong to. Also accepts wildcards (*) and combinations of wildcards followed by exclude patterns starting with -. To include snapshots not created by an SLM policy you can use the special pattern _none that will match all snapshots without an SLM policy.</para>
+	/// <para>
+	/// Filter snapshots by a comma-separated list of SLM policy names that snapshots belong to. Also accepts wildcards (*) and combinations of wildcards followed by exclude patterns starting with -. To include snapshots not created by an SLM policy you can use the special pattern _none that will match all snapshots without an SLM policy.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Name? SlmPolicyFilter { get => Q<Elastic.Clients.Elasticsearch.Name?>("slm_policy_filter"); set => Q("slm_policy_filter", value); }
 
 	/// <summary>
-	/// <para>Allows setting a sort order for the result. Defaults to start_time, i.e. sorting by snapshot start time stamp.</para>
+	/// <para>
+	/// Allows setting a sort order for the result. Defaults to start_time, i.e. sorting by snapshot start time stamp.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort? Sort { get => Q<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
-	/// <para>If true, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.</para>
+	/// <para>
+	/// If true, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns information about a snapshot.</para>
+/// <para>
+/// Returns information about a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class GetSnapshotRequestDescriptor : RequestDescriptor<GetSnapshotRequestDescriptor, GetSnapshotRequestParameters>
 {
