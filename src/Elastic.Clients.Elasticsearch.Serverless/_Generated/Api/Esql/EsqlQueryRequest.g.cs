@@ -32,23 +32,32 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
 public sealed partial class EsqlQueryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The character to use between values within a CSV row. Only valid for the CSV format.</para>
+	/// <para>
+	/// The character to use between values within a CSV row. Only valid for the CSV format.
+	/// </para>
 	/// </summary>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
-	/// <para>Should columns that are entirely `null` be removed from the `columns` and `values` portion of the results?<br/>Defaults to `false`. If `true` then the response will include an extra section under the name `all_columns` which has the name of all columns.</para>
+	/// <para>
+	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
+	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
+	/// </para>
 	/// </summary>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
 	/// <summary>
-	/// <para>A short version of the Accept header, e.g. json, yaml.</para>
+	/// <para>
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
 	/// </summary>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 }
 
 /// <summary>
-/// <para>Executes an ES|QL request</para>
+/// <para>
+/// Executes an ES|QL request
+/// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestParameters>
 {
@@ -61,31 +70,42 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	internal override string OperationName => "esql.query";
 
 	/// <summary>
-	/// <para>The character to use between values within a CSV row. Only valid for the CSV format.</para>
+	/// <para>
+	/// The character to use between values within a CSV row. Only valid for the CSV format.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
-	/// <para>Should columns that are entirely `null` be removed from the `columns` and `values` portion of the results?<br/>Defaults to `false`. If `true` then the response will include an extra section under the name `all_columns` which has the name of all columns.</para>
+	/// <para>
+	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
+	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
 	/// <summary>
-	/// <para>A short version of the Accept header, e.g. json, yaml.</para>
+	/// <para>
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 	/// <summary>
-	/// <para>By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.</para>
+	/// <para>
+	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 
 	/// <summary>
-	/// <para>Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.</para>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Filter { get; set; }
@@ -93,26 +113,37 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	public string? Locale { get; set; }
 
 	/// <summary>
-	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? Params { get; set; }
 
 	/// <summary>
-	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// <para>
+	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
+	/// with information on how the query was executed. This information is for human debugging
+	/// and its format can change at any time but it can give some insight into the performance
+	/// of each part of the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
-	/// <para>The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.</para>
+	/// <para>
+	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 }
 
 /// <summary>
-/// <para>Executes an ES|QL request</para>
+/// <para>
+/// Executes an ES|QL request
+/// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescriptor<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryRequestParameters>
 {
@@ -144,7 +175,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	private string QueryValue { get; set; }
 
 	/// <summary>
-	/// <para>By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.</para>
+	/// <para>
+	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
 	{
@@ -153,7 +186,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.</para>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -186,7 +221,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? value)
 	{
@@ -195,7 +232,12 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// <para>
+	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
+	/// with information on how the query was executed. This information is for human debugging
+	/// and its format can change at any time but it can give some insight into the performance
+	/// of each part of the query.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor<TDocument> Profile(bool? profile = true)
 	{
@@ -204,7 +246,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.</para>
+	/// <para>
+	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor<TDocument> Query(string query)
 	{
@@ -262,7 +306,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Executes an ES|QL request</para>
+/// <para>
+/// Executes an ES|QL request
+/// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQueryRequestDescriptor, EsqlQueryRequestParameters>
 {
@@ -294,7 +340,9 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	private string QueryValue { get; set; }
 
 	/// <summary>
-	/// <para>By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.</para>
+	/// <para>
+	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor Columnar(bool? columnar = true)
 	{
@@ -303,7 +351,9 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	}
 
 	/// <summary>
-	/// <para>Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.</para>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -336,7 +386,9 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	}
 
 	/// <summary>
-	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor Params(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? value)
 	{
@@ -345,7 +397,12 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	}
 
 	/// <summary>
-	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// <para>
+	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
+	/// with information on how the query was executed. This information is for human debugging
+	/// and its format can change at any time but it can give some insight into the performance
+	/// of each part of the query.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor Profile(bool? profile = true)
 	{
@@ -354,7 +411,9 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	}
 
 	/// <summary>
-	/// <para>The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.</para>
+	/// <para>
+	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
+	/// </para>
 	/// </summary>
 	public EsqlQueryRequestDescriptor Query(string query)
 	{

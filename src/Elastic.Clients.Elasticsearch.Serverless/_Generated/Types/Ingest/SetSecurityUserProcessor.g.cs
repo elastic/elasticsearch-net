@@ -30,43 +30,59 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class SetSecurityUserProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Controls what user related properties are added to the field.</para>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -94,7 +110,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -103,7 +122,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -112,7 +133,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -121,7 +144,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -130,7 +155,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -139,7 +166,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -148,7 +177,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -187,7 +218,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Controls what user related properties are added to the field.</para>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
@@ -196,7 +229,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -294,7 +330,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Description(string? description)
 	{
@@ -303,7 +342,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -312,7 +353,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -321,7 +364,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to store the user information into.</para>
+	/// <para>
+	/// The field to store the user information into.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -330,7 +375,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor If(string? value)
 	{
@@ -339,7 +386,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -348,7 +397,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -387,7 +438,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Controls what user related properties are added to the field.</para>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Properties(ICollection<string>? properties)
 	{
@@ -396,7 +449,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SetSecurityUserProcessorDescriptor Tag(string? tag)
 	{

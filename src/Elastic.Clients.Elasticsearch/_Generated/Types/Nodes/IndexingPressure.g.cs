@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class IndexingPressure
 {
 	/// <summary>
-	/// <para>Contains statistics for memory consumption from indexing load.</para>
+	/// <para>
+	/// Contains statistics for memory consumption from indexing load.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("memory")]
 	public Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory? Memory { get; init; }

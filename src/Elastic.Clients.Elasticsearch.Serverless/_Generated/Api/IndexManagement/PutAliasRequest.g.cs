@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class PutAliasRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParameters>
 {
@@ -60,50 +69,77 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	internal override string OperationName => "indices.put_alias";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRouting { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.<br/>If an alias points to multiple indices or data streams and `is_write_index` isn’t set, the alias rejects write requests.<br/>If an index alias points to one index and `is_write_index` isn’t set, the index automatically acts as the write index.<br/>Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
+	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
+	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRouting { get; set; }
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescriptor<PutAliasRequestDescriptor<TDocument>, PutAliasRequestParameters>
 {
@@ -149,7 +185,9 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -176,7 +214,11 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? indexRouting)
 	{
@@ -185,7 +227,12 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.<br/>If an alias points to multiple indices or data streams and `is_write_index` isn’t set, the alias rejects write requests.<br/>If an index alias points to one index and `is_write_index` isn’t set, the index automatically acts as the write index.<br/>Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
+	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
+	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
 	{
@@ -194,7 +241,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -203,7 +253,11 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? searchRouting)
 	{
@@ -259,7 +313,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAliasRequestDescriptor, PutAliasRequestParameters>
 {
@@ -301,7 +358,9 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRoutingValue { get; set; }
 
 	/// <summary>
-	/// <para>Query used to limit documents the alias can access.</para>
+	/// <para>
+	/// Query used to limit documents the alias can access.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -328,7 +387,11 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? indexRouting)
 	{
@@ -337,7 +400,12 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	/// <summary>
-	/// <para>If `true`, sets the write index or data stream for the alias.<br/>If an alias points to multiple indices or data streams and `is_write_index` isn’t set, the alias rejects write requests.<br/>If an index alias points to one index and `is_write_index` isn’t set, the index automatically acts as the write index.<br/>Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.</para>
+	/// <para>
+	/// If <c>true</c>, sets the write index or data stream for the alias.
+	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
+	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
+	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor IsWriteIndex(bool? isWriteIndex = true)
 	{
@@ -346,7 +414,10 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	/// <summary>
-	/// <para>Value used to route indexing and search operations to a specific shard.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route indexing and search operations to a specific shard.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
@@ -355,7 +426,11 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	/// <summary>
-	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.<br/>Data stream aliases don’t support this parameter.</para>
+	/// <para>
+	/// Value used to route search operations to a specific shard.
+	/// If specified, this overwrites the <c>routing</c> value for search operations.
+	/// Data stream aliases don’t support this parameter.
+	/// </para>
 	/// </summary>
 	public PutAliasRequestDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Serverless.Routing? searchRouting)
 	{

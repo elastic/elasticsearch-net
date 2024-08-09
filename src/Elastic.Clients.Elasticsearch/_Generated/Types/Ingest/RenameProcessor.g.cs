@@ -30,49 +30,69 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class RenameProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
@@ -101,7 +121,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -110,7 +133,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -119,7 +145,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -128,7 +157,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -137,7 +169,9 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -146,7 +180,9 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -155,7 +191,9 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -164,7 +202,9 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -203,7 +243,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -212,7 +255,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
@@ -221,7 +267,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -230,7 +279,10 @@ public sealed partial class RenameProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -331,7 +383,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor Description(string? description)
 	{
@@ -340,7 +395,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -349,7 +407,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -358,7 +419,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The field to be renamed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be renamed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -367,7 +431,9 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor If(string? value)
 	{
@@ -376,7 +442,9 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -385,7 +453,9 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -394,7 +464,9 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -433,7 +505,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor Tag(string? tag)
 	{
@@ -442,7 +517,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
@@ -451,7 +529,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -460,7 +541,10 @@ public sealed partial class RenameProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>The new name of the field.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The new name of the field.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RenameProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

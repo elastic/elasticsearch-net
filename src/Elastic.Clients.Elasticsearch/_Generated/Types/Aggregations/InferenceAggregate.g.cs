@@ -93,7 +93,9 @@ internal sealed partial class InferenceAggregateConverter : JsonConverter<Infere
 public sealed partial class InferenceAggregate : IAggregate
 {
 	/// <summary>
-	/// <para>Additional data</para>
+	/// <para>
+	/// Additional data
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Data { get; init; }
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }

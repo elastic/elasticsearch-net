@@ -32,28 +32,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SegmentsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request returns a verbose response.</para>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns low-level information about the Lucene segments in index shards.<br/>For data streams, the API returns information about the stream’s backing indices.</para>
+/// <para>
+/// Returns low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParameters>
 {
@@ -74,32 +89,47 @@ public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParame
 	internal override string OperationName => "indices.segments";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request returns a verbose response.</para>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns low-level information about the Lucene segments in index shards.<br/>For data streams, the API returns information about the stream’s backing indices.</para>
+/// <para>
+/// Returns low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescriptor<SegmentsRequestDescriptor<TDocument>, SegmentsRequestParameters>
 {
@@ -138,7 +168,10 @@ public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Returns low-level information about the Lucene segments in index shards.<br/>For data streams, the API returns information about the stream’s backing indices.</para>
+/// <para>
+/// Returns low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class SegmentsRequestDescriptor : RequestDescriptor<SegmentsRequestDescriptor, SegmentsRequestParameters>
 {

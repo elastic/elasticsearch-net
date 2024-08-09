@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class Page
 {
 	/// <summary>
-	/// <para>Skips the specified number of items.</para>
+	/// <para>
+	/// Skips the specified number of items.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of items to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of items to obtain.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class PageDescriptor : SerializableDescriptor<PageDescript
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Skips the specified number of items.</para>
+	/// <para>
+	/// Skips the specified number of items.
+	/// </para>
 	/// </summary>
 	public PageDescriptor From(int? from)
 	{
@@ -63,7 +69,9 @@ public sealed partial class PageDescriptor : SerializableDescriptor<PageDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies the maximum number of items to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of items to obtain.
+	/// </para>
 	/// </summary>
 	public PageDescriptor Size(int? size)
 	{

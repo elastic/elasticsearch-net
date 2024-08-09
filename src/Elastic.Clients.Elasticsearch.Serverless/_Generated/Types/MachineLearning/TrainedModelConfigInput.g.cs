@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class TrainedModelConfigInput
 {
 	/// <summary>
-	/// <para>An array of input field names for the model.</para>
+	/// <para>
+	/// An array of input field names for the model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_names")]
 	public IReadOnlyCollection<string> FieldNames { get; init; }

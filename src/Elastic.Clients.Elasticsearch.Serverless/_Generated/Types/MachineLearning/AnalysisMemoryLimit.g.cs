@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class AnalysisMemoryLimit
 {
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string ModelMemoryLimit { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class AnalysisMemoryLimitDescriptor : SerializableDescript
 	private string ModelMemoryLimitValue { get; set; }
 
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	public AnalysisMemoryLimitDescriptor ModelMemoryLimit(string modelMemoryLimit)
 	{

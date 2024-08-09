@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 public sealed partial class AsyncSearch<TDocument>
 {
 	/// <summary>
-	/// <para>Partial aggregations results, coming from the shards that have already completed the execution of the query.</para>
+	/// <para>
+	/// Partial aggregations results, coming from the shards that have already completed the execution of the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary? Aggregations { get; init; }
@@ -44,7 +46,10 @@ public sealed partial class AsyncSearch<TDocument>
 	public double? MaxScore { get; init; }
 
 	/// <summary>
-	/// <para>Indicates how many reductions of the results have been performed.<br/>If this number increases compared to the last retrieved results for a get asynch search request, you can expect additional results included in the search response.</para>
+	/// <para>
+	/// Indicates how many reductions of the results have been performed.
+	/// If this number increases compared to the last retrieved results for a get asynch search request, you can expect additional results included in the search response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_reduce_phases")]
 	public long? NumReducePhases { get; init; }
@@ -56,7 +61,10 @@ public sealed partial class AsyncSearch<TDocument>
 	public Elastic.Clients.Elasticsearch.Serverless.ScrollId? ScrollId { get; init; }
 
 	/// <summary>
-	/// <para>Indicates how many shards have run the query.<br/>Note that in order for shard results to be included in the search response, they need to be reduced first.</para>
+	/// <para>
+	/// Indicates how many shards have run the query.
+	/// Note that in order for shard results to be included in the search response, they need to be reduced first.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class PercentilesAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -38,19 +40,26 @@ public sealed partial class PercentilesAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hdr")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	/// <summary>
-	/// <para>The percentiles to calculate.</para>
+	/// <para>
+	/// The percentiles to calculate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("percents")]
 	public ICollection<double>? Percents { get; set; }
@@ -58,7 +67,9 @@ public sealed partial class PercentilesAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentiles.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentiles.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tdigest")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
@@ -89,7 +100,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -98,7 +111,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -107,7 +122,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -122,7 +139,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 	{
@@ -149,7 +168,10 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -158,7 +180,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The percentiles to calculate.</para>
+	/// <para>
+	/// The percentiles to calculate.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Percents(ICollection<double>? percents)
 	{
@@ -191,7 +215,9 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentiles.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentiles.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 	{
@@ -319,7 +345,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -328,7 +356,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -337,7 +367,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -352,7 +384,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.</para>
+	/// <para>
+	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 	{
@@ -379,7 +413,10 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -388,7 +425,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The percentiles to calculate.</para>
+	/// <para>
+	/// The percentiles to calculate.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor Percents(ICollection<double>? percents)
 	{
@@ -421,7 +460,9 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentiles.</para>
+	/// <para>
+	/// Sets parameters for the default TDigest algorithm used to calculate percentiles.
+	/// </para>
 	/// </summary>
 	public PercentilesAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 	{

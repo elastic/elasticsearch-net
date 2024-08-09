@@ -30,31 +30,43 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class MovingPercentilesAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>By default, the window consists of the last n values excluding the current bucket.<br/>Increasing `shift` by 1, moves the starting window position by 1 to the right.</para>
+	/// <para>
+	/// By default, the window consists of the last n values excluding the current bucket.
+	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shift")]
 	public int? Shift { get; set; }
 
 	/// <summary>
-	/// <para>The size of window to "slide" across the histogram.</para>
+	/// <para>
+	/// The size of window to "slide" across the histogram.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("window")]
 	public int? Window { get; set; }
@@ -77,7 +89,9 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	private int? WindowValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public MovingPercentilesAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -86,7 +100,10 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public MovingPercentilesAggregationDescriptor Format(string? format)
 	{
@@ -95,7 +112,9 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -104,7 +123,10 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>By default, the window consists of the last n values excluding the current bucket.<br/>Increasing `shift` by 1, moves the starting window position by 1 to the right.</para>
+	/// <para>
+	/// By default, the window consists of the last n values excluding the current bucket.
+	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
+	/// </para>
 	/// </summary>
 	public MovingPercentilesAggregationDescriptor Shift(int? shift)
 	{
@@ -113,7 +135,9 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The size of window to "slide" across the histogram.</para>
+	/// <para>
+	/// The size of window to "slide" across the histogram.
+	/// </para>
 	/// </summary>
 	public MovingPercentilesAggregationDescriptor Window(int? window)
 	{

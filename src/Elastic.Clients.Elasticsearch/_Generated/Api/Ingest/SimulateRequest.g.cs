@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class SimulateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, the response includes output data for each processor in the executed pipeline.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
+	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Executes an ingest pipeline against a set of provided documents.</para>
+/// <para>
+/// Executes an ingest pipeline against a set of provided documents.
+/// </para>
 /// </summary>
 public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParameters>
 {
@@ -59,26 +63,36 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	internal override string OperationName => "ingest.simulate";
 
 	/// <summary>
-	/// <para>If `true`, the response includes output data for each processor in the executed pipeline.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 
 	/// <summary>
-	/// <para>Sample documents to test in the pipeline.</para>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? Docs { get; set; }
 
 	/// <summary>
-	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
+	/// <para>
+	/// Pipeline to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 }
 
 /// <summary>
-/// <para>Executes an ingest pipeline against a set of provided documents.</para>
+/// <para>
+/// Executes an ingest pipeline against a set of provided documents.
+/// </para>
 /// </summary>
 public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescriptor<SimulateRequestDescriptor<TDocument>, SimulateRequestParameters>
 {
@@ -117,7 +131,9 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	private Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Sample documents to test in the pipeline.</para>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
 	/// </summary>
 	public SimulateRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
 	{
@@ -156,7 +172,11 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
+	/// <para>
+	/// Pipeline to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
 	/// </summary>
 	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
 	{
@@ -237,7 +257,9 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Executes an ingest pipeline against a set of provided documents.</para>
+/// <para>
+/// Executes an ingest pipeline against a set of provided documents.
+/// </para>
 /// </summary>
 public sealed partial class SimulateRequestDescriptor : RequestDescriptor<SimulateRequestDescriptor, SimulateRequestParameters>
 {
@@ -276,7 +298,9 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	private Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> PipelineDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Sample documents to test in the pipeline.</para>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
 	/// </summary>
 	public SimulateRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? docs)
 	{
@@ -315,7 +339,11 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	}
 
 	/// <summary>
-	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
+	/// <para>
+	/// Pipeline to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
 	/// </summary>
 	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
 	{

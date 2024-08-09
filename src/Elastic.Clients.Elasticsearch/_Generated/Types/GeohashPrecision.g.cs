@@ -31,7 +31,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>A precision that can be expressed as a geohash length between 1 and 12, or a distance measure like "1km", "10m".</para>
+/// <para>
+/// A precision that can be expressed as a geohash length between 1 and 12, or a distance measure like "1km", "10m".
+/// </para>
 /// </summary>
 public sealed partial class GeohashPrecision : Union<double, string>
 {

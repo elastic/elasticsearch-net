@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class AnalyticsCollection
 {
 	/// <summary>
-	/// <para>Data stream for the collection.</para>
+	/// <para>
+	/// Data stream for the collection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("event_data_stream")]
 	public Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; init; }

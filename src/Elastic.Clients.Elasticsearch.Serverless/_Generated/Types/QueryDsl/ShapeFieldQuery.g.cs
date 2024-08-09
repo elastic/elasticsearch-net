@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class ShapeFieldQuery
 {
 	/// <summary>
-	/// <para>Queries using a pre-indexed shape.</para>
+	/// <para>
+	/// Queries using a pre-indexed shape.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_shape")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldLookup? IndexedShape { get; set; }
 
 	/// <summary>
-	/// <para>Spatial relation between the query shape and the document shape.</para>
+	/// <para>
+	/// Spatial relation between the query shape and the document shape.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("relation")]
 	public Elastic.Clients.Elasticsearch.Serverless.GeoShapeRelation? Relation { get; set; }
 
 	/// <summary>
-	/// <para>Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.</para>
+	/// <para>
+	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shape")]
 	public object? Shape { get; set; }
@@ -63,7 +69,9 @@ public sealed partial class ShapeFieldQueryDescriptor<TDocument> : SerializableD
 	private object? ShapeValue { get; set; }
 
 	/// <summary>
-	/// <para>Queries using a pre-indexed shape.</para>
+	/// <para>
+	/// Queries using a pre-indexed shape.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor<TDocument> IndexedShape(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldLookup? indexedShape)
 	{
@@ -90,7 +98,9 @@ public sealed partial class ShapeFieldQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Spatial relation between the query shape and the document shape.</para>
+	/// <para>
+	/// Spatial relation between the query shape and the document shape.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.Serverless.GeoShapeRelation? relation)
 	{
@@ -99,7 +109,9 @@ public sealed partial class ShapeFieldQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.</para>
+	/// <para>
+	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor<TDocument> Shape(object? shape)
 	{
@@ -157,7 +169,9 @@ public sealed partial class ShapeFieldQueryDescriptor : SerializableDescriptor<S
 	private object? ShapeValue { get; set; }
 
 	/// <summary>
-	/// <para>Queries using a pre-indexed shape.</para>
+	/// <para>
+	/// Queries using a pre-indexed shape.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor IndexedShape(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldLookup? indexedShape)
 	{
@@ -184,7 +198,9 @@ public sealed partial class ShapeFieldQueryDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Spatial relation between the query shape and the document shape.</para>
+	/// <para>
+	/// Spatial relation between the query shape and the document shape.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor Relation(Elastic.Clients.Elasticsearch.Serverless.GeoShapeRelation? relation)
 	{
@@ -193,7 +209,9 @@ public sealed partial class ShapeFieldQueryDescriptor : SerializableDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.</para>
+	/// <para>
+	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
+	/// </para>
 	/// </summary>
 	public ShapeFieldQueryDescriptor Shape(object? shape)
 	{

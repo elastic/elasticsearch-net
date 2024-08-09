@@ -34,7 +34,9 @@ public sealed partial class RenderSearchTemplateRequestParameters : RequestParam
 }
 
 /// <summary>
-/// <para>Renders a search template as a search request body.</para>
+/// <para>
+/// Renders a search template as a search request body.
+/// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSearchTemplateRequestParameters>
 {
@@ -58,20 +60,31 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 	public string? File { get; set; }
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
-	/// <para>An inline search template.<br/>Supports the same parameters as the search API's request body.<br/>These parameters also support Mustache variables.<br/>If no `id` or `<templated-id>` is specified, this parameter is required.</para>
+	/// <para>
+	/// An inline search template.
+	/// Supports the same parameters as the search API's request body.
+	/// These parameters also support Mustache variables.
+	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 
 /// <summary>
-/// <para>Renders a search template as a search request body.</para>
+/// <para>
+/// Renders a search template as a search request body.
+/// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateRequestParameters>
 {
@@ -110,7 +123,11 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 	}
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	public RenderSearchTemplateRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -119,7 +136,12 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 	}
 
 	/// <summary>
-	/// <para>An inline search template.<br/>Supports the same parameters as the search API's request body.<br/>These parameters also support Mustache variables.<br/>If no `id` or `<templated-id>` is specified, this parameter is required.</para>
+	/// <para>
+	/// An inline search template.
+	/// Supports the same parameters as the search API's request body.
+	/// These parameters also support Mustache variables.
+	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public RenderSearchTemplateRequestDescriptor<TDocument> Source(string? source)
 	{
@@ -153,7 +175,9 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 }
 
 /// <summary>
-/// <para>Renders a search template as a search request body.</para>
+/// <para>
+/// Renders a search template as a search request body.
+/// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescriptor<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateRequestParameters>
 {
@@ -192,7 +216,11 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
 	/// </summary>
 	public RenderSearchTemplateRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -201,7 +229,12 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>An inline search template.<br/>Supports the same parameters as the search API's request body.<br/>These parameters also support Mustache variables.<br/>If no `id` or `<templated-id>` is specified, this parameter is required.</para>
+	/// <para>
+	/// An inline search template.
+	/// Supports the same parameters as the search API's request body.
+	/// These parameters also support Mustache variables.
+	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
+	/// </para>
 	/// </summary>
 	public RenderSearchTemplateRequestDescriptor Source(string? source)
 	{

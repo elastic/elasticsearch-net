@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 /// <summary>
-/// <para>SLM</para>
+/// <para>
+/// SLM
+/// </para>
 /// </summary>
 public sealed partial class SlmIndicator
 {

@@ -28,14 +28,18 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
 /// <summary>
-/// <para>For empty Class assignments</para>
+/// <para>
+/// For empty Class assignments
+/// </para>
 /// </summary>
 public sealed partial class EmptyObject
 {
 }
 
 /// <summary>
-/// <para>For empty Class assignments</para>
+/// <para>
+/// For empty Class assignments
+/// </para>
 /// </summary>
 public sealed partial class EmptyObjectDescriptor : SerializableDescriptor<EmptyObjectDescriptor>
 {

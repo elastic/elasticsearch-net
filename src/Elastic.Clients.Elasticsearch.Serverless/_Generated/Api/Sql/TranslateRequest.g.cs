@@ -34,7 +34,9 @@ public sealed partial class TranslateRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Translates SQL into Elasticsearch queries</para>
+/// <para>
+/// Translates SQL into Elasticsearch queries
+/// </para>
 /// </summary>
 public sealed partial class TranslateRequest : PlainRequest<TranslateRequestParameters>
 {
@@ -47,32 +49,42 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 	internal override string OperationName => "sql.translate";
 
 	/// <summary>
-	/// <para>The maximum number of rows (or entries) to return in one response.</para>
+	/// <para>
+	/// The maximum number of rows (or entries) to return in one response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
+	/// <para>
+	/// Elasticsearch query DSL for additional filtering.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>SQL query to run.</para>
+	/// <para>
+	/// SQL query to run.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
 	/// <summary>
-	/// <para>ISO-8601 time zone ID for the search.</para>
+	/// <para>
+	/// ISO-8601 time zone ID for the search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 }
 
 /// <summary>
-/// <para>Translates SQL into Elasticsearch queries</para>
+/// <para>
+/// Translates SQL into Elasticsearch queries
+/// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescriptor<TranslateRequestDescriptor<TDocument>, TranslateRequestParameters>
 {
@@ -98,7 +110,9 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of rows (or entries) to return in one response.</para>
+	/// <para>
+	/// The maximum number of rows (or entries) to return in one response.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> FetchSize(int? fetchSize)
 	{
@@ -107,7 +121,9 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
+	/// <para>
+	/// Elasticsearch query DSL for additional filtering.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -134,7 +150,9 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>SQL query to run.</para>
+	/// <para>
+	/// SQL query to run.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> Query(string query)
 	{
@@ -143,7 +161,9 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>ISO-8601 time zone ID for the search.</para>
+	/// <para>
+	/// ISO-8601 time zone ID for the search.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -189,7 +209,9 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Translates SQL into Elasticsearch queries</para>
+/// <para>
+/// Translates SQL into Elasticsearch queries
+/// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor : RequestDescriptor<TranslateRequestDescriptor, TranslateRequestParameters>
 {
@@ -215,7 +237,9 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of rows (or entries) to return in one response.</para>
+	/// <para>
+	/// The maximum number of rows (or entries) to return in one response.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor FetchSize(int? fetchSize)
 	{
@@ -224,7 +248,9 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 	}
 
 	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
+	/// <para>
+	/// Elasticsearch query DSL for additional filtering.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -251,7 +277,9 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 	}
 
 	/// <summary>
-	/// <para>SQL query to run.</para>
+	/// <para>
+	/// SQL query to run.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor Query(string query)
 	{
@@ -260,7 +288,9 @@ public sealed partial class TranslateRequestDescriptor : RequestDescriptor<Trans
 	}
 
 	/// <summary>
-	/// <para>ISO-8601 time zone ID for the search.</para>
+	/// <para>
+	/// ISO-8601 time zone ID for the search.
+	/// </para>
 	/// </summary>
 	public TranslateRequestDescriptor TimeZone(string? timeZone)
 	{

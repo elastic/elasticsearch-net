@@ -32,19 +32,35 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class UpdateTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>When true, deferrable validations are not run. This behavior may be<br/>desired if the source index does not exist until after the transform is<br/>created.</para>
+	/// <para>
+	/// When true, deferrable validations are not run. This behavior may be
+	/// desired if the source index does not exist until after the transform is
+	/// created.
+	/// </para>
 	/// </summary>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the<br/>timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
-/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
+/// <para>
+/// Update a transform.
+/// Updates certain properties of a transform.
+/// </para>
+/// <para>
+/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
+/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
+/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
+/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
+/// time of update and runs with those privileges.
+/// </para>
 /// </summary>
 public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransformRequestParameters>
 {
@@ -61,69 +77,105 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	internal override string OperationName => "transform.update_transform";
 
 	/// <summary>
-	/// <para>When true, deferrable validations are not run. This behavior may be<br/>desired if the source index does not exist until after the transform is<br/>created.</para>
+	/// <para>
+	/// When true, deferrable validations are not run. This behavior may be
+	/// desired if the source index does not exist until after the transform is
+	/// created.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the<br/>timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Destination? Dest { get; set; }
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Frequency { get; set; }
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retention_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Settings? Settings { get; set; }
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Source? Source { get; set; }
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sync")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Sync? Sync { get; set; }
 }
 
 /// <summary>
-/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
-/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
+/// <para>
+/// Update a transform.
+/// Updates certain properties of a transform.
+/// </para>
+/// <para>
+/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
+/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
+/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
+/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
+/// time of update and runs with those privileges.
+/// </para>
 /// </summary>
 public sealed partial class UpdateTransformRequestDescriptor<TDocument> : RequestDescriptor<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformRequestParameters>
 {
@@ -170,7 +222,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	private Action<Elastic.Clients.Elasticsearch.Serverless.TransformManagement.SyncDescriptor<TDocument>> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -179,7 +233,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Destination? dest)
 	{
@@ -206,7 +262,12 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Serverless.Duration? frequency)
 	{
@@ -215,7 +276,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -224,7 +287,10 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -251,7 +317,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Settings? settings)
 	{
@@ -278,7 +346,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Source? source)
 	{
@@ -305,7 +375,9 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Sync? sync)
 	{
@@ -437,8 +509,17 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 }
 
 /// <summary>
-/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
-/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
+/// <para>
+/// Update a transform.
+/// Updates certain properties of a transform.
+/// </para>
+/// <para>
+/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
+/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
+/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
+/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
+/// time of update and runs with those privileges.
+/// </para>
 /// </summary>
 public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor<UpdateTransformRequestDescriptor, UpdateTransformRequestParameters>
 {
@@ -485,7 +566,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	private Action<Elastic.Clients.Elasticsearch.Serverless.TransformManagement.SyncDescriptor> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Description(string? description)
 	{
@@ -494,7 +577,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Destination? dest)
 	{
@@ -521,7 +606,12 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Serverless.Duration? frequency)
 	{
@@ -530,7 +620,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform metadata.</para>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -539,7 +631,10 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -566,7 +661,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Settings? settings)
 	{
@@ -593,7 +690,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Source? source)
 	{
@@ -620,7 +719,9 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public UpdateTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Sync? sync)
 	{

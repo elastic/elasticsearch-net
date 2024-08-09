@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Synonyms;
 public partial class SynonymsNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="SynonymsNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="SynonymsNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected SynonymsNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +52,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(DeleteSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +64,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -69,7 +77,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -81,7 +91,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -91,7 +103,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -102,7 +116,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym set</para>
+	/// <para>
+	/// Deletes a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -114,7 +130,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym rule in a synonym set</para>
+	/// <para>
+	/// Deletes a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequest request, CancellationToken cancellationToken = default)
@@ -124,7 +142,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym rule in a synonym set</para>
+	/// <para>
+	/// Deletes a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -134,7 +154,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym rule in a synonym set</para>
+	/// <para>
+	/// Deletes a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -145,7 +167,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a synonym rule in a synonym set</para>
+	/// <para>
+	/// Deletes a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<DeleteSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -157,7 +181,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync(GetSynonymRequest request, CancellationToken cancellationToken = default)
@@ -167,7 +193,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(GetSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -177,7 +205,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -188,7 +218,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -200,7 +232,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync(GetSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -210,7 +244,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -221,7 +257,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -233,7 +271,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym rule from a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym rule from a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequest request, CancellationToken cancellationToken = default)
@@ -243,7 +283,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym rule from a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym rule from a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -253,7 +295,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym rule from a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym rule from a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -264,7 +308,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a synonym rule from a synonym set</para>
+	/// <para>
+	/// Retrieves a synonym rule from a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<GetSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -276,7 +322,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a summary of all defined synonym sets</para>
+	/// <para>
+	/// Retrieves a summary of all defined synonym sets
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequest request, CancellationToken cancellationToken = default)
@@ -286,7 +334,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a summary of all defined synonym sets</para>
+	/// <para>
+	/// Retrieves a summary of all defined synonym sets
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -296,7 +346,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a summary of all defined synonym sets</para>
+	/// <para>
+	/// Retrieves a summary of all defined synonym sets
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(CancellationToken cancellationToken = default)
@@ -307,7 +359,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves a summary of all defined synonym sets</para>
+	/// <para>
+	/// Retrieves a summary of all defined synonym sets
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(Action<GetSynonymsSetsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -319,7 +373,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequest request, CancellationToken cancellationToken = default)
@@ -329,7 +385,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(PutSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -339,7 +397,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -350,7 +410,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -362,7 +424,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -372,7 +436,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -383,7 +449,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym set.</para>
+	/// <para>
+	/// Creates or updates a synonym set.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -395,7 +463,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para>
+	/// Creates or updates a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(PutSynonymRuleRequest request, CancellationToken cancellationToken = default)
@@ -405,7 +475,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para>
+	/// Creates or updates a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(PutSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -415,7 +487,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para>
+	/// Creates or updates a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -426,7 +500,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para>
+	/// Creates or updates a synonym rule in a synonym set
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id setId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<PutSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterNetworkTypes
 {
 	/// <summary>
-	/// <para>Contains statistics about the HTTP network types used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the HTTP network types used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("http_types")]
 	public IReadOnlyDictionary<string, int> HttpTypes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the transport network types used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the transport network types used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_types")]
 	public IReadOnlyDictionary<string, int> TransportTypes { get; init; }

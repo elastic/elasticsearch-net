@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Xpack;
 public partial class XpackNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="XpackNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="XpackNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected XpackNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Provides general information about the installed X-Pack features.</para>
+	/// <para>
+	/// Provides general information about the installed X-Pack features.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +52,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Provides general information about the installed X-Pack features.</para>
+	/// <para>
+	/// Provides general information about the installed X-Pack features.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +64,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Provides general information about the installed X-Pack features.</para>
+	/// <para>
+	/// Provides general information about the installed X-Pack features.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
@@ -69,7 +77,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Provides general information about the installed X-Pack features.</para>
+	/// <para>
+	/// Provides general information about the installed X-Pack features.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -81,7 +91,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+	/// <para>
+	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequest request, CancellationToken cancellationToken = default)
@@ -91,7 +103,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+	/// <para>
+	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -101,7 +115,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+	/// <para>
+	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
@@ -112,7 +128,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
+	/// <para>
+	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(Action<XpackUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

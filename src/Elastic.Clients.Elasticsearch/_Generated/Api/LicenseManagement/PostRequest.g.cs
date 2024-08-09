@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 public sealed partial class PostRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether you acknowledge the license changes.</para>
+	/// <para>
+	/// Specifies whether you acknowledge the license changes.
+	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 }
 
 /// <summary>
-/// <para>Updates the license for the cluster.</para>
+/// <para>
+/// Updates the license for the cluster.
+/// </para>
 /// </summary>
 public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 {
@@ -51,7 +55,9 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 	internal override string OperationName => "license.post";
 
 	/// <summary>
-	/// <para>Specifies whether you acknowledge the license changes.</para>
+	/// <para>
+	/// Specifies whether you acknowledge the license changes.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -59,14 +65,18 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.License? License { get; set; }
 
 	/// <summary>
-	/// <para>A sequence of one or more JSON documents containing the license information.</para>
+	/// <para>
+	/// A sequence of one or more JSON documents containing the license information.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("licenses")]
 	public ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? Licenses { get; set; }
 }
 
 /// <summary>
-/// <para>Updates the license for the cluster.</para>
+/// <para>
+/// Updates the license for the cluster.
+/// </para>
 /// </summary>
 public sealed partial class PostRequestDescriptor : RequestDescriptor<PostRequestDescriptor, PostRequestParameters>
 {
@@ -119,7 +129,9 @@ public sealed partial class PostRequestDescriptor : RequestDescriptor<PostReques
 	}
 
 	/// <summary>
-	/// <para>A sequence of one or more JSON documents containing the license information.</para>
+	/// <para>
+	/// A sequence of one or more JSON documents containing the license information.
+	/// </para>
 	/// </summary>
 	public PostRequestDescriptor Licenses(ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? licenses)
 	{

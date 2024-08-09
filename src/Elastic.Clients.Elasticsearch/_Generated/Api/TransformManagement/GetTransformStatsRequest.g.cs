@@ -32,30 +32,60 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class GetTransformStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no transforms that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If this parameter is false, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no transforms that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If this parameter is false, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of transforms.</para>
+	/// <para>
+	/// Skips the specified number of transforms.
+	/// </para>
 	/// </summary>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of transforms to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of transforms to obtain.
+	/// </para>
 	/// </summary>
 	public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Controls the time to wait for the stats</para>
+	/// <para>
+	/// Controls the time to wait for the stats
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
+/// <para>
+/// Get transform stats.
+/// Retrieves usage information for transforms.
+/// </para>
 /// </summary>
 public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransformStatsRequestParameters>
 {
@@ -72,34 +102,64 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 	internal override string OperationName => "transform.get_transform_stats";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no transforms that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If this parameter is false, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no transforms that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If this parameter is false, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of transforms.</para>
+	/// <para>
+	/// Skips the specified number of transforms.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of transforms to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of transforms to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Controls the time to wait for the stats</para>
+	/// <para>
+	/// Controls the time to wait for the stats
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
+/// <para>
+/// Get transform stats.
+/// Retrieves usage information for transforms.
+/// </para>
 /// </summary>
 public sealed partial class GetTransformStatsRequestDescriptor : RequestDescriptor<GetTransformStatsRequestDescriptor, GetTransformStatsRequestParameters>
 {

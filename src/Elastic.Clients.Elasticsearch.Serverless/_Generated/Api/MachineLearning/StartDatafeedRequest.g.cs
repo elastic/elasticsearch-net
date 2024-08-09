@@ -34,11 +34,25 @@ public sealed partial class StartDatafeedRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Starts one or more datafeeds.</para>
-/// <para>A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped<br/>multiple times throughout its lifecycle.</para>
-/// <para>Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.</para>
-/// <para>If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.<br/>If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.</para>
-/// <para>When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or<br/>update it had at the time of creation or update and runs the query using those same roles. If you provided secondary<br/>authorization headers when you created or updated the datafeed, those credentials are used instead.</para>
+/// <para>
+/// Starts one or more datafeeds.
+/// </para>
+/// <para>
+/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
+/// multiple times throughout its lifecycle.
+/// </para>
+/// <para>
+/// Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.
+/// </para>
+/// <para>
+/// If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.
+/// If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.
+/// </para>
+/// <para>
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
+/// update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
+/// authorization headers when you created or updated the datafeed, those credentials are used instead.
+/// </para>
 /// </summary>
 public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedRequestParameters>
 {
@@ -55,30 +69,50 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 	internal override string OperationName => "ml.start_datafeed";
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public DateTimeOffset? End { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public DateTimeOffset? Start { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `timeout` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>timeout</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get; set; }
 }
 
 /// <summary>
-/// <para>Starts one or more datafeeds.</para>
-/// <para>A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped<br/>multiple times throughout its lifecycle.</para>
-/// <para>Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.</para>
-/// <para>If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.<br/>If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.</para>
-/// <para>When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or<br/>update it had at the time of creation or update and runs the query using those same roles. If you provided secondary<br/>authorization headers when you created or updated the datafeed, those credentials are used instead.</para>
+/// <para>
+/// Starts one or more datafeeds.
+/// </para>
+/// <para>
+/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
+/// multiple times throughout its lifecycle.
+/// </para>
+/// <para>
+/// Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.
+/// </para>
+/// <para>
+/// If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.
+/// If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.
+/// </para>
+/// <para>
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
+/// update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
+/// authorization headers when you created or updated the datafeed, those credentials are used instead.
+/// </para>
 /// </summary>
 public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<StartDatafeedRequestDescriptor, StartDatafeedRequestParameters>
 {
@@ -107,7 +141,9 @@ public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<S
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StartDatafeedRequestDescriptor End(DateTimeOffset? end)
 	{
@@ -116,7 +152,9 @@ public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StartDatafeedRequestDescriptor Start(DateTimeOffset? start)
 	{
@@ -125,7 +163,9 @@ public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<S
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `timeout` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>timeout</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout)
 	{

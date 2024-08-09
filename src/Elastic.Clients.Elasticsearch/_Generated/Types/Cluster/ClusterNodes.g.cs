@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterNodes
 {
 	/// <summary>
-	/// <para>Contains counts for nodes selected by the request’s node filters.</para>
+	/// <para>
+	/// Contains counts for nodes selected by the request’s node filters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the discovery types used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the discovery types used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("discovery_types")]
 	public IReadOnlyDictionary<string, int> DiscoveryTypes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about file stores by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about file stores by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fs")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; init; }
@@ -52,43 +58,58 @@ public sealed partial class ClusterNodes
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("jvm")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the transport and HTTP networks used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the transport and HTTP networks used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("network_types")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the operating systems used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about the operating systems used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("os")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about Elasticsearch distributions installed on selected nodes.</para>
+	/// <para>
+	/// Contains statistics about Elasticsearch distributions installed on selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("packaging_types")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about installed plugins and modules by selected nodes.<br/>If no plugins or modules are installed, this array is empty.</para>
+	/// <para>
+	/// Contains statistics about installed plugins and modules by selected nodes.
+	/// If no plugins or modules are installed, this array is empty.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("plugins")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about processes used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about processes used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("process")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; init; }
 
 	/// <summary>
-	/// <para>Array of Elasticsearch versions used on selected nodes.</para>
+	/// <para>
+	/// Array of Elasticsearch versions used on selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("versions")]
 	public IReadOnlyCollection<string> Versions { get; init; }

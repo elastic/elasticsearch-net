@@ -28,30 +28,40 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Text classification configuration options</para>
+/// <para>
+/// Text classification configuration options
+/// </para>
 /// </summary>
 public sealed partial class TextClassificationInferenceOptions
 {
 	/// <summary>
-	/// <para>Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels</para>
+	/// <para>
+	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -60,7 +70,9 @@ public sealed partial class TextClassificationInferenceOptions
 }
 
 /// <summary>
-/// <para>Text classification configuration options</para>
+/// <para>
+/// Text classification configuration options
+/// </para>
 /// </summary>
 public sealed partial class TextClassificationInferenceOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceOptionsDescriptor>
 {
@@ -78,7 +90,9 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels</para>
+	/// <para>
+	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
+	/// </para>
 	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
 	{
@@ -87,7 +101,9 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
@@ -96,7 +112,9 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -105,7 +123,9 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	}
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	public TextClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? tokenization)
 	{

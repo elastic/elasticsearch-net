@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class SamplerAggregation
 {
 	/// <summary>
-	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// <para>
+	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class SamplerAggregationDescriptor : SerializableDescripto
 	private int? ShardSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// <para>
+	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
+	/// </para>
 	/// </summary>
 	public SamplerAggregationDescriptor ShardSize(int? shardSize)
 	{

@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class TermsGrouping
 {
 	/// <summary>
-	/// <para>The set of fields that you wish to collect terms for.<br/>This array can contain fields that are both keyword and numerics.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to collect terms for.
+	/// This array can contain fields that are both keyword and numerics.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
@@ -48,7 +52,11 @@ public sealed partial class TermsGroupingDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of fields that you wish to collect terms for.<br/>This array can contain fields that are both keyword and numerics.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to collect terms for.
+	/// This array can contain fields that are both keyword and numerics.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	public TermsGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
@@ -76,7 +84,11 @@ public sealed partial class TermsGroupingDescriptor : SerializableDescriptor<Ter
 	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of fields that you wish to collect terms for.<br/>This array can contain fields that are both keyword and numerics.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to collect terms for.
+	/// This array can contain fields that are both keyword and numerics.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	public TermsGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{

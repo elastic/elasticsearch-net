@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class SearchApplicationTemplate
 {
 	/// <summary>
-	/// <para>The associated mustache template.</para>
+	/// <para>
+	/// The associated mustache template.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class SearchApplicationTemplateDescriptor : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The associated mustache template.</para>
+	/// <para>
+	/// The associated mustache template.
+	/// </para>
 	/// </summary>
 	public SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{

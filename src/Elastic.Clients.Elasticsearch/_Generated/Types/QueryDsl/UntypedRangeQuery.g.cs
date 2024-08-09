@@ -205,45 +205,64 @@ public sealed partial class UntypedRangeQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public string? Format { get; set; }
 	public object? From { get; set; }
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public object? Gt { get; set; }
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public object? Gte { get; set; }
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public object? Lt { get; set; }
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public object? Lte { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public string? TimeZone { get; set; }
 	public object? To { get; set; }
@@ -271,7 +290,12 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	private object? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -298,7 +322,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Format(string? format)
 	{
@@ -313,7 +339,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Gt(object? gt)
 	{
@@ -322,7 +350,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Gte(object? gte)
 	{
@@ -331,7 +361,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Lt(object? lt)
 	{
@@ -340,7 +372,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Lte(object? lte)
 	{
@@ -355,7 +389,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
@@ -364,7 +400,9 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -478,7 +516,12 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	private object? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Boost(float? boost)
 	{
@@ -505,7 +548,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Date format used to convert `date` values in the query.</para>
+	/// <para>
+	/// Date format used to convert <c>date</c> values in the query.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Format(string? format)
 	{
@@ -520,7 +565,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Gt(object? gt)
 	{
@@ -529,7 +576,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Gte(object? gte)
 	{
@@ -538,7 +587,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Lt(object? lt)
 	{
@@ -547,7 +598,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Lte(object? lte)
 	{
@@ -562,7 +615,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
@@ -571,7 +626,9 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// <para>
+	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
+	/// </para>
 	/// </summary>
 	public UntypedRangeQueryDescriptor TimeZone(string? timeZone)
 	{

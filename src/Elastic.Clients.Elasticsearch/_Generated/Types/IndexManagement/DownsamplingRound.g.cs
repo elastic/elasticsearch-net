@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DownsamplingRound
 {
 	/// <summary>
-	/// <para>The duration since rollover when this downsampling round should execute</para>
+	/// <para>
+	/// The duration since rollover when this downsampling round should execute
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("after")]
 	public Elastic.Clients.Elasticsearch.Duration After { get; set; }
 
 	/// <summary>
-	/// <para>The downsample configuration to execute.</para>
+	/// <para>
+	/// The downsample configuration to execute.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
@@ -56,7 +60,9 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The duration since rollover when this downsampling round should execute</para>
+	/// <para>
+	/// The duration since rollover when this downsampling round should execute
+	/// </para>
 	/// </summary>
 	public DownsamplingRoundDescriptor After(Elastic.Clients.Elasticsearch.Duration after)
 	{
@@ -65,7 +71,9 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The downsample configuration to execute.</para>
+	/// <para>
+	/// The downsample configuration to execute.
+	/// </para>
 	/// </summary>
 	public DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
 	{

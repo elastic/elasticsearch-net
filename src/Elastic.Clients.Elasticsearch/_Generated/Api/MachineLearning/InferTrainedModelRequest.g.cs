@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class InferTrainedModelRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Controls the amount of time to wait for inference results.</para>
+	/// <para>
+	/// Controls the amount of time to wait for inference results.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Evaluates a trained model.</para>
+/// <para>
+/// Evaluates a trained model.
+/// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrainedModelRequestParameters>
 {
@@ -55,26 +59,36 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 	internal override string OperationName => "ml.infer_trained_model";
 
 	/// <summary>
-	/// <para>Controls the amount of time to wait for inference results.</para>
+	/// <para>
+	/// Controls the amount of time to wait for inference results.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>An array of objects to pass to the model for inference. The objects should contain a fields matching your<br/>configured trained model input. Typically, for NLP models, the field name is `text_field`.<br/>Currently, for NLP models, only a single value is allowed.</para>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<IDictionary<string, object>> Docs { get; set; }
 
 	/// <summary>
-	/// <para>The inference configuration updates to apply on the API call</para>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? InferenceConfig { get; set; }
 }
 
 /// <summary>
-/// <para>Evaluates a trained model.</para>
+/// <para>
+/// Evaluates a trained model.
+/// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<InferTrainedModelRequestDescriptor<TDocument>, InferTrainedModelRequestParameters>
 {
@@ -106,7 +120,11 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>An array of objects to pass to the model for inference. The objects should contain a fields matching your<br/>configured trained model input. Typically, for NLP models, the field name is `text_field`.<br/>Currently, for NLP models, only a single value is allowed.</para>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
 	/// </summary>
 	public InferTrainedModelRequestDescriptor<TDocument> Docs(ICollection<IDictionary<string, object>> docs)
 	{
@@ -115,7 +133,9 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>The inference configuration updates to apply on the API call</para>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
 	/// </summary>
 	public InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? inferenceConfig)
 	{
@@ -167,7 +187,9 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Evaluates a trained model.</para>
+/// <para>
+/// Evaluates a trained model.
+/// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequestDescriptor : RequestDescriptor<InferTrainedModelRequestDescriptor, InferTrainedModelRequestParameters>
 {
@@ -199,7 +221,11 @@ public sealed partial class InferTrainedModelRequestDescriptor : RequestDescript
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor> InferenceConfigDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>An array of objects to pass to the model for inference. The objects should contain a fields matching your<br/>configured trained model input. Typically, for NLP models, the field name is `text_field`.<br/>Currently, for NLP models, only a single value is allowed.</para>
+	/// <para>
+	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
+	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+	/// Currently, for NLP models, only a single value is allowed.
+	/// </para>
 	/// </summary>
 	public InferTrainedModelRequestDescriptor Docs(ICollection<IDictionary<string, object>> docs)
 	{
@@ -208,7 +234,9 @@ public sealed partial class InferTrainedModelRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>The inference configuration updates to apply on the API call</para>
+	/// <para>
+	/// The inference configuration updates to apply on the API call
+	/// </para>
 	/// </summary>
 	public InferTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? inferenceConfig)
 	{

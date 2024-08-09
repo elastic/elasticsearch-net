@@ -34,7 +34,9 @@ public sealed partial class UpdateDataFrameAnalyticsRequestParameters : RequestP
 }
 
 /// <summary>
-/// <para>Updates an existing data frame analytics job.</para>
+/// <para>
+/// Updates an existing data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<UpdateDataFrameAnalyticsRequestParameters>
 {
@@ -51,32 +53,50 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	internal override string OperationName => "ml.update_data_frame_analytics";
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool? AllowLazyStart { get; set; }
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try<br/>to create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
+	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
 }
 
 /// <summary>
-/// <para>Updates an existing data frame analytics job.</para>
+/// <para>
+/// Updates an existing data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsRequestParameters>
 {
@@ -106,7 +126,10 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	private string? ModelMemoryLimitValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? allowLazyStart = true)
 	{
@@ -115,7 +138,9 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -124,7 +149,12 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
 	{
@@ -133,7 +163,13 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try<br/>to create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
+	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
 	{
@@ -173,7 +209,9 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 }
 
 /// <summary>
-/// <para>Updates an existing data frame analytics job.</para>
+/// <para>
+/// Updates an existing data frame analytics job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsRequestParameters>
 {
@@ -203,7 +241,10 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestD
 	private string? ModelMemoryLimitValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether this job can start when there is insufficient machine<br/>learning node capacity for it to be immediately assigned to a node.</para>
+	/// <para>
+	/// Specifies whether this job can start when there is insufficient machine
+	/// learning node capacity for it to be immediately assigned to a node.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? allowLazyStart = true)
 	{
@@ -212,7 +253,9 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestD
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor Description(string? description)
 	{
@@ -221,7 +264,12 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestD
 	}
 
 	/// <summary>
-	/// <para>The maximum number of threads to be used by the analysis. Using more<br/>threads may decrease the time necessary to complete the analysis at the<br/>cost of using more CPU. Note that the process may use additional threads<br/>for operational functionality other than the analysis itself.</para>
+	/// <para>
+	/// The maximum number of threads to be used by the analysis. Using more
+	/// threads may decrease the time necessary to complete the analysis at the
+	/// cost of using more CPU. Note that the process may use additional threads
+	/// for operational functionality other than the analysis itself.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? maxNumThreads)
 	{
@@ -230,7 +278,13 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestD
 	}
 
 	/// <summary>
-	/// <para>The approximate maximum amount of memory resources that are permitted for<br/>analytical processing. If your `elasticsearch.yml` file contains an<br/>`xpack.ml.max_model_memory_limit` setting, an error occurs when you try<br/>to create data frame analytics jobs that have `model_memory_limit` values<br/>greater than that setting.</para>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are permitted for
+	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
+	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
+	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
+	/// greater than that setting.
+	/// </para>
 	/// </summary>
 	public UpdateDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? modelMemoryLimit)
 	{

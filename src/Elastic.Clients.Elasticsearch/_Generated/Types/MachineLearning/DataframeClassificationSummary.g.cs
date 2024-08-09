@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeClassificationSummary
 {
 	/// <summary>
-	/// <para>Accuracy of predictions (per-class and overall).</para>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("accuracy")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryAccuracy? Accuracy { get; init; }
 
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.<br/>It is calculated for a specific class (provided as "class_name") treated as positive.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.
+	/// It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; init; }
 
 	/// <summary>
-	/// <para>Multiclass confusion matrix.</para>
+	/// <para>
+	/// Multiclass confusion matrix.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("multiclass_confusion_matrix")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix { get; init; }
 
 	/// <summary>
-	/// <para>Precision of predictions (per-class and average).</para>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision? Precision { get; init; }
 
 	/// <summary>
-	/// <para>Recall of predictions (per-class and average).</para>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("recall")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall? Recall { get; init; }

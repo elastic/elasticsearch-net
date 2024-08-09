@@ -28,12 +28,16 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
 /// <summary>
-/// <para>Contains statistics about the number of nodes selected by the request.</para>
+/// <para>
+/// Contains statistics about the number of nodes selected by the request.
+/// </para>
 /// </summary>
 public sealed partial class NodeStatistics
 {
 	/// <summary>
-	/// <para>Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.</para>
+	/// <para>
+	/// Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("failed")]
 	public int Failed { get; init; }
@@ -41,13 +45,17 @@ public sealed partial class NodeStatistics
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ErrorCause>? Failures { get; init; }
 
 	/// <summary>
-	/// <para>Number of nodes that responded successfully to the request.</para>
+	/// <para>
+	/// Number of nodes that responded successfully to the request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("successful")]
 	public int Successful { get; init; }
 
 	/// <summary>
-	/// <para>Total number of nodes selected by the request.</para>
+	/// <para>
+	/// Total number of nodes selected by the request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }

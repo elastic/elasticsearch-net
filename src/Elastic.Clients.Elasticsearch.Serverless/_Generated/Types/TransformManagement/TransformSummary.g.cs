@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class TransformSummary
 {
 	/// <summary>
-	/// <para>The security privileges that the transform uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the transform, this property is omitted.</para>
+	/// <para>
+	/// The security privileges that the transform uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the transform, this property is omitted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("authorization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TransformAuthorization? Authorization { get; init; }
 
 	/// <summary>
-	/// <para>The time the transform was created.</para>
+	/// <para>
+	/// The time the transform was created.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("create_time")]
 	public long? CreateTime { get; init; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination Dest { get; init; }
@@ -62,7 +70,9 @@ public sealed partial class TransformSummary
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Pivot? Pivot { get; init; }
@@ -70,25 +80,33 @@ public sealed partial class TransformSummary
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.RetentionPolicy? RetentionPolicy { get; init; }
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Settings? Settings { get; init; }
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Source Source { get; init; }
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sync")]
 	public Elastic.Clients.Elasticsearch.Serverless.TransformManagement.Sync? Sync { get; init; }
 
 	/// <summary>
-	/// <para>The version of Elasticsearch that existed on the node when the transform was created.</para>
+	/// <para>
+	/// The version of Elasticsearch that existed on the node when the transform was created.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; init; }

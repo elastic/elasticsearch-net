@@ -32,14 +32,24 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class PreviewTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the<br/>timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
-/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
+/// <para>
+/// Preview a transform.
+/// Generates a preview of the results that you will get when you create a transform with the same configuration.
+/// </para>
+/// <para>
+/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
+/// generates a list of mappings and settings for the destination index. These values are determined based on the field
+/// types of the source index and the transform aggregations.
+/// </para>
 /// </summary>
 public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransformRequestParameters>
 {
@@ -60,69 +70,104 @@ public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransf
 	internal override string OperationName => "transform.preview_transform";
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the<br/>timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination? Dest { get; set; }
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for<br/>each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for
+	/// each unique key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("latest")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it.<br/>These objects define the group by fields and the aggregation to reduce<br/>the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it.
+	/// These objects define the group by fields and the aggregation to reduce
+	/// the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retention_policy")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Source? Source { get; set; }
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sync")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
 /// <summary>
-/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
-/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
+/// <para>
+/// Preview a transform.
+/// Generates a preview of the results that you will get when you create a transform with the same configuration.
+/// </para>
+/// <para>
+/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
+/// generates a list of mappings and settings for the destination index. These values are determined based on the field
+/// types of the source index and the transform aggregations.
+/// </para>
 /// </summary>
 public sealed partial class PreviewTransformRequestDescriptor<TDocument> : RequestDescriptor<PreviewTransformRequestDescriptor<TDocument>, PreviewTransformRequestParameters>
 {
@@ -177,7 +222,9 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -186,7 +233,9 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? dest)
 	{
@@ -213,7 +262,12 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -222,7 +276,10 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for<br/>each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for
+	/// each unique key.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? latest)
 	{
@@ -249,7 +306,11 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it.<br/>These objects define the group by fields and the aggregation to reduce<br/>the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it.
+	/// These objects define the group by fields and the aggregation to reduce
+	/// the data.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? pivot)
 	{
@@ -276,7 +337,10 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -303,7 +367,9 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
 	{
@@ -330,7 +396,9 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? source)
 	{
@@ -357,7 +425,9 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
 	{
@@ -515,8 +585,15 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 }
 
 /// <summary>
-/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
-/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
+/// <para>
+/// Preview a transform.
+/// Generates a preview of the results that you will get when you create a transform with the same configuration.
+/// </para>
+/// <para>
+/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
+/// generates a list of mappings and settings for the destination index. These values are determined based on the field
+/// types of the source index and the transform aggregations.
+/// </para>
 /// </summary>
 public sealed partial class PreviewTransformRequestDescriptor : RequestDescriptor<PreviewTransformRequestDescriptor, PreviewTransformRequestParameters>
 {
@@ -571,7 +648,9 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> SyncDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Free text description of the transform.</para>
+	/// <para>
+	/// Free text description of the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Description(string? description)
 	{
@@ -580,7 +659,9 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The destination for the transform.</para>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? dest)
 	{
@@ -607,7 +688,12 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The interval between checks for changes in the source indices when the<br/>transform is running continuously. Also determines the retry interval in<br/>the event of transient failures while the transform is searching or<br/>indexing. The minimum value is 1s and the maximum is 1h.</para>
+	/// <para>
+	/// The interval between checks for changes in the source indices when the
+	/// transform is running continuously. Also determines the retry interval in
+	/// the event of transient failures while the transform is searching or
+	/// indexing. The minimum value is 1s and the maximum is 1h.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -616,7 +702,10 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The latest method transforms the data by finding the latest document for<br/>each unique key.</para>
+	/// <para>
+	/// The latest method transforms the data by finding the latest document for
+	/// each unique key.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? latest)
 	{
@@ -643,7 +732,11 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The pivot method transforms the data by aggregating and grouping it.<br/>These objects define the group by fields and the aggregation to reduce<br/>the data.</para>
+	/// <para>
+	/// The pivot method transforms the data by aggregating and grouping it.
+	/// These objects define the group by fields and the aggregation to reduce
+	/// the data.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? pivot)
 	{
@@ -670,7 +763,10 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Defines a retention policy for the transform. Data that meets the defined<br/>criteria is deleted from the destination index.</para>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
 	{
@@ -697,7 +793,9 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Defines optional transform settings.</para>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
 	{
@@ -724,7 +822,9 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The source of the data for the transform.</para>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? source)
 	{
@@ -751,7 +851,9 @@ public sealed partial class PreviewTransformRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Defines the properties transforms require to run continuously.</para>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
 	/// </summary>
 	public PreviewTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
 	{

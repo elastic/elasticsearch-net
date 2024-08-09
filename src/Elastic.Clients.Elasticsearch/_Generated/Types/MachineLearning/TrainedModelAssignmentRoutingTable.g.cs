@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelAssignmentRoutingTable
 {
 	/// <summary>
-	/// <para>Current number of allocations.</para>
+	/// <para>
+	/// Current number of allocations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current_allocations")]
 	public int CurrentAllocations { get; init; }
 
 	/// <summary>
-	/// <para>The reason for the current state. It is usually populated only when the<br/>`routing_state` is `failed`.</para>
+	/// <para>
+	/// The reason for the current state. It is usually populated only when the
+	/// <c>routing_state</c> is <c>failed</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reason")]
 	public string Reason { get; init; }
 
 	/// <summary>
-	/// <para>The current routing state.</para>
+	/// <para>
+	/// The current routing state.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing_state")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; init; }
 
 	/// <summary>
-	/// <para>Target number of allocations.</para>
+	/// <para>
+	/// Target number of allocations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_allocations")]
 	public int TargetAllocations { get; init; }

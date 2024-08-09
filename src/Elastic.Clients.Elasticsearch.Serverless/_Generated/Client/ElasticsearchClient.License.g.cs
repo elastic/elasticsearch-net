@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.LicenseManagement;
 public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="LicenseManagementNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="LicenseManagementNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected LicenseManagementNamespacedClient() : base()
 	{
@@ -38,7 +40,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+	/// <para>
+	/// Get license information.
+	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +54,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+	/// <para>
+	/// Get license information.
+	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +68,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+	/// <para>
+	/// Get license information.
+	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
@@ -69,7 +83,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+	/// <para>
+	/// Get license information.
+	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(Action<GetLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

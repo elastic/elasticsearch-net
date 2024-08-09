@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 public sealed partial class FollowRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>
+	/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to <c>all</c> for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+/// <para>
+/// Creates a new follower index configured to follow the referenced leader index.
+/// </para>
 /// </summary>
 public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters>
 {
@@ -55,7 +59,9 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 	internal override string OperationName => "ccr.follow";
 
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>
+	/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to <c>all</c> for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -86,7 +92,9 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 }
 
 /// <summary>
-/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+/// <para>
+/// Creates a new follower index configured to follow the referenced leader index.
+/// </para>
 /// </summary>
 public sealed partial class FollowRequestDescriptor<TDocument> : RequestDescriptor<FollowRequestDescriptor<TDocument>, FollowRequestParameters>
 {
@@ -281,7 +289,9 @@ public sealed partial class FollowRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+/// <para>
+/// Creates a new follower index configured to follow the referenced leader index.
+/// </para>
 /// </summary>
 public sealed partial class FollowRequestDescriptor : RequestDescriptor<FollowRequestDescriptor, FollowRequestParameters>
 {

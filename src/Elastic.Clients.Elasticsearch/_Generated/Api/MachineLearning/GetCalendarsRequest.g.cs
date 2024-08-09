@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetCalendarsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for calendars.</para>
+/// <para>
+/// Retrieves configuration information for calendars.
+/// </para>
 /// </summary>
 public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsRequestParameters>
 {
@@ -64,26 +70,34 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 	internal override string OperationName => "ml.get_calendars";
 
 	/// <summary>
-	/// <para>Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>This object is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// This object is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for calendars.</para>
+/// <para>
+/// Retrieves configuration information for calendars.
+/// </para>
 /// </summary>
 public sealed partial class GetCalendarsRequestDescriptor : RequestDescriptor<GetCalendarsRequestDescriptor, GetCalendarsRequestParameters>
 {
@@ -119,7 +133,9 @@ public sealed partial class GetCalendarsRequestDescriptor : RequestDescriptor<Ge
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>This object is supported only when you omit the calendar identifier.</para>
+	/// <para>
+	/// This object is supported only when you omit the calendar identifier.
+	/// </para>
 	/// </summary>
 	public GetCalendarsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
 	{

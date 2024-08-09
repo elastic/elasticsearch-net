@@ -30,31 +30,44 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class NestedQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Path { get; set; }
 
 	/// <summary>
-	/// <para>Query you wish to run on nested objects in the path.</para>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Query { get; set; }
@@ -62,7 +75,9 @@ public sealed partial class NestedQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>How scores for matching child objects affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// How scores for matching child objects affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
@@ -91,7 +106,12 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -100,7 +120,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -109,7 +131,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? innerHits)
 	{
@@ -136,7 +160,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
 	{
@@ -145,7 +171,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -154,7 +182,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
 	{
@@ -163,7 +193,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Query you wish to run on nested objects in the path.</para>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
 	{
@@ -196,7 +228,9 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>How scores for matching child objects affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// How scores for matching child objects affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? scoreMode)
 	{
@@ -290,7 +324,12 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor Boost(float? boost)
 	{
@@ -299,7 +338,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -308,7 +349,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? innerHits)
 	{
@@ -335,7 +378,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
 	{
@@ -344,7 +389,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -353,7 +400,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
+	/// <para>
+	/// Path to the nested object you wish to search.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
 	{
@@ -362,7 +411,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>Query you wish to run on nested objects in the path.</para>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
 	{
@@ -395,7 +446,9 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	}
 
 	/// <summary>
-	/// <para>How scores for matching child objects affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// How scores for matching child objects affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	public NestedQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? scoreMode)
 	{

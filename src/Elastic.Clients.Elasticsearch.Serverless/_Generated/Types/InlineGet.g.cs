@@ -103,7 +103,9 @@ public sealed partial class InlineGet<TDocument>
 	public bool Found { get; init; }
 
 	/// <summary>
-	/// <para>Document metadata</para>
+	/// <para>
+	/// Document metadata
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 	public long? PrimaryTerm { get; init; }

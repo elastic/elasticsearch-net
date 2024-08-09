@@ -34,7 +34,9 @@ public sealed partial class PutAutoFollowPatternRequestParameters : RequestParam
 }
 
 /// <summary>
-/// <para>Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.</para>
+/// <para>
+/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+/// </para>
 /// </summary>
 public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFollowPatternRequestParameters>
 {
@@ -51,98 +53,130 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	internal override string OperationName => "ccr.put_auto_follow_pattern";
 
 	/// <summary>
-	/// <para>The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.</para>
+	/// <para>
+	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("follow_index_pattern")]
 	public string? FollowIndexPattern { get; set; }
 
 	/// <summary>
-	/// <para>An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.</para>
+	/// <para>
+	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index_exclusion_patterns")]
 	public ICollection<string>? LeaderIndexExclusionPatterns { get; set; }
 
 	/// <summary>
-	/// <para>An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.</para>
+	/// <para>
+	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index_patterns")]
 	public ICollection<string>? LeaderIndexPatterns { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of outstanding reads requests from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
 	public int? MaxOutstandingReadRequests { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of outstanding reads requests from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
 	public int? MaxOutstandingWriteRequests { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of operations to pull per read from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_read_request_operation_count")]
 	public int? MaxReadRequestOperationCount { get; set; }
 
 	/// <summary>
-	/// <para>The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.</para>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_read_request_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
 	/// <summary>
-	/// <para>The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.</para>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_retry_delay")]
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.</para>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_buffer_count")]
 	public int? MaxWriteBufferCount { get; set; }
 
 	/// <summary>
-	/// <para>The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.</para>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_buffer_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of operations per bulk write request executed on the follower.</para>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_request_operation_count")]
 	public int? MaxWriteRequestOperationCount { get; set; }
 
 	/// <summary>
-	/// <para>The maximum total bytes of operations per bulk write request executed on the follower.</para>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_request_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
 	/// <summary>
-	/// <para>The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.</para>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("read_poll_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 
 	/// <summary>
-	/// <para>The remote cluster containing the leader indices to match against.</para>
+	/// <para>
+	/// The remote cluster containing the leader indices to match against.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_cluster")]
 	public string RemoteCluster { get; set; }
 
 	/// <summary>
-	/// <para>Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).</para>
+	/// <para>
+	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
-/// <para>Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.</para>
+/// <para>
+/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+/// </para>
 /// </summary>
 public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescriptor<PutAutoFollowPatternRequestDescriptor, PutAutoFollowPatternRequestParameters>
 {
@@ -183,7 +217,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.</para>
+	/// <para>
+	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor FollowIndexPattern(string? followIndexPattern)
 	{
@@ -192,7 +228,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.</para>
+	/// <para>
+	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(ICollection<string>? leaderIndexExclusionPatterns)
 	{
@@ -201,7 +239,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.</para>
+	/// <para>
+	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(ICollection<string>? leaderIndexPatterns)
 	{
@@ -210,7 +250,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum number of outstanding reads requests from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxOutstandingReadRequests(int? maxOutstandingReadRequests)
 	{
@@ -219,7 +261,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum number of outstanding reads requests from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests)
 	{
@@ -228,7 +272,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum number of operations to pull per read from the remote cluster.</para>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount)
 	{
@@ -237,7 +283,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.</para>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? maxReadRequestSize)
 	{
@@ -246,7 +294,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.</para>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
 	{
@@ -255,7 +305,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.</para>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxWriteBufferCount(int? maxWriteBufferCount)
 	{
@@ -264,7 +316,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.</para>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? maxWriteBufferSize)
 	{
@@ -273,7 +327,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum number of operations per bulk write request executed on the follower.</para>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxWriteRequestOperationCount(int? maxWriteRequestOperationCount)
 	{
@@ -282,7 +338,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum total bytes of operations per bulk write request executed on the follower.</para>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? maxWriteRequestSize)
 	{
@@ -291,7 +349,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.</para>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
 	{
@@ -300,7 +360,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>The remote cluster containing the leader indices to match against.</para>
+	/// <para>
+	/// The remote cluster containing the leader indices to match against.
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor RemoteCluster(string remoteCluster)
 	{
@@ -309,7 +371,9 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).</para>
+	/// <para>
+	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
+	/// </para>
 	/// </summary>
 	public PutAutoFollowPatternRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

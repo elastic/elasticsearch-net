@@ -30,49 +30,68 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class JoinProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>The separator character.</para>
+	/// <para>
+	/// The separator character.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
@@ -101,7 +120,10 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -110,7 +132,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -119,7 +143,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -128,7 +154,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -137,7 +165,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -146,7 +176,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -155,7 +187,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -194,7 +228,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The separator character.</para>
+	/// <para>
+	/// The separator character.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Separator(string separator)
 	{
@@ -203,7 +239,10 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -212,7 +251,10 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -221,7 +263,10 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -230,7 +275,10 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -331,7 +379,10 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Description(string? description)
 	{
@@ -340,7 +391,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -349,7 +402,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -358,7 +413,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Field containing array values to join.</para>
+	/// <para>
+	/// Field containing array values to join.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -367,7 +424,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor If(string? value)
 	{
@@ -376,7 +435,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -385,7 +446,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -424,7 +487,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>The separator character.</para>
+	/// <para>
+	/// The separator character.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Separator(string separator)
 	{
@@ -433,7 +498,10 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor Tag(string? tag)
 	{
@@ -442,7 +510,10 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -451,7 +522,10 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -460,7 +534,10 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 	}
 
 	/// <summary>
-	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// <para>
+	/// The field to assign the joined value to.
+	/// By default, the field is updated in-place.
+	/// </para>
 	/// </summary>
 	public JoinProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

@@ -30,37 +30,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class HasChildQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Maximum number of child documents that match the query allowed for a returned parent document.
+	/// If the parent document exceeds this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
+	/// If the parent document does not meet this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_children")]
 	public int? MinChildren { get; set; }
 
 	/// <summary>
-	/// <para>Query you wish to run on child documents of the `type` field.<br/>If a child document matches the search, the query returns the parent document.</para>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
@@ -68,13 +86,17 @@ public sealed partial class HasChildQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
 	/// <summary>
-	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// <para>
+	/// Name of the child relationship mapped for the <c>join</c> field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
@@ -105,7 +127,12 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	private string TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -114,7 +141,9 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -123,7 +152,9 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 	{
@@ -150,7 +181,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Maximum number of child documents that match the query allowed for a returned parent document.
+	/// If the parent document exceeds this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren)
 	{
@@ -159,7 +193,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
+	/// If the parent document does not meet this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren)
 	{
@@ -168,7 +205,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Query you wish to run on child documents of the `type` field.<br/>If a child document matches the search, the query returns the parent document.</para>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -201,7 +241,9 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
 	{
@@ -210,7 +252,9 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// <para>
+	/// Name of the child relationship mapped for the <c>join</c> field.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor<TDocument> Type(string type)
 	{
@@ -318,7 +362,12 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	private string TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor Boost(float? boost)
 	{
@@ -327,7 +376,9 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -336,7 +387,9 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 	{
@@ -363,7 +416,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Maximum number of child documents that match the query allowed for a returned parent document.
+	/// If the parent document exceeds this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor MaxChildren(int? maxChildren)
 	{
@@ -372,7 +428,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
+	/// <para>
+	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
+	/// If the parent document does not meet this limit, it is excluded from the search results.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor MinChildren(int? minChildren)
 	{
@@ -381,7 +440,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Query you wish to run on child documents of the `type` field.<br/>If a child document matches the search, the query returns the parent document.</para>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
@@ -414,7 +476,9 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
+	/// <para>
+	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
 	{
@@ -423,7 +487,9 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	}
 
 	/// <summary>
-	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// <para>
+	/// Name of the child relationship mapped for the <c>join</c> field.
+	/// </para>
 	/// </summary>
 	public HasChildQueryDescriptor Type(string type)
 	{

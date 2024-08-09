@@ -32,18 +32,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetRecordsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of records.</para>
+	/// <para>
+	/// Skips the specified number of records.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of records to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of records to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly records for an anomaly detection job.<br/>Records contain the detailed analytical results. They describe the anomalous<br/>activity that has been identified in the input data based on the detector<br/>configuration.<br/>There can be many anomaly records depending on the characteristics and size<br/>of the input data. In practice, there are often too many to be able to<br/>manually process them. The machine learning features therefore perform a<br/>sophisticated aggregation of the anomaly records into buckets.<br/>The number of record results depends on the number of anomalies found in each<br/>bucket, which relates to the number of time series being modeled and the<br/>number of detectors.</para>
+/// <para>
+/// Retrieves anomaly records for an anomaly detection job.
+/// Records contain the detailed analytical results. They describe the anomalous
+/// activity that has been identified in the input data based on the detector
+/// configuration.
+/// There can be many anomaly records depending on the characteristics and size
+/// of the input data. In practice, there are often too many to be able to
+/// manually process them. The machine learning features therefore perform a
+/// sophisticated aggregation of the anomaly records into buckets.
+/// The number of record results depends on the number of anomalies found in each
+/// bucket, which relates to the number of time series being modeled and the
+/// number of detectors.
+/// </para>
 /// </summary>
 public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestParameters>
 {
@@ -60,31 +76,41 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	internal override string OperationName => "ml.get_records";
 
 	/// <summary>
-	/// <para>Skips the specified number of records.</para>
+	/// <para>
+	/// Skips the specified number of records.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of records to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of records to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("desc")]
 	public bool? Desc { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public DateTimeOffset? End { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_interim")]
 	public bool? ExcludeInterim { get; set; }
@@ -92,26 +118,44 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `record_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>record_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("record_score")]
 	public double? RecordScore { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly records for an anomaly detection job.<br/>Records contain the detailed analytical results. They describe the anomalous<br/>activity that has been identified in the input data based on the detector<br/>configuration.<br/>There can be many anomaly records depending on the characteristics and size<br/>of the input data. In practice, there are often too many to be able to<br/>manually process them. The machine learning features therefore perform a<br/>sophisticated aggregation of the anomaly records into buckets.<br/>The number of record results depends on the number of anomalies found in each<br/>bucket, which relates to the number of time series being modeled and the<br/>number of detectors.</para>
+/// <para>
+/// Retrieves anomaly records for an anomaly detection job.
+/// Records contain the detailed analytical results. They describe the anomalous
+/// activity that has been identified in the input data based on the detector
+/// configuration.
+/// There can be many anomaly records depending on the characteristics and size
+/// of the input data. In practice, there are often too many to be able to
+/// manually process them. The machine learning features therefore perform a
+/// sophisticated aggregation of the anomaly records into buckets.
+/// The number of record results depends on the number of anomalies found in each
+/// bucket, which relates to the number of time series being modeled and the
+/// number of detectors.
+/// </para>
 /// </summary>
 public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDescriptor<GetRecordsRequestDescriptor<TDocument>, GetRecordsRequestParameters>
 {
@@ -149,7 +193,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> Desc(bool? desc = true)
 	{
@@ -158,7 +204,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> End(DateTimeOffset? end)
 	{
@@ -167,7 +215,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> ExcludeInterim(bool? excludeInterim = true)
 	{
@@ -200,7 +250,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `record_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>record_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> RecordScore(double? recordScore)
 	{
@@ -209,7 +261,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? sort)
 	{
@@ -218,7 +272,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -227,7 +283,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
 	{
@@ -236,7 +294,9 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 	{
@@ -304,7 +364,19 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Retrieves anomaly records for an anomaly detection job.<br/>Records contain the detailed analytical results. They describe the anomalous<br/>activity that has been identified in the input data based on the detector<br/>configuration.<br/>There can be many anomaly records depending on the characteristics and size<br/>of the input data. In practice, there are often too many to be able to<br/>manually process them. The machine learning features therefore perform a<br/>sophisticated aggregation of the anomaly records into buckets.<br/>The number of record results depends on the number of anomalies found in each<br/>bucket, which relates to the number of time series being modeled and the<br/>number of detectors.</para>
+/// <para>
+/// Retrieves anomaly records for an anomaly detection job.
+/// Records contain the detailed analytical results. They describe the anomalous
+/// activity that has been identified in the input data based on the detector
+/// configuration.
+/// There can be many anomaly records depending on the characteristics and size
+/// of the input data. In practice, there are often too many to be able to
+/// manually process them. The machine learning features therefore perform a
+/// sophisticated aggregation of the anomaly records into buckets.
+/// The number of record results depends on the number of anomalies found in each
+/// bucket, which relates to the number of time series being modeled and the
+/// number of detectors.
+/// </para>
 /// </summary>
 public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetRecordsRequestDescriptor, GetRecordsRequestParameters>
 {
@@ -342,7 +414,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor Desc(bool? desc = true)
 	{
@@ -351,7 +425,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor End(DateTimeOffset? end)
 	{
@@ -360,7 +436,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor ExcludeInterim(bool? excludeInterim = true)
 	{
@@ -393,7 +471,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `record_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>record_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor RecordScore(double? recordScore)
 	{
@@ -402,7 +482,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort)
 	{
@@ -411,7 +493,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -420,7 +504,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
 	{
@@ -429,7 +515,9 @@ public sealed partial class GetRecordsRequestDescriptor : RequestDescriptor<GetR
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetRecordsRequestDescriptor Start(DateTimeOffset? start)
 	{

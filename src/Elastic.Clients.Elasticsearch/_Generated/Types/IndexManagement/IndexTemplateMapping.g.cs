@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexTemplateMapping
 {
 	/// <summary>
-	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// <para>
+	/// Aliases to add.
+	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
+	/// Otherwise, these are index aliases.
+	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
@@ -38,13 +43,18 @@ public sealed partial class IndexTemplateMapping
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping parameters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
@@ -70,7 +80,12 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// <para>
+	/// Aliases to add.
+	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
+	/// Otherwise, these are index aliases.
+	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
@@ -103,7 +118,10 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping parameters.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
@@ -130,7 +148,9 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 	{
@@ -237,7 +257,12 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// <para>
+	/// Aliases to add.
+	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
+	/// Otherwise, these are index aliases.
+	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
 	{
@@ -270,7 +295,10 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping parameters.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
@@ -297,7 +325,9 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	public IndexTemplateMappingDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 	{

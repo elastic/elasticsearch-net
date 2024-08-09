@@ -53,7 +53,9 @@ public sealed partial class TaskInfo
 	public long StartTimeInMillis { get; init; }
 
 	/// <summary>
-	/// <para>Task status information can vary wildly from task to task.</para>
+	/// <para>
+	/// Task status information can vary wildly from task to task.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public object? Status { get; init; }

@@ -32,13 +32,29 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class StartDataFrameAnalyticsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Controls the amount of time to wait until the data frame analytics job<br/>starts.</para>
+	/// <para>
+	/// Controls the amount of time to wait until the data frame analytics job
+	/// starts.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Starts a data frame analytics job.<br/>A data frame analytics job can be started and stopped multiple times<br/>throughout its lifecycle.<br/>If the destination index does not exist, it is created automatically the<br/>first time you start the data frame analytics job. The<br/>`index.number_of_shards` and `index.number_of_replicas` settings for the<br/>destination index are copied from the source index. If there are multiple<br/>source indices, the destination index copies the highest setting values. The<br/>mappings for the destination index are also copied from the source indices.<br/>If there are any mapping conflicts, the job fails to start.<br/>If the destination index exists, it is used as is. You can therefore set up<br/>the destination index in advance with custom settings and mappings.</para>
+/// <para>
+/// Starts a data frame analytics job.
+/// A data frame analytics job can be started and stopped multiple times
+/// throughout its lifecycle.
+/// If the destination index does not exist, it is created automatically the
+/// first time you start the data frame analytics job. The
+/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
+/// destination index are copied from the source index. If there are multiple
+/// source indices, the destination index copies the highest setting values. The
+/// mappings for the destination index are also copied from the source indices.
+/// If there are any mapping conflicts, the job fails to start.
+/// If the destination index exists, it is used as is. You can therefore set up
+/// the destination index in advance with custom settings and mappings.
+/// </para>
 /// </summary>
 public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartDataFrameAnalyticsRequestParameters>
 {
@@ -55,14 +71,30 @@ public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartD
 	internal override string OperationName => "ml.start_data_frame_analytics";
 
 	/// <summary>
-	/// <para>Controls the amount of time to wait until the data frame analytics job<br/>starts.</para>
+	/// <para>
+	/// Controls the amount of time to wait until the data frame analytics job
+	/// starts.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Starts a data frame analytics job.<br/>A data frame analytics job can be started and stopped multiple times<br/>throughout its lifecycle.<br/>If the destination index does not exist, it is created automatically the<br/>first time you start the data frame analytics job. The<br/>`index.number_of_shards` and `index.number_of_replicas` settings for the<br/>destination index are copied from the source index. If there are multiple<br/>source indices, the destination index copies the highest setting values. The<br/>mappings for the destination index are also copied from the source indices.<br/>If there are any mapping conflicts, the job fails to start.<br/>If the destination index exists, it is used as is. You can therefore set up<br/>the destination index in advance with custom settings and mappings.</para>
+/// <para>
+/// Starts a data frame analytics job.
+/// A data frame analytics job can be started and stopped multiple times
+/// throughout its lifecycle.
+/// If the destination index does not exist, it is created automatically the
+/// first time you start the data frame analytics job. The
+/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
+/// destination index are copied from the source index. If there are multiple
+/// source indices, the destination index copies the highest setting values. The
+/// mappings for the destination index are also copied from the source indices.
+/// If there are any mapping conflicts, the job fails to start.
+/// If the destination index exists, it is used as is. You can therefore set up
+/// the destination index in advance with custom settings and mappings.
+/// </para>
 /// </summary>
 public sealed partial class StartDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<StartDataFrameAnalyticsRequestDescriptor<TDocument>, StartDataFrameAnalyticsRequestParameters>
 {
@@ -94,7 +126,20 @@ public sealed partial class StartDataFrameAnalyticsRequestDescriptor<TDocument> 
 }
 
 /// <summary>
-/// <para>Starts a data frame analytics job.<br/>A data frame analytics job can be started and stopped multiple times<br/>throughout its lifecycle.<br/>If the destination index does not exist, it is created automatically the<br/>first time you start the data frame analytics job. The<br/>`index.number_of_shards` and `index.number_of_replicas` settings for the<br/>destination index are copied from the source index. If there are multiple<br/>source indices, the destination index copies the highest setting values. The<br/>mappings for the destination index are also copied from the source indices.<br/>If there are any mapping conflicts, the job fails to start.<br/>If the destination index exists, it is used as is. You can therefore set up<br/>the destination index in advance with custom settings and mappings.</para>
+/// <para>
+/// Starts a data frame analytics job.
+/// A data frame analytics job can be started and stopped multiple times
+/// throughout its lifecycle.
+/// If the destination index does not exist, it is created automatically the
+/// first time you start the data frame analytics job. The
+/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
+/// destination index are copied from the source index. If there are multiple
+/// source indices, the destination index copies the highest setting values. The
+/// mappings for the destination index are also copied from the source indices.
+/// If there are any mapping conflicts, the job fails to start.
+/// If the destination index exists, it is used as is. You can therefore set up
+/// the destination index in advance with custom settings and mappings.
+/// </para>
 /// </summary>
 public sealed partial class StartDataFrameAnalyticsRequestDescriptor : RequestDescriptor<StartDataFrameAnalyticsRequestDescriptor, StartDataFrameAnalyticsRequestParameters>
 {

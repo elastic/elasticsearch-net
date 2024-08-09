@@ -34,7 +34,9 @@ public sealed partial class ListDanglingIndicesRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Returns all dangling indices.</para>
+/// <para>
+/// Returns all dangling indices.
+/// </para>
 /// </summary>
 public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDanglingIndicesRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDangli
 }
 
 /// <summary>
-/// <para>Returns all dangling indices.</para>
+/// <para>
+/// Returns all dangling indices.
+/// </para>
 /// </summary>
 public sealed partial class ListDanglingIndicesRequestDescriptor : RequestDescriptor<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesRequestParameters>
 {

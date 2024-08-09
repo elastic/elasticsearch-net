@@ -30,74 +30,102 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class CsvProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// <para>
+	/// Value used to fill empty fields.
+	/// Empty fields are skipped if this is not provided.
+	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("empty_value")]
 	public object? EmptyValue { get; set; }
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Quote used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("quote")]
 	public string? Quote { get; set; }
 
 	/// <summary>
-	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Separator used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The array of fields to assign extracted values to.</para>
+	/// <para>
+	/// The array of fields to assign extracted values to.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields TargetFields { get; set; }
 
 	/// <summary>
-	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// <para>
+	/// Trim whitespaces in unquoted fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trim")]
 	public bool? Trim { get; set; }
@@ -130,7 +158,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	private bool? TrimValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -139,7 +170,11 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// <para>
+	/// Value used to fill empty fields.
+	/// Empty fields are skipped if this is not provided.
+	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> EmptyValue(object? emptyValue)
 	{
@@ -148,7 +183,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -157,7 +194,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -166,7 +205,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -175,7 +216,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -184,7 +227,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -193,7 +238,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -202,7 +249,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -241,7 +290,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Quote used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Quote(string? quote)
 	{
@@ -250,7 +301,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Separator used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Separator(string? separator)
 	{
@@ -259,7 +312,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -268,7 +324,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The array of fields to assign extracted values to.</para>
+	/// <para>
+	/// The array of fields to assign extracted values to.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Serverless.Fields targetFields)
 	{
@@ -277,7 +335,9 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// <para>
+	/// Trim whitespaces in unquoted fields.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Trim(bool? trim = true)
 	{
@@ -406,7 +466,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	private bool? TrimValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Description(string? description)
 	{
@@ -415,7 +478,11 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// <para>
+	/// Value used to fill empty fields.
+	/// Empty fields are skipped if this is not provided.
+	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor EmptyValue(object? emptyValue)
 	{
@@ -424,7 +491,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -433,7 +502,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -442,7 +513,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>The field to extract data from.</para>
+	/// <para>
+	/// The field to extract data from.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -451,7 +524,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor If(string? value)
 	{
@@ -460,7 +535,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -469,7 +546,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -478,7 +557,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -517,7 +598,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Quote used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Quote(string? quote)
 	{
@@ -526,7 +609,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// <para>
+	/// Separator used in CSV, has to be single character string.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Separator(string? separator)
 	{
@@ -535,7 +620,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Tag(string? tag)
 	{
@@ -544,7 +632,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>The array of fields to assign extracted values to.</para>
+	/// <para>
+	/// The array of fields to assign extracted values to.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Serverless.Fields targetFields)
 	{
@@ -553,7 +643,9 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	}
 
 	/// <summary>
-	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// <para>
+	/// Trim whitespaces in unquoted fields.
+	/// </para>
 	/// </summary>
 	public CsvProcessorDescriptor Trim(bool? trim = true)
 	{

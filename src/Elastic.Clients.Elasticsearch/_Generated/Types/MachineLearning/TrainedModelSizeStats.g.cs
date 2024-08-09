@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelSizeStats
 {
 	/// <summary>
-	/// <para>The size of the model in bytes.</para>
+	/// <para>
+	/// The size of the model in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_size_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize ModelSizeBytes { get; init; }
 
 	/// <summary>
-	/// <para>The amount of memory required to load the model in bytes.</para>
+	/// <para>
+	/// The amount of memory required to load the model in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("required_native_memory_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize RequiredNativeMemoryBytes { get; init; }

@@ -223,68 +223,94 @@ internal sealed partial class DatafeedConfigConverter : JsonConverter<DatafeedCo
 public sealed partial class DatafeedConfig
 {
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? DatafeedId { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the `query_delay` option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: `150s`. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after `frequency` times `max_empty_searches` of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.
+	/// </para>
 	/// </summary>
 	public int? MaxEmptySearches { get; set; }
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between `60s` and `120s`. This randomness improves the query performance when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	public int? ScrollSize { get; set; }
 }
@@ -321,7 +347,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -330,7 +358,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -357,7 +387,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> DatafeedId(Elastic.Clients.Elasticsearch.Id? datafeedId)
 	{
@@ -366,7 +398,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the `query_delay` option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -393,7 +427,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: `150s`. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -402,7 +438,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
@@ -411,7 +449,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
 	{
@@ -444,7 +484,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after `frequency` times `max_empty_searches` of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -453,7 +495,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -480,7 +524,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between `60s` and `120s`. This randomness improves the query performance when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 	{
@@ -489,7 +535,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -498,7 +546,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
 	{
@@ -507,7 +557,9 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor<TDocument> ScrollSize(int? scrollSize)
 	{
@@ -678,7 +730,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -687,7 +741,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -714,7 +770,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id? datafeedId)
 	{
@@ -723,7 +781,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the `query_delay` option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -750,7 +810,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: `150s`. When `frequency` is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
 	{
@@ -759,7 +821,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
@@ -768,7 +832,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search.</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
 	{
@@ -801,7 +867,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after `frequency` times `max_empty_searches` of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -810,7 +878,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -837,7 +907,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between `60s` and `120s`. This randomness improves the query performance when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
 	{
@@ -846,7 +918,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -855,7 +929,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
 	{
@@ -864,7 +940,9 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	public DatafeedConfigDescriptor ScrollSize(int? scrollSize)
 	{

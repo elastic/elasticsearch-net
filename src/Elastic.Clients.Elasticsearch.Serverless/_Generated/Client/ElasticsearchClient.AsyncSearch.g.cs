@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="AsyncSearchNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="AsyncSearchNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected AsyncSearchNamespacedClient() : base()
 	{
@@ -38,7 +40,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +55,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +70,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -69,7 +86,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -81,7 +103,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -91,7 +118,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -102,7 +134,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
+	/// <para>
+	/// Deletes an async search by identifier.
+	/// If the search is still running, the search request will be cancelled.
+	/// Otherwise, the saved search results are deleted.
+	/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -114,7 +151,10 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+	/// <para>
+	/// Retrieves the results of a previously submitted async search request given its identifier.
+	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequest request, CancellationToken cancellationToken = default)
@@ -124,7 +164,10 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+	/// <para>
+	/// Retrieves the results of a previously submitted async search request given its identifier.
+	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -134,7 +177,10 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+	/// <para>
+	/// Retrieves the results of a previously submitted async search request given its identifier.
+	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -145,7 +191,10 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+	/// <para>
+	/// Retrieves the results of a previously submitted async search request given its identifier.
+	/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -157,7 +206,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequest request, CancellationToken cancellationToken = default)
@@ -167,7 +220,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -177,7 +234,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -188,7 +249,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -200,7 +265,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -210,7 +279,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -221,7 +294,11 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Get async search status<br/>Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
+	/// <para>
+	/// Get async search status
+	/// Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
+	/// If the Elasticsearch security features are enabled, use of this API is restricted to the <c>monitoring_user</c> role.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -233,7 +310,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequest request, CancellationToken cancellationToken = default)
@@ -243,7 +326,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -253,7 +342,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, CancellationToken cancellationToken = default)
@@ -264,7 +359,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -276,7 +377,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -287,7 +394,13 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
+	/// <para>
+	/// Runs a search request asynchronously.
+	/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
+	/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
+	/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+	/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)

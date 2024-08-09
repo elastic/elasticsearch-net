@@ -70,7 +70,9 @@ internal sealed partial class FiltersBucketConverter : JsonConverter<FiltersBuck
 public sealed partial class FiltersBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

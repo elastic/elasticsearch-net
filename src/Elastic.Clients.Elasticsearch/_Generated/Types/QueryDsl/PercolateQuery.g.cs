@@ -30,49 +30,68 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class PercolateQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The source of the document being percolated.</para>
+	/// <para>
+	/// The source of the document being percolated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("document")]
 	public object? Document { get; set; }
 
 	/// <summary>
-	/// <para>An array of sources of the documents being percolated.</para>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("documents")]
 	public ICollection<object>? Documents { get; set; }
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The ID of a stored document to percolate.</para>
+	/// <para>
+	/// The ID of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>The index of a stored document to percolate.</para>
+	/// <para>
+	/// The index of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>The suffix used for the `_percolator_document_slot` field when multiple `percolate` queries are specified.</para>
+	/// <para>
+	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string? Name { get; set; }
 
 	/// <summary>
-	/// <para>Preference used to fetch document to percolate.</para>
+	/// <para>
+	/// Preference used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
@@ -80,13 +99,17 @@ public sealed partial class PercolateQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Routing used to fetch document to percolate.</para>
+	/// <para>
+	/// Routing used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>The expected version of a stored document to percolate.</para>
+	/// <para>
+	/// The expected version of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
@@ -115,7 +138,12 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -124,7 +152,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The source of the document being percolated.</para>
+	/// <para>
+	/// The source of the document being percolated.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Document(object? document)
 	{
@@ -133,7 +163,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>An array of sources of the documents being percolated.</para>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Documents(ICollection<object>? documents)
 	{
@@ -142,7 +174,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -151,7 +185,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -160,7 +196,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -169,7 +207,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The ID of a stored document to percolate.</para>
+	/// <para>
+	/// The ID of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -178,7 +218,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The index of a stored document to percolate.</para>
+	/// <para>
+	/// The index of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -187,7 +229,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The suffix used for the `_percolator_document_slot` field when multiple `percolate` queries are specified.</para>
+	/// <para>
+	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Name(string? name)
 	{
@@ -196,7 +240,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Preference used to fetch document to percolate.</para>
+	/// <para>
+	/// Preference used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Preference(string? preference)
 	{
@@ -211,7 +257,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Routing used to fetch document to percolate.</para>
+	/// <para>
+	/// Routing used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
@@ -220,7 +268,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The expected version of a stored document to percolate.</para>
+	/// <para>
+	/// The expected version of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Version(long? version)
 	{
@@ -318,7 +368,12 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Boost(float? boost)
 	{
@@ -327,7 +382,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>The source of the document being percolated.</para>
+	/// <para>
+	/// The source of the document being percolated.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Document(object? document)
 	{
@@ -336,7 +393,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>An array of sources of the documents being percolated.</para>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Documents(ICollection<object>? documents)
 	{
@@ -345,7 +404,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -354,7 +415,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -363,7 +426,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// <para>
+	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -372,7 +437,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>The ID of a stored document to percolate.</para>
+	/// <para>
+	/// The ID of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -381,7 +448,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>The index of a stored document to percolate.</para>
+	/// <para>
+	/// The index of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
@@ -390,7 +459,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>The suffix used for the `_percolator_document_slot` field when multiple `percolate` queries are specified.</para>
+	/// <para>
+	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Name(string? name)
 	{
@@ -399,7 +470,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>Preference used to fetch document to percolate.</para>
+	/// <para>
+	/// Preference used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Preference(string? preference)
 	{
@@ -414,7 +487,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>Routing used to fetch document to percolate.</para>
+	/// <para>
+	/// Routing used to fetch document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
@@ -423,7 +498,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	}
 
 	/// <summary>
-	/// <para>The expected version of a stored document to percolate.</para>
+	/// <para>
+	/// The expected version of a stored document to percolate.
+	/// </para>
 	/// </summary>
 	public PercolateQueryDescriptor Version(long? version)
 	{

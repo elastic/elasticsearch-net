@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryRules;
 public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="QueryRulesNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="QueryRulesNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected QueryRulesNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query rule within a query ruleset.</para>
+	/// <para>
+	/// Deletes a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRuleResponse> DeleteRuleAsync(DeleteRuleRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +52,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query rule within a query ruleset.</para>
+	/// <para>
+	/// Deletes a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRuleResponse> DeleteRuleAsync(DeleteRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +64,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query rule within a query ruleset.</para>
+	/// <para>
+	/// Deletes a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -69,7 +77,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query rule within a query ruleset.</para>
+	/// <para>
+	/// Deletes a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRuleResponse> DeleteRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<DeleteRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -81,7 +91,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query ruleset.</para>
+	/// <para>
+	/// Deletes a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRulesetResponse> DeleteRulesetAsync(DeleteRulesetRequest request, CancellationToken cancellationToken = default)
@@ -91,7 +103,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query ruleset.</para>
+	/// <para>
+	/// Deletes a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRulesetResponse> DeleteRulesetAsync(DeleteRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -101,7 +115,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query ruleset.</para>
+	/// <para>
+	/// Deletes a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, CancellationToken cancellationToken = default)
@@ -112,7 +128,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a query ruleset.</para>
+	/// <para>
+	/// Deletes a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRulesetResponse> DeleteRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Action<DeleteRulesetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -124,7 +142,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query rule within a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query rule within a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRuleResponse> GetRuleAsync(GetRuleRequest request, CancellationToken cancellationToken = default)
@@ -134,7 +154,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query rule within a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query rule within a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRuleResponse> GetRuleAsync(GetRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -144,7 +166,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query rule within a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query rule within a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -155,7 +179,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query rule within a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query rule within a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRuleResponse> GetRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<GetRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -167,7 +193,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRulesetResponse> GetRulesetAsync(GetRulesetRequest request, CancellationToken cancellationToken = default)
@@ -177,7 +205,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRulesetResponse> GetRulesetAsync(GetRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -187,7 +217,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, CancellationToken cancellationToken = default)
@@ -198,7 +230,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a query ruleset</para>
+	/// <para>
+	/// Returns the details about a query ruleset
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRulesetResponse> GetRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Action<GetRulesetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -210,7 +244,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns summarized information about existing query rulesets.</para>
+	/// <para>
+	/// Returns summarized information about existing query rulesets.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListRulesetsResponse> ListRulesetsAsync(ListRulesetsRequest request, CancellationToken cancellationToken = default)
@@ -220,7 +256,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns summarized information about existing query rulesets.</para>
+	/// <para>
+	/// Returns summarized information about existing query rulesets.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListRulesetsResponse> ListRulesetsAsync(ListRulesetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -230,7 +268,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns summarized information about existing query rulesets.</para>
+	/// <para>
+	/// Returns summarized information about existing query rulesets.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListRulesetsResponse> ListRulesetsAsync(CancellationToken cancellationToken = default)
@@ -241,7 +281,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns summarized information about existing query rulesets.</para>
+	/// <para>
+	/// Returns summarized information about existing query rulesets.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListRulesetsResponse> ListRulesetsAsync(Action<ListRulesetsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -253,7 +295,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query rule within a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRuleResponse> PutRuleAsync(PutRuleRequest request, CancellationToken cancellationToken = default)
@@ -263,7 +307,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query rule within a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRuleResponse> PutRuleAsync(PutRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -273,7 +319,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query rule within a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, CancellationToken cancellationToken = default)
@@ -284,7 +332,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query rule within a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query rule within a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRuleResponse> PutRuleAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Elastic.Clients.Elasticsearch.Serverless.Id ruleId, Action<PutRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -296,7 +346,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRulesetResponse> PutRulesetAsync(PutRulesetRequest request, CancellationToken cancellationToken = default)
@@ -306,7 +358,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRulesetResponse> PutRulesetAsync(PutRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -316,7 +370,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, CancellationToken cancellationToken = default)
@@ -327,7 +383,9 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a query ruleset.</para>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRulesetResponse> PutRulesetAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Action<PutRulesetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

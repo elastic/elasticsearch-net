@@ -34,7 +34,9 @@ public sealed partial class UpdateModelSnapshotRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Updates certain properties of a snapshot.</para>
+/// <para>
+/// Updates certain properties of a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class UpdateModelSnapshotRequest : PlainRequest<UpdateModelSnapshotRequestParameters>
 {
@@ -51,20 +53,28 @@ public sealed partial class UpdateModelSnapshotRequest : PlainRequest<UpdateMode
 	internal override string OperationName => "ml.update_model_snapshot";
 
 	/// <summary>
-	/// <para>A description of the model snapshot.</para>
+	/// <para>
+	/// A description of the model snapshot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, this snapshot will not be deleted during automatic cleanup of<br/>snapshots older than `model_snapshot_retention_days`. However, this<br/>snapshot will be deleted when the job is deleted.</para>
+	/// <para>
+	/// If <c>true</c>, this snapshot will not be deleted during automatic cleanup of
+	/// snapshots older than <c>model_snapshot_retention_days</c>. However, this
+	/// snapshot will be deleted when the job is deleted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retain")]
 	public bool? Retain { get; set; }
 }
 
 /// <summary>
-/// <para>Updates certain properties of a snapshot.</para>
+/// <para>
+/// Updates certain properties of a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class UpdateModelSnapshotRequestDescriptor : RequestDescriptor<UpdateModelSnapshotRequestDescriptor, UpdateModelSnapshotRequestParameters>
 {
@@ -98,7 +108,9 @@ public sealed partial class UpdateModelSnapshotRequestDescriptor : RequestDescri
 	private bool? RetainValue { get; set; }
 
 	/// <summary>
-	/// <para>A description of the model snapshot.</para>
+	/// <para>
+	/// A description of the model snapshot.
+	/// </para>
 	/// </summary>
 	public UpdateModelSnapshotRequestDescriptor Description(string? description)
 	{
@@ -107,7 +119,11 @@ public sealed partial class UpdateModelSnapshotRequestDescriptor : RequestDescri
 	}
 
 	/// <summary>
-	/// <para>If `true`, this snapshot will not be deleted during automatic cleanup of<br/>snapshots older than `model_snapshot_retention_days`. However, this<br/>snapshot will be deleted when the job is deleted.</para>
+	/// <para>
+	/// If <c>true</c>, this snapshot will not be deleted during automatic cleanup of
+	/// snapshots older than <c>model_snapshot_retention_days</c>. However, this
+	/// snapshot will be deleted when the job is deleted.
+	/// </para>
 	/// </summary>
 	public UpdateModelSnapshotRequestDescriptor Retain(bool? retain = true)
 	{

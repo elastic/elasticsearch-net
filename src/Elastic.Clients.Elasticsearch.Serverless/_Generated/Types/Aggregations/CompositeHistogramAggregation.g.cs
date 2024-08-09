@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class CompositeHistogramAggregation
 {
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
@@ -44,7 +46,9 @@ public sealed partial class CompositeHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.SortOrder? Order { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
@@ -71,7 +75,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -80,7 +86,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -89,7 +97,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -122,7 +132,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -228,7 +240,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -237,7 +251,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -246,7 +262,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -279,7 +297,9 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{

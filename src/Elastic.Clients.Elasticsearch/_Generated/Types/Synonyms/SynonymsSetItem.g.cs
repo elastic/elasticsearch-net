@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 public sealed partial class SynonymsSetItem
 {
 	/// <summary>
-	/// <para>Number of synonym rules that the synonym set contains</para>
+	/// <para>
+	/// Number of synonym rules that the synonym set contains
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>Synonyms set identifier</para>
+	/// <para>
+	/// Synonyms set identifier
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public string SynonymsSet { get; init; }

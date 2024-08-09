@@ -85,7 +85,9 @@ public sealed partial class DateDecayFunction
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.Serverless.DateMath, Elastic.Clients.Elasticsearch.Serverless.Duration> Placement { get; set; }
@@ -122,7 +124,9 @@ public sealed partial class DateDecayFunctionDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public DateDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? multiValueMode)
 	{
@@ -187,7 +191,9 @@ public sealed partial class DateDecayFunctionDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
+	/// <para>
+	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+	/// </para>
 	/// </summary>
 	public DateDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? multiValueMode)
 	{

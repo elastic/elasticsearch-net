@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>Sum aggregation result. `value` is always present and is zero if there were no values to process.</para>
+/// <para>
+/// Sum aggregation result. <c>value</c> is always present and is zero if there were no values to process.
+/// </para>
 /// </summary>
 public sealed partial class SumAggregate : IAggregate
 {
@@ -36,7 +38,10 @@ public sealed partial class SumAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 
 	/// <summary>
-	/// <para>The metric value. A missing value generally means that there was no data to aggregate,<br/>unless specified otherwise.</para>
+	/// <para>
+	/// The metric value. A missing value generally means that there was no data to aggregate,
+	/// unless specified otherwise.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }

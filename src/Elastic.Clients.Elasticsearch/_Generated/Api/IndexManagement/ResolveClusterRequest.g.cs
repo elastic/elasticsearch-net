@@ -32,28 +32,45 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ResolveClusterRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing<br/>or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing
+	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.</para>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If false, the request returns an error if it targets a missing or closed index. Defaults to false.</para>
+	/// <para>
+	/// If false, the request returns an error if it targets a missing or closed index. Defaults to false.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
-/// <para>Resolves the specified index expressions to return information about each cluster, including<br/>the local cluster, if included.<br/>Multiple patterns and remote clusters are supported.</para>
+/// <para>
+/// Resolves the specified index expressions to return information about each cluster, including
+/// the local cluster, if included.
+/// Multiple patterns and remote clusters are supported.
+/// </para>
 /// </summary>
 public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterRequestParameters>
 {
@@ -70,32 +87,49 @@ public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterR
 	internal override string OperationName => "indices.resolve_cluster";
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing<br/>or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing
+	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.</para>
+	/// <para>
+	/// If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>If false, the request returns an error if it targets a missing or closed index. Defaults to false.</para>
+	/// <para>
+	/// If false, the request returns an error if it targets a missing or closed index. Defaults to false.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
-/// <para>Resolves the specified index expressions to return information about each cluster, including<br/>the local cluster, if included.<br/>Multiple patterns and remote clusters are supported.</para>
+/// <para>
+/// Resolves the specified index expressions to return information about each cluster, including
+/// the local cluster, if included.
+/// Multiple patterns and remote clusters are supported.
+/// </para>
 /// </summary>
 public sealed partial class ResolveClusterRequestDescriptor : RequestDescriptor<ResolveClusterRequestDescriptor, ResolveClusterRequestParameters>
 {

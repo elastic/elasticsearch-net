@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterOperatingSystemPrettyName
 {
 	/// <summary>
-	/// <para>Number of selected nodes using the operating system.</para>
+	/// <para>
+	/// Number of selected nodes using the operating system.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>Human-readable name of an operating system used by one or more selected nodes.</para>
+	/// <para>
+	/// Human-readable name of an operating system used by one or more selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pretty_name")]
 	public string PrettyName { get; init; }

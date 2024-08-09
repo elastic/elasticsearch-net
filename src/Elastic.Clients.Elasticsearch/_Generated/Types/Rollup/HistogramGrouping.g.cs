@@ -30,14 +30,22 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class HistogramGrouping
 {
 	/// <summary>
-	/// <para>The set of fields that you wish to build histograms for.<br/>All fields specified must be some kind of numeric.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to build histograms for.
+	/// All fields specified must be some kind of numeric.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
-	/// <para>The interval of histogram buckets to be generated when rolling up.<br/>For example, a value of `5` creates buckets that are five units wide (`0-5`, `5-10`, etc).<br/>Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.</para>
+	/// <para>
+	/// The interval of histogram buckets to be generated when rolling up.
+	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
+	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("interval")]
 	public long Interval { get; set; }
@@ -55,7 +63,11 @@ public sealed partial class HistogramGroupingDescriptor<TDocument> : Serializabl
 	private long IntervalValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of fields that you wish to build histograms for.<br/>All fields specified must be some kind of numeric.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to build histograms for.
+	/// All fields specified must be some kind of numeric.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	public HistogramGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
@@ -64,7 +76,11 @@ public sealed partial class HistogramGroupingDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The interval of histogram buckets to be generated when rolling up.<br/>For example, a value of `5` creates buckets that are five units wide (`0-5`, `5-10`, etc).<br/>Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.</para>
+	/// <para>
+	/// The interval of histogram buckets to be generated when rolling up.
+	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
+	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
+	/// </para>
 	/// </summary>
 	public HistogramGroupingDescriptor<TDocument> Interval(long interval)
 	{
@@ -95,7 +111,11 @@ public sealed partial class HistogramGroupingDescriptor : SerializableDescriptor
 	private long IntervalValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of fields that you wish to build histograms for.<br/>All fields specified must be some kind of numeric.<br/>Order does not matter.</para>
+	/// <para>
+	/// The set of fields that you wish to build histograms for.
+	/// All fields specified must be some kind of numeric.
+	/// Order does not matter.
+	/// </para>
 	/// </summary>
 	public HistogramGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
@@ -104,7 +124,11 @@ public sealed partial class HistogramGroupingDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The interval of histogram buckets to be generated when rolling up.<br/>For example, a value of `5` creates buckets that are five units wide (`0-5`, `5-10`, etc).<br/>Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.</para>
+	/// <para>
+	/// The interval of histogram buckets to be generated when rolling up.
+	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
+	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
+	/// </para>
 	/// </summary>
 	public HistogramGroupingDescriptor Interval(long interval)
 	{

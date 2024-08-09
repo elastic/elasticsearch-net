@@ -32,18 +32,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class ExplainDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>indicates if the API should return the default values the system uses for the index's lifecycle</para>
+	/// <para>
+	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get the status for a data stream lifecycle.<br/>Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.</para>
+/// <para>
+/// Get the status for a data stream lifecycle.
+/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDataLifecycleRequestParameters>
 {
@@ -60,20 +67,27 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 	internal override string OperationName => "indices.explain_data_lifecycle";
 
 	/// <summary>
-	/// <para>indicates if the API should return the default values the system uses for the index's lifecycle</para>
+	/// <para>
+	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>
+	/// Specify timeout for connection to master
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get the status for a data stream lifecycle.<br/>Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.</para>
+/// <para>
+/// Get the status for a data stream lifecycle.
+/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleRequestParameters>
 {
@@ -110,7 +124,10 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 }
 
 /// <summary>
-/// <para>Get the status for a data stream lifecycle.<br/>Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.</para>
+/// <para>
+/// Get the status for a data stream lifecycle.
+/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+/// </para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor : RequestDescriptor<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleRequestParameters>
 {

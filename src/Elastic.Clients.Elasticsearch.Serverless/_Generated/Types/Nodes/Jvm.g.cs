@@ -30,49 +30,66 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Jvm
 {
 	/// <summary>
-	/// <para>Contains statistics about JVM buffer pools for the node.</para>
+	/// <para>
+	/// Contains statistics about JVM buffer pools for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buffer_pools")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeBufferPool>? BufferPools { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about classes loaded by JVM for the node.</para>
+	/// <para>
+	/// Contains statistics about classes loaded by JVM for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("classes")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.JvmClasses? Classes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about JVM garbage collectors for the node.</para>
+	/// <para>
+	/// Contains statistics about JVM garbage collectors for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gc")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.GarbageCollector? Gc { get; init; }
 
 	/// <summary>
-	/// <para>Contains JVM memory usage statistics for the node.</para>
+	/// <para>
+	/// Contains JVM memory usage statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mem")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.JvmMemoryStats? Mem { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about JVM thread usage for the node.</para>
+	/// <para>
+	/// Contains statistics about JVM thread usage for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("threads")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.JvmThreads? Threads { get; init; }
 
 	/// <summary>
-	/// <para>Last time JVM statistics were refreshed.</para>
+	/// <para>
+	/// Last time JVM statistics were refreshed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long? Timestamp { get; init; }
 
 	/// <summary>
-	/// <para>Human-readable JVM uptime.<br/>Only returned if the `human` query parameter is `true`.</para>
+	/// <para>
+	/// Human-readable JVM uptime.
+	/// Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("uptime")]
 	public string? Uptime { get; init; }
 
 	/// <summary>
-	/// <para>JVM uptime in milliseconds.</para>
+	/// <para>
+	/// JVM uptime in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("uptime_in_millis")]
 	public long? UptimeInMillis { get; init; }

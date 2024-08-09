@@ -34,7 +34,9 @@ public sealed partial class GetTrialStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves information about the status of the trial license.</para>
+/// <para>
+/// Retrieves information about the status of the trial license.
+/// </para>
 /// </summary>
 public sealed partial class GetTrialStatusRequest : PlainRequest<GetTrialStatusRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetTrialStatusRequest : PlainRequest<GetTrialStatusR
 }
 
 /// <summary>
-/// <para>Retrieves information about the status of the trial license.</para>
+/// <para>
+/// Retrieves information about the status of the trial license.
+/// </para>
 /// </summary>
 public sealed partial class GetTrialStatusRequestDescriptor : RequestDescriptor<GetTrialStatusRequestDescriptor, GetTrialStatusRequestParameters>
 {

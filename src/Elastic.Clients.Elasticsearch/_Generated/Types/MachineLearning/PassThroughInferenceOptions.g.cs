@@ -28,18 +28,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 /// <summary>
-/// <para>Pass through configuration options</para>
+/// <para>
+/// Pass through configuration options
+/// </para>
 /// </summary>
 public sealed partial class PassThroughInferenceOptions
 {
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -50,7 +56,9 @@ public sealed partial class PassThroughInferenceOptions
 }
 
 /// <summary>
-/// <para>Pass through configuration options</para>
+/// <para>
+/// Pass through configuration options
+/// </para>
 /// </summary>
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
 {
@@ -69,7 +77,9 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -78,7 +88,9 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 	}
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
 	{

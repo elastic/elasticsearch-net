@@ -32,23 +32,41 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DeleteJobRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether annotations that have been added by the<br/>user should be deleted along with any auto-generated annotations when the job is<br/>reset.</para>
+	/// <para>
+	/// Specifies whether annotations that have been added by the
+	/// user should be deleted along with any auto-generated annotations when the job is
+	/// reset.
+	/// </para>
 	/// </summary>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
 	/// <summary>
-	/// <para>Use to forcefully delete an opened job; this method is quicker than<br/>closing and deleting the job.</para>
+	/// <para>
+	/// Use to forcefully delete an opened job; this method is quicker than
+	/// closing and deleting the job.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>Specifies whether the request should return immediately or wait until the<br/>job deletion completes.</para>
+	/// <para>
+	/// Specifies whether the request should return immediately or wait until the
+	/// job deletion completes.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+/// <para>
+/// Delete an anomaly detection job.
+/// All job configuration, model state and results are deleted.
+/// It is not currently possible to delete multiple jobs using wildcards or a
+/// comma separated list. If you delete a job that has a datafeed, the request
+/// first tries to delete the datafeed. This behavior is equivalent to calling
+/// the delete datafeed API with the same timeout and force parameters as the
+/// delete job request.
+/// </para>
 /// </summary>
 public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestParameters>
 {
@@ -65,26 +83,44 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 	internal override string OperationName => "ml.delete_job";
 
 	/// <summary>
-	/// <para>Specifies whether annotations that have been added by the<br/>user should be deleted along with any auto-generated annotations when the job is<br/>reset.</para>
+	/// <para>
+	/// Specifies whether annotations that have been added by the
+	/// user should be deleted along with any auto-generated annotations when the job is
+	/// reset.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
 	/// <summary>
-	/// <para>Use to forcefully delete an opened job; this method is quicker than<br/>closing and deleting the job.</para>
+	/// <para>
+	/// Use to forcefully delete an opened job; this method is quicker than
+	/// closing and deleting the job.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>Specifies whether the request should return immediately or wait until the<br/>job deletion completes.</para>
+	/// <para>
+	/// Specifies whether the request should return immediately or wait until the
+	/// job deletion completes.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+/// <para>
+/// Delete an anomaly detection job.
+/// All job configuration, model state and results are deleted.
+/// It is not currently possible to delete multiple jobs using wildcards or a
+/// comma separated list. If you delete a job that has a datafeed, the request
+/// first tries to delete the datafeed. This behavior is equivalent to calling
+/// the delete datafeed API with the same timeout and force parameters as the
+/// delete job request.
+/// </para>
 /// </summary>
 public sealed partial class DeleteJobRequestDescriptor : RequestDescriptor<DeleteJobRequestDescriptor, DeleteJobRequestParameters>
 {

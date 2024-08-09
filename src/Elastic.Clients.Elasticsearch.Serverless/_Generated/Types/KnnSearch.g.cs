@@ -30,56 +30,74 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class KnnSearch
 {
 	/// <summary>
-	/// <para>Boost value to apply to kNN scores</para>
+	/// <para>
+	/// Boost value to apply to kNN scores
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Filters for the kNN search query</para>
+	/// <para>
+	/// Filters for the kNN search query
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
-	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
 	/// <summary>
-	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// <para>
+	/// The number of nearest neighbor candidates to consider per shard
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_candidates")]
 	public int? NumCandidates { get; set; }
 
 	/// <summary>
-	/// <para>The query vector</para>
+	/// <para>
+	/// The query vector
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<float>? QueryVector { get; set; }
 
 	/// <summary>
-	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector_builder")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
 	/// <summary>
-	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// <para>
+	/// The minimum similarity for a vector to be considered a match
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("similarity")]
 	public float? Similarity { get; set; }
@@ -111,7 +129,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
-	/// <para>Boost value to apply to kNN scores</para>
+	/// <para>
+	/// Boost value to apply to kNN scores
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Boost(float? boost)
 	{
@@ -120,7 +140,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -129,7 +151,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -138,7 +162,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -147,7 +173,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Filters for the kNN search query</para>
+	/// <para>
+	/// Filters for the kNN search query
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -186,7 +214,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? innerHits)
 	{
@@ -213,7 +243,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> k(int? k)
 	{
@@ -222,7 +254,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// <para>
+	/// The number of nearest neighbor candidates to consider per shard
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> NumCandidates(int? numCandidates)
 	{
@@ -231,7 +265,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The query vector</para>
+	/// <para>
+	/// The query vector
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> QueryVector(ICollection<float>? queryVector)
 	{
@@ -240,7 +276,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? queryVectorBuilder)
 	{
@@ -267,7 +305,9 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// <para>
+	/// The minimum similarity for a vector to be considered a match
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor<TDocument> Similarity(float? similarity)
 	{
@@ -401,7 +441,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
-	/// <para>Boost value to apply to kNN scores</para>
+	/// <para>
+	/// Boost value to apply to kNN scores
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Boost(float? boost)
 	{
@@ -410,7 +452,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -419,7 +463,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -428,7 +474,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The name of the vector field to search against</para>
+	/// <para>
+	/// The name of the vector field to search against
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -437,7 +485,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>Filters for the kNN search query</para>
+	/// <para>
+	/// Filters for the kNN search query
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -476,7 +526,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor InnerHits(Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? innerHits)
 	{
@@ -503,7 +555,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The final number of nearest neighbors to return as top hits</para>
+	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor k(int? k)
 	{
@@ -512,7 +566,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The number of nearest neighbor candidates to consider per shard</para>
+	/// <para>
+	/// The number of nearest neighbor candidates to consider per shard
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor NumCandidates(int? numCandidates)
 	{
@@ -521,7 +577,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The query vector</para>
+	/// <para>
+	/// The query vector
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor QueryVector(ICollection<float>? queryVector)
 	{
@@ -530,7 +588,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// <para>
+	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? queryVectorBuilder)
 	{
@@ -557,7 +617,9 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	}
 
 	/// <summary>
-	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// <para>
+	/// The minimum similarity for a vector to be considered a match
+	/// </para>
 	/// </summary>
 	public KnnSearchDescriptor Similarity(float? similarity)
 	{

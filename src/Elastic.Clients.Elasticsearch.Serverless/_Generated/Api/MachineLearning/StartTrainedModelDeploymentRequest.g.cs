@@ -32,43 +32,71 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class StartTrainedModelDeploymentRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The inference cache size (in memory outside the JVM heap) per node for the model.<br/>The default value is the same size as the `model_size_bytes`. To disable the cache,<br/>`0b` can be provided.</para>
+	/// <para>
+	/// The inference cache size (in memory outside the JVM heap) per node for the model.
+	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
+	/// <c>0b</c> can be provided.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? CacheSize { get => Q<Elastic.Clients.Elasticsearch.Serverless.ByteSize?>("cache_size"); set => Q("cache_size", value); }
 
 	/// <summary>
-	/// <para>The number of model allocations on each node where the model is deployed.<br/>All allocations on a node share the same copy of the model in memory but use<br/>a separate set of threads to evaluate the model.<br/>Increasing this value generally increases the throughput.<br/>If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// The number of model allocations on each node where the model is deployed.
+	/// All allocations on a node share the same copy of the model in memory but use
+	/// a separate set of threads to evaluate the model.
+	/// Increasing this value generally increases the throughput.
+	/// If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	public int? NumberOfAllocations { get => Q<int?>("number_of_allocations"); set => Q("number_of_allocations", value); }
 
 	/// <summary>
-	/// <para>The deployment priority.</para>
+	/// <para>
+	/// The deployment priority.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
 
 	/// <summary>
-	/// <para>Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds<br/>this value, new requests are rejected with a 429 error.</para>
+	/// <para>
+	/// Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
+	/// this value, new requests are rejected with a 429 error.
+	/// </para>
 	/// </summary>
 	public int? QueueCapacity { get => Q<int?>("queue_capacity"); set => Q("queue_capacity", value); }
 
 	/// <summary>
-	/// <para>Sets the number of threads used by each model allocation during inference. This generally increases<br/>the inference speed. The inference process is a compute-bound process; any number<br/>greater than the number of available hardware threads on the machine does not increase the<br/>inference speed. If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// Sets the number of threads used by each model allocation during inference. This generally increases
+	/// the inference speed. The inference process is a compute-bound process; any number
+	/// greater than the number of available hardware threads on the machine does not increase the
+	/// inference speed. If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	public int? ThreadsPerAllocation { get => Q<int?>("threads_per_allocation"); set => Q("threads_per_allocation", value); }
 
 	/// <summary>
-	/// <para>Specifies the amount of time to wait for the model to deploy.</para>
+	/// <para>
+	/// Specifies the amount of time to wait for the model to deploy.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Specifies the allocation status to wait for before returning.</para>
+	/// <para>
+	/// Specifies the allocation status to wait for before returning.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
 }
 
 /// <summary>
-/// <para>Starts a trained model deployment, which allocates the model to every machine learning node.</para>
+/// <para>
+/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// </para>
 /// </summary>
 public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<StartTrainedModelDeploymentRequestParameters>
 {
@@ -85,50 +113,78 @@ public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<St
 	internal override string OperationName => "ml.start_trained_model_deployment";
 
 	/// <summary>
-	/// <para>The inference cache size (in memory outside the JVM heap) per node for the model.<br/>The default value is the same size as the `model_size_bytes`. To disable the cache,<br/>`0b` can be provided.</para>
+	/// <para>
+	/// The inference cache size (in memory outside the JVM heap) per node for the model.
+	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
+	/// <c>0b</c> can be provided.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? CacheSize { get => Q<Elastic.Clients.Elasticsearch.Serverless.ByteSize?>("cache_size"); set => Q("cache_size", value); }
 
 	/// <summary>
-	/// <para>The number of model allocations on each node where the model is deployed.<br/>All allocations on a node share the same copy of the model in memory but use<br/>a separate set of threads to evaluate the model.<br/>Increasing this value generally increases the throughput.<br/>If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// The number of model allocations on each node where the model is deployed.
+	/// All allocations on a node share the same copy of the model in memory but use
+	/// a separate set of threads to evaluate the model.
+	/// Increasing this value generally increases the throughput.
+	/// If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? NumberOfAllocations { get => Q<int?>("number_of_allocations"); set => Q("number_of_allocations", value); }
 
 	/// <summary>
-	/// <para>The deployment priority.</para>
+	/// <para>
+	/// The deployment priority.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
 
 	/// <summary>
-	/// <para>Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds<br/>this value, new requests are rejected with a 429 error.</para>
+	/// <para>
+	/// Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
+	/// this value, new requests are rejected with a 429 error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? QueueCapacity { get => Q<int?>("queue_capacity"); set => Q("queue_capacity", value); }
 
 	/// <summary>
-	/// <para>Sets the number of threads used by each model allocation during inference. This generally increases<br/>the inference speed. The inference process is a compute-bound process; any number<br/>greater than the number of available hardware threads on the machine does not increase the<br/>inference speed. If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// Sets the number of threads used by each model allocation during inference. This generally increases
+	/// the inference speed. The inference process is a compute-bound process; any number
+	/// greater than the number of available hardware threads on the machine does not increase the
+	/// inference speed. If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? ThreadsPerAllocation { get => Q<int?>("threads_per_allocation"); set => Q("threads_per_allocation", value); }
 
 	/// <summary>
-	/// <para>Specifies the amount of time to wait for the model to deploy.</para>
+	/// <para>
+	/// Specifies the amount of time to wait for the model to deploy.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Specifies the allocation status to wait for before returning.</para>
+	/// <para>
+	/// Specifies the allocation status to wait for before returning.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
 }
 
 /// <summary>
-/// <para>Starts a trained model deployment, which allocates the model to every machine learning node.</para>
+/// <para>
+/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// </para>
 /// </summary>
 public sealed partial class StartTrainedModelDeploymentRequestDescriptor : RequestDescriptor<StartTrainedModelDeploymentRequestDescriptor, StartTrainedModelDeploymentRequestParameters>
 {

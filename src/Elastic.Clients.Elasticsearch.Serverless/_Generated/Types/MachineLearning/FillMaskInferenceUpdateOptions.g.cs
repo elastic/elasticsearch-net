@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class FillMaskInferenceUpdateOptions
 {
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
@@ -65,7 +71,9 @@ public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : Serializa
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceUpdateOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
@@ -74,7 +82,9 @@ public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : Serializa
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -83,7 +93,9 @@ public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : Serializa
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public FillMaskInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptions? tokenization)
 	{

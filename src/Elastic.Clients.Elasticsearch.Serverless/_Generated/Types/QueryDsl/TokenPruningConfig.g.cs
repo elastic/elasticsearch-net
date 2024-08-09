@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class TokenPruningConfig
 {
 	/// <summary>
-	/// <para>Whether to only score pruned tokens, vs only scoring kept tokens.</para>
+	/// <para>
+	/// Whether to only score pruned tokens, vs only scoring kept tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("only_score_pruned_tokens")]
 	public bool? OnlyScorePrunedTokens { get; set; }
 
 	/// <summary>
-	/// <para>Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.</para>
+	/// <para>
+	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokens_freq_ratio_threshold")]
 	public int? TokensFreqRatioThreshold { get; set; }
 
 	/// <summary>
-	/// <para>Tokens whose weight is less than this threshold are considered nonsignificant and pruned.</para>
+	/// <para>
+	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokens_weight_threshold")]
 	public float? TokensWeightThreshold { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class TokenPruningConfigDescriptor : SerializableDescripto
 	private float? TokensWeightThresholdValue { get; set; }
 
 	/// <summary>
-	/// <para>Whether to only score pruned tokens, vs only scoring kept tokens.</para>
+	/// <para>
+	/// Whether to only score pruned tokens, vs only scoring kept tokens.
+	/// </para>
 	/// </summary>
 	public TokenPruningConfigDescriptor OnlyScorePrunedTokens(bool? onlyScorePrunedTokens = true)
 	{
@@ -70,7 +78,9 @@ public sealed partial class TokenPruningConfigDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.</para>
+	/// <para>
+	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
+	/// </para>
 	/// </summary>
 	public TokenPruningConfigDescriptor TokensFreqRatioThreshold(int? tokensFreqRatioThreshold)
 	{
@@ -79,7 +89,9 @@ public sealed partial class TokenPruningConfigDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>Tokens whose weight is less than this threshold are considered nonsignificant and pruned.</para>
+	/// <para>
+	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
+	/// </para>
 	/// </summary>
 	public TokenPruningConfigDescriptor TokensWeightThreshold(float? tokensWeightThreshold)
 	{

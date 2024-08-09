@@ -30,97 +30,135 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class KeyValueProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>List of keys to exclude from document.</para>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_keys")]
 	public ICollection<string>? ExcludeKeys { get; set; }
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// <para>
+	/// Regex pattern to use for splitting key-value pairs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_split")]
 	public string FieldSplit { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include_keys")]
 	public ICollection<string>? IncludeKeys { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Prefix to be added to extracted keys.</para>
+	/// <para>
+	/// Prefix to be added to extracted keys.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
 	/// <summary>
-	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// <para>
+	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("strip_brackets")]
 	public bool? StripBrackets { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted keys.</para>
+	/// <para>
+	/// String of characters to trim from extracted keys.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trim_key")]
 	public string? TrimKey { get; set; }
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted values.</para>
+	/// <para>
+	/// String of characters to trim from extracted values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("trim_value")]
 	public string? TrimValue { get; set; }
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// <para>
+	/// Regex pattern to use for splitting the key from the value within a key-value pair.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value_split")]
 	public string ValueSplit { get; set; }
@@ -157,7 +195,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	private string ValueSplitValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -166,7 +207,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>List of keys to exclude from document.</para>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> ExcludeKeys(ICollection<string>? excludeKeys)
 	{
@@ -175,7 +218,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -184,7 +230,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -193,7 +242,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -202,7 +254,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// <para>
+	/// Regex pattern to use for splitting key-value pairs.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> FieldSplit(string fieldSplit)
 	{
@@ -211,7 +265,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -220,7 +276,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -229,7 +287,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -238,7 +298,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> IncludeKeys(ICollection<string>? includeKeys)
 	{
@@ -247,7 +310,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -286,7 +351,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Prefix to be added to extracted keys.</para>
+	/// <para>
+	/// Prefix to be added to extracted keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Prefix(string? prefix)
 	{
@@ -295,7 +362,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// <para>
+	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? stripBrackets = true)
 	{
@@ -304,7 +373,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -313,7 +385,11 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -322,7 +398,11 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -331,7 +411,11 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -340,7 +424,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted keys.</para>
+	/// <para>
+	/// String of characters to trim from extracted keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TrimKey(string? trimKey)
 	{
@@ -349,7 +435,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted values.</para>
+	/// <para>
+	/// String of characters to trim from extracted values.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TrimValue(string? trimValue)
 	{
@@ -358,7 +446,9 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// <para>
+	/// Regex pattern to use for splitting the key from the value within a key-value pair.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> ValueSplit(string valueSplit)
 	{
@@ -511,7 +601,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	private string ValueSplitValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Description(string? description)
 	{
@@ -520,7 +613,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>List of keys to exclude from document.</para>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor ExcludeKeys(ICollection<string>? excludeKeys)
 	{
@@ -529,7 +624,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -538,7 +636,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -547,7 +648,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -556,7 +660,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// <para>
+	/// Regex pattern to use for splitting key-value pairs.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor FieldSplit(string fieldSplit)
 	{
@@ -565,7 +671,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor If(string? value)
 	{
@@ -574,7 +682,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -583,7 +693,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -592,7 +704,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor IncludeKeys(ICollection<string>? includeKeys)
 	{
@@ -601,7 +716,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -640,7 +757,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Prefix to be added to extracted keys.</para>
+	/// <para>
+	/// Prefix to be added to extracted keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Prefix(string? prefix)
 	{
@@ -649,7 +768,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// <para>
+	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor StripBrackets(bool? stripBrackets = true)
 	{
@@ -658,7 +779,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor Tag(string? tag)
 	{
@@ -667,7 +791,11 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -676,7 +804,11 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -685,7 +817,11 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
@@ -694,7 +830,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted keys.</para>
+	/// <para>
+	/// String of characters to trim from extracted keys.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor TrimKey(string? trimKey)
 	{
@@ -703,7 +841,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>String of characters to trim from extracted values.</para>
+	/// <para>
+	/// String of characters to trim from extracted values.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor TrimValue(string? trimValue)
 	{
@@ -712,7 +852,9 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// <para>
+	/// Regex pattern to use for splitting the key from the value within a key-value pair.
+	/// </para>
 	/// </summary>
 	public KeyValueProcessorDescriptor ValueSplit(string valueSplit)
 	{

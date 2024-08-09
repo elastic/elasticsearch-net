@@ -30,13 +30,19 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class TimeSync
 {
 	/// <summary>
-	/// <para>The time delay between the current time and the latest input data time.</para>
+	/// <para>
+	/// The time delay between the current time and the latest input data time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delay")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Delay { get; set; }
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -56,7 +62,9 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The time delay between the current time and the latest input data time.</para>
+	/// <para>
+	/// The time delay between the current time and the latest input data time.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Serverless.Duration? delay)
 	{
@@ -65,7 +73,11 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -74,7 +86,11 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -83,7 +99,11 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -118,7 +138,9 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The time delay between the current time and the latest input data time.</para>
+	/// <para>
+	/// The time delay between the current time and the latest input data time.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Serverless.Duration? delay)
 	{
@@ -127,7 +149,11 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -136,7 +162,11 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -145,7 +175,11 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	}
 
 	/// <summary>
-	/// <para>The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field<br/>that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it<br/>accounts for data transmission delays.</para>
+	/// <para>
+	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+	/// accounts for data transmission delays.
+	/// </para>
 	/// </summary>
 	public TimeSyncDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

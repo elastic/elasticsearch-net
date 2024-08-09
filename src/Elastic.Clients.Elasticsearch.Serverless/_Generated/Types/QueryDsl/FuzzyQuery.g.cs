@@ -165,39 +165,56 @@ public sealed partial class FuzzyQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of variations created.</para>
+	/// <para>
+	/// Maximum number of variations created.
+	/// </para>
 	/// </summary>
 	public int? MaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public int? PrefixLength { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public string? Rewrite { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// <para>
+	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public bool? Transpositions { get; set; }
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public object Value { get; set; }
 
@@ -223,7 +240,12 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	private object ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -250,7 +272,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -259,7 +283,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Maximum number of variations created.</para>
+	/// <para>
+	/// Maximum number of variations created.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
@@ -268,7 +294,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
@@ -283,7 +311,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -292,7 +322,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// <para>
+	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Transpositions(bool? transpositions = true)
 	{
@@ -301,7 +333,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Value(object value)
 	{
@@ -384,7 +418,12 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	private object ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor Boost(float? boost)
 	{
@@ -411,7 +450,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -420,7 +461,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Maximum number of variations created.</para>
+	/// <para>
+	/// Maximum number of variations created.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
@@ -429,7 +472,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor PrefixLength(int? prefixLength)
 	{
@@ -444,7 +489,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor Rewrite(string? rewrite)
 	{
@@ -453,7 +500,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// <para>
+	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor Transpositions(bool? transpositions = true)
 	{
@@ -462,7 +511,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	/// <summary>
-	/// <para>Term you wish to find in the provided field.</para>
+	/// <para>
+	/// Term you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public FuzzyQueryDescriptor Value(object value)
 	{

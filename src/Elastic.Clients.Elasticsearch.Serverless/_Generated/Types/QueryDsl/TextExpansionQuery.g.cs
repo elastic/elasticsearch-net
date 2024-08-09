@@ -113,18 +113,27 @@ public sealed partial class TextExpansionQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The text expansion NLP model to use</para>
+	/// <para>
+	/// The text expansion NLP model to use
+	/// </para>
 	/// </summary>
 	public string ModelId { get; set; }
 
 	/// <summary>
-	/// <para>The query text</para>
+	/// <para>
+	/// The query text
+	/// </para>
 	/// </summary>
 	public string ModelText { get; set; }
 	public string? QueryName { get; set; }
@@ -147,7 +156,12 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -174,7 +188,9 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The text expansion NLP model to use</para>
+	/// <para>
+	/// The text expansion NLP model to use
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor<TDocument> ModelId(string modelId)
 	{
@@ -183,7 +199,9 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The query text</para>
+	/// <para>
+	/// The query text
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor<TDocument> ModelText(string modelText)
 	{
@@ -240,7 +258,12 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor Boost(float? boost)
 	{
@@ -267,7 +290,9 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The text expansion NLP model to use</para>
+	/// <para>
+	/// The text expansion NLP model to use
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor ModelId(string modelId)
 	{
@@ -276,7 +301,9 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The query text</para>
+	/// <para>
+	/// The query text
+	/// </para>
 	/// </summary>
 	public TextExpansionQueryDescriptor ModelText(string modelText)
 	{

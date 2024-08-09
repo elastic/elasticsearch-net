@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class RuleCondition
 {
 	/// <summary>
-	/// <para>Specifies the result property to which the condition applies. If your detector uses `lat_long`, `metric`, `rare`, or `freq_rare` functions, you can only specify conditions that apply to time.</para>
+	/// <para>
+	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("applies_to")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AppliesTo AppliesTo { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.</para>
+	/// <para>
+	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ConditionOperator Operator { get; set; }
 
 	/// <summary>
-	/// <para>The value that is compared against the `applies_to` field using the operator.</para>
+	/// <para>
+	/// The value that is compared against the <c>applies_to</c> field using the operator.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double Value { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class RuleConditionDescriptor : SerializableDescriptor<Rul
 	private double ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the result property to which the condition applies. If your detector uses `lat_long`, `metric`, `rare`, or `freq_rare` functions, you can only specify conditions that apply to time.</para>
+	/// <para>
+	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
+	/// </para>
 	/// </summary>
 	public RuleConditionDescriptor AppliesTo(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AppliesTo appliesTo)
 	{
@@ -70,7 +78,9 @@ public sealed partial class RuleConditionDescriptor : SerializableDescriptor<Rul
 	}
 
 	/// <summary>
-	/// <para>Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.</para>
+	/// <para>
+	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
+	/// </para>
 	/// </summary>
 	public RuleConditionDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ConditionOperator value)
 	{
@@ -79,7 +89,9 @@ public sealed partial class RuleConditionDescriptor : SerializableDescriptor<Rul
 	}
 
 	/// <summary>
-	/// <para>The value that is compared against the `applies_to` field using the operator.</para>
+	/// <para>
+	/// The value that is compared against the <c>applies_to</c> field using the operator.
+	/// </para>
 	/// </summary>
 	public RuleConditionDescriptor Value(double value)
 	{

@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class ParentIdQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>ID of the parent document.</para>
+	/// <para>
+	/// ID of the parent document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
@@ -50,7 +59,9 @@ public sealed partial class ParentIdQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// <para>
+	/// Name of the child relationship mapped for the <c>join</c> field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; set; }
@@ -73,7 +84,12 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	private string? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ParentIdQueryDescriptor Boost(float? boost)
 	{
@@ -82,7 +98,9 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	}
 
 	/// <summary>
-	/// <para>ID of the parent document.</para>
+	/// <para>
+	/// ID of the parent document.
+	/// </para>
 	/// </summary>
 	public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -91,7 +109,9 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	}
 
 	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// <para>
+	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
+	/// </para>
 	/// </summary>
 	public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
@@ -106,7 +126,9 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	}
 
 	/// <summary>
-	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// <para>
+	/// Name of the child relationship mapped for the <c>join</c> field.
+	/// </para>
 	/// </summary>
 	public ParentIdQueryDescriptor Type(string? type)
 	{

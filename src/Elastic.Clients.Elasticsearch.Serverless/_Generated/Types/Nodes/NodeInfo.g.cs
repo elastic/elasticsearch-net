@@ -37,7 +37,9 @@ public sealed partial class NodeInfo
 	public string BuildFlavor { get; init; }
 
 	/// <summary>
-	/// <para>Short hash of the last git commit in this release.</para>
+	/// <para>
+	/// Short hash of the last git commit in this release.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("build_hash")]
 	public string BuildHash { get; init; }
@@ -45,7 +47,9 @@ public sealed partial class NodeInfo
 	public string BuildType { get; init; }
 
 	/// <summary>
-	/// <para>The node’s host name.</para>
+	/// <para>
+	/// The node’s host name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("host")]
 	public string Host { get; init; }
@@ -55,7 +59,9 @@ public sealed partial class NodeInfo
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoIngest? Ingest { get; init; }
 
 	/// <summary>
-	/// <para>The node’s IP address.</para>
+	/// <para>
+	/// The node’s IP address.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ip")]
 	public string Ip { get; init; }
@@ -65,7 +71,9 @@ public sealed partial class NodeInfo
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.PluginStats>? Modules { get; init; }
 
 	/// <summary>
-	/// <para>The node's name</para>
+	/// <para>
+	/// The node's name
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
@@ -85,13 +93,17 @@ public sealed partial class NodeInfo
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeThreadPoolInfo>? ThreadPool { get; init; }
 
 	/// <summary>
-	/// <para>Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by Indexing Buffer settings.</para>
+	/// <para>
+	/// Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by Indexing Buffer settings.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_indexing_buffer")]
 	public long? TotalIndexingBuffer { get; init; }
 
 	/// <summary>
-	/// <para>Same as total_indexing_buffer, but expressed in bytes.</para>
+	/// <para>
+	/// Same as total_indexing_buffer, but expressed in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_indexing_buffer_in_bytes")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? TotalIndexingBufferInBytes { get; init; }
@@ -99,13 +111,17 @@ public sealed partial class NodeInfo
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoTransport? Transport { get; init; }
 
 	/// <summary>
-	/// <para>Host and port where transport HTTP connections are accepted.</para>
+	/// <para>
+	/// Host and port where transport HTTP connections are accepted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_address")]
 	public string TransportAddress { get; init; }
 
 	/// <summary>
-	/// <para>Elasticsearch version running on this node.</para>
+	/// <para>
+	/// Elasticsearch version running on this node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public string Version { get; init; }

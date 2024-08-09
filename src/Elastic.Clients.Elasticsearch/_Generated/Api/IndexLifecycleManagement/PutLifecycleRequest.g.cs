@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public sealed partial class PutLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.</para>
+/// <para>
+/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+/// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
 {
@@ -60,13 +66,17 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	internal override string OperationName => "ilm.put_lifecycle";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -75,7 +85,9 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 }
 
 /// <summary>
-/// <para>Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.</para>
+/// <para>
+/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+/// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>
 {

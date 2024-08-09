@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalyticsStatsProgress
 {
 	/// <summary>
-	/// <para>Defines the phase of the data frame analytics job.</para>
+	/// <para>
+	/// Defines the phase of the data frame analytics job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("phase")]
 	public string Phase { get; init; }
 
 	/// <summary>
-	/// <para>The progress that the data frame analytics job has made expressed in percentage.</para>
+	/// <para>
+	/// The progress that the data frame analytics job has made expressed in percentage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("progress_percent")]
 	public int ProgressPercent { get; init; }

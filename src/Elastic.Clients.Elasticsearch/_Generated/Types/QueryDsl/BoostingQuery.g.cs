@@ -30,25 +30,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class BoostingQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Query used to decrease the relevance score of matching documents.</para>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("negative")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("negative_boost")]
 	public double NegativeBoost { get; set; }
 
 	/// <summary>
-	/// <para>Any returned documents must match this query.</para>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("positive")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
@@ -77,7 +88,12 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -86,7 +102,9 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Query used to decrease the relevance score of matching documents.</para>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)
 	{
@@ -113,7 +131,9 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor<TDocument> NegativeBoost(double negativeBoost)
 	{
@@ -122,7 +142,9 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Any returned documents must match this query.</para>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query positive)
 	{
@@ -226,7 +248,12 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor Boost(float? boost)
 	{
@@ -235,7 +262,9 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	}
 
 	/// <summary>
-	/// <para>Query used to decrease the relevance score of matching documents.</para>
+	/// <para>
+	/// Query used to decrease the relevance score of matching documents.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)
 	{
@@ -262,7 +291,9 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	}
 
 	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
+	/// <para>
+	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor NegativeBoost(double negativeBoost)
 	{
@@ -271,7 +302,9 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	}
 
 	/// <summary>
-	/// <para>Any returned documents must match this query.</para>
+	/// <para>
+	/// Any returned documents must match this query.
+	/// </para>
 	/// </summary>
 	public BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query positive)
 	{

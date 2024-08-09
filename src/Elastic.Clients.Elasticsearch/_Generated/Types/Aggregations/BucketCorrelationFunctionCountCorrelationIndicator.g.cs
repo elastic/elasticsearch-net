@@ -30,19 +30,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
 {
 	/// <summary>
-	/// <para>The total number of documents that initially created the expectations. It’s required to be greater<br/>than or equal to the sum of all values in the buckets_path as this is the originating superset of data<br/>to which the term values are correlated.</para>
+	/// <para>
+	/// The total number of documents that initially created the expectations. It’s required to be greater
+	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
+	/// to which the term values are correlated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public int DocCount { get; set; }
 
 	/// <summary>
-	/// <para>An array of numbers with which to correlate the configured `bucket_path` values.<br/>The length of this value must always equal the number of buckets returned by the `bucket_path`.</para>
+	/// <para>
+	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
+	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expectations")]
 	public ICollection<double> Expectations { get; set; }
 
 	/// <summary>
-	/// <para>An array of fractions to use when averaging and calculating variance. This should be used if<br/>the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,<br/>must equal expectations.</para>
+	/// <para>
+	/// An array of fractions to use when averaging and calculating variance. This should be used if
+	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
+	/// must equal expectations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fractions")]
 	public ICollection<double>? Fractions { get; set; }
@@ -61,7 +72,11 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorDe
 	private ICollection<double>? FractionsValue { get; set; }
 
 	/// <summary>
-	/// <para>The total number of documents that initially created the expectations. It’s required to be greater<br/>than or equal to the sum of all values in the buckets_path as this is the originating superset of data<br/>to which the term values are correlated.</para>
+	/// <para>
+	/// The total number of documents that initially created the expectations. It’s required to be greater
+	/// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
+	/// to which the term values are correlated.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor DocCount(int docCount)
 	{
@@ -70,7 +85,10 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorDe
 	}
 
 	/// <summary>
-	/// <para>An array of numbers with which to correlate the configured `bucket_path` values.<br/>The length of this value must always equal the number of buckets returned by the `bucket_path`.</para>
+	/// <para>
+	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
+	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(ICollection<double> expectations)
 	{
@@ -79,7 +97,11 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorDe
 	}
 
 	/// <summary>
-	/// <para>An array of fractions to use when averaging and calculating variance. This should be used if<br/>the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,<br/>must equal expectations.</para>
+	/// <para>
+	/// An array of fractions to use when averaging and calculating variance. This should be used if
+	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
+	/// must equal expectations.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(ICollection<double>? fractions)
 	{

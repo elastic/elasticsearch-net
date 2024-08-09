@@ -32,43 +32,65 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ClearCacheRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the fields cache.<br/>Use the `fields` parameter to clear the cache of specific fields only.</para>
+	/// <para>
+	/// If <c>true</c>, clears the fields cache.
+	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
+	/// </para>
 	/// </summary>
 	public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of field names used to limit the `fielddata` parameter.</para>
+	/// <para>
+	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the query cache.</para>
+	/// <para>
+	/// If <c>true</c>, clears the query cache.
+	/// </para>
 	/// </summary>
 	public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the request cache.</para>
+	/// <para>
+	/// If <c>true</c>, clears the request cache.
+	/// </para>
 	/// </summary>
 	public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 }
 
 /// <summary>
-/// <para>Clears the caches of one or more indices.<br/>For data streams, the API clears the caches of the stream’s backing indices.</para>
+/// <para>
+/// Clears the caches of one or more indices.
+/// For data streams, the API clears the caches of the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestParameters>
 {
@@ -89,50 +111,72 @@ public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestPa
 	internal override string OperationName => "indices.clear_cache";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the fields cache.<br/>Use the `fields` parameter to clear the cache of specific fields only.</para>
+	/// <para>
+	/// If <c>true</c>, clears the fields cache.
+	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of field names used to limit the `fielddata` parameter.</para>
+	/// <para>
+	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the query cache.</para>
+	/// <para>
+	/// If <c>true</c>, clears the query cache.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 
 	/// <summary>
-	/// <para>If `true`, clears the request cache.</para>
+	/// <para>
+	/// If <c>true</c>, clears the request cache.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 }
 
 /// <summary>
-/// <para>Clears the caches of one or more indices.<br/>For data streams, the API clears the caches of the stream’s backing indices.</para>
+/// <para>
+/// Clears the caches of one or more indices.
+/// For data streams, the API clears the caches of the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDescriptor<ClearCacheRequestDescriptor<TDocument>, ClearCacheRequestParameters>
 {
@@ -174,7 +218,10 @@ public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Clears the caches of one or more indices.<br/>For data streams, the API clears the caches of the stream’s backing indices.</para>
+/// <para>
+/// Clears the caches of one or more indices.
+/// For data streams, the API clears the caches of the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor : RequestDescriptor<ClearCacheRequestDescriptor, ClearCacheRequestParameters>
 {

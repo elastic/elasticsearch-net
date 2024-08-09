@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class IndexTemplateSummary
 {
 	/// <summary>
-	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// <para>
+	/// Aliases to add.
+	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
+	/// Otherwise, these are index aliases.
+	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias))]
@@ -39,13 +44,18 @@ public sealed partial class IndexTemplateSummary
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
 
 	/// <summary>
-	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// <para>
+	/// Mapping for fields in the index.
+	/// If specified, this mapping can include field names, field data types, and mapping parameters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? Mappings { get; init; }
 
 	/// <summary>
-	/// <para>Configuration options for the index.</para>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; init; }

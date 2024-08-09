@@ -30,37 +30,52 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DatafeedStats
 {
 	/// <summary>
-	/// <para>For started datafeeds only, contains messages relating to the selection of a node.</para>
+	/// <para>
+	/// For started datafeeds only, contains messages relating to the selection of a node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("assignment_explanation")]
 	public string? AssignmentExplanation { get; init; }
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the datafeed.<br/>This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.<br/>It must start and end with alphanumeric characters.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed.
+	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+	/// It must start and end with alphanumeric characters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("datafeed_id")]
 	public string DatafeedId { get; init; }
 
 	/// <summary>
-	/// <para>For started datafeeds only, this information pertains to the node upon which the datafeed is started.</para>
+	/// <para>
+	/// For started datafeeds only, this information pertains to the node upon which the datafeed is started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNode? Node { get; init; }
 
 	/// <summary>
-	/// <para>An object containing the running state for this datafeed.<br/>It is only provided if the datafeed is started.</para>
+	/// <para>
+	/// An object containing the running state for this datafeed.
+	/// It is only provided if the datafeed is started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("running_state")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState? RunningState { get; init; }
 
 	/// <summary>
-	/// <para>The status of the datafeed, which can be one of the following values: `starting`, `started`, `stopping`, `stopped`.</para>
+	/// <para>
+	/// The status of the datafeed, which can be one of the following values: <c>starting</c>, <c>started</c>, <c>stopping</c>, <c>stopped</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; init; }
 
 	/// <summary>
-	/// <para>An object that provides statistical information about timing aspect of this datafeed.</para>
+	/// <para>
+	/// An object that provides statistical information about timing aspect of this datafeed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timing_stats")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats TimingStats { get; init; }

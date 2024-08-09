@@ -34,7 +34,9 @@ public sealed partial class StartSlmRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Turns on snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Turns on snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class StartSlmRequest : PlainRequest<StartSlmRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class StartSlmRequest : PlainRequest<StartSlmRequestParame
 }
 
 /// <summary>
-/// <para>Turns on snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Turns on snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class StartSlmRequestDescriptor : RequestDescriptor<StartSlmRequestDescriptor, StartSlmRequestParameters>
 {

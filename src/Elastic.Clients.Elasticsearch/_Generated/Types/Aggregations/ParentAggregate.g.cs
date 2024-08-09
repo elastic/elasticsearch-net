@@ -77,7 +77,9 @@ internal sealed partial class ParentAggregateConverter : JsonConverter<ParentAgg
 public sealed partial class ParentAggregate : IAggregate
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

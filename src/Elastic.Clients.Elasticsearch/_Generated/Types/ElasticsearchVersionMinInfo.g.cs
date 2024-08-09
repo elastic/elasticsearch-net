@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>Reduced (minimal) info ElasticsearchVersion</para>
+/// <para>
+/// Reduced (minimal) info ElasticsearchVersion
+/// </para>
 /// </summary>
 public sealed partial class ElasticsearchVersionMinInfo
 {

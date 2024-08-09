@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement;
 public sealed partial class PutLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a snapshot lifecycle policy.</para>
+/// <para>
+/// Creates or updates a snapshot lifecycle policy.
+/// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
 {
@@ -60,50 +66,66 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	internal override string OperationName => "slm.put_lifecycle";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Configuration for each snapshot created by the policy.</para>
+	/// <para>
+	/// Configuration for each snapshot created by the policy.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("config")]
 	public Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement.SlmConfiguration? Config { get; set; }
 
 	/// <summary>
-	/// <para>Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.</para>
+	/// <para>
+	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name? Name { get; set; }
 
 	/// <summary>
-	/// <para>Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.</para>
+	/// <para>
+	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("repository")]
 	public string? Repository { get; set; }
 
 	/// <summary>
-	/// <para>Retention rules used to retain and delete snapshots created by the policy.</para>
+	/// <para>
+	/// Retention rules used to retain and delete snapshots created by the policy.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retention")]
 	public Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement.Retention? Retention { get; set; }
 
 	/// <summary>
-	/// <para>Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.</para>
+	/// <para>
+	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("schedule")]
 	public string? Schedule { get; set; }
 }
 
 /// <summary>
-/// <para>Creates or updates a snapshot lifecycle policy.</para>
+/// <para>
+/// Creates or updates a snapshot lifecycle policy.
+/// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>
 {
@@ -141,7 +163,9 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	private string? ScheduleValue { get; set; }
 
 	/// <summary>
-	/// <para>Configuration for each snapshot created by the policy.</para>
+	/// <para>
+	/// Configuration for each snapshot created by the policy.
+	/// </para>
 	/// </summary>
 	public PutLifecycleRequestDescriptor Config(Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement.SlmConfiguration? config)
 	{
@@ -168,7 +192,9 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.</para>
+	/// <para>
+	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
+	/// </para>
 	/// </summary>
 	public PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
 	{
@@ -177,7 +203,9 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.</para>
+	/// <para>
+	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
+	/// </para>
 	/// </summary>
 	public PutLifecycleRequestDescriptor Repository(string? repository)
 	{
@@ -186,7 +214,9 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Retention rules used to retain and delete snapshots created by the policy.</para>
+	/// <para>
+	/// Retention rules used to retain and delete snapshots created by the policy.
+	/// </para>
 	/// </summary>
 	public PutLifecycleRequestDescriptor Retention(Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement.Retention? retention)
 	{
@@ -213,7 +243,9 @@ public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<Pu
 	}
 
 	/// <summary>
-	/// <para>Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.</para>
+	/// <para>
+	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
+	/// </para>
 	/// </summary>
 	public PutLifecycleRequestDescriptor Schedule(string? schedule)
 	{

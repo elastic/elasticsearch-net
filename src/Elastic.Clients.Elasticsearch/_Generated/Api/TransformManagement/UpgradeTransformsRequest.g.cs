@@ -32,18 +32,30 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class UpgradeTransformsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>When true, the request checks for updates but does not run them.</para>
+	/// <para>
+	/// When true, the request checks for updates but does not run them.
+	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and<br/>returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
+	/// returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Upgrades all transforms.<br/>This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It<br/>also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not<br/>affect the source and destination indices. The upgrade also does not affect the roles that transforms use when<br/>Elasticsearch security features are enabled; the role used to read source data and write to the destination index<br/>remains unchanged.</para>
+/// <para>
+/// Upgrades all transforms.
+/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It
+/// also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not
+/// affect the source and destination indices. The upgrade also does not affect the roles that transforms use when
+/// Elasticsearch security features are enabled; the role used to read source data and write to the destination index
+/// remains unchanged.
+/// </para>
 /// </summary>
 public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTransformsRequestParameters>
 {
@@ -56,20 +68,32 @@ public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTrans
 	internal override string OperationName => "transform.upgrade_transforms";
 
 	/// <summary>
-	/// <para>When true, the request checks for updates but does not run them.</para>
+	/// <para>
+	/// When true, the request checks for updates but does not run them.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and<br/>returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
+	/// returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Upgrades all transforms.<br/>This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It<br/>also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not<br/>affect the source and destination indices. The upgrade also does not affect the roles that transforms use when<br/>Elasticsearch security features are enabled; the role used to read source data and write to the destination index<br/>remains unchanged.</para>
+/// <para>
+/// Upgrades all transforms.
+/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It
+/// also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not
+/// affect the source and destination indices. The upgrade also does not affect the roles that transforms use when
+/// Elasticsearch security features are enabled; the role used to read source data and write to the destination index
+/// remains unchanged.
+/// </para>
 /// </summary>
 public sealed partial class UpgradeTransformsRequestDescriptor : RequestDescriptor<UpgradeTransformsRequestDescriptor, UpgradeTransformsRequestParameters>
 {

@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DatafeedRunningState
 {
 	/// <summary>
-	/// <para>Indicates if the datafeed is "real-time"; meaning that the datafeed has no configured `end` time.</para>
+	/// <para>
+	/// Indicates if the datafeed is "real-time"; meaning that the datafeed has no configured <c>end</c> time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("real_time_configured")]
 	public bool RealTimeConfigured { get; init; }
 
 	/// <summary>
-	/// <para>Indicates whether the datafeed has finished running on the available past data.<br/>For datafeeds without a configured `end` time, this means that the datafeed is now running on "real-time" data.</para>
+	/// <para>
+	/// Indicates whether the datafeed has finished running on the available past data.
+	/// For datafeeds without a configured <c>end</c> time, this means that the datafeed is now running on "real-time" data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("real_time_running")]
 	public bool RealTimeRunning { get; init; }
 
 	/// <summary>
-	/// <para>Provides the latest time interval the datafeed has searched.</para>
+	/// <para>
+	/// Provides the latest time interval the datafeed has searched.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_interval")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval? SearchInterval { get; init; }

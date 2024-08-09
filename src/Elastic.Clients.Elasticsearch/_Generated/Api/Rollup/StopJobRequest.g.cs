@@ -32,18 +32,26 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class StopJobRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `wait_for_completion` is `true`, the API blocks for (at maximum) the specified duration while waiting for the job to stop.<br/>If more than `timeout` time has passed, the API throws a timeout exception.</para>
+	/// <para>
+	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
+	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If set to `true`, causes the API to block until the indexer state completely stops.<br/>If set to `false`, the API returns immediately and the indexer is stopped asynchronously in the background.</para>
+	/// <para>
+	/// If set to <c>true</c>, causes the API to block until the indexer state completely stops.
+	/// If set to <c>false</c>, the API returns immediately and the indexer is stopped asynchronously in the background.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Stops an existing, started rollup job.</para>
+/// <para>
+/// Stops an existing, started rollup job.
+/// </para>
 /// </summary>
 public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParameters>
 {
@@ -60,20 +68,28 @@ public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParamete
 	internal override string OperationName => "rollup.stop_job";
 
 	/// <summary>
-	/// <para>If `wait_for_completion` is `true`, the API blocks for (at maximum) the specified duration while waiting for the job to stop.<br/>If more than `timeout` time has passed, the API throws a timeout exception.</para>
+	/// <para>
+	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
+	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If set to `true`, causes the API to block until the indexer state completely stops.<br/>If set to `false`, the API returns immediately and the indexer is stopped asynchronously in the background.</para>
+	/// <para>
+	/// If set to <c>true</c>, causes the API to block until the indexer state completely stops.
+	/// If set to <c>false</c>, the API returns immediately and the indexer is stopped asynchronously in the background.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Stops an existing, started rollup job.</para>
+/// <para>
+/// Stops an existing, started rollup job.
+/// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescriptor<StopJobRequestDescriptor<TDocument>, StopJobRequestParameters>
 {
@@ -106,7 +122,9 @@ public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Stops an existing, started rollup job.</para>
+/// <para>
+/// Stops an existing, started rollup job.
+/// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor : RequestDescriptor<StopJobRequestDescriptor, StopJobRequestParameters>
 {

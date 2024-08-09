@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class TestPopulation
 {
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// <para>
+	/// A filter used to define a set of records to run unpaired t-test on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Filter { get; set; }
@@ -61,7 +65,9 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -70,7 +76,9 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -79,7 +87,9 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -88,7 +98,9 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// <para>
+	/// A filter used to define a set of records to run unpaired t-test on.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{
@@ -196,7 +208,9 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -205,7 +219,9 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -214,7 +230,9 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>The field to aggregate.</para>
+	/// <para>
+	/// The field to aggregate.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -223,7 +241,9 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// <para>
+	/// A filter used to define a set of records to run unpaired t-test on.
+	/// </para>
 	/// </summary>
 	public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
 	{

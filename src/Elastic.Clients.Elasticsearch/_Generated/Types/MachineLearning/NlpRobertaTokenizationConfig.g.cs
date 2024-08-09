@@ -28,36 +28,48 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 /// <summary>
-/// <para>RoBERTa tokenization configuration options</para>
+/// <para>
+/// RoBERTa tokenization configuration options
+/// </para>
 /// </summary>
 public sealed partial class NlpRobertaTokenizationConfig
 {
 	/// <summary>
-	/// <para>Should the tokenizer prefix input with a space character</para>
+	/// <para>
+	/// Should the tokenizer prefix input with a space character
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("add_prefix_space")]
 	public bool? AddPrefixSpace { get; set; }
 
 	/// <summary>
-	/// <para>Maximum input sequence length for the model</para>
+	/// <para>
+	/// Maximum input sequence length for the model
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_sequence_length")]
 	public int? MaxSequenceLength { get; set; }
 
 	/// <summary>
-	/// <para>Tokenization spanning options. Special value of -1 indicates no spanning takes place</para>
+	/// <para>
+	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
 
 	/// <summary>
-	/// <para>Should tokenization input be automatically truncated before sending to the model for inference</para>
+	/// <para>
+	/// Should tokenization input be automatically truncated before sending to the model for inference
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 
 	/// <summary>
-	/// <para>Is tokenization completed with special tokens</para>
+	/// <para>
+	/// Is tokenization completed with special tokens
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
@@ -66,7 +78,9 @@ public sealed partial class NlpRobertaTokenizationConfig
 }
 
 /// <summary>
-/// <para>RoBERTa tokenization configuration options</para>
+/// <para>
+/// RoBERTa tokenization configuration options
+/// </para>
 /// </summary>
 public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>
 {
@@ -83,7 +97,9 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	private bool? WithSpecialTokensValue { get; set; }
 
 	/// <summary>
-	/// <para>Should the tokenizer prefix input with a space character</para>
+	/// <para>
+	/// Should the tokenizer prefix input with a space character
+	/// </para>
 	/// </summary>
 	public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)
 	{
@@ -92,7 +108,9 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Maximum input sequence length for the model</para>
+	/// <para>
+	/// Maximum input sequence length for the model
+	/// </para>
 	/// </summary>
 	public NlpRobertaTokenizationConfigDescriptor MaxSequenceLength(int? maxSequenceLength)
 	{
@@ -101,7 +119,9 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Tokenization spanning options. Special value of -1 indicates no spanning takes place</para>
+	/// <para>
+	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
+	/// </para>
 	/// </summary>
 	public NlpRobertaTokenizationConfigDescriptor Span(int? span)
 	{
@@ -110,7 +130,9 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Should tokenization input be automatically truncated before sending to the model for inference</para>
+	/// <para>
+	/// Should tokenization input be automatically truncated before sending to the model for inference
+	/// </para>
 	/// </summary>
 	public NlpRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? truncate)
 	{
@@ -119,7 +141,9 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Is tokenization completed with special tokens</para>
+	/// <para>
+	/// Is tokenization completed with special tokens
+	/// </para>
 	/// </summary>
 	public NlpRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? withSpecialTokens = true)
 	{

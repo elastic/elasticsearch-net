@@ -30,37 +30,52 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class AutoDateHistogramAggregation
 {
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets")]
 	public int? Buckets { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
+	/// <para>
+	/// The minimum rounding interval.
+	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_interval")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public DateTimeOffset? Missing { get; set; }
 
 	/// <summary>
-	/// <para>Time zone specified as a ISO 8601 UTC offset.</para>
+	/// <para>
+	/// Time zone specified as a ISO 8601 UTC offset.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("offset")]
 	public string? Offset { get; set; }
@@ -70,7 +85,9 @@ public sealed partial class AutoDateHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>Time zone ID.</para>
+	/// <para>
+	/// Time zone ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
@@ -99,7 +116,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
 	{
@@ -108,7 +127,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -117,7 +138,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -126,7 +149,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -135,7 +160,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Format(string? format)
 	{
@@ -144,7 +172,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
+	/// <para>
+	/// The minimum rounding interval.
+	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval)
 	{
@@ -153,7 +184,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 	{
@@ -162,7 +196,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>Time zone specified as a ISO 8601 UTC offset.</para>
+	/// <para>
+	/// Time zone specified as a ISO 8601 UTC offset.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> Offset(string? offset)
 	{
@@ -201,7 +237,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	}
 
 	/// <summary>
-	/// <para>Time zone ID.</para>
+	/// <para>
+	/// Time zone ID.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -301,7 +339,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	private string? TimeZoneValue { get; set; }
 
 	/// <summary>
-	/// <para>The target number of buckets.</para>
+	/// <para>
+	/// The target number of buckets.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Buckets(int? buckets)
 	{
@@ -310,7 +350,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -319,7 +361,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -328,7 +372,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -337,7 +383,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// <para>
+	/// The date format used to format <c>key_as_string</c> in the response.
+	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Format(string? format)
 	{
@@ -346,7 +395,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
+	/// <para>
+	/// The minimum rounding interval.
+	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval)
 	{
@@ -355,7 +407,10 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 	{
@@ -364,7 +419,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Time zone specified as a ISO 8601 UTC offset.</para>
+	/// <para>
+	/// Time zone specified as a ISO 8601 UTC offset.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor Offset(string? offset)
 	{
@@ -403,7 +460,9 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Time zone ID.</para>
+	/// <para>
+	/// Time zone ID.
+	/// </para>
 	/// </summary>
 	public AutoDateHistogramAggregationDescriptor TimeZone(string? timeZone)
 	{

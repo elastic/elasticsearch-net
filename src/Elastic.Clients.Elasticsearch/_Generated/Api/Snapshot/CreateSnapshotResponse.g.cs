@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class CreateSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Equals `true` if the snapshot was accepted. Present when the request had `wait_for_completion` set to `false`</para>
+	/// <para>
+	/// Equals <c>true</c> if the snapshot was accepted. Present when the request had <c>wait_for_completion</c> set to <c>false</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("accepted")]
 	public bool? Accepted { get; init; }
 
 	/// <summary>
-	/// <para>Snapshot information. Present when the request had `wait_for_completion` set to `true`</para>
+	/// <para>
+	/// Snapshot information. Present when the request had <c>wait_for_completion</c> set to <c>true</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("snapshot")]
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo? Snapshot { get; init; }

@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class Groupings
 {
 	/// <summary>
-	/// <para>A date histogram group aggregates a date field into time-based buckets.<br/>This group is mandatory; you currently cannot roll up documents without a timestamp and a `date_histogram` group.</para>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogram { get; set; }
 
 	/// <summary>
-	/// <para>The histogram group aggregates one or more numeric fields into numeric histogram intervals.</para>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? Histogram { get; set; }
 
 	/// <summary>
-	/// <para>The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.<br/>The indexer enumerates and stores all values of a field for each time-period.<br/>This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.</para>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? Terms { get; set; }
@@ -67,7 +76,10 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> TermsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A date histogram group aggregates a date field into time-based buckets.<br/>This group is mandatory; you currently cannot roll up documents without a timestamp and a `date_histogram` group.</para>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? dateHistogram)
 	{
@@ -94,7 +106,9 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The histogram group aggregates one or more numeric fields into numeric histogram intervals.</para>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? histogram)
 	{
@@ -121,7 +135,11 @@ public sealed partial class GroupingsDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.<br/>The indexer enumerates and stores all values of a field for each time-period.<br/>This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.</para>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? terms)
 	{
@@ -221,7 +239,10 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	private Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> TermsDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A date histogram group aggregates a date field into time-based buckets.<br/>This group is mandatory; you currently cannot roll up documents without a timestamp and a `date_histogram` group.</para>
+	/// <para>
+	/// A date histogram group aggregates a date field into time-based buckets.
+	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? dateHistogram)
 	{
@@ -248,7 +269,9 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	}
 
 	/// <summary>
-	/// <para>The histogram group aggregates one or more numeric fields into numeric histogram intervals.</para>
+	/// <para>
+	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? histogram)
 	{
@@ -275,7 +298,11 @@ public sealed partial class GroupingsDescriptor : SerializableDescriptor<Groupin
 	}
 
 	/// <summary>
-	/// <para>The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.<br/>The indexer enumerates and stores all values of a field for each time-period.<br/>This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.</para>
+	/// <para>
+	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
+	/// The indexer enumerates and stores all values of a field for each time-period.
+	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
+	/// </para>
 	/// </summary>
 	public GroupingsDescriptor Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? terms)
 	{

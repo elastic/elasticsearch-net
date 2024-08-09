@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexingSlowlogTresholds
 {
 	/// <summary>
-	/// <para>The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.json`.<br/>Log and the thresholds are configured in the same way as the search slowlog.</para>
+	/// <para>
+	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
+	/// Log and the thresholds are configured in the same way as the search slowlog.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Index { get; set; }
@@ -49,7 +52,10 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.json`.<br/>Log and the thresholds are configured in the same way as the search slowlog.</para>
+	/// <para>
+	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
+	/// Log and the thresholds are configured in the same way as the search slowlog.
+	/// </para>
 	/// </summary>
 	public IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? index)
 	{

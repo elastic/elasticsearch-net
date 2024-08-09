@@ -32,18 +32,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class ResetJobRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether annotations that have been added by the<br/>user should be deleted along with any auto-generated annotations when the job is<br/>reset.</para>
+	/// <para>
+	/// Specifies whether annotations that have been added by the
+	/// user should be deleted along with any auto-generated annotations when the job is
+	/// reset.
+	/// </para>
 	/// </summary>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before<br/>returning.</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before
+	/// returning.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Resets an anomaly detection job.<br/>All model state and results are deleted. The job is ready to start over as if<br/>it had just been created.<br/>It is not currently possible to reset multiple jobs using wildcards or a<br/>comma separated list.</para>
+/// <para>
+/// Resets an anomaly detection job.
+/// All model state and results are deleted. The job is ready to start over as if
+/// it had just been created.
+/// It is not currently possible to reset multiple jobs using wildcards or a
+/// comma separated list.
+/// </para>
 /// </summary>
 public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParameters>
 {
@@ -60,20 +73,33 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 	internal override string OperationName => "ml.reset_job";
 
 	/// <summary>
-	/// <para>Specifies whether annotations that have been added by the<br/>user should be deleted along with any auto-generated annotations when the job is<br/>reset.</para>
+	/// <para>
+	/// Specifies whether annotations that have been added by the
+	/// user should be deleted along with any auto-generated annotations when the job is
+	/// reset.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before<br/>returning.</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before
+	/// returning.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Resets an anomaly detection job.<br/>All model state and results are deleted. The job is ready to start over as if<br/>it had just been created.<br/>It is not currently possible to reset multiple jobs using wildcards or a<br/>comma separated list.</para>
+/// <para>
+/// Resets an anomaly detection job.
+/// All model state and results are deleted. The job is ready to start over as if
+/// it had just been created.
+/// It is not currently possible to reset multiple jobs using wildcards or a
+/// comma separated list.
+/// </para>
 /// </summary>
 public sealed partial class ResetJobRequestDescriptor : RequestDescriptor<ResetJobRequestDescriptor, ResetJobRequestParameters>
 {

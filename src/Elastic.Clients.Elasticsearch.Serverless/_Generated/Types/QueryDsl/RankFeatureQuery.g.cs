@@ -30,25 +30,36 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class RankFeatureQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("linear")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
 
 	/// <summary>
-	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("log")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
@@ -56,13 +67,17 @@ public sealed partial class RankFeatureQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("saturation")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
 
 	/// <summary>
-	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
@@ -95,7 +110,12 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -104,7 +124,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -113,7 +135,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -122,7 +146,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -131,7 +157,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLinear? linear)
 	{
@@ -158,7 +186,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Log(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLogarithm? log)
 	{
@@ -191,7 +221,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Saturation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSaturation? saturation)
 	{
@@ -218,7 +250,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Sigmoid(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
 	{
@@ -354,7 +388,12 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Boost(float? boost)
 	{
@@ -363,7 +402,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -372,7 +413,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -381,7 +424,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// <para>
+	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -390,7 +435,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLinear? linear)
 	{
@@ -417,7 +464,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionLogarithm? log)
 	{
@@ -450,7 +499,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSaturation? saturation)
 	{
@@ -477,7 +528,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// <para>
+	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+	/// </para>
 	/// </summary>
 	public RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
 	{

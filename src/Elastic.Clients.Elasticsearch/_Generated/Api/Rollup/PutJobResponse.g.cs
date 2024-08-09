@@ -29,7 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class PutJobResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
+	/// <para>
+	/// For a successful response, this value is always true. On failure, an exception is returned instead.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }

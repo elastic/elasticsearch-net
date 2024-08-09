@@ -30,73 +30,105 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class EnrichProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// <para>
+	/// The maximum number of matched documents to include under the configured target field.
+	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
+	/// In order to avoid documents getting too large, the maximum allowed value is 128.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_matches")]
 	public int? MaxMatches { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
 
 	/// <summary>
-	/// <para>The name of the enrich policy to use.</para>
+	/// <para>
+	/// The name of the enrich policy to use.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("policy_name")]
 	public string PolicyName { get; set; }
 
 	/// <summary>
-	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// <para>
+	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
+	/// This option is only used for <c>geo_match</c> enrich policy types.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shape_relation")]
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelation { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
@@ -129,7 +161,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -138,7 +173,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -147,7 +185,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -156,7 +197,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -165,7 +209,9 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -174,7 +220,9 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -183,7 +231,9 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -192,7 +242,11 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// <para>
+	/// The maximum number of matched documents to include under the configured target field.
+	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
+	/// In order to avoid documents getting too large, the maximum allowed value is 128.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> MaxMatches(int? maxMatches)
 	{
@@ -201,7 +255,9 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -240,7 +296,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
@@ -249,7 +308,9 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The name of the enrich policy to use.</para>
+	/// <para>
+	/// The name of the enrich policy to use.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> PolicyName(string policyName)
 	{
@@ -258,7 +319,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// <para>
+	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
+	/// This option is only used for <c>geo_match</c> enrich policy types.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
 	{
@@ -267,7 +331,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -276,7 +343,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
@@ -285,7 +355,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -294,7 +367,10 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -419,7 +495,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	private Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Description(string? description)
 	{
@@ -428,7 +507,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -437,7 +519,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -446,7 +531,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -455,7 +543,9 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor If(string? value)
 	{
@@ -464,7 +554,9 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -473,7 +565,9 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -482,7 +576,11 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// <para>
+	/// The maximum number of matched documents to include under the configured target field.
+	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
+	/// In order to avoid documents getting too large, the maximum allowed value is 128.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor MaxMatches(int? maxMatches)
 	{
@@ -491,7 +589,9 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -530,7 +630,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Override(bool? value = true)
 	{
@@ -539,7 +642,9 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The name of the enrich policy to use.</para>
+	/// <para>
+	/// The name of the enrich policy to use.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor PolicyName(string policyName)
 	{
@@ -548,7 +653,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// <para>
+	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
+	/// This option is only used for <c>geo_match</c> enrich policy types.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
 	{
@@ -557,7 +665,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor Tag(string? tag)
 	{
@@ -566,7 +677,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
@@ -575,7 +689,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -584,7 +701,10 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// <para>
+	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public EnrichProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

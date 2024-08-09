@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class PhraseSuggestCollateQuery
 {
 	/// <summary>
-	/// <para>The search template ID.</para>
+	/// <para>
+	/// The search template ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? Id { get; set; }
 
 	/// <summary>
-	/// <para>The query source.</para>
+	/// <para>
+	/// The query source.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class PhraseSuggestCollateQueryDescriptor : SerializableDe
 	private string? SourceValue { get; set; }
 
 	/// <summary>
-	/// <para>The search template ID.</para>
+	/// <para>
+	/// The search template ID.
+	/// </para>
 	/// </summary>
 	public PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id? id)
 	{
@@ -63,7 +69,9 @@ public sealed partial class PhraseSuggestCollateQueryDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The query source.</para>
+	/// <para>
+	/// The query source.
+	/// </para>
 	/// </summary>
 	public PhraseSuggestCollateQueryDescriptor Source(string? source)
 	{

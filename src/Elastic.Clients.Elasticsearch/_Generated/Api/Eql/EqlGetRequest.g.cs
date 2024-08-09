@@ -32,18 +32,26 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 public sealed partial class EqlGetRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period for which the search and its results are stored on the cluster.<br/>Defaults to the keep_alive value set by the search’s EQL search API request.</para>
+	/// <para>
+	/// Period for which the search and its results are stored on the cluster.
+	/// Defaults to the keep_alive value set by the search’s EQL search API request.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Timeout duration to wait for the request to finish.<br/>Defaults to no timeout, meaning the request waits for complete search results.</para>
+	/// <para>
+	/// Timeout duration to wait for the request to finish.
+	/// Defaults to no timeout, meaning the request waits for complete search results.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns the current status and available results for an async EQL search or a stored synchronous EQL search.</para>
+/// <para>
+/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// </para>
 /// </summary>
 public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters>
 {
@@ -60,20 +68,28 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	internal override string OperationName => "eql.get";
 
 	/// <summary>
-	/// <para>Period for which the search and its results are stored on the cluster.<br/>Defaults to the keep_alive value set by the search’s EQL search API request.</para>
+	/// <para>
+	/// Period for which the search and its results are stored on the cluster.
+	/// Defaults to the keep_alive value set by the search’s EQL search API request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Timeout duration to wait for the request to finish.<br/>Defaults to no timeout, meaning the request waits for complete search results.</para>
+	/// <para>
+	/// Timeout duration to wait for the request to finish.
+	/// Defaults to no timeout, meaning the request waits for complete search results.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns the current status and available results for an async EQL search or a stored synchronous EQL search.</para>
+/// <para>
+/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// </para>
 /// </summary>
 public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescriptor<EqlGetRequestDescriptor<TDocument>, EqlGetRequestParameters>
 {
@@ -106,7 +122,9 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Returns the current status and available results for an async EQL search or a stored synchronous EQL search.</para>
+/// <para>
+/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// </para>
 /// </summary>
 public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRequestDescriptor, EqlGetRequestParameters>
 {

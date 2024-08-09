@@ -32,17 +32,23 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public enum GroupBy
 {
 	/// <summary>
-	/// <para>Parent task ID</para>
+	/// <para>
+	/// Parent task ID
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "parents")]
 	Parents,
 	/// <summary>
-	/// <para>Do not group tasks.</para>
+	/// <para>
+	/// Do not group tasks.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
 	/// <summary>
-	/// <para>Node ID</para>
+	/// <para>
+	/// Node ID
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "nodes")]
 	Nodes

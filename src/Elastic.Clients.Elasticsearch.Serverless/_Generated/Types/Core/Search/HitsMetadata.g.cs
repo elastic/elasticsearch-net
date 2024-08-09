@@ -35,7 +35,9 @@ public sealed partial class HitsMetadata<T>
 	public double? MaxScore { get; init; }
 
 	/// <summary>
-	/// <para>Total hit count information, present only if `track_total_hits` wasn't `false` in the search request.</para>
+	/// <para>
+	/// Total hit count information, present only if <c>track_total_hits</c> wasn't <c>false</c> in the search request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Union<Elastic.Clients.Elasticsearch.Serverless.Core.Search.TotalHits, long>? Total { get; init; }

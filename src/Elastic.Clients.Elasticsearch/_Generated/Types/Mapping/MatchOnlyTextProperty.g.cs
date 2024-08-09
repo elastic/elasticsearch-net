@@ -28,25 +28,39 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
 /// <summary>
-/// <para>A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field<br/>effectively stores data the same way as a text field that only indexes documents (index_options: docs) and<br/>disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries<br/>that need positions such as the match_phrase query perform slower as they need to look at the _source document<br/>to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.</para>
+/// <para>
+/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
+/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
+/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
+/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
+/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
+/// </para>
 /// </summary>
 public sealed partial class MatchOnlyTextProperty : IProperty
 {
 	/// <summary>
-	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// <para>
+	/// Allows you to copy the values of multiple fields into a group
+	/// field, which can then be queried as a single field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_to")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
 	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -56,7 +70,13 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 }
 
 /// <summary>
-/// <para>A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field<br/>effectively stores data the same way as a text field that only indexes documents (index_options: docs) and<br/>disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries<br/>that need positions such as the match_phrase query perform slower as they need to look at the _source document<br/>to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.</para>
+/// <para>
+/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
+/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
+/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
+/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
+/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
+/// </para>
 /// </summary>
 public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptor<MatchOnlyTextPropertyDescriptor<TDocument>>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
@@ -71,7 +91,10 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	private IDictionary<string, string>? MetaValue { get; set; }
 
 	/// <summary>
-	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// <para>
+	/// Allows you to copy the values of multiple fields into a group
+	/// field, which can then be queried as a single field.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -80,7 +103,10 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
@@ -103,7 +129,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -146,7 +174,13 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 }
 
 /// <summary>
-/// <para>A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field<br/>effectively stores data the same way as a text field that only indexes documents (index_options: docs) and<br/>disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries<br/>that need positions such as the match_phrase query perform slower as they need to look at the _source document<br/>to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.</para>
+/// <para>
+/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
+/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
+/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
+/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
+/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
+/// </para>
 /// </summary>
 public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
@@ -161,7 +195,10 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	private IDictionary<string, string>? MetaValue { get; set; }
 
 	/// <summary>
-	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
+	/// <para>
+	/// Allows you to copy the values of multiple fields into a group
+	/// field, which can then be queried as a single field.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -170,7 +207,10 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
 	{
@@ -193,7 +233,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public MatchOnlyTextPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

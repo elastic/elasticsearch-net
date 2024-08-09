@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 public sealed partial class SearchableSnapshotsStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Return stats aggregated at cluster, index or shard level</para>
+	/// <para>
+	/// Return stats aggregated at cluster, index or shard level
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 }
 
 /// <summary>
-/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
+/// <para>
+/// Retrieve shard-level statistics about searchable snapshots.
+/// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<SearchableSnapshotsStatsRequestParameters>
 {
@@ -59,14 +63,18 @@ public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<Searc
 	internal override string OperationName => "searchable_snapshots.stats";
 
 	/// <summary>
-	/// <para>Return stats aggregated at cluster, index or shard level</para>
+	/// <para>
+	/// Return stats aggregated at cluster, index or shard level
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 }
 
 /// <summary>
-/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
+/// <para>
+/// Retrieve shard-level statistics about searchable snapshots.
+/// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequestDescriptor<TDocument> : RequestDescriptor<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsRequestParameters>
 {
@@ -102,7 +110,9 @@ public sealed partial class SearchableSnapshotsStatsRequestDescriptor<TDocument>
 }
 
 /// <summary>
-/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
+/// <para>
+/// Retrieve shard-level statistics about searchable snapshots.
+/// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequestDescriptor : RequestDescriptor<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsRequestParameters>
 {

@@ -30,67 +30,91 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class GeoIpProcessor
 {
 	/// <summary>
-	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// <para>
+	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("database_file")]
 	public string? DatabaseFile { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// <para>
+	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("first_only")]
 	public bool? FirstOnly { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
@@ -122,7 +146,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// <para>
+	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> DatabaseFile(string? databaseFile)
 	{
@@ -131,7 +157,10 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -140,7 +169,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -149,7 +180,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -158,7 +191,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -167,7 +202,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// <para>
+	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> FirstOnly(bool? firstOnly = true)
 	{
@@ -176,7 +213,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -185,7 +224,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -194,7 +235,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -203,7 +246,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -242,7 +287,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
@@ -251,7 +298,10 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -260,7 +310,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -269,7 +321,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -278,7 +332,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -404,7 +460,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// <para>
+	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor DatabaseFile(string? databaseFile)
 	{
@@ -413,7 +471,10 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Description(string? description)
 	{
@@ -422,7 +483,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -431,7 +494,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -440,7 +505,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// <para>
+	/// The field to get the ip address from for the geographical lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -449,7 +516,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// <para>
+	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor FirstOnly(bool? firstOnly = true)
 	{
@@ -458,7 +527,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor If(string? value)
 	{
@@ -467,7 +538,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -476,7 +549,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -485,7 +560,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -524,7 +601,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Properties(ICollection<string>? properties)
 	{
@@ -533,7 +612,10 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor Tag(string? tag)
 	{
@@ -542,7 +624,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
@@ -551,7 +635,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -560,7 +646,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// <para>
+	/// The field that will hold the geographical information looked up from the MaxMind database.
+	/// </para>
 	/// </summary>
 	public GeoIpProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

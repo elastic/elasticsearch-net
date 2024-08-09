@@ -32,13 +32,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DeleteDataStreamRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete data streams.<br/>Deletes one or more data streams and their backing indices.</para>
+/// <para>
+/// Delete data streams.
+/// Deletes one or more data streams and their backing indices.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
 {
@@ -55,14 +67,27 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 	internal override string OperationName => "indices.delete_data_stream";
 
 	/// <summary>
-	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete data streams.<br/>Deletes one or more data streams and their backing indices.</para>
+/// <para>
+/// Delete data streams.
+/// Deletes one or more data streams and their backing indices.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
 {
@@ -81,6 +106,7 @@ public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescripto
 	internal override string OperationName => "indices.delete_data_stream";
 
 	public DeleteDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public DeleteDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public DeleteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{

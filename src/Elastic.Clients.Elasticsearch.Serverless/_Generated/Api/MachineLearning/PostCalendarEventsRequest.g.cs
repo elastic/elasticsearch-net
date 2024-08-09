@@ -34,7 +34,9 @@ public sealed partial class PostCalendarEventsRequestParameters : RequestParamet
 }
 
 /// <summary>
-/// <para>Adds scheduled events to a calendar.</para>
+/// <para>
+/// Adds scheduled events to a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalendarEventsRequestParameters>
 {
@@ -51,14 +53,18 @@ public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalenda
 	internal override string OperationName => "ml.post_calendar_events";
 
 	/// <summary>
-	/// <para>A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.</para>
+	/// <para>
+	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("events")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.CalendarEvent> Events { get; set; }
 }
 
 /// <summary>
-/// <para>Adds scheduled events to a calendar.</para>
+/// <para>
+/// Adds scheduled events to a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PostCalendarEventsRequestDescriptor : RequestDescriptor<PostCalendarEventsRequestDescriptor, PostCalendarEventsRequestParameters>
 {
@@ -88,7 +94,9 @@ public sealed partial class PostCalendarEventsRequestDescriptor : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.CalendarEventDescriptor>[] EventsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.</para>
+	/// <para>
+	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
+	/// </para>
 	/// </summary>
 	public PostCalendarEventsRequestDescriptor Events(ICollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.CalendarEvent> events)
 	{

@@ -30,37 +30,51 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 public sealed partial class SlmConfiguration
 {
 	/// <summary>
-	/// <para>A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.<br/>Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.</para>
+	/// <para>
+	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
+	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_states")]
 	public ICollection<string>? FeatureStates { get; set; }
 
 	/// <summary>
-	/// <para>If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.</para>
+	/// <para>
+	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
 
 	/// <summary>
-	/// <para>If true, the current global state is included in the snapshot.</para>
+	/// <para>
+	/// If true, the current global state is included in the snapshot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include_global_state")]
 	public bool? IncludeGlobalState { get; set; }
 
 	/// <summary>
-	/// <para>A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.<br/>By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.</para>
+	/// <para>
+	/// A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.
+	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
-	/// <para>Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.</para>
+	/// <para>
+	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
 	public IDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
-	/// <para>If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.</para>
+	/// <para>
+	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("partial")]
 	public bool? Partial { get; set; }
@@ -82,7 +96,10 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	private bool? PartialValue { get; set; }
 
 	/// <summary>
-	/// <para>A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.<br/>Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.</para>
+	/// <para>
+	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
+	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor FeatureStates(ICollection<string>? featureStates)
 	{
@@ -91,7 +108,9 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.</para>
+	/// <para>
+	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
 	{
@@ -100,7 +119,9 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If true, the current global state is included in the snapshot.</para>
+	/// <para>
+	/// If true, the current global state is included in the snapshot.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor IncludeGlobalState(bool? includeGlobalState = true)
 	{
@@ -109,7 +130,10 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.<br/>By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.</para>
+	/// <para>
+	/// A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.
+	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
@@ -118,7 +142,9 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.</para>
+	/// <para>
+	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -127,7 +153,9 @@ public sealed partial class SlmConfigurationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.</para>
+	/// <para>
+	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
+	/// </para>
 	/// </summary>
 	public SlmConfigurationDescriptor Partial(bool? partial = true)
 	{

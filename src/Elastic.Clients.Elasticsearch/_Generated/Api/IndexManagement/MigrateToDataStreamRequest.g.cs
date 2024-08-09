@@ -31,10 +31,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class MigrateToDataStreamRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Convert an index alias to a data stream.<br/>Converts an index alias to a data stream.<br/>You must have a matching index template that is data stream enabled.<br/>The alias must meet the following criteria:<br/>The alias must have a write index;<br/>All indices for the alias must have a `@timestamp` field mapping of a `date` or `date_nanos` field type;<br/>The alias must not have any filters;<br/>The alias must not use custom routing.<br/>If successful, the request removes the alias and creates a data stream with the same name.<br/>The indices for the alias become hidden backing indices for the stream.<br/>The write index for the alias becomes the write index for the stream.</para>
+/// <para>
+/// Convert an index alias to a data stream.
+/// Converts an index alias to a data stream.
+/// You must have a matching index template that is data stream enabled.
+/// The alias must meet the following criteria:
+/// The alias must have a write index;
+/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
+/// The alias must not have any filters;
+/// The alias must not use custom routing.
+/// If successful, the request removes the alias and creates a data stream with the same name.
+/// The indices for the alias become hidden backing indices for the stream.
+/// The write index for the alias becomes the write index for the stream.
+/// </para>
 /// </summary>
 public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToDataStreamRequestParameters>
 {
@@ -49,10 +74,38 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.migrate_to_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Convert an index alias to a data stream.<br/>Converts an index alias to a data stream.<br/>You must have a matching index template that is data stream enabled.<br/>The alias must meet the following criteria:<br/>The alias must have a write index;<br/>All indices for the alias must have a `@timestamp` field mapping of a `date` or `date_nanos` field type;<br/>The alias must not have any filters;<br/>The alias must not use custom routing.<br/>If successful, the request removes the alias and creates a data stream with the same name.<br/>The indices for the alias become hidden backing indices for the stream.<br/>The write index for the alias becomes the write index for the stream.</para>
+/// <para>
+/// Convert an index alias to a data stream.
+/// Converts an index alias to a data stream.
+/// You must have a matching index template that is data stream enabled.
+/// The alias must meet the following criteria:
+/// The alias must have a write index;
+/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
+/// The alias must not have any filters;
+/// The alias must not use custom routing.
+/// If successful, the request removes the alias and creates a data stream with the same name.
+/// The indices for the alias become hidden backing indices for the stream.
+/// The write index for the alias becomes the write index for the stream.
+/// </para>
 /// </summary>
 public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptor<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
 {
@@ -69,6 +122,9 @@ public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescri
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.migrate_to_data_stream";
+
+	public MigrateToDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public MigrateToDataStreamRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
 	{

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeEvaluationRegressionMetricsHuber
 {
 	/// <summary>
-	/// <para>Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.</para>
+	/// <para>
+	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delta")]
 	public double? Delta { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsHuberDescriptor 
 	private double? DeltaValue { get; set; }
 
 	/// <summary>
-	/// <para>Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.</para>
+	/// <para>
+	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsHuberDescriptor Delta(double? delta)
 	{

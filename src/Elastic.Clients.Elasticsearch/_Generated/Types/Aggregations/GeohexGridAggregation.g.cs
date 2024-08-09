@@ -30,31 +30,43 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class GeohexGridAggregation
 {
 	/// <summary>
-	/// <para>Bounding box used to filter the geo-points in each bucket.</para>
+	/// <para>
+	/// Bounding box used to filter the geo-points in each bucket.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bounds")]
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Integer zoom of the key used to defined cells or buckets<br/>in the results. Value should be between 0-15.</para>
+	/// <para>
+	/// Integer zoom of the key used to defined cells or buckets
+	/// in the results. Value should be between 0-15.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public int? Precision { get; set; }
 
 	/// <summary>
-	/// <para>Number of buckets returned from each shard.</para>
+	/// <para>
+	/// Number of buckets returned from each shard.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of buckets to return.</para>
+	/// <para>
+	/// Maximum number of buckets to return.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
@@ -77,7 +89,9 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Bounding box used to filter the geo-points in each bucket.</para>
+	/// <para>
+	/// Bounding box used to filter the geo-points in each bucket.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
@@ -86,7 +100,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -95,7 +112,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -104,7 +124,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -113,7 +136,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Integer zoom of the key used to defined cells or buckets<br/>in the results. Value should be between 0-15.</para>
+	/// <para>
+	/// Integer zoom of the key used to defined cells or buckets
+	/// in the results. Value should be between 0-15.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Precision(int? precision)
 	{
@@ -122,7 +148,9 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Number of buckets returned from each shard.</para>
+	/// <para>
+	/// Number of buckets returned from each shard.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
@@ -131,7 +159,9 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Maximum number of buckets to return.</para>
+	/// <para>
+	/// Maximum number of buckets to return.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -187,7 +217,9 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	private int? SizeValue { get; set; }
 
 	/// <summary>
-	/// <para>Bounding box used to filter the geo-points in each bucket.</para>
+	/// <para>
+	/// Bounding box used to filter the geo-points in each bucket.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
@@ -196,7 +228,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -205,7 +240,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -214,7 +252,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
+	/// <para>
+	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -223,7 +264,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Integer zoom of the key used to defined cells or buckets<br/>in the results. Value should be between 0-15.</para>
+	/// <para>
+	/// Integer zoom of the key used to defined cells or buckets
+	/// in the results. Value should be between 0-15.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Precision(int? precision)
 	{
@@ -232,7 +276,9 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Number of buckets returned from each shard.</para>
+	/// <para>
+	/// Number of buckets returned from each shard.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor ShardSize(int? shardSize)
 	{
@@ -241,7 +287,9 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Maximum number of buckets to return.</para>
+	/// <para>
+	/// Maximum number of buckets to return.
+	/// </para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Size(int? size)
 	{

@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class BoxplotAggregation
 {
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("compression")]
 	public double? Compression { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
@@ -68,7 +75,9 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Compression(double? compression)
 	{
@@ -77,7 +86,9 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -86,7 +97,9 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -95,7 +108,9 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -104,7 +119,10 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
@@ -193,7 +211,9 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// <para>
+	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor Compression(double? compression)
 	{
@@ -202,7 +222,9 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -211,7 +233,9 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -220,7 +244,9 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -229,7 +255,10 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public BoxplotAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{

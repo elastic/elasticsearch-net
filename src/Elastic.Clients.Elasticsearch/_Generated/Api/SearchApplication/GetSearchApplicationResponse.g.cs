@@ -29,31 +29,41 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Analytics collection associated to the Search Application.</para>
+	/// <para>
+	/// Analytics collection associated to the Search Application.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analytics_collection_name")]
 	public string? AnalyticsCollectionName { get; init; }
 
 	/// <summary>
-	/// <para>Indices that are part of the Search Application.</para>
+	/// <para>
+	/// Indices that are part of the Search Application.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<string> Indices { get; init; }
 
 	/// <summary>
-	/// <para>Search Application name.</para>
+	/// <para>
+	/// Search Application name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
-	/// <para>Search template to use on search operations.</para>
+	/// <para>
+	/// Search template to use on search operations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; init; }
 
 	/// <summary>
-	/// <para>Last time the Search Application was updated.</para>
+	/// <para>
+	/// Last time the Search Application was updated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated_at_millis")]
 	public long UpdatedAtMillis { get; init; }
