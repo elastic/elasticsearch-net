@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeRegressionSummary
 {
 	/// <summary>
-	/// <para>Pseudo Huber loss function.</para>
+	/// <para>
+	/// Pseudo Huber loss function.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("huber")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationValue? Huber { get; init; }
 
 	/// <summary>
-	/// <para>Average squared difference between the predicted values and the actual (`ground truth`) value.</para>
+	/// <para>
+	/// Average squared difference between the predicted values and the actual (<c>ground truth</c>) value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mse")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationValue? Mse { get; init; }
 
 	/// <summary>
-	/// <para>Average squared difference between the logarithm of the predicted values and the logarithm of the actual (`ground truth`) value.</para>
+	/// <para>
+	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (<c>ground truth</c>) value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("msle")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationValue? Msle { get; init; }
 
 	/// <summary>
-	/// <para>Proportion of the variance in the dependent variable that is predictable from the independent variables.</para>
+	/// <para>
+	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("r_squared")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationValue? RSquared { get; init; }

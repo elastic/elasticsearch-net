@@ -34,7 +34,16 @@ public sealed partial class RevertModelSnapshotRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Reverts to a specific snapshot.<br/>The machine learning features react quickly to anomalous input, learning new<br/>behaviors in data. Highly anomalous input increases the variance in the<br/>models whilst the system learns whether this is a new step-change in behavior<br/>or a one-off event. In the case where this anomalous input is known to be a<br/>one-off, then it might be appropriate to reset the model state to a time<br/>before this event. For example, you might consider reverting to a saved<br/>snapshot after Black Friday or a critical system failure.</para>
+/// <para>
+/// Reverts to a specific snapshot.
+/// The machine learning features react quickly to anomalous input, learning new
+/// behaviors in data. Highly anomalous input increases the variance in the
+/// models whilst the system learns whether this is a new step-change in behavior
+/// or a one-off event. In the case where this anomalous input is known to be a
+/// one-off, then it might be appropriate to reset the model state to a time
+/// before this event. For example, you might consider reverting to a saved
+/// snapshot after Black Friday or a critical system failure.
+/// </para>
 /// </summary>
 public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertModelSnapshotRequestParameters>
 {
@@ -51,14 +60,25 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 	internal override string OperationName => "ml.revert_model_snapshot";
 
 	/// <summary>
-	/// <para>Refer to the description for the `delete_intervening_results` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delete_intervening_results")]
 	public bool? DeleteInterveningResults { get; set; }
 }
 
 /// <summary>
-/// <para>Reverts to a specific snapshot.<br/>The machine learning features react quickly to anomalous input, learning new<br/>behaviors in data. Highly anomalous input increases the variance in the<br/>models whilst the system learns whether this is a new step-change in behavior<br/>or a one-off event. In the case where this anomalous input is known to be a<br/>one-off, then it might be appropriate to reset the model state to a time<br/>before this event. For example, you might consider reverting to a saved<br/>snapshot after Black Friday or a critical system failure.</para>
+/// <para>
+/// Reverts to a specific snapshot.
+/// The machine learning features react quickly to anomalous input, learning new
+/// behaviors in data. Highly anomalous input increases the variance in the
+/// models whilst the system learns whether this is a new step-change in behavior
+/// or a one-off event. In the case where this anomalous input is known to be a
+/// one-off, then it might be appropriate to reset the model state to a time
+/// before this event. For example, you might consider reverting to a saved
+/// snapshot after Black Friday or a critical system failure.
+/// </para>
 /// </summary>
 public sealed partial class RevertModelSnapshotRequestDescriptor : RequestDescriptor<RevertModelSnapshotRequestDescriptor, RevertModelSnapshotRequestParameters>
 {
@@ -91,7 +111,9 @@ public sealed partial class RevertModelSnapshotRequestDescriptor : RequestDescri
 	private bool? DeleteInterveningResultsValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `delete_intervening_results` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
+	/// </para>
 	/// </summary>
 	public RevertModelSnapshotRequestDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true)
 	{

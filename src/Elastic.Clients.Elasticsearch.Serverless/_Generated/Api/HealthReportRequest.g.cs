@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class HealthReportRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Limit the number of affected resources the health report API returns.</para>
+	/// <para>
+	/// Limit the number of affected resources the health report API returns.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout.</para>
+	/// <para>
+	/// Explicit operation timeout.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Opt-in for more information about the health of the system.</para>
+	/// <para>
+	/// Opt-in for more information about the health of the system.
+	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns the health of the cluster.</para>
+/// <para>
+/// Returns the health of the cluster.
+/// </para>
 /// </summary>
 public sealed partial class HealthReportRequest : PlainRequest<HealthReportRequestParameters>
 {
@@ -69,26 +77,34 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 	internal override string OperationName => "health_report";
 
 	/// <summary>
-	/// <para>Limit the number of affected resources the health report API returns.</para>
+	/// <para>
+	/// Limit the number of affected resources the health report API returns.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout.</para>
+	/// <para>
+	/// Explicit operation timeout.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Opt-in for more information about the health of the system.</para>
+	/// <para>
+	/// Opt-in for more information about the health of the system.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Returns the health of the cluster.</para>
+/// <para>
+/// Returns the health of the cluster.
+/// </para>
 /// </summary>
 public sealed partial class HealthReportRequestDescriptor : RequestDescriptor<HealthReportRequestDescriptor, HealthReportRequestParameters>
 {

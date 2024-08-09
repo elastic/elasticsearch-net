@@ -181,35 +181,50 @@ public sealed partial class NumberRangeQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 	public double? From { get; set; }
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public double? Gt { get; set; }
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public double? Gte { get; set; }
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public double? Lt { get; set; }
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public double? Lte { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? Relation { get; set; }
 	public double? To { get; set; }
@@ -235,7 +250,12 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	private double? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -268,7 +288,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Gt(double? gt)
 	{
@@ -277,7 +299,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Gte(double? gte)
 	{
@@ -286,7 +310,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Lt(double? lt)
 	{
@@ -295,7 +321,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Lte(double? lte)
 	{
@@ -310,7 +338,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? relation)
 	{
@@ -410,7 +440,12 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	private double? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Boost(float? boost)
 	{
@@ -443,7 +478,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Gt(double? gt)
 	{
@@ -452,7 +489,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Gte(double? gte)
 	{
@@ -461,7 +500,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Lt(double? lt)
 	{
@@ -470,7 +511,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Lte(double? lte)
 	{
@@ -485,7 +528,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? relation)
 	{

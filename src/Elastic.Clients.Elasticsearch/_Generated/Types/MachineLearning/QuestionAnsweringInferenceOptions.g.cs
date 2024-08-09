@@ -28,30 +28,40 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 /// <summary>
-/// <para>Question answering inference options</para>
+/// <para>
+/// Question answering inference options
+/// </para>
 /// </summary>
 public sealed partial class QuestionAnsweringInferenceOptions
 {
 	/// <summary>
-	/// <para>The maximum answer length to consider</para>
+	/// <para>
+	/// The maximum answer length to consider
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_answer_length")]
 	public int? MaxAnswerLength { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -60,7 +70,9 @@ public sealed partial class QuestionAnsweringInferenceOptions
 }
 
 /// <summary>
-/// <para>Question answering inference options</para>
+/// <para>
+/// Question answering inference options
+/// </para>
 /// </summary>
 public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : SerializableDescriptor<QuestionAnsweringInferenceOptionsDescriptor>
 {
@@ -78,7 +90,9 @@ public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : Serial
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The maximum answer length to consider</para>
+	/// <para>
+	/// The maximum answer length to consider
+	/// </para>
 	/// </summary>
 	public QuestionAnsweringInferenceOptionsDescriptor MaxAnswerLength(int? maxAnswerLength)
 	{
@@ -87,7 +101,9 @@ public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the number of top class predictions to return. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public QuestionAnsweringInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)
 	{
@@ -96,7 +112,9 @@ public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public QuestionAnsweringInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -105,7 +123,9 @@ public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public QuestionAnsweringInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
 	{

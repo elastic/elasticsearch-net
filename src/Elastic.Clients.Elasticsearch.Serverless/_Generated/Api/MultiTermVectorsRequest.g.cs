@@ -32,63 +32,89 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class MultiTermVectorsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// </para>
 	/// </summary>
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term offsets.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
 	/// </summary>
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term payloads.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
 	/// </summary>
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term positions.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
 	/// </summary>
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on.
+	/// Random by default.
+	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If true, the request is real-time as opposed to near-real-time.</para>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>If true, the response includes term frequency and document frequency.</para>
+	/// <para>
+	/// If true, the response includes term frequency and document frequency.
+	/// </para>
 	/// </summary>
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns the document version as part of a hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type.</para>
+	/// <para>
+	/// Specific version type.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
 /// <summary>
-/// <para>Returns multiple termvectors in one request.</para>
+/// <para>
+/// Returns multiple termvectors in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVectorsRequestParameters>
 {
@@ -109,86 +135,116 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 	internal override string OperationName => "mtermvectors";
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// Used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term offsets.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term payloads.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
 	/// <summary>
-	/// <para>If `true`, the response includes term positions.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
 	/// <summary>
-	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
+	/// <para>
+	/// Specifies the node or shard the operation should be performed on.
+	/// Random by default.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>If true, the request is real-time as opposed to near-real-time.</para>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// <para>
+	/// Custom value used to route operations to a specific shard.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>If true, the response includes term frequency and document frequency.</para>
+	/// <para>
+	/// If true, the response includes term frequency and document frequency.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns the document version as part of a hit.</para>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type.</para>
+	/// <para>
+	/// Specific version type.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
-	/// <para>Array of existing or artificial documents.</para>
+	/// <para>
+	/// Array of existing or artificial documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperation>? Docs { get; set; }
 
 	/// <summary>
-	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// <para>
+	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? Ids { get; set; }
 }
 
 /// <summary>
-/// <para>Returns multiple termvectors in one request.</para>
+/// <para>
+/// Returns multiple termvectors in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : RequestDescriptor<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsRequestParameters>
 {
@@ -235,7 +291,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? IdsValue { get; set; }
 
 	/// <summary>
-	/// <para>Array of existing or artificial documents.</para>
+	/// <para>
+	/// Array of existing or artificial documents.
+	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
 	{
@@ -274,7 +332,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// <para>
+	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Ids(ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? ids)
 	{
@@ -327,7 +387,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 }
 
 /// <summary>
-/// <para>Returns multiple termvectors in one request.</para>
+/// <para>
+/// Returns multiple termvectors in one request.
+/// </para>
 /// </summary>
 public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescriptor<MultiTermVectorsRequestDescriptor, MultiTermVectorsRequestParameters>
 {
@@ -374,7 +436,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? IdsValue { get; set; }
 
 	/// <summary>
-	/// <para>Array of existing or artificial documents.</para>
+	/// <para>
+	/// Array of existing or artificial documents.
+	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
 	{
@@ -413,7 +477,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// <para>
+	/// Simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
 	/// </summary>
 	public MultiTermVectorsRequestDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? ids)
 	{

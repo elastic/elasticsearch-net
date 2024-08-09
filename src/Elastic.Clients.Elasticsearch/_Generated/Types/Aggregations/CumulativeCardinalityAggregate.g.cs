@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>Result of the `cumulative_cardinality` aggregation</para>
+/// <para>
+/// Result of the <c>cumulative_cardinality</c> aggregation
+/// </para>
 /// </summary>
 public sealed partial class CumulativeCardinalityAggregate : IAggregate
 {

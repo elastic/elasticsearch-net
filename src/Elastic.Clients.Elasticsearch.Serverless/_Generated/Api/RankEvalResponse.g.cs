@@ -29,7 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The details section contains one entry for every query in the original requests section, keyed by the search request id</para>
+	/// <para>
+	/// The details section contains one entry for every query in the original requests section, keyed by the search request id
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
@@ -37,7 +39,9 @@ public sealed partial class RankEvalResponse : ElasticsearchResponse
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
 
 	/// <summary>
-	/// <para>The overall evaluation quality calculated by the defined metric</para>
+	/// <para>
+	/// The overall evaluation quality calculated by the defined metric
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }

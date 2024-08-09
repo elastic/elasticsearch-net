@@ -32,23 +32,34 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class DeleteTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If this value is true, the destination index is deleted together with the transform. If false, the destination<br/>index will not be deleted</para>
+	/// <para>
+	/// If this value is true, the destination index is deleted together with the transform. If false, the destination
+	/// index will not be deleted
+	/// </para>
 	/// </summary>
 	public bool? DeleteDestIndex { get => Q<bool?>("delete_dest_index"); set => Q("delete_dest_index", value); }
 
 	/// <summary>
-	/// <para>If this value is false, the transform must be stopped before it can be deleted. If true, the transform is<br/>deleted regardless of its current state.</para>
+	/// <para>
+	/// If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
+	/// deleted regardless of its current state.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a transform.<br/>Deletes a transform.</para>
+/// <para>
+/// Delete a transform.
+/// Deletes a transform.
+/// </para>
 /// </summary>
 public sealed partial class DeleteTransformRequest : PlainRequest<DeleteTransformRequestParameters>
 {
@@ -65,26 +76,37 @@ public sealed partial class DeleteTransformRequest : PlainRequest<DeleteTransfor
 	internal override string OperationName => "transform.delete_transform";
 
 	/// <summary>
-	/// <para>If this value is true, the destination index is deleted together with the transform. If false, the destination<br/>index will not be deleted</para>
+	/// <para>
+	/// If this value is true, the destination index is deleted together with the transform. If false, the destination
+	/// index will not be deleted
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? DeleteDestIndex { get => Q<bool?>("delete_dest_index"); set => Q("delete_dest_index", value); }
 
 	/// <summary>
-	/// <para>If this value is false, the transform must be stopped before it can be deleted. If true, the transform is<br/>deleted regardless of its current state.</para>
+	/// <para>
+	/// If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
+	/// deleted regardless of its current state.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete a transform.<br/>Deletes a transform.</para>
+/// <para>
+/// Delete a transform.
+/// Deletes a transform.
+/// </para>
 /// </summary>
 public sealed partial class DeleteTransformRequestDescriptor : RequestDescriptor<DeleteTransformRequestDescriptor, DeleteTransformRequestParameters>
 {

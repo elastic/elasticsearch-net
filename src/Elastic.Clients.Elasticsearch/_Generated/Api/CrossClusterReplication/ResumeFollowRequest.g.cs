@@ -34,7 +34,9 @@ public sealed partial class ResumeFollowRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Resumes a follower index that has been paused</para>
+/// <para>
+/// Resumes a follower index that has been paused
+/// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowRequestParameters>
 {
@@ -73,7 +75,9 @@ public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowReque
 }
 
 /// <summary>
-/// <para>Resumes a follower index that has been paused</para>
+/// <para>
+/// Resumes a follower index that has been paused
+/// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDescriptor<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowRequestParameters>
 {
@@ -240,7 +244,9 @@ public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Resumes a follower index that has been paused</para>
+/// <para>
+/// Resumes a follower index that has been paused
+/// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequestDescriptor : RequestDescriptor<ResumeFollowRequestDescriptor, ResumeFollowRequestParameters>
 {

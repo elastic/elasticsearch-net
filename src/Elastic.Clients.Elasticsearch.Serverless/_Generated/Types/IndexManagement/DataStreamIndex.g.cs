@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStreamIndex
 {
 	/// <summary>
-	/// <para>Name of the current ILM lifecycle policy configured for this backing index.</para>
+	/// <para>
+	/// Name of the current ILM lifecycle policy configured for this backing index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ilm_policy")]
 	public string? IlmPolicy { get; init; }
 
 	/// <summary>
-	/// <para>Name of the backing index.</para>
+	/// <para>
+	/// Name of the backing index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name")]
 	public string IndexName { get; init; }
 
 	/// <summary>
-	/// <para>Universally unique identifier (UUID) for the index.</para>
+	/// <para>
+	/// Universally unique identifier (UUID) for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_uuid")]
 	public string IndexUuid { get; init; }
 
 	/// <summary>
-	/// <para>Name of the lifecycle system that's currently managing this backing index.</para>
+	/// <para>
+	/// Name of the lifecycle system that's currently managing this backing index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("managed_by")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.ManagedBy ManagedBy { get; init; }
 
 	/// <summary>
-	/// <para>Indicates if ILM should take precedence over DSL in case both are configured to manage this index.</para>
+	/// <para>
+	/// Indicates if ILM should take precedence over DSL in case both are configured to manage this index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefer_ilm")]
 	public bool PreferIlm { get; init; }

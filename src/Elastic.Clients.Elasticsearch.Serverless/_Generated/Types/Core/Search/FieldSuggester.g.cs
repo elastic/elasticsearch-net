@@ -51,19 +51,26 @@ public sealed partial class FieldSuggester
 	public static FieldSuggester Term(Elastic.Clients.Elasticsearch.Serverless.Core.Search.TermSuggester termSuggester) => new FieldSuggester("term", termSuggester);
 
 	/// <summary>
-	/// <para>Prefix used to search for suggestions.</para>
+	/// <para>
+	/// Prefix used to search for suggestions.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
 	/// <summary>
-	/// <para>A prefix expressed as a regular expression.</para>
+	/// <para>
+	/// A prefix expressed as a regular expression.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
 
 	/// <summary>
-	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The text to use as input for the suggester.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
@@ -236,7 +243,9 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>Prefix used to search for suggestions.</para>
+	/// <para>
+	/// Prefix used to search for suggestions.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
 	{
@@ -245,7 +254,9 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>A prefix expressed as a regular expression.</para>
+	/// <para>
+	/// A prefix expressed as a regular expression.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Regex(string? regex)
 	{
@@ -254,7 +265,10 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The text to use as input for the suggester.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Text(string? text)
 	{
@@ -343,7 +357,9 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>Prefix used to search for suggestions.</para>
+	/// <para>
+	/// Prefix used to search for suggestions.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor Prefix(string? prefix)
 	{
@@ -352,7 +368,9 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	}
 
 	/// <summary>
-	/// <para>A prefix expressed as a regular expression.</para>
+	/// <para>
+	/// A prefix expressed as a regular expression.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor Regex(string? regex)
 	{
@@ -361,7 +379,10 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	}
 
 	/// <summary>
-	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// <para>
+	/// The text to use as input for the suggester.
+	/// Needs to be set globally or per suggestion.
+	/// </para>
 	/// </summary>
 	public FieldSuggesterDescriptor Text(string? text)
 	{

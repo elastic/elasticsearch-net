@@ -91,7 +91,9 @@ internal sealed partial class SignificantStringTermsBucketConverter : JsonConver
 public sealed partial class SignificantStringTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long BgCount { get; init; }

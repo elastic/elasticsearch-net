@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TextStructure;
 public sealed partial class TestGrokPatternRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).</para>
+	/// <para>
+	/// The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).
+	/// </para>
 	/// </summary>
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 }
 
 /// <summary>
-/// <para>Tests a Grok pattern on some text.</para>
+/// <para>
+/// Tests a Grok pattern on some text.
+/// </para>
 /// </summary>
 public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatternRequestParameters>
 {
@@ -51,26 +55,34 @@ public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatter
 	internal override string OperationName => "text_structure.test_grok_pattern";
 
 	/// <summary>
-	/// <para>The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).</para>
+	/// <para>
+	/// The mode of compatibility with ECS compliant Grok patterns (disabled or v1, default: disabled).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 
 	/// <summary>
-	/// <para>Grok pattern to run on the text.</para>
+	/// <para>
+	/// Grok pattern to run on the text.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grok_pattern")]
 	public string GrokPattern { get; set; }
 
 	/// <summary>
-	/// <para>Lines of text to run the Grok pattern on.</para>
+	/// <para>
+	/// Lines of text to run the Grok pattern on.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public ICollection<string> Text { get; set; }
 }
 
 /// <summary>
-/// <para>Tests a Grok pattern on some text.</para>
+/// <para>
+/// Tests a Grok pattern on some text.
+/// </para>
 /// </summary>
 public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor<TestGrokPatternRequestDescriptor, TestGrokPatternRequestParameters>
 {
@@ -94,7 +106,9 @@ public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor
 	private ICollection<string> TextValue { get; set; }
 
 	/// <summary>
-	/// <para>Grok pattern to run on the text.</para>
+	/// <para>
+	/// Grok pattern to run on the text.
+	/// </para>
 	/// </summary>
 	public TestGrokPatternRequestDescriptor GrokPattern(string grokPattern)
 	{
@@ -103,7 +117,9 @@ public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor
 	}
 
 	/// <summary>
-	/// <para>Lines of text to run the Grok pattern on.</para>
+	/// <para>
+	/// Lines of text to run the Grok pattern on.
+	/// </para>
 	/// </summary>
 	public TestGrokPatternRequestDescriptor Text(ICollection<string> text)
 	{

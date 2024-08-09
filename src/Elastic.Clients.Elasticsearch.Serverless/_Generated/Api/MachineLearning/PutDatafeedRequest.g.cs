@@ -32,17 +32,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class PutDatafeedRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the `_all`<br/>string or when no indices are specified.</para>
+	/// <para>
+	/// If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the <c>_all</c>
+	/// string or when no indices are specified.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines<br/>whether wildcard expressions match hidden data streams. Supports comma-separated values.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, unavailable indices (missing or closed) are ignored.</para>
+	/// <para>
+	/// If true, unavailable indices (missing or closed) are ignored.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
@@ -240,7 +248,13 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 }
 
 /// <summary>
-/// <para>Instantiates a datafeed.<br/>Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.<br/>You can associate only one datafeed with each anomaly detection job.<br/>The datafeed contains a query that runs at a defined interval (`frequency`).<br/>If you are concerned about delayed data, you can add a delay (`query_delay') at each interval.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had<br/>at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.<br/>You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed<br/>directly to the `.ml-config` index. Do not give users `write` privileges on the `.ml-config` index.</para>
+/// <para>
+/// Instantiates a datafeed.
+/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
+/// You can associate only one datafeed with each anomaly detection job.
+/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(PutDatafeedRequestConverter))]
 public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequestParameters>
@@ -262,43 +276,71 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	internal override string OperationName => "ml.put_datafeed";
 
 	/// <summary>
-	/// <para>If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the `_all`<br/>string or when no indices are specified.</para>
+	/// <para>
+	/// If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the <c>_all</c>
+	/// string or when no indices are specified.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines<br/>whether wildcard expressions match hidden data streams. Supports comma-separated values.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, unavailable indices (missing or closed) are ignored.</para>
+	/// <para>
+	/// If true, unavailable indices (missing or closed) are ignored.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches.<br/>Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years.<br/>This search is split into time chunks in order to ensure the load on Elasticsearch is managed.<br/>Chunking configuration controls how the size of these time chunks are calculated;<br/>it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years.
+	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
+	/// Chunking configuration controls how the size of these time chunks are calculated;
+	/// it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("chunking_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window.<br/>The datafeed can optionally search over indices that have already been read in an effort to determine whether<br/>any data has subsequently been added to the index. If missing data is found, it is a good indication that the<br/>`query_delay` is set too low and the data is being indexed after the datafeed has passed that moment in time.<br/>This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window.
+	/// The datafeed can optionally search over indices that have already been read in an effort to determine whether
+	/// any data has subsequently been added to the index. If missing data is found, it is a good indication that the
+	/// <c>query_delay</c> is set too low and the data is being indexed after the datafeed has passed that moment in time.
+	/// This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("delayed_data_check_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time.<br/>The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible<br/>fraction of the bucket span. When `frequency` is shorter than the bucket span, interim results for the last<br/>(partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses<br/>aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time.
+	/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible
+	/// fraction of the bucket span. When <c>frequency</c> is shorter than the bucket span, interim results for the last
+	/// (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses
+	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Frequency { get; set; }
@@ -306,62 +348,97 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	public IDictionary<string, Union<string, ICollection<string>>>? Headers { get; set; }
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Serverless.Indices? Indices { get; set; }
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_options")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndicesOptions? IndicesOptions { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? JobId { get; set; }
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_empty_searches")]
 	public int? MaxEmptySearches { get; set; }
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_delay")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? QueryDelay { get; set; }
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_size")]
 	public int? ScrollSize { get; set; }
 }
 
 /// <summary>
-/// <para>Instantiates a datafeed.<br/>Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.<br/>You can associate only one datafeed with each anomaly detection job.<br/>The datafeed contains a query that runs at a defined interval (`frequency`).<br/>If you are concerned about delayed data, you can add a delay (`query_delay') at each interval.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had<br/>at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.<br/>You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed<br/>directly to the `.ml-config` index. Do not give users `write` privileges on the `.ml-config` index.</para>
+/// <para>
+/// Instantiates a datafeed.
+/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
+/// You can associate only one datafeed with each anomaly detection job.
+/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// </para>
 /// </summary>
 public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDescriptor<PutDatafeedRequestDescriptor<TDocument>, PutDatafeedRequestParameters>
 {
@@ -413,7 +490,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches.<br/>Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -422,7 +502,12 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years.<br/>This search is split into time chunks in order to ensure the load on Elasticsearch is managed.<br/>Chunking configuration controls how the size of these time chunks are calculated;<br/>it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years.
+	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
+	/// Chunking configuration controls how the size of these time chunks are calculated;
+	/// it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -449,7 +534,13 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window.<br/>The datafeed can optionally search over indices that have already been read in an effort to determine whether<br/>any data has subsequently been added to the index. If missing data is found, it is a good indication that the<br/>`query_delay` is set too low and the data is being indexed after the datafeed has passed that moment in time.<br/>This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window.
+	/// The datafeed can optionally search over indices that have already been read in an effort to determine whether
+	/// any data has subsequently been added to the index. If missing data is found, it is a good indication that the
+	/// <c>query_delay</c> is set too low and the data is being indexed after the datafeed has passed that moment in time.
+	/// This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -476,7 +567,13 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time.<br/>The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible<br/>fraction of the bucket span. When `frequency` is shorter than the bucket span, interim results for the last<br/>(partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses<br/>aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time.
+	/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible
+	/// fraction of the bucket span. When <c>frequency</c> is shorter than the bucket span, interim results for the last
+	/// (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses
+	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Serverless.Duration? frequency)
 	{
@@ -491,7 +588,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -500,7 +600,9 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.Serverless.IndicesOptions? indicesOptions)
 	{
@@ -527,7 +629,9 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Serverless.Id? jobId)
 	{
@@ -536,7 +640,12 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -545,7 +654,11 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -572,7 +685,12 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Serverless.Duration? queryDelay)
 	{
@@ -581,7 +699,9 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -590,7 +710,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -599,7 +722,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> ScrollSize(int? scrollSize)
 	{
@@ -739,7 +865,13 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Instantiates a datafeed.<br/>Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.<br/>You can associate only one datafeed with each anomaly detection job.<br/>The datafeed contains a query that runs at a defined interval (`frequency`).<br/>If you are concerned about delayed data, you can add a delay (`query_delay') at each interval.<br/>When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had<br/>at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,<br/>those credentials are used instead.<br/>You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed<br/>directly to the `.ml-config` index. Do not give users `write` privileges on the `.ml-config` index.</para>
+/// <para>
+/// Instantiates a datafeed.
+/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
+/// You can associate only one datafeed with each anomaly detection job.
+/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// </para>
 /// </summary>
 public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<PutDatafeedRequestDescriptor, PutDatafeedRequestParameters>
 {
@@ -791,7 +923,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	private int? ScrollSizeValue { get; set; }
 
 	/// <summary>
-	/// <para>If set, the datafeed performs aggregation searches.<br/>Support for aggregations is limited and should be used only with low cardinality data.</para>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -800,7 +935,12 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Datafeeds might be required to search over long time periods, for several months or years.<br/>This search is split into time chunks in order to ensure the load on Elasticsearch is managed.<br/>Chunking configuration controls how the size of these time chunks are calculated;<br/>it is an advanced configuration option.</para>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years.
+	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
+	/// Chunking configuration controls how the size of these time chunks are calculated;
+	/// it is an advanced configuration option.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ChunkingConfig? chunkingConfig)
 	{
@@ -827,7 +967,13 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed checks for missing data and the size of the window.<br/>The datafeed can optionally search over indices that have already been read in an effort to determine whether<br/>any data has subsequently been added to the index. If missing data is found, it is a good indication that the<br/>`query_delay` is set too low and the data is being indexed after the datafeed has passed that moment in time.<br/>This check runs only on real-time datafeeds.</para>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window.
+	/// The datafeed can optionally search over indices that have already been read in an effort to determine whether
+	/// any data has subsequently been added to the index. If missing data is found, it is a good indication that the
+	/// <c>query_delay</c> is set too low and the data is being indexed after the datafeed has passed that moment in time.
+	/// This check runs only on real-time datafeeds.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
 	{
@@ -854,7 +1000,13 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>The interval at which scheduled queries are made while the datafeed runs in real time.<br/>The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible<br/>fraction of the bucket span. When `frequency` is shorter than the bucket span, interim results for the last<br/>(partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses<br/>aggregations, this value must be divisible by the interval of the date histogram aggregation.</para>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time.
+	/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible
+	/// fraction of the bucket span. When <c>frequency</c> is shorter than the bucket span, interim results for the last
+	/// (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses
+	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Serverless.Duration? frequency)
 	{
@@ -869,7 +1021,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine<br/>learning nodes must have the `remote_cluster_client` role.</para>
+	/// <para>
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -878,7 +1033,9 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Specifies index expansion options that are used during search</para>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.Serverless.IndicesOptions? indicesOptions)
 	{
@@ -905,7 +1062,9 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Serverless.Id? jobId)
 	{
@@ -914,7 +1073,12 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>If a real-time datafeed has never seen any data (including during any initial training period), it automatically<br/>stops and closes the associated job after this many real-time searches return no documents. In other words,<br/>it stops after `frequency` times `max_empty_searches` of real-time operation. If not set, a datafeed with no<br/>end time that sees no data remains started until it is explicitly stopped. By default, it is not set.</para>
+	/// <para>
+	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
+	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
+	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor MaxEmptySearches(int? maxEmptySearches)
 	{
@@ -923,7 +1087,11 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an<br/>Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this<br/>object is passed verbatim to Elasticsearch.</para>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -950,7 +1118,12 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might<br/>not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default<br/>value is randomly selected between `60s` and `120s`. This randomness improves the query performance<br/>when there are multiple jobs running on the same node.</para>
+	/// <para>
+	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
+	/// when there are multiple jobs running on the same node.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Serverless.Duration? queryDelay)
 	{
@@ -959,7 +1132,9 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Specifies runtime fields for the datafeed search.</para>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -968,7 +1143,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.<br/>The detector configuration objects in a job can contain functions that use these script fields.</para>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
@@ -977,7 +1155,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	}
 
 	/// <summary>
-	/// <para>The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.<br/>The maximum value is the value of `index.max_result_window`, which is 10,000 by default.</para>
+	/// <para>
+	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor ScrollSize(int? scrollSize)
 	{

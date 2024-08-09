@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Processor
 {
 	/// <summary>
-	/// <para>Number of documents transformed by the processor.</para>
+	/// <para>
+	/// Number of documents transformed by the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long? Count { get; init; }
 
 	/// <summary>
-	/// <para>Number of documents currently being transformed by the processor.</para>
+	/// <para>
+	/// Number of documents currently being transformed by the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current")]
 	public long? Current { get; init; }
 
 	/// <summary>
-	/// <para>Number of failed operations for the processor.</para>
+	/// <para>
+	/// Number of failed operations for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("failed")]
 	public long? Failed { get; init; }
 
 	/// <summary>
-	/// <para>Time, in milliseconds, spent by the processor transforming documents.</para>
+	/// <para>
+	/// Time, in milliseconds, spent by the processor transforming documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_in_millis")]
 	public long? TimeInMillis { get; init; }

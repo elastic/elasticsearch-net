@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Synonyms;
 public sealed partial class GetSynonymRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Starting offset for query rules to be retrieved</para>
+	/// <para>
+	/// Starting offset for query rules to be retrieved
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>specifies a max number of query rules to retrieve</para>
+	/// <para>
+	/// specifies a max number of query rules to retrieve
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves a synonym set</para>
+/// <para>
+/// Retrieves a synonym set
+/// </para>
 /// </summary>
 public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestParameters>
 {
@@ -60,20 +66,26 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 	internal override string OperationName => "synonyms.get_synonym";
 
 	/// <summary>
-	/// <para>Starting offset for query rules to be retrieved</para>
+	/// <para>
+	/// Starting offset for query rules to be retrieved
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>specifies a max number of query rules to retrieve</para>
+	/// <para>
+	/// specifies a max number of query rules to retrieve
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves a synonym set</para>
+/// <para>
+/// Retrieves a synonym set
+/// </para>
 /// </summary>
 public sealed partial class GetSynonymRequestDescriptor<TDocument> : RequestDescriptor<GetSynonymRequestDescriptor<TDocument>, GetSynonymRequestParameters>
 {
@@ -106,7 +118,9 @@ public sealed partial class GetSynonymRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Retrieves a synonym set</para>
+/// <para>
+/// Retrieves a synonym set
+/// </para>
 /// </summary>
 public sealed partial class GetSynonymRequestDescriptor : RequestDescriptor<GetSynonymRequestDescriptor, GetSynonymRequestParameters>
 {

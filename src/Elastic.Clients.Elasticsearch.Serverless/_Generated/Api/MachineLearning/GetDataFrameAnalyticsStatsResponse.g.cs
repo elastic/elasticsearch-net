@@ -32,7 +32,9 @@ public sealed partial class GetDataFrameAnalyticsStatsResponse : ElasticsearchRe
 	public long Count { get; init; }
 
 	/// <summary>
-	/// <para>An array of objects that contain usage information for data frame analytics jobs, which are sorted by the id value in ascending order.</para>
+	/// <para>
+	/// An array of objects that contain usage information for data frame analytics jobs, which are sorted by the id value in ascending order.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_frame_analytics")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalytics> DataFrameAnalytics { get; init; }

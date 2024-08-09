@@ -34,7 +34,17 @@ public sealed partial class DeleteExpiredDataRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+/// <para>
+/// Delete expired ML data.
+/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// their retention days period. Machine learning state documents that are not
+/// associated with any job are also deleted.
+/// You can limit the request to a single or set of anomaly detection jobs by
+/// using a job identifier, a group name, a comma-separated list of jobs, or a
+/// wildcard expression. You can delete expired data for all anomaly detection
+/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
+/// &lt;job_id>.
+/// </para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpiredDataRequestParameters>
 {
@@ -55,20 +65,35 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 	internal override string OperationName => "ml.delete_expired_data";
 
 	/// <summary>
-	/// <para>The desired requests per second for the deletion processes. The default<br/>behavior is no throttling.</para>
+	/// <para>
+	/// The desired requests per second for the deletion processes. The default
+	/// behavior is no throttling.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float? RequestsPerSecond { get; set; }
 
 	/// <summary>
-	/// <para>How long can the underlying delete processes run until they are canceled.</para>
+	/// <para>
+	/// How long can the underlying delete processes run until they are canceled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>
-/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+/// <para>
+/// Delete expired ML data.
+/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// their retention days period. Machine learning state documents that are not
+/// associated with any job are also deleted.
+/// You can limit the request to a single or set of anomaly detection jobs by
+/// using a job identifier, a group name, a comma-separated list of jobs, or a
+/// wildcard expression. You can delete expired data for all anomaly detection
+/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
+/// &lt;job_id>.
+/// </para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescriptor<DeleteExpiredDataRequestDescriptor, DeleteExpiredDataRequestParameters>
 {
@@ -100,7 +125,10 @@ public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescript
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>The desired requests per second for the deletion processes. The default<br/>behavior is no throttling.</para>
+	/// <para>
+	/// The desired requests per second for the deletion processes. The default
+	/// behavior is no throttling.
+	/// </para>
 	/// </summary>
 	public DeleteExpiredDataRequestDescriptor RequestsPerSecond(float? requestsPerSecond)
 	{
@@ -109,7 +137,9 @@ public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>How long can the underlying delete processes run until they are canceled.</para>
+	/// <para>
+	/// How long can the underlying delete processes run until they are canceled.
+	/// </para>
 	/// </summary>
 	public DeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{

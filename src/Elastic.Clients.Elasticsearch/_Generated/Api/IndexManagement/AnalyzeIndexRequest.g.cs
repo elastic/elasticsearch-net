@@ -34,7 +34,9 @@ public sealed partial class AnalyzeIndexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Performs analysis on a text string and returns the resulting tokens.</para>
+/// <para>
+/// Performs analysis on a text string and returns the resulting tokens.
+/// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexRequestParameters>
 {
@@ -55,63 +57,87 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 	internal override string OperationName => "indices.analyze";
 
 	/// <summary>
-	/// <para>The name of the analyzer that should be applied to the provided `text`.<br/>This could be a built-in analyzer, or an analyzer that’s been configured in the index.</para>
+	/// <para>
+	/// The name of the analyzer that should be applied to the provided <c>text</c>.
+	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Array of token attributes used to filter the output of the `explain` parameter.</para>
+	/// <para>
+	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("attributes")]
 	public ICollection<string>? Attributes { get; set; }
 
 	/// <summary>
-	/// <para>Array of character filters used to preprocess characters before the tokenizer.</para>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("char_filter")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilter { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the response includes token attributes and additional details.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes token attributes and additional details.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Array of token filters used to apply after the tokenizer.</para>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Normalizer to use to convert text into a single token.</para>
+	/// <para>
+	/// Normalizer to use to convert text into a single token.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("normalizer")]
 	public string? Normalizer { get; set; }
 
 	/// <summary>
-	/// <para>Text to analyze.<br/>If an array of strings is provided, it is analyzed as a multi-value field.</para>
+	/// <para>
+	/// Text to analyze.
+	/// If an array of strings is provided, it is analyzed as a multi-value field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Text { get; set; }
 
 	/// <summary>
-	/// <para>Tokenizer to use to convert text into tokens.</para>
+	/// <para>
+	/// Tokenizer to use to convert text into tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenizer? Tokenizer { get; set; }
 }
 
 /// <summary>
-/// <para>Performs analysis on a text string and returns the resulting tokens.</para>
+/// <para>
+/// Performs analysis on a text string and returns the resulting tokens.
+/// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDescriptor<AnalyzeIndexRequestDescriptor<TDocument>, AnalyzeIndexRequestParameters>
 {
@@ -150,7 +176,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	private Elastic.Clients.Elasticsearch.Analysis.ITokenizer? TokenizerValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the analyzer that should be applied to the provided `text`.<br/>This could be a built-in analyzer, or an analyzer that’s been configured in the index.</para>
+	/// <para>
+	/// The name of the analyzer that should be applied to the provided <c>text</c>.
+	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -159,7 +188,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Array of token attributes used to filter the output of the `explain` parameter.</para>
+	/// <para>
+	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Attributes(ICollection<string>? attributes)
 	{
@@ -168,7 +199,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Array of character filters used to preprocess characters before the tokenizer.</para>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> CharFilter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? charFilter)
 	{
@@ -177,7 +210,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>If `true`, the response includes token attributes and additional details.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes token attributes and additional details.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
@@ -186,7 +221,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -195,7 +234,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -204,7 +247,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -213,7 +260,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Array of token filters used to apply after the tokenizer.</para>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? filter)
 	{
@@ -222,7 +271,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Normalizer to use to convert text into a single token.</para>
+	/// <para>
+	/// Normalizer to use to convert text into a single token.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Normalizer(string? normalizer)
 	{
@@ -231,7 +282,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Text to analyze.<br/>If an array of strings is provided, it is analyzed as a multi-value field.</para>
+	/// <para>
+	/// Text to analyze.
+	/// If an array of strings is provided, it is analyzed as a multi-value field.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Text(ICollection<string>? text)
 	{
@@ -240,7 +294,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	}
 
 	/// <summary>
-	/// <para>Tokenizer to use to convert text into tokens.</para>
+	/// <para>
+	/// Tokenizer to use to convert text into tokens.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? tokenizer)
 	{
@@ -310,7 +366,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Performs analysis on a text string and returns the resulting tokens.</para>
+/// <para>
+/// Performs analysis on a text string and returns the resulting tokens.
+/// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>
 {
@@ -349,7 +407,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	private Elastic.Clients.Elasticsearch.Analysis.ITokenizer? TokenizerValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the analyzer that should be applied to the provided `text`.<br/>This could be a built-in analyzer, or an analyzer that’s been configured in the index.</para>
+	/// <para>
+	/// The name of the analyzer that should be applied to the provided <c>text</c>.
+	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Analyzer(string? analyzer)
 	{
@@ -358,7 +419,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Array of token attributes used to filter the output of the `explain` parameter.</para>
+	/// <para>
+	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Attributes(ICollection<string>? attributes)
 	{
@@ -367,7 +430,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Array of character filters used to preprocess characters before the tokenizer.</para>
+	/// <para>
+	/// Array of character filters used to preprocess characters before the tokenizer.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor CharFilter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? charFilter)
 	{
@@ -376,7 +441,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>If `true`, the response includes token attributes and additional details.</para>
+	/// <para>
+	/// If <c>true</c>, the response includes token attributes and additional details.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Explain(bool? explain = true)
 	{
@@ -385,7 +452,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -394,7 +465,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -403,7 +478,11 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Field used to derive the analyzer.<br/>To use this parameter, you must specify an index.<br/>If specified, the `analyzer` parameter overrides this value.</para>
+	/// <para>
+	/// Field used to derive the analyzer.
+	/// To use this parameter, you must specify an index.
+	/// If specified, the <c>analyzer</c> parameter overrides this value.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -412,7 +491,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Array of token filters used to apply after the tokenizer.</para>
+	/// <para>
+	/// Array of token filters used to apply after the tokenizer.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? filter)
 	{
@@ -421,7 +502,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Normalizer to use to convert text into a single token.</para>
+	/// <para>
+	/// Normalizer to use to convert text into a single token.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Normalizer(string? normalizer)
 	{
@@ -430,7 +513,10 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Text to analyze.<br/>If an array of strings is provided, it is analyzed as a multi-value field.</para>
+	/// <para>
+	/// Text to analyze.
+	/// If an array of strings is provided, it is analyzed as a multi-value field.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Text(ICollection<string>? text)
 	{
@@ -439,7 +525,9 @@ public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<An
 	}
 
 	/// <summary>
-	/// <para>Tokenizer to use to convert text into tokens.</para>
+	/// <para>
+	/// Tokenizer to use to convert text into tokens.
+	/// </para>
 	/// </summary>
 	public AnalyzeIndexRequestDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? tokenizer)
 	{

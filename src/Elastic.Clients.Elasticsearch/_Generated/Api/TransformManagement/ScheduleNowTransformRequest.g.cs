@@ -32,14 +32,24 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class ScheduleNowTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Controls the time to wait for the scheduling to take place</para>
+	/// <para>
+	/// Controls the time to wait for the scheduling to take place
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
-/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
+/// <para>
+/// Schedule a transform to start now.
+/// Instantly runs a transform to process data.
+/// </para>
+/// <para>
+/// If you _schedule_now a transform, it will process the new data instantly,
+/// without waiting for the configured frequency interval. After _schedule_now API is called,
+/// the transform will be processed again at now + frequency unless _schedule_now API
+/// is called again in the meantime.
+/// </para>
 /// </summary>
 public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleNowTransformRequestParameters>
 {
@@ -56,15 +66,25 @@ public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleN
 	internal override string OperationName => "transform.schedule_now_transform";
 
 	/// <summary>
-	/// <para>Controls the time to wait for the scheduling to take place</para>
+	/// <para>
+	/// Controls the time to wait for the scheduling to take place
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
-/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
+/// <para>
+/// Schedule a transform to start now.
+/// Instantly runs a transform to process data.
+/// </para>
+/// <para>
+/// If you _schedule_now a transform, it will process the new data instantly,
+/// without waiting for the configured frequency interval. After _schedule_now API is called,
+/// the transform will be processed again at now + frequency unless _schedule_now API
+/// is called again in the meantime.
+/// </para>
 /// </summary>
 public sealed partial class ScheduleNowTransformRequestDescriptor : RequestDescriptor<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformRequestParameters>
 {

@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class ModelPlotConfig
 {
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("annotations_enabled")]
 	public bool? AnnotationsEnabled { get; set; }
 
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model bounds for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Terms { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TermsValue { get; set; }
 
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor<TDocument> AnnotationsEnabled(bool? annotationsEnabled = true)
 	{
@@ -70,7 +78,9 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model bounds for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor<TDocument> Enabled(bool? enabled = true)
 	{
@@ -79,7 +89,9 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.Field? terms)
 	{
@@ -88,7 +100,9 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor<TDocument> Terms<TValue>(Expression<Func<TDocument, TValue>> terms)
 	{
@@ -97,7 +111,9 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor<TDocument> Terms(Expression<Func<TDocument, object>> terms)
 	{
@@ -143,7 +159,9 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TermsValue { get; set; }
 
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor AnnotationsEnabled(bool? annotationsEnabled = true)
 	{
@@ -152,7 +170,9 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If true, enables calculation and storage of the model bounds for each entity that is being analyzed.</para>
+	/// <para>
+	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor Enabled(bool? enabled = true)
 	{
@@ -161,7 +181,9 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.Field? terms)
 	{
@@ -170,7 +192,9 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor Terms<TDocument, TValue>(Expression<Func<TDocument, TValue>> terms)
 	{
@@ -179,7 +203,9 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.</para>
+	/// <para>
+	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
+	/// </para>
 	/// </summary>
 	public ModelPlotConfigDescriptor Terms<TDocument>(Expression<Func<TDocument, object>> terms)
 	{

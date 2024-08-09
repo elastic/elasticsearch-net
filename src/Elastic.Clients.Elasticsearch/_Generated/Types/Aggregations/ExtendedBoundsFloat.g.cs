@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ExtendedBoundsFloat
 {
 	/// <summary>
-	/// <para>Maximum value for the bound.</para>
+	/// <para>
+	/// Maximum value for the bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public float? Max { get; set; }
 
 	/// <summary>
-	/// <para>Minimum value for the bound.</para>
+	/// <para>
+	/// Minimum value for the bound.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public float? Min { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class ExtendedBoundsFloatDescriptor : SerializableDescript
 	private float? MinValue { get; set; }
 
 	/// <summary>
-	/// <para>Maximum value for the bound.</para>
+	/// <para>
+	/// Maximum value for the bound.
+	/// </para>
 	/// </summary>
 	public ExtendedBoundsFloatDescriptor Max(float? max)
 	{
@@ -63,7 +69,9 @@ public sealed partial class ExtendedBoundsFloatDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Minimum value for the bound.</para>
+	/// <para>
+	/// Minimum value for the bound.
+	/// </para>
 	/// </summary>
 	public ExtendedBoundsFloatDescriptor Min(float? min)
 	{

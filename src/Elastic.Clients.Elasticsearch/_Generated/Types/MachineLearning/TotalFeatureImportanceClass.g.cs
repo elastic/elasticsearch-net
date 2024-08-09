@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TotalFeatureImportanceClass
 {
 	/// <summary>
-	/// <para>The target class value. Could be a string, boolean, or number.</para>
+	/// <para>
+	/// The target class value. Could be a string, boolean, or number.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("class_name")]
 	public string ClassName { get; init; }
 
 	/// <summary>
-	/// <para>A collection of feature importance statistics related to the training data set for this particular feature.</para>
+	/// <para>
+	/// A collection of feature importance statistics related to the training data set for this particular feature.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; init; }

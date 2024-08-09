@@ -35,13 +35,17 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
-/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// <para>
+/// Returns results matching a query expressed in Event Query Language (EQL)
+/// </para>
 /// </summary>
 public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
 {
@@ -63,7 +67,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -71,26 +77,34 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public bool? CaseSensitive { get; set; }
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryField { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// <para>
+	/// Maximum number of events to search at a time for sequence queries.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Query, written in Query DSL, used to filter the events on which the EQL query runs.</para>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query))]
@@ -101,7 +115,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public bool? KeepOnCompletion { get; set; }
 
 	/// <summary>
-	/// <para>EQL query you wish to run.</para>
+	/// <para>
+	/// EQL query you wish to run.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -111,19 +127,25 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>For basic queries, the maximum number of matching events to return. Defaults to 10</para>
+	/// <para>
+	/// For basic queries, the maximum number of matching events to return. Defaults to 10
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tiebreaker_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TiebreakerField { get; set; }
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TimestampField { get; set; }
@@ -132,7 +154,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 }
 
 /// <summary>
-/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// <para>
+/// Returns results matching a query expressed in Event Query Language (EQL)
+/// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
 {
@@ -192,7 +216,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
 	{
@@ -201,7 +227,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> EventCategoryField<TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
 	{
@@ -210,7 +238,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Expression<Func<TDocument, object>> eventCategoryField)
 	{
@@ -219,7 +249,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// <para>
+	/// Maximum number of events to search at a time for sequence queries.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> FetchSize(int? fetchSize)
 	{
@@ -228,7 +260,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -267,7 +301,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Query, written in Query DSL, used to filter the events on which the EQL query runs.</para>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -318,7 +354,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>EQL query you wish to run.</para>
+	/// <para>
+	/// EQL query you wish to run.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> Query(string query)
 	{
@@ -339,7 +377,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>For basic queries, the maximum number of matching events to return. Defaults to 10</para>
+	/// <para>
+	/// For basic queries, the maximum number of matching events to return. Defaults to 10
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> Size(int? size)
 	{
@@ -348,7 +388,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TiebreakerField(Elastic.Clients.Elasticsearch.Serverless.Field? tiebreakerField)
 	{
@@ -357,7 +399,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TiebreakerField<TValue>(Expression<Func<TDocument, TValue>> tiebreakerField)
 	{
@@ -366,7 +410,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TiebreakerField(Expression<Func<TDocument, object>> tiebreakerField)
 	{
@@ -375,7 +421,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Serverless.Field? timestampField)
 	{
@@ -384,7 +432,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TimestampField<TValue>(Expression<Func<TDocument, TValue>> timestampField)
 	{
@@ -393,7 +443,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TimestampField(Expression<Func<TDocument, object>> timestampField)
 	{
@@ -541,7 +593,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// <para>
+/// Returns results matching a query expressed in Event Query Language (EQL)
+/// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
 {
@@ -597,7 +651,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
 	{
@@ -606,7 +662,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor EventCategoryField<TDocument, TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
 	{
@@ -615,7 +673,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// <para>
+	/// Field containing the event classification, such as process, file, or network.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor EventCategoryField<TDocument>(Expression<Func<TDocument, object>> eventCategoryField)
 	{
@@ -624,7 +684,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// <para>
+	/// Maximum number of events to search at a time for sequence queries.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor FetchSize(int? fetchSize)
 	{
@@ -633,7 +695,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
 	{
@@ -672,7 +736,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Query, written in Query DSL, used to filter the events on which the EQL query runs.</para>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filter)
 	{
@@ -723,7 +789,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>EQL query you wish to run.</para>
+	/// <para>
+	/// EQL query you wish to run.
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor Query(string query)
 	{
@@ -744,7 +812,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>For basic queries, the maximum number of matching events to return. Defaults to 10</para>
+	/// <para>
+	/// For basic queries, the maximum number of matching events to return. Defaults to 10
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor Size(int? size)
 	{
@@ -753,7 +823,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TiebreakerField(Elastic.Clients.Elasticsearch.Serverless.Field? tiebreakerField)
 	{
@@ -762,7 +834,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TiebreakerField<TDocument, TValue>(Expression<Func<TDocument, TValue>> tiebreakerField)
 	{
@@ -771,7 +845,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// <para>
+	/// Field used to sort hits with the same timestamp in ascending order
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TiebreakerField<TDocument>(Expression<Func<TDocument, object>> tiebreakerField)
 	{
@@ -780,7 +856,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Serverless.Field? timestampField)
 	{
@@ -789,7 +867,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TimestampField<TDocument, TValue>(Expression<Func<TDocument, TValue>> timestampField)
 	{
@@ -798,7 +878,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	/// <summary>
-	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// <para>
+	/// Field containing event timestamp. Default "@timestamp"
+	/// </para>
 	/// </summary>
 	public EqlSearchRequestDescriptor TimestampField<TDocument>(Expression<Func<TDocument, object>> timestampField)
 	{

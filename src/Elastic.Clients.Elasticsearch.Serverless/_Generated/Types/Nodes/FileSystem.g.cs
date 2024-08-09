@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class FileSystem
 {
 	/// <summary>
-	/// <para>List of all file stores.</para>
+	/// <para>
+	/// List of all file stores.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Nodes.DataPathStats>? Data { get; init; }
 
 	/// <summary>
-	/// <para>Contains I/O statistics for the node.</para>
+	/// <para>
+	/// Contains I/O statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("io_stats")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.IoStats? IoStats { get; init; }
 
 	/// <summary>
-	/// <para>Last time the file stores statistics were refreshed.<br/>Recorded in milliseconds since the Unix Epoch.</para>
+	/// <para>
+	/// Last time the file stores statistics were refreshed.
+	/// Recorded in milliseconds since the Unix Epoch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long? Timestamp { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics for all file stores of the node.</para>
+	/// <para>
+	/// Contains statistics for all file stores of the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.FileSystemTotal? Total { get; init; }

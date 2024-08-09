@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeEvaluationRegressionMetricsMsle
 {
 	/// <summary>
-	/// <para>Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.</para>
+	/// <para>
+	/// Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("offset")]
 	public double? Offset { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class DataframeEvaluationRegressionMetricsMsleDescriptor :
 	private double? OffsetValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.</para>
+	/// <para>
+	/// Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionMetricsMsleDescriptor Offset(double? offset)
 	{

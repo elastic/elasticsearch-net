@@ -30,19 +30,29 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class Source
 {
 	/// <summary>
-	/// <para>The source indices for the transform. It can be a single index, an index pattern (for example, `"my-index-*""`), an<br/>array of indices (for example, `["my-index-000001", "my-index-000002"]`), or an array of index patterns (for<br/>example, `["my-index-*", "my-other-index-*"]`. For remote indices use the syntax `"remote_name:index_name"`. If<br/>any indices are in remote clusters then the master node and at least one transform node must have the `remote_cluster_client` node role.</para>
+	/// <para>
+	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
+	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
+	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
+	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data<br/>nodes, including remote nodes, must be 7.12 or later.</para>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
@@ -63,7 +73,12 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
 
 	/// <summary>
-	/// <para>The source indices for the transform. It can be a single index, an index pattern (for example, `"my-index-*""`), an<br/>array of indices (for example, `["my-index-000001", "my-index-000002"]`), or an array of index patterns (for<br/>example, `["my-index-*", "my-other-index-*"]`. For remote indices use the syntax `"remote_name:index_name"`. If<br/>any indices are in remote clusters then the master node and at least one transform node must have the `remote_cluster_client` node role.</para>
+	/// <para>
+	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
+	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
+	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
+	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -72,7 +87,9 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -99,7 +116,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data<br/>nodes, including remote nodes, must be 7.12 or later.</para>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -153,7 +173,12 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
 
 	/// <summary>
-	/// <para>The source indices for the transform. It can be a single index, an index pattern (for example, `"my-index-*""`), an<br/>array of indices (for example, `["my-index-000001", "my-index-000002"]`), or an array of index patterns (for<br/>example, `["my-index-*", "my-other-index-*"]`. For remote indices use the syntax `"remote_name:index_name"`. If<br/>any indices are in remote clusters then the master node and at least one transform node must have the `remote_cluster_client` node role.</para>
+	/// <para>
+	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
+	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
+	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
+	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -162,7 +187,9 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -189,7 +216,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	}
 
 	/// <summary>
-	/// <para>Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data<br/>nodes, including remote nodes, must be 7.12 or later.</para>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
 	/// </summary>
 	public SourceDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{

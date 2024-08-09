@@ -33,31 +33,41 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	public bool? Custom { get; set; }
 
 	/// <summary>
-	/// <para>The feature name prefix. Defaults to ngram_<start>_<length>.</para>
+	/// <para>
+	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_prefix")]
 	public string? FeaturePrefix { get; set; }
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.</para>
+	/// <para>
+	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("length")]
 	public int? Length { get; set; }
 
 	/// <summary>
-	/// <para>Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.</para>
+	/// <para>
+	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("n_grams")]
 	public ICollection<int> NGrams { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public int? Start { get; set; }
@@ -87,7 +97,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The feature name prefix. Defaults to ngram_<start>_<length>.</para>
+	/// <para>
+	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> FeaturePrefix(string? featurePrefix)
 	{
@@ -96,7 +108,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -105,7 +119,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -114,7 +130,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -123,7 +141,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.</para>
+	/// <para>
+	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Length(int? length)
 	{
@@ -132,7 +152,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.</para>
+	/// <para>
+	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(ICollection<int> nGrams)
 	{
@@ -141,7 +163,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Start(int? start)
 	{
@@ -206,7 +230,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The feature name prefix. Defaults to ngram_<start>_<length>.</para>
+	/// <para>
+	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor FeaturePrefix(string? featurePrefix)
 	{
@@ -215,7 +241,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -224,7 +252,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -233,7 +263,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>The name of the text field to encode.</para>
+	/// <para>
+	/// The name of the text field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -242,7 +274,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.</para>
+	/// <para>
+	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Length(int? length)
 	{
@@ -251,7 +285,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.</para>
+	/// <para>
+	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(ICollection<int> nGrams)
 	{
@@ -260,7 +296,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingDescri
 	}
 
 	/// <summary>
-	/// <para>Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.</para>
+	/// <para>
+	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Start(int? start)
 	{

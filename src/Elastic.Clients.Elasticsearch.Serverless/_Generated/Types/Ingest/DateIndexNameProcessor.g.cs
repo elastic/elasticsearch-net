@@ -30,73 +30,105 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class DateIndexNameProcessor
 {
 	/// <summary>
-	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("date_formats")]
 	public ICollection<string> DateFormats { get; set; }
 
 	/// <summary>
-	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// <para>
+	/// How to round the date when formatting the date into the index name. Valid values are:
+	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("date_rounding")]
 	public string DateRounding { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The format to be used when printing the parsed date into the index name.
+	/// A valid java time pattern is expected here.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name_format")]
 	public string? IndexNameFormat { get; set; }
 
 	/// <summary>
-	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// A prefix of the index name to be prepended before the printed date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name_prefix")]
 	public string? IndexNamePrefix { get; set; }
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// <para>
+	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// <para>
+	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
@@ -129,7 +161,10 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	private string? TimezoneValue { get; set; }
 
 	/// <summary>
-	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> DateFormats(ICollection<string> dateFormats)
 	{
@@ -138,7 +173,11 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// <para>
+	/// How to round the date when formatting the date into the index name. Valid values are:
+	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> DateRounding(string dateRounding)
 	{
@@ -147,7 +186,10 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -156,7 +198,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -165,7 +209,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -174,7 +220,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -183,7 +231,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -192,7 +242,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -201,7 +253,11 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The format to be used when printing the parsed date into the index name.
+	/// A valid java time pattern is expected here.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> IndexNameFormat(string? indexNameFormat)
 	{
@@ -210,7 +266,10 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// A prefix of the index name to be prepended before the printed date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> IndexNamePrefix(string? indexNamePrefix)
 	{
@@ -219,7 +278,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// <para>
+	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Locale(string? locale)
 	{
@@ -228,7 +289,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -267,7 +330,10 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -276,7 +342,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// <para>
+	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Timezone(string? timezone)
 	{
@@ -401,7 +469,10 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	private string? TimezoneValue { get; set; }
 
 	/// <summary>
-	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor DateFormats(ICollection<string> dateFormats)
 	{
@@ -410,7 +481,11 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// <para>
+	/// How to round the date when formatting the date into the index name. Valid values are:
+	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor DateRounding(string dateRounding)
 	{
@@ -419,7 +494,10 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Description(string? description)
 	{
@@ -428,7 +506,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -437,7 +517,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -446,7 +528,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field to get the date or timestamp from.</para>
+	/// <para>
+	/// The field to get the date or timestamp from.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -455,7 +539,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor If(string? value)
 	{
@@ -464,7 +550,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -473,7 +561,11 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The format to be used when printing the parsed date into the index name.
+	/// A valid java time pattern is expected here.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor IndexNameFormat(string? indexNameFormat)
 	{
@@ -482,7 +574,10 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// A prefix of the index name to be prepended before the printed date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor IndexNamePrefix(string? indexNamePrefix)
 	{
@@ -491,7 +586,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// <para>
+	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Locale(string? locale)
 	{
@@ -500,7 +597,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -539,7 +638,10 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Tag(string? tag)
 	{
@@ -548,7 +650,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// <para>
+	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
+	/// </para>
 	/// </summary>
 	public DateIndexNameProcessorDescriptor Timezone(string? timezone)
 	{

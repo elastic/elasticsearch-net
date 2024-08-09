@@ -30,49 +30,68 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class AppendProcessor
 {
 	/// <summary>
-	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// <para>
+	/// If <c>false</c>, the processor does not append values already present in the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_duplicates")]
 	public bool? AllowDuplicates { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The value to be appended. Supports template snippets.</para>
+	/// <para>
+	/// The value to be appended. Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public ICollection<object> Value { get; set; }
@@ -101,7 +120,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	private ICollection<object> ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// <para>
+	/// If <c>false</c>, the processor does not append values already present in the field.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> AllowDuplicates(bool? allowDuplicates = true)
 	{
@@ -110,7 +131,10 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -119,7 +143,10 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -128,7 +155,10 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -137,7 +167,10 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -146,7 +179,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -155,7 +190,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -164,7 +201,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -203,7 +242,10 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -212,7 +254,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The value to be appended. Supports template snippets.</para>
+	/// <para>
+	/// The value to be appended. Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Value(ICollection<object> value)
 	{
@@ -313,7 +357,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	private ICollection<object> ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// <para>
+	/// If <c>false</c>, the processor does not append values already present in the field.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor AllowDuplicates(bool? allowDuplicates = true)
 	{
@@ -322,7 +368,10 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Description(string? description)
 	{
@@ -331,7 +380,10 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -340,7 +392,10 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -349,7 +404,10 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to be appended to.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -358,7 +416,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor If(string? value)
 	{
@@ -367,7 +427,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -376,7 +438,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -415,7 +479,10 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Tag(string? tag)
 	{
@@ -424,7 +491,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 	}
 
 	/// <summary>
-	/// <para>The value to be appended. Supports template snippets.</para>
+	/// <para>
+	/// The value to be appended. Supports template snippets.
+	/// </para>
 	/// </summary>
 	public AppendProcessorDescriptor Value(ICollection<object> value)
 	{

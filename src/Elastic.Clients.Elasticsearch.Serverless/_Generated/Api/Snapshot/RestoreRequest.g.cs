@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 public sealed partial class RestoreRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before returning</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before returning
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Restores a snapshot.</para>
+/// <para>
+/// Restores a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParameters>
 {
@@ -60,13 +66,17 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 	internal override string OperationName => "snapshot.restore";
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before returning</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before returning
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -93,7 +103,9 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 }
 
 /// <summary>
-/// <para>Restores a snapshot.</para>
+/// <para>
+/// Restores a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescriptor<RestoreRequestDescriptor<TDocument>, RestoreRequestParameters>
 {
@@ -295,7 +307,9 @@ public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Restores a snapshot.</para>
+/// <para>
+/// Restores a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class RestoreRequestDescriptor : RequestDescriptor<RestoreRequestDescriptor, RestoreRequestParameters>
 {

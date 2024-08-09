@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class ApiKeyAuthorization
 {
 	/// <summary>
-	/// <para>The identifier for the API key.</para>
+	/// <para>
+	/// The identifier for the API key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
 	/// <summary>
-	/// <para>The name of the API key.</para>
+	/// <para>
+	/// The name of the API key.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }

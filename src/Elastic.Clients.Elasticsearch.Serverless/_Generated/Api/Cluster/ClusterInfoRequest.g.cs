@@ -34,7 +34,10 @@ public sealed partial class ClusterInfoRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
+/// <para>
+/// Get cluster info.
+/// Returns basic information about the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequestParameters>
 {
@@ -52,7 +55,10 @@ public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequest
 }
 
 /// <summary>
-/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
+/// <para>
+/// Get cluster info.
+/// Returns basic information about the cluster.
+/// </para>
 /// </summary>
 public sealed partial class ClusterInfoRequestDescriptor : RequestDescriptor<ClusterInfoRequestDescriptor, ClusterInfoRequestParameters>
 {

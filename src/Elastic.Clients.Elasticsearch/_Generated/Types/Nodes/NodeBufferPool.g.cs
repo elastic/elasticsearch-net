@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class NodeBufferPool
 {
 	/// <summary>
-	/// <para>Number of buffer pools.</para>
+	/// <para>
+	/// Number of buffer pools.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long? Count { get; init; }
 
 	/// <summary>
-	/// <para>Total capacity of buffer pools.</para>
+	/// <para>
+	/// Total capacity of buffer pools.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_capacity")]
 	public string? TotalCapacity { get; init; }
 
 	/// <summary>
-	/// <para>Total capacity of buffer pools in bytes.</para>
+	/// <para>
+	/// Total capacity of buffer pools in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_capacity_in_bytes")]
 	public long? TotalCapacityInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Size of buffer pools.</para>
+	/// <para>
+	/// Size of buffer pools.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("used")]
 	public string? Used { get; init; }
 
 	/// <summary>
-	/// <para>Size of buffer pools in bytes.</para>
+	/// <para>
+	/// Size of buffer pools in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("used_in_bytes")]
 	public long? UsedInBytes { get; init; }

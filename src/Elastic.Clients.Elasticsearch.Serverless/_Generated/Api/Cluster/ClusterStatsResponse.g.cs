@@ -29,43 +29,57 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Name of the cluster, based on the cluster name setting.</para>
+	/// <para>
+	/// Name of the cluster, based on the cluster name setting.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
-	/// <para>Unique identifier for the cluster.</para>
+	/// <para>
+	/// Unique identifier for the cluster.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_uuid")]
 	public string ClusterUuid { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about indices with shards assigned to selected nodes.</para>
+	/// <para>
+	/// Contains statistics about indices with shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Serverless.Cluster.ClusterIndices Indices { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about nodes selected by the request’s node filters.</para>
+	/// <para>
+	/// Contains statistics about nodes selected by the request’s node filters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public Elastic.Clients.Elasticsearch.Serverless.Cluster.ClusterNodes Nodes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the number of nodes selected by the request’s node filters.</para>
+	/// <para>
+	/// Contains statistics about the number of nodes selected by the request’s node filters.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.Serverless.NodeStatistics? NodeStats { get; init; }
 
 	/// <summary>
-	/// <para>Health status of the cluster, based on the state of its primary and replica shards.</para>
+	/// <para>
+	/// Health status of the cluster, based on the state of its primary and replica shards.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Serverless.HealthStatus Status { get; init; }
 
 	/// <summary>
-	/// <para>Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.</para>
+	/// <para>
+	/// Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }

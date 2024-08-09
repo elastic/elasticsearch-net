@@ -32,13 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DeleteDatafeedRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Use to forcefully delete a started datafeed; this method is quicker than<br/>stopping and deleting the datafeed.</para>
+	/// <para>
+	/// Use to forcefully delete a started datafeed; this method is quicker than
+	/// stopping and deleting the datafeed.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete a datafeed.</para>
+/// <para>
+/// Delete a datafeed.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedRequestParameters>
 {
@@ -55,14 +60,19 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 	internal override string OperationName => "ml.delete_datafeed";
 
 	/// <summary>
-	/// <para>Use to forcefully delete a started datafeed; this method is quicker than<br/>stopping and deleting the datafeed.</para>
+	/// <para>
+	/// Use to forcefully delete a started datafeed; this method is quicker than
+	/// stopping and deleting the datafeed.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete a datafeed.</para>
+/// <para>
+/// Delete a datafeed.
+/// </para>
 /// </summary>
 public sealed partial class DeleteDatafeedRequestDescriptor : RequestDescriptor<DeleteDatafeedRequestDescriptor, DeleteDatafeedRequestParameters>
 {

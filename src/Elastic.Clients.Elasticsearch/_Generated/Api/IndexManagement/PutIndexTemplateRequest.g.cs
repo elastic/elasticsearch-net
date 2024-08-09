@@ -32,23 +32,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class PutIndexTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>User defined reason for creating/updating the index template</para>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
 	/// </summary>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing index templates.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing index templates.
+	/// </para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>
+/// Create or update an index template.
+/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// </para>
 /// </summary>
 public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTemplateRequestParameters>
 {
@@ -65,86 +75,130 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	internal override string OperationName => "indices.put_index_template";
 
 	/// <summary>
-	/// <para>User defined reason for creating/updating the index template</para>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
-	/// <para>If `true`, this request cannot replace or update existing index templates.</para>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing index templates.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>This setting overrides the value of the `action.auto_create_index` cluster setting.<br/>If set to `true` in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via `actions.auto_create_index`.<br/>If set to `false`, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.</para>
+	/// <para>
+	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
+	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
+	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; set; }
 
 	/// <summary>
-	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("composed_of")]
 	public ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
 	/// <summary>
-	/// <para>If this object is included, the template is used to create data streams and their backing indices.<br/>Supports an empty object.<br/>Data streams require a matching index template with a `data_stream` object.</para>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deprecated")]
 	public bool? Deprecated { get; set; }
 
 	/// <summary>
-	/// <para>The configuration option ignore_missing_component_templates can be used when an index template<br/>references a component template that might not exist</para>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing_component_templates")]
 	public ICollection<string>? IgnoreMissingComponentTemplates { get; set; }
 
 	/// <summary>
-	/// <para>Name of the index template to create.</para>
+	/// <para>
+	/// Name of the index template to create.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
 	/// <summary>
-	/// <para>Optional user metadata about the index template.<br/>May have any contents.<br/>This map is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>Priority to determine index template precedence when a new data stream or index is created.<br/>The index template with the highest priority is chosen.<br/>If no priority is specified the template is treated as though it is of priority 0 (lowest priority).<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Priority to determine index template precedence when a new data stream or index is created.
+	/// The index template with the highest priority is chosen.
+	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("priority")]
 	public long? Priority { get; set; }
 
 	/// <summary>
-	/// <para>Template to be applied.<br/>It may optionally include an `aliases`, `mappings`, or `settings` configuration.</para>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
 
 	/// <summary>
-	/// <para>Version number used to manage index templates externally.<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Version number used to manage index templates externally.
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
 /// <summary>
-/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>
+/// Create or update an index template.
+/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// </para>
 /// </summary>
 public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateRequestParameters>
 {
@@ -188,7 +242,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>This setting overrides the value of the `action.auto_create_index` cluster setting.<br/>If set to `true` in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via `actions.auto_create_index`.<br/>If set to `false`, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.</para>
+	/// <para>
+	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
+	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
+	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> AllowAutoCreate(bool? allowAutoCreate = true)
 	{
@@ -197,7 +255,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
@@ -206,7 +267,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>If this object is included, the template is used to create data streams and their backing indices.<br/>Supports an empty object.<br/>Data streams require a matching index template with a `data_stream` object.</para>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
 	{
@@ -233,7 +298,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> Deprecated(bool? deprecated = true)
 	{
@@ -242,7 +310,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>The configuration option ignore_missing_component_templates can be used when an index template<br/>references a component template that might not exist</para>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(ICollection<string>? ignoreMissingComponentTemplates)
 	{
@@ -251,7 +322,9 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Name of the index template to create.</para>
+	/// <para>
+	/// Name of the index template to create.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns)
 	{
@@ -260,7 +333,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Optional user metadata about the index template.<br/>May have any contents.<br/>This map is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -269,7 +346,12 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Priority to determine index template precedence when a new data stream or index is created.<br/>The index template with the highest priority is chosen.<br/>If no priority is specified the template is treated as though it is of priority 0 (lowest priority).<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Priority to determine index template precedence when a new data stream or index is created.
+	/// The index template with the highest priority is chosen.
+	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> Priority(long? priority)
 	{
@@ -278,7 +360,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Template to be applied.<br/>It may optionally include an `aliases`, `mappings`, or `settings` configuration.</para>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
 	{
@@ -305,7 +390,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	/// <summary>
-	/// <para>Version number used to manage index templates externally.<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Version number used to manage index templates externally.
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor<TDocument> Version(long? version)
 	{
@@ -401,7 +489,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 }
 
 /// <summary>
-/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>
+/// Create or update an index template.
+/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// </para>
 /// </summary>
 public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescriptor<PutIndexTemplateRequestDescriptor, PutIndexTemplateRequestParameters>
 {
@@ -445,7 +536,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	private long? VersionValue { get; set; }
 
 	/// <summary>
-	/// <para>This setting overrides the value of the `action.auto_create_index` cluster setting.<br/>If set to `true` in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via `actions.auto_create_index`.<br/>If set to `false`, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.</para>
+	/// <para>
+	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
+	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
+	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor AllowAutoCreate(bool? allowAutoCreate = true)
 	{
@@ -454,7 +549,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Name>? composedOf)
 	{
@@ -463,7 +561,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>If this object is included, the template is used to create data streams and their backing indices.<br/>Supports an empty object.<br/>Data streams require a matching index template with a `data_stream` object.</para>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
 	{
@@ -490,7 +592,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Marks this index template as deprecated. When creating or updating a non-deprecated index template<br/>that uses deprecated components, Elasticsearch will emit a deprecation warning.</para>
+	/// <para>
+	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
+	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor Deprecated(bool? deprecated = true)
 	{
@@ -499,7 +604,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>The configuration option ignore_missing_component_templates can be used when an index template<br/>references a component template that might not exist</para>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(ICollection<string>? ignoreMissingComponentTemplates)
 	{
@@ -508,7 +616,9 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Name of the index template to create.</para>
+	/// <para>
+	/// Name of the index template to create.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns)
 	{
@@ -517,7 +627,11 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Optional user metadata about the index template.<br/>May have any contents.<br/>This map is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -526,7 +640,12 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Priority to determine index template precedence when a new data stream or index is created.<br/>The index template with the highest priority is chosen.<br/>If no priority is specified the template is treated as though it is of priority 0 (lowest priority).<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Priority to determine index template precedence when a new data stream or index is created.
+	/// The index template with the highest priority is chosen.
+	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor Priority(long? priority)
 	{
@@ -535,7 +654,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Template to be applied.<br/>It may optionally include an `aliases`, `mappings`, or `settings` configuration.</para>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
 	{
@@ -562,7 +684,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Version number used to manage index templates externally.<br/>This number is not automatically generated by Elasticsearch.</para>
+	/// <para>
+	/// Version number used to manage index templates externally.
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
 	/// </summary>
 	public PutIndexTemplateRequestDescriptor Version(long? version)
 	{

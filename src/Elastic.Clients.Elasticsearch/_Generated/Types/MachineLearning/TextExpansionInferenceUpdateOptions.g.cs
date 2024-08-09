@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TextExpansionInferenceUpdateOptions
 {
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
@@ -54,7 +56,9 @@ public sealed partial class TextExpansionInferenceUpdateOptionsDescriptor : Seri
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public TextExpansionInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{

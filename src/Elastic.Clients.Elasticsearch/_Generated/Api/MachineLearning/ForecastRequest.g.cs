@@ -34,8 +34,15 @@ public sealed partial class ForecastRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Predicts the future behavior of a time series by using its historical<br/>behavior.</para>
-/// <para>Forecasts are not supported for jobs that perform population analysis; an<br/>error occurs if you try to create a forecast for a job that has an<br/>`over_field_name` in its configuration.</para>
+/// <para>
+/// Predicts the future behavior of a time series by using its historical
+/// behavior.
+/// </para>
+/// <para>
+/// Forecasts are not supported for jobs that perform population analysis; an
+/// error occurs if you try to create a forecast for a job that has an
+/// <c>over_field_name</c> in its configuration.
+/// </para>
 /// </summary>
 public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParameters>
 {
@@ -52,27 +59,40 @@ public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParame
 	internal override string OperationName => "ml.forecast";
 
 	/// <summary>
-	/// <para>Refer to the description for the `duration` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>duration</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("duration")]
 	public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `expires_in` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>expires_in</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expires_in")]
 	public Elastic.Clients.Elasticsearch.Duration? ExpiresIn { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `max_model_memory` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>max_model_memory</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_model_memory")]
 	public string? MaxModelMemory { get; set; }
 }
 
 /// <summary>
-/// <para>Predicts the future behavior of a time series by using its historical<br/>behavior.</para>
-/// <para>Forecasts are not supported for jobs that perform population analysis; an<br/>error occurs if you try to create a forecast for a job that has an<br/>`over_field_name` in its configuration.</para>
+/// <para>
+/// Predicts the future behavior of a time series by using its historical
+/// behavior.
+/// </para>
+/// <para>
+/// Forecasts are not supported for jobs that perform population analysis; an
+/// error occurs if you try to create a forecast for a job that has an
+/// <c>over_field_name</c> in its configuration.
+/// </para>
 /// </summary>
 public sealed partial class ForecastRequestDescriptor : RequestDescriptor<ForecastRequestDescriptor, ForecastRequestParameters>
 {
@@ -101,7 +121,9 @@ public sealed partial class ForecastRequestDescriptor : RequestDescriptor<Foreca
 	private string? MaxModelMemoryValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `duration` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>duration</c> query parameter.
+	/// </para>
 	/// </summary>
 	public ForecastRequestDescriptor Duration(Elastic.Clients.Elasticsearch.Duration? duration)
 	{
@@ -110,7 +132,9 @@ public sealed partial class ForecastRequestDescriptor : RequestDescriptor<Foreca
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `expires_in` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>expires_in</c> query parameter.
+	/// </para>
 	/// </summary>
 	public ForecastRequestDescriptor ExpiresIn(Elastic.Clients.Elasticsearch.Duration? expiresIn)
 	{
@@ -119,7 +143,9 @@ public sealed partial class ForecastRequestDescriptor : RequestDescriptor<Foreca
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `max_model_memory` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>max_model_memory</c> query parameter.
+	/// </para>
 	/// </summary>
 	public ForecastRequestDescriptor MaxModelMemory(string? maxModelMemory)
 	{

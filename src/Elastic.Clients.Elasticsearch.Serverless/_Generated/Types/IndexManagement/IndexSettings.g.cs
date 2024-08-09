@@ -747,7 +747,9 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
 
 	/// <summary>
-	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// <para>
+	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsAnalyze? Analyze { get; set; }
 	public string? AutoExpandReplicas { get; set; }
@@ -765,7 +767,9 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Index { get; set; }
 
 	/// <summary>
-	/// <para>Configure indexing back pressure limits.</para>
+	/// <para>
+	/// Configure indexing back pressure limits.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingSlowlogSettings? IndexingSlowlog { get; set; }
@@ -773,7 +777,9 @@ public sealed partial class IndexSettings
 	public bool? LoadFixedBitsetFiltersEagerly { get; set; }
 
 	/// <summary>
-	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// <para>
+	/// Enable or disable dynamic mapping for an index.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.MappingLimitSettings? Mapping { get; set; }
 	public int? MaxDocvalueFieldsSearch { get; set; }
@@ -794,7 +800,9 @@ public sealed partial class IndexSettings
 	public object? NumberOfShards { get; set; }
 
 	/// <summary>
-	/// <para>Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the [Elasticsearch API specification](https://github.com/elastic/elasticsearch-specification) so that they can be added in a future release</para>
+	/// <para>
+	/// Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the <a href="https://github.com/elastic/elasticsearch-specification">Elasticsearch API specification</a> so that they can be added in a future release
+	/// </para>
 	/// </summary>
 	public IDictionary<string, object> OtherSettings { get; set; }
 	public object? Priority { get; set; }
@@ -809,14 +817,18 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; set; }
 
 	/// <summary>
-	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// <para>
+	/// Configure custom similarity settings to customize how search results are scored.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarities? Similarity { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
 	/// <summary>
-	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// <para>
+	/// The store module allows you to control how index data is stored and accessed on disk.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Storage? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
@@ -963,7 +975,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// <para>
+	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsAnalyze? analyze)
 	{
@@ -1122,7 +1136,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Configure indexing back pressure limits.</para>
+	/// <para>
+	/// Configure indexing back pressure limits.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> IndexingPressure(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressure? indexingPressure)
 	{
@@ -1203,7 +1219,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// <para>
+	/// Enable or disable dynamic mapping for an index.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.MappingLimitSettings? mapping)
 	{
@@ -1344,7 +1362,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the [Elasticsearch API specification](https://github.com/elastic/elasticsearch-specification) so that they can be added in a future release</para>
+	/// <para>
+	/// Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the <a href="https://github.com/elastic/elasticsearch-specification">Elasticsearch API specification</a> so that they can be added in a future release
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> OtherSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -1503,7 +1523,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// <para>
+	/// Configure custom similarity settings to customize how search results are scored.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarities? similarity)
 	{
@@ -1574,7 +1596,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// <para>
+	/// The store module allows you to control how index data is stored and accessed on disk.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor<TDocument> Store(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Storage? store)
 	{
@@ -2388,7 +2412,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>Settings to define analyzers, tokenizers, token filters and character filters.</para>
+	/// <para>
+	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsAnalyze? analyze)
 	{
@@ -2547,7 +2573,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>Configure indexing back pressure limits.</para>
+	/// <para>
+	/// Configure indexing back pressure limits.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor IndexingPressure(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressure? indexingPressure)
 	{
@@ -2628,7 +2656,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>Enable or disable dynamic mapping for an index.</para>
+	/// <para>
+	/// Enable or disable dynamic mapping for an index.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor Mapping(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.MappingLimitSettings? mapping)
 	{
@@ -2769,7 +2799,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the [Elasticsearch API specification](https://github.com/elastic/elasticsearch-specification) so that they can be added in a future release</para>
+	/// <para>
+	/// Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the <a href="https://github.com/elastic/elasticsearch-specification">Elasticsearch API specification</a> so that they can be added in a future release
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor OtherSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -2928,7 +2960,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
+	/// <para>
+	/// Configure custom similarity settings to customize how search results are scored.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarities? similarity)
 	{
@@ -2999,7 +3033,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	}
 
 	/// <summary>
-	/// <para>The store module allows you to control how index data is stored and accessed on disk.</para>
+	/// <para>
+	/// The store module allows you to control how index data is stored and accessed on disk.
+	/// </para>
 	/// </summary>
 	public IndexSettingsDescriptor Store(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Storage? store)
 	{

@@ -31,7 +31,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>Slices configuration used to parallelize a process.</para>
+/// <para>
+/// Slices configuration used to parallelize a process.
+/// </para>
 /// </summary>
 public sealed partial class Slices : Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {

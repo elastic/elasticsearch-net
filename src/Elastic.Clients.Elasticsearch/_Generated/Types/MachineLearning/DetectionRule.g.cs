@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DetectionRule
 {
 	/// <summary>
-	/// <para>The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.</para>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? Actions { get; set; }
 
 	/// <summary>
-	/// <para>An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.</para>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("conditions")]
 	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? Conditions { get; set; }
 
 	/// <summary>
-	/// <para>A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in `by_field_name`, `over_field_name`, or `partition_field_name`.</para>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scope")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? Scope { get; set; }
@@ -64,7 +70,9 @@ public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDes
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> ScopeValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.</para>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? actions)
 	{
@@ -73,7 +81,9 @@ public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.</para>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor<TDocument> Conditions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? conditions)
 	{
@@ -112,7 +122,9 @@ public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in `by_field_name`, `over_field_name`, or `partition_field_name`.</para>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor<TDocument> Scope(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>> selector)
 	{
@@ -186,7 +198,9 @@ public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<Det
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> ScopeValue { get; set; }
 
 	/// <summary>
-	/// <para>The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.</para>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? actions)
 	{
@@ -195,7 +209,9 @@ public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<Det
 	}
 
 	/// <summary>
-	/// <para>An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.</para>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor Conditions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? conditions)
 	{
@@ -234,7 +250,9 @@ public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<Det
 	}
 
 	/// <summary>
-	/// <para>A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in `by_field_name`, `over_field_name`, or `partition_field_name`.</para>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
 	/// </summary>
 	public DetectionRuleDescriptor Scope(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>> selector)
 	{

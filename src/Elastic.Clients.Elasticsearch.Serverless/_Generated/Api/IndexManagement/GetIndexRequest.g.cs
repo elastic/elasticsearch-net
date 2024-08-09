@@ -32,48 +32,72 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class GetIndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only<br/>missing or closed indices. This behavior applies even if the request targets other open indices. For example,<br/>a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only
+	/// missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+	/// a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard expressions can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as open,hidden.</para>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return only information on specified index features</para>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 
 	/// <summary>
-	/// <para>If true, returns settings in flat format.</para>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>If false, requests that target a missing index return an error.</para>
+	/// <para>
+	/// If false, requests that target a missing index return an error.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If true, return all default settings in the response.</para>
+	/// <para>
+	/// If true, return all default settings in the response.
+	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>
+/// Get index information.
+/// Returns information about one or more indices. For data streams, the API returns information about the
+/// stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParameters>
 {
@@ -90,56 +114,80 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	internal override string OperationName => "indices.get";
 
 	/// <summary>
-	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only<br/>missing or closed indices. This behavior applies even if the request targets other open indices. For example,<br/>a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only
+	/// missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+	/// a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard expressions can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as open,hidden.</para>
+	/// <para>
+	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as open,hidden.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return only information on specified index features</para>
+	/// <para>
+	/// Return only information on specified index features
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 
 	/// <summary>
-	/// <para>If true, returns settings in flat format.</para>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>If false, requests that target a missing index return an error.</para>
+	/// <para>
+	/// If false, requests that target a missing index return an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>If true, return all default settings in the response.</para>
+	/// <para>
+	/// If true, return all default settings in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>
+/// Get index information.
+/// Returns information about one or more indices. For data streams, the API returns information about the
+/// stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescriptor<GetIndexRequestDescriptor<TDocument>, GetIndexRequestParameters>
 {
@@ -182,7 +230,11 @@ public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>
+/// Get index information.
+/// Returns information about one or more indices. For data streams, the API returns information about the
+/// stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class GetIndexRequestDescriptor : RequestDescriptor<GetIndexRequestDescriptor, GetIndexRequestParameters>
 {

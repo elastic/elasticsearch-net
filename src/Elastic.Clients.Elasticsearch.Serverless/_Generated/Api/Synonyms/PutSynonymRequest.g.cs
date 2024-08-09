@@ -34,7 +34,9 @@ public sealed partial class PutSynonymRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates or updates a synonym set.</para>
+/// <para>
+/// Creates or updates a synonym set.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestParameters>
 {
@@ -51,14 +53,18 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 	internal override string OperationName => "synonyms.put_synonym";
 
 	/// <summary>
-	/// <para>The synonym set information to update</para>
+	/// <para>
+	/// The synonym set information to update
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule> SynonymsSet { get; set; }
 }
 
 /// <summary>
-/// <para>Creates or updates a synonym set.</para>
+/// <para>
+/// Creates or updates a synonym set.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDescriptor<PutSynonymRequestDescriptor<TDocument>, PutSynonymRequestParameters>
 {
@@ -88,7 +94,9 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor>[] SynonymsSetDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The synonym set information to update</para>
+	/// <para>
+	/// The synonym set information to update
+	/// </para>
 	/// </summary>
 	public PutSynonymRequestDescriptor<TDocument> SynonymsSet(ICollection<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule> synonymsSet)
 	{
@@ -165,7 +173,9 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Creates or updates a synonym set.</para>
+/// <para>
+/// Creates or updates a synonym set.
+/// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutSynonymRequestDescriptor, PutSynonymRequestParameters>
 {
@@ -195,7 +205,9 @@ public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutS
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor>[] SynonymsSetDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>The synonym set information to update</para>
+	/// <para>
+	/// The synonym set information to update
+	/// </para>
 	/// </summary>
 	public PutSynonymRequestDescriptor SynonymsSet(ICollection<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule> synonymsSet)
 	{

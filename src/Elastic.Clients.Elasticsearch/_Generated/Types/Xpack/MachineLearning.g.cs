@@ -41,7 +41,9 @@ public sealed partial class MachineLearning
 	public Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; init; }
 
 	/// <summary>
-	/// <para>Job usage statistics. The `_all` entry is always present and gathers statistics for all jobs.</para>
+	/// <para>
+	/// Job usage statistics. The <c>_all</c> entry is always present and gathers statistics for all jobs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("jobs")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; init; }

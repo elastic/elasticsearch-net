@@ -34,7 +34,11 @@ public sealed partial class ProcessorGrokRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Extracts structured fields out of a single text field within a document.<br/>You choose which field to extract matched fields from, as well as the grok pattern you expect will match.<br/>A grok pattern is like a regular expression that supports aliased expressions that can be reused.</para>
+/// <para>
+/// Extracts structured fields out of a single text field within a document.
+/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
+/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
+/// </para>
 /// </summary>
 public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokRequestParameters>
 {
@@ -48,7 +52,11 @@ public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokReq
 }
 
 /// <summary>
-/// <para>Extracts structured fields out of a single text field within a document.<br/>You choose which field to extract matched fields from, as well as the grok pattern you expect will match.<br/>A grok pattern is like a regular expression that supports aliased expressions that can be reused.</para>
+/// <para>
+/// Extracts structured fields out of a single text field within a document.
+/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
+/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
+/// </para>
 /// </summary>
 public sealed partial class ProcessorGrokRequestDescriptor : RequestDescriptor<ProcessorGrokRequestDescriptor, ProcessorGrokRequestParameters>
 {

@@ -32,13 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DeleteTrainedModelRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.</para>
+	/// <para>
+	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
+	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
+/// <para>
+/// Delete an unreferenced trained model.
+/// The request deletes a trained inference model that is not referenced by an ingest pipeline.
+/// </para>
 /// </summary>
 public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrainedModelRequestParameters>
 {
@@ -55,14 +60,19 @@ public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrain
 	internal override string OperationName => "ml.delete_trained_model";
 
 	/// <summary>
-	/// <para>Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.</para>
+	/// <para>
+	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
-/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
+/// <para>
+/// Delete an unreferenced trained model.
+/// The request deletes a trained inference model that is not referenced by an ingest pipeline.
+/// </para>
 /// </summary>
 public sealed partial class DeleteTrainedModelRequestDescriptor : RequestDescriptor<DeleteTrainedModelRequestDescriptor, DeleteTrainedModelRequestParameters>
 {

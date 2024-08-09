@@ -32,23 +32,38 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies how long the async search should be available in the cluster.<br/>When not specified, the `keep_alive` set with the corresponding submit async request will be used.<br/>Otherwise, it is possible to override the value and extend the validity of the request.<br/>When this period expires, the search, if still running, is cancelled.<br/>If the search is completed, its saved results are deleted.</para>
+	/// <para>
+	/// Specifies how long the async search should be available in the cluster.
+	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
+	/// Otherwise, it is possible to override the value and extend the validity of the request.
+	/// When this period expires, the search, if still running, is cancelled.
+	/// If the search is completed, its saved results are deleted.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>Specifies to wait for the search to be completed up until the provided timeout.<br/>Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.<br/>By default no timeout is set meaning that the currently available results will be returned without any additional wait.</para>
+	/// <para>
+	/// Specifies to wait for the search to be completed up until the provided timeout.
+	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
+	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
-/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+/// <para>
+/// Retrieves the results of a previously submitted async search request given its identifier.
+/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchRequestParameters>
 {
@@ -65,26 +80,41 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 	internal override string OperationName => "async_search.get";
 
 	/// <summary>
-	/// <para>Specifies how long the async search should be available in the cluster.<br/>When not specified, the `keep_alive` set with the corresponding submit async request will be used.<br/>Otherwise, it is possible to override the value and extend the validity of the request.<br/>When this period expires, the search, if still running, is cancelled.<br/>If the search is completed, its saved results are deleted.</para>
+	/// <para>
+	/// Specifies how long the async search should be available in the cluster.
+	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
+	/// Otherwise, it is possible to override the value and extend the validity of the request.
+	/// When this period expires, the search, if still running, is cancelled.
+	/// If the search is completed, its saved results are deleted.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>Specifies to wait for the search to be completed up until the provided timeout.<br/>Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.<br/>By default no timeout is set meaning that the currently available results will be returned without any additional wait.</para>
+	/// <para>
+	/// Specifies to wait for the search to be completed up until the provided timeout.
+	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
+	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
-/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+/// <para>
+/// Retrieves the results of a previously submitted async search request given its identifier.
+/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchRequestParameters>
 {
@@ -118,7 +148,10 @@ public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Retrieves the results of a previously submitted async search request given its identifier.<br/>If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.</para>
+/// <para>
+/// Retrieves the results of a previously submitted async search request given its identifier.
+/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+/// </para>
 /// </summary>
 public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptor<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequestParameters>
 {

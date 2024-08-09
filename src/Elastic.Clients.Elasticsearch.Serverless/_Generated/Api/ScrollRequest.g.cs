@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class ScrollRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>
+	/// <para>
+	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
+	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 }
 
 /// <summary>
-/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
+/// <para>
+/// Allows to retrieve a large numbers of results from a single search request.
+/// </para>
 /// </summary>
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
 {
@@ -51,26 +55,34 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 	internal override string OperationName => "scroll";
 
 	/// <summary>
-	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>
+	/// <para>
+	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Period to retain the search context for scrolling.</para>
+	/// <para>
+	/// Period to retain the search context for scrolling.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get; set; }
 
 	/// <summary>
-	/// <para>Scroll ID of the search.</para>
+	/// <para>
+	/// Scroll ID of the search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.ScrollId ScrollId { get; set; }
 }
 
 /// <summary>
-/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
+/// <para>
+/// Allows to retrieve a large numbers of results from a single search request.
+/// </para>
 /// </summary>
 public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRequestDescriptor, ScrollRequestParameters>
 {
@@ -94,7 +106,9 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 	private Elastic.Clients.Elasticsearch.Serverless.ScrollId ScrollIdValue { get; set; }
 
 	/// <summary>
-	/// <para>Period to retain the search context for scrolling.</para>
+	/// <para>
+	/// Period to retain the search context for scrolling.
+	/// </para>
 	/// </summary>
 	public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Serverless.Duration? scroll)
 	{
@@ -103,7 +117,9 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 	}
 
 	/// <summary>
-	/// <para>Scroll ID of the search.</para>
+	/// <para>
+	/// Scroll ID of the search.
+	/// </para>
 	/// </summary>
 	public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.Serverless.ScrollId scrollId)
 	{

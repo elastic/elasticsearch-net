@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class NodeOperatingSystemInfo
 {
 	/// <summary>
-	/// <para>The number of processors actually used to calculate thread pool size. This number can be set with the node.processors setting of a node and defaults to the number of processors reported by the OS.</para>
+	/// <para>
+	/// The number of processors actually used to calculate thread pool size. This number can be set with the node.processors setting of a node and defaults to the number of processors reported by the OS.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocated_processors")]
 	public int? AllocatedProcessors { get; init; }
 
 	/// <summary>
-	/// <para>Name of the JVM architecture (ex: amd64, x86)</para>
+	/// <para>
+	/// Name of the JVM architecture (ex: amd64, x86)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("arch")]
 	public string Arch { get; init; }
 
 	/// <summary>
-	/// <para>Number of processors available to the Java virtual machine</para>
+	/// <para>
+	/// Number of processors available to the Java virtual machine
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("available_processors")]
 	public int AvailableProcessors { get; init; }
@@ -52,7 +58,9 @@ public sealed partial class NodeOperatingSystemInfo
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoMemory? Mem { get; init; }
 
 	/// <summary>
-	/// <para>Name of the operating system (ex: Linux, Windows, Mac OS X)</para>
+	/// <para>
+	/// Name of the operating system (ex: Linux, Windows, Mac OS X)
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
@@ -60,7 +68,9 @@ public sealed partial class NodeOperatingSystemInfo
 	public string PrettyName { get; init; }
 
 	/// <summary>
-	/// <para>Refresh interval for the OS statistics</para>
+	/// <para>
+	/// Refresh interval for the OS statistics
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh_interval_in_millis")]
 	public long RefreshIntervalInMillis { get; init; }
@@ -68,7 +78,9 @@ public sealed partial class NodeOperatingSystemInfo
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoMemory? Swap { get; init; }
 
 	/// <summary>
-	/// <para>Version of the operating system</para>
+	/// <para>
+	/// Version of the operating system
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public string Version { get; init; }

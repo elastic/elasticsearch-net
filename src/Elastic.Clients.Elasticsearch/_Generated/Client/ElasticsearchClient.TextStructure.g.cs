@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 public partial class TextStructureNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="TextStructureNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="TextStructureNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected TextStructureNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +119,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(CancellationToken cancellationToken = default)
@@ -116,7 +132,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
+	/// <para>
+	/// Tests a Grok pattern on some text.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(Action<TestGrokPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

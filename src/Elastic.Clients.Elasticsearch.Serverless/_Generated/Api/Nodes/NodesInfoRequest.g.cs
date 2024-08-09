@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class NodesInfoRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, returns settings in flat format.</para>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster nodes information.</para>
+/// <para>
+/// Returns cluster nodes information.
+/// </para>
 /// </summary>
 public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestParameters>
 {
@@ -77,26 +85,34 @@ public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestPara
 	internal override string OperationName => "nodes.info";
 
 	/// <summary>
-	/// <para>If true, returns settings in flat format.</para>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster nodes information.</para>
+/// <para>
+/// Returns cluster nodes information.
+/// </para>
 /// </summary>
 public sealed partial class NodesInfoRequestDescriptor : RequestDescriptor<NodesInfoRequestDescriptor, NodesInfoRequestParameters>
 {

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DataStreamTimestampField
 {
 	/// <summary>
-	/// <para>Name of the timestamp field for the data stream, which must be `@timestamp`. The `@timestamp` field must be included in every document indexed to the data stream.</para>
+	/// <para>
+	/// Name of the timestamp field for the data stream, which must be <c>@timestamp</c>. The <c>@timestamp</c> field must be included in every document indexed to the data stream.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }

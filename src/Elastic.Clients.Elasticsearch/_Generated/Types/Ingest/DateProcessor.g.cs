@@ -30,61 +30,86 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class DateProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("formats")]
 	public ICollection<string> Formats { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The locale to use when parsing the date, relevant when parsing month names or week days.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The timezone to use when parsing the date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
@@ -115,7 +140,10 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	private string? TimezoneValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -124,7 +152,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -133,7 +163,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -142,7 +174,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -151,7 +185,10 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Formats(ICollection<string> formats)
 	{
@@ -160,7 +197,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -169,7 +208,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -178,7 +219,10 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The locale to use when parsing the date, relevant when parsing month names or week days.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Locale(string? locale)
 	{
@@ -187,7 +231,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -226,7 +272,10 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -235,7 +284,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -244,7 +295,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -253,7 +306,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -262,7 +317,10 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The timezone to use when parsing the date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Timezone(string? timezone)
 	{
@@ -377,7 +435,10 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	private string? TimezoneValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Description(string? description)
 	{
@@ -386,7 +447,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -395,7 +458,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -404,7 +469,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field to get the date from.</para>
+	/// <para>
+	/// The field to get the date from.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -413,7 +480,10 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// <para>
+	/// An array of the expected date formats.
+	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Formats(ICollection<string> formats)
 	{
@@ -422,7 +492,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor If(string? value)
 	{
@@ -431,7 +503,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -440,7 +514,10 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The locale to use when parsing the date, relevant when parsing month names or week days.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Locale(string? locale)
 	{
@@ -449,7 +526,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -488,7 +567,10 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Tag(string? tag)
 	{
@@ -497,7 +579,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -506,7 +590,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -515,7 +601,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The field that will hold the parsed date.</para>
+	/// <para>
+	/// The field that will hold the parsed date.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
@@ -524,7 +612,10 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	}
 
 	/// <summary>
-	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The timezone to use when parsing the date.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public DateProcessorDescriptor Timezone(string? timezone)
 	{

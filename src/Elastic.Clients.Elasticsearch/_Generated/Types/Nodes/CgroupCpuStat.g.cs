@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class CgroupCpuStat
 {
 	/// <summary>
-	/// <para>The number of reporting periods (as specified by `cfs_period_micros`) that have elapsed.</para>
+	/// <para>
+	/// The number of reporting periods (as specified by <c>cfs_period_micros</c>) that have elapsed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_elapsed_periods")]
 	public long? NumberOfElapsedPeriods { get; init; }
 
 	/// <summary>
-	/// <para>The number of times all tasks in the same cgroup as the Elasticsearch process have been throttled.</para>
+	/// <para>
+	/// The number of times all tasks in the same cgroup as the Elasticsearch process have been throttled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_times_throttled")]
 	public long? NumberOfTimesThrottled { get; init; }
 
 	/// <summary>
-	/// <para>The total amount of time, in nanoseconds, for which all tasks in the same cgroup as the Elasticsearch process have been throttled.</para>
+	/// <para>
+	/// The total amount of time, in nanoseconds, for which all tasks in the same cgroup as the Elasticsearch process have been throttled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_throttled_nanos")]
 	public long? TimeThrottledNanos { get; init; }

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class MissingAggregation
 {
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
@@ -52,7 +54,9 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -61,7 +65,9 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -70,7 +76,9 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -115,7 +123,9 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -124,7 +134,9 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -133,7 +145,9 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>The name of the field.</para>
+	/// <para>
+	/// The name of the field.
+	/// </para>
 	/// </summary>
 	public MissingAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

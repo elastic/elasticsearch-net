@@ -37,13 +37,17 @@ public sealed partial class ShardStatistics
 	public int? Skipped { get; init; }
 
 	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
+	/// <para>
+	/// Indicates how many shards have successfully run the search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("successful")]
 	public int Successful { get; init; }
 
 	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
+	/// <para>
+	/// Indicates how many shards the search will run on overall.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }

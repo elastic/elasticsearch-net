@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class PinnedDoc
 {
 	/// <summary>
-	/// <para>The unique document ID.</para>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
-	/// <para>The index that contains the document.</para>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class PinnedDocDescriptor : SerializableDescriptor<PinnedD
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
 
 	/// <summary>
-	/// <para>The unique document ID.</para>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
 	/// </summary>
 	public PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -63,7 +69,9 @@ public sealed partial class PinnedDocDescriptor : SerializableDescriptor<PinnedD
 	}
 
 	/// <summary>
-	/// <para>The index that contains the document.</para>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
 	/// </summary>
 	public PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{

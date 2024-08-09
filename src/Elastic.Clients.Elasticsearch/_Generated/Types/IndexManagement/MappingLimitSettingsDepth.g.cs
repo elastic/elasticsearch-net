@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MappingLimitSettingsDepth
 {
 	/// <summary>
-	/// <para>The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined<br/>at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.</para>
+	/// <para>
+	/// The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined
+	/// at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
@@ -47,7 +50,10 @@ public sealed partial class MappingLimitSettingsDepthDescriptor : SerializableDe
 	private long? LimitValue { get; set; }
 
 	/// <summary>
-	/// <para>The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined<br/>at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.</para>
+	/// <para>
+	/// The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined
+	/// at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.
+	/// </para>
 	/// </summary>
 	public MappingLimitSettingsDepthDescriptor Limit(long? limit)
 	{

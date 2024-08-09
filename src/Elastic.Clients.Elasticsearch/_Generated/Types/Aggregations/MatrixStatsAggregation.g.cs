@@ -30,20 +30,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class MatrixStatsAggregation
 {
 	/// <summary>
-	/// <para>An array of fields for computing the statistics.</para>
+	/// <para>
+	/// An array of fields for computing the statistics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 
 	/// <summary>
-	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// <para>
+	/// Array value the aggregation will use for array or multi-valued fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
@@ -64,7 +71,9 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 	/// <summary>
-	/// <para>An array of fields for computing the statistics.</para>
+	/// <para>
+	/// An array of fields for computing the statistics.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
@@ -73,7 +82,10 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor<TDocument> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
 	{
@@ -82,7 +94,9 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// <para>
+	/// Array value the aggregation will use for array or multi-valued fields.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 	{
@@ -128,7 +142,9 @@ public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescr
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 	/// <summary>
-	/// <para>An array of fields for computing the statistics.</para>
+	/// <para>
+	/// An array of fields for computing the statistics.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
@@ -137,7 +153,10 @@ public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector)
 	{
@@ -146,7 +165,9 @@ public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// <para>
+	/// Array value the aggregation will use for array or multi-valued fields.
+	/// </para>
 	/// </summary>
 	public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 	{

@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class FieldMetric
 {
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>An array of metrics to collect for the field. At least one metric must be configured.</para>
+	/// <para>
+	/// An array of metrics to collect for the field. At least one metric must be configured.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	public ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	private ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> MetricsValue { get; set; }
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -63,7 +69,9 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -72,7 +80,9 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -81,7 +91,9 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>An array of metrics to collect for the field. At least one metric must be configured.</para>
+	/// <para>
+	/// An array of metrics to collect for the field. At least one metric must be configured.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> metrics)
 	{
@@ -112,7 +124,9 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	private ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> MetricsValue { get; set; }
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -121,7 +135,9 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -130,7 +146,9 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>The field to collect metrics for. This must be a numeric of some kind.</para>
+	/// <para>
+	/// The field to collect metrics for. This must be a numeric of some kind.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -139,7 +157,9 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>An array of metrics to collect for the field. At least one metric must be configured.</para>
+	/// <para>
+	/// An array of metrics to collect for the field. At least one metric must be configured.
+	/// </para>
 	/// </summary>
 	public FieldMetricDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> metrics)
 	{

@@ -181,35 +181,50 @@ public sealed partial class TermRangeQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? From { get; set; }
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public string? Gt { get; set; }
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public string? Gte { get; set; }
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public string? Lt { get; set; }
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public string? Lte { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	public string? To { get; set; }
@@ -235,7 +250,12 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	private string? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -268,7 +288,9 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Gt(string? gt)
 	{
@@ -277,7 +299,9 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Gte(string? gte)
 	{
@@ -286,7 +310,9 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Lt(string? lt)
 	{
@@ -295,7 +321,9 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Lte(string? lte)
 	{
@@ -310,7 +338,9 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
@@ -410,7 +440,12 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	private string? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Boost(float? boost)
 	{
@@ -443,7 +478,9 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>Greater than.</para>
+	/// <para>
+	/// Greater than.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Gt(string? gt)
 	{
@@ -452,7 +489,9 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>Greater than or equal to.</para>
+	/// <para>
+	/// Greater than or equal to.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Gte(string? gte)
 	{
@@ -461,7 +500,9 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>Less than.</para>
+	/// <para>
+	/// Less than.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Lt(string? lt)
 	{
@@ -470,7 +511,9 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>Less than or equal to.</para>
+	/// <para>
+	/// Less than or equal to.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Lte(string? lte)
 	{
@@ -485,7 +528,9 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	}
 
 	/// <summary>
-	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// <para>
+	/// Indicates how the range query matches values for <c>range</c> fields.
+	/// </para>
 	/// </summary>
 	public TermRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{

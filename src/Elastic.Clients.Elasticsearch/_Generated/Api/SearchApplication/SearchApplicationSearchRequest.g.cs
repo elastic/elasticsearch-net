@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class SearchApplicationSearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Determines whether aggregation names are prefixed by their respective types in the response.</para>
+	/// <para>
+	/// Determines whether aggregation names are prefixed by their respective types in the response.
+	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
 /// <summary>
-/// <para>Perform a search against a search application.</para>
+/// <para>
+/// Perform a search against a search application.
+/// </para>
 /// </summary>
 public sealed partial class SearchApplicationSearchRequest : PlainRequest<SearchApplicationSearchRequestParameters>
 {
@@ -55,20 +59,26 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 	internal override string OperationName => "search_application.search";
 
 	/// <summary>
-	/// <para>Determines whether aggregation names are prefixed by their respective types in the response.</para>
+	/// <para>
+	/// Determines whether aggregation names are prefixed by their respective types in the response.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
-	/// <para>Query parameters specific to this request, which will override any defaults specified in the template.</para>
+	/// <para>
+	/// Query parameters specific to this request, which will override any defaults specified in the template.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 }
 
 /// <summary>
-/// <para>Perform a search against a search application.</para>
+/// <para>
+/// Perform a search against a search application.
+/// </para>
 /// </summary>
 public sealed partial class SearchApplicationSearchRequestDescriptor : RequestDescriptor<SearchApplicationSearchRequestDescriptor, SearchApplicationSearchRequestParameters>
 {
@@ -97,7 +107,9 @@ public sealed partial class SearchApplicationSearchRequestDescriptor : RequestDe
 	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	/// <summary>
-	/// <para>Query parameters specific to this request, which will override any defaults specified in the template.</para>
+	/// <para>
+	/// Query parameters specific to this request, which will override any defaults specified in the template.
+	/// </para>
 	/// </summary>
 	public SearchApplicationSearchRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

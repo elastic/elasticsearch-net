@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class GarbageCollector
 {
 	/// <summary>
-	/// <para>Contains statistics about JVM garbage collectors for the node.</para>
+	/// <para>
+	/// Contains statistics about JVM garbage collectors for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collectors")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal>? Collectors { get; init; }

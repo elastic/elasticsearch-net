@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 {
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_name")]
 	public Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
@@ -38,7 +40,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.</para>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("frequency_map")]
 	public IDictionary<string, double> FrequencyMap { get; set; }
@@ -59,7 +63,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	private IDictionary<string, double> FrequencyMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Name featureName)
 	{
@@ -86,7 +92,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	}
 
 	/// <summary>
-	/// <para>The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.</para>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector)
 	{
@@ -120,7 +128,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	private IDictionary<string, double> FrequencyMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Name featureName)
 	{
@@ -147,7 +157,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	}
 
 	/// <summary>
-	/// <para>The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.</para>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector)
 	{

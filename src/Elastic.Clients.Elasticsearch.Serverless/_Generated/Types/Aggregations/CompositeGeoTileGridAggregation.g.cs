@@ -33,7 +33,9 @@ public sealed partial class CompositeGeoTileGridAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class CompositeGeoTileGridAggregation
 	public int? Precision { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
@@ -81,7 +85,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -90,7 +96,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -99,7 +107,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -132,7 +142,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
@@ -255,7 +267,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
@@ -264,7 +278,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -273,7 +289,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -306,7 +324,9 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{

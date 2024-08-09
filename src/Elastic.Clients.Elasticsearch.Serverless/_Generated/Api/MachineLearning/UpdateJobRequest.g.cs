@@ -34,7 +34,9 @@ public sealed partial class UpdateJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Updates certain properties of an anomaly detection job.</para>
+/// <para>
+/// Updates certain properties of an anomaly detection job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestParameters>
 {
@@ -51,7 +53,17 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	internal override string OperationName => "ml.update_job";
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when<br/>there is insufficient machine learning node capacity for it to be<br/>immediately assigned to a node. If `false` and a machine learning node<br/>with capacity to run the job cannot immediately be found, the open<br/>anomaly detection jobs API returns an error. However, this is also<br/>subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this<br/>option is set to `true`, the open anomaly detection jobs API does not<br/>return an error and the job waits in the opening state until sufficient<br/>machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when
+	/// there is insufficient machine learning node capacity for it to be
+	/// immediately assigned to a node. If <c>false</c> and a machine learning node
+	/// with capacity to run the job cannot immediately be found, the open
+	/// anomaly detection jobs API returns an error. However, this is also
+	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
+	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
+	/// return an error and the job waits in the opening state until sufficient
+	/// machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool? AllowLazyOpen { get; set; }
@@ -59,7 +71,18 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisMemoryLimit? AnalysisLimits { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence<br/>of the model.<br/>The default value is a randomized value between 3 to 4 hours, which<br/>avoids all jobs persisting at exactly the same time. The smallest allowed<br/>value is 1 hour.<br/>For very large models (several GB), persistence could take 10-20 minutes,<br/>so do not set the value too low.<br/>If the job is open when you make the update, you must stop the datafeed,<br/>close the job, then reopen the job and restart the datafeed for the<br/>changes to take effect.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence
+	/// of the model.
+	/// The default value is a randomized value between 3 to 4 hours, which
+	/// avoids all jobs persisting at exactly the same time. The smallest allowed
+	/// value is 1 hour.
+	/// For very large models (several GB), persistence could take 10-20 minutes,
+	/// so do not set the value too low.
+	/// If the job is open when you make the update, you must stop the datafeed,
+	/// close the job, then reopen the job and restart the datafeed for the
+	/// changes to take effect.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? BackgroundPersistInterval { get; set; }
@@ -67,31 +90,49 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	public ICollection<string>? CategorizationFilters { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.<br/>For example, it can contain custom URL information as shown in Adding<br/>custom URLs to machine learning results.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("custom_settings")]
 	public IDictionary<string, object>? CustomSettings { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies a period of time (in days)<br/>after which only the first snapshot per day is retained. This period is<br/>relative to the timestamp of the most recent snapshot for this job. Valid<br/>values range from 0 to `model_snapshot_retention_days`. For jobs created<br/>before version 7.8.0, the default value matches<br/>`model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies a period of time (in days)
+	/// after which only the first snapshot per day is retained. This period is
+	/// relative to the timestamp of the most recent snapshot for this job. Valid
+	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
+	/// before version 7.8.0, the default value matches
+	/// <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>An array of detector update objects.</para>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detectors")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Detector>? Detectors { get; set; }
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("groups")]
 	public ICollection<string>? Groups { get; set; }
@@ -101,32 +142,51 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? ModelPruneWindow { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies the maximum period of time (in<br/>days) that snapshots are retained. This period is relative to the<br/>timestamp of the most recent snapshot for this job.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies the maximum period of time (in
+	/// days) that snapshots are retained. This period is relative to the
+	/// timestamp of the most recent snapshot for this job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long? ModelSnapshotRetentionDays { get; set; }
 
 	/// <summary>
-	/// <para>Settings related to how categorization interacts with partition fields.</para>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("per_partition_categorization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the<br/>score are applied, as new data is seen.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the
+	/// score are applied, as new data is seen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results<br/>are retained. Age is calculated relative to the timestamp of the latest<br/>bucket result. If this property has a non-null value, once per day at<br/>00:30 (server time), results that are the specified number of days older<br/>than the latest bucket result are deleted from Elasticsearch. The default<br/>value is null, which means all results are retained.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results
+	/// are retained. Age is calculated relative to the timestamp of the latest
+	/// bucket result. If this property has a non-null value, once per day at
+	/// 00:30 (server time), results that are the specified number of days older
+	/// than the latest bucket result are deleted from Elasticsearch. The default
+	/// value is null, which means all results are retained.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; set; }
 }
 
 /// <summary>
-/// <para>Updates certain properties of an anomaly detection job.</para>
+/// <para>
+/// Updates certain properties of an anomaly detection job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescriptor<UpdateJobRequestDescriptor<TDocument>, UpdateJobRequestParameters>
 {
@@ -176,7 +236,17 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	private long? ResultsRetentionDaysValue { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when<br/>there is insufficient machine learning node capacity for it to be<br/>immediately assigned to a node. If `false` and a machine learning node<br/>with capacity to run the job cannot immediately be found, the open<br/>anomaly detection jobs API returns an error. However, this is also<br/>subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this<br/>option is set to `true`, the open anomaly detection jobs API does not<br/>return an error and the job waits in the opening state until sufficient<br/>machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when
+	/// there is insufficient machine learning node capacity for it to be
+	/// immediately assigned to a node. If <c>false</c> and a machine learning node
+	/// with capacity to run the job cannot immediately be found, the open
+	/// anomaly detection jobs API returns an error. However, this is also
+	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
+	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
+	/// return an error and the job waits in the opening state until sufficient
+	/// machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true)
 	{
@@ -209,7 +279,18 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence<br/>of the model.<br/>The default value is a randomized value between 3 to 4 hours, which<br/>avoids all jobs persisting at exactly the same time. The smallest allowed<br/>value is 1 hour.<br/>For very large models (several GB), persistence could take 10-20 minutes,<br/>so do not set the value too low.<br/>If the job is open when you make the update, you must stop the datafeed,<br/>close the job, then reopen the job and restart the datafeed for the<br/>changes to take effect.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence
+	/// of the model.
+	/// The default value is a randomized value between 3 to 4 hours, which
+	/// avoids all jobs persisting at exactly the same time. The smallest allowed
+	/// value is 1 hour.
+	/// For very large models (several GB), persistence could take 10-20 minutes,
+	/// so do not set the value too low.
+	/// If the job is open when you make the update, you must stop the datafeed,
+	/// close the job, then reopen the job and restart the datafeed for the
+	/// changes to take effect.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? backgroundPersistInterval)
 	{
@@ -224,7 +305,11 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.<br/>For example, it can contain custom URL information as shown in Adding<br/>custom URLs to machine learning results.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -233,7 +318,15 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies a period of time (in days)<br/>after which only the first snapshot per day is retained. This period is<br/>relative to the timestamp of the most recent snapshot for this job. Valid<br/>values range from 0 to `model_snapshot_retention_days`. For jobs created<br/>before version 7.8.0, the default value matches<br/>`model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies a period of time (in days)
+	/// after which only the first snapshot per day is retained. This period is
+	/// relative to the timestamp of the most recent snapshot for this job. Valid
+	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
+	/// before version 7.8.0, the default value matches
+	/// <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
 	{
@@ -242,7 +335,9 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -251,7 +346,9 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>An array of detector update objects.</para>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> Detectors(ICollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Detector>? detectors)
 	{
@@ -290,7 +387,9 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> Groups(ICollection<string>? groups)
 	{
@@ -329,7 +428,12 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies the maximum period of time (in<br/>days) that snapshots are retained. This period is relative to the<br/>timestamp of the most recent snapshot for this job.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies the maximum period of time (in
+	/// days) that snapshots are retained. This period is relative to the
+	/// timestamp of the most recent snapshot for this job.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
 	{
@@ -338,7 +442,9 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Settings related to how categorization interacts with partition fields.</para>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
 	{
@@ -365,7 +471,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the<br/>score are applied, as new data is seen.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the
+	/// score are applied, as new data is seen.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays)
 	{
@@ -374,7 +483,14 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results<br/>are retained. Age is calculated relative to the timestamp of the latest<br/>bucket result. If this property has a non-null value, once per day at<br/>00:30 (server time), results that are the specified number of days older<br/>than the latest bucket result are deleted from Elasticsearch. The default<br/>value is null, which means all results are retained.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results
+	/// are retained. Age is calculated relative to the timestamp of the latest
+	/// bucket result. If this property has a non-null value, once per day at
+	/// 00:30 (server time), results that are the specified number of days older
+	/// than the latest bucket result are deleted from Elasticsearch. The default
+	/// value is null, which means all results are retained.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays)
 	{
@@ -535,7 +651,9 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Updates certain properties of an anomaly detection job.</para>
+/// <para>
+/// Updates certain properties of an anomaly detection job.
+/// </para>
 /// </summary>
 public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<UpdateJobRequestDescriptor, UpdateJobRequestParameters>
 {
@@ -585,7 +703,17 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	private long? ResultsRetentionDaysValue { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when<br/>there is insufficient machine learning node capacity for it to be<br/>immediately assigned to a node. If `false` and a machine learning node<br/>with capacity to run the job cannot immediately be found, the open<br/>anomaly detection jobs API returns an error. However, this is also<br/>subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this<br/>option is set to `true`, the open anomaly detection jobs API does not<br/>return an error and the job waits in the opening state until sufficient<br/>machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when
+	/// there is insufficient machine learning node capacity for it to be
+	/// immediately assigned to a node. If <c>false</c> and a machine learning node
+	/// with capacity to run the job cannot immediately be found, the open
+	/// anomaly detection jobs API returns an error. However, this is also
+	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
+	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
+	/// return an error and the job waits in the opening state until sufficient
+	/// machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor AllowLazyOpen(bool? allowLazyOpen = true)
 	{
@@ -618,7 +746,18 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence<br/>of the model.<br/>The default value is a randomized value between 3 to 4 hours, which<br/>avoids all jobs persisting at exactly the same time. The smallest allowed<br/>value is 1 hour.<br/>For very large models (several GB), persistence could take 10-20 minutes,<br/>so do not set the value too low.<br/>If the job is open when you make the update, you must stop the datafeed,<br/>close the job, then reopen the job and restart the datafeed for the<br/>changes to take effect.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence
+	/// of the model.
+	/// The default value is a randomized value between 3 to 4 hours, which
+	/// avoids all jobs persisting at exactly the same time. The smallest allowed
+	/// value is 1 hour.
+	/// For very large models (several GB), persistence could take 10-20 minutes,
+	/// so do not set the value too low.
+	/// If the job is open when you make the update, you must stop the datafeed,
+	/// close the job, then reopen the job and restart the datafeed for the
+	/// changes to take effect.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? backgroundPersistInterval)
 	{
@@ -633,7 +772,11 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.<br/>For example, it can contain custom URL information as shown in Adding<br/>custom URLs to machine learning results.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -642,7 +785,15 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies a period of time (in days)<br/>after which only the first snapshot per day is retained. This period is<br/>relative to the timestamp of the most recent snapshot for this job. Valid<br/>values range from 0 to `model_snapshot_retention_days`. For jobs created<br/>before version 7.8.0, the default value matches<br/>`model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies a period of time (in days)
+	/// after which only the first snapshot per day is retained. This period is
+	/// relative to the timestamp of the most recent snapshot for this job. Valid
+	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
+	/// before version 7.8.0, the default value matches
+	/// <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
 	{
@@ -651,7 +802,9 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor Description(string? description)
 	{
@@ -660,7 +813,9 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>An array of detector update objects.</para>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor Detectors(ICollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Detector>? detectors)
 	{
@@ -699,7 +854,9 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor Groups(ICollection<string>? groups)
 	{
@@ -738,7 +895,12 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old<br/>model snapshots for this job. It specifies the maximum period of time (in<br/>days) that snapshots are retained. This period is relative to the<br/>timestamp of the most recent snapshot for this job.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old
+	/// model snapshots for this job. It specifies the maximum period of time (in
+	/// days) that snapshots are retained. This period is relative to the
+	/// timestamp of the most recent snapshot for this job.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
 	{
@@ -747,7 +909,9 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Settings related to how categorization interacts with partition fields.</para>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
 	{
@@ -774,7 +938,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the<br/>score are applied, as new data is seen.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the
+	/// score are applied, as new data is seen.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor RenormalizationWindowDays(long? renormalizationWindowDays)
 	{
@@ -783,7 +950,14 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results<br/>are retained. Age is calculated relative to the timestamp of the latest<br/>bucket result. If this property has a non-null value, once per day at<br/>00:30 (server time), results that are the specified number of days older<br/>than the latest bucket result are deleted from Elasticsearch. The default<br/>value is null, which means all results are retained.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results
+	/// are retained. Age is calculated relative to the timestamp of the latest
+	/// bucket result. If this property has a non-null value, once per day at
+	/// 00:30 (server time), results that are the specified number of days older
+	/// than the latest bucket result are deleted from Elasticsearch. The default
+	/// value is null, which means all results are retained.
+	/// </para>
 	/// </summary>
 	public UpdateJobRequestDescriptor ResultsRetentionDays(long? resultsRetentionDays)
 	{

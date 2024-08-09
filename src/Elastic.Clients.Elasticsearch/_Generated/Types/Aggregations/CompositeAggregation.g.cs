@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CompositeAggregation
 {
 	/// <summary>
-	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("after")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
 
 	/// <summary>
-	/// <para>The number of composite buckets that should be returned.</para>
+	/// <para>
+	/// The number of composite buckets that should be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sources")]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
@@ -63,7 +70,9 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
 	/// <summary>
-	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
 	{
@@ -72,7 +81,9 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The number of composite buckets that should be returned.</para>
+	/// <para>
+	/// The number of composite buckets that should be returned.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> Size(int? size)
 	{
@@ -81,7 +92,10 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{
@@ -127,7 +141,9 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
 	/// <summary>
-	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// <para>
+	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
 	{
@@ -136,7 +152,9 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The number of composite buckets that should be returned.</para>
+	/// <para>
+	/// The number of composite buckets that should be returned.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor Size(int? size)
 	{
@@ -145,7 +163,10 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// <para>
+	/// The value sources used to build composite buckets.
+	/// Keys are returned in the order of the <c>sources</c> definition.
+	/// </para>
 	/// </summary>
 	public CompositeAggregationDescriptor Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{

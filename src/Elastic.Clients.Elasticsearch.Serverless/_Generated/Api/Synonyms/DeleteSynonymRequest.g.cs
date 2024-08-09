@@ -34,7 +34,9 @@ public sealed partial class DeleteSynonymRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes a synonym set</para>
+/// <para>
+/// Deletes a synonym set
+/// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymReq
 }
 
 /// <summary>
-/// <para>Deletes a synonym set</para>
+/// <para>
+/// Deletes a synonym set
+/// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequestDescriptor<TDocument> : RequestDescriptor<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymRequestParameters>
 {
@@ -82,7 +86,9 @@ public sealed partial class DeleteSynonymRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Deletes a synonym set</para>
+/// <para>
+/// Deletes a synonym set
+/// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRequestDescriptor : RequestDescriptor<DeleteSynonymRequestDescriptor, DeleteSynonymRequestParameters>
 {

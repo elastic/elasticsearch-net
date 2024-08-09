@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class MappingLimitSettingsDimensionFields
 {
 	/// <summary>
-	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release.<br/>Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
+	/// <para>
+	/// [preview] This functionality is in technical preview and may be changed or removed in a future release.
+	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
@@ -47,7 +50,10 @@ public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : Seri
 	private long? LimitValue { get; set; }
 
 	/// <summary>
-	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release.<br/>Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
+	/// <para>
+	/// [preview] This functionality is in technical preview and may be changed or removed in a future release.
+	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
+	/// </para>
 	/// </summary>
 	public MappingLimitSettingsDimensionFieldsDescriptor Limit(long? limit)
 	{

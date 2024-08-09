@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class IpRangeAggregationRange
 {
 	/// <summary>
-	/// <para>Start of the range.</para>
+	/// <para>
+	/// Start of the range.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; set; }
 
 	/// <summary>
-	/// <para>IP range defined as a CIDR mask.</para>
+	/// <para>
+	/// IP range defined as a CIDR mask.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mask")]
 	public string? Mask { get; set; }
 
 	/// <summary>
-	/// <para>End of the range.</para>
+	/// <para>
+	/// End of the range.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDesc
 	private string? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Start of the range.</para>
+	/// <para>
+	/// Start of the range.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationRangeDescriptor From(string? from)
 	{
@@ -70,7 +78,9 @@ public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>IP range defined as a CIDR mask.</para>
+	/// <para>
+	/// IP range defined as a CIDR mask.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationRangeDescriptor Mask(string? mask)
 	{
@@ -79,7 +89,9 @@ public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>End of the range.</para>
+	/// <para>
+	/// End of the range.
+	/// </para>
 	/// </summary>
 	public IpRangeAggregationRangeDescriptor To(string? to)
 	{

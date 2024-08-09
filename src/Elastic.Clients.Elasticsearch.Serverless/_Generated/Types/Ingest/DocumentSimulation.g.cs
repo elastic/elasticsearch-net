@@ -104,34 +104,46 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 }
 
 /// <summary>
-/// <para>The simulated document, with optional metadata.</para>
+/// <para>
+/// The simulated document, with optional metadata.
+/// </para>
 /// </summary>
 [JsonConverter(typeof(DocumentSimulationConverter))]
 public sealed partial class DocumentSimulation
 {
 	/// <summary>
-	/// <para>Unique identifier for the document. This ID must be unique within the `_index`.</para>
+	/// <para>
+	/// Unique identifier for the document. This ID must be unique within the <c>_index</c>.
+	/// </para>
 	/// </summary>
 	public string Id { get; init; }
 
 	/// <summary>
-	/// <para>Name of the index containing the document.</para>
+	/// <para>
+	/// Name of the index containing the document.
+	/// </para>
 	/// </summary>
 	public string Index { get; init; }
 	public Elastic.Clients.Elasticsearch.Serverless.Ingest.IngestInfo Ingest { get; init; }
 
 	/// <summary>
-	/// <para>Additional metadata</para>
+	/// <para>
+	/// Additional metadata
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, string> Metadata { get; init; }
 
 	/// <summary>
-	/// <para>Value used to send the document to a specific primary shard.</para>
+	/// <para>
+	/// Value used to send the document to a specific primary shard.
+	/// </para>
 	/// </summary>
 	public string? Routing { get; init; }
 
 	/// <summary>
-	/// <para>JSON body for the document.</para>
+	/// <para>
+	/// JSON body for the document.
+	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Source { get; init; }
 	public long? Version { get; init; }

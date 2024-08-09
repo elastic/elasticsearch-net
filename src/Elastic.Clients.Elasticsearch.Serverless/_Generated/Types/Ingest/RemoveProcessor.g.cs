@@ -30,51 +30,69 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class RemoveProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// <para>
+	/// Fields to be removed. Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// <para>
+	/// Fields to be kept. When set, all fields other than those specified are removed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("keep")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Keep { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -103,7 +121,10 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -112,7 +133,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// <para>
+	/// Fields to be removed. Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Fields field)
 	{
@@ -121,7 +144,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -130,7 +155,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -139,7 +166,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -148,7 +177,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// <para>
+	/// Fields to be kept. When set, all fields other than those specified are removed.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> Keep(Elastic.Clients.Elasticsearch.Serverless.Fields? keep)
 	{
@@ -157,7 +188,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -196,7 +229,10 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -301,7 +337,10 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor Description(string? description)
 	{
@@ -310,7 +349,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// <para>
+	/// Fields to be removed. Supports template snippets.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Fields field)
 	{
@@ -319,7 +360,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor If(string? value)
 	{
@@ -328,7 +371,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -337,7 +382,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -346,7 +393,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// <para>
+	/// Fields to be kept. When set, all fields other than those specified are removed.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor Keep(Elastic.Clients.Elasticsearch.Serverless.Fields? keep)
 	{
@@ -355,7 +404,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -394,7 +445,10 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public RemoveProcessorDescriptor Tag(string? tag)
 	{

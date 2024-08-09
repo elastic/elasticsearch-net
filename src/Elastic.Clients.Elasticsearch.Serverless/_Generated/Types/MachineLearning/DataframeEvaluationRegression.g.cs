@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeEvaluationRegression
 {
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actual_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field ActualField { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetrics? Metrics { get; set; }
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("predicted_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field PredictedField { get; set; }
@@ -65,7 +71,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Serverless.Field PredictedFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Serverless.Field actualField)
 	{
@@ -74,7 +82,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -83,7 +93,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
 	{
@@ -92,7 +104,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetrics? metrics)
 	{
@@ -119,7 +133,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Serverless.Field predictedField)
 	{
@@ -128,7 +144,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField<TValue>(Expression<Func<TDocument, TValue>> predictedField)
 	{
@@ -137,7 +155,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Expression<Func<TDocument, object>> predictedField)
 	{
@@ -187,7 +207,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.Field PredictedFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor ActualField(Elastic.Clients.Elasticsearch.Serverless.Field actualField)
 	{
@@ -196,7 +218,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
 	{
@@ -205,7 +229,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field of the index which contains the ground truth. The data type of this field must be numerical.</para>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
 	{
@@ -214,7 +240,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.</para>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor Metrics(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluationRegressionMetrics? metrics)
 	{
@@ -241,7 +269,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor PredictedField(Elastic.Clients.Elasticsearch.Serverless.Field predictedField)
 	{
@@ -250,7 +280,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor PredictedField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedField)
 	{
@@ -259,7 +291,9 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field in the index that contains the predicted value, in other words the results of the regression analysis.</para>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationRegressionDescriptor PredictedField<TDocument>(Expression<Func<TDocument, object>> predictedField)
 	{

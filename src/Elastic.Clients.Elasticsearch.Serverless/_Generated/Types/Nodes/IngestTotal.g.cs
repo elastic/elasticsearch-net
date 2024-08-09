@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class IngestTotal
 {
 	/// <summary>
-	/// <para>Total number of documents ingested during the lifetime of this node.</para>
+	/// <para>
+	/// Total number of documents ingested during the lifetime of this node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public long? Count { get; init; }
 
 	/// <summary>
-	/// <para>Total number of documents currently being ingested.</para>
+	/// <para>
+	/// Total number of documents currently being ingested.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current")]
 	public long? Current { get; init; }
 
 	/// <summary>
-	/// <para>Total number of failed ingest operations during the lifetime of this node.</para>
+	/// <para>
+	/// Total number of failed ingest operations during the lifetime of this node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("failed")]
 	public long? Failed { get; init; }
 
 	/// <summary>
-	/// <para>Total number of ingest processors.</para>
+	/// <para>
+	/// Total number of ingest processors.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("processors")]
 	public IReadOnlyCollection<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.KeyedProcessor>>? Processors { get; init; }
 
 	/// <summary>
-	/// <para>Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.</para>
+	/// <para>
+	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_in_millis")]
 	public long? TimeInMillis { get; init; }

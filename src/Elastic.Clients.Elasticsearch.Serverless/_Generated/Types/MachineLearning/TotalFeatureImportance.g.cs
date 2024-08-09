@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class TotalFeatureImportance
 {
 	/// <summary>
-	/// <para>If the trained model is a classification model, feature importance statistics are gathered per target class value.</para>
+	/// <para>
+	/// If the trained model is a classification model, feature importance statistics are gathered per target class value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("classes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TotalFeatureImportanceClass> Classes { get; init; }
 
 	/// <summary>
-	/// <para>The feature for which this importance was calculated.</para>
+	/// <para>
+	/// The feature for which this importance was calculated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_name")]
 	public string FeatureName { get; init; }
 
 	/// <summary>
-	/// <para>A collection of feature importance statistics related to the training data set for this particular feature.</para>
+	/// <para>
+	/// A collection of feature importance statistics related to the training data set for this particular feature.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; init; }

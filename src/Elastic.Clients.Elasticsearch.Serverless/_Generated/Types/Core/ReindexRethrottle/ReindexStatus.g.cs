@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.ReindexRethrottle;
 public sealed partial class ReindexStatus
 {
 	/// <summary>
-	/// <para>The number of scroll responses pulled back by the reindex.</para>
+	/// <para>
+	/// The number of scroll responses pulled back by the reindex.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("batches")]
 	public long Batches { get; init; }
 
 	/// <summary>
-	/// <para>The number of documents that were successfully created.</para>
+	/// <para>
+	/// The number of documents that were successfully created.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("created")]
 	public long Created { get; init; }
 
 	/// <summary>
-	/// <para>The number of documents that were successfully deleted.</para>
+	/// <para>
+	/// The number of documents that were successfully deleted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deleted")]
 	public long Deleted { get; init; }
 
 	/// <summary>
-	/// <para>The number of documents that were ignored because the script used for the reindex returned a `noop` value for `ctx.op`.</para>
+	/// <para>
+	/// The number of documents that were ignored because the script used for the reindex returned a <c>noop</c> value for <c>ctx.op</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("noops")]
 	public long Noops { get; init; }
 
 	/// <summary>
-	/// <para>The number of requests per second effectively executed during the reindex.</para>
+	/// <para>
+	/// The number of requests per second effectively executed during the reindex.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("requests_per_second")]
 	public float RequestsPerSecond { get; init; }
 
 	/// <summary>
-	/// <para>The number of retries attempted by reindex. `bulk` is the number of bulk actions retried and `search` is the number of search actions retried.</para>
+	/// <para>
+	/// The number of retries attempted by reindex. <c>bulk</c> is the number of bulk actions retried and <c>search</c> is the number of search actions retried.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retries")]
 	public Elastic.Clients.Elasticsearch.Serverless.Retries Retries { get; init; }
@@ -68,7 +80,9 @@ public sealed partial class ReindexStatus
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Throttled { get; init; }
 
 	/// <summary>
-	/// <para>Number of milliseconds the request slept to conform to `requests_per_second`.</para>
+	/// <para>
+	/// Number of milliseconds the request slept to conform to <c>requests_per_second</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("throttled_millis")]
 	public long ThrottledMillis { get; init; }
@@ -76,25 +90,34 @@ public sealed partial class ReindexStatus
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? ThrottledUntil { get; init; }
 
 	/// <summary>
-	/// <para>This field should always be equal to zero in a `_reindex` response.<br/>It only has meaning when using the Task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be executed again in order to conform to `requests_per_second`.</para>
+	/// <para>
+	/// This field should always be equal to zero in a <c>_reindex</c> response.
+	/// It only has meaning when using the Task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be executed again in order to conform to <c>requests_per_second</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("throttled_until_millis")]
 	public long ThrottledUntilMillis { get; init; }
 
 	/// <summary>
-	/// <para>The number of documents that were successfully processed.</para>
+	/// <para>
+	/// The number of documents that were successfully processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
 
 	/// <summary>
-	/// <para>The number of documents that were successfully updated, for example, a document with same ID already existed prior to reindex updating it.</para>
+	/// <para>
+	/// The number of documents that were successfully updated, for example, a document with same ID already existed prior to reindex updating it.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("updated")]
 	public long Updated { get; init; }
 
 	/// <summary>
-	/// <para>The number of version conflicts that reindex hits.</para>
+	/// <para>
+	/// The number of version conflicts that reindex hits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version_conflicts")]
 	public long VersionConflicts { get; init; }

@@ -30,38 +30,54 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class CombinedFieldsQuery
 {
 	/// <summary>
-	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If true, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// <para>
+	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
 	/// <summary>
-	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// <para>
+	/// Text to search for in the provided <c>fields</c>.
+	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -69,7 +85,9 @@ public sealed partial class CombinedFieldsQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
@@ -95,7 +113,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If true, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -104,7 +124,12 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -113,7 +138,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// <para>
+	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
@@ -122,7 +149,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -131,7 +160,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
@@ -140,7 +171,10 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// <para>
+	/// Text to search for in the provided <c>fields</c>.
+	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Query(string query)
 	{
@@ -155,7 +189,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
 	{
@@ -228,7 +264,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If true, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -237,7 +275,12 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor Boost(float? boost)
 	{
@@ -246,7 +289,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// <para>
+	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
@@ -255,7 +300,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -264,7 +311,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
@@ -273,7 +322,10 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// <para>
+	/// Text to search for in the provided <c>fields</c>.
+	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor Query(string query)
 	{
@@ -288,7 +340,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
 	{

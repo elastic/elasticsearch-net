@@ -31,7 +31,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for<br/>the different buckets, the result is a dictionary.</para>
+/// <para>
+/// Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
+/// the different buckets, the result is a dictionary.
+/// </para>
 /// </summary>
 public sealed partial class Buckets<TBucket> : Union<IReadOnlyDictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
 {

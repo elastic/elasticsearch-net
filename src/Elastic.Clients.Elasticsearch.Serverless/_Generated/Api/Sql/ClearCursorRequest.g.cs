@@ -34,7 +34,9 @@ public sealed partial class ClearCursorRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Clears the SQL cursor</para>
+/// <para>
+/// Clears the SQL cursor
+/// </para>
 /// </summary>
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
 {
@@ -47,14 +49,18 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 	internal override string OperationName => "sql.clear_cursor";
 
 	/// <summary>
-	/// <para>Cursor to clear.</para>
+	/// <para>
+	/// Cursor to clear.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string Cursor { get; set; }
 }
 
 /// <summary>
-/// <para>Clears the SQL cursor</para>
+/// <para>
+/// Clears the SQL cursor
+/// </para>
 /// </summary>
 public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<ClearCursorRequestDescriptor, ClearCursorRequestParameters>
 {
@@ -75,7 +81,9 @@ public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<Cle
 	private string CursorValue { get; set; }
 
 	/// <summary>
-	/// <para>Cursor to clear.</para>
+	/// <para>
+	/// Cursor to clear.
+	/// </para>
 	/// </summary>
 	public ClearCursorRequestDescriptor Cursor(string cursor)
 	{

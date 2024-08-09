@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class HdrMethod
 {
 	/// <summary>
-	/// <para>Specifies the resolution of values for the histogram in number of significant digits.</para>
+	/// <para>
+	/// Specifies the resolution of values for the histogram in number of significant digits.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_significant_value_digits")]
 	public int? NumberOfSignificantValueDigits { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class HdrMethodDescriptor : SerializableDescriptor<HdrMeth
 	private int? NumberOfSignificantValueDigitsValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the resolution of values for the histogram in number of significant digits.</para>
+	/// <para>
+	/// Specifies the resolution of values for the histogram in number of significant digits.
+	/// </para>
 	/// </summary>
 	public HdrMethodDescriptor NumberOfSignificantValueDigits(int? numberOfSignificantValueDigits)
 	{

@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ExtendedStatsAggregation
 {
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -38,7 +40,10 @@ public sealed partial class ExtendedStatsAggregation
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
@@ -46,7 +51,9 @@ public sealed partial class ExtendedStatsAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
-	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// <para>
+	/// The number of standard deviations above/below the mean to display.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sigma")]
 	public double? Sigma { get; set; }
@@ -71,7 +78,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	private double? SigmaValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -80,7 +89,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -89,7 +100,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -104,7 +117,10 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -137,7 +153,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// <para>
+	/// The number of standard deviations above/below the mean to display.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Sigma(double? sigma)
 	{
@@ -209,7 +227,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	private double? SigmaValue { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -218,7 +238,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -227,7 +249,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -242,7 +266,10 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -275,7 +302,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// <para>
+	/// The number of standard deviations above/below the mean to display.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsAggregationDescriptor Sigma(double? sigma)
 	{

@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class UpdateAliasesRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
@@ -56,26 +65,37 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	internal override string OperationName => "indices.update_aliases";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Actions to perform.</para>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? Actions { get; set; }
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestDescriptor<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesRequestParameters>
 {
@@ -102,7 +122,9 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Actions to perform.</para>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
 	/// </summary>
 	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? actions)
 	{
@@ -179,7 +201,10 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
+/// <para>
+/// Create or update an alias.
+/// Adds a data stream or index to an alias.
+/// </para>
 /// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
 {
@@ -206,7 +231,9 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
-	/// <para>Actions to perform.</para>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
 	/// </summary>
 	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? actions)
 	{

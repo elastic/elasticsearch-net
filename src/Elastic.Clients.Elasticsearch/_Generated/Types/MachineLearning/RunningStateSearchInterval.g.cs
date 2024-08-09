@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class RunningStateSearchInterval
 {
 	/// <summary>
-	/// <para>The end time.</para>
+	/// <para>
+	/// The end time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public Elastic.Clients.Elasticsearch.Duration? End { get; init; }
 
 	/// <summary>
-	/// <para>The end time as an epoch in milliseconds.</para>
+	/// <para>
+	/// The end time as an epoch in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end_ms")]
 	public long EndMs { get; init; }
 
 	/// <summary>
-	/// <para>The start time.</para>
+	/// <para>
+	/// The start time.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public Elastic.Clients.Elasticsearch.Duration? Start { get; init; }
 
 	/// <summary>
-	/// <para>The start time as an epoch in milliseconds.</para>
+	/// <para>
+	/// The start time as an epoch in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_ms")]
 	public long StartMs { get; init; }

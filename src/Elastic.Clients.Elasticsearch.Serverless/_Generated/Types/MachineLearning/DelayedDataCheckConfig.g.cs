@@ -30,13 +30,19 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DelayedDataCheckConfig
 {
 	/// <summary>
-	/// <para>The window of time that is searched for late data. This window of time ends with the latest finalized bucket.<br/>It defaults to null, which causes an appropriate `check_window` to be calculated when the real-time datafeed runs.<br/>In particular, the default `check_window` span calculation is based on the maximum of `2h` or `8 * bucket_span`.</para>
+	/// <para>
+	/// The window of time that is searched for late data. This window of time ends with the latest finalized bucket.
+	/// It defaults to null, which causes an appropriate <c>check_window</c> to be calculated when the real-time datafeed runs.
+	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("check_window")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? CheckWindow { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed periodically checks for delayed data.</para>
+	/// <para>
+	/// Specifies whether the datafeed periodically checks for delayed data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool Enabled { get; set; }
@@ -54,7 +60,11 @@ public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescr
 	private bool EnabledValue { get; set; }
 
 	/// <summary>
-	/// <para>The window of time that is searched for late data. This window of time ends with the latest finalized bucket.<br/>It defaults to null, which causes an appropriate `check_window` to be calculated when the real-time datafeed runs.<br/>In particular, the default `check_window` span calculation is based on the maximum of `2h` or `8 * bucket_span`.</para>
+	/// <para>
+	/// The window of time that is searched for late data. This window of time ends with the latest finalized bucket.
+	/// It defaults to null, which causes an appropriate <c>check_window</c> to be calculated when the real-time datafeed runs.
+	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
+	/// </para>
 	/// </summary>
 	public DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Serverless.Duration? checkWindow)
 	{
@@ -63,7 +73,9 @@ public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the datafeed periodically checks for delayed data.</para>
+	/// <para>
+	/// Specifies whether the datafeed periodically checks for delayed data.
+	/// </para>
 	/// </summary>
 	public DelayedDataCheckConfigDescriptor Enabled(bool enabled = true)
 	{

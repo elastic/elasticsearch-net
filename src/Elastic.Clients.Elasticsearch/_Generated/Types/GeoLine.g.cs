@@ -28,18 +28,24 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>A GeoJson GeoLine.</para>
+/// <para>
+/// A GeoJson GeoLine.
+/// </para>
 /// </summary>
 public sealed partial class GeoLine
 {
 	/// <summary>
-	/// <para>Array of `[lon, lat]` coordinates</para>
+	/// <para>
+	/// Array of <c>[lon, lat]</c> coordinates
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("coordinates")]
 	public IReadOnlyCollection<IReadOnlyCollection<double>> Coordinates { get; init; }
 
 	/// <summary>
-	/// <para>Always `"LineString"`</para>
+	/// <para>
+	/// Always <c>"LineString"</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }

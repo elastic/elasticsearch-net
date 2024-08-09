@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeAnalyticsMemoryEstimation
 {
 	/// <summary>
-	/// <para>Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.</para>
+	/// <para>
+	/// Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expected_memory_with_disk")]
 	public string ExpectedMemoryWithDisk { get; init; }
 
 	/// <summary>
-	/// <para>Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).</para>
+	/// <para>
+	/// Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expected_memory_without_disk")]
 	public string ExpectedMemoryWithoutDisk { get; init; }

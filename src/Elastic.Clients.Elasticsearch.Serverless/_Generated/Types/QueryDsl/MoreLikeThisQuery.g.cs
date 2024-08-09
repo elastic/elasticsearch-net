@@ -30,87 +30,123 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class MoreLikeThisQuery
 {
 	/// <summary>
-	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
+	/// <para>
+	/// The analyzer that is used to analyze the free form text.
+	/// Defaults to the analyzer associated with the first field in fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Each term in the formed query could be further boosted by their tf-idf score.<br/>This sets the boost factor to use when using this feature.<br/>Defaults to deactivated (0).</para>
+	/// <para>
+	/// Each term in the formed query could be further boosted by their tf-idf score.
+	/// This sets the boost factor to use when using this feature.
+	/// Defaults to deactivated (0).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost_terms")]
 	public double? BoostTerms { get; set; }
 
 	/// <summary>
-	/// <para>Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (`text` or `keyword`).</para>
+	/// <para>
+	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fail_on_unsupported_field")]
 	public bool? FailOnUnsupportedField { get; set; }
 
 	/// <summary>
-	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// A list of fields to fetch and analyze the text from.
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the input documents should also be included in the search results returned.</para>
+	/// <para>
+	/// Specifies whether the input documents should also be included in the search results returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public bool? Include { get; set; }
 
 	/// <summary>
-	/// <para>Specifies free form text and/or a single or multiple documents for which you want to find similar documents.</para>
+	/// <para>
+	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("like")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> Like { get; set; }
 
 	/// <summary>
-	/// <para>The maximum document frequency above which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The maximum document frequency above which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_doc_freq")]
 	public int? MaxDocFreq { get; set; }
 
 	/// <summary>
-	/// <para>The maximum number of query terms that can be selected.</para>
+	/// <para>
+	/// The maximum number of query terms that can be selected.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_query_terms")]
 	public int? MaxQueryTerms { get; set; }
 
 	/// <summary>
-	/// <para>The maximum word length above which the terms are ignored.<br/>Defaults to unbounded (`0`).</para>
+	/// <para>
+	/// The maximum word length above which the terms are ignored.
+	/// Defaults to unbounded (<c>0</c>).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_word_length")]
 	public int? MaxWordLength { get; set; }
 
 	/// <summary>
-	/// <para>The minimum document frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum document frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public int? MinDocFreq { get; set; }
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// <para>
+	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum term frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_term_freq")]
 	public int? MinTermFreq { get; set; }
 
 	/// <summary>
-	/// <para>The minimum word length below which the terms are ignored.</para>
+	/// <para>
+	/// The minimum word length below which the terms are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
@@ -120,14 +156,19 @@ public sealed partial class MoreLikeThisQuery
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
 
 	/// <summary>
-	/// <para>An array of stop words.<br/>Any word in this set is ignored.</para>
+	/// <para>
+	/// An array of stop words.
+	/// Any word in this set is ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stop_words")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? StopWords { get; set; }
 
 	/// <summary>
-	/// <para>Used in combination with `like` to exclude documents that match a set of terms.</para>
+	/// <para>
+	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unlike")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
@@ -170,7 +211,10 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
+	/// <para>
+	/// The analyzer that is used to analyze the free form text.
+	/// Defaults to the analyzer associated with the first field in fields.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -179,7 +223,12 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -188,7 +237,11 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Each term in the formed query could be further boosted by their tf-idf score.<br/>This sets the boost factor to use when using this feature.<br/>Defaults to deactivated (0).</para>
+	/// <para>
+	/// Each term in the formed query could be further boosted by their tf-idf score.
+	/// This sets the boost factor to use when using this feature.
+	/// Defaults to deactivated (0).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? boostTerms)
 	{
@@ -197,7 +250,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (`text` or `keyword`).</para>
+	/// <para>
+	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> FailOnUnsupportedField(bool? failOnUnsupportedField = true)
 	{
@@ -206,7 +261,10 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// A list of fields to fetch and analyze the text from.
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -215,7 +273,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the input documents should also be included in the search results returned.</para>
+	/// <para>
+	/// Specifies whether the input documents should also be included in the search results returned.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Include(bool? include = true)
 	{
@@ -224,7 +284,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Specifies free form text and/or a single or multiple documents for which you want to find similar documents.</para>
+	/// <para>
+	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Like(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> like)
 	{
@@ -233,7 +295,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The maximum document frequency above which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The maximum document frequency above which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MaxDocFreq(int? maxDocFreq)
 	{
@@ -242,7 +306,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The maximum number of query terms that can be selected.</para>
+	/// <para>
+	/// The maximum number of query terms that can be selected.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? maxQueryTerms)
 	{
@@ -251,7 +317,10 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The maximum word length above which the terms are ignored.<br/>Defaults to unbounded (`0`).</para>
+	/// <para>
+	/// The maximum word length above which the terms are ignored.
+	/// Defaults to unbounded (<c>0</c>).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? maxWordLength)
 	{
@@ -260,7 +329,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The minimum document frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum document frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? minDocFreq)
 	{
@@ -269,7 +340,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// <para>
+	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -278,7 +351,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum term frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq)
 	{
@@ -287,7 +362,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The minimum word length below which the terms are ignored.</para>
+	/// <para>
+	/// The minimum word length below which the terms are ignored.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? minWordLength)
 	{
@@ -308,7 +385,10 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>An array of stop words.<br/>Any word in this set is ignored.</para>
+	/// <para>
+	/// An array of stop words.
+	/// Any word in this set is ignored.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> StopWords(ICollection<string>? stopWords)
 	{
@@ -317,7 +397,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Used in combination with `like` to exclude documents that match a set of terms.</para>
+	/// <para>
+	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Unlike(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like>? unlike)
 	{
@@ -490,7 +572,10 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
+	/// <para>
+	/// The analyzer that is used to analyze the free form text.
+	/// Defaults to the analyzer associated with the first field in fields.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -499,7 +584,12 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Boost(float? boost)
 	{
@@ -508,7 +598,11 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Each term in the formed query could be further boosted by their tf-idf score.<br/>This sets the boost factor to use when using this feature.<br/>Defaults to deactivated (0).</para>
+	/// <para>
+	/// Each term in the formed query could be further boosted by their tf-idf score.
+	/// This sets the boost factor to use when using this feature.
+	/// Defaults to deactivated (0).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor BoostTerms(double? boostTerms)
 	{
@@ -517,7 +611,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (`text` or `keyword`).</para>
+	/// <para>
+	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor FailOnUnsupportedField(bool? failOnUnsupportedField = true)
 	{
@@ -526,7 +622,10 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// <para>
+	/// A list of fields to fetch and analyze the text from.
+	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -535,7 +634,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the input documents should also be included in the search results returned.</para>
+	/// <para>
+	/// Specifies whether the input documents should also be included in the search results returned.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Include(bool? include = true)
 	{
@@ -544,7 +645,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies free form text and/or a single or multiple documents for which you want to find similar documents.</para>
+	/// <para>
+	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Like(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> like)
 	{
@@ -553,7 +656,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The maximum document frequency above which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The maximum document frequency above which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MaxDocFreq(int? maxDocFreq)
 	{
@@ -562,7 +667,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The maximum number of query terms that can be selected.</para>
+	/// <para>
+	/// The maximum number of query terms that can be selected.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MaxQueryTerms(int? maxQueryTerms)
 	{
@@ -571,7 +678,10 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The maximum word length above which the terms are ignored.<br/>Defaults to unbounded (`0`).</para>
+	/// <para>
+	/// The maximum word length above which the terms are ignored.
+	/// Defaults to unbounded (<c>0</c>).
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MaxWordLength(int? maxWordLength)
 	{
@@ -580,7 +690,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The minimum document frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum document frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MinDocFreq(int? minDocFreq)
 	{
@@ -589,7 +701,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// <para>
+	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -598,7 +712,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
+	/// <para>
+	/// The minimum term frequency below which the terms are ignored from the input document.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MinTermFreq(int? minTermFreq)
 	{
@@ -607,7 +723,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The minimum word length below which the terms are ignored.</para>
+	/// <para>
+	/// The minimum word length below which the terms are ignored.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MinWordLength(int? minWordLength)
 	{
@@ -628,7 +746,10 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>An array of stop words.<br/>Any word in this set is ignored.</para>
+	/// <para>
+	/// An array of stop words.
+	/// Any word in this set is ignored.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor StopWords(ICollection<string>? stopWords)
 	{
@@ -637,7 +758,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Used in combination with `like` to exclude documents that match a set of terms.</para>
+	/// <para>
+	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
+	/// </para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor Unlike(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like>? unlike)
 	{

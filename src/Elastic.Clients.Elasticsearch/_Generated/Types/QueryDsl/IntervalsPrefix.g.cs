@@ -30,19 +30,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class IntervalsPrefix
 {
 	/// <summary>
-	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>prefix</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the top-level field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string Prefix { get; set; }
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
@@ -64,7 +71,9 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>prefix</c>.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -73,7 +82,9 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the top-level field.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> Prefix(string prefix)
 	{
@@ -82,7 +93,10 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
@@ -91,7 +105,10 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
@@ -100,7 +117,10 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
 	{
@@ -142,7 +162,9 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// <para>
+	/// Analyzer used to analyze the <c>prefix</c>.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor Analyzer(string? analyzer)
 	{
@@ -151,7 +173,9 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	}
 
 	/// <summary>
-	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// <para>
+	/// Beginning characters of terms you wish to find in the top-level field.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor Prefix(string prefix)
 	{
@@ -160,7 +184,10 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
@@ -169,7 +196,10 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
@@ -178,7 +208,10 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	}
 
 	/// <summary>
-	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
 	/// </summary>
 	public IntervalsPrefixDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
 	{

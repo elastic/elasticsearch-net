@@ -34,7 +34,9 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+/// <para>
+/// Retrieves the configuration, stats, and status of rollup jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
 {
@@ -56,7 +58,9 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 }
 
 /// <summary>
-/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+/// <para>
+/// Retrieves the configuration, stats, and status of rollup jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetJobsRequestDescriptor<TDocument> : RequestDescriptor<GetJobsRequestDescriptor<TDocument>, GetJobsRequestParameters>
 {
@@ -90,7 +94,9 @@ public sealed partial class GetJobsRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+/// <para>
+/// Retrieves the configuration, stats, and status of rollup jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetJobsRequestDescriptor : RequestDescriptor<GetJobsRequestDescriptor, GetJobsRequestParameters>
 {

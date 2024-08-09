@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class FrequentItemSetsField
 {
 	/// <summary>
-	/// <para>Values to exclude.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
@@ -38,7 +41,10 @@ public sealed partial class FrequentItemSetsField
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Values to include.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to include.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
@@ -57,7 +63,10 @@ public sealed partial class FrequentItemSetsFieldDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
 	/// <summary>
-	/// <para>Values to exclude.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsFieldDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
@@ -84,7 +93,10 @@ public sealed partial class FrequentItemSetsFieldDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Values to include.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to include.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsFieldDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
@@ -126,7 +138,10 @@ public sealed partial class FrequentItemSetsFieldDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 
 	/// <summary>
-	/// <para>Values to exclude.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to exclude.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsFieldDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
@@ -153,7 +168,10 @@ public sealed partial class FrequentItemSetsFieldDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Values to include.<br/>Can be regular expression strings or arrays of strings of exact terms.</para>
+	/// <para>
+	/// Values to include.
+	/// Can be regular expression strings or arrays of strings of exact terms.
+	/// </para>
 	/// </summary>
 	public FrequentItemSetsFieldDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{

@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 {
 	/// <summary>
-	/// <para>The default value if field value is not found in the target_map.</para>
+	/// <para>
+	/// The default value if field value is not found in the target_map.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("default_value")]
 	public int DefaultValue { get; set; }
 
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("feature_name")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name FeatureName { get; set; }
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The field value to target mean transition map.</para>
+	/// <para>
+	/// The field value to target mean transition map.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_map")]
 	public IDictionary<string, object> TargetMap { get; set; }
@@ -70,7 +78,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	private IDictionary<string, object> TargetMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The default value if field value is not found in the target_map.</para>
+	/// <para>
+	/// The default value if field value is not found in the target_map.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> DefaultValue(int defaultValue)
 	{
@@ -79,7 +89,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Serverless.Name featureName)
 	{
@@ -88,7 +100,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -97,7 +111,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -106,7 +122,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -115,7 +133,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The field value to target mean transition map.</para>
+	/// <para>
+	/// The field value to target mean transition map.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> TargetMap(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -152,7 +172,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	private IDictionary<string, object> TargetMapValue { get; set; }
 
 	/// <summary>
-	/// <para>The default value if field value is not found in the target_map.</para>
+	/// <para>
+	/// The default value if field value is not found in the target_map.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor DefaultValue(int defaultValue)
 	{
@@ -161,7 +183,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The resulting feature name.</para>
+	/// <para>
+	/// The resulting feature name.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Serverless.Name featureName)
 	{
@@ -170,7 +194,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -179,7 +205,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -188,7 +216,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The name of the field to encode.</para>
+	/// <para>
+	/// The name of the field to encode.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -197,7 +227,9 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingD
 	}
 
 	/// <summary>
-	/// <para>The field value to target mean transition map.</para>
+	/// <para>
+	/// The field value to target mean transition map.
+	/// </para>
 	/// </summary>
 	public DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor TargetMap(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

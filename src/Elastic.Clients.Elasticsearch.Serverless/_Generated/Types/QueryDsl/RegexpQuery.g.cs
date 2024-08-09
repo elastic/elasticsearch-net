@@ -153,34 +153,50 @@ public sealed partial class RegexpQuery
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Enables optional operators for the regular expression.</para>
+	/// <para>
+	/// Enables optional operators for the regular expression.
+	/// </para>
 	/// </summary>
 	public string? Flags { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public int? MaxDeterminizedStates { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public string? Rewrite { get; set; }
 
 	/// <summary>
-	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Regular expression for terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public string Value { get; set; }
 
@@ -205,7 +221,12 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	private string ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -214,7 +235,10 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -241,7 +265,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Enables optional operators for the regular expression.</para>
+	/// <para>
+	/// Enables optional operators for the regular expression.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Flags(string? flags)
 	{
@@ -250,7 +276,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
@@ -265,7 +293,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -274,7 +304,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Regular expression for terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Value(string value)
 	{
@@ -350,7 +382,12 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	private string ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor Boost(float? boost)
 	{
@@ -359,7 +396,10 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	/// <summary>
-	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// <para>
+	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
+	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
@@ -386,7 +426,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	/// <summary>
-	/// <para>Enables optional operators for the regular expression.</para>
+	/// <para>
+	/// Enables optional operators for the regular expression.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor Flags(string? flags)
 	{
@@ -395,7 +437,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	/// <summary>
-	/// <para>Maximum number of automaton states required for the query.</para>
+	/// <para>
+	/// Maximum number of automaton states required for the query.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
@@ -410,7 +454,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor Rewrite(string? rewrite)
 	{
@@ -419,7 +465,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	/// <summary>
-	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// <para>
+	/// Regular expression for terms you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public RegexpQueryDescriptor Value(string value)
 	{

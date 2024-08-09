@@ -33,20 +33,26 @@ public sealed partial class FieldCollapse
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>The number of inner hits and their sort order</para>
+	/// <para>
+	/// The number of inner hits and their sort order
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits>? InnerHits { get; set; }
 
 	/// <summary>
-	/// <para>The number of concurrent requests allowed to retrieve the inner_hits per group</para>
+	/// <para>
+	/// The number of concurrent requests allowed to retrieve the inner_hits per group
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_concurrent_group_searches")]
 	public int? MaxConcurrentGroupSearches { get; set; }
@@ -95,7 +101,9 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -104,7 +112,9 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -113,7 +123,9 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -122,7 +134,9 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The number of inner hits and their sort order</para>
+	/// <para>
+	/// The number of inner hits and their sort order
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> InnerHits(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits>? innerHits)
 	{
@@ -161,7 +175,9 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The number of concurrent requests allowed to retrieve the inner_hits per group</para>
+	/// <para>
+	/// The number of concurrent requests allowed to retrieve the inner_hits per group
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches)
 	{
@@ -272,7 +288,9 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -281,7 +299,9 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -290,7 +310,9 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	/// <summary>
-	/// <para>The field to collapse the result set on</para>
+	/// <para>
+	/// The field to collapse the result set on
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -299,7 +321,9 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	/// <summary>
-	/// <para>The number of inner hits and their sort order</para>
+	/// <para>
+	/// The number of inner hits and their sort order
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor InnerHits(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits>? innerHits)
 	{
@@ -338,7 +362,9 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	/// <summary>
-	/// <para>The number of concurrent requests allowed to retrieve the inner_hits per group</para>
+	/// <para>
+	/// The number of concurrent requests allowed to retrieve the inner_hits per group
+	/// </para>
 	/// </summary>
 	public FieldCollapseDescriptor MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches)
 	{

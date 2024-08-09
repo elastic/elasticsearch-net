@@ -34,7 +34,9 @@ public sealed partial class PutCalendarJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Adds an anomaly detection job to a calendar.</para>
+/// <para>
+/// Adds an anomaly detection job to a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobR
 }
 
 /// <summary>
-/// <para>Adds an anomaly detection job to a calendar.</para>
+/// <para>
+/// Adds an anomaly detection job to a calendar.
+/// </para>
 /// </summary>
 public sealed partial class PutCalendarJobRequestDescriptor : RequestDescriptor<PutCalendarJobRequestDescriptor, PutCalendarJobRequestParameters>
 {

@@ -30,79 +30,107 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class PressureMemory
 {
 	/// <summary>
-	/// <para>Memory consumed by indexing requests in the coordinating, primary, or replica stage.</para>
+	/// <para>
+	/// Memory consumed by indexing requests in the coordinating, primary, or replica stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("all")]
 	public Elastic.Clients.Elasticsearch.ByteSize? All { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed, in bytes, by indexing requests in the coordinating, primary, or replica stage.</para>
+	/// <para>
+	/// Memory consumed, in bytes, by indexing requests in the coordinating, primary, or replica stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("all_in_bytes")]
 	public long? AllInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed by indexing requests in the coordinating or primary stage.<br/>This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.</para>
+	/// <para>
+	/// Memory consumed by indexing requests in the coordinating or primary stage.
+	/// This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("combined_coordinating_and_primary")]
 	public Elastic.Clients.Elasticsearch.ByteSize? CombinedCoordinatingAndPrimary { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed, in bytes, by indexing requests in the coordinating or primary stage.<br/>This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.</para>
+	/// <para>
+	/// Memory consumed, in bytes, by indexing requests in the coordinating or primary stage.
+	/// This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("combined_coordinating_and_primary_in_bytes")]
 	public long? CombinedCoordinatingAndPrimaryInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed by indexing requests in the coordinating stage.</para>
+	/// <para>
+	/// Memory consumed by indexing requests in the coordinating stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("coordinating")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Coordinating { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed, in bytes, by indexing requests in the coordinating stage.</para>
+	/// <para>
+	/// Memory consumed, in bytes, by indexing requests in the coordinating stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("coordinating_in_bytes")]
 	public long? CoordinatingInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Number of indexing requests rejected in the coordinating stage.</para>
+	/// <para>
+	/// Number of indexing requests rejected in the coordinating stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("coordinating_rejections")]
 	public long? CoordinatingRejections { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed by indexing requests in the primary stage.</para>
+	/// <para>
+	/// Memory consumed by indexing requests in the primary stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("primary")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Primary { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed, in bytes, by indexing requests in the primary stage.</para>
+	/// <para>
+	/// Memory consumed, in bytes, by indexing requests in the primary stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("primary_in_bytes")]
 	public long? PrimaryInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Number of indexing requests rejected in the primary stage.</para>
+	/// <para>
+	/// Number of indexing requests rejected in the primary stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("primary_rejections")]
 	public long? PrimaryRejections { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed by indexing requests in the replica stage.</para>
+	/// <para>
+	/// Memory consumed by indexing requests in the replica stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replica")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Replica { get; init; }
 
 	/// <summary>
-	/// <para>Memory consumed, in bytes, by indexing requests in the replica stage.</para>
+	/// <para>
+	/// Memory consumed, in bytes, by indexing requests in the replica stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replica_in_bytes")]
 	public long? ReplicaInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Number of indexing requests rejected in the replica stage.</para>
+	/// <para>
+	/// Number of indexing requests rejected in the replica stage.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replica_rejections")]
 	public long? ReplicaRejections { get; init; }

@@ -34,7 +34,9 @@ public sealed partial class GetBasicStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves information about the status of the basic license.</para>
+/// <para>
+/// Retrieves information about the status of the basic license.
+/// </para>
 /// </summary>
 public sealed partial class GetBasicStatusRequest : PlainRequest<GetBasicStatusRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetBasicStatusRequest : PlainRequest<GetBasicStatusR
 }
 
 /// <summary>
-/// <para>Retrieves information about the status of the basic license.</para>
+/// <para>
+/// Retrieves information about the status of the basic license.
+/// </para>
 /// </summary>
 public sealed partial class GetBasicStatusRequestDescriptor : RequestDescriptor<GetBasicStatusRequestDescriptor, GetBasicStatusRequestParameters>
 {

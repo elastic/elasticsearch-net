@@ -34,7 +34,9 @@ public sealed partial class ForgetFollowerRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Removes the follower retention leases from the leader.</para>
+/// <para>
+/// Removes the follower retention leases from the leader.
+/// </para>
 /// </summary>
 public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerRequestParameters>
 {
@@ -61,7 +63,9 @@ public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerR
 }
 
 /// <summary>
-/// <para>Removes the follower retention leases from the leader.</para>
+/// <para>
+/// Removes the follower retention leases from the leader.
+/// </para>
 /// </summary>
 public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : RequestDescriptor<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerRequestParameters>
 {
@@ -150,7 +154,9 @@ public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Removes the follower retention leases from the leader.</para>
+/// <para>
+/// Removes the follower retention leases from the leader.
+/// </para>
 /// </summary>
 public sealed partial class ForgetFollowerRequestDescriptor : RequestDescriptor<ForgetFollowerRequestDescriptor, ForgetFollowerRequestParameters>
 {

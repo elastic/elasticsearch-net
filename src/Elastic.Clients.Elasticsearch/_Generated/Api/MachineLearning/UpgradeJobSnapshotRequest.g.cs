@@ -32,18 +32,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class UpgradeJobSnapshotRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Controls the time to wait for the request to complete.</para>
+	/// <para>
+	/// Controls the time to wait for the request to complete.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>When true, the API won’t respond until the upgrade is complete.<br/>Otherwise, it responds as soon as the upgrade task is assigned to a node.</para>
+	/// <para>
+	/// When true, the API won’t respond until the upgrade is complete.
+	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Upgrades an anomaly detection model snapshot to the latest major version.<br/>Over time, older snapshot formats are deprecated and removed. Anomaly<br/>detection jobs support only snapshots that are from the current or previous<br/>major version.<br/>This API provides a means to upgrade a snapshot to the current major version.<br/>This aids in preparing the cluster for an upgrade to the next major version.<br/>Only one snapshot per anomaly detection job can be upgraded at a time and the<br/>upgraded snapshot cannot be the current snapshot of the anomaly detection<br/>job.</para>
+/// <para>
+/// Upgrades an anomaly detection model snapshot to the latest major version.
+/// Over time, older snapshot formats are deprecated and removed. Anomaly
+/// detection jobs support only snapshots that are from the current or previous
+/// major version.
+/// This API provides a means to upgrade a snapshot to the current major version.
+/// This aids in preparing the cluster for an upgrade to the next major version.
+/// Only one snapshot per anomaly detection job can be upgraded at a time and the
+/// upgraded snapshot cannot be the current snapshot of the anomaly detection
+/// job.
+/// </para>
 /// </summary>
 public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobSnapshotRequestParameters>
 {
@@ -60,20 +75,35 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 	internal override string OperationName => "ml.upgrade_job_snapshot";
 
 	/// <summary>
-	/// <para>Controls the time to wait for the request to complete.</para>
+	/// <para>
+	/// Controls the time to wait for the request to complete.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>When true, the API won’t respond until the upgrade is complete.<br/>Otherwise, it responds as soon as the upgrade task is assigned to a node.</para>
+	/// <para>
+	/// When true, the API won’t respond until the upgrade is complete.
+	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Upgrades an anomaly detection model snapshot to the latest major version.<br/>Over time, older snapshot formats are deprecated and removed. Anomaly<br/>detection jobs support only snapshots that are from the current or previous<br/>major version.<br/>This API provides a means to upgrade a snapshot to the current major version.<br/>This aids in preparing the cluster for an upgrade to the next major version.<br/>Only one snapshot per anomaly detection job can be upgraded at a time and the<br/>upgraded snapshot cannot be the current snapshot of the anomaly detection<br/>job.</para>
+/// <para>
+/// Upgrades an anomaly detection model snapshot to the latest major version.
+/// Over time, older snapshot formats are deprecated and removed. Anomaly
+/// detection jobs support only snapshots that are from the current or previous
+/// major version.
+/// This API provides a means to upgrade a snapshot to the current major version.
+/// This aids in preparing the cluster for an upgrade to the next major version.
+/// Only one snapshot per anomaly detection job can be upgraded at a time and the
+/// upgraded snapshot cannot be the current snapshot of the anomaly detection
+/// job.
+/// </para>
 /// </summary>
 public sealed partial class UpgradeJobSnapshotRequestDescriptor : RequestDescriptor<UpgradeJobSnapshotRequestDescriptor, UpgradeJobSnapshotRequestParameters>
 {

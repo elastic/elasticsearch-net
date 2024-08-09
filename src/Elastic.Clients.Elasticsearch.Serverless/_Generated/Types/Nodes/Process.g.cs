@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Process
 {
 	/// <summary>
-	/// <para>Contains CPU statistics for the node.</para>
+	/// <para>
+	/// Contains CPU statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cpu")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.Cpu? Cpu { get; init; }
 
 	/// <summary>
-	/// <para>Maximum number of file descriptors allowed on the system, or `-1` if not supported.</para>
+	/// <para>
+	/// Maximum number of file descriptors allowed on the system, or <c>-1</c> if not supported.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_file_descriptors")]
 	public int? MaxFileDescriptors { get; init; }
 
 	/// <summary>
-	/// <para>Contains virtual memory statistics for the node.</para>
+	/// <para>
+	/// Contains virtual memory statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mem")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.MemoryStats? Mem { get; init; }
 
 	/// <summary>
-	/// <para>Number of opened file descriptors associated with the current or `-1` if not supported.</para>
+	/// <para>
+	/// Number of opened file descriptors associated with the current or <c>-1</c> if not supported.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("open_file_descriptors")]
 	public int? OpenFileDescriptors { get; init; }
 
 	/// <summary>
-	/// <para>Last time the statistics were refreshed.<br/>Recorded in milliseconds since the Unix Epoch.</para>
+	/// <para>
+	/// Last time the statistics were refreshed.
+	/// Recorded in milliseconds since the Unix Epoch.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long? Timestamp { get; init; }

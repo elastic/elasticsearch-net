@@ -30,13 +30,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class WrapperQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>A base64 encoded query.<br/>The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// <para>
+	/// A base64 encoded query.
+	/// The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -59,7 +67,12 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public WrapperQueryDescriptor Boost(float? boost)
 	{
@@ -68,7 +81,10 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 	}
 
 	/// <summary>
-	/// <para>A base64 encoded query.<br/>The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// <para>
+	/// A base64 encoded query.
+	/// The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
+	/// </para>
 	/// </summary>
 	public WrapperQueryDescriptor Query(string query)
 	{

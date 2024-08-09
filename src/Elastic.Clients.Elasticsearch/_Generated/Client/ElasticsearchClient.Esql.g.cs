@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 public partial class EsqlNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="EsqlNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="EsqlNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected EsqlNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -106,7 +120,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -118,7 +134,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -131,7 +149,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -141,7 +161,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -152,7 +174,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -164,7 +188,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -174,7 +200,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
@@ -185,7 +213,9 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Executes an ES|QL request</para>
+	/// <para>
+	/// Executes an ES|QL request
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(Action<EsqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

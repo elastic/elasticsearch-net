@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class CgroupCpu
 {
 	/// <summary>
-	/// <para>The period of time, in microseconds, for how regularly all tasks in the same cgroup as the Elasticsearch process should have their access to CPU resources reallocated.</para>
+	/// <para>
+	/// The period of time, in microseconds, for how regularly all tasks in the same cgroup as the Elasticsearch process should have their access to CPU resources reallocated.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cfs_period_micros")]
 	public int? CfsPeriodMicros { get; init; }
 
 	/// <summary>
-	/// <para>The total amount of time, in microseconds, for which all tasks in the same cgroup as the Elasticsearch process can run during one period `cfs_period_micros`.</para>
+	/// <para>
+	/// The total amount of time, in microseconds, for which all tasks in the same cgroup as the Elasticsearch process can run during one period <c>cfs_period_micros</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cfs_quota_micros")]
 	public int? CfsQuotaMicros { get; init; }
 
 	/// <summary>
-	/// <para>The `cpu` control group to which the Elasticsearch process belongs.</para>
+	/// <para>
+	/// The <c>cpu</c> control group to which the Elasticsearch process belongs.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("control_group")]
 	public string? ControlGroup { get; init; }
 
 	/// <summary>
-	/// <para>Contains CPU statistics for the node.</para>
+	/// <para>
+	/// Contains CPU statistics for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stat")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.CgroupCpuStat? Stat { get; init; }

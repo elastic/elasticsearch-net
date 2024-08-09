@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class ClusterProcess
 {
 	/// <summary>
-	/// <para>Contains statistics about CPU used by selected nodes.</para>
+	/// <para>
+	/// Contains statistics about CPU used by selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cpu")]
 	public Elastic.Clients.Elasticsearch.Serverless.Cluster.ClusterProcessCpu Cpu { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about open file descriptors in selected nodes.</para>
+	/// <para>
+	/// Contains statistics about open file descriptors in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("open_file_descriptors")]
 	public Elastic.Clients.Elasticsearch.Serverless.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; init; }

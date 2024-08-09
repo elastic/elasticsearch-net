@@ -28,7 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>The response returned by Elasticsearch when request execution did not succeed.</para>
+/// <para>
+/// The response returned by Elasticsearch when request execution did not succeed.
+/// </para>
 /// </summary>
 public sealed partial class ErrorResponseBase
 {

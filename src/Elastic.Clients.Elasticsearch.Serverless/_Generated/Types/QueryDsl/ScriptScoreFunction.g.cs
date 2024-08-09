@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class ScriptScoreFunction
 {
 	/// <summary>
-	/// <para>A script that computes a score.</para>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script Script { get; set; }
@@ -51,7 +53,9 @@ public sealed partial class ScriptScoreFunctionDescriptor : SerializableDescript
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>A script that computes a score.</para>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
 	/// </summary>
 	public ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script script)
 	{

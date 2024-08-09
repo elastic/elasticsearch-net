@@ -32,13 +32,22 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class DeleteVotingConfigExclusionsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether to wait for all excluded nodes to be removed from the<br/>cluster before clearing the voting configuration exclusions list.<br/>Defaults to true, meaning that all excluded nodes must be removed from<br/>the cluster before this API takes any action. If set to false then the<br/>voting configuration exclusions list is cleared even if some excluded<br/>nodes are still in the cluster.</para>
+	/// <para>
+	/// Specifies whether to wait for all excluded nodes to be removed from the
+	/// cluster before clearing the voting configuration exclusions list.
+	/// Defaults to true, meaning that all excluded nodes must be removed from
+	/// the cluster before this API takes any action. If set to false then the
+	/// voting configuration exclusions list is cleared even if some excluded
+	/// nodes are still in the cluster.
+	/// </para>
 	/// </summary>
 	public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 }
 
 /// <summary>
-/// <para>Clears cluster voting config exclusions.</para>
+/// <para>
+/// Clears cluster voting config exclusions.
+/// </para>
 /// </summary>
 public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<DeleteVotingConfigExclusionsRequestParameters>
 {
@@ -51,14 +60,23 @@ public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<D
 	internal override string OperationName => "cluster.delete_voting_config_exclusions";
 
 	/// <summary>
-	/// <para>Specifies whether to wait for all excluded nodes to be removed from the<br/>cluster before clearing the voting configuration exclusions list.<br/>Defaults to true, meaning that all excluded nodes must be removed from<br/>the cluster before this API takes any action. If set to false then the<br/>voting configuration exclusions list is cleared even if some excluded<br/>nodes are still in the cluster.</para>
+	/// <para>
+	/// Specifies whether to wait for all excluded nodes to be removed from the
+	/// cluster before clearing the voting configuration exclusions list.
+	/// Defaults to true, meaning that all excluded nodes must be removed from
+	/// the cluster before this API takes any action. If set to false then the
+	/// voting configuration exclusions list is cleared even if some excluded
+	/// nodes are still in the cluster.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 }
 
 /// <summary>
-/// <para>Clears cluster voting config exclusions.</para>
+/// <para>
+/// Clears cluster voting config exclusions.
+/// </para>
 /// </summary>
 public sealed partial class DeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptor<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsRequestParameters>
 {
