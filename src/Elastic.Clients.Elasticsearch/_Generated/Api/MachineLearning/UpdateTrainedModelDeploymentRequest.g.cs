@@ -34,7 +34,9 @@ public sealed partial class UpdateTrainedModelDeploymentRequestParameters : Requ
 }
 
 /// <summary>
-/// <para>Starts a trained model deployment, which allocates the model to every machine learning node.</para>
+/// <para>
+/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// </para>
 /// </summary>
 public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<UpdateTrainedModelDeploymentRequestParameters>
 {
@@ -51,14 +53,23 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 	internal override string OperationName => "ml.update_trained_model_deployment";
 
 	/// <summary>
-	/// <para>The number of model allocations on each node where the model is deployed.<br/>All allocations on a node share the same copy of the model in memory but use<br/>a separate set of threads to evaluate the model.<br/>Increasing this value generally increases the throughput.<br/>If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// The number of model allocations on each node where the model is deployed.
+	/// All allocations on a node share the same copy of the model in memory but use
+	/// a separate set of threads to evaluate the model.
+	/// Increasing this value generally increases the throughput.
+	/// If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
 	public int? NumberOfAllocations { get; set; }
 }
 
 /// <summary>
-/// <para>Starts a trained model deployment, which allocates the model to every machine learning node.</para>
+/// <para>
+/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// </para>
 /// </summary>
 public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : RequestDescriptor<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentRequestParameters>
 {
@@ -85,7 +96,14 @@ public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : Requ
 	private int? NumberOfAllocationsValue { get; set; }
 
 	/// <summary>
-	/// <para>The number of model allocations on each node where the model is deployed.<br/>All allocations on a node share the same copy of the model in memory but use<br/>a separate set of threads to evaluate the model.<br/>Increasing this value generally increases the throughput.<br/>If this setting is greater than the number of hardware threads<br/>it will automatically be changed to a value less than the number of hardware threads.</para>
+	/// <para>
+	/// The number of model allocations on each node where the model is deployed.
+	/// All allocations on a node share the same copy of the model in memory but use
+	/// a separate set of threads to evaluate the model.
+	/// Increasing this value generally increases the throughput.
+	/// If this setting is greater than the number of hardware threads
+	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// </para>
 	/// </summary>
 	public UpdateTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? numberOfAllocations)
 	{

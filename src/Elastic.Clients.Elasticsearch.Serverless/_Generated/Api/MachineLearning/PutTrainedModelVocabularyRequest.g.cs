@@ -34,7 +34,11 @@ public sealed partial class PutTrainedModelVocabularyRequestParameters : Request
 }
 
 /// <summary>
-/// <para>Creates a trained model vocabulary.<br/>This API is supported only for natural language processing (NLP) models.<br/>The vocabulary is stored in the index as described in `inference_config.*.vocabulary` of the trained model definition.</para>
+/// <para>
+/// Creates a trained model vocabulary.
+/// This API is supported only for natural language processing (NLP) models.
+/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutTrainedModelVocabularyRequestParameters>
 {
@@ -51,26 +55,36 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 	internal override string OperationName => "ml.put_trained_model_vocabulary";
 
 	/// <summary>
-	/// <para>The optional model merges if required by the tokenizer.</para>
+	/// <para>
+	/// The optional model merges if required by the tokenizer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("merges")]
 	public ICollection<string>? Merges { get; set; }
 
 	/// <summary>
-	/// <para>The optional vocabulary value scores if required by the tokenizer.</para>
+	/// <para>
+	/// The optional vocabulary value scores if required by the tokenizer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("scores")]
 	public ICollection<double>? Scores { get; set; }
 
 	/// <summary>
-	/// <para>The model vocabulary, which must not be empty.</para>
+	/// <para>
+	/// The model vocabulary, which must not be empty.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("vocabulary")]
 	public ICollection<string> Vocabulary { get; set; }
 }
 
 /// <summary>
-/// <para>Creates a trained model vocabulary.<br/>This API is supported only for natural language processing (NLP) models.<br/>The vocabulary is stored in the index as described in `inference_config.*.vocabulary` of the trained model definition.</para>
+/// <para>
+/// Creates a trained model vocabulary.
+/// This API is supported only for natural language processing (NLP) models.
+/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
+/// </para>
 /// </summary>
 public sealed partial class PutTrainedModelVocabularyRequestDescriptor : RequestDescriptor<PutTrainedModelVocabularyRequestDescriptor, PutTrainedModelVocabularyRequestParameters>
 {
@@ -99,7 +113,9 @@ public sealed partial class PutTrainedModelVocabularyRequestDescriptor : Request
 	private ICollection<string> VocabularyValue { get; set; }
 
 	/// <summary>
-	/// <para>The optional model merges if required by the tokenizer.</para>
+	/// <para>
+	/// The optional model merges if required by the tokenizer.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelVocabularyRequestDescriptor Merges(ICollection<string>? merges)
 	{
@@ -108,7 +124,9 @@ public sealed partial class PutTrainedModelVocabularyRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The optional vocabulary value scores if required by the tokenizer.</para>
+	/// <para>
+	/// The optional vocabulary value scores if required by the tokenizer.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelVocabularyRequestDescriptor Scores(ICollection<double>? scores)
 	{
@@ -117,7 +135,9 @@ public sealed partial class PutTrainedModelVocabularyRequestDescriptor : Request
 	}
 
 	/// <summary>
-	/// <para>The model vocabulary, which must not be empty.</para>
+	/// <para>
+	/// The model vocabulary, which must not be empty.
+	/// </para>
 	/// </summary>
 	public PutTrainedModelVocabularyRequestDescriptor Vocabulary(ICollection<string> vocabulary)
 	{

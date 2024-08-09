@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Ingest
 {
 	/// <summary>
-	/// <para>Contains statistics about ingest pipelines for the node.</para>
+	/// <para>
+	/// Contains statistics about ingest pipelines for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipelines")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.IngestTotal>? Pipelines { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about ingest operations for the node.</para>
+	/// <para>
+	/// Contains statistics about ingest operations for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.IngestTotal? Total { get; init; }

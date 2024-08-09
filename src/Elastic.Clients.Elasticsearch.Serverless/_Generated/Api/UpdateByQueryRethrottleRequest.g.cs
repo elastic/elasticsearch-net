@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Update By Query operation.</para>
+/// <para>
+/// Changes the number of requests per second for a particular Update By Query operation.
+/// </para>
 /// </summary>
 public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<UpdateByQueryRethrottleRequestParameters>
 {
@@ -55,14 +59,18 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 	internal override string OperationName => "update_by_query_rethrottle";
 
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Update By Query operation.</para>
+/// <para>
+/// Changes the number of requests per second for a particular Update By Query operation.
+/// </para>
 /// </summary>
 public sealed partial class UpdateByQueryRethrottleRequestDescriptor : RequestDescriptor<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleRequestParameters>
 {

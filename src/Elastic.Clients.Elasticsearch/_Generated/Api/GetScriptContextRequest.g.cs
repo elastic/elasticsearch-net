@@ -34,7 +34,9 @@ public sealed partial class GetScriptContextRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Returns all script contexts.</para>
+/// <para>
+/// Returns all script contexts.
+/// </para>
 /// </summary>
 public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptContextRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptCont
 }
 
 /// <summary>
-/// <para>Returns all script contexts.</para>
+/// <para>
+/// Returns all script contexts.
+/// </para>
 /// </summary>
 public sealed partial class GetScriptContextRequestDescriptor : RequestDescriptor<GetScriptContextRequestDescriptor, GetScriptContextRequestParameters>
 {

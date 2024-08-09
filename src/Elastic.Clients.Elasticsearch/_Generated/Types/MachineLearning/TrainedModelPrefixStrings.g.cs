@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class TrainedModelPrefixStrings
 {
 	/// <summary>
-	/// <para>String prepended to input at ingest</para>
+	/// <para>
+	/// String prepended to input at ingest
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ingest")]
 	public string? Ingest { get; set; }
 
 	/// <summary>
-	/// <para>String prepended to input at search</para>
+	/// <para>
+	/// String prepended to input at search
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search")]
 	public string? Search { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class TrainedModelPrefixStringsDescriptor : SerializableDe
 	private string? SearchValue { get; set; }
 
 	/// <summary>
-	/// <para>String prepended to input at ingest</para>
+	/// <para>
+	/// String prepended to input at ingest
+	/// </para>
 	/// </summary>
 	public TrainedModelPrefixStringsDescriptor Ingest(string? ingest)
 	{
@@ -63,7 +69,9 @@ public sealed partial class TrainedModelPrefixStringsDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>String prepended to input at search</para>
+	/// <para>
+	/// String prepended to input at search
+	/// </para>
 	/// </summary>
 	public TrainedModelPrefixStringsDescriptor Search(string? search)
 	{

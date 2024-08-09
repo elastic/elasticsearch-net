@@ -32,18 +32,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout<br/>expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout
+	/// expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request<br/>fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request
+	/// fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Get information about how machine learning jobs and trained models are using memory,<br/>on each node, both within the JVM heap, and natively, outside of the JVM.</para>
+/// <para>
+/// Get information about how machine learning jobs and trained models are using memory,
+/// on each node, both within the JVM heap, and natively, outside of the JVM.
+/// </para>
 /// </summary>
 public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsRequestParameters>
 {
@@ -64,20 +73,29 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 	internal override string OperationName => "ml.get_memory_stats";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout<br/>expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout
+	/// expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request<br/>fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request
+	/// fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Get information about how machine learning jobs and trained models are using memory,<br/>on each node, both within the JVM heap, and natively, outside of the JVM.</para>
+/// <para>
+/// Get information about how machine learning jobs and trained models are using memory,
+/// on each node, both within the JVM heap, and natively, outside of the JVM.
+/// </para>
 /// </summary>
 public sealed partial class GetMemoryStatsRequestDescriptor : RequestDescriptor<GetMemoryStatsRequestDescriptor, GetMemoryStatsRequestParameters>
 {

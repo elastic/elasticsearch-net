@@ -28,7 +28,11 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.SpecUtils;
 
 /// <summary>
-/// <para>A class that implements `OverloadOf` should have the exact same properties with the same types.<br/>It can change if a property is required or not. There is no need to port the descriptions<br/>and js doc tags, the compiler will do that for you.</para>
+/// <para>
+/// A class that implements <c>OverloadOf</c> should have the exact same properties with the same types.
+/// It can change if a property is required or not. There is no need to port the descriptions
+/// and js doc tags, the compiler will do that for you.
+/// </para>
 /// </summary>
 public sealed partial class OverloadOf<TDefinition>
 {

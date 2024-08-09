@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 public sealed partial class ListRulesetsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Starting offset (default: 0)</para>
+	/// <para>
+	/// Starting offset (default: 0)
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>specifies a max number of results to get</para>
+	/// <para>
+	/// specifies a max number of results to get
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Returns summarized information about existing query rulesets.</para>
+/// <para>
+/// Returns summarized information about existing query rulesets.
+/// </para>
 /// </summary>
 public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsRequestParameters>
 {
@@ -56,20 +62,26 @@ public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsReque
 	internal override string OperationName => "query_rules.list_rulesets";
 
 	/// <summary>
-	/// <para>Starting offset (default: 0)</para>
+	/// <para>
+	/// Starting offset (default: 0)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>specifies a max number of results to get</para>
+	/// <para>
+	/// specifies a max number of results to get
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Returns summarized information about existing query rulesets.</para>
+/// <para>
+/// Returns summarized information about existing query rulesets.
+/// </para>
 /// </summary>
 public sealed partial class ListRulesetsRequestDescriptor : RequestDescriptor<ListRulesetsRequestDescriptor, ListRulesetsRequestParameters>
 {

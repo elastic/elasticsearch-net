@@ -30,25 +30,39 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 public sealed partial class ExploreControls
 {
 	/// <summary>
-	/// <para>To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.<br/>You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.</para>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sample_diversity")]
 	public Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversity { get; set; }
 
 	/// <summary>
-	/// <para>Each hop considers a sample of the best-matching documents on each shard.<br/>Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.<br/>Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.<br/>Very large sample sizes can dilute the quality of the results and increase execution times.</para>
+	/// <para>
+	/// Each hop considers a sample of the best-matching documents on each shard.
+	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
+	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
+	/// Very large sample sizes can dilute the quality of the results and increase execution times.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sample_size")]
 	public int? SampleSize { get; set; }
 
 	/// <summary>
-	/// <para>The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.<br/>This timeout is honored on a best-effort basis.<br/>Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.</para>
+	/// <para>
+	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
+	/// This timeout is honored on a best-effort basis.
+	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
 	/// <summary>
-	/// <para>Filters associated terms so only those that are significantly associated with your query are included.</para>
+	/// <para>
+	/// Filters associated terms so only those that are significantly associated with your query are included.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_significance")]
 	public bool UseSignificance { get; set; }
@@ -70,7 +84,10 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	private bool UseSignificanceValue { get; set; }
 
 	/// <summary>
-	/// <para>To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.<br/>You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.</para>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? sampleDiversity)
 	{
@@ -97,7 +114,12 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Each hop considers a sample of the best-matching documents on each shard.<br/>Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.<br/>Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.<br/>Very large sample sizes can dilute the quality of the results and increase execution times.</para>
+	/// <para>
+	/// Each hop considers a sample of the best-matching documents on each shard.
+	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
+	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
+	/// Very large sample sizes can dilute the quality of the results and increase execution times.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor<TDocument> SampleSize(int? sampleSize)
 	{
@@ -106,7 +128,11 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.<br/>This timeout is honored on a best-effort basis.<br/>Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.</para>
+	/// <para>
+	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
+	/// This timeout is honored on a best-effort basis.
+	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{
@@ -115,7 +141,9 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Filters associated terms so only those that are significantly associated with your query are included.</para>
+	/// <para>
+	/// Filters associated terms so only those that are significantly associated with your query are included.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor<TDocument> UseSignificance(bool useSignificance = true)
 	{
@@ -176,7 +204,10 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	private bool UseSignificanceValue { get; set; }
 
 	/// <summary>
-	/// <para>To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.<br/>You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.</para>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? sampleDiversity)
 	{
@@ -203,7 +234,12 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Each hop considers a sample of the best-matching documents on each shard.<br/>Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.<br/>Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.<br/>Very large sample sizes can dilute the quality of the results and increase execution times.</para>
+	/// <para>
+	/// Each hop considers a sample of the best-matching documents on each shard.
+	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
+	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
+	/// Very large sample sizes can dilute the quality of the results and increase execution times.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor SampleSize(int? sampleSize)
 	{
@@ -212,7 +248,11 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.<br/>This timeout is honored on a best-effort basis.<br/>Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.</para>
+	/// <para>
+	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
+	/// This timeout is honored on a best-effort basis.
+	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
 	{
@@ -221,7 +261,9 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	}
 
 	/// <summary>
-	/// <para>Filters associated terms so only those that are significantly associated with your query are included.</para>
+	/// <para>
+	/// Filters associated terms so only those that are significantly associated with your query are included.
+	/// </para>
 	/// </summary>
 	public ExploreControlsDescriptor UseSignificance(bool useSignificance = true)
 	{

@@ -32,18 +32,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ExistsComponentTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only.<br/>Defaults to false, which means information is retrieved from the master node.</para>
+	/// <para>
+	/// If true, the request retrieves information from the local node only.
+	/// Defaults to false, which means information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an<br/>error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
+/// <para>
+/// Check component templates.
+/// Returns information about whether a particular component template exists.
+/// </para>
 /// </summary>
 public sealed partial class ExistsComponentTemplateRequest : PlainRequest<ExistsComponentTemplateRequestParameters>
 {
@@ -60,20 +70,30 @@ public sealed partial class ExistsComponentTemplateRequest : PlainRequest<Exists
 	internal override string OperationName => "cluster.exists_component_template";
 
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only.<br/>Defaults to false, which means information is retrieved from the master node.</para>
+	/// <para>
+	/// If true, the request retrieves information from the local node only.
+	/// Defaults to false, which means information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an<br/>error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
+/// <para>
+/// Check component templates.
+/// Returns information about whether a particular component template exists.
+/// </para>
 /// </summary>
 public sealed partial class ExistsComponentTemplateRequestDescriptor : RequestDescriptor<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateRequestParameters>
 {

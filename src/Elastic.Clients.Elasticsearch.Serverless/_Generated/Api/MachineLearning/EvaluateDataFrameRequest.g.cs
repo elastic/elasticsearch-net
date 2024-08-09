@@ -34,7 +34,13 @@ public sealed partial class EvaluateDataFrameRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>
+/// Evaluate data frame analytics.
+/// The API packages together commonly used evaluation metrics for various types
+/// of machine learning features. This has been designed for use on indexes
+/// created by data frame analytics. Evaluation requires both a ground truth
+/// field and an analytics result field to be present.
+/// </para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateDataFrameRequestParameters>
 {
@@ -47,26 +53,38 @@ public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateData
 	internal override string OperationName => "ml.evaluate_data_frame";
 
 	/// <summary>
-	/// <para>Defines the type of evaluation you want to perform.</para>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("evaluation")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluation Evaluation { get; set; }
 
 	/// <summary>
-	/// <para>Defines the `index` in which the evaluation will be performed.</para>
+	/// <para>
+	/// Defines the <c>index</c> in which the evaluation will be performed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName Index { get; set; }
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
 }
 
 /// <summary>
-/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>
+/// Evaluate data frame analytics.
+/// The API packages together commonly used evaluation metrics for various types
+/// of machine learning features. This has been designed for use on indexes
+/// created by data frame analytics. Evaluation requires both a ground truth
+/// field and an analytics result field to be present.
+/// </para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : RequestDescriptor<EvaluateDataFrameRequestDescriptor<TDocument>, EvaluateDataFrameRequestParameters>
 {
@@ -93,7 +111,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Defines the type of evaluation you want to perform.</para>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluation evaluation)
 	{
@@ -120,7 +140,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>Defines the `index` in which the evaluation will be performed.</para>
+	/// <para>
+	/// Defines the <c>index</c> in which the evaluation will be performed.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName index)
 	{
@@ -129,7 +151,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
@@ -197,7 +221,13 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>
+/// Evaluate data frame analytics.
+/// The API packages together commonly used evaluation metrics for various types
+/// of machine learning features. This has been designed for use on indexes
+/// created by data frame analytics. Evaluation requires both a ground truth
+/// field and an analytics result field to be present.
+/// </para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescriptor<EvaluateDataFrameRequestDescriptor, EvaluateDataFrameRequestParameters>
 {
@@ -224,7 +254,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescript
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Defines the type of evaluation you want to perform.</para>
+	/// <para>
+	/// Defines the type of evaluation you want to perform.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor Evaluation(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeEvaluation evaluation)
 	{
@@ -251,7 +283,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the `index` in which the evaluation will be performed.</para>
+	/// <para>
+	/// Defines the <c>index</c> in which the evaluation will be performed.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName index)
 	{
@@ -260,7 +294,9 @@ public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A query clause that retrieves a subset of data from the source index.</para>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
 	/// </summary>
 	public EvaluateDataFrameRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{

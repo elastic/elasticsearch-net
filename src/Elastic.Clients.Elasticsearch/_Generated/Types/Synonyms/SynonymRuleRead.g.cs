@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 public sealed partial class SynonymRuleRead
 {
 	/// <summary>
-	/// <para>Synonym Rule identifier</para>
+	/// <para>
+	/// Synonym Rule identifier
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
 	/// <summary>
-	/// <para>Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2</para>
+	/// <para>
+	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public string Synonyms { get; init; }

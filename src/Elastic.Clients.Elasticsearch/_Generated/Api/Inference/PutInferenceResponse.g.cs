@@ -29,31 +29,41 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class PutInferenceResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>The inference Id</para>
+	/// <para>
+	/// The inference Id
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_id")]
 	public string InferenceId { get; init; }
 
 	/// <summary>
-	/// <para>The service type</para>
+	/// <para>
+	/// The service type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("service")]
 	public string Service { get; init; }
 
 	/// <summary>
-	/// <para>Settings specific to the service</para>
+	/// <para>
+	/// Settings specific to the service
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("service_settings")]
 	public object ServiceSettings { get; init; }
 
 	/// <summary>
-	/// <para>Task settings specific to the service and task type</para>
+	/// <para>
+	/// Task settings specific to the service and task type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
 	public object TaskSettings { get; init; }
 
 	/// <summary>
-	/// <para>The task type</para>
+	/// <para>
+	/// The task type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_type")]
 	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }

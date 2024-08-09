@@ -30,67 +30,98 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class SetProcessor
 {
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_from")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? CopyFrom { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_empty_value")]
 	public bool? IgnoreEmptyValue { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("media_type")]
 	public string? MediaType { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// <para>
+	/// The value to be set for the field.
+	/// Supports template snippets.
+	/// May specify only one of <c>value</c> or <c>copy_from</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public object? Value { get; set; }
@@ -122,7 +153,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	private object? ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> CopyFrom(Elastic.Clients.Elasticsearch.Serverless.Field? copyFrom)
 	{
@@ -131,7 +165,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> CopyFrom<TValue>(Expression<Func<TDocument, TValue>> copyFrom)
 	{
@@ -140,7 +177,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> CopyFrom(Expression<Func<TDocument, object>> copyFrom)
 	{
@@ -149,7 +189,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -158,7 +201,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -167,7 +213,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -176,7 +225,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -185,7 +237,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -194,7 +248,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> IgnoreEmptyValue(bool? ignoreEmptyValue = true)
 	{
@@ -203,7 +259,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -212,7 +270,11 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> MediaType(string? mediaType)
 	{
@@ -221,7 +283,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -260,7 +324,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
@@ -269,7 +336,10 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -278,7 +348,11 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// <para>
+	/// The value to be set for the field.
+	/// Supports template snippets.
+	/// May specify only one of <c>value</c> or <c>copy_from</c>.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor<TDocument> Value(object? value)
 	{
@@ -404,7 +478,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	private object? ValueValue { get; set; }
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor CopyFrom(Elastic.Clients.Elasticsearch.Serverless.Field? copyFrom)
 	{
@@ -413,7 +490,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor CopyFrom<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyFrom)
 	{
@@ -422,7 +502,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>
+	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor CopyFrom<TDocument>(Expression<Func<TDocument, object>> copyFrom)
 	{
@@ -431,7 +514,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Description(string? description)
 	{
@@ -440,7 +526,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -449,7 +538,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -458,7 +550,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The field to insert, upsert, or update.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -467,7 +562,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor If(string? value)
 	{
@@ -476,7 +573,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// <para>
+	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor IgnoreEmptyValue(bool? ignoreEmptyValue = true)
 	{
@@ -485,7 +584,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -494,7 +595,11 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor MediaType(string? mediaType)
 	{
@@ -503,7 +608,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -542,7 +649,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// <para>
+	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
+	/// When set to <c>false</c>, such fields will not be touched.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Override(bool? value = true)
 	{
@@ -551,7 +661,10 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Tag(string? tag)
 	{
@@ -560,7 +673,11 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// <para>
+	/// The value to be set for the field.
+	/// Supports template snippets.
+	/// May specify only one of <c>value</c> or <c>copy_from</c>.
+	/// </para>
 	/// </summary>
 	public SetProcessorDescriptor Value(object? value)
 	{

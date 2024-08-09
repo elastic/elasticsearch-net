@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class PerPartitionCategorization
 {
 	/// <summary>
-	/// <para>To enable this setting, you must also set the `partition_field_name` property to the same value in every detector that uses the keyword `mlcategory`. Otherwise, job creation fails.</para>
+	/// <para>
+	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
-	/// <para>This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.</para>
+	/// <para>
+	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stop_on_warn")]
 	public bool? StopOnWarn { get; set; }
@@ -54,7 +58,9 @@ public sealed partial class PerPartitionCategorizationDescriptor : SerializableD
 	private bool? StopOnWarnValue { get; set; }
 
 	/// <summary>
-	/// <para>To enable this setting, you must also set the `partition_field_name` property to the same value in every detector that uses the keyword `mlcategory`. Otherwise, job creation fails.</para>
+	/// <para>
+	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
+	/// </para>
 	/// </summary>
 	public PerPartitionCategorizationDescriptor Enabled(bool? enabled = true)
 	{
@@ -63,7 +69,9 @@ public sealed partial class PerPartitionCategorizationDescriptor : SerializableD
 	}
 
 	/// <summary>
-	/// <para>This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.</para>
+	/// <para>
+	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
+	/// </para>
 	/// </summary>
 	public PerPartitionCategorizationDescriptor StopOnWarn(bool? stopOnWarn = true)
 	{

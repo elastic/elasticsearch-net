@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DatafeedTimingStats
 {
 	/// <summary>
-	/// <para>The average search time per bucket, in milliseconds.</para>
+	/// <para>
+	/// The average search time per bucket, in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("average_search_time_per_bucket_ms")]
 	public double? AverageSearchTimePerBucketMs { get; init; }
 
 	/// <summary>
-	/// <para>The number of buckets processed.</para>
+	/// <para>
+	/// The number of buckets processed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_count")]
 	public long BucketCount { get; init; }
 
 	/// <summary>
-	/// <para>The exponential average search time per hour, in milliseconds.</para>
+	/// <para>
+	/// The exponential average search time per hour, in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exponential_average_search_time_per_hour_ms")]
 	public double ExponentialAverageSearchTimePerHourMs { get; init; }
 
 	/// <summary>
-	/// <para>Identifier for the anomaly detection job.</para>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>The number of searches run by the datafeed.</para>
+	/// <para>
+	/// The number of searches run by the datafeed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("search_count")]
 	public long SearchCount { get; init; }
 
 	/// <summary>
-	/// <para>The total time the datafeed spent searching, in milliseconds.</para>
+	/// <para>
+	/// The total time the datafeed spent searching, in milliseconds.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_search_time_ms")]
 	public double TotalSearchTimeMs { get; init; }

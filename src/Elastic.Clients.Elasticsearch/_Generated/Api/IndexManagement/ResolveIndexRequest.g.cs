@@ -32,13 +32,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ResolveIndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.<br/>Multiple patterns and remote clusters are supported.</para>
+/// <para>
+/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+/// Multiple patterns and remote clusters are supported.
+/// </para>
 /// </summary>
 public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexRequestParameters>
 {
@@ -55,14 +63,22 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 	internal override string OperationName => "indices.resolve_index";
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.<br/>Multiple patterns and remote clusters are supported.</para>
+/// <para>
+/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+/// Multiple patterns and remote clusters are supported.
+/// </para>
 /// </summary>
 public sealed partial class ResolveIndexRequestDescriptor : RequestDescriptor<ResolveIndexRequestDescriptor, ResolveIndexRequestParameters>
 {

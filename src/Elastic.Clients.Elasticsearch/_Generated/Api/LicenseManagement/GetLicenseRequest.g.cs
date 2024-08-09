@@ -32,13 +32,19 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 public sealed partial class GetLicenseRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether to retrieve local information. The default value is `false`, which means the information is retrieved from the master node.</para>
+	/// <para>
+	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
-/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+/// <para>
+/// Get license information.
+/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+/// </para>
 /// </summary>
 public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestParameters>
 {
@@ -51,14 +57,20 @@ public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestPa
 	internal override string OperationName => "license.get";
 
 	/// <summary>
-	/// <para>Specifies whether to retrieve local information. The default value is `false`, which means the information is retrieved from the master node.</para>
+	/// <para>
+	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
-/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
+/// <para>
+/// Get license information.
+/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
+/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+/// </para>
 /// </summary>
 public sealed partial class GetLicenseRequestDescriptor : RequestDescriptor<GetLicenseRequestDescriptor, GetLicenseRequestParameters>
 {

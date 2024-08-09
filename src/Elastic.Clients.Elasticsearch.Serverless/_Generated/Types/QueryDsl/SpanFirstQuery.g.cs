@@ -30,19 +30,28 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class SpanFirstQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// <para>
+	/// Controls the maximum end position permitted in a match.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public int End { get; set; }
 
 	/// <summary>
-	/// <para>Can be any other span type query.</para>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery Match { get; set; }
@@ -69,7 +78,12 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -78,7 +92,9 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// <para>
+	/// Controls the maximum end position permitted in a match.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor<TDocument> End(int end)
 	{
@@ -87,7 +103,9 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Can be any other span type query.</para>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery match)
 	{
@@ -172,7 +190,12 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor Boost(float? boost)
 	{
@@ -181,7 +204,9 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// <para>
+	/// Controls the maximum end position permitted in a match.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor End(int end)
 	{
@@ -190,7 +215,9 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	}
 
 	/// <summary>
-	/// <para>Can be any other span type query.</para>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
 	/// </summary>
 	public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery match)
 	{

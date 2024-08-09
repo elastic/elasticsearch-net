@@ -32,30 +32,62 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class GetTransformRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no transforms that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If this parameter is false, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no transforms that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If this parameter is false, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Excludes fields that were automatically added when creating the<br/>transform. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Excludes fields that were automatically added when creating the
+	/// transform. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of transforms.</para>
+	/// <para>
+	/// Skips the specified number of transforms.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of transforms to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of transforms to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
+/// <para>
+/// Get transforms.
+/// Retrieves configuration information for transforms.
+/// </para>
 /// </summary>
 public sealed partial class GetTransformRequest : PlainRequest<GetTransformRequestParameters>
 {
@@ -76,34 +108,66 @@ public sealed partial class GetTransformRequest : PlainRequest<GetTransformReque
 	internal override string OperationName => "transform.get_transform";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no transforms that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>If this parameter is false, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no transforms that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If this parameter is false, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Excludes fields that were automatically added when creating the<br/>transform. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Excludes fields that were automatically added when creating the
+	/// transform. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of transforms.</para>
+	/// <para>
+	/// Skips the specified number of transforms.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of transforms to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of transforms to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
+/// <para>
+/// Get transforms.
+/// Retrieves configuration information for transforms.
+/// </para>
 /// </summary>
 public sealed partial class GetTransformRequestDescriptor : RequestDescriptor<GetTransformRequestDescriptor, GetTransformRequestParameters>
 {

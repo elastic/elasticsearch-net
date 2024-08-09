@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class ConfusionMatrixThreshold
 {
 	/// <summary>
-	/// <para>False Negative</para>
+	/// <para>
+	/// False Negative
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fn")]
 	public int FalseNegative { get; init; }
 
 	/// <summary>
-	/// <para>False Positive</para>
+	/// <para>
+	/// False Positive
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fp")]
 	public int FalsePositive { get; init; }
 
 	/// <summary>
-	/// <para>True Negative</para>
+	/// <para>
+	/// True Negative
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tn")]
 	public int TrueNegative { get; init; }
 
 	/// <summary>
-	/// <para>True Positive</para>
+	/// <para>
+	/// True Positive
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tp")]
 	public int TruePositive { get; init; }

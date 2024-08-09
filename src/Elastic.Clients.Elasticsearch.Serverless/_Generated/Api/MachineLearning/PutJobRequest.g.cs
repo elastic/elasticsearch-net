@@ -34,7 +34,10 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>
+/// Create an anomaly detection job.
+/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
 {
@@ -51,98 +54,131 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	internal override string OperationName => "ml.put_job";
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool? AllowLazyOpen { get; set; }
 
 	/// <summary>
-	/// <para>Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.</para>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
 
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analysis_limits")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisLimits? AnalysisLimits { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the `background_persist_interval` value too low.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? BackgroundPersistInterval { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("custom_settings")]
 	public object? CustomSettings { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to `model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 	/// <summary>
-	/// <para>Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.</para>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_description")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataDescription DataDescription { get; set; }
 
 	/// <summary>
-	/// <para>Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.</para>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("datafeed_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedConfig? DatafeedConfig { get; set; }
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("groups")]
 	public ICollection<string>? Groups { get; set; }
 
 	/// <summary>
-	/// <para>This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.</para>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_plot_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long? ModelSnapshotRetentionDays { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; set; }
 
 	/// <summary>
-	/// <para>A text string that affects the name of the machine learning results index. By default, the job generates an index named `.ml-anomalies-shared`.</para>
+	/// <para>
+	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_index_name")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName? ResultsIndexName { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; set; }
 }
 
 /// <summary>
-/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>
+/// Create an anomaly detection job.
+/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
 {
@@ -193,7 +229,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	private long? ResultsRetentionDaysValue { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true)
 	{
@@ -202,7 +240,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.</para>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig analysisConfig)
 	{
@@ -229,7 +269,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisLimits? analysisLimits)
 	{
@@ -256,7 +298,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the `background_persist_interval` value too low.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? backgroundPersistInterval)
 	{
@@ -265,7 +309,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> CustomSettings(object? customSettings)
 	{
@@ -274,7 +320,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to `model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
 	{
@@ -283,7 +331,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.</para>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> DataDescription(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataDescription dataDescription)
 	{
@@ -310,7 +360,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.</para>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> DatafeedConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedConfig? datafeedConfig)
 	{
@@ -337,7 +389,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Description(string? description)
 	{
@@ -346,7 +400,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> Groups(ICollection<string>? groups)
 	{
@@ -355,7 +411,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.</para>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfig? modelPlotConfig)
 	{
@@ -382,7 +440,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
 	{
@@ -391,7 +451,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays)
 	{
@@ -400,7 +462,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>A text string that affects the name of the machine learning results index. By default, the job generates an index named `.ml-anomalies-shared`.</para>
+	/// <para>
+	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> ResultsIndexName(Elastic.Clients.Elasticsearch.Serverless.IndexName? resultsIndexName)
 	{
@@ -409,7 +473,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays)
 	{
@@ -565,7 +631,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>
+/// Create an anomaly detection job.
+/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>
 {
@@ -616,7 +685,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	private long? ResultsRetentionDaysValue { get; set; }
 
 	/// <summary>
-	/// <para>Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide `xpack.ml.max_lazy_ml_nodes` setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.</para>
+	/// <para>
+	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor AllowLazyOpen(bool? allowLazyOpen = true)
 	{
@@ -625,7 +696,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.</para>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig analysisConfig)
 	{
@@ -652,7 +725,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.</para>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisLimits? analysisLimits)
 	{
@@ -679,7 +754,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the `background_persist_interval` value too low.</para>
+	/// <para>
+	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Serverless.Duration? backgroundPersistInterval)
 	{
@@ -688,7 +765,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. Contains custom meta data about the job.</para>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor CustomSettings(object? customSettings)
 	{
@@ -697,7 +776,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to `model_snapshot_retention_days`.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
 	{
@@ -706,7 +787,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.</para>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor DataDescription(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataDescription dataDescription)
 	{
@@ -733,7 +816,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.</para>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedConfig? datafeedConfig)
 	{
@@ -760,7 +845,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>A description of the job.</para>
+	/// <para>
+	/// A description of the job.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Description(string? description)
 	{
@@ -769,7 +856,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>A list of job groups. A job can belong to no groups or many.</para>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor Groups(ICollection<string>? groups)
 	{
@@ -778,7 +867,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.</para>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfig? modelPlotConfig)
 	{
@@ -805,7 +896,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.</para>
+	/// <para>
+	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
 	{
@@ -814,7 +907,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.</para>
+	/// <para>
+	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor RenormalizationWindowDays(long? renormalizationWindowDays)
 	{
@@ -823,7 +918,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>A text string that affects the name of the machine learning results index. By default, the job generates an index named `.ml-anomalies-shared`.</para>
+	/// <para>
+	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor ResultsIndexName(Elastic.Clients.Elasticsearch.Serverless.IndexName? resultsIndexName)
 	{
@@ -832,7 +929,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	}
 
 	/// <summary>
-	/// <para>Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.</para>
+	/// <para>
+	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
+	/// </para>
 	/// </summary>
 	public PutJobRequestDescriptor ResultsRetentionDays(long? resultsRetentionDays)
 	{

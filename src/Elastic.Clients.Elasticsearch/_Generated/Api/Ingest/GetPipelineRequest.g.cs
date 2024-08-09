@@ -32,18 +32,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class GetPipelineRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// <para>
+	/// Return pipelines without their definitions (default: false)
+	/// </para>
 	/// </summary>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
 /// <summary>
-/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
+/// <para>
+/// Returns information about one or more ingest pipelines.
+/// This API returns a local reference of the pipeline.
+/// </para>
 /// </summary>
 public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequestParameters>
 {
@@ -64,20 +72,28 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 	internal override string OperationName => "ingest.get_pipeline";
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// <para>
+	/// Return pipelines without their definitions (default: false)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
 /// <summary>
-/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
+/// <para>
+/// Returns information about one or more ingest pipelines.
+/// This API returns a local reference of the pipeline.
+/// </para>
 /// </summary>
 public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDescriptor<GetPipelineRequestDescriptor<TDocument>, GetPipelineRequestParameters>
 {
@@ -114,7 +130,10 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
+/// <para>
+/// Returns information about one or more ingest pipelines.
+/// This API returns a local reference of the pipeline.
+/// </para>
 /// </summary>
 public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<GetPipelineRequestDescriptor, GetPipelineRequestParameters>
 {

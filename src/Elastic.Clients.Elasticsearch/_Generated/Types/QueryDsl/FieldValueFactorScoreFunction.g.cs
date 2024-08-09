@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class FieldValueFactorScoreFunction
 {
 	/// <summary>
-	/// <para>Optional factor to multiply the field value with.</para>
+	/// <para>
+	/// Optional factor to multiply the field value with.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("factor")]
 	public double? Factor { get; set; }
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Value used if the document doesn’t have that field.<br/>The modifier and factor are still applied to it as though it were read from the document.</para>
+	/// <para>
+	/// Value used if the document doesn’t have that field.
+	/// The modifier and factor are still applied to it as though it were read from the document.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
 	/// <summary>
-	/// <para>Modifier to apply to the field value.</para>
+	/// <para>
+	/// Modifier to apply to the field value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
@@ -70,7 +79,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
 
 	/// <summary>
-	/// <para>Optional factor to multiply the field value with.</para>
+	/// <para>
+	/// Optional factor to multiply the field value with.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
 	{
@@ -79,7 +90,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -88,7 +101,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -97,7 +112,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -106,7 +123,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Value used if the document doesn’t have that field.<br/>The modifier and factor are still applied to it as though it were read from the document.</para>
+	/// <para>
+	/// Value used if the document doesn’t have that field.
+	/// The modifier and factor are still applied to it as though it were read from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing)
 	{
@@ -115,7 +135,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>Modifier to apply to the field value.</para>
+	/// <para>
+	/// Modifier to apply to the field value.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
 	{
@@ -164,7 +186,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
 
 	/// <summary>
-	/// <para>Optional factor to multiply the field value with.</para>
+	/// <para>
+	/// Optional factor to multiply the field value with.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
 	{
@@ -173,7 +197,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -182,7 +208,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -191,7 +219,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Field to be extracted from the document.</para>
+	/// <para>
+	/// Field to be extracted from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -200,7 +230,10 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Value used if the document doesn’t have that field.<br/>The modifier and factor are still applied to it as though it were read from the document.</para>
+	/// <para>
+	/// Value used if the document doesn’t have that field.
+	/// The modifier and factor are still applied to it as though it were read from the document.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Missing(double? missing)
 	{
@@ -209,7 +242,9 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>Modifier to apply to the field value.</para>
+	/// <para>
+	/// Modifier to apply to the field value.
+	/// </para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
 	{

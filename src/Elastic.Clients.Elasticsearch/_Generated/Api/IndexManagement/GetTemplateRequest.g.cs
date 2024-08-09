@@ -32,23 +32,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class GetTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get index templates.<br/>Retrieves information about one or more index templates.</para>
+/// <para>
+/// Get index templates.
+/// Retrieves information about one or more index templates.
+/// </para>
 /// </summary>
 public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequestParameters>
 {
@@ -69,26 +79,36 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 	internal override string OperationName => "indices.get_template";
 
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>If `true`, the request retrieves information from the local node only.</para>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Get index templates.<br/>Retrieves information about one or more index templates.</para>
+/// <para>
+/// Get index templates.
+/// Retrieves information about one or more index templates.
+/// </para>
 /// </summary>
 public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<GetTemplateRequestDescriptor, GetTemplateRequestParameters>
 {

@@ -30,49 +30,67 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class ForeachProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// <para>
+	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Ingest processor to run on each element.</para>
+	/// <para>
+	/// Ingest processor to run on each element.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("processor")]
 	public Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -103,7 +121,10 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -112,7 +133,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -121,7 +144,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -130,7 +155,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -139,7 +166,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -148,7 +177,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -157,7 +188,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// <para>
+	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -166,7 +199,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -205,7 +240,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Ingest processor to run on each element.</para>
+	/// <para>
+	/// Ingest processor to run on each element.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Processor(Elastic.Clients.Elasticsearch.Ingest.Processor processor)
 	{
@@ -232,7 +269,10 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -349,7 +389,10 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Description(string? description)
 	{
@@ -358,7 +401,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -367,7 +412,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -376,7 +423,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Field containing array or object values.</para>
+	/// <para>
+	/// Field containing array or object values.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -385,7 +434,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor If(string? value)
 	{
@@ -394,7 +445,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -403,7 +456,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// <para>
+	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
@@ -412,7 +467,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -451,7 +508,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Ingest processor to run on each element.</para>
+	/// <para>
+	/// Ingest processor to run on each element.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.Processor processor)
 	{
@@ -478,7 +537,10 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public ForeachProcessorDescriptor Tag(string? tag)
 	{

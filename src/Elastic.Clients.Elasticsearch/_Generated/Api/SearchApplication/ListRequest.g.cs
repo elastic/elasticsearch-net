@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public sealed partial class ListRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Starting offset.</para>
+	/// <para>
+	/// Starting offset.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>Specifies a max number of results to get.</para>
+	/// <para>
+	/// Specifies a max number of results to get.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Returns the existing search applications.</para>
+/// <para>
+/// Returns the existing search applications.
+/// </para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 {
@@ -61,26 +69,34 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	internal override string OperationName => "search_application.list";
 
 	/// <summary>
-	/// <para>Starting offset.</para>
+	/// <para>
+	/// Starting offset.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
-	/// <para>Specifies a max number of results to get.</para>
+	/// <para>
+	/// Specifies a max number of results to get.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Returns the existing search applications.</para>
+/// <para>
+/// Returns the existing search applications.
+/// </para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>
 {

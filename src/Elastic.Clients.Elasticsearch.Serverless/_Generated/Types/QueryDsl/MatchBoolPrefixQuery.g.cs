@@ -201,53 +201,84 @@ public sealed partial class MatchBoolPrefixQuery
 	}
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public string? FuzzyRewrite { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public int? MaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? Operator { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>Terms you wish to find in the provided field.<br/>The last term is used in a prefix query.</para>
+	/// <para>
+	/// Terms you wish to find in the provided field.
+	/// The last term is used in a prefix query.
+	/// </para>
 	/// </summary>
 	public string Query { get; set; }
 	public string? QueryName { get; set; }
@@ -277,7 +308,9 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -286,7 +319,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -313,7 +351,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -322,7 +363,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -331,7 +375,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -340,7 +387,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
@@ -349,7 +399,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -358,7 +411,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -367,7 +423,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
@@ -376,7 +435,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Terms you wish to find in the provided field.<br/>The last term is used in a prefix query.</para>
+	/// <para>
+	/// Terms you wish to find in the provided field.
+	/// The last term is used in a prefix query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor<TDocument> Query(string query)
 	{
@@ -486,7 +548,9 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -495,7 +559,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor Boost(float? boost)
 	{
@@ -522,7 +591,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -531,7 +603,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -540,7 +615,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -549,7 +627,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
@@ -558,7 +639,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -567,7 +651,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.<br/>Applied to the constructed bool query.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// Applied to the constructed bool query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -576,7 +663,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor PrefixLength(int? prefixLength)
 	{
@@ -585,7 +675,10 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Terms you wish to find in the provided field.<br/>The last term is used in a prefix query.</para>
+	/// <para>
+	/// Terms you wish to find in the provided field.
+	/// The last term is used in a prefix query.
+	/// </para>
 	/// </summary>
 	public MatchBoolPrefixQueryDescriptor Query(string query)
 	{

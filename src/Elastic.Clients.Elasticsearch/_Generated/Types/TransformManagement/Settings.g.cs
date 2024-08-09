@@ -28,49 +28,74 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 /// <summary>
-/// <para>The source of the data for the transform.</para>
+/// <para>
+/// The source of the data for the transform.
+/// </para>
 /// </summary>
 public sealed partial class Settings
 {
 	/// <summary>
-	/// <para>Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align<br/>checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the<br/>transform config. As a result, less document updates in the destination index will be performed thus improving<br/>overall performance.</para>
+	/// <para>
+	/// Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align
+	/// checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the
+	/// transform config. As a result, less document updates in the destination index will be performed thus improving
+	/// overall performance.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("align_checkpoints")]
 	public bool? AlignCheckpoints { get; set; }
 
 	/// <summary>
-	/// <para>Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was<br/>the default for transforms created before version 7.11. For compatible output set this value to `true`.</para>
+	/// <para>
+	/// Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was
+	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dates_as_epoch_millis")]
 	public bool? DatesAsEpochMillis { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the transform should deduce the destination index mappings from the transform configuration.</para>
+	/// <para>
+	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("deduce_mappings")]
 	public bool? DeduceMappings { get; set; }
 
 	/// <summary>
-	/// <para>Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a<br/>wait time between search requests. The default value is null, which disables throttling.</para>
+	/// <para>
+	/// Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a
+	/// wait time between search requests. The default value is null, which disables throttling.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs_per_second")]
 	public float? DocsPerSecond { get; set; }
 
 	/// <summary>
-	/// <para>Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker<br/>exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is `10` and the<br/>maximum is `65,536`.</para>
+	/// <para>
+	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
+	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
+	/// maximum is <c>65,536</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_page_search_size")]
 	public int? MaxPageSearchSize { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case<br/>of an error which means the transform never fails. Setting the number of retries other than infinite fails in<br/>validation.</para>
+	/// <para>
+	/// If <c>true</c>, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case
+	/// of an error which means the transform never fails. Setting the number of retries other than infinite fails in
+	/// validation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unattended")]
 	public bool? Unattended { get; set; }
 }
 
 /// <summary>
-/// <para>The source of the data for the transform.</para>
+/// <para>
+/// The source of the data for the transform.
+/// </para>
 /// </summary>
 public sealed partial class SettingsDescriptor : SerializableDescriptor<SettingsDescriptor>
 {
@@ -88,7 +113,12 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	private bool? UnattendedValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align<br/>checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the<br/>transform config. As a result, less document updates in the destination index will be performed thus improving<br/>overall performance.</para>
+	/// <para>
+	/// Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align
+	/// checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the
+	/// transform config. As a result, less document updates in the destination index will be performed thus improving
+	/// overall performance.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor AlignCheckpoints(bool? alignCheckpoints = true)
 	{
@@ -97,7 +127,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	}
 
 	/// <summary>
-	/// <para>Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was<br/>the default for transforms created before version 7.11. For compatible output set this value to `true`.</para>
+	/// <para>
+	/// Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was
+	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor DatesAsEpochMillis(bool? datesAsEpochMillis = true)
 	{
@@ -106,7 +139,9 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	}
 
 	/// <summary>
-	/// <para>Specifies whether the transform should deduce the destination index mappings from the transform configuration.</para>
+	/// <para>
+	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor DeduceMappings(bool? deduceMappings = true)
 	{
@@ -115,7 +150,10 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	}
 
 	/// <summary>
-	/// <para>Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a<br/>wait time between search requests. The default value is null, which disables throttling.</para>
+	/// <para>
+	/// Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a
+	/// wait time between search requests. The default value is null, which disables throttling.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor DocsPerSecond(float? docsPerSecond)
 	{
@@ -124,7 +162,11 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	}
 
 	/// <summary>
-	/// <para>Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker<br/>exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is `10` and the<br/>maximum is `65,536`.</para>
+	/// <para>
+	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
+	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
+	/// maximum is <c>65,536</c>.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor MaxPageSearchSize(int? maxPageSearchSize)
 	{
@@ -133,7 +175,11 @@ public sealed partial class SettingsDescriptor : SerializableDescriptor<Settings
 	}
 
 	/// <summary>
-	/// <para>If `true`, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case<br/>of an error which means the transform never fails. Setting the number of retries other than infinite fails in<br/>validation.</para>
+	/// <para>
+	/// If <c>true</c>, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case
+	/// of an error which means the transform never fails. Setting the number of retries other than infinite fails in
+	/// validation.
+	/// </para>
 	/// </summary>
 	public SettingsDescriptor Unattended(bool? unattended = true)
 	{

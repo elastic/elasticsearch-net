@@ -34,7 +34,9 @@ public sealed partial class DeleteJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an existing rollup job.</para>
+/// <para>
+/// Deletes an existing rollup job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 }
 
 /// <summary>
-/// <para>Deletes an existing rollup job.</para>
+/// <para>
+/// Deletes an existing rollup job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteJobRequestDescriptor<TDocument> : RequestDescriptor<DeleteJobRequestDescriptor<TDocument>, DeleteJobRequestParameters>
 {
@@ -82,7 +86,9 @@ public sealed partial class DeleteJobRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Deletes an existing rollup job.</para>
+/// <para>
+/// Deletes an existing rollup job.
+/// </para>
 /// </summary>
 public sealed partial class DeleteJobRequestDescriptor : RequestDescriptor<DeleteJobRequestDescriptor, DeleteJobRequestParameters>
 {

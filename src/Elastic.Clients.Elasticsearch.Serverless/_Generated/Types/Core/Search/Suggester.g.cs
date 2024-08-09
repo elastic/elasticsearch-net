@@ -82,12 +82,16 @@ internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 public sealed partial class Suggester
 {
 	/// <summary>
-	/// <para>The named suggesters</para>
+	/// <para>
+	/// The named suggesters
+	/// </para>
 	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggester> Suggesters { get; set; }
 
 	/// <summary>
-	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// <para>
+	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
+	/// </para>
 	/// </summary>
 	public string? Text { get; set; }
 }
@@ -104,7 +108,9 @@ public sealed partial class SuggesterDescriptor<TDocument> : SerializableDescrip
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>The named suggesters</para>
+	/// <para>
+	/// The named suggesters
+	/// </para>
 	/// </summary>
 	public SuggesterDescriptor<TDocument> Suggesters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggesterDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggesterDescriptor<TDocument>>> selector)
 	{
@@ -113,7 +119,9 @@ public sealed partial class SuggesterDescriptor<TDocument> : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// <para>
+	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
+	/// </para>
 	/// </summary>
 	public SuggesterDescriptor<TDocument> Text(string? text)
 	{
@@ -155,7 +163,9 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 	private string? TextValue { get; set; }
 
 	/// <summary>
-	/// <para>The named suggesters</para>
+	/// <para>
+	/// The named suggesters
+	/// </para>
 	/// </summary>
 	public SuggesterDescriptor Suggesters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggesterDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggesterDescriptor>> selector)
 	{
@@ -164,7 +174,9 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 	}
 
 	/// <summary>
-	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// <para>
+	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
+	/// </para>
 	/// </summary>
 	public SuggesterDescriptor Text(string? text)
 	{

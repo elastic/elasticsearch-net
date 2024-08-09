@@ -34,7 +34,9 @@ public sealed partial class RemovePolicyRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Removes the assigned lifecycle policy and stops managing the specified index</para>
+/// <para>
+/// Removes the assigned lifecycle policy and stops managing the specified index
+/// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyReque
 }
 
 /// <summary>
-/// <para>Removes the assigned lifecycle policy and stops managing the specified index</para>
+/// <para>
+/// Removes the assigned lifecycle policy and stops managing the specified index
+/// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequestDescriptor<TDocument> : RequestDescriptor<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyRequestParameters>
 {
@@ -86,7 +90,9 @@ public sealed partial class RemovePolicyRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Removes the assigned lifecycle policy and stops managing the specified index</para>
+/// <para>
+/// Removes the assigned lifecycle policy and stops managing the specified index
+/// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequestDescriptor : RequestDescriptor<RemovePolicyRequestDescriptor, RemovePolicyRequestParameters>
 {

@@ -30,25 +30,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class Pool
 {
 	/// <summary>
-	/// <para>Maximum amount of memory, in bytes, available for use by the heap.</para>
+	/// <para>
+	/// Maximum amount of memory, in bytes, available for use by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_in_bytes")]
 	public long? MaxInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Largest amount of memory, in bytes, historically used by the heap.</para>
+	/// <para>
+	/// Largest amount of memory, in bytes, historically used by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("peak_max_in_bytes")]
 	public long? PeakMaxInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Largest amount of memory, in bytes, historically used by the heap.</para>
+	/// <para>
+	/// Largest amount of memory, in bytes, historically used by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("peak_used_in_bytes")]
 	public long? PeakUsedInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Memory, in bytes, used by the heap.</para>
+	/// <para>
+	/// Memory, in bytes, used by the heap.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("used_in_bytes")]
 	public long? UsedInBytes { get; init; }

@@ -105,7 +105,9 @@ internal sealed partial class RangeBucketConverter : JsonConverter<RangeBucket>
 public sealed partial class RangeBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }
@@ -113,7 +115,9 @@ public sealed partial class RangeBucket
 	public string? FromAsString { get; init; }
 
 	/// <summary>
-	/// <para>The bucket key. Present if the aggregation is _not_ keyed</para>
+	/// <para>
+	/// The bucket key. Present if the aggregation is <em>not</em> keyed
+	/// </para>
 	/// </summary>
 	public string? Key { get; init; }
 	public double? To { get; init; }

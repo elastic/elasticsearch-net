@@ -124,27 +124,37 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 public enum CardinalityExecutionMode
 {
 	/// <summary>
-	/// <para>Run the aggregation by using segment ordinal values and resolving those values after each segment.</para>
+	/// <para>
+	/// Run the aggregation by using segment ordinal values and resolving those values after each segment.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "segment_ordinals")]
 	SegmentOrdinals,
 	/// <summary>
-	/// <para>Heuristic-based mode, default in Elasticsearch 8.4 and later.</para>
+	/// <para>
+	/// Heuristic-based mode, default in Elasticsearch 8.4 and later.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "save_time_heuristic")]
 	SaveTimeHeuristic,
 	/// <summary>
-	/// <para>Heuristic-based mode, default in Elasticsearch 8.3 and earlier.</para>
+	/// <para>
+	/// Heuristic-based mode, default in Elasticsearch 8.3 and earlier.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "save_memory_heuristic")]
 	SaveMemoryHeuristic,
 	/// <summary>
-	/// <para>Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.</para>
+	/// <para>
+	/// Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
 	/// <summary>
-	/// <para>Run the aggregation by using field values directly.</para>
+	/// <para>
+	/// Run the aggregation by using field values directly.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "direct")]
 	Direct
@@ -202,17 +212,25 @@ internal sealed class CardinalityExecutionModeConverter : JsonConverter<Cardinal
 public enum GapPolicy
 {
 	/// <summary>
-	/// <para>Treats missing data as if the bucket does not exist. It will skip the bucket and<br/>continue calculating using the next available value.</para>
+	/// <para>
+	/// Treats missing data as if the bucket does not exist. It will skip the bucket and
+	/// continue calculating using the next available value.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "skip")]
 	Skip,
 	/// <summary>
-	/// <para>Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,<br/>otherwise the empty bucket is skipped.</para>
+	/// <para>
+	/// Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,
+	/// otherwise the empty bucket is skipped.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "keep_values")]
 	KeepValues,
 	/// <summary>
-	/// <para>Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.</para>
+	/// <para>
+	/// Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "insert_zeros")]
 	InsertZeros
@@ -379,32 +397,44 @@ internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 public enum NormalizeMethod
 {
 	/// <summary>
-	/// <para>This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.</para>
+	/// <para>
+	/// This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "z-score")]
 	ZScore,
 	/// <summary>
-	/// <para>This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.</para>
+	/// <para>
+	/// This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "softmax")]
 	Softmax,
 	/// <summary>
-	/// <para>This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.</para>
+	/// <para>
+	/// This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "rescale_0_100")]
 	Rescale0100,
 	/// <summary>
-	/// <para>This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.</para>
+	/// <para>
+	/// This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "rescale_0_1")]
 	Rescale01,
 	/// <summary>
-	/// <para>This method normalizes each value so that it represents a percentage of the total sum it attributes to.</para>
+	/// <para>
+	/// This method normalizes each value so that it represents a percentage of the total sum it attributes to.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "percent_of_sum")]
 	PercentOfSum,
 	/// <summary>
-	/// <para>This method normalizes such that each value is normalized by how much it differs from the average.</para>
+	/// <para>
+	/// This method normalizes such that each value is normalized by how much it differs from the average.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "mean")]
 	Mean
@@ -467,12 +497,16 @@ internal sealed class NormalizeMethodConverter : JsonConverter<NormalizeMethod>
 public enum RateMode
 {
 	/// <summary>
-	/// <para>Uses the number of values of the field.</para>
+	/// <para>
+	/// Uses the number of values of the field.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "value_count")]
 	ValueCount,
 	/// <summary>
-	/// <para>Calculates the sum of all values of the field.</para>
+	/// <para>
+	/// Calculates the sum of all values of the field.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "sum")]
 	Sum
@@ -515,17 +549,23 @@ internal sealed class RateModeConverter : JsonConverter<RateMode>
 public enum SamplerAggregationExecutionHint
 {
 	/// <summary>
-	/// <para>Hold field values directly.</para>
+	/// <para>
+	/// Hold field values directly.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "map")]
 	Map,
 	/// <summary>
-	/// <para>Hold ordinals of the field as determined by the Lucene index.</para>
+	/// <para>
+	/// Hold ordinals of the field as determined by the Lucene index.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
 	/// <summary>
-	/// <para>Hold hashes of the field values - with potential for hash collisions.</para>
+	/// <para>
+	/// Hold hashes of the field values - with potential for hash collisions.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "bytes_hash")]
 	BytesHash
@@ -573,12 +613,16 @@ internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<S
 public enum TermsAggregationCollectMode
 {
 	/// <summary>
-	/// <para>Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.</para>
+	/// <para>
+	/// Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "depth_first")]
 	DepthFirst,
 	/// <summary>
-	/// <para>Caches the set of documents that fall into the uppermost buckets for subsequent replay.</para>
+	/// <para>
+	/// Caches the set of documents that fall into the uppermost buckets for subsequent replay.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "breadth_first")]
 	BreadthFirst
@@ -677,17 +721,23 @@ internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<Ter
 public enum TTestType
 {
 	/// <summary>
-	/// <para>Performs paired t-test.</para>
+	/// <para>
+	/// Performs paired t-test.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "paired")]
 	Paired,
 	/// <summary>
-	/// <para>Performs two-sample equal variance test.</para>
+	/// <para>
+	/// Performs two-sample equal variance test.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "homoscedastic")]
 	Homoscedastic,
 	/// <summary>
-	/// <para>Performs two-sample unequal variance test.</para>
+	/// <para>
+	/// Performs two-sample unequal variance test.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "heteroscedastic")]
 	Heteroscedastic

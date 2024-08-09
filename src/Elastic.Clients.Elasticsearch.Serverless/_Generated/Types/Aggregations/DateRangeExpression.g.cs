@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class DateRangeExpression
 {
 	/// <summary>
-	/// <para>Start of the range (inclusive).</para>
+	/// <para>
+	/// Start of the range (inclusive).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.FieldDateMath? From { get; set; }
 
 	/// <summary>
-	/// <para>Custom key to return the range with.</para>
+	/// <para>
+	/// Custom key to return the range with.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
 
 	/// <summary>
-	/// <para>End of the range (exclusive).</para>
+	/// <para>
+	/// End of the range (exclusive).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("to")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.FieldDateMath? To { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class DateRangeExpressionDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.FieldDateMath? ToValue { get; set; }
 
 	/// <summary>
-	/// <para>Start of the range (inclusive).</para>
+	/// <para>
+	/// Start of the range (inclusive).
+	/// </para>
 	/// </summary>
 	public DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Serverless.Aggregations.FieldDateMath? from)
 	{
@@ -70,7 +78,9 @@ public sealed partial class DateRangeExpressionDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Custom key to return the range with.</para>
+	/// <para>
+	/// Custom key to return the range with.
+	/// </para>
 	/// </summary>
 	public DateRangeExpressionDescriptor Key(string? key)
 	{
@@ -79,7 +89,9 @@ public sealed partial class DateRangeExpressionDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>End of the range (exclusive).</para>
+	/// <para>
+	/// End of the range (exclusive).
+	/// </para>
 	/// </summary>
 	public DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Serverless.Aggregations.FieldDateMath? to)
 	{

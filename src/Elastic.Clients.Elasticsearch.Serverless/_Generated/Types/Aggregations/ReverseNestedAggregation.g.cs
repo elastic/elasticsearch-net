@@ -30,7 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class ReverseNestedAggregation
 {
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Path { get; set; }
@@ -49,7 +52,10 @@ public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : Seri
 	private Elastic.Clients.Elasticsearch.Serverless.Field? PathValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Serverless.Field? path)
 	{
@@ -58,7 +64,10 @@ public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -67,7 +76,10 @@ public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : Seri
 	}
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
 	{
@@ -99,7 +111,10 @@ public sealed partial class ReverseNestedAggregationDescriptor : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Field? PathValue { get; set; }
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Serverless.Field? path)
 	{
@@ -108,7 +123,10 @@ public sealed partial class ReverseNestedAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
 	{
@@ -117,7 +135,10 @@ public sealed partial class ReverseNestedAggregationDescriptor : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
+	/// <para>
+	/// Defines the nested object field that should be joined back to.
+	/// The default is empty, which means that it joins back to the root/main document level.
+	/// </para>
 	/// </summary>
 	public ReverseNestedAggregationDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
 	{

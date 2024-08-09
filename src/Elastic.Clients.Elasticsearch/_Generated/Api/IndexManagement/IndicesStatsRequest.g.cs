@@ -32,53 +32,76 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndicesStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If true, statistics are not collected from closed indices.</para>
+	/// <para>
+	/// If true, statistics are not collected from closed indices.
+	/// </para>
 	/// </summary>
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of search groups to include in the search statistics.</para>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
-	/// <para>If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).</para>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
 	/// </summary>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
 	/// <summary>
-	/// <para>If true, the response includes information from segments that are not loaded into memory.</para>
+	/// <para>
+	/// If true, the response includes information from segments that are not loaded into memory.
+	/// </para>
 	/// </summary>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
 	/// <summary>
-	/// <para>Indicates whether statistics are aggregated at the cluster, index, or shard level.</para>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
 /// <summary>
-/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
+/// <para>
+/// Returns statistics for one or more indices.
+/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsRequestParameters>
 {
@@ -107,62 +130,85 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	internal override string OperationName => "indices.stats";
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument<br/>determines whether wildcard expressions match hidden data streams. Supports comma-separated values,<br/>such as `open,hidden`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
+	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+	/// such as <c>open,hidden</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>If true, statistics are not collected from closed indices.</para>
+	/// <para>
+	/// If true, statistics are not collected from closed indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of search groups to include in the search statistics.</para>
+	/// <para>
+	/// Comma-separated list of search groups to include in the search statistics.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
 
 	/// <summary>
-	/// <para>If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).</para>
+	/// <para>
+	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
 	/// <summary>
-	/// <para>If true, the response includes information from segments that are not loaded into memory.</para>
+	/// <para>
+	/// If true, the response includes information from segments that are not loaded into memory.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
 	/// <summary>
-	/// <para>Indicates whether statistics are aggregated at the cluster, index, or shard level.</para>
+	/// <para>
+	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
 /// <summary>
-/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
+/// <para>
+/// Returns statistics for one or more indices.
+/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDescriptor<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsRequestParameters>
 {
@@ -212,7 +258,10 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
+/// <para>
+/// Returns statistics for one or more indices.
+/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<IndicesStatsRequestDescriptor, IndicesStatsRequestParameters>
 {

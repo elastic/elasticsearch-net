@@ -34,13 +34,17 @@ public sealed partial class CompletionStats
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldSizeUsage>? Fields { get; init; }
 
 	/// <summary>
-	/// <para>Total amount of memory used for completion across all shards assigned to selected nodes.</para>
+	/// <para>
+	/// Total amount of memory used for completion across all shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? Size { get; init; }
 
 	/// <summary>
-	/// <para>Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.</para>
+	/// <para>
+	/// Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }

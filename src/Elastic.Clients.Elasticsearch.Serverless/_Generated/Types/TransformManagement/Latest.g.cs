@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.TransformManagement;
 public sealed partial class Latest
 {
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Sort { get; set; }
 
 	/// <summary>
-	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
+	/// <para>
+	/// Specifies an array of one or more fields that are used to group the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unique_key")]
 	[JsonConverter(typeof(FieldsConverter))]
@@ -55,7 +59,9 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.Fields UniqueKeyValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.Field sort)
 	{
@@ -64,7 +70,9 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -73,7 +81,9 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
 	{
@@ -82,7 +92,9 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
+	/// <para>
+	/// Specifies an array of one or more fields that are used to group the data.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor<TDocument> UniqueKey(Elastic.Clients.Elasticsearch.Serverless.Fields uniqueKey)
 	{
@@ -113,7 +125,9 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	private Elastic.Clients.Elasticsearch.Serverless.Fields UniqueKeyValue { get; set; }
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.Field sort)
 	{
@@ -122,7 +136,9 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -131,7 +147,9 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies the date field that is used to identify the latest documents.</para>
+	/// <para>
+	/// Specifies the date field that is used to identify the latest documents.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
 	{
@@ -140,7 +158,9 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	}
 
 	/// <summary>
-	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
+	/// <para>
+	/// Specifies an array of one or more fields that are used to group the data.
+	/// </para>
 	/// </summary>
 	public LatestDescriptor UniqueKey(Elastic.Clients.Elasticsearch.Serverless.Fields uniqueKey)
 	{

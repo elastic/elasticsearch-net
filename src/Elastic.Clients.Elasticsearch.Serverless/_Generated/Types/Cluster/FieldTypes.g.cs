@@ -30,43 +30,57 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 public sealed partial class FieldTypes
 {
 	/// <summary>
-	/// <para>The number of occurrences of the field type in selected nodes.</para>
+	/// <para>
+	/// The number of occurrences of the field type in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>The number of indices containing the field type in selected nodes.</para>
+	/// <para>
+	/// The number of indices containing the field type in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index_count")]
 	public int IndexCount { get; init; }
 
 	/// <summary>
-	/// <para>For dense_vector field types, number of indexed vector types in selected nodes.</para>
+	/// <para>
+	/// For dense_vector field types, number of indexed vector types in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_vector_count")]
 	public long? IndexedVectorCount { get; init; }
 
 	/// <summary>
-	/// <para>For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.</para>
+	/// <para>
+	/// For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_vector_dim_max")]
 	public long? IndexedVectorDimMax { get; init; }
 
 	/// <summary>
-	/// <para>For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.</para>
+	/// <para>
+	/// For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_vector_dim_min")]
 	public long? IndexedVectorDimMin { get; init; }
 
 	/// <summary>
-	/// <para>The name for the field type in selected nodes.</para>
+	/// <para>
+	/// The name for the field type in selected nodes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
-	/// <para>The number of fields that declare a script.</para>
+	/// <para>
+	/// The number of fields that declare a script.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script_count")]
 	public int? ScriptCount { get; init; }

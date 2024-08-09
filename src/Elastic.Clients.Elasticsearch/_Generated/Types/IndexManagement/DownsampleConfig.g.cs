@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DownsampleConfig
 {
 	/// <summary>
-	/// <para>The interval at which to aggregate the original time series index.</para>
+	/// <para>
+	/// The interval at which to aggregate the original time series index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public string FixedInterval { get; set; }
@@ -47,7 +49,9 @@ public sealed partial class DownsampleConfigDescriptor : SerializableDescriptor<
 	private string FixedIntervalValue { get; set; }
 
 	/// <summary>
-	/// <para>The interval at which to aggregate the original time series index.</para>
+	/// <para>
+	/// The interval at which to aggregate the original time series index.
+	/// </para>
 	/// </summary>
 	public DownsampleConfigDescriptor FixedInterval(string fixedInterval)
 	{

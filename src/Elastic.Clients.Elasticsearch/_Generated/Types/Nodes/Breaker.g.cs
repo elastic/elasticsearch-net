@@ -30,37 +30,49 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class Breaker
 {
 	/// <summary>
-	/// <para>Estimated memory used for the operation.</para>
+	/// <para>
+	/// Estimated memory used for the operation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("estimated_size")]
 	public string? EstimatedSize { get; init; }
 
 	/// <summary>
-	/// <para>Estimated memory used, in bytes, for the operation.</para>
+	/// <para>
+	/// Estimated memory used, in bytes, for the operation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("estimated_size_in_bytes")]
 	public long? EstimatedSizeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Memory limit for the circuit breaker.</para>
+	/// <para>
+	/// Memory limit for the circuit breaker.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit_size")]
 	public string? LimitSize { get; init; }
 
 	/// <summary>
-	/// <para>Memory limit, in bytes, for the circuit breaker.</para>
+	/// <para>
+	/// Memory limit, in bytes, for the circuit breaker.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit_size_in_bytes")]
 	public long? LimitSizeInBytes { get; init; }
 
 	/// <summary>
-	/// <para>A constant that all estimates for the circuit breaker are multiplied with to calculate a final estimate.</para>
+	/// <para>
+	/// A constant that all estimates for the circuit breaker are multiplied with to calculate a final estimate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("overhead")]
 	public float? Overhead { get; init; }
 
 	/// <summary>
-	/// <para>Total number of times the circuit breaker has been triggered and prevented an out of memory error.</para>
+	/// <para>
+	/// Total number of times the circuit breaker has been triggered and prevented an out of memory error.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tripped")]
 	public float? Tripped { get; init; }

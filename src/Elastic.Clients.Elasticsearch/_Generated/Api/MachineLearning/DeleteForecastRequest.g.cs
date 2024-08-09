@@ -32,18 +32,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DeleteForecastRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies whether an error occurs when there are no forecasts. In<br/>particular, if this parameter is set to `false` and there are no<br/>forecasts associated with the job, attempts to delete all forecasts<br/>return an error.</para>
+	/// <para>
+	/// Specifies whether an error occurs when there are no forecasts. In
+	/// particular, if this parameter is set to <c>false</c> and there are no
+	/// forecasts associated with the job, attempts to delete all forecasts
+	/// return an error.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for the completion of the delete<br/>operation. When this period of time elapses, the API fails and returns an<br/>error.</para>
+	/// <para>
+	/// Specifies the period of time to wait for the completion of the delete
+	/// operation. When this period of time elapses, the API fails and returns an
+	/// error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+/// <para>
+/// Delete forecasts from a job.
+/// By default, forecasts are retained for 14 days. You can specify a
+/// different retention period with the <c>expires_in</c> parameter in the forecast
+/// jobs API. The delete forecast API enables you to delete one or more
+/// forecasts before they expire.
+/// </para>
 /// </summary>
 public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastRequestParameters>
 {
@@ -64,20 +79,35 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 	internal override string OperationName => "ml.delete_forecast";
 
 	/// <summary>
-	/// <para>Specifies whether an error occurs when there are no forecasts. In<br/>particular, if this parameter is set to `false` and there are no<br/>forecasts associated with the job, attempts to delete all forecasts<br/>return an error.</para>
+	/// <para>
+	/// Specifies whether an error occurs when there are no forecasts. In
+	/// particular, if this parameter is set to <c>false</c> and there are no
+	/// forecasts associated with the job, attempts to delete all forecasts
+	/// return an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
 	/// <summary>
-	/// <para>Specifies the period of time to wait for the completion of the delete<br/>operation. When this period of time elapses, the API fails and returns an<br/>error.</para>
+	/// <para>
+	/// Specifies the period of time to wait for the completion of the delete
+	/// operation. When this period of time elapses, the API fails and returns an
+	/// error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+/// <para>
+/// Delete forecasts from a job.
+/// By default, forecasts are retained for 14 days. You can specify a
+/// different retention period with the <c>expires_in</c> parameter in the forecast
+/// jobs API. The delete forecast API enables you to delete one or more
+/// forecasts before they expire.
+/// </para>
 /// </summary>
 public sealed partial class DeleteForecastRequestDescriptor : RequestDescriptor<DeleteForecastRequestDescriptor, DeleteForecastRequestParameters>
 {

@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 public sealed partial class XpackInfoRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If this param is used it must be set to true</para>
+	/// <para>
+	/// If this param is used it must be set to true
+	/// </para>
 	/// </summary>
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of the information categories to include in the response. For example, `build,license,features`.</para>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response. For example, <c>build,license,features</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Categories { get => Q<ICollection<string>?>("categories"); set => Q("categories", value); }
 }
 
 /// <summary>
-/// <para>Provides general information about the installed X-Pack features.</para>
+/// <para>
+/// Provides general information about the installed X-Pack features.
+/// </para>
 /// </summary>
 public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestParameters>
 {
@@ -56,20 +62,26 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 	internal override string OperationName => "xpack.info";
 
 	/// <summary>
-	/// <para>If this param is used it must be set to true</para>
+	/// <para>
+	/// If this param is used it must be set to true
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of the information categories to include in the response. For example, `build,license,features`.</para>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response. For example, <c>build,license,features</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Categories { get => Q<ICollection<string>?>("categories"); set => Q("categories", value); }
 }
 
 /// <summary>
-/// <para>Provides general information about the installed X-Pack features.</para>
+/// <para>
+/// Provides general information about the installed X-Pack features.
+/// </para>
 /// </summary>
 public sealed partial class XpackInfoRequestDescriptor : RequestDescriptor<XpackInfoRequestDescriptor, XpackInfoRequestParameters>
 {

@@ -98,7 +98,9 @@ internal sealed partial class SignificantLongTermsBucketConverter : JsonConverte
 public sealed partial class SignificantLongTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long BgCount { get; init; }

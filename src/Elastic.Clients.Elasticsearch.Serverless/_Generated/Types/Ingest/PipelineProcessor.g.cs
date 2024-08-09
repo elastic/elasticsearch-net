@@ -30,43 +30,60 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class PipelineProcessor
 {
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// <para>
+	/// Whether to ignore missing pipelines instead of failing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing_pipeline")]
 	public bool? IgnoreMissingPipeline { get; set; }
 
 	/// <summary>
-	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The name of the pipeline to execute.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name Name { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
@@ -94,7 +111,10 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -103,7 +123,9 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -112,7 +134,9 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -121,7 +145,9 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// <para>
+	/// Whether to ignore missing pipelines instead of failing.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> IgnoreMissingPipeline(bool? ignoreMissingPipeline = true)
 	{
@@ -130,7 +156,10 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The name of the pipeline to execute.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Serverless.Name name)
 	{
@@ -139,7 +168,9 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -178,7 +209,10 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -276,7 +310,10 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	private string? TagValue { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor Description(string? description)
 	{
@@ -285,7 +322,9 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor If(string? value)
 	{
@@ -294,7 +333,9 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -303,7 +344,9 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// <para>
+	/// Whether to ignore missing pipelines instead of failing.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor IgnoreMissingPipeline(bool? ignoreMissingPipeline = true)
 	{
@@ -312,7 +355,10 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// <para>
+	/// The name of the pipeline to execute.
+	/// Supports template snippets.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Name name)
 	{
@@ -321,7 +367,9 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -360,7 +408,10 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public PipelineProcessorDescriptor Tag(string? tag)
 	{

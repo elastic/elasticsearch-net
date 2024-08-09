@@ -34,7 +34,11 @@ public sealed partial class PutFilterRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Instantiates a filter.<br/>A filter contains a list of strings. It can be used by one or more anomaly detection jobs.<br/>Specifically, filters are referenced in the `custom_rules` property of detector configuration objects.</para>
+/// <para>
+/// Instantiates a filter.
+/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
+/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
+/// </para>
 /// </summary>
 public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestParameters>
 {
@@ -51,20 +55,29 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 	internal override string OperationName => "ml.put_filter";
 
 	/// <summary>
-	/// <para>A description of the filter.</para>
+	/// <para>
+	/// A description of the filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The items of the filter. A wildcard `*` can be used at the beginning or the end of an item.<br/>Up to 10000 items are allowed in each filter.</para>
+	/// <para>
+	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+	/// Up to 10000 items are allowed in each filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("items")]
 	public ICollection<string>? Items { get; set; }
 }
 
 /// <summary>
-/// <para>Instantiates a filter.<br/>A filter contains a list of strings. It can be used by one or more anomaly detection jobs.<br/>Specifically, filters are referenced in the `custom_rules` property of detector configuration objects.</para>
+/// <para>
+/// Instantiates a filter.
+/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
+/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
+/// </para>
 /// </summary>
 public sealed partial class PutFilterRequestDescriptor : RequestDescriptor<PutFilterRequestDescriptor, PutFilterRequestParameters>
 {
@@ -92,7 +105,9 @@ public sealed partial class PutFilterRequestDescriptor : RequestDescriptor<PutFi
 	private ICollection<string>? ItemsValue { get; set; }
 
 	/// <summary>
-	/// <para>A description of the filter.</para>
+	/// <para>
+	/// A description of the filter.
+	/// </para>
 	/// </summary>
 	public PutFilterRequestDescriptor Description(string? description)
 	{
@@ -101,7 +116,10 @@ public sealed partial class PutFilterRequestDescriptor : RequestDescriptor<PutFi
 	}
 
 	/// <summary>
-	/// <para>The items of the filter. A wildcard `*` can be used at the beginning or the end of an item.<br/>Up to 10000 items are allowed in each filter.</para>
+	/// <para>
+	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+	/// Up to 10000 items are allowed in each filter.
+	/// </para>
 	/// </summary>
 	public PutFilterRequestDescriptor Items(ICollection<string>? items)
 	{

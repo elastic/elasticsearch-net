@@ -48,7 +48,9 @@ public sealed partial class IpProperty : IProperty
 	public bool? Index { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -158,7 +160,9 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -475,7 +479,9 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IpPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{

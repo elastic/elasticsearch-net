@@ -77,7 +77,9 @@ internal sealed partial class FilterAggregateConverter : JsonConverter<FilterAgg
 public sealed partial class FilterAggregate : IAggregate
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

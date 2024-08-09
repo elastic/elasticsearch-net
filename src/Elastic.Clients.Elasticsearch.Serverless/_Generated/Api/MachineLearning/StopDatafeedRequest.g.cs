@@ -34,7 +34,11 @@ public sealed partial class StopDatafeedRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Stops one or more datafeeds.<br/>A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped<br/>multiple times throughout its lifecycle.</para>
+/// <para>
+/// Stops one or more datafeeds.
+/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
+/// multiple times throughout its lifecycle.
+/// </para>
 /// </summary>
 public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedRequestParameters>
 {
@@ -51,26 +55,36 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 	internal override string OperationName => "ml.stop_datafeed";
 
 	/// <summary>
-	/// <para>Refer to the description for the `allow_no_match` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>allow_no_match</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_no_match")]
 	public bool? AllowNoMatch { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `force` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>force</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("force")]
 	public bool? Force { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `timeout` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>timeout</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get; set; }
 }
 
 /// <summary>
-/// <para>Stops one or more datafeeds.<br/>A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped<br/>multiple times throughout its lifecycle.</para>
+/// <para>
+/// Stops one or more datafeeds.
+/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
+/// multiple times throughout its lifecycle.
+/// </para>
 /// </summary>
 public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<StopDatafeedRequestDescriptor, StopDatafeedRequestParameters>
 {
@@ -99,7 +113,9 @@ public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<St
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? TimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `allow_no_match` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>allow_no_match</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StopDatafeedRequestDescriptor AllowNoMatch(bool? allowNoMatch = true)
 	{
@@ -108,7 +124,9 @@ public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<St
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `force` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>force</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StopDatafeedRequestDescriptor Force(bool? force = true)
 	{
@@ -117,7 +135,9 @@ public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<St
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `timeout` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>timeout</c> query parameter.
+	/// </para>
 	/// </summary>
 	public StopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout)
 	{

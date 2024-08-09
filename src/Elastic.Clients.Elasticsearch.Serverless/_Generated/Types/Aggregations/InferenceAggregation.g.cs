@@ -30,31 +30,42 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class InferenceAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>Contains the inference type and its options.</para>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 
 	/// <summary>
-	/// <para>The ID or alias for the trained model.</para>
+	/// <para>
+	/// The ID or alias for the trained model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name ModelId { get; set; }
@@ -79,7 +90,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Serverless.Name ModelIdValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -88,7 +101,10 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> Format(string? format)
 	{
@@ -97,7 +113,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -106,7 +124,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Contains the inference type and its options.</para>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? inferenceConfig)
 	{
@@ -133,7 +153,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The ID or alias for the trained model.</para>
+	/// <para>
+	/// The ID or alias for the trained model.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Serverless.Name modelId)
 	{
@@ -201,7 +223,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Name ModelIdValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -210,7 +234,10 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor Format(string? format)
 	{
@@ -219,7 +246,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -228,7 +257,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Contains the inference type and its options.</para>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? inferenceConfig)
 	{
@@ -255,7 +286,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>The ID or alias for the trained model.</para>
+	/// <para>
+	/// The ID or alias for the trained model.
+	/// </para>
 	/// </summary>
 	public InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Serverless.Name modelId)
 	{

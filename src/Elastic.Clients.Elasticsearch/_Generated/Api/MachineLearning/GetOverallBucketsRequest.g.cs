@@ -34,8 +34,26 @@ public sealed partial class GetOverallBucketsRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Retrieves overall bucket results that summarize the bucket results of<br/>multiple anomaly detection jobs.</para>
-/// <para>The `overall_score` is calculated by combining the scores of all the<br/>buckets within the overall bucket span. First, the maximum<br/>`anomaly_score` per anomaly detection job in the overall bucket is<br/>calculated. Then the `top_n` of those scores are averaged to result in<br/>the `overall_score`. This means that you can fine-tune the<br/>`overall_score` so that it is more or less sensitive to the number of<br/>jobs that detect an anomaly at the same time. For example, if you set<br/>`top_n` to `1`, the `overall_score` is the maximum bucket score in the<br/>overall bucket. Alternatively, if you set `top_n` to the number of jobs,<br/>the `overall_score` is high only when all jobs detect anomalies in that<br/>overall bucket. If you set the `bucket_span` parameter (to a value<br/>greater than its default), the `overall_score` is the maximum<br/>`overall_score` of the overall buckets that have a span equal to the<br/>jobs' largest bucket span.</para>
+/// <para>
+/// Retrieves overall bucket results that summarize the bucket results of
+/// multiple anomaly detection jobs.
+/// </para>
+/// <para>
+/// The <c>overall_score</c> is calculated by combining the scores of all the
+/// buckets within the overall bucket span. First, the maximum
+/// <c>anomaly_score</c> per anomaly detection job in the overall bucket is
+/// calculated. Then the <c>top_n</c> of those scores are averaged to result in
+/// the <c>overall_score</c>. This means that you can fine-tune the
+/// <c>overall_score</c> so that it is more or less sensitive to the number of
+/// jobs that detect an anomaly at the same time. For example, if you set
+/// <c>top_n</c> to <c>1</c>, the <c>overall_score</c> is the maximum bucket score in the
+/// overall bucket. Alternatively, if you set <c>top_n</c> to the number of jobs,
+/// the <c>overall_score</c> is high only when all jobs detect anomalies in that
+/// overall bucket. If you set the <c>bucket_span</c> parameter (to a value
+/// greater than its default), the <c>overall_score</c> is the maximum
+/// <c>overall_score</c> of the overall buckets that have a span equal to the
+/// jobs' largest bucket span.
+/// </para>
 /// </summary>
 public sealed partial class GetOverallBucketsRequest : PlainRequest<GetOverallBucketsRequestParameters>
 {
@@ -52,51 +70,83 @@ public sealed partial class GetOverallBucketsRequest : PlainRequest<GetOverallBu
 	internal override string OperationName => "ml.get_overall_buckets";
 
 	/// <summary>
-	/// <para>Refer to the description for the `allow_no_match` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>allow_no_match</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_no_match")]
 	public bool? AllowNoMatch { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `bucket_span` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>bucket_span</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_span")]
 	public Elastic.Clients.Elasticsearch.Duration? BucketSpan { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public DateTimeOffset? End { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_interim")]
 	public bool? ExcludeInterim { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `overall_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>overall_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("overall_score")]
 	public object? OverallScore { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public DateTimeOffset? Start { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `top_n` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>top_n</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("top_n")]
 	public int? TopN { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves overall bucket results that summarize the bucket results of<br/>multiple anomaly detection jobs.</para>
-/// <para>The `overall_score` is calculated by combining the scores of all the<br/>buckets within the overall bucket span. First, the maximum<br/>`anomaly_score` per anomaly detection job in the overall bucket is<br/>calculated. Then the `top_n` of those scores are averaged to result in<br/>the `overall_score`. This means that you can fine-tune the<br/>`overall_score` so that it is more or less sensitive to the number of<br/>jobs that detect an anomaly at the same time. For example, if you set<br/>`top_n` to `1`, the `overall_score` is the maximum bucket score in the<br/>overall bucket. Alternatively, if you set `top_n` to the number of jobs,<br/>the `overall_score` is high only when all jobs detect anomalies in that<br/>overall bucket. If you set the `bucket_span` parameter (to a value<br/>greater than its default), the `overall_score` is the maximum<br/>`overall_score` of the overall buckets that have a span equal to the<br/>jobs' largest bucket span.</para>
+/// <para>
+/// Retrieves overall bucket results that summarize the bucket results of
+/// multiple anomaly detection jobs.
+/// </para>
+/// <para>
+/// The <c>overall_score</c> is calculated by combining the scores of all the
+/// buckets within the overall bucket span. First, the maximum
+/// <c>anomaly_score</c> per anomaly detection job in the overall bucket is
+/// calculated. Then the <c>top_n</c> of those scores are averaged to result in
+/// the <c>overall_score</c>. This means that you can fine-tune the
+/// <c>overall_score</c> so that it is more or less sensitive to the number of
+/// jobs that detect an anomaly at the same time. For example, if you set
+/// <c>top_n</c> to <c>1</c>, the <c>overall_score</c> is the maximum bucket score in the
+/// overall bucket. Alternatively, if you set <c>top_n</c> to the number of jobs,
+/// the <c>overall_score</c> is high only when all jobs detect anomalies in that
+/// overall bucket. If you set the <c>bucket_span</c> parameter (to a value
+/// greater than its default), the <c>overall_score</c> is the maximum
+/// <c>overall_score</c> of the overall buckets that have a span equal to the
+/// jobs' largest bucket span.
+/// </para>
 /// </summary>
 public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescriptor<GetOverallBucketsRequestDescriptor, GetOverallBucketsRequestParameters>
 {
@@ -129,7 +179,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	private int? TopNValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `allow_no_match` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>allow_no_match</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true)
 	{
@@ -138,7 +190,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `bucket_span` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>bucket_span</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration? bucketSpan)
 	{
@@ -147,7 +201,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor End(DateTimeOffset? end)
 	{
@@ -156,7 +212,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor ExcludeInterim(bool? excludeInterim = true)
 	{
@@ -165,7 +223,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `overall_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>overall_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor OverallScore(object? overallScore)
 	{
@@ -174,7 +234,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor Start(DateTimeOffset? start)
 	{
@@ -183,7 +245,9 @@ public sealed partial class GetOverallBucketsRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `top_n` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>top_n</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetOverallBucketsRequestDescriptor TopN(int? topN)
 	{

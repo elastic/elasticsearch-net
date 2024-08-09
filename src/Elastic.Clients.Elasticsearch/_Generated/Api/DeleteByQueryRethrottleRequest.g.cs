@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Delete By Query operation.</para>
+/// <para>
+/// Changes the number of requests per second for a particular Delete By Query operation.
+/// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<DeleteByQueryRethrottleRequestParameters>
 {
@@ -55,14 +59,18 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 	internal override string OperationName => "delete_by_query_rethrottle";
 
 	/// <summary>
-	/// <para>The throttle for this request in sub-requests per second.</para>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Delete By Query operation.</para>
+/// <para>
+/// Changes the number of requests per second for a particular Delete By Query operation.
+/// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptor<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>
 {

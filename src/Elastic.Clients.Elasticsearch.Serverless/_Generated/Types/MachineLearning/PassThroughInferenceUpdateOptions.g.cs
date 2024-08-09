@@ -30,13 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class PassThroughInferenceUpdateOptions
 {
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
@@ -58,7 +62,9 @@ public sealed partial class PassThroughInferenceUpdateOptionsDescriptor : Serial
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public PassThroughInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -67,7 +73,9 @@ public sealed partial class PassThroughInferenceUpdateOptionsDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>The tokenization options to update when inferring</para>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
 	/// </summary>
 	public PassThroughInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.NlpTokenizationUpdateOptions? tokenization)
 	{

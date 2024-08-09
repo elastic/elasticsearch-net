@@ -32,30 +32,62 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no data frame analytics<br/>jobs that match.<br/>2. Contains the `_all` string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value returns an empty data_frame_analytics array when there<br/>are no matches and the subset of results when there are partial matches.<br/>If this parameter is `false`, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value returns an empty data_frame_analytics array when there
+	/// are no matches and the subset of results when there are partial matches.
+	/// If this parameter is <c>false</c>, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of data frame analytics jobs.</para>
+	/// <para>
+	/// Skips the specified number of data frame analytics jobs.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of data frame analytics jobs to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of data frame analytics jobs to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Defines whether the stats response should be verbose.</para>
+	/// <para>
+	/// Defines whether the stats response should be verbose.
+	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for data frame analytics jobs.</para>
+/// <para>
+/// Retrieves usage information for data frame analytics jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<GetDataFrameAnalyticsStatsRequestParameters>
 {
@@ -76,34 +108,66 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	internal override string OperationName => "ml.get_data_frame_analytics_stats";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no data frame analytics<br/>jobs that match.<br/>2. Contains the `_all` string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value returns an empty data_frame_analytics array when there<br/>are no matches and the subset of results when there are partial matches.<br/>If this parameter is `false`, the request returns a 404 status code when<br/>there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value returns an empty data_frame_analytics array when there
+	/// are no matches and the subset of results when there are partial matches.
+	/// If this parameter is <c>false</c>, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Skips the specified number of data frame analytics jobs.</para>
+	/// <para>
+	/// Skips the specified number of data frame analytics jobs.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of data frame analytics jobs to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of data frame analytics jobs to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Defines whether the stats response should be verbose.</para>
+	/// <para>
+	/// Defines whether the stats response should be verbose.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
-/// <para>Retrieves usage information for data frame analytics jobs.</para>
+/// <para>
+/// Retrieves usage information for data frame analytics jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsRequestParameters>
 {
@@ -142,7 +206,9 @@ public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor<TDocumen
 }
 
 /// <summary>
-/// <para>Retrieves usage information for data frame analytics jobs.</para>
+/// <para>
+/// Retrieves usage information for data frame analytics jobs.
+/// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsRequestParameters>
 {

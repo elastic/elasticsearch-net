@@ -28,24 +28,32 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 /// <summary>
-/// <para>Text embedding inference options</para>
+/// <para>
+/// Text embedding inference options
+/// </para>
 /// </summary>
 public sealed partial class TextEmbeddingInferenceOptions
 {
 	/// <summary>
-	/// <para>The number of dimensions in the embedding output</para>
+	/// <para>
+	/// The number of dimensions in the embedding output
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("embedding_size")]
 	public int? EmbeddingSize { get; set; }
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
@@ -54,7 +62,9 @@ public sealed partial class TextEmbeddingInferenceOptions
 }
 
 /// <summary>
-/// <para>Text embedding inference options</para>
+/// <para>
+/// Text embedding inference options
+/// </para>
 /// </summary>
 public sealed partial class TextEmbeddingInferenceOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceOptionsDescriptor>
 {
@@ -71,7 +81,9 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The number of dimensions in the embedding output</para>
+	/// <para>
+	/// The number of dimensions in the embedding output
+	/// </para>
 	/// </summary>
 	public TextEmbeddingInferenceOptionsDescriptor EmbeddingSize(int? embeddingSize)
 	{
@@ -80,7 +92,9 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
 	/// </summary>
 	public TextEmbeddingInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
@@ -89,7 +103,9 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The tokenization options</para>
+	/// <para>
+	/// The tokenization options
+	/// </para>
 	/// </summary>
 	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
 	{

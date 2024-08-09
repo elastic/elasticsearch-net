@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CompositeDateHistogramAggregation
 {
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public string? CalendarInterval { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public string? FixedInterval { get; set; }
@@ -58,7 +64,9 @@ public sealed partial class CompositeDateHistogramAggregation
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -91,7 +99,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> CalendarInterval(string? calendarInterval)
 	{
@@ -100,7 +110,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -109,7 +121,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -118,7 +132,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -127,7 +143,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> FixedInterval(string? fixedInterval)
 	{
@@ -166,7 +184,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor<TDocumen
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
@@ -310,7 +330,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor CalendarInterval(string? calendarInterval)
 	{
@@ -319,7 +341,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -328,7 +352,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -337,7 +363,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -346,7 +374,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Either `calendar_interval` or `fixed_interval` must be present</para>
+	/// <para>
+	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor FixedInterval(string? fixedInterval)
 	{
@@ -385,7 +415,9 @@ public sealed partial class CompositeDateHistogramAggregationDescriptor : Serial
 	}
 
 	/// <summary>
-	/// <para>Either `field` or `script` must be present</para>
+	/// <para>
+	/// Either <c>field</c> or <c>script</c> must be present
+	/// </para>
 	/// </summary>
 	public CompositeDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{

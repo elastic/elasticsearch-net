@@ -30,80 +30,111 @@ namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 public sealed partial class MultiMatchQuery
 {
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
-	/// <para>The fields to be queried.<br/>Defaults to the `index.query.default_field` index settings, which in turn defaults to `*`.</para>
+	/// <para>
+	/// The fields to be queried.
+	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_expansions")]
 	public int? MaxExpansions { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? Operator { get; set; }
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
@@ -111,25 +142,33 @@ public sealed partial class MultiMatchQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 
 	/// <summary>
-	/// <para>Determines how scores for each per-term blended query and scores across groups are combined.</para>
+	/// <para>
+	/// Determines how scores for each per-term blended query and scores across groups are combined.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
 	/// <summary>
-	/// <para>How `the` multi_match query is executed internally.</para>
+	/// <para>
+	/// How <c>the</c> multi_match query is executed internally.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? Type { get; set; }
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
@@ -165,7 +204,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -174,7 +215,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -183,7 +226,12 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -192,7 +240,10 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>The fields to be queried.<br/>Defaults to the `index.query.default_field` index settings, which in turn defaults to `*`.</para>
+	/// <para>
+	/// The fields to be queried.
+	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -201,7 +252,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -210,7 +263,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -219,7 +274,10 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -228,7 +286,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Lenient(bool? lenient = true)
 	{
@@ -237,7 +297,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
@@ -246,7 +308,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -255,7 +319,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -264,7 +330,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
@@ -273,7 +341,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Query(string query)
 	{
@@ -288,7 +358,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Slop(int? slop)
 	{
@@ -297,7 +369,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Determines how scores for each per-term blended query and scores across groups are combined.</para>
+	/// <para>
+	/// Determines how scores for each per-term blended query and scores across groups are combined.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
 	{
@@ -306,7 +380,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>How `the` multi_match query is executed internally.</para>
+	/// <para>
+	/// How <c>the</c> multi_match query is executed internally.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? type)
 	{
@@ -315,7 +391,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
@@ -462,7 +540,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// <para>
+	/// Analyzer used to convert the text in the query value into tokens.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Analyzer(string? analyzer)
 	{
@@ -471,7 +551,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// <para>
+	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
@@ -480,7 +562,12 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Boost(float? boost)
 	{
@@ -489,7 +576,10 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>The fields to be queried.<br/>Defaults to the `index.query.default_field` index settings, which in turn defaults to `*`.</para>
+	/// <para>
+	/// The fields to be queried.
+	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
@@ -498,7 +588,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Maximum edit distance allowed for matching.</para>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Serverless.Fuzziness? fuzziness)
 	{
@@ -507,7 +599,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query.</para>
+	/// <para>
+	/// Method used to rewrite the query.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
 	{
@@ -516,7 +610,10 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).<br/>Can be applied to the term subqueries constructed for all terms but the final term.</para>
+	/// <para>
+	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// Can be applied to the term subqueries constructed for all terms but the final term.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
@@ -525,7 +622,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// <para>
+	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Lenient(bool? lenient = true)
 	{
@@ -534,7 +633,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// <para>
+	/// Maximum number of terms to which the query will expand.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
@@ -543,7 +644,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// <para>
+	/// Minimum number of clauses that must match for a document to be returned.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
 	{
@@ -552,7 +655,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// <para>
+	/// Boolean logic used to interpret text in the query value.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? value)
 	{
@@ -561,7 +666,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// <para>
+	/// Number of beginning characters left unchanged for fuzzy matching.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor PrefixLength(int? prefixLength)
 	{
@@ -570,7 +677,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// <para>
+	/// Text, number, boolean value or date you wish to find in the provided field.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Query(string query)
 	{
@@ -585,7 +694,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// <para>
+	/// Maximum number of positions allowed between matching tokens.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Slop(int? slop)
 	{
@@ -594,7 +705,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Determines how scores for each per-term blended query and scores across groups are combined.</para>
+	/// <para>
+	/// Determines how scores for each per-term blended query and scores across groups are combined.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor TieBreaker(double? tieBreaker)
 	{
@@ -603,7 +716,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>How `the` multi_match query is executed internally.</para>
+	/// <para>
+	/// How <c>the</c> multi_match query is executed internally.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor Type(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? type)
 	{
@@ -612,7 +727,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
-	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// <para>
+	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+	/// </para>
 	/// </summary>
 	public MultiMatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{

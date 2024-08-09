@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class BucketCorrelationFunctionCountCorrelation
 {
 	/// <summary>
-	/// <para>The indicator with which to correlate the configured `bucket_path` values.</para>
+	/// <para>
+	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indicator")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationDescriptor 
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> IndicatorDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The indicator with which to correlate the configured `bucket_path` values.</para>
+	/// <para>
+	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
+	/// </para>
 	/// </summary>
 	public BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator indicator)
 	{

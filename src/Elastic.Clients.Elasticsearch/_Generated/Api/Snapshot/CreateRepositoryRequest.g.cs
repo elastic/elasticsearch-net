@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class CreateRepositoryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Whether to verify the repository after creation</para>
+	/// <para>
+	/// Whether to verify the repository after creation
+	/// </para>
 	/// </summary>
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 }
 
 /// <summary>
-/// <para>Creates a repository.</para>
+/// <para>
+/// Creates a repository.
+/// </para>
 /// </summary>
 public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>, ISelfSerializable
 {
@@ -65,19 +73,25 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	internal override string OperationName => "snapshot.create_repository";
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>
+	/// Explicit operation timeout
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Whether to verify the repository after creation</para>
+	/// <para>
+	/// Whether to verify the repository after creation
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
@@ -91,7 +105,9 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 }
 
 /// <summary>
-/// <para>Creates a repository.</para>
+/// <para>
+/// Creates a repository.
+/// </para>
 /// </summary>
 public sealed partial class CreateRepositoryRequestDescriptor : RequestDescriptor<CreateRepositoryRequestDescriptor, CreateRepositoryRequestParameters>
 {

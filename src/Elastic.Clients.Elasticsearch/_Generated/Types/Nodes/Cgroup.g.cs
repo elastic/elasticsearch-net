@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class Cgroup
 {
 	/// <summary>
-	/// <para>Contains statistics about `cpu` control group for the node.</para>
+	/// <para>
+	/// Contains statistics about <c>cpu</c> control group for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cpu")]
 	public Elastic.Clients.Elasticsearch.Nodes.CgroupCpu? Cpu { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about `cpuacct` control group for the node.</para>
+	/// <para>
+	/// Contains statistics about <c>cpuacct</c> control group for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cpuacct")]
 	public Elastic.Clients.Elasticsearch.Nodes.CpuAcct? Cpuacct { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about the memory control group for the node.</para>
+	/// <para>
+	/// Contains statistics about the memory control group for the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("memory")]
 	public Elastic.Clients.Elasticsearch.Nodes.CgroupMemory? Memory { get; init; }

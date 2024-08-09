@@ -34,7 +34,9 @@ public sealed partial class MoveToStepRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Manually moves an index into the specified step and executes that step.</para>
+/// <para>
+/// Manually moves an index into the specified step and executes that step.
+/// </para>
 /// </summary>
 public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestParameters>
 {
@@ -57,7 +59,9 @@ public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestPa
 }
 
 /// <summary>
-/// <para>Manually moves an index into the specified step and executes that step.</para>
+/// <para>
+/// Manually moves an index into the specified step and executes that step.
+/// </para>
 /// </summary>
 public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDescriptor<MoveToStepRequestDescriptor<TDocument>, MoveToStepRequestParameters>
 {
@@ -180,7 +184,9 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Manually moves an index into the specified step and executes that step.</para>
+/// <para>
+/// Manually moves an index into the specified step and executes that step.
+/// </para>
 /// </summary>
 public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<MoveToStepRequestDescriptor, MoveToStepRequestParameters>
 {

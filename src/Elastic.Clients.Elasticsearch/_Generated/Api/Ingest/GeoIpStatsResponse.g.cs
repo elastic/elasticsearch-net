@@ -29,13 +29,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Downloaded GeoIP2 databases for each node.</para>
+	/// <para>
+	/// Downloaded GeoIP2 databases for each node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
 
 	/// <summary>
-	/// <para>Download statistics for all GeoIP2 databases.</para>
+	/// <para>
+	/// Download statistics for all GeoIP2 databases.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stats")]
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; init; }

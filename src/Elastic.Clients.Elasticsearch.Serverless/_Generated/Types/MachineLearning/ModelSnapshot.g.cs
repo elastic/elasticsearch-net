@@ -30,61 +30,81 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class ModelSnapshot
 {
 	/// <summary>
-	/// <para>An optional description of the job.</para>
+	/// <para>
+	/// An optional description of the job.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the job that the snapshot was created for.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the job that the snapshot was created for.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 
 	/// <summary>
-	/// <para>The timestamp of the latest processed record.</para>
+	/// <para>
+	/// The timestamp of the latest processed record.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("latest_record_time_stamp")]
 	public int? LatestRecordTimeStamp { get; init; }
 
 	/// <summary>
-	/// <para>The timestamp of the latest bucket result.</para>
+	/// <para>
+	/// The timestamp of the latest bucket result.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("latest_result_time_stamp")]
 	public int? LatestResultTimeStamp { get; init; }
 
 	/// <summary>
-	/// <para>The minimum version required to be able to restore the model snapshot.</para>
+	/// <para>
+	/// The minimum version required to be able to restore the model snapshot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_version")]
 	public string MinVersion { get; init; }
 
 	/// <summary>
-	/// <para>Summary information describing the model.</para>
+	/// <para>
+	/// Summary information describing the model.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_size_stats")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelSizeStats? ModelSizeStats { get; init; }
 
 	/// <summary>
-	/// <para>If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.</para>
+	/// <para>
+	/// If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("retain")]
 	public bool Retain { get; init; }
 
 	/// <summary>
-	/// <para>For internal use only.</para>
+	/// <para>
+	/// For internal use only.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("snapshot_doc_count")]
 	public long SnapshotDocCount { get; init; }
 
 	/// <summary>
-	/// <para>A numerical character string that uniquely identifies the model snapshot.</para>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("snapshot_id")]
 	public string SnapshotId { get; init; }
 
 	/// <summary>
-	/// <para>The creation timestamp for the snapshot.</para>
+	/// <para>
+	/// The creation timestamp for the snapshot.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }

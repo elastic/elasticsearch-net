@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class SnapshotStatusRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</para>
+	/// <para>
+	/// Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns information about the status of a snapshot.</para>
+/// <para>
+/// Returns information about the status of a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusRequestParameters>
 {
@@ -68,20 +74,26 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 	internal override string OperationName => "snapshot.status";
 
 	/// <summary>
-	/// <para>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</para>
+	/// <para>
+	/// Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns information about the status of a snapshot.</para>
+/// <para>
+/// Returns information about the status of a snapshot.
+/// </para>
 /// </summary>
 public sealed partial class SnapshotStatusRequestDescriptor : RequestDescriptor<SnapshotStatusRequestDescriptor, SnapshotStatusRequestParameters>
 {

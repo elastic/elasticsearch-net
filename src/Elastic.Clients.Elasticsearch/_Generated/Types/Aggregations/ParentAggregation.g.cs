@@ -30,7 +30,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ParentAggregation
 {
 	/// <summary>
-	/// <para>The child type that should be selected.</para>
+	/// <para>
+	/// The child type that should be selected.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; set; }
@@ -49,7 +51,9 @@ public sealed partial class ParentAggregationDescriptor : SerializableDescriptor
 	private string? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>The child type that should be selected.</para>
+	/// <para>
+	/// The child type that should be selected.
+	/// </para>
 	/// </summary>
 	public ParentAggregationDescriptor Type(string? type)
 	{

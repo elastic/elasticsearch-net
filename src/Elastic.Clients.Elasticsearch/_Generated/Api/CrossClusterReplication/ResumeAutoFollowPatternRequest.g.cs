@@ -34,7 +34,9 @@ public sealed partial class ResumeAutoFollowPatternRequestParameters : RequestPa
 }
 
 /// <summary>
-/// <para>Resumes an auto-follow pattern that has been paused</para>
+/// <para>
+/// Resumes an auto-follow pattern that has been paused
+/// </para>
 /// </summary>
 public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<ResumeAutoFollowPatternRequestParameters>
 {
@@ -52,7 +54,9 @@ public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<Resume
 }
 
 /// <summary>
-/// <para>Resumes an auto-follow pattern that has been paused</para>
+/// <para>
+/// Resumes an auto-follow pattern that has been paused
+/// </para>
 /// </summary>
 public sealed partial class ResumeAutoFollowPatternRequestDescriptor : RequestDescriptor<ResumeAutoFollowPatternRequestDescriptor, ResumeAutoFollowPatternRequestParameters>
 {

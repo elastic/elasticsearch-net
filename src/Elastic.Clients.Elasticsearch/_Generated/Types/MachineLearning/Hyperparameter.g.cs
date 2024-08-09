@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Hyperparameter
 {
 	/// <summary>
-	/// <para>A positive number showing how much the parameter influences the variation of the loss function. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.</para>
+	/// <para>
+	/// A positive number showing how much the parameter influences the variation of the loss function. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("absolute_importance")]
 	public double? AbsoluteImportance { get; init; }
 
 	/// <summary>
-	/// <para>Name of the hyperparameter.</para>
+	/// <para>
+	/// Name of the hyperparameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
-	/// <para>A number between 0 and 1 showing the proportion of influence on the variation of the loss function among all tuned hyperparameters. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.</para>
+	/// <para>
+	/// A number between 0 and 1 showing the proportion of influence on the variation of the loss function among all tuned hyperparameters. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("relative_importance")]
 	public double? RelativeImportance { get; init; }
 
 	/// <summary>
-	/// <para>Indicates if the hyperparameter is specified by the user (true) or optimized (false).</para>
+	/// <para>
+	/// Indicates if the hyperparameter is specified by the user (true) or optimized (false).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("supplied")]
 	public bool Supplied { get; init; }
 
 	/// <summary>
-	/// <para>The value of the hyperparameter, either optimized or specified by the user.</para>
+	/// <para>
+	/// The value of the hyperparameter, either optimized or specified by the user.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double Value { get; init; }

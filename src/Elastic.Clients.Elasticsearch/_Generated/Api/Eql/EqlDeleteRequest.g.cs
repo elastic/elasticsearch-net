@@ -34,7 +34,10 @@ public sealed partial class EqlDeleteRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an async EQL search or a stored synchronous EQL search.<br/>The API also deletes results for the search.</para>
+/// <para>
+/// Deletes an async EQL search or a stored synchronous EQL search.
+/// The API also deletes results for the search.
+/// </para>
 /// </summary>
 public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestParameters>
 {
@@ -52,7 +55,10 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 }
 
 /// <summary>
-/// <para>Deletes an async EQL search or a stored synchronous EQL search.<br/>The API also deletes results for the search.</para>
+/// <para>
+/// Deletes an async EQL search or a stored synchronous EQL search.
+/// The API also deletes results for the search.
+/// </para>
 /// </summary>
 public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescriptor<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteRequestParameters>
 {
@@ -82,7 +88,10 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Deletes an async EQL search or a stored synchronous EQL search.<br/>The API also deletes results for the search.</para>
+/// <para>
+/// Deletes an async EQL search or a stored synchronous EQL search.
+/// The API also deletes results for the search.
+/// </para>
 /// </summary>
 public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDeleteRequestDescriptor, EqlDeleteRequestParameters>
 {

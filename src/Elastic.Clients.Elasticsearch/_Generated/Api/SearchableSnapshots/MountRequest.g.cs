@@ -32,23 +32,31 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 public sealed partial class MountRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Selects the kind of local storage used to accelerate searches. Experimental, and defaults to `full_copy`</para>
+	/// <para>
+	/// Selects the kind of local storage used to accelerate searches. Experimental, and defaults to <c>full_copy</c>
+	/// </para>
 	/// </summary>
 	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before returning</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before returning
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Mount a snapshot as a searchable index.</para>
+/// <para>
+/// Mount a snapshot as a searchable index.
+/// </para>
 /// </summary>
 public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 {
@@ -65,19 +73,25 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	internal override string OperationName => "searchable_snapshots.mount";
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Selects the kind of local storage used to accelerate searches. Experimental, and defaults to `full_copy`</para>
+	/// <para>
+	/// Selects the kind of local storage used to accelerate searches. Experimental, and defaults to <c>full_copy</c>
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
-	/// <para>Should this request wait until the operation has completed before returning</para>
+	/// <para>
+	/// Should this request wait until the operation has completed before returning
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -92,7 +106,9 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 }
 
 /// <summary>
-/// <para>Mount a snapshot as a searchable index.</para>
+/// <para>
+/// Mount a snapshot as a searchable index.
+/// </para>
 /// </summary>
 public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequestDescriptor, MountRequestParameters>
 {

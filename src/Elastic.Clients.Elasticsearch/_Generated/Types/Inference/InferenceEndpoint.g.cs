@@ -28,31 +28,41 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Inference;
 
 /// <summary>
-/// <para>Configuration options when storing the inference endpoint</para>
+/// <para>
+/// Configuration options when storing the inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class InferenceEndpoint
 {
 	/// <summary>
-	/// <para>The service type</para>
+	/// <para>
+	/// The service type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("service")]
 	public string Service { get; set; }
 
 	/// <summary>
-	/// <para>Settings specific to the service</para>
+	/// <para>
+	/// Settings specific to the service
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("service_settings")]
 	public object ServiceSettings { get; set; }
 
 	/// <summary>
-	/// <para>Task settings specific to the service and task type</para>
+	/// <para>
+	/// Task settings specific to the service and task type
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
 	public object TaskSettings { get; set; }
 }
 
 /// <summary>
-/// <para>Configuration options when storing the inference endpoint</para>
+/// <para>
+/// Configuration options when storing the inference endpoint
+/// </para>
 /// </summary>
 public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor<InferenceEndpointDescriptor>
 {
@@ -67,7 +77,9 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	private object TaskSettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>The service type</para>
+	/// <para>
+	/// The service type
+	/// </para>
 	/// </summary>
 	public InferenceEndpointDescriptor Service(string service)
 	{
@@ -76,7 +88,9 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Settings specific to the service</para>
+	/// <para>
+	/// Settings specific to the service
+	/// </para>
 	/// </summary>
 	public InferenceEndpointDescriptor ServiceSettings(object serviceSettings)
 	{
@@ -85,7 +99,9 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>Task settings specific to the service and task type</para>
+	/// <para>
+	/// Task settings specific to the service and task type
+	/// </para>
 	/// </summary>
 	public InferenceEndpointDescriptor TaskSettings(object taskSettings)
 	{

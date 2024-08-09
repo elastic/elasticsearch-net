@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class TTestAggregation
 {
 	/// <summary>
-	/// <para>Test population A.</para>
+	/// <para>
+	/// Test population A.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("a")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
 
 	/// <summary>
-	/// <para>Test population B.</para>
+	/// <para>
+	/// Test population B.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("b")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 
 	/// <summary>
-	/// <para>The type of test.</para>
+	/// <para>
+	/// The type of test.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
@@ -67,7 +73,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Test population A.</para>
+	/// <para>
+	/// Test population A.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
 	{
@@ -94,7 +102,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>Test population B.</para>
+	/// <para>
+	/// Test population B.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
 	{
@@ -121,7 +131,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>The type of test.</para>
+	/// <para>
+	/// The type of test.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
 	{
@@ -191,7 +203,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
-	/// <para>Test population A.</para>
+	/// <para>
+	/// Test population A.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
 	{
@@ -218,7 +232,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>Test population B.</para>
+	/// <para>
+	/// Test population B.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
 	{
@@ -245,7 +261,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>The type of test.</para>
+	/// <para>
+	/// The type of test.
+	/// </para>
 	/// </summary>
 	public TTestAggregationDescriptor Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
 	{

@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class BucketSelectorAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The script to run for this aggregation.</para>
+	/// <para>
+	/// The script to run for this aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
@@ -72,7 +81,9 @@ public sealed partial class BucketSelectorAggregationDescriptor : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public BucketSelectorAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -81,7 +92,10 @@ public sealed partial class BucketSelectorAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public BucketSelectorAggregationDescriptor Format(string? format)
 	{
@@ -90,7 +104,9 @@ public sealed partial class BucketSelectorAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public BucketSelectorAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -99,7 +115,9 @@ public sealed partial class BucketSelectorAggregationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The script to run for this aggregation.</para>
+	/// <para>
+	/// The script to run for this aggregation.
+	/// </para>
 	/// </summary>
 	public BucketSelectorAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{

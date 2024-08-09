@@ -34,7 +34,9 @@ public sealed partial class StopSlmRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Turns off snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Turns off snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class StopSlmRequest : PlainRequest<StopSlmRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class StopSlmRequest : PlainRequest<StopSlmRequestParamete
 }
 
 /// <summary>
-/// <para>Turns off snapshot lifecycle management (SLM).</para>
+/// <para>
+/// Turns off snapshot lifecycle management (SLM).
+/// </para>
 /// </summary>
 public sealed partial class StopSlmRequestDescriptor : RequestDescriptor<StopSlmRequestDescriptor, StopSlmRequestParameters>
 {

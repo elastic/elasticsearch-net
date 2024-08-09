@@ -32,7 +32,9 @@ public sealed partial class GetOverallBucketsResponse : ElasticsearchResponse
 	public long Count { get; init; }
 
 	/// <summary>
-	/// <para>Array of overall bucket objects</para>
+	/// <para>
+	/// Array of overall bucket objects
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("overall_buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.OverallBucket> OverallBuckets { get; init; }

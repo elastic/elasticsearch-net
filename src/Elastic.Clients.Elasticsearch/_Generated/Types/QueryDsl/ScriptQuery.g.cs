@@ -30,7 +30,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 public sealed partial class ScriptQuery
 {
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
@@ -38,7 +43,10 @@ public sealed partial class ScriptQuery
 	public string? QueryName { get; set; }
 
 	/// <summary>
-	/// <para>Contains a script to run as a query.<br/>This script must return a boolean value, `true` or `false`.</para>
+	/// <para>
+	/// Contains a script to run as a query.
+	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
@@ -61,7 +69,12 @@ public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<Scrip
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// <para>
+	/// Floating point number used to decrease or increase the relevance scores of the query.
+	/// Boost values are relative to the default value of 1.0.
+	/// A boost value between 0 and 1.0 decreases the relevance score.
+	/// A value greater than 1.0 increases the relevance score.
+	/// </para>
 	/// </summary>
 	public ScriptQueryDescriptor Boost(float? boost)
 	{
@@ -76,7 +89,10 @@ public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<Scrip
 	}
 
 	/// <summary>
-	/// <para>Contains a script to run as a query.<br/>This script must return a boolean value, `true` or `false`.</para>
+	/// <para>
+	/// Contains a script to run as a query.
+	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
+	/// </para>
 	/// </summary>
 	public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{

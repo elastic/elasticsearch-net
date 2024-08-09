@@ -37,7 +37,9 @@ public sealed partial class DataframeAnalyticsSummary
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; init; }
 
 	/// <summary>
-	/// <para>The security privileges that the job uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the job, this property is omitted.</para>
+	/// <para>
+	/// The security privileges that the job uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the job, this property is omitted.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("authorization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DataframeAnalyticsAuthorization? Authorization { get; init; }

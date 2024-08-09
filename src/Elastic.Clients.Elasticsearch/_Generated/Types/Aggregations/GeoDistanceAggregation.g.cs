@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class GeoDistanceAggregation
 {
 	/// <summary>
-	/// <para>The distance calculation type.</para>
+	/// <para>
+	/// The distance calculation type.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("distance_type")]
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The origin  used to evaluate the distance.</para>
+	/// <para>
+	/// The origin  used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("origin")]
 	public Elastic.Clients.Elasticsearch.GeoLocation? Origin { get; set; }
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ranges")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
 	/// <summary>
-	/// <para>The distance unit.</para>
+	/// <para>
+	/// The distance unit.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unit")]
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
@@ -80,7 +90,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
 
 	/// <summary>
-	/// <para>The distance calculation type.</para>
+	/// <para>
+	/// The distance calculation type.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
@@ -89,7 +101,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -98,7 +112,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -107,7 +123,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -116,7 +134,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The origin  used to evaluate the distance.</para>
+	/// <para>
+	/// The origin  used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin)
 	{
@@ -125,7 +145,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 	{
@@ -164,7 +186,9 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The distance unit.</para>
+	/// <para>
+	/// The distance unit.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
 	{
@@ -252,7 +276,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
 
 	/// <summary>
-	/// <para>The distance calculation type.</para>
+	/// <para>
+	/// The distance calculation type.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
@@ -261,7 +287,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -270,7 +298,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -279,7 +309,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// <para>
+	/// A field of type <c>geo_point</c> used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -288,7 +320,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The origin  used to evaluate the distance.</para>
+	/// <para>
+	/// The origin  used to evaluate the distance.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin)
 	{
@@ -297,7 +331,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>An array of ranges used to bucket documents.</para>
+	/// <para>
+	/// An array of ranges used to bucket documents.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges)
 	{
@@ -336,7 +372,9 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The distance unit.</para>
+	/// <para>
+	/// The distance unit.
+	/// </para>
 	/// </summary>
 	public GeoDistanceAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
 	{

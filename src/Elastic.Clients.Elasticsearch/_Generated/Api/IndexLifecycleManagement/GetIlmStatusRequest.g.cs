@@ -34,7 +34,9 @@ public sealed partial class GetIlmStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves the current index lifecycle management (ILM) status.</para>
+/// <para>
+/// Retrieves the current index lifecycle management (ILM) status.
+/// </para>
 /// </summary>
 public sealed partial class GetIlmStatusRequest : PlainRequest<GetIlmStatusRequestParameters>
 {
@@ -48,7 +50,9 @@ public sealed partial class GetIlmStatusRequest : PlainRequest<GetIlmStatusReque
 }
 
 /// <summary>
-/// <para>Retrieves the current index lifecycle management (ILM) status.</para>
+/// <para>
+/// Retrieves the current index lifecycle management (ILM) status.
+/// </para>
 /// </summary>
 public sealed partial class GetIlmStatusRequestDescriptor : RequestDescriptor<GetIlmStatusRequestDescriptor, GetIlmStatusRequestParameters>
 {

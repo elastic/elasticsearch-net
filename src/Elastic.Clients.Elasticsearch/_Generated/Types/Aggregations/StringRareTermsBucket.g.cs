@@ -77,7 +77,9 @@ internal sealed partial class StringRareTermsBucketConverter : JsonConverter<Str
 public sealed partial class StringRareTermsBucket
 {
 	/// <summary>
-	/// <para>Nested aggregations</para>
+	/// <para>
+	/// Nested aggregations
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }

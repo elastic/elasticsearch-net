@@ -123,7 +123,10 @@ public sealed partial class Aggregation
 	public static Aggregation WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation weightedAverageAggregation) => new Aggregation("weighted_avg", weightedAverageAggregation);
 
 	/// <summary>
-	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
@@ -1003,7 +1006,10 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	/// <summary>
-	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
 	/// </summary>
 	public AggregationDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -1235,7 +1241,10 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	/// <summary>
-	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
 	/// </summary>
 	public AggregationDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{

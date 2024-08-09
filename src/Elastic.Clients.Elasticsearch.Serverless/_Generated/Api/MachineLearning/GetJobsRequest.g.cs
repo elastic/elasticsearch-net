@@ -32,20 +32,53 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GetJobsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no jobs that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value is `true`, which returns an empty `jobs` array when<br/>there are no matches and the subset of results when there are partial<br/>matches. If this parameter is `false`, the request returns a `404` status<br/>code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
+	/// there are no matches and the subset of results when there are partial
+	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
+	/// code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for anomaly detection jobs.<br/>You can get information for multiple anomaly detection jobs in a single API<br/>request by using a group name, a comma-separated list of jobs, or a wildcard<br/>expression. You can get information for all anomaly detection jobs by using<br/>`_all`, by specifying `*` as the `<job_id>`, or by omitting the `<job_id>`.</para>
+/// <para>
+/// Retrieves configuration information for anomaly detection jobs.
+/// You can get information for multiple anomaly detection jobs in a single API
+/// request by using a group name, a comma-separated list of jobs, or a wildcard
+/// expression. You can get information for all anomaly detection jobs by using
+/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
+/// </para>
 /// </summary>
 public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
 {
@@ -66,22 +99,55 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 	internal override string OperationName => "ml.get_jobs";
 
 	/// <summary>
-	/// <para>Specifies what to do when the request:</para>
-	/// <para>1. Contains wildcard expressions and there are no jobs that match.<br/>2. Contains the _all string or no identifiers and there are no matches.<br/>3. Contains wildcard expressions and there are only partial matches.</para>
-	/// <para>The default value is `true`, which returns an empty `jobs` array when<br/>there are no matches and the subset of results when there are partial<br/>matches. If this parameter is `false`, the request returns a `404` status<br/>code when there are no matches or only partial matches.</para>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
+	/// there are no matches and the subset of results when there are partial
+	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
+	/// code when there are no matches or only partial matches.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
-	/// <para>Indicates if certain fields should be removed from the configuration on<br/>retrieval. This allows the configuration to be in an acceptable format to<br/>be retrieved and then added to another cluster.</para>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
 /// <summary>
-/// <para>Retrieves configuration information for anomaly detection jobs.<br/>You can get information for multiple anomaly detection jobs in a single API<br/>request by using a group name, a comma-separated list of jobs, or a wildcard<br/>expression. You can get information for all anomaly detection jobs by using<br/>`_all`, by specifying `*` as the `<job_id>`, or by omitting the `<job_id>`.</para>
+/// <para>
+/// Retrieves configuration information for anomaly detection jobs.
+/// You can get information for multiple anomaly detection jobs in a single API
+/// request by using a group name, a comma-separated list of jobs, or a wildcard
+/// expression. You can get information for all anomaly detection jobs by using
+/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
+/// </para>
 /// </summary>
 public sealed partial class GetJobsRequestDescriptor : RequestDescriptor<GetJobsRequestDescriptor, GetJobsRequestParameters>
 {

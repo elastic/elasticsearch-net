@@ -32,18 +32,24 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class GetRepositoryRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>
+	/// Return local information, do not retrieve the state from master node (default: false)
+	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns information about a repository.</para>
+/// <para>
+/// Returns information about a repository.
+/// </para>
 /// </summary>
 public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryRequestParameters>
 {
@@ -64,20 +70,26 @@ public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryReq
 	internal override string OperationName => "snapshot.get_repository";
 
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>
+	/// Return local information, do not retrieve the state from master node (default: false)
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>
+	/// Explicit operation timeout for connection to master node
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns information about a repository.</para>
+/// <para>
+/// Returns information about a repository.
+/// </para>
 /// </summary>
 public sealed partial class GetRepositoryRequestDescriptor : RequestDescriptor<GetRepositoryRequestDescriptor, GetRepositoryRequestParameters>
 {

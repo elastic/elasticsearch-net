@@ -354,17 +354,23 @@ internal sealed class DataframeStateConverter : JsonConverter<DataframeState>
 public enum DeploymentAllocationState
 {
 	/// <summary>
-	/// <para>Trained model deployment is starting but it is not yet deployed on any nodes.</para>
+	/// <para>
+	/// Trained model deployment is starting but it is not yet deployed on any nodes.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "starting")]
 	Starting,
 	/// <summary>
-	/// <para>The trained model is started on at least one node.</para>
+	/// <para>
+	/// The trained model is started on at least one node.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "started")]
 	Started,
 	/// <summary>
-	/// <para>Trained model deployment has started on all valid nodes.</para>
+	/// <para>
+	/// Trained model deployment has started on all valid nodes.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "fully_allocated")]
 	FullyAllocated
@@ -468,17 +474,23 @@ internal sealed class DeploymentAssignmentStateConverter : JsonConverter<Deploym
 public enum DeploymentState
 {
 	/// <summary>
-	/// <para>The deployment is preparing to stop and deallocate the model from the relevant nodes.</para>
+	/// <para>
+	/// The deployment is preparing to stop and deallocate the model from the relevant nodes.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "stopping")]
 	Stopping,
 	/// <summary>
-	/// <para>The deployment has recently started but is not yet usable; the model is not allocated on any nodes.</para>
+	/// <para>
+	/// The deployment has recently started but is not yet usable; the model is not allocated on any nodes.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "starting")]
 	Starting,
 	/// <summary>
-	/// <para>The deployment is usable; at least one node has the model allocated.</para>
+	/// <para>
+	/// The deployment is usable; at least one node has the model allocated.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "started")]
 	Started
@@ -624,27 +636,42 @@ internal sealed class FilterTypeConverter : JsonConverter<FilterType>
 public enum Include
 {
 	/// <summary>
-	/// <para>Includes the total feature importance for the training data set. The<br/>baseline and total feature importance values are returned in the metadata<br/>field in the response body.</para>
+	/// <para>
+	/// Includes the total feature importance for the training data set. The
+	/// baseline and total feature importance values are returned in the metadata
+	/// field in the response body.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "total_feature_importance")]
 	TotalFeatureImportance,
 	/// <summary>
-	/// <para>Includes the information about hyperparameters used to train the model.<br/>This information consists of the value, the absolute and relative<br/>importance of the hyperparameter as well as an indicator of whether it was<br/>specified by the user or tuned during hyperparameter optimization.</para>
+	/// <para>
+	/// Includes the information about hyperparameters used to train the model.
+	/// This information consists of the value, the absolute and relative
+	/// importance of the hyperparameter as well as an indicator of whether it was
+	/// specified by the user or tuned during hyperparameter optimization.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "hyperparameters")]
 	Hyperparameters,
 	/// <summary>
-	/// <para>Includes the baseline for feature importance values.</para>
+	/// <para>
+	/// Includes the baseline for feature importance values.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "feature_importance_baseline")]
 	FeatureImportanceBaseline,
 	/// <summary>
-	/// <para>Includes the model definition status.</para>
+	/// <para>
+	/// Includes the model definition status.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "definition_status")]
 	DefinitionStatus,
 	/// <summary>
-	/// <para>Includes the model definition.</para>
+	/// <para>
+	/// Includes the model definition.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "definition")]
 	Definition
@@ -751,27 +778,40 @@ internal sealed class JobBlockedReasonConverter : JsonConverter<JobBlockedReason
 public enum JobState
 {
 	/// <summary>
-	/// <para>The job open action is in progress and has not yet completed.</para>
+	/// <para>
+	/// The job open action is in progress and has not yet completed.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "opening")]
 	Opening,
 	/// <summary>
-	/// <para>The job is available to receive and process data.</para>
+	/// <para>
+	/// The job is available to receive and process data.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "opened")]
 	Opened,
 	/// <summary>
-	/// <para>The job did not finish successfully due to an error.<br/>This situation can occur due to invalid input data, a fatal error occurring during the analysis, or an external interaction such as the process being killed by the Linux out of memory (OOM) killer.<br/>If the job had irrevocably failed, it must be force closed and then deleted.<br/>If the datafeed can be corrected, the job can be closed and then re-opened.</para>
+	/// <para>
+	/// The job did not finish successfully due to an error.
+	/// This situation can occur due to invalid input data, a fatal error occurring during the analysis, or an external interaction such as the process being killed by the Linux out of memory (OOM) killer.
+	/// If the job had irrevocably failed, it must be force closed and then deleted.
+	/// If the datafeed can be corrected, the job can be closed and then re-opened.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "failed")]
 	Failed,
 	/// <summary>
-	/// <para>The job close action is in progress and has not yet completed. A closing job cannot accept further data.</para>
+	/// <para>
+	/// The job close action is in progress and has not yet completed. A closing job cannot accept further data.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "closing")]
 	Closing,
 	/// <summary>
-	/// <para>The job finished successfully with its model state persisted. The job must be opened before it can accept further data.</para>
+	/// <para>
+	/// The job finished successfully with its model state persisted. The job must be opened before it can accept further data.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "closed")]
 	Closed
@@ -878,27 +918,37 @@ internal sealed class MemoryStatusConverter : JsonConverter<MemoryStatus>
 public enum RoutingState
 {
 	/// <summary>
-	/// <para>The trained model is being deallocated from this node.</para>
+	/// <para>
+	/// The trained model is being deallocated from this node.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "stopping")]
 	Stopping,
 	/// <summary>
-	/// <para>The trained model is fully deallocated from this node.</para>
+	/// <para>
+	/// The trained model is fully deallocated from this node.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "stopped")]
 	Stopped,
 	/// <summary>
-	/// <para>The trained model is attempting to allocate on this node; inference requests are not yet accepted.</para>
+	/// <para>
+	/// The trained model is attempting to allocate on this node; inference requests are not yet accepted.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "starting")]
 	Starting,
 	/// <summary>
-	/// <para>The trained model is allocated and ready to accept inference requests.</para>
+	/// <para>
+	/// The trained model is allocated and ready to accept inference requests.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "started")]
 	Started,
 	/// <summary>
-	/// <para>The allocation attempt failed.</para>
+	/// <para>
+	/// The allocation attempt failed.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "failed")]
 	Failed
@@ -956,12 +1006,16 @@ internal sealed class RoutingStateConverter : JsonConverter<RoutingState>
 public enum RuleAction
 {
 	/// <summary>
-	/// <para>The result will not be created. Unless you also specify `skip_model_update`, the model will be updated as usual with the corresponding series value.</para>
+	/// <para>
+	/// The result will not be created. Unless you also specify <c>skip_model_update</c>, the model will be updated as usual with the corresponding series value.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "skip_result")]
 	SkipResult,
 	/// <summary>
-	/// <para>The value for that series will not be used to update the model. Unless you also specify `skip_result`, the results will be created as usual. This action is suitable when certain values are expected to be consistently anomalous and they affect the model in a way that negatively impacts the rest of the results.</para>
+	/// <para>
+	/// The value for that series will not be used to update the model. Unless you also specify <c>skip_result</c>, the results will be created as usual. This action is suitable when certain values are expected to be consistently anomalous and they affect the model in a way that negatively impacts the rest of the results.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "skip_model_update")]
 	SkipModelUpdate
@@ -1109,17 +1163,24 @@ internal sealed class TokenizationTruncateConverter : JsonConverter<Tokenization
 public enum TrainedModelType
 {
 	/// <summary>
-	/// <para>The model definition is an ensemble model of decision trees.</para>
+	/// <para>
+	/// The model definition is an ensemble model of decision trees.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "tree_ensemble")]
 	TreeEnsemble,
 	/// <summary>
-	/// <para>The stored definition is a PyTorch (specifically a TorchScript) model.<br/>Currently only NLP models are supported.</para>
+	/// <para>
+	/// The stored definition is a PyTorch (specifically a TorchScript) model.
+	/// Currently only NLP models are supported.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "pytorch")]
 	Pytorch,
 	/// <summary>
-	/// <para>A special type reserved for language identification models.</para>
+	/// <para>
+	/// A special type reserved for language identification models.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "lang_ident")]
 	LangIdent

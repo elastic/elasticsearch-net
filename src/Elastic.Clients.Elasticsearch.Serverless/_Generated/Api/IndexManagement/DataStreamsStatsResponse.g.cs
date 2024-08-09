@@ -29,37 +29,50 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStreamsStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Total number of backing indices for the selected data streams.</para>
+	/// <para>
+	/// Total number of backing indices for the selected data streams.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("backing_indices")]
 	public int BackingIndices { get; init; }
 
 	/// <summary>
-	/// <para>Total number of selected data streams.</para>
+	/// <para>
+	/// Total number of selected data streams.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_stream_count")]
 	public int DataStreamCount { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics for the selected data streams.</para>
+	/// <para>
+	/// Contains statistics for the selected data streams.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_streams")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamsStatsItem> DataStreams { get; init; }
 
 	/// <summary>
-	/// <para>Contains information about shards that attempted to execute the request.</para>
+	/// <para>
+	/// Contains information about shards that attempted to execute the request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
 
 	/// <summary>
-	/// <para>Total size, in bytes, of all shards for the selected data streams.</para>
+	/// <para>
+	/// Total size, in bytes, of all shards for the selected data streams.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_store_size_bytes")]
 	public long TotalStoreSizeBytes { get; init; }
 
 	/// <summary>
-	/// <para>Total size of all shards for the selected data streams.<br/>This property is included only if the `human` query parameter is `true`</para>
+	/// <para>
+	/// Total size of all shards for the selected data streams.
+	/// This property is included only if the <c>human</c> query parameter is <c>true</c>
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_store_sizes")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? TotalStoreSizes { get; init; }

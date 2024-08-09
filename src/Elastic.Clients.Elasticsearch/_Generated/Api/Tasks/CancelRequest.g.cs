@@ -32,28 +32,38 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public sealed partial class CancelRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of node IDs or names used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit the request.
+	/// </para>
 	/// </summary>
 	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
-	/// <para>Parent task ID used to limit the tasks.</para>
+	/// <para>
+	/// Parent task ID used to limit the tasks.
+	/// </para>
 	/// </summary>
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
-	/// <para>Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false</para>
+	/// <para>
+	/// Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
+	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Cancels a task, if it can be cancelled through an API.</para>
+/// <para>
+/// Cancels a task, if it can be cancelled through an API.
+/// </para>
 /// </summary>
 public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters>
 {
@@ -74,32 +84,42 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 	internal override string OperationName => "tasks.cancel";
 
 	/// <summary>
-	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list or wildcard expression of actions used to limit the request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>Comma-separated list of node IDs or names used to limit the request.</para>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit the request.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
-	/// <para>Parent task ID used to limit the tasks.</para>
+	/// <para>
+	/// Parent task ID used to limit the tasks.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
 	/// <summary>
-	/// <para>Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false</para>
+	/// <para>
+	/// Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
-/// <para>Cancels a task, if it can be cancelled through an API.</para>
+/// <para>
+/// Cancels a task, if it can be cancelled through an API.
+/// </para>
 /// </summary>
 public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRequestDescriptor, CancelRequestParameters>
 {

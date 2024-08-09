@@ -27,7 +27,9 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.</para>
+	/// <para>
+	/// Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.
+	/// </para>
 	/// </summary>
 	protected DanglingIndicesNamespacedClient() : base()
 	{
@@ -38,7 +40,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +53,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +65,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +78,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +92,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +107,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +119,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
@@ -116,7 +132,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns all dangling indices.</para>
+	/// <para>
+	/// Returns all dangling indices.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(Action<ListDanglingIndicesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

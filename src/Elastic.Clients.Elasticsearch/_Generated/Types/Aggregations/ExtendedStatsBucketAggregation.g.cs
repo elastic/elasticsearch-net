@@ -30,25 +30,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class ExtendedStatsBucketAggregation
 {
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
-	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// <para>
+	/// The number of standard deviations above/below the mean to display.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sigma")]
 	public double? Sigma { get; set; }
@@ -70,7 +79,9 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	private double? SigmaValue { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -79,7 +90,10 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	}
 
 	/// <summary>
-	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// <para>
+	/// <c>DecimalFormat</c> pattern for the output value.
+	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor Format(string? format)
 	{
@@ -88,7 +102,9 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	}
 
 	/// <summary>
-	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// <para>
+	/// Policy to apply when gaps are found in the data.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
@@ -97,7 +113,9 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	}
 
 	/// <summary>
-	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// <para>
+	/// The number of standard deviations above/below the mean to display.
+	/// </para>
 	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma)
 	{

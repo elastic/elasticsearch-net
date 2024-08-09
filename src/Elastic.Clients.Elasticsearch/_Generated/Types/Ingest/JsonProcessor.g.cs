@@ -30,61 +30,88 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class JsonProcessor
 {
 	/// <summary>
-	/// <para>Flag that forces the parsed JSON to be added at the top level of the document.<br/>`target_field` must not be set when this option is chosen.</para>
+	/// <para>
+	/// Flag that forces the parsed JSON to be added at the top level of the document.
+	/// <c>target_field</c> must not be set when this option is chosen.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("add_to_root")]
 	public bool? AddToRoot { get; set; }
 
 	/// <summary>
-	/// <para>When set to `replace`, root fields that conflict with fields from the parsed JSON will be overridden.<br/>When set to `merge`, conflicting fields will be merged.<br/>Only applicable `if add_to_root` is set to true.</para>
+	/// <para>
+	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
+	/// When set to <c>merge</c>, conflicting fields will be merged.
+	/// Only applicable <c>if add_to_root</c> is set to true.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("add_to_root_conflict_strategy")]
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? AddToRootConflictStrategy { get; set; }
 
 	/// <summary>
-	/// <para>When set to `true`, the JSON parser will not fail if the JSON contains duplicate keys.<br/>Instead, the last encountered value for any duplicate key wins.</para>
+	/// <para>
+	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
+	/// Instead, the last encountered value for any duplicate key wins.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_duplicate_keys")]
 	public bool? AllowDuplicateKeys { get; set; }
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
@@ -115,7 +142,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Flag that forces the parsed JSON to be added at the top level of the document.<br/>`target_field` must not be set when this option is chosen.</para>
+	/// <para>
+	/// Flag that forces the parsed JSON to be added at the top level of the document.
+	/// <c>target_field</c> must not be set when this option is chosen.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> AddToRoot(bool? addToRoot = true)
 	{
@@ -124,7 +154,11 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>When set to `replace`, root fields that conflict with fields from the parsed JSON will be overridden.<br/>When set to `merge`, conflicting fields will be merged.<br/>Only applicable `if add_to_root` is set to true.</para>
+	/// <para>
+	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
+	/// When set to <c>merge</c>, conflicting fields will be merged.
+	/// Only applicable <c>if add_to_root</c> is set to true.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> AddToRootConflictStrategy(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? addToRootConflictStrategy)
 	{
@@ -133,7 +167,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>When set to `true`, the JSON parser will not fail if the JSON contains duplicate keys.<br/>Instead, the last encountered value for any duplicate key wins.</para>
+	/// <para>
+	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
+	/// Instead, the last encountered value for any duplicate key wins.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> AllowDuplicateKeys(bool? allowDuplicateKeys = true)
 	{
@@ -142,7 +179,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -151,7 +191,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -160,7 +202,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -169,7 +213,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -178,7 +224,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> If(string? value)
 	{
@@ -187,7 +235,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -196,7 +246,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -235,7 +287,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Tag(string? tag)
 	{
@@ -244,7 +299,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -253,7 +311,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -262,7 +323,10 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
@@ -381,7 +445,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
-	/// <para>Flag that forces the parsed JSON to be added at the top level of the document.<br/>`target_field` must not be set when this option is chosen.</para>
+	/// <para>
+	/// Flag that forces the parsed JSON to be added at the top level of the document.
+	/// <c>target_field</c> must not be set when this option is chosen.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor AddToRoot(bool? addToRoot = true)
 	{
@@ -390,7 +457,11 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>When set to `replace`, root fields that conflict with fields from the parsed JSON will be overridden.<br/>When set to `merge`, conflicting fields will be merged.<br/>Only applicable `if add_to_root` is set to true.</para>
+	/// <para>
+	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
+	/// When set to <c>merge</c>, conflicting fields will be merged.
+	/// Only applicable <c>if add_to_root</c> is set to true.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor AddToRootConflictStrategy(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? addToRootConflictStrategy)
 	{
@@ -399,7 +470,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>When set to `true`, the JSON parser will not fail if the JSON contains duplicate keys.<br/>Instead, the last encountered value for any duplicate key wins.</para>
+	/// <para>
+	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
+	/// Instead, the last encountered value for any duplicate key wins.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor AllowDuplicateKeys(bool? allowDuplicateKeys = true)
 	{
@@ -408,7 +482,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor Description(string? description)
 	{
@@ -417,7 +494,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -426,7 +505,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -435,7 +516,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>
+	/// The field to be parsed.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -444,7 +527,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>Conditionally execute the processor.</para>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor If(string? value)
 	{
@@ -453,7 +538,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>Ignore failures for the processor.</para>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -462,7 +549,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>Handle failures for the processor.</para>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -501,7 +590,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor Tag(string? tag)
 	{
@@ -510,7 +602,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
@@ -519,7 +614,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
@@ -528,7 +626,10 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
+	/// <para>
+	/// The field that the converted structured object will be written into.
+	/// Any existing content in this field will be overwritten.
+	/// </para>
 	/// </summary>
 	public JsonProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{

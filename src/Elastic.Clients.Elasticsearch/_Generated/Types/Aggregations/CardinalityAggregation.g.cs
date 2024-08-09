@@ -30,25 +30,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class CardinalityAggregation
 {
 	/// <summary>
-	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// <para>
+	/// Mechanism by which cardinality aggregations is run.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	/// <summary>
-	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// <para>
+	/// A unique count below which counts are expected to be close to accurate.
+	/// This allows to trade memory for accuracy.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision_threshold")]
 	public int? PrecisionThreshold { get; set; }
@@ -78,7 +88,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// <para>
+	/// Mechanism by which cardinality aggregations is run.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 	{
@@ -87,7 +99,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -96,7 +110,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -105,7 +121,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
@@ -114,7 +132,10 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -123,7 +144,10 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	}
 
 	/// <summary>
-	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// <para>
+	/// A unique count below which counts are expected to be close to accurate.
+	/// This allows to trade memory for accuracy.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold)
 	{
@@ -232,7 +256,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// <para>
+	/// Mechanism by which cardinality aggregations is run.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 	{
@@ -241,7 +267,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -250,7 +278,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -259,7 +289,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The field on which to run the aggregation.</para>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -268,7 +300,10 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
@@ -277,7 +312,10 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	}
 
 	/// <summary>
-	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// <para>
+	/// A unique count below which counts are expected to be close to accurate.
+	/// This allows to trade memory for accuracy.
+	/// </para>
 	/// </summary>
 	public CardinalityAggregationDescriptor PrecisionThreshold(int? precisionThreshold)
 	{

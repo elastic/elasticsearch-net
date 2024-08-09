@@ -30,67 +30,91 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class Client
 {
 	/// <summary>
-	/// <para>Reported agent for the HTTP client.<br/>If unavailable, this property is not included in the response.</para>
+	/// <para>
+	/// Reported agent for the HTTP client.
+	/// If unavailable, this property is not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("agent")]
 	public string? Agent { get; init; }
 
 	/// <summary>
-	/// <para>Time at which the client closed the connection if the connection is closed.</para>
+	/// <para>
+	/// Time at which the client closed the connection if the connection is closed.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("closed_time_millis")]
 	public long? ClosedTimeMillis { get; init; }
 
 	/// <summary>
-	/// <para>Unique ID for the HTTP client.</para>
+	/// <para>
+	/// Unique ID for the HTTP client.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public long? Id { get; init; }
 
 	/// <summary>
-	/// <para>Time of the most recent request from this client.</para>
+	/// <para>
+	/// Time of the most recent request from this client.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("last_request_time_millis")]
 	public long? LastRequestTimeMillis { get; init; }
 
 	/// <summary>
-	/// <para>The URI of the client’s most recent request.</para>
+	/// <para>
+	/// The URI of the client’s most recent request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("last_uri")]
 	public string? LastUri { get; init; }
 
 	/// <summary>
-	/// <para>Local address for the HTTP connection.</para>
+	/// <para>
+	/// Local address for the HTTP connection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("local_address")]
 	public string? LocalAddress { get; init; }
 
 	/// <summary>
-	/// <para>Time at which the client opened the connection.</para>
+	/// <para>
+	/// Time at which the client opened the connection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("opened_time_millis")]
 	public long? OpenedTimeMillis { get; init; }
 
 	/// <summary>
-	/// <para>Remote address for the HTTP connection.</para>
+	/// <para>
+	/// Remote address for the HTTP connection.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_address")]
 	public string? RemoteAddress { get; init; }
 
 	/// <summary>
-	/// <para>Number of requests from this client.</para>
+	/// <para>
+	/// Number of requests from this client.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("request_count")]
 	public long? RequestCount { get; init; }
 
 	/// <summary>
-	/// <para>Cumulative size in bytes of all requests from this client.</para>
+	/// <para>
+	/// Cumulative size in bytes of all requests from this client.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("request_size_bytes")]
 	public long? RequestSizeBytes { get; init; }
 
 	/// <summary>
-	/// <para>Value from the client’s `x-opaque-id` HTTP header.<br/>If unavailable, this property is not included in the response.</para>
+	/// <para>
+	/// Value from the client’s <c>x-opaque-id</c> HTTP header.
+	/// If unavailable, this property is not included in the response.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("x_opaque_id")]
 	public string? XOpaqueId { get; init; }

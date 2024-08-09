@@ -158,12 +158,16 @@ internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearch
 public enum Conflicts
 {
 	/// <summary>
-	/// <para>Continue reindexing even if there are conflicts.</para>
+	/// <para>
+	/// Continue reindexing even if there are conflicts.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "proceed")]
 	Proceed,
 	/// <summary>
-	/// <para>Stop reindexing if there are conflicts.</para>
+	/// <para>
+	/// Stop reindexing if there are conflicts.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "abort")]
 	Abort
@@ -472,27 +476,37 @@ internal sealed class DistanceUnitConverter : JsonConverter<DistanceUnit>
 public enum ExpandWildcard
 {
 	/// <summary>
-	/// <para>Match open, non-hidden indices. Also matches any non-hidden data stream.</para>
+	/// <para>
+	/// Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "open")]
 	Open,
 	/// <summary>
-	/// <para>Wildcard expressions are not accepted.</para>
+	/// <para>
+	/// Wildcard expressions are not accepted.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
 	/// <summary>
-	/// <para>Match hidden data streams and hidden indices. Must be combined with open, closed, or both.</para>
+	/// <para>
+	/// Match hidden data streams and hidden indices. Must be combined with open, closed, or both.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "hidden")]
 	Hidden,
 	/// <summary>
-	/// <para>Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.</para>
+	/// <para>
+	/// Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "closed")]
 	Closed,
 	/// <summary>
-	/// <para>Match any data stream or index, including hidden ones.</para>
+	/// <para>
+	/// Match any data stream or index, including hidden ones.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "all")]
 	All
@@ -606,12 +620,16 @@ internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNum
 public enum GeoDistanceType
 {
 	/// <summary>
-	/// <para>The `plane` calculation is faster but less accurate.</para>
+	/// <para>
+	/// The <c>plane</c> calculation is faster but less accurate.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "plane")]
 	Plane,
 	/// <summary>
-	/// <para>The `arc` calculation is the most accurate.</para>
+	/// <para>
+	/// The <c>arc</c> calculation is the most accurate.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "arc")]
 	Arc
@@ -654,22 +672,31 @@ internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
 public enum GeoShapeRelation
 {
 	/// <summary>
-	/// <para>Return all documents whose `geo_shape` or `geo_point` field is within the query geometry.<br/>Line geometries are not supported.</para>
+	/// <para>
+	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field is within the query geometry.
+	/// Line geometries are not supported.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "within")]
 	Within,
 	/// <summary>
-	/// <para>Return all documents whose `geo_shape` or `geo_point` field intersects the query geometry.</para>
+	/// <para>
+	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field intersects the query geometry.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "intersects")]
 	Intersects,
 	/// <summary>
-	/// <para>Return all documents whose `geo_shape` or `geo_point` field has nothing in common with the query geometry.</para>
+	/// <para>
+	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field has nothing in common with the query geometry.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "disjoint")]
 	Disjoint,
 	/// <summary>
-	/// <para>Return all documents whose `geo_shape` or `geo_point` field contains the query geometry.</para>
+	/// <para>
+	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field contains the query geometry.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "contains")]
 	Contains
@@ -722,17 +749,23 @@ internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation
 public enum HealthStatus
 {
 	/// <summary>
-	/// <para>All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.</para>
+	/// <para>
+	/// All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "yellow")]
 	Yellow,
 	/// <summary>
-	/// <para>One or more primary shards are unassigned, so some data is unavailable. This can occur briefly during cluster startup as primary shards are assigned.</para>
+	/// <para>
+	/// One or more primary shards are unassigned, so some data is unavailable. This can occur briefly during cluster startup as primary shards are assigned.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "red")]
 	Red,
 	/// <summary>
-	/// <para>All shards are assigned.</para>
+	/// <para>
+	/// All shards are assigned.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "green")]
 	Green
@@ -1223,22 +1256,30 @@ public readonly partial struct ScriptLanguage : IEnumStruct<ScriptLanguage>
 	public readonly string Value { get; }
 
 	/// <summary>
-	/// <para>Painless scripting language, purpose-built for Elasticsearch.</para>
+	/// <para>
+	/// Painless scripting language, purpose-built for Elasticsearch.
+	/// </para>
 	/// </summary>
 	public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
 
 	/// <summary>
-	/// <para>Mustache templated, used for templates.</para>
+	/// <para>
+	/// Mustache templated, used for templates.
+	/// </para>
 	/// </summary>
 	public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
 
 	/// <summary>
-	/// <para>Expert Java API</para>
+	/// <para>
+	/// Expert Java API
+	/// </para>
 	/// </summary>
 	public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
 
 	/// <summary>
-	/// <para>Lucene’s expressions language, compiles a JavaScript expression to bytecode.</para>
+	/// <para>
+	/// Lucene’s expressions language, compiles a JavaScript expression to bytecode.
+	/// </para>
 	/// </summary>
 	public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
 
@@ -1308,12 +1349,16 @@ internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
 public enum SearchType
 {
 	/// <summary>
-	/// <para>Documents are scored using local term and document frequencies for the shard. This is usually faster but less accurate.</para>
+	/// <para>
+	/// Documents are scored using local term and document frequencies for the shard. This is usually faster but less accurate.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "query_then_fetch")]
 	QueryThenFetch,
 	/// <summary>
-	/// <para>Documents are scored using global term and document frequencies across all shards. This is usually slower but more accurate.</para>
+	/// <para>
+	/// Documents are scored using global term and document frequencies across all shards. This is usually slower but more accurate.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "dfs_query_then_fetch")]
 	DfsQueryThenFetch
@@ -1356,7 +1401,9 @@ internal sealed class SearchTypeConverter : JsonConverter<SearchType>
 public enum SlicesCalculation
 {
 	/// <summary>
-	/// <para>Let Elasticsearch choose a reasonable number for most data streams and indices.</para>
+	/// <para>
+	/// Let Elasticsearch choose a reasonable number for most data streams and indices.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "auto")]
 	Auto
@@ -1457,12 +1504,16 @@ internal sealed class SortModeConverter : JsonConverter<SortMode>
 public enum SortOrder
 {
 	/// <summary>
-	/// <para>Descending (largest to smallest)</para>
+	/// <para>
+	/// Descending (largest to smallest)
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "desc")]
 	Desc,
 	/// <summary>
-	/// <para>Ascending (smallest to largest)</para>
+	/// <para>
+	/// Ascending (smallest to largest)
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "asc")]
 	Asc
@@ -1505,17 +1556,23 @@ internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 public enum SuggestMode
 {
 	/// <summary>
-	/// <para>Only suggest terms that occur in more docs on the shard than the original term.</para>
+	/// <para>
+	/// Only suggest terms that occur in more docs on the shard than the original term.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "popular")]
 	Popular,
 	/// <summary>
-	/// <para>Only generate suggestions for terms that are not in the shard.</para>
+	/// <para>
+	/// Only generate suggestions for terms that are not in the shard.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "missing")]
 	Missing,
 	/// <summary>
-	/// <para>Suggest any matching suggestions based on terms in the suggest text.</para>
+	/// <para>
+	/// Suggest any matching suggestions based on terms in the suggest text.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "always")]
 	Always
@@ -1703,19 +1760,27 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 public enum VersionType
 {
 	/// <summary>
-	/// <para>Use internal versioning that starts at 1 and increments with each update or delete.</para>
+	/// <para>
+	/// Use internal versioning that starts at 1 and increments with each update or delete.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
 	[EnumMember(Value = "force")]
 	Force,
 	/// <summary>
-	/// <para>Only index the document if the given version is equal or higher than the version of the stored document or if there is no existing document.<br/>Note: the external_gte version type is meant for special use cases and should be used with care.<br/>If used incorrectly, it can result in loss of data.</para>
+	/// <para>
+	/// Only index the document if the given version is equal or higher than the version of the stored document or if there is no existing document.
+	/// Note: the external_gte version type is meant for special use cases and should be used with care.
+	/// If used incorrectly, it can result in loss of data.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "external_gte")]
 	ExternalGte,
 	/// <summary>
-	/// <para>Only index the document if the given version is strictly higher than the version of the stored document or if there is no existing document.</para>
+	/// <para>
+	/// Only index the document if the given version is strictly higher than the version of the stored document or if there is no existing document.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "external")]
 	External

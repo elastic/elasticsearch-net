@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 public sealed partial class DocumentRating
 {
 	/// <summary>
-	/// <para>The document ID.</para>
+	/// <para>
+	/// The document ID.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id Id { get; set; }
 
 	/// <summary>
-	/// <para>The document’s index. For data streams, this should be the document’s backing index.</para>
+	/// <para>
+	/// The document’s index. For data streams, this should be the document’s backing index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexName Index { get; set; }
 
 	/// <summary>
-	/// <para>The document’s relevance with regard to this search request.</para>
+	/// <para>
+	/// The document’s relevance with regard to this search request.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rating")]
 	public int Rating { get; set; }
@@ -61,7 +67,9 @@ public sealed partial class DocumentRatingDescriptor : SerializableDescriptor<Do
 	private int RatingValue { get; set; }
 
 	/// <summary>
-	/// <para>The document ID.</para>
+	/// <para>
+	/// The document ID.
+	/// </para>
 	/// </summary>
 	public DocumentRatingDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
@@ -70,7 +78,9 @@ public sealed partial class DocumentRatingDescriptor : SerializableDescriptor<Do
 	}
 
 	/// <summary>
-	/// <para>The document’s index. For data streams, this should be the document’s backing index.</para>
+	/// <para>
+	/// The document’s index. For data streams, this should be the document’s backing index.
+	/// </para>
 	/// </summary>
 	public DocumentRatingDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName index)
 	{
@@ -79,7 +89,9 @@ public sealed partial class DocumentRatingDescriptor : SerializableDescriptor<Do
 	}
 
 	/// <summary>
-	/// <para>The document’s relevance with regard to this search request.</para>
+	/// <para>
+	/// The document’s relevance with regard to this search request.
+	/// </para>
 	/// </summary>
 	public DocumentRatingDescriptor Rating(int rating)
 	{

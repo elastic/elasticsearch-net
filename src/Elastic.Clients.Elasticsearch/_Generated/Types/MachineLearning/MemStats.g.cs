@@ -30,31 +30,43 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class MemStats
 {
 	/// <summary>
-	/// <para>If the amount of physical memory has been overridden using the es.total_memory_bytes system property<br/>then this reports the overridden value. Otherwise it reports the same value as total.</para>
+	/// <para>
+	/// If the amount of physical memory has been overridden using the es.total_memory_bytes system property
+	/// then this reports the overridden value. Otherwise it reports the same value as total.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("adjusted_total")]
 	public Elastic.Clients.Elasticsearch.ByteSize? AdjustedTotal { get; init; }
 
 	/// <summary>
-	/// <para>If the amount of physical memory has been overridden using the `es.total_memory_bytes` system property<br/>then this reports the overridden value in bytes. Otherwise it reports the same value as `total_in_bytes`.</para>
+	/// <para>
+	/// If the amount of physical memory has been overridden using the <c>es.total_memory_bytes</c> system property
+	/// then this reports the overridden value in bytes. Otherwise it reports the same value as <c>total_in_bytes</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("adjusted_total_in_bytes")]
 	public int AdjustedTotalInBytes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about machine learning use of native memory on the node.</para>
+	/// <para>
+	/// Contains statistics about machine learning use of native memory on the node.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ml")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Ml { get; init; }
 
 	/// <summary>
-	/// <para>Total amount of physical memory.</para>
+	/// <para>
+	/// Total amount of physical memory.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; init; }
 
 	/// <summary>
-	/// <para>Total amount of physical memory in bytes.</para>
+	/// <para>
+	/// Total amount of physical memory in bytes.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_in_bytes")]
 	public int TotalInBytes { get; init; }

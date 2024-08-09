@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class GarbageCollectorTotal
 {
 	/// <summary>
-	/// <para>Total number of JVM garbage collectors that collect objects.</para>
+	/// <para>
+	/// Total number of JVM garbage collectors that collect objects.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collection_count")]
 	public long? CollectionCount { get; init; }
 
 	/// <summary>
-	/// <para>Total time spent by JVM collecting objects.</para>
+	/// <para>
+	/// Total time spent by JVM collecting objects.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collection_time")]
 	public string? CollectionTime { get; init; }
 
 	/// <summary>
-	/// <para>Total time, in milliseconds, spent by JVM collecting objects.</para>
+	/// <para>
+	/// Total time, in milliseconds, spent by JVM collecting objects.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collection_time_in_millis")]
 	public long? CollectionTimeInMillis { get; init; }

@@ -32,18 +32,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 public sealed partial class GetBucketsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Skips the specified number of buckets.</para>
+	/// <para>
+	/// Skips the specified number of buckets.
+	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of buckets to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of buckets to obtain.
+	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more buckets.<br/>The API presents a chronological view of the records, grouped by bucket.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more buckets.
+/// The API presents a chronological view of the records, grouped by bucket.
+/// </para>
 /// </summary>
 public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestParameters>
 {
@@ -64,43 +71,57 @@ public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestPa
 	internal override string OperationName => "ml.get_buckets";
 
 	/// <summary>
-	/// <para>Skips the specified number of buckets.</para>
+	/// <para>
+	/// Skips the specified number of buckets.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
-	/// <para>Specifies the maximum number of buckets to obtain.</para>
+	/// <para>
+	/// Specifies the maximum number of buckets to obtain.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
-	/// <para>Refer to the description for the `anomaly_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>anomaly_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("anomaly_score")]
 	public double? AnomalyScore { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("desc")]
 	public bool? Desc { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public DateTimeOffset? End { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_interim")]
 	public bool? ExcludeInterim { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `expand` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>expand</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("expand")]
 	public bool? Expand { get; set; }
@@ -108,20 +129,27 @@ public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestPa
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start")]
 	public DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more buckets.<br/>The API presents a chronological view of the records, grouped by bucket.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more buckets.
+/// The API presents a chronological view of the records, grouped by bucket.
+/// </para>
 /// </summary>
 public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDescriptor<GetBucketsRequestDescriptor<TDocument>, GetBucketsRequestParameters>
 {
@@ -170,7 +198,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `anomaly_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>anomaly_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> AnomalyScore(double? anomalyScore)
 	{
@@ -179,7 +209,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Desc(bool? desc = true)
 	{
@@ -188,7 +220,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> End(DateTimeOffset? end)
 	{
@@ -197,7 +231,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> ExcludeInterim(bool? excludeInterim = true)
 	{
@@ -206,7 +242,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `expand` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>expand</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Expand(bool? expand = true)
 	{
@@ -239,7 +277,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.Field? sort)
 	{
@@ -248,7 +288,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -257,7 +299,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
 	{
@@ -266,7 +310,9 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
 	{
@@ -340,7 +386,10 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Retrieves anomaly detection job results for one or more buckets.<br/>The API presents a chronological view of the records, grouped by bucket.</para>
+/// <para>
+/// Retrieves anomaly detection job results for one or more buckets.
+/// The API presents a chronological view of the records, grouped by bucket.
+/// </para>
 /// </summary>
 public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetBucketsRequestDescriptor, GetBucketsRequestParameters>
 {
@@ -389,7 +438,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	private DateTimeOffset? StartValue { get; set; }
 
 	/// <summary>
-	/// <para>Refer to the description for the `anomaly_score` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>anomaly_score</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor AnomalyScore(double? anomalyScore)
 	{
@@ -398,7 +449,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `desc` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>desc</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Desc(bool? desc = true)
 	{
@@ -407,7 +460,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `end` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>end</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor End(DateTimeOffset? end)
 	{
@@ -416,7 +471,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `exclude_interim` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>exclude_interim</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor ExcludeInterim(bool? excludeInterim = true)
 	{
@@ -425,7 +482,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `expand` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>expand</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Expand(bool? expand = true)
 	{
@@ -458,7 +517,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.Field? sort)
 	{
@@ -467,7 +528,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
 	{
@@ -476,7 +539,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the desription for the `sort` query parameter.</para>
+	/// <para>
+	/// Refer to the desription for the <c>sort</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
 	{
@@ -485,7 +550,9 @@ public sealed partial class GetBucketsRequestDescriptor : RequestDescriptor<GetB
 	}
 
 	/// <summary>
-	/// <para>Refer to the description for the `start` query parameter.</para>
+	/// <para>
+	/// Refer to the description for the <c>start</c> query parameter.
+	/// </para>
 	/// </summary>
 	public GetBucketsRequestDescriptor Start(DateTimeOffset? start)
 	{

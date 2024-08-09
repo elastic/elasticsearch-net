@@ -32,7 +32,9 @@ public sealed partial class GetDataFrameAnalyticsResponse : ElasticsearchRespons
 	public int Count { get; init; }
 
 	/// <summary>
-	/// <para>An array of data frame analytics job resources, which are sorted by the id value in ascending order.</para>
+	/// <para>
+	/// An array of data frame analytics job resources, which are sorted by the id value in ascending order.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("data_frame_analytics")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary> DataFrameAnalytics { get; init; }

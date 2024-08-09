@@ -32,38 +32,61 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class PutMappingRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the mappings are applied only to the current write index for the target.</para>
+	/// <para>
+	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
+	/// </para>
 	/// </summary>
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 }
 
 /// <summary>
-/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>
+/// Update field mappings.
+/// Adds new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields.
+/// For data streams, these changes are applied to all backing indices by default.
+/// </para>
 /// </summary>
 public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
 {
@@ -80,112 +103,177 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	internal override string OperationName => "indices.put_mapping";
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>If `true`, the mappings are applied only to the current write index for the target.</para>
+	/// <para>
+	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
 	/// <summary>
-	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// <para>
+	/// Controls whether dynamic date detection is enabled.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
 
 	/// <summary>
-	/// <para>Controls whether new fields are added dynamically.</para>
+	/// <para>
+	/// Controls whether new fields are added dynamically.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? Dynamic { get; set; }
 
 	/// <summary>
-	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// <para>
+	/// If date detection is enabled then new string fields are checked
+	/// against 'dynamic_date_formats' and if the value matches then
+	/// a new date field is added instead of string.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 
 	/// <summary>
-	/// <para>Specify dynamic templates for the mapping.</para>
+	/// <para>
+	/// Specify dynamic templates for the mapping.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_templates")]
 	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	/// <summary>
-	/// <para>Control whether field names are enabled for the index.</para>
+	/// <para>
+	/// Control whether field names are enabled for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? FieldNames { get; set; }
 
 	/// <summary>
-	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// <para>
+	/// A mapping type can have custom meta data associated with it. These are
+	/// not used at all by Elasticsearch, but can be used to store
+	/// application-specific metadata.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// <para>
+	/// Automatically map strings into numeric data types for all fields.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
 
 	/// <summary>
-	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
-	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for a field. For new fields, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field name
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data type
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 
 	/// <summary>
-	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// <para>
+	/// Enable making a routing value required on indexed documents.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? Routing { get; set; }
 
 	/// <summary>
-	/// <para>Mapping of runtime fields for the index.</para>
+	/// <para>
+	/// Mapping of runtime fields for the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? Runtime { get; set; }
 
 	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// <para>
+	/// Control whether the _source field is enabled on the index.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? Source { get; set; }
 }
 
 /// <summary>
-/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>
+/// Update field mappings.
+/// Adds new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields.
+/// For data streams, these changes are applied to all backing indices by default.
+/// </para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
 {
@@ -239,7 +327,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// <para>
+	/// Controls whether dynamic date detection is enabled.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DateDetection(bool? dateDetection = true)
 	{
@@ -248,7 +338,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Controls whether new fields are added dynamically.</para>
+	/// <para>
+	/// Controls whether new fields are added dynamically.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
@@ -257,7 +349,11 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// <para>
+	/// If date detection is enabled then new string fields are checked
+	/// against 'dynamic_date_formats' and if the value matches then
+	/// a new date field is added instead of string.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
@@ -266,7 +362,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Specify dynamic templates for the mapping.</para>
+	/// <para>
+	/// Specify dynamic templates for the mapping.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
@@ -275,7 +373,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Control whether field names are enabled for the index.</para>
+	/// <para>
+	/// Control whether field names are enabled for the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
 	{
@@ -302,7 +402,11 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// <para>
+	/// A mapping type can have custom meta data associated with it. These are
+	/// not used at all by Elasticsearch, but can be used to store
+	/// application-specific metadata.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -311,7 +415,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// <para>
+	/// Automatically map strings into numeric data types for all fields.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> NumericDetection(bool? numericDetection = true)
 	{
@@ -320,8 +426,26 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
-	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for a field. For new fields, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field name
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data type
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? properties)
 	{
@@ -344,7 +468,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// <para>
+	/// Enable making a routing value required on indexed documents.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
 	{
@@ -371,7 +497,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Mapping of runtime fields for the index.</para>
+	/// <para>
+	/// Mapping of runtime fields for the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -380,7 +508,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// <para>
+	/// Control whether the _source field is enabled on the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
 	{
@@ -510,7 +640,12 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>
+/// Update field mappings.
+/// Adds new fields to an existing data stream or index.
+/// You can also use this API to change the search settings of existing fields.
+/// For data streams, these changes are applied to all backing indices by default.
+/// </para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
 {
@@ -560,7 +695,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>Controls whether dynamic date detection is enabled.</para>
+	/// <para>
+	/// Controls whether dynamic date detection is enabled.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor DateDetection(bool? dateDetection = true)
 	{
@@ -569,7 +706,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Controls whether new fields are added dynamically.</para>
+	/// <para>
+	/// Controls whether new fields are added dynamically.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
@@ -578,7 +717,11 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>If date detection is enabled then new string fields are checked<br/>against 'dynamic_date_formats' and if the value matches then<br/>a new date field is added instead of string.</para>
+	/// <para>
+	/// If date detection is enabled then new string fields are checked
+	/// against 'dynamic_date_formats' and if the value matches then
+	/// a new date field is added instead of string.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor DynamicDateFormats(ICollection<string>? dynamicDateFormats)
 	{
@@ -587,7 +730,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Specify dynamic templates for the mapping.</para>
+	/// <para>
+	/// Specify dynamic templates for the mapping.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
@@ -596,7 +741,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Control whether field names are enabled for the index.</para>
+	/// <para>
+	/// Control whether field names are enabled for the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
 	{
@@ -623,7 +770,11 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// <para>
+	/// A mapping type can have custom meta data associated with it. These are
+	/// not used at all by Elasticsearch, but can be used to store
+	/// application-specific metadata.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -632,7 +783,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Automatically map strings into numeric data types for all fields.</para>
+	/// <para>
+	/// Automatically map strings into numeric data types for all fields.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor NumericDetection(bool? numericDetection = true)
 	{
@@ -641,8 +794,26 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Mapping for a field. For new fields, this mapping can include:</para>
-	/// <para>- Field name<br/>- Field data type<br/>- Mapping parameters</para>
+	/// <para>
+	/// Mapping for a field. For new fields, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field name
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data type
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? properties)
 	{
@@ -665,7 +836,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// <para>
+	/// Enable making a routing value required on indexed documents.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
 	{
@@ -692,7 +865,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Mapping of runtime fields for the index.</para>
+	/// <para>
+	/// Mapping of runtime fields for the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor Runtime(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -701,7 +876,9 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// <para>
+	/// Control whether the _source field is enabled on the index.
+	/// </para>
 	/// </summary>
 	public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
 	{

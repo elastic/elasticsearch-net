@@ -30,19 +30,25 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class JvmClasses
 {
 	/// <summary>
-	/// <para>Number of classes currently loaded by JVM.</para>
+	/// <para>
+	/// Number of classes currently loaded by JVM.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current_loaded_count")]
 	public long? CurrentLoadedCount { get; init; }
 
 	/// <summary>
-	/// <para>Total number of classes loaded since the JVM started.</para>
+	/// <para>
+	/// Total number of classes loaded since the JVM started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_loaded_count")]
 	public long? TotalLoadedCount { get; init; }
 
 	/// <summary>
-	/// <para>Total number of classes unloaded since the JVM started.</para>
+	/// <para>
+	/// Total number of classes unloaded since the JVM started.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_unloaded_count")]
 	public long? TotalUnloadedCount { get; init; }

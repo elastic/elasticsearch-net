@@ -34,7 +34,10 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
+/// <para>
+/// Search a vector tile.
+/// Searches a vector tile for geospatial values.
+/// </para>
 /// </summary>
 public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestParameters>
 {
@@ -51,95 +54,174 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	internal override string OperationName => "search_mvt";
 
 	/// <summary>
-	/// <para>Sub-aggregations for the geotile_grid.</para>
-	/// <para>Supports the following aggregation types:<br/>- avg<br/>- cardinality<br/>- max<br/>- min<br/>- sum</para>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// Supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// avg
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// cardinality
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// max
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// min
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// sum
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggs")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
 
 	/// <summary>
-	/// <para>Size, in pixels, of a clipping buffer outside the tile. This allows renderers<br/>to avoid outline artifacts from geometries that extend past the extent of the tile.</para>
+	/// <para>
+	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buffer")]
 	public int? Buffer { get; set; }
 
 	/// <summary>
-	/// <para>If false, the meta layer’s feature is the bounding box of the tile.<br/>If true, the meta layer’s feature is a bounding box resulting from a<br/>geo_bounds aggregation. The aggregation runs on <field> values that intersect<br/>the <zoom>/<x>/<y> tile with wrap_longitude set to false. The resulting<br/>bounding box may be larger than the vector tile.</para>
+	/// <para>
+	/// If false, the meta layer’s feature is the bounding box of the tile.
+	/// If true, the meta layer’s feature is a bounding box resulting from a
+	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// bounding box may be larger than the vector tile.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("exact_bounds")]
 	public bool? ExactBounds { get; set; }
 
 	/// <summary>
-	/// <para>Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.</para>
+	/// <para>
+	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("extent")]
 	public int? Extent { get; set; }
 
 	/// <summary>
-	/// <para>Fields to return in the `hits` layer. Supports wildcards (`*`).<br/>This parameter does not support fields with array values. Fields with array<br/>values may return inconsistent results.</para>
+	/// <para>
+	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// This parameter does not support fields with array values. Fields with array
+	/// values may return inconsistent results.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
-	/// <para>Aggregation used to create a grid for the `field`.</para>
+	/// <para>
+	/// Aggregation used to create a grid for the <c>field</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grid_agg")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAgg { get; set; }
 
 	/// <summary>
-	/// <para>Additional zoom levels available through the aggs layer. For example, if <zoom> is 7<br/>and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results<br/>don’t include the aggs layer.</para>
+	/// <para>
+	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
+	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don’t include the aggs layer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grid_precision")]
 	public int? GridPrecision { get; set; }
 
 	/// <summary>
-	/// <para>Determines the geometry type for features in the aggs layer. In the aggs layer,<br/>each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon<br/>of the cells bounding box. If 'point' each feature is a Point that is the centroid<br/>of the cell.</para>
+	/// <para>
+	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
+	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
+	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// of the cell.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("grid_type")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridType { get; set; }
 
 	/// <summary>
-	/// <para>Query DSL used to filter documents for the search.</para>
+	/// <para>
+	/// Query DSL used to filter documents for the search.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
-	/// <para>Maximum number of features to return in the hits layer. Accepts 0-10000.<br/>If 0, results don’t include the hits layer.</para>
+	/// <para>
+	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don’t include the hits layer.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>Sorts features in the hits layer. By default, the API calculates a bounding<br/>box for each feature. It sorts features based on this box’s diagonal length,<br/>from longest to shortest.</para>
+	/// <para>
+	/// Sorts features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// from longest to shortest.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If `true`, the exact number<br/>of hits is returned at the cost of some performance. If `false`, the response does<br/>not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
+	/// not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
-	/// <para>If `true`, the hits and aggs layers will contain additional point features representing<br/>suggested label positions for the original features.</para>
+	/// <para>
+	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
+	/// suggested label positions for the original features.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("with_labels")]
 	public bool? WithLabels { get; set; }
 }
 
 /// <summary>
-/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
+/// <para>
+/// Search a vector tile.
+/// Searches a vector tile for geospatial values.
+/// </para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescriptor<SearchMvtRequestDescriptor<TDocument>, SearchMvtRequestParameters>
 {
@@ -212,8 +294,39 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	private bool? WithLabelsValue { get; set; }
 
 	/// <summary>
-	/// <para>Sub-aggregations for the geotile_grid.</para>
-	/// <para>Supports the following aggregation types:<br/>- avg<br/>- cardinality<br/>- max<br/>- min<br/>- sum</para>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// Supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// avg
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// cardinality
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// max
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// min
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// sum
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
@@ -222,7 +335,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Size, in pixels, of a clipping buffer outside the tile. This allows renderers<br/>to avoid outline artifacts from geometries that extend past the extent of the tile.</para>
+	/// <para>
+	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Buffer(int? buffer)
 	{
@@ -231,7 +347,13 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>If false, the meta layer’s feature is the bounding box of the tile.<br/>If true, the meta layer’s feature is a bounding box resulting from a<br/>geo_bounds aggregation. The aggregation runs on <field> values that intersect<br/>the <zoom>/<x>/<y> tile with wrap_longitude set to false. The resulting<br/>bounding box may be larger than the vector tile.</para>
+	/// <para>
+	/// If false, the meta layer’s feature is the bounding box of the tile.
+	/// If true, the meta layer’s feature is a bounding box resulting from a
+	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// bounding box may be larger than the vector tile.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> ExactBounds(bool? exactBounds = true)
 	{
@@ -240,7 +362,9 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.</para>
+	/// <para>
+	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Extent(int? extent)
 	{
@@ -249,7 +373,11 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Fields to return in the `hits` layer. Supports wildcards (`*`).<br/>This parameter does not support fields with array values. Fields with array<br/>values may return inconsistent results.</para>
+	/// <para>
+	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// This parameter does not support fields with array values. Fields with array
+	/// values may return inconsistent results.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
@@ -258,7 +386,9 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Aggregation used to create a grid for the `field`.</para>
+	/// <para>
+	/// Aggregation used to create a grid for the <c>field</c>.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
 	{
@@ -267,7 +397,11 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Additional zoom levels available through the aggs layer. For example, if <zoom> is 7<br/>and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results<br/>don’t include the aggs layer.</para>
+	/// <para>
+	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
+	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don’t include the aggs layer.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> GridPrecision(int? gridPrecision)
 	{
@@ -276,7 +410,12 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Determines the geometry type for features in the aggs layer. In the aggs layer,<br/>each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon<br/>of the cells bounding box. If 'point' each feature is a Point that is the centroid<br/>of the cell.</para>
+	/// <para>
+	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
+	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
+	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// of the cell.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? gridType)
 	{
@@ -285,7 +424,9 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Query DSL used to filter documents for the search.</para>
+	/// <para>
+	/// Query DSL used to filter documents for the search.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -312,7 +453,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
@@ -321,7 +465,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Maximum number of features to return in the hits layer. Accepts 0-10000.<br/>If 0, results don’t include the hits layer.</para>
+	/// <para>
+	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don’t include the hits layer.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Size(int? size)
 	{
@@ -330,7 +477,11 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Sorts features in the hits layer. By default, the API calculates a bounding<br/>box for each feature. It sorts features based on this box’s diagonal length,<br/>from longest to shortest.</para>
+	/// <para>
+	/// Sorts features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// from longest to shortest.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -369,7 +520,11 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If `true`, the exact number<br/>of hits is returned at the cost of some performance. If `false`, the response does<br/>not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
+	/// not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -378,7 +533,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>If `true`, the hits and aggs layers will contain additional point features representing<br/>suggested label positions for the original features.</para>
+	/// <para>
+	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
+	/// suggested label positions for the original features.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor<TDocument> WithLabels(bool? withLabels = true)
 	{
@@ -511,7 +669,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
+/// <para>
+/// Search a vector tile.
+/// Searches a vector tile for geospatial values.
+/// </para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<SearchMvtRequestDescriptor, SearchMvtRequestParameters>
 {
@@ -580,8 +741,39 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	private bool? WithLabelsValue { get; set; }
 
 	/// <summary>
-	/// <para>Sub-aggregations for the geotile_grid.</para>
-	/// <para>Supports the following aggregation types:<br/>- avg<br/>- cardinality<br/>- max<br/>- min<br/>- sum</para>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// Supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// avg
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// cardinality
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// max
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// min
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// sum
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public SearchMvtRequestDescriptor Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
 	{
@@ -590,7 +782,10 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Size, in pixels, of a clipping buffer outside the tile. This allows renderers<br/>to avoid outline artifacts from geometries that extend past the extent of the tile.</para>
+	/// <para>
+	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Buffer(int? buffer)
 	{
@@ -599,7 +794,13 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>If false, the meta layer’s feature is the bounding box of the tile.<br/>If true, the meta layer’s feature is a bounding box resulting from a<br/>geo_bounds aggregation. The aggregation runs on <field> values that intersect<br/>the <zoom>/<x>/<y> tile with wrap_longitude set to false. The resulting<br/>bounding box may be larger than the vector tile.</para>
+	/// <para>
+	/// If false, the meta layer’s feature is the bounding box of the tile.
+	/// If true, the meta layer’s feature is a bounding box resulting from a
+	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// bounding box may be larger than the vector tile.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor ExactBounds(bool? exactBounds = true)
 	{
@@ -608,7 +809,9 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.</para>
+	/// <para>
+	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Extent(int? extent)
 	{
@@ -617,7 +820,11 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Fields to return in the `hits` layer. Supports wildcards (`*`).<br/>This parameter does not support fields with array values. Fields with array<br/>values may return inconsistent results.</para>
+	/// <para>
+	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// This parameter does not support fields with array values. Fields with array
+	/// values may return inconsistent results.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
@@ -626,7 +833,9 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Aggregation used to create a grid for the `field`.</para>
+	/// <para>
+	/// Aggregation used to create a grid for the <c>field</c>.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
 	{
@@ -635,7 +844,11 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Additional zoom levels available through the aggs layer. For example, if <zoom> is 7<br/>and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results<br/>don’t include the aggs layer.</para>
+	/// <para>
+	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
+	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don’t include the aggs layer.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor GridPrecision(int? gridPrecision)
 	{
@@ -644,7 +857,12 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Determines the geometry type for features in the aggs layer. In the aggs layer,<br/>each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon<br/>of the cells bounding box. If 'point' each feature is a Point that is the centroid<br/>of the cell.</para>
+	/// <para>
+	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
+	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
+	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// of the cell.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? gridType)
 	{
@@ -653,7 +871,9 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Query DSL used to filter documents for the search.</para>
+	/// <para>
+	/// Query DSL used to filter documents for the search.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
@@ -680,7 +900,10 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{
@@ -689,7 +912,10 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Maximum number of features to return in the hits layer. Accepts 0-10000.<br/>If 0, results don’t include the hits layer.</para>
+	/// <para>
+	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don’t include the hits layer.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Size(int? size)
 	{
@@ -698,7 +924,11 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Sorts features in the hits layer. By default, the API calculates a bounding<br/>box for each feature. It sorts features based on this box’s diagonal length,<br/>from longest to shortest.</para>
+	/// <para>
+	/// Sorts features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// from longest to shortest.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
@@ -737,7 +967,11 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If `true`, the exact number<br/>of hits is returned at the cost of some performance. If `false`, the response does<br/>not include the total number of hits matching the query.</para>
+	/// <para>
+	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
+	/// not include the total number of hits matching the query.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
@@ -746,7 +980,10 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	}
 
 	/// <summary>
-	/// <para>If `true`, the hits and aggs layers will contain additional point features representing<br/>suggested label positions for the original features.</para>
+	/// <para>
+	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
+	/// suggested label positions for the original features.
+	/// </para>
 	/// </summary>
 	public SearchMvtRequestDescriptor WithLabels(bool? withLabels = true)
 	{

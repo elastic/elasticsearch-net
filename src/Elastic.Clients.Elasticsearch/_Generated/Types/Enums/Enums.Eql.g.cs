@@ -32,12 +32,16 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 public enum ResultPosition
 {
 	/// <summary>
-	/// <para>Return the most recent matches, similar to the Unix tail command.</para>
+	/// <para>
+	/// Return the most recent matches, similar to the Unix tail command.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "tail")]
 	Tail,
 	/// <summary>
-	/// <para>Return the earliest matches, similar to the Unix head command.</para>
+	/// <para>
+	/// Return the earliest matches, similar to the Unix head command.
+	/// </para>
 	/// </summary>
 	[EnumMember(Value = "head")]
 	Head

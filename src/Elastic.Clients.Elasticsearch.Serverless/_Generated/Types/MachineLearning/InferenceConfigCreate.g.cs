@@ -29,7 +29,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 /// <summary>
-/// <para>Inference configuration provided when storing the model config</para>
+/// <para>
+/// Inference configuration provided when storing the model config
+/// </para>
 /// </summary>
 [JsonConverter(typeof(InferenceConfigCreateConverter))]
 public sealed partial class InferenceConfigCreate

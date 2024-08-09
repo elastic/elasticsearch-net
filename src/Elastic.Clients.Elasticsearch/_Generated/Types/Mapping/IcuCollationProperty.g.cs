@@ -54,7 +54,9 @@ public sealed partial class IcuCollationProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
-	/// <para>Should the field be searchable?</para>
+	/// <para>
+	/// Should the field be searchable?
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
@@ -64,7 +66,9 @@ public sealed partial class IcuCollationProperty : IProperty
 	public string? Language { get; set; }
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
@@ -72,7 +76,9 @@ public sealed partial class IcuCollationProperty : IProperty
 	public bool? Norms { get; set; }
 
 	/// <summary>
-	/// <para>Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.</para>
+	/// <para>
+	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
@@ -213,7 +219,9 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Should the field be searchable?</para>
+	/// <para>
+	/// Should the field be searchable?
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
@@ -234,7 +242,9 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -249,7 +259,9 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.</para>
+	/// <para>
+	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor<TDocument> NullValue(string? nullValue)
 	{
@@ -622,7 +634,9 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Should the field be searchable?</para>
+	/// <para>
+	/// Should the field be searchable?
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor Index(bool? index = true)
 	{
@@ -643,7 +657,9 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Metadata about the field.</para>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
@@ -658,7 +674,9 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	}
 
 	/// <summary>
-	/// <para>Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.</para>
+	/// <para>
+	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
+	/// </para>
 	/// </summary>
 	public IcuCollationPropertyDescriptor NullValue(string? nullValue)
 	{

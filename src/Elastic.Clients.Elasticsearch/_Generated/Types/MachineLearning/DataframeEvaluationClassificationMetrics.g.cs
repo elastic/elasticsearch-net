@@ -30,31 +30,41 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class DataframeEvaluationClassificationMetrics
 {
 	/// <summary>
-	/// <para>Accuracy of predictions (per-class and overall).</para>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("accuracy")]
 	public IDictionary<string, object>? Accuracy { get; set; }
 
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
 	/// <summary>
-	/// <para>Multiclass confusion matrix.</para>
+	/// <para>
+	/// Multiclass confusion matrix.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("multiclass_confusion_matrix")]
 	public IDictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 
 	/// <summary>
-	/// <para>Precision of predictions (per-class and average).</para>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public IDictionary<string, object>? Precision { get; set; }
 
 	/// <summary>
-	/// <para>Recall of predictions (per-class and average).</para>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("recall")]
 	public IDictionary<string, object>? Recall { get; set; }
@@ -77,7 +87,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	private IDictionary<string, object>? RecallValue { get; set; }
 
 	/// <summary>
-	/// <para>Accuracy of predictions (per-class and overall).</para>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsDescriptor Accuracy(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -86,7 +98,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	}
 
 	/// <summary>
-	/// <para>The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.</para>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? aucRoc)
 	{
@@ -113,7 +127,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	}
 
 	/// <summary>
-	/// <para>Multiclass confusion matrix.</para>
+	/// <para>
+	/// Multiclass confusion matrix.
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -122,7 +138,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	}
 
 	/// <summary>
-	/// <para>Precision of predictions (per-class and average).</para>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsDescriptor Precision(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
@@ -131,7 +149,9 @@ public sealed partial class DataframeEvaluationClassificationMetricsDescriptor :
 	}
 
 	/// <summary>
-	/// <para>Recall of predictions (per-class and average).</para>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
 	/// </summary>
 	public DataframeEvaluationClassificationMetricsDescriptor Recall(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{

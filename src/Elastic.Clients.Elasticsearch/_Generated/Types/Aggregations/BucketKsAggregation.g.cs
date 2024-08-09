@@ -28,30 +28,57 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
-/// <para>A sibling pipeline aggregation which executes a two sample Kolmogorov–Smirnov test (referred<br/>to as a "K-S test" from now on) against a provided distribution, and the distribution implied<br/>by the documents counts in the configured sibling aggregation. Specifically, for some metric,<br/>assuming that the percentile intervals of the metric are known beforehand or have been computed<br/>by an aggregation, then one would use range aggregation for the sibling to compute the p-value<br/>of the distribution difference between the metric and the restriction of that metric to a subset<br/>of the documents. A natural use case is if the sibling aggregation range aggregation nested in a<br/>terms aggregation, in which case one compares the overall distribution of metric to its restriction<br/>to each term.</para>
+/// <para>
+/// A sibling pipeline aggregation which executes a two sample Kolmogorov–Smirnov test (referred
+/// to as a "K-S test" from now on) against a provided distribution, and the distribution implied
+/// by the documents counts in the configured sibling aggregation. Specifically, for some metric,
+/// assuming that the percentile intervals of the metric are known beforehand or have been computed
+/// by an aggregation, then one would use range aggregation for the sibling to compute the p-value
+/// of the distribution difference between the metric and the restriction of that metric to a subset
+/// of the documents. A natural use case is if the sibling aggregation range aggregation nested in a
+/// terms aggregation, in which case one compares the overall distribution of metric to its restriction
+/// to each term.
+/// </para>
 /// </summary>
 public sealed partial class BucketKsAggregation
 {
 	/// <summary>
-	/// <para>A list of string values indicating which K-S test alternative to calculate. The valid values<br/>are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used<br/>when calculating the K-S test. Default value is all possible alternative hypotheses.</para>
+	/// <para>
+	/// A list of string values indicating which K-S test alternative to calculate. The valid values
+	/// are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used
+	/// when calculating the K-S test. Default value is all possible alternative hypotheses.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("alternative")]
 	public ICollection<string>? Alternative { get; set; }
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
-	/// <para>A list of doubles indicating the distribution of the samples with which to compare to the `buckets_path` results.<br/>In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual<br/>document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall<br/>documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a<br/>metric to define the bucket end points.</para>
+	/// <para>
+	/// A list of doubles indicating the distribution of the samples with which to compare to the <c>buckets_path</c> results.
+	/// In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual
+	/// document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall
+	/// documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a
+	/// metric to define the bucket end points.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fractions")]
 	public ICollection<double>? Fractions { get; set; }
 
 	/// <summary>
-	/// <para>Indicates the sampling methodology when calculating the K-S test. Note, this is sampling of the returned values.<br/>This determines the cumulative distribution function (CDF) points used comparing the two samples. Default is<br/>`upper_tail`, which emphasizes the upper end of the CDF points. Valid options are: `upper_tail`, `uniform`,<br/>and `lower_tail`.</para>
+	/// <para>
+	/// Indicates the sampling methodology when calculating the K-S test. Note, this is sampling of the returned values.
+	/// This determines the cumulative distribution function (CDF) points used comparing the two samples. Default is
+	/// <c>upper_tail</c>, which emphasizes the upper end of the CDF points. Valid options are: <c>upper_tail</c>, <c>uniform</c>,
+	/// and <c>lower_tail</c>.
+	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sampling_method")]
 	public string? SamplingMethod { get; set; }
@@ -60,7 +87,17 @@ public sealed partial class BucketKsAggregation
 }
 
 /// <summary>
-/// <para>A sibling pipeline aggregation which executes a two sample Kolmogorov–Smirnov test (referred<br/>to as a "K-S test" from now on) against a provided distribution, and the distribution implied<br/>by the documents counts in the configured sibling aggregation. Specifically, for some metric,<br/>assuming that the percentile intervals of the metric are known beforehand or have been computed<br/>by an aggregation, then one would use range aggregation for the sibling to compute the p-value<br/>of the distribution difference between the metric and the restriction of that metric to a subset<br/>of the documents. A natural use case is if the sibling aggregation range aggregation nested in a<br/>terms aggregation, in which case one compares the overall distribution of metric to its restriction<br/>to each term.</para>
+/// <para>
+/// A sibling pipeline aggregation which executes a two sample Kolmogorov–Smirnov test (referred
+/// to as a "K-S test" from now on) against a provided distribution, and the distribution implied
+/// by the documents counts in the configured sibling aggregation. Specifically, for some metric,
+/// assuming that the percentile intervals of the metric are known beforehand or have been computed
+/// by an aggregation, then one would use range aggregation for the sibling to compute the p-value
+/// of the distribution difference between the metric and the restriction of that metric to a subset
+/// of the documents. A natural use case is if the sibling aggregation range aggregation nested in a
+/// terms aggregation, in which case one compares the overall distribution of metric to its restriction
+/// to each term.
+/// </para>
 /// </summary>
 public sealed partial class BucketKsAggregationDescriptor : SerializableDescriptor<BucketKsAggregationDescriptor>
 {
@@ -76,7 +113,11 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	private string? SamplingMethodValue { get; set; }
 
 	/// <summary>
-	/// <para>A list of string values indicating which K-S test alternative to calculate. The valid values<br/>are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used<br/>when calculating the K-S test. Default value is all possible alternative hypotheses.</para>
+	/// <para>
+	/// A list of string values indicating which K-S test alternative to calculate. The valid values
+	/// are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used
+	/// when calculating the K-S test. Default value is all possible alternative hypotheses.
+	/// </para>
 	/// </summary>
 	public BucketKsAggregationDescriptor Alternative(ICollection<string>? alternative)
 	{
@@ -85,7 +126,9 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// <para>
+	/// Path to the buckets that contain one set of values to correlate.
+	/// </para>
 	/// </summary>
 	public BucketKsAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
 	{
@@ -94,7 +137,13 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>A list of doubles indicating the distribution of the samples with which to compare to the `buckets_path` results.<br/>In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual<br/>document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall<br/>documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a<br/>metric to define the bucket end points.</para>
+	/// <para>
+	/// A list of doubles indicating the distribution of the samples with which to compare to the <c>buckets_path</c> results.
+	/// In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual
+	/// document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall
+	/// documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a
+	/// metric to define the bucket end points.
+	/// </para>
 	/// </summary>
 	public BucketKsAggregationDescriptor Fractions(ICollection<double>? fractions)
 	{
@@ -103,7 +152,12 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Indicates the sampling methodology when calculating the K-S test. Note, this is sampling of the returned values.<br/>This determines the cumulative distribution function (CDF) points used comparing the two samples. Default is<br/>`upper_tail`, which emphasizes the upper end of the CDF points. Valid options are: `upper_tail`, `uniform`,<br/>and `lower_tail`.</para>
+	/// <para>
+	/// Indicates the sampling methodology when calculating the K-S test. Note, this is sampling of the returned values.
+	/// This determines the cumulative distribution function (CDF) points used comparing the two samples. Default is
+	/// <c>upper_tail</c>, which emphasizes the upper end of the CDF points. Valid options are: <c>upper_tail</c>, <c>uniform</c>,
+	/// and <c>lower_tail</c>.
+	/// </para>
 	/// </summary>
 	public BucketKsAggregationDescriptor SamplingMethod(string? samplingMethod)
 	{
