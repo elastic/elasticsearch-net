@@ -7,15 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
-
-using Elastic.Clients.Elasticsearch.Requests;
+using System.Threading;
 using Elastic.Transport;
 using Elastic.Transport.Diagnostics;
-using Elastic.Transport.Products.Elasticsearch;
+
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
+using Elastic.Clients.Elasticsearch.Requests;
+#endif
+
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 /// <summary>
 /// A strongly-typed client for communicating with Elasticsearch server endpoints.
@@ -84,6 +92,8 @@ public partial class ElasticsearchClient
 	public Serializer SourceSerializer => _transport.Configuration.SourceSerializer;
 	public ITransport<IElasticsearchClientSettings> Transport => _transport;
 
+	private partial void SetupNamespaces();
+
 	private volatile int _productCheckStatus;
 
 	private enum ProductCheckStatus
@@ -93,8 +103,6 @@ public partial class ElasticsearchClient
 		Succeeded = 2,
 		Failed = 3
 	}
-
-	private partial void SetupNamespaces();
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
