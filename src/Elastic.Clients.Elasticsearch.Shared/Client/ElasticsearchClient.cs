@@ -92,9 +92,7 @@ public partial class ElasticsearchClient
 	public Serializer SourceSerializer => _transport.Configuration.SourceSerializer;
 	public ITransport<IElasticsearchClientSettings> Transport => _transport;
 
-	private partial void SetupNamespaces();
-
-	private volatile int _productCheckStatus;
+	private int _productCheckStatus;
 
 	private enum ProductCheckStatus
 	{
@@ -103,6 +101,8 @@ public partial class ElasticsearchClient
 		Succeeded = 2,
 		Failed = 3
 	}
+
+	private partial void SetupNamespaces();
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
@@ -183,13 +183,12 @@ public partial class ElasticsearchClient
 			}
 			catch
 			{
-				// Re-try product check on next request
+				// Re-try product check on next request.
 
-				Interlocked.CompareExchange(
-					ref _productCheckStatus,
-					(int)ProductCheckStatus.NotChecked,
-					(int)ProductCheckStatus.InProgress
-				);
+				// 32-bit read/write operations are atomic and due to the initial memory barrier, we can be sure that
+				// no other thread executes the product check at the same time. Locked access is not required here.
+				if (_productCheckStatus is (int)ProductCheckStatus.InProgress)
+					_productCheckStatus = (int)ProductCheckStatus.NotChecked;
 
 				throw;
 			}
@@ -236,7 +235,7 @@ public partial class ElasticsearchClient
 			// Evaluate product check result
 
 			var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
-										values.Single().Equals("Elasticsearch", StringComparison.Ordinal);
+										values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
 
 			_productCheckStatus = productCheckSucceeded
 				? (int)ProductCheckStatus.Succeeded
