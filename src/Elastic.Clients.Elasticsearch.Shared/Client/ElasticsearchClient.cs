@@ -145,6 +145,8 @@ public partial class ElasticsearchClient
 		where TRequestParameters : RequestParameters, new()
 	{
 		// The product check modifies request parameters and therefore must not be executed concurrently.
+		// We use a lockless CAS approach to make sure that only a single product check request is executed at a time.
+		// We do not guarantee that the product check is always performed on the first request.
 
 		var productCheckStatus = Interlocked.CompareExchange(
 			ref _productCheckStatus,
@@ -174,6 +176,26 @@ public partial class ElasticsearchClient
 		}
 
 		async ValueTask<TResponse> SendRequestWithProductCheck()
+		{
+			try
+			{
+				return await SendRequestWithProductCheckCore().ConfigureAwait(false);
+			}
+			catch
+			{
+				// Re-try product check on next request
+
+				Interlocked.CompareExchange(
+					ref _productCheckStatus,
+					(int)ProductCheckStatus.NotChecked,
+					(int)ProductCheckStatus.InProgress
+				);
+
+				throw;
+			}
+		}
+
+		async ValueTask<TResponse> SendRequestWithProductCheckCore()
 		{
 			// Attach product check header
 
