@@ -48,7 +48,7 @@ public sealed partial class GetFiltersRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves filters.
+/// Get filters.
 /// You can get a single filter or all filters.
 /// </para>
 /// </summary>
@@ -89,7 +89,7 @@ public sealed partial class GetFiltersRequest : PlainRequest<GetFiltersRequestPa
 
 /// <summary>
 /// <para>
-/// Retrieves filters.
+/// Get filters.
 /// You can get a single filter or all filters.
 /// </para>
 /// </summary>

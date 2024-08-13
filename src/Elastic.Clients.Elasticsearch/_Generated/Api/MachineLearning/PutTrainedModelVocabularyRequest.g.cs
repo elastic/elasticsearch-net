@@ -35,7 +35,7 @@ public sealed partial class PutTrainedModelVocabularyRequestParameters : Request
 
 /// <summary>
 /// <para>
-/// Creates a trained model vocabulary.
+/// Create a trained model vocabulary.
 /// This API is supported only for natural language processing (NLP) models.
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>
@@ -81,7 +81,7 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 
 /// <summary>
 /// <para>
-/// Creates a trained model vocabulary.
+/// Create a trained model vocabulary.
 /// This API is supported only for natural language processing (NLP) models.
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>

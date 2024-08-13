@@ -35,7 +35,7 @@ public sealed partial class UpdateDataFrameAnalyticsRequestParameters : RequestP
 
 /// <summary>
 /// <para>
-/// Updates an existing data frame analytics job.
+/// Update a data frame analytics job.
 /// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<UpdateDataFrameAnalyticsRequestParameters>
@@ -95,7 +95,7 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 
 /// <summary>
 /// <para>
-/// Updates an existing data frame analytics job.
+/// Update a data frame analytics job.
 /// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsRequestParameters>
@@ -210,7 +210,7 @@ public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor<TDocument>
 
 /// <summary>
 /// <para>
-/// Updates an existing data frame analytics job.
+/// Update a data frame analytics job.
 /// </para>
 /// </summary>
 public sealed partial class UpdateDataFrameAnalyticsRequestDescriptor : RequestDescriptor<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsRequestParameters>

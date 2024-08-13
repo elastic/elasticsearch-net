@@ -35,7 +35,7 @@ public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Req
 
 /// <summary>
 /// <para>
-/// Creates part of a trained model definition.
+/// Create part of a trained model definition.
 /// </para>
 /// </summary>
 public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<PutTrainedModelDefinitionPartRequestParameters>
@@ -79,7 +79,7 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 
 /// <summary>
 /// <para>
-/// Creates part of a trained model definition.
+/// Create part of a trained model definition.
 /// </para>
 /// </summary>
 public sealed partial class PutTrainedModelDefinitionPartRequestDescriptor : RequestDescriptor<PutTrainedModelDefinitionPartRequestDescriptor, PutTrainedModelDefinitionPartRequestParameters>

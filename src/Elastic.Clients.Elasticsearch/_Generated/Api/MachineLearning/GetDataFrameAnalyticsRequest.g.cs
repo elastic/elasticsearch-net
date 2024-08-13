@@ -88,7 +88,7 @@ public sealed partial class GetDataFrameAnalyticsRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for data frame analytics jobs.
+/// Get data frame analytics job configuration info.
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.
@@ -173,7 +173,7 @@ public sealed partial class GetDataFrameAnalyticsRequest : PlainRequest<GetDataF
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for data frame analytics jobs.
+/// Get data frame analytics job configuration info.
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.
@@ -217,7 +217,7 @@ public sealed partial class GetDataFrameAnalyticsRequestDescriptor<TDocument> : 
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for data frame analytics jobs.
+/// Get data frame analytics job configuration info.
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.
