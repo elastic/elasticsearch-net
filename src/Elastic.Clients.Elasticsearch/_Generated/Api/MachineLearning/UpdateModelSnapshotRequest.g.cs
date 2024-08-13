@@ -35,6 +35,7 @@ public sealed partial class UpdateModelSnapshotRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
+/// Update a snapshot.
 /// Updates certain properties of a snapshot.
 /// </para>
 /// </summary>
@@ -73,6 +74,7 @@ public sealed partial class UpdateModelSnapshotRequest : PlainRequest<UpdateMode
 
 /// <summary>
 /// <para>
+/// Update a snapshot.
 /// Updates certain properties of a snapshot.
 /// </para>
 /// </summary>

@@ -96,7 +96,7 @@ public sealed partial class GetInfluencersRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more influencers.
+/// Get anomaly detection job results for influencers.
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.
@@ -198,7 +198,7 @@ public sealed partial class GetInfluencersRequest : PlainRequest<GetInfluencersR
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more influencers.
+/// Get anomaly detection job results for influencers.
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.
@@ -294,7 +294,7 @@ public sealed partial class GetInfluencersRequestDescriptor<TDocument> : Request
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more influencers.
+/// Get anomaly detection job results for influencers.
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.

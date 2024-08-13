@@ -76,7 +76,8 @@ public sealed partial class GetTrainedModelsStatsRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for trained models. You can get usage information for multiple trained
+/// Get trained models usage info.
+/// You can get usage information for multiple trained
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 /// </para>
 /// </summary>
@@ -146,7 +147,8 @@ public sealed partial class GetTrainedModelsStatsRequest : PlainRequest<GetTrain
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for trained models. You can get usage information for multiple trained
+/// Get trained models usage info.
+/// You can get usage information for multiple trained
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 /// </para>
 /// </summary>

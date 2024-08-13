@@ -249,7 +249,7 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 
 /// <summary>
 /// <para>
-/// Instantiates a datafeed.
+/// Create a datafeed.
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -433,7 +433,7 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 
 /// <summary>
 /// <para>
-/// Instantiates a datafeed.
+/// Create a datafeed.
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -866,7 +866,7 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Instantiates a datafeed.
+/// Create a datafeed.
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).

@@ -48,7 +48,7 @@ public sealed partial class GetCalendarsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for calendars.
+/// Get calendar configuration info.
 /// </para>
 /// </summary>
 public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsRequestParameters>
@@ -96,7 +96,7 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for calendars.
+/// Get calendar configuration info.
 /// </para>
 /// </summary>
 public sealed partial class GetCalendarsRequestDescriptor : RequestDescriptor<GetCalendarsRequestDescriptor, GetCalendarsRequestParameters>

@@ -63,7 +63,7 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : Requ
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+/// Get anomaly detection job model snapshot upgrade usage info.
 /// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<GetModelSnapshotUpgradeStatsRequestParameters>
@@ -113,7 +113,7 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<G
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+/// Get anomaly detection job model snapshot upgrade usage info.
 /// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotUpgradeStatsRequestDescriptor : RequestDescriptor<GetModelSnapshotUpgradeStatsRequestDescriptor, GetModelSnapshotUpgradeStatsRequestParameters>

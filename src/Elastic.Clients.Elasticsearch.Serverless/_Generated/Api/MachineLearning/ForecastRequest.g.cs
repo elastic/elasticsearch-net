@@ -35,13 +35,13 @@ public sealed partial class ForecastRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Predicts the future behavior of a time series by using its historical
-/// behavior.
+/// Predict future behavior of a time series.
 /// </para>
 /// <para>
 /// Forecasts are not supported for jobs that perform population analysis; an
 /// error occurs if you try to create a forecast for a job that has an
-/// <c>over_field_name</c> in its configuration.
+/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+/// based on historical data.
 /// </para>
 /// </summary>
 public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParameters>
@@ -85,13 +85,13 @@ public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParame
 
 /// <summary>
 /// <para>
-/// Predicts the future behavior of a time series by using its historical
-/// behavior.
+/// Predict future behavior of a time series.
 /// </para>
 /// <para>
 /// Forecasts are not supported for jobs that perform population analysis; an
 /// error occurs if you try to create a forecast for a job that has an
-/// <c>over_field_name</c> in its configuration.
+/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+/// based on historical data.
 /// </para>
 /// </summary>
 public sealed partial class ForecastRequestDescriptor : RequestDescriptor<ForecastRequestDescriptor, ForecastRequestParameters>

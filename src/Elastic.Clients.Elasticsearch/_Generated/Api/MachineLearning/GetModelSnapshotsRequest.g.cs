@@ -48,7 +48,7 @@ public sealed partial class GetModelSnapshotsRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves information about model snapshots.
+/// Get model snapshots info.
 /// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnapshotsRequestParameters>
@@ -122,7 +122,7 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 
 /// <summary>
 /// <para>
-/// Retrieves information about model snapshots.
+/// Get model snapshots info.
 /// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : RequestDescriptor<GetModelSnapshotsRequestDescriptor<TDocument>, GetModelSnapshotsRequestParameters>
@@ -307,7 +307,7 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 
 /// <summary>
 /// <para>
-/// Retrieves information about model snapshots.
+/// Get model snapshots info.
 /// </para>
 /// </summary>
 public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescriptor<GetModelSnapshotsRequestDescriptor, GetModelSnapshotsRequestParameters>
