@@ -48,7 +48,7 @@ public sealed partial class GetRecordsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly records for an anomaly detection job.
+/// Get anomaly records for an anomaly detection job.
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.
@@ -144,7 +144,7 @@ public sealed partial class GetRecordsRequest : PlainRequest<GetRecordsRequestPa
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly records for an anomaly detection job.
+/// Get anomaly records for an anomaly detection job.
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.
@@ -365,7 +365,7 @@ public sealed partial class GetRecordsRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly records for an anomaly detection job.
+/// Get anomaly records for an anomaly detection job.
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.

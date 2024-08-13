@@ -51,7 +51,8 @@ public sealed partial class PutTrainedModelRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Enables you to supply a trained model that is not created by data frame analytics.
+/// Create a trained model.
+/// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedModelRequestParameters>
@@ -192,7 +193,8 @@ public sealed partial class PutTrainedModelRequest : PlainRequest<PutTrainedMode
 
 /// <summary>
 /// <para>
-/// Enables you to supply a trained model that is not created by data frame analytics.
+/// Create a trained model.
+/// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<PutTrainedModelRequestDescriptor<TDocument>, PutTrainedModelRequestParameters>
@@ -562,7 +564,8 @@ public sealed partial class PutTrainedModelRequestDescriptor<TDocument> : Reques
 
 /// <summary>
 /// <para>
-/// Enables you to supply a trained model that is not created by data frame analytics.
+/// Create a trained model.
+/// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
 public sealed partial class PutTrainedModelRequestDescriptor : RequestDescriptor<PutTrainedModelRequestDescriptor, PutTrainedModelRequestParameters>

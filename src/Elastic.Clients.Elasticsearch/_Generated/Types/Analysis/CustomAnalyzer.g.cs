@@ -30,8 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class CustomAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("char_filter")]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? CharFilter { get; set; }
 	[JsonInclude, JsonPropertyName("filter")]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Filter { get; set; }
 	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
@@ -94,13 +96,13 @@ public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptor<Cu
 		if (CharFilterValue is not null)
 		{
 			writer.WritePropertyName("char_filter");
-			JsonSerializer.Serialize(writer, CharFilterValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(CharFilterValue, writer, options);
 		}
 
 		if (FilterValue is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(FilterValue, writer, options);
 		}
 
 		if (PositionIncrementGapValue.HasValue)

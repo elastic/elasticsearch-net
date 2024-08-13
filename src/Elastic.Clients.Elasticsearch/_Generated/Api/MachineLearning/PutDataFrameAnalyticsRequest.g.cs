@@ -35,7 +35,7 @@ public sealed partial class PutDataFrameAnalyticsRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Instantiates a data frame analytics job.
+/// Create a data frame analytics job.
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// </para>
@@ -168,7 +168,7 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 
 /// <summary>
 /// <para>
-/// Instantiates a data frame analytics job.
+/// Create a data frame analytics job.
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// </para>
@@ -538,7 +538,7 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 
 /// <summary>
 /// <para>
-/// Instantiates a data frame analytics job.
+/// Create a data frame analytics job.
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// </para>

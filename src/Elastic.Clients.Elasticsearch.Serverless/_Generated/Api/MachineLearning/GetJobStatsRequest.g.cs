@@ -64,7 +64,7 @@ public sealed partial class GetJobStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for anomaly detection jobs.
+/// Get anomaly detection jobs usage info.
 /// </para>
 /// </summary>
 public sealed partial class GetJobStatsRequest : PlainRequest<GetJobStatsRequestParameters>
@@ -119,7 +119,7 @@ public sealed partial class GetJobStatsRequest : PlainRequest<GetJobStatsRequest
 
 /// <summary>
 /// <para>
-/// Retrieves usage information for anomaly detection jobs.
+/// Get anomaly detection jobs usage info.
 /// </para>
 /// </summary>
 public sealed partial class GetJobStatsRequestDescriptor : RequestDescriptor<GetJobStatsRequestDescriptor, GetJobStatsRequestParameters>

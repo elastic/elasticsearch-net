@@ -35,7 +35,7 @@ public sealed partial class PutCalendarRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a calendar.
+/// Create a calendar.
 /// </para>
 /// </summary>
 public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequestParameters>
@@ -71,7 +71,7 @@ public sealed partial class PutCalendarRequest : PlainRequest<PutCalendarRequest
 
 /// <summary>
 /// <para>
-/// Creates a calendar.
+/// Create a calendar.
 /// </para>
 /// </summary>
 public sealed partial class PutCalendarRequestDescriptor : RequestDescriptor<PutCalendarRequestDescriptor, PutCalendarRequestParameters>

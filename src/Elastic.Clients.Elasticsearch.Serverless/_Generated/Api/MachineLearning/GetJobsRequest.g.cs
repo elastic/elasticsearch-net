@@ -73,7 +73,7 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for anomaly detection jobs.
+/// Get anomaly detection jobs configuration info.
 /// You can get information for multiple anomaly detection jobs in a single API
 /// request by using a group name, a comma-separated list of jobs, or a wildcard
 /// expression. You can get information for all anomaly detection jobs by using
@@ -142,7 +142,7 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for anomaly detection jobs.
+/// Get anomaly detection jobs configuration info.
 /// You can get information for multiple anomaly detection jobs in a single API
 /// request by using a group name, a comma-separated list of jobs, or a wildcard
 /// expression. You can get information for all anomaly detection jobs by using
