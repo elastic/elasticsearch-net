@@ -95,7 +95,8 @@ public sealed partial class StartTrainedModelDeploymentRequestParameters : Reque
 
 /// <summary>
 /// <para>
-/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// Start a trained model deployment.
+/// It allocates the model to every machine learning node.
 /// </para>
 /// </summary>
 public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<StartTrainedModelDeploymentRequestParameters>
@@ -183,7 +184,8 @@ public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<St
 
 /// <summary>
 /// <para>
-/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// Start a trained model deployment.
+/// It allocates the model to every machine learning node.
 /// </para>
 /// </summary>
 public sealed partial class StartTrainedModelDeploymentRequestDescriptor : RequestDescriptor<StartTrainedModelDeploymentRequestDescriptor, StartTrainedModelDeploymentRequestParameters>

@@ -51,7 +51,7 @@ public sealed partial class ResetJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Resets an anomaly detection job.
+/// Reset an anomaly detection job.
 /// All model state and results are deleted. The job is ready to start over as if
 /// it had just been created.
 /// It is not currently possible to reset multiple jobs using wildcards or a
@@ -94,7 +94,7 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 
 /// <summary>
 /// <para>
-/// Resets an anomaly detection job.
+/// Reset an anomaly detection job.
 /// All model state and results are deleted. The job is ready to start over as if
 /// it had just been created.
 /// It is not currently possible to reset multiple jobs using wildcards or a

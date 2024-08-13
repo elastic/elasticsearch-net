@@ -35,6 +35,7 @@ public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Request
 
 /// <summary>
 /// <para>
+/// Preview features used by data frame analytics.
 /// Previews the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
@@ -69,6 +70,7 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<Prev
 
 /// <summary>
 /// <para>
+/// Preview features used by data frame analytics.
 /// Previews the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
@@ -158,6 +160,7 @@ public sealed partial class PreviewDataFrameAnalyticsRequestDescriptor<TDocument
 
 /// <summary>
 /// <para>
+/// Preview features used by data frame analytics.
 /// Previews the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>

@@ -3177,7 +3177,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3198,7 +3198,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3218,7 +3218,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3239,7 +3239,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3261,7 +3261,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3284,7 +3284,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3304,7 +3304,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3325,7 +3325,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Forces any buffered data to be processed by the job.
+	/// Force buffered data to be processed.
 	/// The flush jobs API is only applicable when sending data for analysis using
 	/// the post data API. Depending on the content of the buffer, then it might
 	/// additionally calculate new results. Both flush and close operations are
@@ -3347,13 +3347,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3366,13 +3366,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3384,13 +3384,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3403,13 +3403,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3423,13 +3423,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3444,13 +3444,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3462,13 +3462,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3481,13 +3481,13 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Predicts the future behavior of a time series by using its historical
-	/// behavior.
+	/// Predict future behavior of a time series.
 	/// </para>
 	/// <para>
 	/// Forecasts are not supported for jobs that perform population analysis; an
 	/// error occurs if you try to create a forecast for a job that has an
-	/// <c>over_field_name</c> in its configuration.
+	/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
+	/// based on historical data.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3501,7 +3501,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3515,7 +3515,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3528,7 +3528,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3542,7 +3542,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3557,7 +3557,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3573,7 +3573,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3588,7 +3588,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3604,7 +3604,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3618,7 +3618,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3633,7 +3633,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3649,7 +3649,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3664,7 +3664,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3680,7 +3680,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3693,7 +3693,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3707,7 +3707,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3722,7 +3722,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3736,7 +3736,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3751,7 +3751,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3764,7 +3764,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3778,7 +3778,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3793,7 +3793,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3807,7 +3807,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more buckets.
+	/// Get anomaly detection job results for buckets.
 	/// The API presents a chronological view of the records, grouped by bucket.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3822,7 +3822,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3835,7 +3835,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3847,7 +3847,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3860,7 +3860,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3874,7 +3874,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3889,7 +3889,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3901,7 +3901,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3914,7 +3914,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about the scheduled events in calendars.
+	/// Get info about events in calendars.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3928,7 +3928,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3941,7 +3941,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3953,7 +3953,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3966,7 +3966,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3980,7 +3980,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3995,7 +3995,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4009,7 +4009,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4024,7 +4024,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4036,7 +4036,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4049,7 +4049,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4063,7 +4063,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4076,7 +4076,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for calendars.
+	/// Get calendar configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4090,7 +4090,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4103,7 +4103,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4115,7 +4115,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4128,7 +4128,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4142,7 +4142,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4157,7 +4157,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4171,7 +4171,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4186,7 +4186,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4198,7 +4198,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4211,7 +4211,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4225,7 +4225,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4238,7 +4238,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more categories.
+	/// Get anomaly detection job results for categories.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4252,7 +4252,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4270,7 +4270,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4287,7 +4287,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4305,7 +4305,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4324,7 +4324,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4344,7 +4344,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4363,7 +4363,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4383,7 +4383,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4400,7 +4400,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4418,7 +4418,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4437,7 +4437,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4455,7 +4455,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for datafeeds.
+	/// Get datafeeds configuration info.
 	/// You can get information for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4474,7 +4474,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4493,7 +4493,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4511,7 +4511,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4530,7 +4530,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4550,7 +4550,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4571,7 +4571,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4591,7 +4591,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4612,7 +4612,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4630,7 +4630,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4649,7 +4649,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4669,7 +4669,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4688,7 +4688,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for datafeeds.
+	/// Get datafeeds usage info.
 	/// You can get statistics for multiple datafeeds in a single API request by
 	/// using a comma-separated list of datafeeds or a wildcard expression. You can
 	/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -4708,7 +4708,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4724,7 +4724,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4739,7 +4739,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4755,7 +4755,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4772,7 +4772,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4790,7 +4790,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4807,7 +4807,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4825,7 +4825,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4841,7 +4841,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4858,7 +4858,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4876,7 +4876,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4893,7 +4893,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4911,7 +4911,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4926,7 +4926,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4942,7 +4942,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4959,7 +4959,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4975,7 +4975,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -4992,7 +4992,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -5007,7 +5007,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -5023,7 +5023,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -5040,7 +5040,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -5056,7 +5056,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for data frame analytics jobs.
+	/// Get data frame analytics job configuration info.
 	/// You can get information for multiple data frame analytics jobs in a single
 	/// API request by using a comma-separated list of data frame analytics jobs or a
 	/// wildcard expression.
@@ -5073,7 +5073,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5086,7 +5086,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5098,7 +5098,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5111,7 +5111,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5125,7 +5125,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5140,7 +5140,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5154,7 +5154,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5169,7 +5169,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5182,7 +5182,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5196,7 +5196,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5211,7 +5211,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5225,7 +5225,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5240,7 +5240,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5252,7 +5252,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5265,7 +5265,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5279,7 +5279,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5292,7 +5292,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5306,7 +5306,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5318,7 +5318,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5331,7 +5331,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5345,7 +5345,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5358,7 +5358,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for data frame analytics jobs.
+	/// Get data frame analytics jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5372,7 +5372,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5386,7 +5386,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5399,7 +5399,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5413,7 +5413,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5428,7 +5428,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5444,7 +5444,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5459,7 +5459,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5475,7 +5475,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5488,7 +5488,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5502,7 +5502,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5517,7 +5517,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5531,7 +5531,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves filters.
+	/// Get filters.
 	/// You can get a single filter or all filters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5546,7 +5546,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5562,7 +5562,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5577,7 +5577,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5593,7 +5593,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5610,7 +5610,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5628,7 +5628,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5644,7 +5644,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5661,7 +5661,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5679,7 +5679,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5694,7 +5694,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5710,7 +5710,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5727,7 +5727,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5742,7 +5742,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5758,7 +5758,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly detection job results for one or more influencers.
+	/// Get anomaly detection job results for influencers.
 	/// Influencers are the entities that have contributed to, or are to blame for,
 	/// the anomalies. Influencer results are available only if an
 	/// <c>influencer_field_name</c> is specified in the job configuration.
@@ -5775,7 +5775,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5792,7 +5792,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5808,7 +5808,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5825,7 +5825,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5843,7 +5843,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5862,7 +5862,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5880,7 +5880,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5899,7 +5899,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5915,7 +5915,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5932,7 +5932,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5950,7 +5950,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5967,7 +5967,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for anomaly detection jobs.
+	/// Get anomaly detection jobs configuration info.
 	/// You can get information for multiple anomaly detection jobs in a single API
 	/// request by using a group name, a comma-separated list of jobs, or a wildcard
 	/// expression. You can get information for all anomaly detection jobs by using
@@ -5985,7 +5985,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5998,7 +5998,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6010,7 +6010,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6023,7 +6023,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6037,7 +6037,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6052,7 +6052,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6066,7 +6066,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6081,7 +6081,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6093,7 +6093,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6106,7 +6106,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6120,7 +6120,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6133,7 +6133,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection jobs.
+	/// Get anomaly detection jobs usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6147,6 +6147,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6161,6 +6162,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6174,6 +6176,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6188,6 +6191,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6203,6 +6207,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6219,6 +6224,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6234,6 +6240,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6250,6 +6257,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6263,6 +6271,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6277,6 +6286,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6292,6 +6302,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6306,6 +6317,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get machine learning memory usage info.
 	/// Get information about how machine learning jobs and trained models are using memory,
 	/// on each node, both within the JVM heap, and natively, outside of the JVM.
 	/// </para>
@@ -6321,7 +6333,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6334,7 +6346,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6346,7 +6358,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6359,7 +6371,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6373,7 +6385,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6388,7 +6400,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6402,7 +6414,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6417,7 +6429,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6430,7 +6442,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6444,7 +6456,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6459,7 +6471,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6473,7 +6485,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6488,7 +6500,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6500,7 +6512,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6513,7 +6525,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6527,7 +6539,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6540,7 +6552,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6554,7 +6566,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6566,7 +6578,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6579,7 +6591,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6593,7 +6605,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6606,7 +6618,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about model snapshots.
+	/// Get model snapshots info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6620,7 +6632,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6633,7 +6645,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6645,7 +6657,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6658,7 +6670,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6672,7 +6684,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6687,7 +6699,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6699,7 +6711,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6712,7 +6724,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for anomaly detection job model snapshot upgrades.
+	/// Get anomaly detection job model snapshot upgrade usage info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6726,7 +6738,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6756,7 +6771,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6785,7 +6803,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6815,7 +6836,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6846,7 +6870,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6878,7 +6905,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6907,7 +6937,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6937,7 +6970,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves overall bucket results that summarize the bucket results of
+	/// Get overall bucket results.
+	/// </para>
+	/// <para>
+	/// Retrievs overall bucket results that summarize the bucket results of
 	/// multiple anomaly detection jobs.
 	/// </para>
 	/// <para>
@@ -6968,7 +7004,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -6991,7 +7027,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7013,7 +7049,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7036,7 +7072,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7060,7 +7096,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7085,7 +7121,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7108,7 +7144,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7132,7 +7168,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7157,7 +7193,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7179,7 +7215,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7202,7 +7238,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7226,7 +7262,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7248,7 +7284,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7271,7 +7307,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves anomaly records for an anomaly detection job.
+	/// Get anomaly records for an anomaly detection job.
 	/// Records contain the detailed analytical results. They describe the anomalous
 	/// activity that has been identified in the input data based on the detector
 	/// configuration.
@@ -7295,7 +7331,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7308,7 +7344,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7320,7 +7356,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7333,7 +7369,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7347,7 +7383,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7362,7 +7398,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7376,7 +7412,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7391,7 +7427,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7403,7 +7439,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7416,7 +7452,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7430,7 +7466,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7443,7 +7479,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves configuration information for a trained model.
+	/// Get trained model configuration info.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7457,7 +7493,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7471,7 +7508,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7484,7 +7522,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7498,7 +7537,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7513,7 +7553,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7529,7 +7570,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7544,7 +7586,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7560,7 +7603,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7573,7 +7617,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7587,7 +7632,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7602,7 +7648,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7616,7 +7663,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves usage information for trained models. You can get usage information for multiple trained
+	/// Get trained models usage info.
+	/// You can get usage information for multiple trained
 	/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -7631,7 +7679,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7644,7 +7692,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7656,7 +7704,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7669,7 +7717,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7683,7 +7731,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7698,7 +7746,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7711,7 +7759,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7725,7 +7773,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7740,7 +7788,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7752,7 +7800,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7765,7 +7813,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7779,7 +7827,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7791,7 +7839,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7804,7 +7852,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evaluates a trained model.
+	/// Evaluate a trained model.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7818,6 +7866,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7837,6 +7886,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7855,6 +7905,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7874,6 +7925,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7894,6 +7946,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7915,6 +7968,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7933,6 +7987,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7952,6 +8007,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Return ML defaults and limits.
 	/// Returns defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
@@ -7973,9 +8029,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -7993,9 +8048,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8012,9 +8066,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8032,9 +8085,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8053,9 +8105,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8075,9 +8126,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8094,9 +8144,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8114,9 +8163,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Open anomaly detection jobs.
-	/// An anomaly detection job must be opened in order for it to be ready to
-	/// receive and analyze data. It can be opened and closed multiple times
-	/// throughout its lifecycle.
+	/// An anomaly detection job must be opened to be ready to receive and analyze
+	/// data. It can be opened and closed multiple times throughout its lifecycle.
 	/// When you open a new job, it starts with an empty model.
 	/// When you open an existing job, the most recent model state is automatically
 	/// loaded. The job is ready to resume its analysis from where it left off, once
@@ -8134,7 +8182,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8147,7 +8195,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8159,7 +8207,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8172,7 +8220,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8186,7 +8234,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8201,7 +8249,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8213,7 +8261,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8226,7 +8274,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds scheduled events to a calendar.
+	/// Add scheduled events to the calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8240,6 +8288,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8253,6 +8302,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8265,6 +8315,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8278,6 +8329,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8292,6 +8344,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8307,6 +8360,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8321,6 +8375,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8336,6 +8391,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8349,6 +8405,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8363,6 +8420,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8378,6 +8436,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8392,6 +8451,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8407,6 +8467,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8419,6 +8480,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8432,6 +8494,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8446,6 +8509,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8459,6 +8523,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8473,6 +8538,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8485,6 +8551,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8498,6 +8565,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8512,6 +8580,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8525,6 +8594,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Preview features used by data frame analytics.
 	/// Previews the extracted features used by a data frame analytics config.
 	/// </para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -8539,7 +8609,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8552,7 +8622,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8564,7 +8634,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8577,7 +8647,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8591,7 +8661,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8606,7 +8676,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8618,7 +8688,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8631,7 +8701,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a calendar.
+	/// Create a calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8645,7 +8715,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8658,7 +8728,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8670,7 +8740,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8683,7 +8753,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8697,7 +8767,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8712,7 +8782,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8724,7 +8794,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8737,7 +8807,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds an anomaly detection job to a calendar.
+	/// Add anomaly detection job to calendar.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8751,7 +8821,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8768,7 +8838,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8784,7 +8854,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8801,7 +8871,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8819,7 +8889,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8838,7 +8908,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8855,7 +8925,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8873,7 +8943,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8892,7 +8962,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8908,7 +8978,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8925,7 +8995,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8943,7 +9013,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8959,7 +9029,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8976,7 +9046,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a datafeed.
+	/// Create a datafeed.
 	/// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 	/// You can associate only one datafeed with each anomaly detection job.
 	/// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -8994,7 +9064,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9009,7 +9079,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9023,7 +9093,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9038,7 +9108,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9054,7 +9124,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9071,7 +9141,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9086,7 +9156,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9102,7 +9172,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9119,7 +9189,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9133,7 +9203,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9148,7 +9218,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9164,7 +9234,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9178,7 +9248,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9193,7 +9263,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a data frame analytics job.
+	/// Create a data frame analytics job.
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
@@ -9209,7 +9279,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9224,7 +9294,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9238,7 +9308,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9253,7 +9323,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9269,7 +9339,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9286,7 +9356,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9300,7 +9370,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9315,7 +9385,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Instantiates a filter.
+	/// Create a filter.
 	/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 	/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 	/// </para>
@@ -9532,7 +9602,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9545,7 +9616,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9557,7 +9629,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9570,7 +9643,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9584,7 +9658,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9599,7 +9674,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9612,7 +9688,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9626,7 +9703,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9641,7 +9719,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9653,7 +9732,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9666,7 +9746,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9680,7 +9761,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9692,7 +9774,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9705,7 +9788,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables you to supply a trained model that is not created by data frame analytics.
+	/// Create a trained model.
+	/// Enable you to supply a trained model that is not created by data frame analytics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9719,8 +9803,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9747,8 +9832,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9774,8 +9860,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9802,8 +9889,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9831,8 +9919,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9861,8 +9950,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9888,8 +9978,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9916,8 +10007,9 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a trained model alias. A trained model alias is a logical
-	/// name used to reference a single trained model.
+	/// Create or update a trained model alias.
+	/// A trained model alias is a logical name used to reference a single trained
+	/// model.
 	/// You can use aliases instead of trained model identifiers to make it easier to
 	/// reference your models. For example, you can use aliases in inference
 	/// aggregations and processors.
@@ -9945,7 +10037,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9958,7 +10050,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9970,7 +10062,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9983,7 +10075,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9997,7 +10089,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10012,7 +10104,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10024,7 +10116,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10037,7 +10129,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates part of a trained model definition.
+	/// Create part of a trained model definition.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10051,7 +10143,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10066,7 +10158,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10080,7 +10172,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10095,7 +10187,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10111,7 +10203,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10128,7 +10220,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10142,7 +10234,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10157,7 +10249,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a trained model vocabulary.
+	/// Create a trained model vocabulary.
 	/// This API is supported only for natural language processing (NLP) models.
 	/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 	/// </para>
@@ -10173,7 +10265,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10190,7 +10282,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10206,7 +10298,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10223,7 +10315,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10241,7 +10333,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10260,7 +10352,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10276,7 +10368,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10293,7 +10385,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets an anomaly detection job.
+	/// Reset an anomaly detection job.
 	/// All model state and results are deleted. The job is ready to start over as if
 	/// it had just been created.
 	/// It is not currently possible to reset multiple jobs using wildcards or a
@@ -10311,7 +10403,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10331,7 +10423,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10350,7 +10442,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10370,7 +10462,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10391,7 +10483,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10413,7 +10505,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10432,7 +10524,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10452,7 +10544,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reverts to a specific snapshot.
+	/// Revert to a snapshot.
 	/// The machine learning features react quickly to anomalous input, learning new
 	/// behaviors in data. Highly anomalous input increases the variance in the
 	/// models whilst the system learns whether this is a new step-change in behavior
@@ -10473,6 +10565,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10497,6 +10590,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10520,6 +10614,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10544,6 +10639,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10569,6 +10665,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10595,6 +10692,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10618,6 +10716,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10642,6 +10741,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Set upgrade_mode for ML indices.
 	/// Sets a cluster wide upgrade_mode setting that prepares machine learning
 	/// indices for an upgrade.
 	/// When upgrading your cluster, in some circumstances you must restart your
@@ -10667,7 +10767,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10696,7 +10796,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10724,7 +10824,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10753,7 +10853,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10783,7 +10883,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10814,7 +10914,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10842,7 +10942,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10871,7 +10971,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts one or more datafeeds.
+	/// Start datafeeds.
 	/// </para>
 	/// <para>
 	/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -10901,7 +11001,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -10925,7 +11025,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -10948,7 +11048,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -10972,7 +11072,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -10997,7 +11097,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11023,7 +11123,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11047,7 +11147,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11072,7 +11172,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11098,7 +11198,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11121,7 +11221,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11145,7 +11245,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11170,7 +11270,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11193,7 +11293,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11217,7 +11317,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a data frame analytics job.
+	/// Start a data frame analytics job.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// If the destination index does not exist, it is created automatically the
@@ -11242,7 +11342,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11255,7 +11356,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11267,7 +11369,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11280,7 +11383,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11294,7 +11398,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11309,7 +11414,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11321,7 +11427,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11334,7 +11441,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Start a trained model deployment.
+	/// It allocates the model to every machine learning node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11348,7 +11456,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11363,7 +11471,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11377,7 +11485,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11392,7 +11500,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11408,7 +11516,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11425,7 +11533,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11439,7 +11547,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11454,7 +11562,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more datafeeds.
+	/// Stop datafeeds.
 	/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 	/// multiple times throughout its lifecycle.
 	/// </para>
@@ -11470,7 +11578,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11485,7 +11593,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11499,7 +11607,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11514,7 +11622,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11530,7 +11638,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11547,7 +11655,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11562,7 +11670,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11578,7 +11686,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11595,7 +11703,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11609,7 +11717,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11624,7 +11732,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11640,7 +11748,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11654,7 +11762,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11669,7 +11777,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops one or more data frame analytics jobs.
+	/// Stop data frame analytics jobs.
 	/// A data frame analytics job can be started and stopped multiple times
 	/// throughout its lifecycle.
 	/// </para>
@@ -11685,7 +11793,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11698,7 +11806,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11710,7 +11818,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11723,7 +11831,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11737,7 +11845,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11752,7 +11860,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11764,7 +11872,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11777,7 +11885,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Stops a trained model deployment.
+	/// Stop a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -11791,7 +11899,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11808,7 +11916,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11824,7 +11932,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11841,7 +11949,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11859,7 +11967,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11878,7 +11986,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11895,7 +12003,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11913,7 +12021,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11932,7 +12040,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11948,7 +12056,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11965,7 +12073,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11983,7 +12091,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -11999,7 +12107,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -12016,7 +12124,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates the properties of a datafeed.
+	/// Update a datafeed.
 	/// You must stop and start the datafeed for the changes to be applied.
 	/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 	/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -12034,7 +12142,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12047,7 +12155,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12059,7 +12167,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12072,7 +12180,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12086,7 +12194,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12101,7 +12209,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12114,7 +12222,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12128,7 +12236,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12143,7 +12251,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12155,7 +12263,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12168,7 +12276,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12182,7 +12290,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12194,7 +12302,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12207,7 +12315,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates an existing data frame analytics job.
+	/// Update a data frame analytics job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12221,6 +12329,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12234,6 +12343,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12246,6 +12356,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12259,6 +12370,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12273,6 +12385,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12288,6 +12401,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12300,6 +12414,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12313,6 +12428,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a filter.
 	/// Updates the description of a filter, adds items, or removes items from the list.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12327,6 +12443,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12340,6 +12457,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12352,6 +12470,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12365,6 +12484,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12379,6 +12499,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12394,6 +12515,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12407,6 +12529,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12421,6 +12544,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12436,6 +12560,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12448,6 +12573,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12461,6 +12587,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12475,6 +12602,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12487,6 +12615,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12500,6 +12629,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update an anomaly detection job.
 	/// Updates certain properties of an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12514,6 +12644,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12527,6 +12658,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12539,6 +12671,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12552,6 +12685,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12566,6 +12700,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12581,6 +12716,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12593,6 +12729,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12606,6 +12743,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Update a snapshot.
 	/// Updates certain properties of a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -12620,7 +12758,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12633,7 +12771,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12645,7 +12783,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12658,7 +12796,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12672,7 +12810,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12687,7 +12825,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12699,7 +12837,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12712,7 +12850,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Starts a trained model deployment, which allocates the model to every machine learning node.
+	/// Update a trained model deployment.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -12726,6 +12864,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12747,6 +12886,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12767,6 +12907,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12788,6 +12929,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12810,6 +12952,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12833,6 +12976,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12853,6 +12997,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous
@@ -12874,6 +13019,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Upgrade a snapshot.
 	/// Upgrades an anomaly detection model snapshot to the latest major version.
 	/// Over time, older snapshot formats are deprecated and removed. Anomaly
 	/// detection jobs support only snapshots that are from the current or previous

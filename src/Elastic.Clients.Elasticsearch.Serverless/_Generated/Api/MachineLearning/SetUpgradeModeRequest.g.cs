@@ -50,6 +50,7 @@ public sealed partial class SetUpgradeModeRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Set upgrade_mode for ML indices.
 /// Sets a cluster wide upgrade_mode setting that prepares machine learning
 /// indices for an upgrade.
 /// When upgrading your cluster, in some circumstances you must restart your
@@ -95,6 +96,7 @@ public sealed partial class SetUpgradeModeRequest : PlainRequest<SetUpgradeModeR
 
 /// <summary>
 /// <para>
+/// Set upgrade_mode for ML indices.
 /// Sets a cluster wide upgrade_mode setting that prepares machine learning
 /// indices for an upgrade.
 /// When upgrading your cluster, in some circumstances you must restart your

@@ -48,7 +48,7 @@ public sealed partial class GetBucketsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more buckets.
+/// Get anomaly detection job results for buckets.
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>
@@ -147,7 +147,7 @@ public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestPa
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more buckets.
+/// Get anomaly detection job results for buckets.
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>
@@ -387,7 +387,7 @@ public sealed partial class GetBucketsRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more buckets.
+/// Get anomaly detection job results for buckets.
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>

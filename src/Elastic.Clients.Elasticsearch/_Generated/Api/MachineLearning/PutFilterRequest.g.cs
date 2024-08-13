@@ -35,7 +35,7 @@ public sealed partial class PutFilterRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Instantiates a filter.
+/// Create a filter.
 /// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>
@@ -74,7 +74,7 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 
 /// <summary>
 /// <para>
-/// Instantiates a filter.
+/// Create a filter.
 /// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>

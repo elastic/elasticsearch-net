@@ -52,7 +52,7 @@ public sealed partial class StopTrainedModelDeploymentRequestParameters : Reques
 
 /// <summary>
 /// <para>
-/// Stops a trained model deployment.
+/// Stop a trained model deployment.
 /// </para>
 /// </summary>
 public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<StopTrainedModelDeploymentRequestParameters>
@@ -92,7 +92,7 @@ public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<Sto
 
 /// <summary>
 /// <para>
-/// Stops a trained model deployment.
+/// Stop a trained model deployment.
 /// </para>
 /// </summary>
 public sealed partial class StopTrainedModelDeploymentRequestDescriptor : RequestDescriptor<StopTrainedModelDeploymentRequestDescriptor, StopTrainedModelDeploymentRequestParameters>

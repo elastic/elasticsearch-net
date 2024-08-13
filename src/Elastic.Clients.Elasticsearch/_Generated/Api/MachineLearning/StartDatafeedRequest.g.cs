@@ -35,7 +35,7 @@ public sealed partial class StartDatafeedRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Starts one or more datafeeds.
+/// Start datafeeds.
 /// </para>
 /// <para>
 /// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
@@ -95,7 +95,7 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 
 /// <summary>
 /// <para>
-/// Starts one or more datafeeds.
+/// Start datafeeds.
 /// </para>
 /// <para>
 /// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
