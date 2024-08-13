@@ -264,7 +264,7 @@ internal sealed partial class UpdateDatafeedRequestConverter : JsonConverter<Upd
 
 /// <summary>
 /// <para>
-/// Updates the properties of a datafeed.
+/// Update a datafeed.
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -470,7 +470,7 @@ public sealed partial class UpdateDatafeedRequest : PlainRequest<UpdateDatafeedR
 
 /// <summary>
 /// <para>
-/// Updates the properties of a datafeed.
+/// Update a datafeed.
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -888,7 +888,7 @@ public sealed partial class UpdateDatafeedRequestDescriptor<TDocument> : Request
 
 /// <summary>
 /// <para>
-/// Updates the properties of a datafeed.
+/// Update a datafeed.
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,

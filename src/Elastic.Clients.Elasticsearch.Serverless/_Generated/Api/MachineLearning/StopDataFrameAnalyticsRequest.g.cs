@@ -80,7 +80,7 @@ public sealed partial class StopDataFrameAnalyticsRequestParameters : RequestPar
 
 /// <summary>
 /// <para>
-/// Stops one or more data frame analytics jobs.
+/// Stop data frame analytics jobs.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// </para>
@@ -151,7 +151,7 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 
 /// <summary>
 /// <para>
-/// Stops one or more data frame analytics jobs.
+/// Stop data frame analytics jobs.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// </para>
@@ -189,7 +189,7 @@ public sealed partial class StopDataFrameAnalyticsRequestDescriptor<TDocument> :
 
 /// <summary>
 /// <para>
-/// Stops one or more data frame analytics jobs.
+/// Stop data frame analytics jobs.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// </para>

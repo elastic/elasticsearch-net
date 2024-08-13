@@ -50,6 +50,7 @@ public sealed partial class GetMemoryStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Get machine learning memory usage info.
 /// Get information about how machine learning jobs and trained models are using memory,
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>
@@ -93,6 +94,7 @@ public sealed partial class GetMemoryStatsRequest : PlainRequest<GetMemoryStatsR
 
 /// <summary>
 /// <para>
+/// Get machine learning memory usage info.
 /// Get information about how machine learning jobs and trained models are using memory,
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>

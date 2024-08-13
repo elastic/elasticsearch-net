@@ -35,6 +35,7 @@ public sealed partial class MlInfoRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Return ML defaults and limits.
 /// Returns defaults and limits used by machine learning.
 /// This endpoint is designed to be used by a user interface that needs to fully
 /// understand machine learning configurations where some options are not
@@ -57,6 +58,7 @@ public sealed partial class MlInfoRequest : PlainRequest<MlInfoRequestParameters
 
 /// <summary>
 /// <para>
+/// Return ML defaults and limits.
 /// Returns defaults and limits used by machine learning.
 /// This endpoint is designed to be used by a user interface that needs to fully
 /// understand machine learning configurations where some options are not

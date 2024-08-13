@@ -35,7 +35,7 @@ public sealed partial class PostCalendarEventsRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Adds scheduled events to a calendar.
+/// Add scheduled events to the calendar.
 /// </para>
 /// </summary>
 public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalendarEventsRequestParameters>
@@ -63,7 +63,7 @@ public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalenda
 
 /// <summary>
 /// <para>
-/// Adds scheduled events to a calendar.
+/// Add scheduled events to the calendar.
 /// </para>
 /// </summary>
 public sealed partial class PostCalendarEventsRequestDescriptor : RequestDescriptor<PostCalendarEventsRequestDescriptor, PostCalendarEventsRequestParameters>

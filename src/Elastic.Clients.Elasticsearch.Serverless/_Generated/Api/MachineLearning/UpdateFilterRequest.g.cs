@@ -35,6 +35,7 @@ public sealed partial class UpdateFilterRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Update a filter.
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
@@ -79,6 +80,7 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 
 /// <summary>
 /// <para>
+/// Update a filter.
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
