@@ -35,6 +35,7 @@ public sealed partial class UpdateJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Update an anomaly detection job.
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
@@ -185,6 +186,7 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 
 /// <summary>
 /// <para>
+/// Update an anomaly detection job.
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
@@ -652,6 +654,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
+/// Update an anomaly detection job.
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>

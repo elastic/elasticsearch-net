@@ -42,7 +42,7 @@ public sealed partial class StartDataFrameAnalyticsRequestParameters : RequestPa
 
 /// <summary>
 /// <para>
-/// Starts a data frame analytics job.
+/// Start a data frame analytics job.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// If the destination index does not exist, it is created automatically the
@@ -82,7 +82,7 @@ public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartD
 
 /// <summary>
 /// <para>
-/// Starts a data frame analytics job.
+/// Start a data frame analytics job.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// If the destination index does not exist, it is created automatically the
@@ -127,7 +127,7 @@ public sealed partial class StartDataFrameAnalyticsRequestDescriptor<TDocument> 
 
 /// <summary>
 /// <para>
-/// Starts a data frame analytics job.
+/// Start a data frame analytics job.
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// If the destination index does not exist, it is created automatically the

@@ -41,7 +41,7 @@ public sealed partial class InferTrainedModelRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Evaluates a trained model.
+/// Evaluate a trained model.
 /// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrainedModelRequestParameters>
@@ -87,7 +87,7 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 
 /// <summary>
 /// <para>
-/// Evaluates a trained model.
+/// Evaluate a trained model.
 /// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : RequestDescriptor<InferTrainedModelRequestDescriptor<TDocument>, InferTrainedModelRequestParameters>
@@ -188,7 +188,7 @@ public sealed partial class InferTrainedModelRequestDescriptor<TDocument> : Requ
 
 /// <summary>
 /// <para>
-/// Evaluates a trained model.
+/// Evaluate a trained model.
 /// </para>
 /// </summary>
 public sealed partial class InferTrainedModelRequestDescriptor : RequestDescriptor<InferTrainedModelRequestDescriptor, InferTrainedModelRequestParameters>

@@ -69,7 +69,7 @@ public sealed partial class GetCalendarEventsRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves information about the scheduled events in calendars.
+/// Get info about events in calendars.
 /// </para>
 /// </summary>
 public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarEventsRequestParameters>
@@ -129,7 +129,7 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 
 /// <summary>
 /// <para>
-/// Retrieves information about the scheduled events in calendars.
+/// Get info about events in calendars.
 /// </para>
 /// </summary>
 public sealed partial class GetCalendarEventsRequestDescriptor : RequestDescriptor<GetCalendarEventsRequestDescriptor, GetCalendarEventsRequestParameters>

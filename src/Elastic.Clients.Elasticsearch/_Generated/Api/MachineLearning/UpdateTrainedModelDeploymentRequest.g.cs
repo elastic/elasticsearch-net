@@ -35,7 +35,7 @@ public sealed partial class UpdateTrainedModelDeploymentRequestParameters : Requ
 
 /// <summary>
 /// <para>
-/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// Update a trained model deployment.
 /// </para>
 /// </summary>
 public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<UpdateTrainedModelDeploymentRequestParameters>
@@ -68,7 +68,7 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 
 /// <summary>
 /// <para>
-/// Starts a trained model deployment, which allocates the model to every machine learning node.
+/// Update a trained model deployment.
 /// </para>
 /// </summary>
 public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : RequestDescriptor<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentRequestParameters>

@@ -35,7 +35,7 @@ public sealed partial class RevertModelSnapshotRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Reverts to a specific snapshot.
+/// Revert to a snapshot.
 /// The machine learning features react quickly to anomalous input, learning new
 /// behaviors in data. Highly anomalous input increases the variance in the
 /// models whilst the system learns whether this is a new step-change in behavior
@@ -70,7 +70,7 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 
 /// <summary>
 /// <para>
-/// Reverts to a specific snapshot.
+/// Revert to a snapshot.
 /// The machine learning features react quickly to anomalous input, learning new
 /// behaviors in data. Highly anomalous input increases the variance in the
 /// models whilst the system learns whether this is a new step-change in behavior

@@ -55,7 +55,7 @@ public sealed partial class GetCategoriesRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more categories.
+/// Get anomaly detection job results for categories.
 /// </para>
 /// </summary>
 public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesRequestParameters>
@@ -112,7 +112,7 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 
 /// <summary>
 /// <para>
-/// Retrieves anomaly detection job results for one or more categories.
+/// Get anomaly detection job results for categories.
 /// </para>
 /// </summary>
 public sealed partial class GetCategoriesRequestDescriptor : RequestDescriptor<GetCategoriesRequestDescriptor, GetCategoriesRequestParameters>

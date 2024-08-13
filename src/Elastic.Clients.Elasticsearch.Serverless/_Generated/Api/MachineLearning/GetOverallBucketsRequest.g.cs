@@ -35,7 +35,10 @@ public sealed partial class GetOverallBucketsRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves overall bucket results that summarize the bucket results of
+/// Get overall bucket results.
+/// </para>
+/// <para>
+/// Retrievs overall bucket results that summarize the bucket results of
 /// multiple anomaly detection jobs.
 /// </para>
 /// <para>
@@ -128,7 +131,10 @@ public sealed partial class GetOverallBucketsRequest : PlainRequest<GetOverallBu
 
 /// <summary>
 /// <para>
-/// Retrieves overall bucket results that summarize the bucket results of
+/// Get overall bucket results.
+/// </para>
+/// <para>
+/// Retrievs overall bucket results that summarize the bucket results of
 /// multiple anomaly detection jobs.
 /// </para>
 /// <para>

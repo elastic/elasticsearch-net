@@ -49,6 +49,7 @@ public sealed partial class UpgradeJobSnapshotRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
+/// Upgrade a snapshot.
 /// Upgrades an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous
@@ -94,6 +95,7 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 
 /// <summary>
 /// <para>
+/// Upgrade a snapshot.
 /// Upgrades an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous

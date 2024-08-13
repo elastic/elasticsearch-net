@@ -59,6 +59,14 @@ public sealed partial class KnnQuery
 
 	/// <summary>
 	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("k")]
+	public int? k { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The number of nearest neighbor candidates to consider per shard
 	/// </para>
 	/// </summary>
@@ -108,6 +116,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private int? kValue { get; set; }
 	private int? NumCandidatesValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
@@ -201,6 +210,17 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> k(int? k)
+	{
+		kValue = k;
 		return Self;
 	}
 
@@ -312,6 +332,12 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
+		if (kValue.HasValue)
+		{
+			writer.WritePropertyName("k");
+			writer.WriteNumberValue(kValue.Value);
+		}
+
 		if (NumCandidatesValue.HasValue)
 		{
 			writer.WritePropertyName("num_candidates");
@@ -370,6 +396,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
+	private int? kValue { get; set; }
 	private int? NumCandidatesValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
@@ -463,6 +490,17 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The final number of nearest neighbors to return as top hits
+	/// </para>
+	/// </summary>
+	public KnnQueryDescriptor k(int? k)
+	{
+		kValue = k;
 		return Self;
 	}
 
@@ -572,6 +610,12 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+		}
+
+		if (kValue.HasValue)
+		{
+			writer.WritePropertyName("k");
+			writer.WriteNumberValue(kValue.Value);
 		}
 
 		if (NumCandidatesValue.HasValue)

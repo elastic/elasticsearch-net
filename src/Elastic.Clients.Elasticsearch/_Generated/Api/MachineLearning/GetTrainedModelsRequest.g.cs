@@ -110,7 +110,7 @@ public sealed partial class GetTrainedModelsRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for a trained model.
+/// Get trained model configuration info.
 /// </para>
 /// </summary>
 public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedModelsRequestParameters>
@@ -217,7 +217,7 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 
 /// <summary>
 /// <para>
-/// Retrieves configuration information for a trained model.
+/// Get trained model configuration info.
 /// </para>
 /// </summary>
 public sealed partial class GetTrainedModelsRequestDescriptor : RequestDescriptor<GetTrainedModelsRequestDescriptor, GetTrainedModelsRequestParameters>
