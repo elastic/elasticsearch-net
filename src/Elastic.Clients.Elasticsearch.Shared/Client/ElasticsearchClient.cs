@@ -234,15 +234,19 @@ public partial class ElasticsearchClient
 
 			// Evaluate product check result
 
-			var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
-										values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
+			var hasSuccessStatusCode = response.ApiCallDetails.HttpStatusCode is >= 200 and <= 299;
+			if (hasSuccessStatusCode)
+			{
+				var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
+											values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
 
-			_productCheckStatus = productCheckSucceeded
-				? (int)ProductCheckStatus.Succeeded
-				: (int)ProductCheckStatus.Failed;
+				_productCheckStatus = productCheckSucceeded
+					? (int)ProductCheckStatus.Succeeded
+					: (int)ProductCheckStatus.Failed;
 
-			if (_productCheckStatus == (int)ProductCheckStatus.Failed)
-				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+				if (_productCheckStatus == (int)ProductCheckStatus.Failed)
+					throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+			}
 
 			if (request.RequestParameters.RequestConfiguration is null)
 				return response;
@@ -253,6 +257,13 @@ public partial class ElasticsearchClient
 				request.RequestParameters.RequestConfiguration = null;
 			else if (originalHeaders is { Count: > 0 })
 				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
+
+			if (!hasSuccessStatusCode)
+			{
+				// The product check is unreliable for non success status codes.
+				// We have to re-try on the next request.
+				_productCheckStatus = (int)ProductCheckStatus.NotChecked;
+			}
 
 			return response;
 		}
