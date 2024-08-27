@@ -51,6 +51,9 @@ public sealed partial class ExistsQuery
 	public string? QueryName { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Exists(existsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Exists(existsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Exists(existsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Exists(existsQuery);
 }
 
 public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>

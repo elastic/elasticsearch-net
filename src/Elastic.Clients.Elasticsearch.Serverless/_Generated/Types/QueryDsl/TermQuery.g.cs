@@ -144,6 +144,9 @@ public sealed partial class TermQuery
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue Value { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TermQuery termQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Term(termQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(TermQuery termQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Term(termQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(TermQuery termQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Term(termQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(TermQuery termQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Term(termQuery);
 }
 
 public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptor<TermQueryDescriptor<TDocument>>
