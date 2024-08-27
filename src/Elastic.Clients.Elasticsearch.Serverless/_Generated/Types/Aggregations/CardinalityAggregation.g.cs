@@ -68,6 +68,7 @@ public sealed partial class CardinalityAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(CardinalityAggregation cardinalityAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Cardinality(cardinalityAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyAggregation(CardinalityAggregation cardinalityAggregation) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyAggregation.Cardinality(cardinalityAggregation);
 }
 
 public sealed partial class CardinalityAggregationDescriptor<TDocument> : SerializableDescriptor<CardinalityAggregationDescriptor<TDocument>>

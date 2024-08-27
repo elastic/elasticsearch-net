@@ -185,6 +185,9 @@ public sealed partial class WildcardQuery
 	public string? Wildcard { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(WildcardQuery wildcardQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Wildcard(wildcardQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(WildcardQuery wildcardQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Wildcard(wildcardQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(WildcardQuery wildcardQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Wildcard(wildcardQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(WildcardQuery wildcardQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Wildcard(wildcardQuery);
 }
 
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>

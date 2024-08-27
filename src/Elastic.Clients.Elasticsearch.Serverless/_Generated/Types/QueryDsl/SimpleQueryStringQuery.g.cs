@@ -151,6 +151,9 @@ public sealed partial class SimpleQueryStringQuery
 	public string? QuoteFieldSuffix { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.SimpleQueryString(simpleQueryStringQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.SimpleQueryString(simpleQueryStringQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.SimpleQueryString(simpleQueryStringQuery);
 }
 
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>

@@ -71,6 +71,7 @@ public sealed partial class DateRangeAggregation
 	public string? TimeZone { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(DateRangeAggregation dateRangeAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateRange(dateRangeAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(DateRangeAggregation dateRangeAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.DateRange(dateRangeAggregation);
 }
 
 public sealed partial class DateRangeAggregationDescriptor<TDocument> : SerializableDescriptor<DateRangeAggregationDescriptor<TDocument>>

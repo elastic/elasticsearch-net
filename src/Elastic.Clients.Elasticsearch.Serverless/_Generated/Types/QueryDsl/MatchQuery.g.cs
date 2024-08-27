@@ -333,6 +333,9 @@ public sealed partial class MatchQuery
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Match(matchQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Match(matchQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Match(matchQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Match(matchQuery);
 }
 
 public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescriptor<MatchQueryDescriptor<TDocument>>
