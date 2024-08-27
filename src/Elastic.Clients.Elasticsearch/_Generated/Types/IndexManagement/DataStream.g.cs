@@ -39,6 +39,14 @@ public sealed partial class DataStream
 
 	/// <summary>
 	/// <para>
+	/// Information about failure store backing indices
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("failure_store")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStore? FailureStore { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// Current generation for the data stream. This number acts as a cumulative count of the stream’s rollovers, starting at 1.
 	/// </para>
 	/// </summary>
@@ -121,6 +129,14 @@ public sealed partial class DataStream
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replicated")]
 	public bool? Replicated { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the next write to this data stream will trigger a rollover first and the document will be indexed in the new backing index. If the rollover fails the indexing request will fail too.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("rollover_on_write")]
+	public bool RolloverOnWrite { get; init; }
 
 	/// <summary>
 	/// <para>

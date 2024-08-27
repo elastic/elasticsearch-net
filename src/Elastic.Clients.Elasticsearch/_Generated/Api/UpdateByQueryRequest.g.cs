@@ -118,6 +118,13 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search.
 	/// </para>
 	/// </summary>
@@ -362,6 +369,14 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 
 	/// <summary>
 	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search.
 	/// </para>
 	/// </summary>
@@ -582,6 +597,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	public UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public UpdateByQueryRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public UpdateByQueryRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+	public UpdateByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public UpdateByQueryRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public UpdateByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -828,6 +844,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	public UpdateByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public UpdateByQueryRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public UpdateByQueryRequestDescriptor Preference(string? preference) => Qs("preference", preference);
+	public UpdateByQueryRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public UpdateByQueryRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public UpdateByQueryRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public UpdateByQueryRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);

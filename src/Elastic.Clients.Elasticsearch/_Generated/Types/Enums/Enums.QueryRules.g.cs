@@ -144,7 +144,9 @@ internal sealed class QueryRuleCriteriaTypeConverter : JsonConverter<QueryRuleCr
 public enum QueryRuleType
 {
 	[EnumMember(Value = "pinned")]
-	Pinned
+	Pinned,
+	[EnumMember(Value = "exclude")]
+	Exclude
 }
 
 internal sealed class QueryRuleTypeConverter : JsonConverter<QueryRuleType>
@@ -156,6 +158,8 @@ internal sealed class QueryRuleTypeConverter : JsonConverter<QueryRuleType>
 		{
 			case "pinned":
 				return QueryRuleType.Pinned;
+			case "exclude":
+				return QueryRuleType.Exclude;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -168,6 +172,9 @@ internal sealed class QueryRuleTypeConverter : JsonConverter<QueryRuleType>
 		{
 			case QueryRuleType.Pinned:
 				writer.WriteStringValue("pinned");
+				return;
+			case QueryRuleType.Exclude:
+				writer.WriteStringValue("exclude");
 				return;
 		}
 

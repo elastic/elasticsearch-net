@@ -29,6 +29,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public sealed partial class Indicators
 {
+	[JsonInclude, JsonPropertyName("data_stream_lifecycle")]
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; init; }
 	[JsonInclude, JsonPropertyName("disk")]
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; init; }
 	[JsonInclude, JsonPropertyName("ilm")]
