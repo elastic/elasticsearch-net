@@ -58,6 +58,7 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule> SynonymsSet { get; set; }
 }
 
@@ -140,32 +141,30 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 		if (SynonymsSetDescriptor is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, SynonymsSetDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (SynonymsSetDescriptorAction is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor(SynonymsSetDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (SynonymsSetDescriptorActions is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
+			if (SynonymsSetDescriptorActions.Length != 1)
+				writer.WriteStartArray();
 			foreach (var action in SynonymsSetDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (SynonymsSetDescriptorActions.Length != 1)
+				writer.WriteEndArray();
 		}
 		else
 		{
 			writer.WritePropertyName("synonyms_set");
-			JsonSerializer.Serialize(writer, SynonymsSetValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule>(SynonymsSetValue, writer, options);
 		}
 
 		writer.WriteEndObject();
@@ -251,32 +250,30 @@ public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutS
 		if (SynonymsSetDescriptor is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, SynonymsSetDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (SynonymsSetDescriptorAction is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor(SynonymsSetDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (SynonymsSetDescriptorActions is not null)
 		{
 			writer.WritePropertyName("synonyms_set");
-			writer.WriteStartArray();
+			if (SynonymsSetDescriptorActions.Length != 1)
+				writer.WriteStartArray();
 			foreach (var action in SynonymsSetDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRuleDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (SynonymsSetDescriptorActions.Length != 1)
+				writer.WriteEndArray();
 		}
 		else
 		{
 			writer.WritePropertyName("synonyms_set");
-			JsonSerializer.Serialize(writer, SynonymsSetValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Synonyms.SynonymRule>(SynonymsSetValue, writer, options);
 		}
 
 		writer.WriteEndObject();
