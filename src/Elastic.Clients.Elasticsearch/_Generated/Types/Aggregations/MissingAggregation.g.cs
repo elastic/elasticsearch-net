@@ -40,6 +40,7 @@ public sealed partial class MissingAggregation
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MissingAggregation missingAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Missing(missingAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(MissingAggregation missingAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Missing(missingAggregation);
 }
 
 public sealed partial class MissingAggregationDescriptor<TDocument> : SerializableDescriptor<MissingAggregationDescriptor<TDocument>>

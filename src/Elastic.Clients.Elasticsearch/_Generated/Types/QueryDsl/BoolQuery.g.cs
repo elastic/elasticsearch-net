@@ -89,6 +89,8 @@ public sealed partial class BoolQuery
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Bool(boolQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Bool(boolQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Bool(boolQuery);
 }
 
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>

@@ -55,6 +55,7 @@ public sealed partial class CompositeAggregation
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(CompositeAggregation compositeAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Composite(compositeAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(CompositeAggregation compositeAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Composite(compositeAggregation);
 }
 
 public sealed partial class CompositeAggregationDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationDescriptor<TDocument>>

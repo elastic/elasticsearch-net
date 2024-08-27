@@ -51,6 +51,7 @@ public sealed partial class ValueCountAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(ValueCountAggregation valueCountAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.ValueCount(valueCountAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyAggregation(ValueCountAggregation valueCountAggregation) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyAggregation.ValueCount(valueCountAggregation);
 }
 
 public sealed partial class ValueCountAggregationDescriptor<TDocument> : SerializableDescriptor<ValueCountAggregationDescriptor<TDocument>>

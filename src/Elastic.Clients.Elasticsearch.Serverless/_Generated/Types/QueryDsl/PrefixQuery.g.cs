@@ -163,6 +163,9 @@ public sealed partial class PrefixQuery
 	public string Value { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Prefix(prefixQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Prefix(prefixQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Prefix(prefixQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Prefix(prefixQuery);
 }
 
 public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
