@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static class SingleOrManySerializationHelper
 {
-	public static IList<TItem> Deserialize<TItem>(ref Utf8JsonReader reader, JsonSerializerOptions options)
+	public static List<TItem> Deserialize<TItem>(ref Utf8JsonReader reader, JsonSerializerOptions options)
 	{
 		switch (reader.TokenType)
 		{

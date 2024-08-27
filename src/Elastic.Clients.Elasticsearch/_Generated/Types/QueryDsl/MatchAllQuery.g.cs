@@ -43,6 +43,8 @@ public sealed partial class MatchAllQuery
 	public string? QueryName { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MatchAllQuery matchAllQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.MatchAll(matchAllQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(MatchAllQuery matchAllQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.MatchAll(matchAllQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(MatchAllQuery matchAllQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.MatchAll(matchAllQuery);
 }
 
 public sealed partial class MatchAllQueryDescriptor : SerializableDescriptor<MatchAllQueryDescriptor>

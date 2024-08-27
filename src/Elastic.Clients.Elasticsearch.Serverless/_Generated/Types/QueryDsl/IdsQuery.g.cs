@@ -51,6 +51,9 @@ public sealed partial class IdsQuery
 	public Elastic.Clients.Elasticsearch.Serverless.Ids? Values { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Ids(idsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyQuery.Ids(idsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.RoleQuery.Ids(idsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Serverless.Security.UserQuery.Ids(idsQuery);
 }
 
 public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQueryDescriptor>

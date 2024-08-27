@@ -108,6 +108,8 @@ public sealed partial class TermsQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Term { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Terms(termsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Terms(termsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Terms(termsQuery);
 }
 
 public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescriptor<TermsQueryDescriptor<TDocument>>
