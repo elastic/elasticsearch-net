@@ -59,6 +59,7 @@ public sealed partial class RangeAggregation
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(RangeAggregation rangeAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Range(rangeAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(RangeAggregation rangeAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Range(rangeAggregation);
 }
 
 public sealed partial class RangeAggregationDescriptor<TDocument> : SerializableDescriptor<RangeAggregationDescriptor<TDocument>>
