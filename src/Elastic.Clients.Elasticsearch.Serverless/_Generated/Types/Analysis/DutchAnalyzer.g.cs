@@ -29,9 +29,13 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Analysis;
 
 public sealed partial class DutchAnalyzer : IAnalyzer
 {
+	[JsonInclude, JsonPropertyName("stem_exclusion")]
+	public ICollection<string>? StemExclusion { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
+	[JsonInclude, JsonPropertyName("stopwords_path")]
+	public string? StopwordsPath { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "dutch";
@@ -45,7 +49,15 @@ public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<Dut
 	{
 	}
 
+	private ICollection<string>? StemExclusionValue { get; set; }
 	private ICollection<string>? StopwordsValue { get; set; }
+	private string? StopwordsPathValue { get; set; }
+
+	public DutchAnalyzerDescriptor StemExclusion(ICollection<string>? stemExclusion)
+	{
+		StemExclusionValue = stemExclusion;
+		return Self;
+	}
 
 	public DutchAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
 	{
@@ -53,13 +65,31 @@ public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<Dut
 		return Self;
 	}
 
+	public DutchAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	{
+		StopwordsPathValue = stopwordsPath;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (StemExclusionValue is not null)
+		{
+			writer.WritePropertyName("stem_exclusion");
+			JsonSerializer.Serialize(writer, StemExclusionValue, options);
+		}
+
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
 			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+		}
+
+		if (!string.IsNullOrEmpty(StopwordsPathValue))
+		{
+			writer.WritePropertyName("stopwords_path");
+			writer.WriteStringValue(StopwordsPathValue);
 		}
 
 		writer.WritePropertyName("type");
@@ -69,6 +99,8 @@ public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<Dut
 
 	DutchAnalyzer IBuildableDescriptor<DutchAnalyzer>.Build() => new()
 	{
-		Stopwords = StopwordsValue
+		StemExclusion = StemExclusionValue,
+		Stopwords = StopwordsValue,
+		StopwordsPath = StopwordsPathValue
 	};
 }

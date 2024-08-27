@@ -52,7 +52,7 @@ public sealed partial class PainlessContextSetup
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
 public sealed partial class PainlessContextSetupDescriptor<TDocument> : SerializableDescriptor<PainlessContextSetupDescriptor<TDocument>>
@@ -65,7 +65,7 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 
 	private object DocumentValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
@@ -97,7 +97,7 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 	/// Use this parameter to specify a query for computing a score.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -138,7 +138,7 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
-		else
+		else if (QueryValue is not null)
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, QueryValue, options);
@@ -158,7 +158,7 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 
 	private object DocumentValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
@@ -190,7 +190,7 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 	/// Use this parameter to specify a query for computing a score.
 	/// </para>
 	/// </summary>
-	public PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
 		QueryDescriptorAction = null;
@@ -231,7 +231,7 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
-		else
+		else if (QueryValue is not null)
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, QueryValue, options);

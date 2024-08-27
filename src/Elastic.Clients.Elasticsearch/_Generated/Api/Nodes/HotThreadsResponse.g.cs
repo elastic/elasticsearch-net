@@ -28,6 +28,4 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public sealed partial class HotThreadsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("hot_threads")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.HotThread> HotThreads { get; init; }
 }

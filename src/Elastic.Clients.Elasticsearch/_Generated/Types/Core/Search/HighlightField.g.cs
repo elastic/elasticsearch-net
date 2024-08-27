@@ -29,9 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class HighlightField
 {
-	[JsonInclude, JsonPropertyName("analyzer")]
-	public Elastic.Clients.Elasticsearch.Analysis.IAnalyzer? Analyzer { get; set; }
-
 	/// <summary>
 	/// <para>
 	/// A string that contains each boundary character.
@@ -202,7 +199,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IAnalyzer? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
@@ -227,12 +223,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	private bool? RequireFieldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
-
-	public HighlightFieldDescriptor<TDocument> Analyzer(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer? analyzer)
-	{
-		AnalyzerValue = analyzer;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>
@@ -487,12 +477,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AnalyzerValue is not null)
-		{
-			writer.WritePropertyName("analyzer");
-			JsonSerializer.Serialize(writer, AnalyzerValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(BoundaryCharsValue))
 		{
 			writer.WritePropertyName("boundary_chars");
@@ -647,7 +631,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.IAnalyzer? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
@@ -672,12 +655,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	private bool? RequireFieldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
-
-	public HighlightFieldDescriptor Analyzer(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer? analyzer)
-	{
-		AnalyzerValue = analyzer;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>
@@ -932,12 +909,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AnalyzerValue is not null)
-		{
-			writer.WritePropertyName("analyzer");
-			JsonSerializer.Serialize(writer, AnalyzerValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(BoundaryCharsValue))
 		{
 			writer.WritePropertyName("boundary_chars");
