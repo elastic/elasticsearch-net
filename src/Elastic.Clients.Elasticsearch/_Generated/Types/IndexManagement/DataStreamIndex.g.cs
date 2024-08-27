@@ -59,7 +59,7 @@ public sealed partial class DataStreamIndex
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("managed_by")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy ManagedBy { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? ManagedBy { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -67,5 +67,5 @@ public sealed partial class DataStreamIndex
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("prefer_ilm")]
-	public bool PreferIlm { get; init; }
+	public bool? PreferIlm { get; init; }
 }
