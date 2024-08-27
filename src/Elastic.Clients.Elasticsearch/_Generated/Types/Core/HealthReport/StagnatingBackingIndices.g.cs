@@ -25,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Nodes;
+namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-public sealed partial class HotThread
+public sealed partial class StagnatingBackingIndices
 {
-	[JsonInclude, JsonPropertyName("hosts")]
-	public IReadOnlyCollection<string> Hosts { get; init; }
-	[JsonInclude, JsonPropertyName("node_id")]
-	public string NodeId { get; init; }
-	[JsonInclude, JsonPropertyName("node_name")]
-	public string NodeName { get; init; }
-	[JsonInclude, JsonPropertyName("threads")]
-	public IReadOnlyCollection<string> Threads { get; init; }
+	[JsonInclude, JsonPropertyName("first_occurrence_timestamp")]
+	public long FirstOccurrenceTimestamp { get; init; }
+	[JsonInclude, JsonPropertyName("index_name")]
+	public string IndexName { get; init; }
+	[JsonInclude, JsonPropertyName("retry_count")]
+	public int RetryCount { get; init; }
 }
