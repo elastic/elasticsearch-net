@@ -37,6 +37,7 @@ using Elastic.Clients.Elasticsearch.QueryRules;
 using Elastic.Clients.Elasticsearch.Rollup;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.SearchApplication;
+using Elastic.Clients.Elasticsearch.Security;
 using Elastic.Clients.Elasticsearch.Snapshot;
 using Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 using Elastic.Clients.Elasticsearch.Sql;
@@ -74,6 +75,7 @@ public partial class ElasticsearchClient
 	public virtual RollupNamespacedClient Rollup { get; private set; }
 	public virtual SearchableSnapshotsNamespacedClient SearchableSnapshots { get; private set; }
 	public virtual SearchApplicationNamespacedClient SearchApplication { get; private set; }
+	public virtual SecurityNamespacedClient Security { get; private set; }
 	public virtual SnapshotNamespacedClient Snapshot { get; private set; }
 	public virtual SnapshotLifecycleManagementNamespacedClient SnapshotLifecycleManagement { get; private set; }
 	public virtual SqlNamespacedClient Sql { get; private set; }
@@ -105,6 +107,7 @@ public partial class ElasticsearchClient
 		Rollup = new RollupNamespacedClient(this);
 		SearchableSnapshots = new SearchableSnapshotsNamespacedClient(this);
 		SearchApplication = new SearchApplicationNamespacedClient(this);
+		Security = new SecurityNamespacedClient(this);
 		Snapshot = new SnapshotNamespacedClient(this);
 		SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespacedClient(this);
 		Sql = new SqlNamespacedClient(this);

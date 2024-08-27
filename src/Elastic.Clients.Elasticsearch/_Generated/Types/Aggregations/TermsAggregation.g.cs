@@ -149,6 +149,7 @@ public sealed partial class TermsAggregation
 	public string? ValueType { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Terms(termsAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation.Terms(termsAggregation);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy.Terms(termsAggregation);
 }
 
