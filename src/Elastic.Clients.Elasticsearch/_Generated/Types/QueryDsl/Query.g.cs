@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
@@ -92,6 +92,7 @@ public sealed partial class Query
 	public static Query Rule(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery ruleQuery) => new Query("rule", ruleQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
+	public static Query Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery semanticQuery) => new Query("semantic", semanticQuery);
 	public static Query Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => new Query("shape", shapeQuery);
 	public static Query SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new Query("simple_query_string", simpleQueryStringQuery);
 	public static Query SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new Query("span_containing", spanContainingQuery);
@@ -103,6 +104,7 @@ public sealed partial class Query
 	public static Query SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery spanOrQuery) => new Query("span_or", spanOrQuery);
 	public static Query SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery spanTermQuery) => new Query("span_term", spanTermQuery);
 	public static Query SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => new Query("span_within", spanWithinQuery);
+	public static Query SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery sparseVectorQuery) => new Query("sparse_vector", sparseVectorQuery);
 	public static Query Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => new Query("term", termQuery);
 	public static Query Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => new Query("terms", termsQuery);
 	public static Query TermsSet(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery termsSetQuery) => new Query("terms_set", termsSetQuery);
@@ -415,6 +417,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "semantic")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "shape")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery?>(ref reader, options);
@@ -488,6 +497,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			if (propertyName == "span_within")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "sparse_vector")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -670,6 +686,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "script_score":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery)value.Variant, options);
 					break;
+				case "semantic":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery)value.Variant, options);
+					break;
 				case "shape":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery)value.Variant, options);
 					break;
@@ -702,6 +721,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 					break;
 				case "span_within":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)value.Variant, options);
+					break;
+				case "sparse_vector":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery)value.Variant, options);
 					break;
 				case "term":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)value.Variant, options);
@@ -840,6 +862,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor<TDocument> ScriptScore(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
+	public QueryDescriptor<TDocument> Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery semanticQuery) => Set(semanticQuery, "semantic");
+	public QueryDescriptor<TDocument> Semantic(Action<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor> configure) => Set(configure, "semantic");
 	public QueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
 	public QueryDescriptor<TDocument> Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>> configure) => Set(configure, "shape");
 	public QueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
@@ -862,6 +886,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> SpanTerm(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 	public QueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public QueryDescriptor<TDocument> SpanWithin(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+	public QueryDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery sparseVectorQuery) => Set(sparseVectorQuery, "sparse_vector");
+	public QueryDescriptor<TDocument> SparseVector(Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>> configure) => Set(configure, "sparse_vector");
 	public QueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
 	public QueryDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
 	public QueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
@@ -1006,6 +1032,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor ScriptScore<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
+	public QueryDescriptor Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery semanticQuery) => Set(semanticQuery, "semantic");
+	public QueryDescriptor Semantic(Action<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor> configure) => Set(configure, "semantic");
 	public QueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
 	public QueryDescriptor Shape<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor> configure) => Set(configure, "shape");
 	public QueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
@@ -1028,6 +1056,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor SpanTerm<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
 	public QueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public QueryDescriptor SpanWithin<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
+	public QueryDescriptor SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery sparseVectorQuery) => Set(sparseVectorQuery, "sparse_vector");
+	public QueryDescriptor SparseVector<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor> configure) => Set(configure, "sparse_vector");
 	public QueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
 	public QueryDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> configure) => Set(configure, "term");
 	public QueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");

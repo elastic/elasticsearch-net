@@ -285,6 +285,321 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<BulkDeleteRoleRequest, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<BulkDeleteRoleRequest, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkDeleteRoleResponse BulkDeleteRole()
+	{
+		var descriptor = new BulkDeleteRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkDeleteRoleResponse BulkDeleteRole(Action<BulkDeleteRoleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new BulkDeleteRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkDeleteRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk delete roles API cannot delete roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(Action<BulkDeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkDeleteRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<BulkPutRoleRequest, BulkPutRoleResponse, BulkPutRoleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequest, BulkPutRoleResponse, BulkPutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole<TDocument>()
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole()
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual BulkPutRoleResponse BulkPutRole(Action<BulkPutRoleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// The bulk create or update roles API cannot update roles that are defined in roles files.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(Action<BulkPutRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new BulkPutRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Changes the passwords of users in the native realm and built-in users.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -5755,6 +6070,193 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole(QueryRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<QueryRoleRequest, QueryRoleResponse, QueryRoleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequest, QueryRoleResponse, QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole<TDocument>()
+	{
+		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole(QueryRoleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole()
+	{
+		var descriptor = new QueryRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual QueryRoleResponse QueryRole(Action<QueryRoleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new QueryRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new QueryRoleRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<QueryRoleResponse> QueryRoleAsync(Action<QueryRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new QueryRoleRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

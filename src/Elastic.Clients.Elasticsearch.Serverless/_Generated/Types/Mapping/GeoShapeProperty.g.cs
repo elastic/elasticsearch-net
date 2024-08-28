@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapeProperty : IProperty
 {
@@ -81,7 +81,7 @@ public sealed partial class GeoShapeProperty : IProperty
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptor<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
 {
@@ -339,7 +339,7 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
 {

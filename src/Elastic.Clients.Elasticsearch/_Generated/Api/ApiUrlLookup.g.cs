@@ -137,6 +137,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "_ingest/geoip/stats" });
+	internal static ApiUrls IngestGetGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database", "_ingest/geoip/database/{id}" });
 	internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "_ingest/pipeline", "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "_ingest/processor/grok" });
 	internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
@@ -269,9 +270,12 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "{index}/_update/{id}" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "_update_by_query/{task_id}/_rethrottle" });
+	internal static ApiUrls QueryRulesDeleteRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesDeleteRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesGetRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesGetRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
 	internal static ApiUrls QueryRulesListRulesets = new ApiUrls(new[] { "_query_rules" });
+	internal static ApiUrls QueryRulesPutRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesPutRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
 	internal static ApiUrls RollupDeleteJob = new ApiUrls(new[] { "_rollup/job/{id}" });
 	internal static ApiUrls RollupGetJobs = new ApiUrls(new[] { "_rollup/job/{id}", "_rollup/job" });
@@ -295,6 +299,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SearchApplicationSearch = new ApiUrls(new[] { "_application/search_application/{name}/_search" });
 	internal static ApiUrls SecurityActivateUserProfile = new ApiUrls(new[] { "_security/profile/_activate" });
 	internal static ApiUrls SecurityAuthenticate = new ApiUrls(new[] { "_security/_authenticate" });
+	internal static ApiUrls SecurityBulkDeleteRole = new ApiUrls(new[] { "_security/role" });
+	internal static ApiUrls SecurityBulkPutRole = new ApiUrls(new[] { "_security/role" });
 	internal static ApiUrls SecurityChangePassword = new ApiUrls(new[] { "_security/user/{username}/_password", "_security/user/_password" });
 	internal static ApiUrls SecurityClearApiKeyCache = new ApiUrls(new[] { "_security/api_key/{ids}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedPrivileges = new ApiUrls(new[] { "_security/privilege/{application}/_clear_cache" });
@@ -335,6 +341,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecurityPutRoleMapping = new ApiUrls(new[] { "_security/role_mapping/{name}" });
 	internal static ApiUrls SecurityPutUser = new ApiUrls(new[] { "_security/user/{username}" });
 	internal static ApiUrls SecurityQueryApiKeys = new ApiUrls(new[] { "_security/_query/api_key" });
+	internal static ApiUrls SecurityQueryRole = new ApiUrls(new[] { "_security/_query/role" });
 	internal static ApiUrls SecurityQueryUser = new ApiUrls(new[] { "_security/_query/user" });
 	internal static ApiUrls SecuritySamlAuthenticate = new ApiUrls(new[] { "_security/saml/authenticate" });
 	internal static ApiUrls SecuritySamlCompleteLogout = new ApiUrls(new[] { "_security/saml/complete_logout" });

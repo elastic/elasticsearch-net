@@ -90,6 +90,7 @@ public sealed partial class BoolQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Bool(boolQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Bool(boolQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Bool(boolQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Bool(boolQuery);
 }
 

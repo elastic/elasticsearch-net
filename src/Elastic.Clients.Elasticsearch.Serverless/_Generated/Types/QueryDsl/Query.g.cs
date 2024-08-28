@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query

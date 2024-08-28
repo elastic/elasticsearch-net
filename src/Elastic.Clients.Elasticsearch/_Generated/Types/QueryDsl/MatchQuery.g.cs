@@ -334,6 +334,7 @@ public sealed partial class MatchQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Match(matchQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Match(matchQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Match(matchQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(MatchQuery matchQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Match(matchQuery);
 }
 

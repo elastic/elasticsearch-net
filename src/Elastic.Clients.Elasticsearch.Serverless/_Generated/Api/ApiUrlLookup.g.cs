@@ -91,6 +91,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "_validate/query", "{index}/_validate/query" });
 	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "_ingest/geoip/stats" });
+	internal static ApiUrls IngestGetGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database", "_ingest/geoip/database/{id}" });
 	internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "_ingest/pipeline", "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "_ingest/processor/grok" });
 	internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
