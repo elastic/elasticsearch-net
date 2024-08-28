@@ -109,6 +109,7 @@ public sealed partial class TermsQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Terms(termsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Terms(termsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Terms(termsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Terms(termsQuery);
 }
 

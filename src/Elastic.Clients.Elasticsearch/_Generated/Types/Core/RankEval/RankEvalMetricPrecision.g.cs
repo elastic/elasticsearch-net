@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 /// <para>
 /// Precision at K (P@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricPrecision
 {
@@ -64,7 +64,7 @@ public sealed partial class RankEvalMetricPrecision
 /// <para>
 /// Precision at K (P@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptor<RankEvalMetricPrecisionDescriptor>
 {
