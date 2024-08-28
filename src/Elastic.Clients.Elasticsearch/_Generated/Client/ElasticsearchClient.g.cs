@@ -124,7 +124,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequest request)
@@ -139,7 +139,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
@@ -153,7 +153,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(BulkRequestDescriptor<TDocument> descriptor)
@@ -168,7 +168,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -184,7 +184,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -201,7 +201,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>()
@@ -217,7 +217,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -234,7 +234,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequestDescriptor descriptor)
@@ -249,7 +249,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -265,7 +265,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest)
@@ -282,7 +282,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk()
@@ -298,7 +298,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
@@ -315,7 +315,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -329,7 +329,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -344,7 +344,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -360,7 +360,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -375,7 +375,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -391,7 +391,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -405,7 +405,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -420,7 +420,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -436,7 +436,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
 	{
@@ -451,7 +451,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -465,7 +465,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
@@ -478,7 +478,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -490,7 +490,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequestDescriptor descriptor)
@@ -503,7 +503,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll()
@@ -517,7 +517,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
@@ -532,7 +532,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -544,7 +544,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
 	{
@@ -557,7 +557,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clears the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -571,7 +571,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
@@ -584,7 +584,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -596,7 +596,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequestDescriptor descriptor)
@@ -609,7 +609,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime()
@@ -623,7 +623,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
@@ -638,7 +638,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -650,7 +650,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
 	{
@@ -663,7 +663,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Closes a point-in-time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6379,7 +6379,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
@@ -6397,7 +6397,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6414,7 +6414,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor)
@@ -6432,7 +6432,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6451,7 +6451,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -6471,7 +6471,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>()
@@ -6490,7 +6490,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -6510,7 +6510,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequestDescriptor descriptor)
@@ -6528,7 +6528,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6547,7 +6547,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
@@ -6567,7 +6567,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6584,7 +6584,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6602,7 +6602,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6621,7 +6621,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -6639,7 +6639,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6658,7 +6658,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6675,7 +6675,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6693,7 +6693,7 @@ public partial class ElasticsearchClient
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

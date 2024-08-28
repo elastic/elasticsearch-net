@@ -164,6 +164,7 @@ public sealed partial class PrefixQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Prefix(prefixQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Prefix(prefixQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Prefix(prefixQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Prefix(prefixQuery);
 }
 
