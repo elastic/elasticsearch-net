@@ -52,6 +52,7 @@ public sealed partial class ExistsQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Exists(existsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Exists(existsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Exists(existsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Exists(existsQuery);
 }
 
