@@ -152,6 +152,7 @@ public sealed partial class SimpleQueryStringQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.SimpleQueryString(simpleQueryStringQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.SimpleQueryString(simpleQueryStringQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.SimpleQueryString(simpleQueryStringQuery);
 }
 
