@@ -52,6 +52,7 @@ public sealed partial class IdsQuery
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Ids(idsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Ids(idsQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Ids(idsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Ids(idsQuery);
 }
 
