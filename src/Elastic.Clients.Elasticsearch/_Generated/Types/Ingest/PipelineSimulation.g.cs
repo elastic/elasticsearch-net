@@ -29,10 +29,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class PipelineSimulation
 {
+	[JsonInclude, JsonPropertyName("description")]
+	public string? Description { get; init; }
 	[JsonInclude, JsonPropertyName("doc")]
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; init; }
-	[JsonInclude, JsonPropertyName("processor_results")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
+	[JsonInclude, JsonPropertyName("error")]
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
+	[JsonInclude, JsonPropertyName("ignored_error")]
+	public Elastic.Clients.Elasticsearch.ErrorCause? IgnoredError { get; init; }
 	[JsonInclude, JsonPropertyName("processor_type")]
 	public string? ProcessorType { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
