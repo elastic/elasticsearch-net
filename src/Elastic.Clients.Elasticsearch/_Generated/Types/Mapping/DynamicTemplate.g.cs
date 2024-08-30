@@ -50,24 +50,18 @@ public sealed partial class DynamicTemplate
 	public static DynamicTemplate Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => new DynamicTemplate("runtime", property);
 
 	[JsonInclude, JsonPropertyName("match")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Match { get; set; }
 	[JsonInclude, JsonPropertyName("match_mapping_type")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? MatchMappingType { get; set; }
 	[JsonInclude, JsonPropertyName("match_pattern")]
 	public Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
 	[JsonInclude, JsonPropertyName("path_match")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? PathMatch { get; set; }
 	[JsonInclude, JsonPropertyName("path_unmatch")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? PathUnmatch { get; set; }
 	[JsonInclude, JsonPropertyName("unmatch")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Unmatch { get; set; }
 	[JsonInclude, JsonPropertyName("unmatch_mapping_type")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? UnmatchMappingType { get; set; }
 
 	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class

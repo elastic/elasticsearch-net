@@ -29,8 +29,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class DatabaseConfiguration
 {
+	/// <summary>
+	/// <para>
+	/// The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
+	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("maxmind")]
 	public Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The provider-assigned name of the IP geolocation database to download.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }
