@@ -30,5 +30,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class Maxmind
 {
 	[JsonInclude, JsonPropertyName("account_id")]
-	public string AccountId { get; init; }
+	public Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
+}
+
+public sealed partial class MaxmindDescriptor : SerializableDescriptor<MaxmindDescriptor>
+{
+	internal MaxmindDescriptor(Action<MaxmindDescriptor> configure) => configure.Invoke(this);
+
+	public MaxmindDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Id AccountIdValue { get; set; }
+
+	public MaxmindDescriptor AccountId(Elastic.Clients.Elasticsearch.Id accountId)
+	{
+		AccountIdValue = accountId;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("account_id");
+		JsonSerializer.Serialize(writer, AccountIdValue, options);
+		writer.WriteEndObject();
+	}
 }

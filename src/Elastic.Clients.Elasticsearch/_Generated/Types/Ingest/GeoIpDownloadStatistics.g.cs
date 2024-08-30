@@ -34,8 +34,16 @@ public sealed partial class GeoIpDownloadStatistics
 	/// Current number of databases available for use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("database_count")]
-	public int DatabaseCount { get; init; }
+	[JsonInclude, JsonPropertyName("databases_count")]
+	public int DatabasesCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Total number of databases not updated after 30 days
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("expired_databases")]
+	public int ExpiredDatabases { get; init; }
 
 	/// <summary>
 	/// <para>

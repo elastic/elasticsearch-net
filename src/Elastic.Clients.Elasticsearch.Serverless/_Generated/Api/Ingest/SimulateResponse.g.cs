@@ -29,5 +29,5 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 public sealed partial class SimulateResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("docs")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineSimulation> Docs { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.SimulateDocumentResult> Docs { get; init; }
 }
