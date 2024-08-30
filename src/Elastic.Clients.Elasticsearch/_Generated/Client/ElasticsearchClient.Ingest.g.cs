@@ -41,6 +41,193 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequest, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequest, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Deletes a geoip database configuration.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Deletes one or more existing ingest pipeline.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -1072,6 +1259,193 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequest, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequest, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns information about one or more geoip database configurations.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

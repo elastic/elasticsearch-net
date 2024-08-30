@@ -76,7 +76,7 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? Docs { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document> Docs { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -122,7 +122,7 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? DocsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document> DocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
@@ -135,7 +135,7 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? docs)
+	public SimulateRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document> docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;
@@ -230,7 +230,7 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 
 			writer.WriteEndArray();
 		}
-		else if (DocsValue is not null)
+		else
 		{
 			writer.WritePropertyName("docs");
 			JsonSerializer.Serialize(writer, DocsValue, options);
@@ -289,7 +289,7 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 		return Self;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? DocsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document> DocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
@@ -302,7 +302,7 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? docs)
+	public SimulateRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document> docs)
 	{
 		DocsDescriptor = null;
 		DocsDescriptorAction = null;
@@ -397,7 +397,7 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 
 			writer.WriteEndArray();
 		}
-		else if (DocsValue is not null)
+		else
 		{
 			writer.WritePropertyName("docs");
 			JsonSerializer.Serialize(writer, DocsValue, options);

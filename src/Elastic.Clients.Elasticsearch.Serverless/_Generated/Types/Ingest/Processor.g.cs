@@ -63,6 +63,7 @@ public sealed partial class Processor
 	public static Processor Geoip(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor geoIpProcessor) => new Processor("geoip", geoIpProcessor);
 	public static Processor Grok(Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessor grokProcessor) => new Processor("grok", grokProcessor);
 	public static Processor Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => new Processor("gsub", gsubProcessor);
+	public static Processor HtmlStrip(Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor htmlStripProcessor) => new Processor("html_strip", htmlStripProcessor);
 	public static Processor Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => new Processor("inference", inferenceProcessor);
 	public static Processor Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => new Processor("join", joinProcessor);
 	public static Processor Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => new Processor("json", jsonProcessor);
@@ -79,6 +80,7 @@ public sealed partial class Processor
 	public static Processor Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => new Processor("split", splitProcessor);
 	public static Processor Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => new Processor("trim", trimProcessor);
 	public static Processor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => new Processor("uppercase", uppercaseProcessor);
+	public static Processor UriParts(Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor uriPartsProcessor) => new Processor("uri_parts", uriPartsProcessor);
 	public static Processor UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
 	public static Processor UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => new Processor("user_agent", userAgentProcessor);
 
@@ -239,6 +241,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				continue;
 			}
 
+			if (propertyName == "html_strip")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "inference")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor?>(ref reader, options);
@@ -351,6 +360,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				continue;
 			}
 
+			if (propertyName == "uri_parts")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "urldecode")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor?>(ref reader, options);
@@ -431,6 +447,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "gsub":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor)value.Variant, options);
 					break;
+				case "html_strip":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor)value.Variant, options);
+					break;
 				case "inference":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor)value.Variant, options);
 					break;
@@ -478,6 +497,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 					break;
 				case "uppercase":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor)value.Variant, options);
+					break;
+				case "uri_parts":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor)value.Variant, options);
 					break;
 				case "urldecode":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor)value.Variant, options);
@@ -557,6 +579,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Grok(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessorDescriptor<TDocument>> configure) => Set(configure, "grok");
 	public ProcessorDescriptor<TDocument> Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
 	public ProcessorDescriptor<TDocument> Gsub(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessorDescriptor<TDocument>> configure) => Set(configure, "gsub");
+	public ProcessorDescriptor<TDocument> HtmlStrip(Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor htmlStripProcessor) => Set(htmlStripProcessor, "html_strip");
+	public ProcessorDescriptor<TDocument> HtmlStrip(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessorDescriptor<TDocument>> configure) => Set(configure, "html_strip");
 	public ProcessorDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
 	public ProcessorDescriptor<TDocument> Inference(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
 	public ProcessorDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
@@ -589,6 +613,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Trim(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
 	public ProcessorDescriptor<TDocument> Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor<TDocument> Uppercase(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
+	public ProcessorDescriptor<TDocument> UriParts(Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor uriPartsProcessor) => Set(uriPartsProcessor, "uri_parts");
+	public ProcessorDescriptor<TDocument> UriParts(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessorDescriptor<TDocument>> configure) => Set(configure, "uri_parts");
 	public ProcessorDescriptor<TDocument> UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
 	public ProcessorDescriptor<TDocument> UrlDecode(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor<TDocument> UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
@@ -679,6 +705,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Grok<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessorDescriptor> configure) => Set(configure, "grok");
 	public ProcessorDescriptor Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
 	public ProcessorDescriptor Gsub<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessorDescriptor> configure) => Set(configure, "gsub");
+	public ProcessorDescriptor HtmlStrip(Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor htmlStripProcessor) => Set(htmlStripProcessor, "html_strip");
+	public ProcessorDescriptor HtmlStrip<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessorDescriptor> configure) => Set(configure, "html_strip");
 	public ProcessorDescriptor Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
 	public ProcessorDescriptor Inference<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor> configure) => Set(configure, "inference");
 	public ProcessorDescriptor Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
@@ -711,6 +739,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Trim<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor> configure) => Set(configure, "trim");
 	public ProcessorDescriptor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor Uppercase<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessorDescriptor> configure) => Set(configure, "uppercase");
+	public ProcessorDescriptor UriParts(Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor uriPartsProcessor) => Set(uriPartsProcessor, "uri_parts");
+	public ProcessorDescriptor UriParts<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessorDescriptor> configure) => Set(configure, "uri_parts");
 	public ProcessorDescriptor UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
 	public ProcessorDescriptor UrlDecode<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
