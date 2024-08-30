@@ -27,53 +27,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
-public sealed partial class GeoIpDownloadStatistics
+public sealed partial class SimulateDocumentResult
 {
-	/// <summary>
-	/// <para>
-	/// Current number of databases available for use.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("databases_count")]
-	public int DatabasesCount { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total number of databases not updated after 30 days
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("expired_databases")]
-	public int ExpiredDatabases { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total number of failed database downloads.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("failed_downloads")]
-	public int FailedDownloads { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total number of database updates skipped.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("skipped_updates")]
-	public int SkippedUpdates { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total number of successful database downloads.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("successful_downloads")]
-	public int SuccessfulDownloads { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total milliseconds spent downloading databases.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total_download_time")]
-	public long TotalDownloadTime { get; init; }
+	[JsonInclude, JsonPropertyName("doc")]
+	public Elastic.Clients.Elasticsearch.Serverless.Ingest.DocumentSimulation? Doc { get; init; }
+	[JsonInclude, JsonPropertyName("error")]
+	public Elastic.Clients.Elasticsearch.Serverless.ErrorCause? Error { get; init; }
+	[JsonInclude, JsonPropertyName("processor_results")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
 }
