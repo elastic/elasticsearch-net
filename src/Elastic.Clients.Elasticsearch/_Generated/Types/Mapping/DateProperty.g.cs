@@ -66,8 +66,6 @@ public sealed partial class DateProperty : IProperty
 	public int? PrecisionStep { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -100,7 +98,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	private DateTimeOffset? NullValueValue { get; set; }
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public DatePropertyDescriptor<TDocument> Boost(double? boost)
@@ -244,12 +241,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public DatePropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -359,12 +350,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -417,7 +402,6 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -447,7 +431,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	private DateTimeOffset? NullValueValue { get; set; }
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public DatePropertyDescriptor Boost(double? boost)
@@ -591,12 +574,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
-	public DatePropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public DatePropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -706,12 +683,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -764,7 +735,6 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		NullValue = NullValueValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

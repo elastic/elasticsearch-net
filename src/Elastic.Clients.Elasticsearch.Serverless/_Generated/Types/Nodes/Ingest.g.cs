@@ -35,7 +35,7 @@ public sealed partial class Ingest
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pipelines")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.IngestTotal>? Pipelines { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.IngestStats>? Pipelines { get; init; }
 
 	/// <summary>
 	/// <para>

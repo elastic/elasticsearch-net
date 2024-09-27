@@ -65,8 +65,6 @@ public sealed partial class ShapeProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.GeoOrientation? Orientation { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -100,7 +98,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
@@ -202,12 +199,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public ShapePropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ShapePropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -283,12 +274,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -313,7 +298,6 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -344,7 +328,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ShapePropertyDescriptor Coerce(bool? coerce = true)
@@ -446,12 +429,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		return Self;
 	}
 
-	public ShapePropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ShapePropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -527,12 +504,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -557,7 +528,6 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

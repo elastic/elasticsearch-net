@@ -69,6 +69,9 @@ public sealed partial class TokenizersDescriptor : IsADictionaryDescriptor<Token
 	public TokenizersDescriptor CharGroup(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, null);
 	public TokenizersDescriptor CharGroup(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.CharGroupTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor CharGroup(string tokenizerName, CharGroupTokenizer charGroupTokenizer) => AssignVariant(tokenizerName, charGroupTokenizer);
+	public TokenizersDescriptor Classic(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.ClassicTokenizerDescriptor, ClassicTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Classic(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.ClassicTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.ClassicTokenizerDescriptor, ClassicTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Classic(string tokenizerName, ClassicTokenizer classicTokenizer) => AssignVariant(tokenizerName, classicTokenizer);
 	public TokenizersDescriptor EdgeNGram(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, null);
 	public TokenizersDescriptor EdgeNGram(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor EdgeNGram(string tokenizerName, EdgeNGramTokenizer edgeNGramTokenizer) => AssignVariant(tokenizerName, edgeNGramTokenizer);
@@ -99,9 +102,18 @@ public sealed partial class TokenizersDescriptor : IsADictionaryDescriptor<Token
 	public TokenizersDescriptor Pattern(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, null);
 	public TokenizersDescriptor Pattern(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Pattern(string tokenizerName, PatternTokenizer patternTokenizer) => AssignVariant(tokenizerName, patternTokenizer);
+	public TokenizersDescriptor SimplePatternSplit(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternSplitTokenizerDescriptor, SimplePatternSplitTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor SimplePatternSplit(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternSplitTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternSplitTokenizerDescriptor, SimplePatternSplitTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor SimplePatternSplit(string tokenizerName, SimplePatternSplitTokenizer simplePatternSplitTokenizer) => AssignVariant(tokenizerName, simplePatternSplitTokenizer);
+	public TokenizersDescriptor SimplePattern(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternTokenizerDescriptor, SimplePatternTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor SimplePattern(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternTokenizerDescriptor, SimplePatternTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor SimplePattern(string tokenizerName, SimplePatternTokenizer simplePatternTokenizer) => AssignVariant(tokenizerName, simplePatternTokenizer);
 	public TokenizersDescriptor Standard(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, null);
 	public TokenizersDescriptor Standard(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Standard(string tokenizerName, StandardTokenizer standardTokenizer) => AssignVariant(tokenizerName, standardTokenizer);
+	public TokenizersDescriptor Thai(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.ThaiTokenizerDescriptor, ThaiTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Thai(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.ThaiTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.ThaiTokenizerDescriptor, ThaiTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Thai(string tokenizerName, ThaiTokenizer thaiTokenizer) => AssignVariant(tokenizerName, thaiTokenizer);
 	public TokenizersDescriptor UaxEmailUrl(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, null);
 	public TokenizersDescriptor UaxEmailUrl(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.UaxEmailUrlTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor UaxEmailUrl(string tokenizerName, UaxEmailUrlTokenizer uaxEmailUrlTokenizer) => AssignVariant(tokenizerName, uaxEmailUrlTokenizer);
@@ -126,6 +138,8 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 		{
 			case "char_group":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.CharGroupTokenizer>(ref reader, options);
+			case "classic":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.ClassicTokenizer>(ref reader, options);
 			case "edge_ngram":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramTokenizer>(ref reader, options);
 			case "icu_tokenizer":
@@ -146,8 +160,14 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.PathHierarchyTokenizer>(ref reader, options);
 			case "pattern":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternTokenizer>(ref reader, options);
+			case "simple_pattern_split":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternSplitTokenizer>(ref reader, options);
+			case "simple_pattern":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternTokenizer>(ref reader, options);
 			case "standard":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardTokenizer>(ref reader, options);
+			case "thai":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.ThaiTokenizer>(ref reader, options);
 			case "uax_url_email":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.UaxEmailUrlTokenizer>(ref reader, options);
 			case "whitespace":
@@ -170,6 +190,9 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 		{
 			case "char_group":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.CharGroupTokenizer), options);
+				return;
+			case "classic":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.ClassicTokenizer), options);
 				return;
 			case "edge_ngram":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramTokenizer), options);
@@ -201,8 +224,17 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 			case "pattern":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternTokenizer), options);
 				return;
+			case "simple_pattern_split":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternSplitTokenizer), options);
+				return;
+			case "simple_pattern":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.SimplePatternTokenizer), options);
+				return;
 			case "standard":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardTokenizer), options);
+				return;
+			case "thai":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.ThaiTokenizer), options);
 				return;
 			case "uax_url_email":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.UaxEmailUrlTokenizer), options);

@@ -60,6 +60,7 @@ public sealed partial class Processor
 	public static Processor Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor enrichProcessor) => new Processor("enrich", enrichProcessor);
 	public static Processor Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor failProcessor) => new Processor("fail", failProcessor);
 	public static Processor Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor foreachProcessor) => new Processor("foreach", foreachProcessor);
+	public static Processor GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor geoGridProcessor) => new Processor("geo_grid", geoGridProcessor);
 	public static Processor Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor geoIpProcessor) => new Processor("geoip", geoIpProcessor);
 	public static Processor Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor grokProcessor) => new Processor("grok", grokProcessor);
 	public static Processor Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor gsubProcessor) => new Processor("gsub", gsubProcessor);
@@ -70,6 +71,7 @@ public sealed partial class Processor
 	public static Processor Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor keyValueProcessor) => new Processor("kv", keyValueProcessor);
 	public static Processor Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor lowercaseProcessor) => new Processor("lowercase", lowercaseProcessor);
 	public static Processor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor pipelineProcessor) => new Processor("pipeline", pipelineProcessor);
+	public static Processor Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor redactProcessor) => new Processor("redact", redactProcessor);
 	public static Processor Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor removeProcessor) => new Processor("remove", removeProcessor);
 	public static Processor Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor renameProcessor) => new Processor("rename", renameProcessor);
 	public static Processor Reroute(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor rerouteProcessor) => new Processor("reroute", rerouteProcessor);
@@ -220,6 +222,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				continue;
 			}
 
+			if (propertyName == "geo_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "geoip")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?>(ref reader, options);
@@ -286,6 +295,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			if (propertyName == "pipeline")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "redact")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -438,6 +454,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "foreach":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)value.Variant, options);
 					break;
+				case "geo_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor)value.Variant, options);
+					break;
 				case "geoip":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)value.Variant, options);
 					break;
@@ -467,6 +486,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 					break;
 				case "pipeline":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)value.Variant, options);
+					break;
+				case "redact":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor)value.Variant, options);
 					break;
 				case "remove":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)value.Variant, options);
@@ -573,6 +595,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Fail(Action<Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
 	public ProcessorDescriptor<TDocument> Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
 	public ProcessorDescriptor<TDocument> Foreach(Action<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
+	public ProcessorDescriptor<TDocument> GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor geoGridProcessor) => Set(geoGridProcessor, "geo_grid");
+	public ProcessorDescriptor<TDocument> GeoGrid(Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>> configure) => Set(configure, "geo_grid");
 	public ProcessorDescriptor<TDocument> Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
 	public ProcessorDescriptor<TDocument> Geoip(Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument>> configure) => Set(configure, "geoip");
 	public ProcessorDescriptor<TDocument> Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
@@ -593,6 +617,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Lowercase(Action<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
 	public ProcessorDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
 	public ProcessorDescriptor<TDocument> Pipeline(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
+	public ProcessorDescriptor<TDocument> Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor redactProcessor) => Set(redactProcessor, "redact");
+	public ProcessorDescriptor<TDocument> Redact(Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>> configure) => Set(configure, "redact");
 	public ProcessorDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
 	public ProcessorDescriptor<TDocument> Remove(Action<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
 	public ProcessorDescriptor<TDocument> Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
@@ -699,6 +725,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Fail<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor> configure) => Set(configure, "fail");
 	public ProcessorDescriptor Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
 	public ProcessorDescriptor Foreach<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor> configure) => Set(configure, "foreach");
+	public ProcessorDescriptor GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor geoGridProcessor) => Set(geoGridProcessor, "geo_grid");
+	public ProcessorDescriptor GeoGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor> configure) => Set(configure, "geo_grid");
 	public ProcessorDescriptor Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
 	public ProcessorDescriptor Geoip<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor> configure) => Set(configure, "geoip");
 	public ProcessorDescriptor Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
@@ -719,6 +747,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Lowercase<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor> configure) => Set(configure, "lowercase");
 	public ProcessorDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
 	public ProcessorDescriptor Pipeline<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
+	public ProcessorDescriptor Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor redactProcessor) => Set(redactProcessor, "redact");
+	public ProcessorDescriptor Redact<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor> configure) => Set(configure, "redact");
 	public ProcessorDescriptor Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
 	public ProcessorDescriptor Remove<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor> configure) => Set(configure, "remove");
 	public ProcessorDescriptor Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");

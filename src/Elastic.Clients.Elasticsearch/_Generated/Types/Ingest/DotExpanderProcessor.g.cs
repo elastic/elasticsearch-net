@@ -73,6 +73,16 @@ public sealed partial class DotExpanderProcessor
 
 	/// <summary>
 	/// <para>
+	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
+	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
+	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("override")]
+	public bool? Override { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The field that contains the field to expand.
 	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
 	/// </para>
@@ -108,6 +118,7 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private bool? OverrideValue { get; set; }
 	private string? PathValue { get; set; }
 	private string? TagValue { get; set; }
 
@@ -224,6 +235,19 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 
 	/// <summary>
 	/// <para>
+	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
+	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
+	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
+	/// </para>
+	/// </summary>
+	public DotExpanderProcessorDescriptor<TDocument> Override(bool? value = true)
+	{
+		OverrideValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The field that contains the field to expand.
 	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
 	/// </para>
@@ -300,6 +324,12 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
+		if (OverrideValue.HasValue)
+		{
+			writer.WritePropertyName("override");
+			writer.WriteBooleanValue(OverrideValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(PathValue))
 		{
 			writer.WritePropertyName("path");
@@ -332,6 +362,7 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private bool? OverrideValue { get; set; }
 	private string? PathValue { get; set; }
 	private string? TagValue { get; set; }
 
@@ -448,6 +479,19 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 
 	/// <summary>
 	/// <para>
+	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
+	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
+	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
+	/// </para>
+	/// </summary>
+	public DotExpanderProcessorDescriptor Override(bool? value = true)
+	{
+		OverrideValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The field that contains the field to expand.
 	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
 	/// </para>
@@ -522,6 +566,12 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
+		}
+
+		if (OverrideValue.HasValue)
+		{
+			writer.WritePropertyName("override");
+			writer.WriteBooleanValue(OverrideValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(PathValue))

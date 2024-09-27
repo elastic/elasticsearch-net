@@ -56,8 +56,6 @@ public sealed partial class IntegerRangeProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -83,7 +81,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public IntegerRangePropertyDescriptor<TDocument> Boost(double? boost)
@@ -179,12 +176,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IntegerRangePropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IntegerRangePropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -254,12 +245,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -283,7 +268,6 @@ public sealed partial class IntegerRangePropertyDescriptor<TDocument> : Serializ
 		Index = IndexValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -306,7 +290,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public IntegerRangePropertyDescriptor Boost(double? boost)
@@ -402,12 +385,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IntegerRangePropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IntegerRangePropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -477,12 +454,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -506,7 +477,6 @@ public sealed partial class IntegerRangePropertyDescriptor : SerializableDescrip
 		Index = IndexValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

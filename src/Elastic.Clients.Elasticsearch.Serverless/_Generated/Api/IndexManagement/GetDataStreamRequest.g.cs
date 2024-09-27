@@ -52,6 +52,13 @@ public sealed partial class GetDataStreamRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether the maximum timestamp for each data stream should be calculated and returned.
+	/// </para>
+	/// </summary>
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
@@ -102,6 +109,14 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether the maximum timestamp for each data stream should be calculated and returned.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
@@ -133,6 +148,7 @@ public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<G
 	public GetDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetDataStreamRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public GetDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public GetDataStreamRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 
 	public GetDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.DataStreamNames? name)
 	{

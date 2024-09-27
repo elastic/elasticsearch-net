@@ -101,6 +101,7 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.SumAggregate? GetSum(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.SumAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TDigestPercentileRanksAggregate? GetTDigestPercentileRanks(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TDigestPercentileRanksAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TDigestPercentilesAggregate? GetTDigestPercentiles(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TDigestPercentilesAggregate>(key);
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TimeSeriesAggregate? GetTimeSeries(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TimeSeriesAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopHitsAggregate? GetTopHits(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopHitsAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsAggregate? GetTopMetrics(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestAggregate? GetTTest(string key) => TryGet<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestAggregate>(key);
@@ -555,6 +556,13 @@ internal sealed partial class AggregateDictionaryConverter : JsonConverter<Aggre
 			case "tdigest_percentiles":
 				{
 					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TDigestPercentilesAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], item);
+					break;
+				}
+
+			case "time_series":
+				{
+					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TimeSeriesAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], item);
 					break;
 				}

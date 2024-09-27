@@ -35,8 +35,14 @@ public sealed partial class CacheStats
 	public int Evictions { get; init; }
 	[JsonInclude, JsonPropertyName("hits")]
 	public int Hits { get; init; }
+	[JsonInclude, JsonPropertyName("hits_time_in_millis")]
+	public long HitsTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("misses")]
 	public int Misses { get; init; }
+	[JsonInclude, JsonPropertyName("misses_time_in_millis")]
+	public long MissesTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("node_id")]
 	public string NodeId { get; init; }
+	[JsonInclude, JsonPropertyName("size_in_bytes")]
+	public long SizeInBytes { get; init; }
 }

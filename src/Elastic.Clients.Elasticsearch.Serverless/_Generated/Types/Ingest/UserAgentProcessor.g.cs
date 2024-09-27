@@ -40,6 +40,14 @@ public sealed partial class UserAgentProcessor
 
 	/// <summary>
 	/// <para>
+	/// Extracts device type from the user agent string on a best-effort basis.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("extract_device_type")]
+	public bool? ExtractDeviceType { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
@@ -77,8 +85,14 @@ public sealed partial class UserAgentProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
-	[JsonInclude, JsonPropertyName("options")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? Options { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("properties")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? Properties { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,6 +131,7 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	}
 
 	private string? DescriptionValue { get; set; }
+	private bool? ExtractDeviceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
@@ -125,7 +140,7 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? OptionsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? PropertiesValue { get; set; }
 	private string? RegexFileValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
@@ -139,6 +154,17 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	public UserAgentProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Extracts device type from the user agent string on a best-effort basis.
+	/// </para>
+	/// </summary>
+	public UserAgentProcessorDescriptor<TDocument> ExtractDeviceType(bool? extractDeviceType = true)
+	{
+		ExtractDeviceTypeValue = extractDeviceType;
 		return Self;
 	}
 
@@ -249,9 +275,14 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public UserAgentProcessorDescriptor<TDocument> Options(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? options)
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public UserAgentProcessorDescriptor<TDocument> Properties(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? properties)
 	{
-		OptionsValue = options;
+		PropertiesValue = properties;
 		return Self;
 	}
 
@@ -320,6 +351,12 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 			writer.WriteStringValue(DescriptionValue);
 		}
 
+		if (ExtractDeviceTypeValue.HasValue)
+		{
+			writer.WritePropertyName("extract_device_type");
+			writer.WriteBooleanValue(ExtractDeviceTypeValue.Value);
+		}
+
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(IfValue))
@@ -371,10 +408,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (OptionsValue is not null)
+		if (PropertiesValue is not null)
 		{
-			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, OptionsValue, options);
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(RegexFileValue))
@@ -408,6 +445,7 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	}
 
 	private string? DescriptionValue { get; set; }
+	private bool? ExtractDeviceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
@@ -416,7 +454,7 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? OptionsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? PropertiesValue { get; set; }
 	private string? RegexFileValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
@@ -430,6 +468,17 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	public UserAgentProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Extracts device type from the user agent string on a best-effort basis.
+	/// </para>
+	/// </summary>
+	public UserAgentProcessorDescriptor ExtractDeviceType(bool? extractDeviceType = true)
+	{
+		ExtractDeviceTypeValue = extractDeviceType;
 		return Self;
 	}
 
@@ -540,9 +589,14 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public UserAgentProcessorDescriptor Options(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? options)
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public UserAgentProcessorDescriptor Properties(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProperty>? properties)
 	{
-		OptionsValue = options;
+		PropertiesValue = properties;
 		return Self;
 	}
 
@@ -611,6 +665,12 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 			writer.WriteStringValue(DescriptionValue);
 		}
 
+		if (ExtractDeviceTypeValue.HasValue)
+		{
+			writer.WritePropertyName("extract_device_type");
+			writer.WriteBooleanValue(ExtractDeviceTypeValue.Value);
+		}
+
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(IfValue))
@@ -662,10 +722,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (OptionsValue is not null)
+		if (PropertiesValue is not null)
 		{
-			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, OptionsValue, options);
+			writer.WritePropertyName("properties");
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(RegexFileValue))

@@ -32,6 +32,7 @@ public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
 	[JsonInclude, JsonPropertyName("keywords")]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Keywords { get; set; }
 	[JsonInclude, JsonPropertyName("keywords_path")]
 	public string? KeywordsPath { get; set; }
@@ -101,7 +102,7 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 		if (KeywordsValue is not null)
 		{
 			writer.WritePropertyName("keywords");
-			JsonSerializer.Serialize(writer, KeywordsValue, options);
+			SingleOrManySerializationHelper.Serialize<string>(KeywordsValue, writer, options);
 		}
 
 		if (!string.IsNullOrEmpty(KeywordsPathValue))
