@@ -133,7 +133,7 @@ public abstract class
 
 		_sourceSerializer = sourceSerializerFactory?.Invoke(sourceSerializer, this) ?? sourceSerializer;
 		_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
-		_defaultFieldNameInferrer = p => p.ToCamelCase();
+		_defaultFieldNameInferrer = (_sourceSerializer is DefaultSourceSerializer dfs) ? p => dfs.Options?.PropertyNamingPolicy?.ConvertName(p) ?? p : p => p.ToCamelCase();
 		_defaultIndices = new FluentDictionary<Type, string>();
 		_defaultRelationNames = new FluentDictionary<Type, string>();
 		_inferrer = new Inferrer(this);
