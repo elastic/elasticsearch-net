@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Elastic.Transport.Products.Elasticsearch;
 
 #if ELASTICSEARCH_SERVERLESS
@@ -25,4 +26,8 @@ public abstract class DictionaryResponse<TKey, TValue> : ElasticsearchResponse
 	internal DictionaryResponse() => BackingDictionary = EmptyReadOnly<TKey, TValue>.Dictionary;
 
 	protected IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; }
+
+	// TODO: Remove after exposing the values in the derived responses
+	[Obsolete("Temporary workaround. This field will be removed in the future and replaced by custom accessors in the derived classes.")]
+	public IReadOnlyDictionary<TKey, TValue> Values => BackingDictionary;
 }
