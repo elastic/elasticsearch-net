@@ -185,7 +185,8 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 
 				if (property == "stored_fields")
 				{
-					variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Fields?>(ref reader, options);
+					reader.Read();
+					variant.StoredFields = new FieldsConverter().Read(ref reader, typeToConvert, options);
 					continue;
 				}
 
@@ -380,7 +381,7 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 		if (value.StoredFields is not null)
 		{
 			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, value.StoredFields, options);
+			new FieldsConverter().Write(writer, value.StoredFields, options);
 		}
 
 		if (value.Suggest is not null)
