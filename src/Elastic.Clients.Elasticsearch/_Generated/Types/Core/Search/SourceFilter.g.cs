@@ -41,13 +41,15 @@ internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter
 				var property = reader.GetString();
 				if (property == "excludes" || property == "exclude")
 				{
-					variant.Excludes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+					reader.Read();
+					variant.Excludes = new FieldsConverter().Read(ref reader, typeToConvert, options);
 					continue;
 				}
 
 				if (property == "includes" || property == "include")
 				{
-					variant.Includes = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+					reader.Read();
+					variant.Includes = new FieldsConverter().Read(ref reader, typeToConvert, options);
 					continue;
 				}
 			}
@@ -62,13 +64,13 @@ internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter
 		if (value.Excludes is not null)
 		{
 			writer.WritePropertyName("excludes");
-			JsonSerializer.Serialize(writer, value.Excludes, options);
+			new FieldsConverter().Write(writer, value.Excludes, options);
 		}
 
 		if (value.Includes is not null)
 		{
 			writer.WritePropertyName("includes");
-			JsonSerializer.Serialize(writer, value.Includes, options);
+			new FieldsConverter().Write(writer, value.Includes, options);
 		}
 
 		writer.WriteEndObject();

@@ -606,7 +606,7 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 		if (value.StoredFields is not null)
 		{
 			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, value.StoredFields, options);
+			new FieldsConverter().Write(writer, value.StoredFields, options);
 		}
 
 		if (value.Suggest is not null)
