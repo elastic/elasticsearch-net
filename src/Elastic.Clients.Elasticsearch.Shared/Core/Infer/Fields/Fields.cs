@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 namespace Elastic.Clients.Elasticsearch;
 #endif
 
-[DebuggerDisplay($"{nameof(DebuggerDisplay)},nq")]
+[DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Fields :
 	IEquatable<Fields>,
 	IEnumerable<Field>,

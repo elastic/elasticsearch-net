@@ -20,7 +20,7 @@ namespace Elastic.Clients.Elasticsearch;
 #endif
 
 [JsonConverter(typeof(FieldConverter))]
-[DebuggerDisplay($"{nameof(DebuggerDisplay)},nq")]
+[DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Field :
 	IEquatable<Field>,
 	IUrlParameter
