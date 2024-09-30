@@ -15,7 +15,7 @@ The {es} .NET client is available as a https://www.nuget.org/packages/Elastic.Cl
 package for use with .NET Core, .NET 5+, and .NET Framework (4.6.1 and later) 
 applications.
 
-_NOTE: This documentation covers the v8 .NET client for {es}, designed for use 
+_NOTE: This documentation covers the v8 .NET client for {es}, for use 
 with {es} 8.x versions. To develop applications targeting {es} v7, use the 
 https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17[v7 (NEST) client]._
 
