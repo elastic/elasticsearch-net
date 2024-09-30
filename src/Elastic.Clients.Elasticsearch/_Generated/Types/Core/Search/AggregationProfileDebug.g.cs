@@ -29,6 +29,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class AggregationProfileDebug
 {
+	[JsonInclude, JsonPropertyName("brute_force_used")]
+	public int? BruteForceUsed { get; init; }
 	[JsonInclude, JsonPropertyName("built_buckets")]
 	public int? BuiltBuckets { get; init; }
 	[JsonInclude, JsonPropertyName("chars_fetched")]
@@ -45,6 +47,10 @@ public sealed partial class AggregationProfileDebug
 	public string? Delegate { get; init; }
 	[JsonInclude, JsonPropertyName("delegate_debug")]
 	public Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug? DelegateDebug { get; init; }
+	[JsonInclude, JsonPropertyName("dynamic_pruning_attempted")]
+	public int? DynamicPruningAttempted { get; init; }
+	[JsonInclude, JsonPropertyName("dynamic_pruning_used")]
+	public int? DynamicPruningUsed { get; init; }
 	[JsonInclude, JsonPropertyName("empty_collectors_used")]
 	public int? EmptyCollectorsUsed { get; init; }
 	[JsonInclude, JsonPropertyName("extract_count")]
@@ -77,6 +83,8 @@ public sealed partial class AggregationProfileDebug
 	public int? SegmentsWithMultiValuedOrds { get; init; }
 	[JsonInclude, JsonPropertyName("segments_with_single_valued_ords")]
 	public int? SegmentsWithSingleValuedOrds { get; init; }
+	[JsonInclude, JsonPropertyName("skipped_due_to_no_data")]
+	public int? SkippedDueToNoData { get; init; }
 	[JsonInclude, JsonPropertyName("string_hashing_collectors_used")]
 	public int? StringHashingCollectorsUsed { get; init; }
 	[JsonInclude, JsonPropertyName("surviving_buckets")]

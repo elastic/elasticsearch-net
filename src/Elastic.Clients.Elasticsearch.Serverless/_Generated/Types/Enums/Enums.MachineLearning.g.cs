@@ -417,12 +417,32 @@ internal sealed class DeploymentAllocationStateConverter : JsonConverter<Deploym
 [JsonConverter(typeof(DeploymentAssignmentStateConverter))]
 public enum DeploymentAssignmentState
 {
+	/// <summary>
+	/// <para>
+	/// The deployment is preparing to stop and deallocate the model from the relevant nodes.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "stopping")]
 	Stopping,
+	/// <summary>
+	/// <para>
+	/// The deployment has recently started but is not yet usable; the model is not allocated on any nodes.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "starting")]
 	Starting,
+	/// <summary>
+	/// <para>
+	/// The deployment is usable; at least one node has the model allocated.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "started")]
 	Started,
+	/// <summary>
+	/// <para>
+	/// The deployment is on a failed state and must be re-deployed.
+	/// </para>
+	/// </summary>
 	[EnumMember(Value = "failed")]
 	Failed
 }
@@ -463,70 +483,6 @@ internal sealed class DeploymentAssignmentStateConverter : JsonConverter<Deploym
 				return;
 			case DeploymentAssignmentState.Failed:
 				writer.WriteStringValue("failed");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(DeploymentStateConverter))]
-public enum DeploymentState
-{
-	/// <summary>
-	/// <para>
-	/// The deployment is preparing to stop and deallocate the model from the relevant nodes.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "stopping")]
-	Stopping,
-	/// <summary>
-	/// <para>
-	/// The deployment has recently started but is not yet usable; the model is not allocated on any nodes.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "starting")]
-	Starting,
-	/// <summary>
-	/// <para>
-	/// The deployment is usable; at least one node has the model allocated.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "started")]
-	Started
-}
-
-internal sealed class DeploymentStateConverter : JsonConverter<DeploymentState>
-{
-	public override DeploymentState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "stopping":
-				return DeploymentState.Stopping;
-			case "starting":
-				return DeploymentState.Starting;
-			case "started":
-				return DeploymentState.Started;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DeploymentState value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case DeploymentState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
-			case DeploymentState.Starting:
-				writer.WriteStringValue("starting");
-				return;
-			case DeploymentState.Started:
-				writer.WriteStringValue("started");
 				return;
 		}
 

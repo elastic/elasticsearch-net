@@ -43,7 +43,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -55,7 +55,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -67,7 +67,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -80,7 +80,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -94,7 +94,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -106,7 +106,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -119,7 +119,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Deletes a geoip database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -274,7 +274,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -286,7 +286,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(GetGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -298,7 +298,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -311,7 +311,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Ids? id, Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -325,7 +325,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -338,7 +338,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -352,7 +352,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -364,7 +364,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -377,7 +377,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Ids? id, Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -391,7 +391,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(CancellationToken cancellationToken = default)
 	{
@@ -404,7 +404,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -632,7 +632,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -644,7 +644,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -656,7 +656,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
@@ -669,7 +669,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -683,7 +683,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -695,7 +695,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
@@ -708,7 +708,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Returns information about one or more geoip database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/TODO.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

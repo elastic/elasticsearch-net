@@ -32,7 +32,7 @@ public sealed partial class SearchShardsResponse : ElasticsearchResponse
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; init; }
 	[JsonInclude, JsonPropertyName("nodes")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes> Nodes { get; init; }
 	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; init; }
 }

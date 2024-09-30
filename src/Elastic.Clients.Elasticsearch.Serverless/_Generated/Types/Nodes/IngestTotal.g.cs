@@ -35,7 +35,7 @@ public sealed partial class IngestTotal
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
-	public long? Count { get; init; }
+	public long Count { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -43,7 +43,7 @@ public sealed partial class IngestTotal
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("current")]
-	public long? Current { get; init; }
+	public long Current { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -51,15 +51,7 @@ public sealed partial class IngestTotal
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("failed")]
-	public long? Failed { get; init; }
-
-	/// <summary>
-	/// <para>
-	/// Total number of ingest processors.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("processors")]
-	public IReadOnlyCollection<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Nodes.KeyedProcessor>>? Processors { get; init; }
+	public long Failed { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -67,5 +59,5 @@ public sealed partial class IngestTotal
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_in_millis")]
-	public long? TimeInMillis { get; init; }
+	public long TimeInMillis { get; init; }
 }

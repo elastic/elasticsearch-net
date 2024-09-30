@@ -99,6 +99,15 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 
 	/// <summary>
 	/// <para>
+	/// Marks this ingest pipeline as deprecated.
+	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("deprecated")]
+	public bool? Deprecated { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Description of the ingest pipeline.
 	/// </para>
 	/// </summary>
@@ -170,6 +179,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
+	private bool? DeprecatedValue { get; set; }
 	private string? DescriptionValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
@@ -181,6 +191,18 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
 	private long? VersionValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Marks this ingest pipeline as deprecated.
+	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	public PutPipelineRequestDescriptor<TDocument> Deprecated(bool? deprecated = true)
+	{
+		DeprecatedValue = deprecated;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>
@@ -300,6 +322,12 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (DeprecatedValue.HasValue)
+		{
+			writer.WritePropertyName("deprecated");
+			writer.WriteBooleanValue(DeprecatedValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");
@@ -416,6 +444,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
+	private bool? DeprecatedValue { get; set; }
 	private string? DescriptionValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
@@ -427,6 +456,18 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
 	private long? VersionValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Marks this ingest pipeline as deprecated.
+	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	public PutPipelineRequestDescriptor Deprecated(bool? deprecated = true)
+	{
+		DeprecatedValue = deprecated;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>
@@ -546,6 +587,12 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (DeprecatedValue.HasValue)
+		{
+			writer.WritePropertyName("deprecated");
+			writer.WriteBooleanValue(DeprecatedValue.Value);
+		}
+
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");

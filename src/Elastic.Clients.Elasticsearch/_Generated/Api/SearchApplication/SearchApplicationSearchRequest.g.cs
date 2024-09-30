@@ -41,7 +41,9 @@ public sealed partial class SearchApplicationSearchRequestParameters : RequestPa
 
 /// <summary>
 /// <para>
-/// Perform a search against a search application.
+/// Run a search application search.
+/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+/// Unspecified template parameters are assigned their default values if applicable.
 /// </para>
 /// </summary>
 public sealed partial class SearchApplicationSearchRequest : PlainRequest<SearchApplicationSearchRequestParameters>
@@ -77,7 +79,9 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 
 /// <summary>
 /// <para>
-/// Perform a search against a search application.
+/// Run a search application search.
+/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+/// Unspecified template parameters are assigned their default values if applicable.
 /// </para>
 /// </summary>
 public sealed partial class SearchApplicationSearchRequestDescriptor : RequestDescriptor<SearchApplicationSearchRequestDescriptor, SearchApplicationSearchRequestParameters>

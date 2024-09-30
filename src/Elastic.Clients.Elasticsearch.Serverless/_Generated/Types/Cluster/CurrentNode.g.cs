@@ -35,6 +35,8 @@ public sealed partial class CurrentNode
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
+	[JsonInclude, JsonPropertyName("roles")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.NodeRole> Roles { get; init; }
 	[JsonInclude, JsonPropertyName("transport_address")]
 	public string TransportAddress { get; init; }
 	[JsonInclude, JsonPropertyName("weight_ranking")]
