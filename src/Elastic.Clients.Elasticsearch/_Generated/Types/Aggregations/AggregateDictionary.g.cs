@@ -101,6 +101,7 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregate? GetSum(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.SumAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate? GetTDigestPercentileRanks(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate? GetTDigestPercentiles(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate? GetTimeSeries(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate? GetTopHits(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate? GetTopMetrics(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate? GetTTest(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate>(key);
@@ -555,6 +556,13 @@ internal sealed partial class AggregateDictionaryConverter : JsonConverter<Aggre
 			case "tdigest_percentiles":
 				{
 					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], item);
+					break;
+				}
+
+			case "time_series":
+				{
+					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], item);
 					break;
 				}

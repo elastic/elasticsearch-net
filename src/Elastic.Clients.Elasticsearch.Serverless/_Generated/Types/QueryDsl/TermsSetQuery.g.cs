@@ -48,6 +48,12 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 					continue;
 				}
 
+				if (property == "minimum_should_match")
+				{
+					variant.MinimumShouldMatch = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "minimum_should_match_field")
 				{
 					variant.MinimumShouldMatchField = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Field?>(ref reader, options);
@@ -68,7 +74,7 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 
 				if (property == "terms")
 				{
-					variant.Terms = JsonSerializer.Deserialize<ICollection<string>>(ref reader, options);
+					variant.Terms = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>>(ref reader, options);
 					continue;
 				}
 			}
@@ -91,6 +97,12 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(value.Boost.Value);
+		}
+
+		if (value.MinimumShouldMatch is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
 		}
 
 		if (value.MinimumShouldMatchField is not null)
@@ -141,6 +153,13 @@ public sealed partial class TermsSetQuery
 
 	/// <summary>
 	/// <para>
+	/// Specification describing number of matching terms required to return a document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Numeric field containing the number of matching terms required to return a document.
 	/// </para>
 	/// </summary>
@@ -159,7 +178,7 @@ public sealed partial class TermsSetQuery
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public ICollection<string> Terms { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue> Terms { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TermsSetQuery termsSetQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.TermsSet(termsSetQuery);
 }
@@ -174,12 +193,13 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? MinimumShouldMatchScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private ICollection<string> TermsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue> TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -210,6 +230,17 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	public TermsSetQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specification describing number of matching terms required to return a document.
+	/// </para>
+	/// </summary>
+	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
@@ -286,7 +317,7 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<string> terms)
+	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue> terms)
 	{
 		TermsValue = terms;
 		return Self;
@@ -303,6 +334,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 		}
 
 		if (MinimumShouldMatchFieldValue is not null)
@@ -350,12 +387,13 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? MinimumShouldMatchScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private ICollection<string> TermsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue> TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -386,6 +424,17 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	public TermsSetQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specification describing number of matching terms required to return a document.
+	/// </para>
+	/// </summary>
+	public TermsSetQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
@@ -462,7 +511,7 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public TermsSetQueryDescriptor Terms(ICollection<string> terms)
+	public TermsSetQueryDescriptor Terms(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue> terms)
 	{
 		TermsValue = terms;
 		return Self;
@@ -479,6 +528,12 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 		}
 
 		if (MinimumShouldMatchFieldValue is not null)

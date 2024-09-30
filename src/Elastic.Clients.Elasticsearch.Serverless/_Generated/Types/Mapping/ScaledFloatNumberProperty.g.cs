@@ -66,8 +66,6 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 	public double? ScalingFactor { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -100,7 +98,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ScaledFloatNumberPropertyDescriptor<TDocument> Boost(double? boost)
@@ -244,12 +241,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ScaledFloatNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -359,12 +350,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -417,7 +402,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		Properties = PropertiesValue,
 		ScalingFactor = ScalingFactorValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -447,7 +431,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ScaledFloatNumberPropertyDescriptor Boost(double? boost)
@@ -591,12 +574,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ScaledFloatNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -706,12 +683,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -764,7 +735,6 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		Properties = PropertiesValue,
 		ScalingFactor = ScalingFactorValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

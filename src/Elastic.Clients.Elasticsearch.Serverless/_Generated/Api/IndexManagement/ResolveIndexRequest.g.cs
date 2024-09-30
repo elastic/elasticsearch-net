@@ -33,6 +33,15 @@ public sealed partial class ResolveIndexRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
@@ -40,6 +49,13 @@ public sealed partial class ResolveIndexRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
@@ -64,6 +80,16 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 
 	/// <summary>
 	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
@@ -72,6 +98,14 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
@@ -96,7 +130,9 @@ public sealed partial class ResolveIndexRequestDescriptor : RequestDescriptor<Re
 
 	internal override string OperationName => "indices.resolve_index";
 
+	public ResolveIndexRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ResolveIndexRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public ResolveIndexRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 
 	public ResolveIndexRequestDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Names name)
 	{

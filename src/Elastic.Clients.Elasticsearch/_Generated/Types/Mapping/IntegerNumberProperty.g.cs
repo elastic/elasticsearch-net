@@ -64,8 +64,6 @@ public sealed partial class IntegerNumberProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -113,7 +111,6 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
@@ -253,12 +250,6 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IntegerNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -384,12 +375,6 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -453,7 +438,6 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
@@ -484,7 +468,6 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
@@ -624,12 +607,6 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IntegerNumberPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IntegerNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -755,12 +732,6 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -824,7 +795,6 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue,
 		TimeSeriesMetric = TimeSeriesMetricValue

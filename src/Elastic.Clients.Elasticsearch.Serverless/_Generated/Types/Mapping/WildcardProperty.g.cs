@@ -52,8 +52,6 @@ public sealed partial class WildcardProperty : IProperty
 	public string? NullValue { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -77,7 +75,6 @@ public sealed partial class WildcardPropertyDescriptor<TDocument> : Serializable
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private string? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public WildcardPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Serverless.Fields? copyTo)
@@ -161,12 +158,6 @@ public sealed partial class WildcardPropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public WildcardPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public WildcardPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -224,12 +215,6 @@ public sealed partial class WildcardPropertyDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -251,7 +236,6 @@ public sealed partial class WildcardPropertyDescriptor<TDocument> : Serializable
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -272,7 +256,6 @@ public sealed partial class WildcardPropertyDescriptor : SerializableDescriptor<
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private string? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public WildcardPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Serverless.Fields? copyTo)
@@ -356,12 +339,6 @@ public sealed partial class WildcardPropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public WildcardPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public WildcardPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -419,12 +396,6 @@ public sealed partial class WildcardPropertyDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -446,7 +417,6 @@ public sealed partial class WildcardPropertyDescriptor : SerializableDescriptor<
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

@@ -58,8 +58,6 @@ public sealed partial class BooleanProperty : IProperty
 	public bool? NullValue { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -88,7 +86,6 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public BooleanPropertyDescriptor<TDocument> Boost(double? boost)
@@ -208,12 +205,6 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public BooleanPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -299,12 +290,6 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -353,7 +338,6 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -379,7 +363,6 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public BooleanPropertyDescriptor Boost(double? boost)
@@ -499,12 +482,6 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public BooleanPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -590,12 +567,6 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -644,7 +615,6 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		Meta = MetaValue,
 		NullValue = NullValueValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

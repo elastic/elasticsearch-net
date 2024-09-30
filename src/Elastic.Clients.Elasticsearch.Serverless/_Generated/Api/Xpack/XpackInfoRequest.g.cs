@@ -43,7 +43,7 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 	/// A comma-separated list of the information categories to include in the response. For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Categories { get => Q<ICollection<string>?>("categories"); set => Q("categories", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Xpack.XPackCategory>? Categories { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
 }
 
 /// <summary>
@@ -75,7 +75,7 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public ICollection<string>? Categories { get => Q<ICollection<string>?>("categories"); set => Q("categories", value); }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Xpack.XPackCategory>? Categories { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
 }
 
 /// <summary>
@@ -100,7 +100,7 @@ public sealed partial class XpackInfoRequestDescriptor : RequestDescriptor<Xpack
 	internal override string OperationName => "xpack.info";
 
 	public XpackInfoRequestDescriptor AcceptEnterprise(bool? acceptEnterprise = true) => Qs("accept_enterprise", acceptEnterprise);
-	public XpackInfoRequestDescriptor Categories(ICollection<string>? categories) => Qs("categories", categories);
+	public XpackInfoRequestDescriptor Categories(ICollection<Elastic.Clients.Elasticsearch.Serverless.Xpack.XPackCategory>? categories) => Qs("categories", categories);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

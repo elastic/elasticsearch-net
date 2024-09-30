@@ -64,8 +64,6 @@ public sealed partial class UnsignedLongNumberProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -97,7 +95,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Boost(double? boost)
@@ -235,12 +232,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -344,12 +335,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -401,7 +386,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -430,7 +414,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public UnsignedLongNumberPropertyDescriptor Boost(double? boost)
@@ -568,12 +551,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public UnsignedLongNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -677,12 +654,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -734,7 +705,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

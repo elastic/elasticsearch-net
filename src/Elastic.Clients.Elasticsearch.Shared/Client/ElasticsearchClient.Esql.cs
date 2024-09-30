@@ -65,7 +65,7 @@ public partial class EsqlNamespacedClient
 		void Configure(EsqlQueryRequestDescriptor<TDocument> descriptor)
 		{
 			configureRequest(descriptor);
-			descriptor.Format("JSON");
+			descriptor.Format(EsqlFormat.Json);
 			descriptor.Columnar(false);
 		}
 	}

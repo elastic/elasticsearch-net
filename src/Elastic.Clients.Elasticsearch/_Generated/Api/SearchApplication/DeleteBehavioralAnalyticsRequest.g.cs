@@ -36,6 +36,7 @@ public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Request
 /// <summary>
 /// <para>
 /// Delete a behavioral analytics collection.
+/// The associated data stream is also deleted.
 /// </para>
 /// </summary>
 public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<DeleteBehavioralAnalyticsRequestParameters>
@@ -56,6 +57,7 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : PlainRequest<Dele
 /// <summary>
 /// <para>
 /// Delete a behavioral analytics collection.
+/// The associated data stream is also deleted.
 /// </para>
 /// </summary>
 public sealed partial class DeleteBehavioralAnalyticsRequestDescriptor : RequestDescriptor<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsRequestParameters>

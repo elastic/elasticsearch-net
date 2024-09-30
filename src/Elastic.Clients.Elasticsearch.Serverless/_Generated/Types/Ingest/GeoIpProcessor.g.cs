@@ -48,6 +48,15 @@ public sealed partial class GeoIpProcessor
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
+	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("download_database_on_pipeline_creation")]
+	public bool? DownloadDatabaseOnPipelineCreation { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
@@ -132,6 +141,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 
 	private string? DatabaseFileValue { get; set; }
 	private string? DescriptionValue { get; set; }
+	private bool? DownloadDatabaseOnPipelineCreationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? FirstOnlyValue { get; set; }
 	private string? IfValue { get; set; }
@@ -165,6 +175,18 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	public GeoIpProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
+	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
+	/// </para>
+	/// </summary>
+	public GeoIpProcessorDescriptor<TDocument> DownloadDatabaseOnPipelineCreation(bool? downloadDatabaseOnPipelineCreation = true)
+	{
+		DownloadDatabaseOnPipelineCreationValue = downloadDatabaseOnPipelineCreation;
 		return Self;
 	}
 
@@ -357,6 +379,12 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(DescriptionValue);
 		}
 
+		if (DownloadDatabaseOnPipelineCreationValue.HasValue)
+		{
+			writer.WritePropertyName("download_database_on_pipeline_creation");
+			writer.WriteBooleanValue(DownloadDatabaseOnPipelineCreationValue.Value);
+		}
+
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (FirstOnlyValue.HasValue)
@@ -446,6 +474,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 
 	private string? DatabaseFileValue { get; set; }
 	private string? DescriptionValue { get; set; }
+	private bool? DownloadDatabaseOnPipelineCreationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? FirstOnlyValue { get; set; }
 	private string? IfValue { get; set; }
@@ -479,6 +508,18 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	public GeoIpProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
+	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
+	/// </para>
+	/// </summary>
+	public GeoIpProcessorDescriptor DownloadDatabaseOnPipelineCreation(bool? downloadDatabaseOnPipelineCreation = true)
+	{
+		DownloadDatabaseOnPipelineCreationValue = downloadDatabaseOnPipelineCreation;
 		return Self;
 	}
 
@@ -669,6 +710,12 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		{
 			writer.WritePropertyName("description");
 			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (DownloadDatabaseOnPipelineCreationValue.HasValue)
+		{
+			writer.WritePropertyName("download_database_on_pipeline_creation");
+			writer.WriteBooleanValue(DownloadDatabaseOnPipelineCreationValue.Value);
 		}
 
 		writer.WritePropertyName("field");

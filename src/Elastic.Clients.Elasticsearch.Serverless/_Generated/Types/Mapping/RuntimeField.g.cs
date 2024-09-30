@@ -39,6 +39,14 @@ public sealed partial class RuntimeField
 
 	/// <summary>
 	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubField>? Fields { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A custom format for <c>date</c> type runtime fields.
 	/// </para>
 	/// </summary>
@@ -98,6 +106,7 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> FetchFieldsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>> FetchFieldsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>>[] FetchFieldsDescriptorActions { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor> FieldsValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? InputFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
@@ -145,6 +154,17 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 		FetchFieldsDescriptor = null;
 		FetchFieldsDescriptorAction = null;
 		FetchFieldsDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public RuntimeFieldDescriptor<TDocument> Fields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>> selector)
+	{
+		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>());
 		return Self;
 	}
 
@@ -310,6 +330,12 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, FetchFieldsValue, options);
 		}
 
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
 		if (!string.IsNullOrEmpty(FormatValue))
 		{
 			writer.WritePropertyName("format");
@@ -368,6 +394,7 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor FetchFieldsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor> FetchFieldsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldFetchFieldsDescriptor>[] FetchFieldsDescriptorActions { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor> FieldsValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? InputFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
@@ -415,6 +442,17 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 		FetchFieldsDescriptor = null;
 		FetchFieldsDescriptorAction = null;
 		FetchFieldsDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For type <c>composite</c>
+	/// </para>
+	/// </summary>
+	public RuntimeFieldDescriptor Fields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>> selector)
+	{
+		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.CompositeSubFieldDescriptor>());
 		return Self;
 	}
 
@@ -578,6 +616,12 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 		{
 			writer.WritePropertyName("fetch_fields");
 			JsonSerializer.Serialize(writer, FetchFieldsValue, options);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(FormatValue))

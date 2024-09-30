@@ -36,7 +36,7 @@ public sealed partial class QueryRequestParameters : RequestParameters
 	/// Format for the response.
 	/// </para>
 	/// </summary>
-	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 }
 
 /// <summary>
@@ -60,7 +60,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
@@ -215,7 +215,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	internal override string OperationName => "sql.query";
 
-	public QueryRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
+	public QueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
 
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
@@ -567,7 +567,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	internal override string OperationName => "sql.query";
 
-	public QueryRequestDescriptor Format(string? format) => Qs("format", format);
+	public QueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
 
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }

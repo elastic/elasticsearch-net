@@ -35,7 +35,7 @@ public sealed partial class GetBehavioralAnalyticsRequestParameters : RequestPar
 
 /// <summary>
 /// <para>
-/// Returns the existing behavioral analytics collections.
+/// Get behavioral analytics collections.
 /// </para>
 /// </summary>
 public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBehavioralAnalyticsRequestParameters>
@@ -59,7 +59,7 @@ public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBeha
 
 /// <summary>
 /// <para>
-/// Returns the existing behavioral analytics collections.
+/// Get behavioral analytics collections.
 /// </para>
 /// </summary>
 public sealed partial class GetBehavioralAnalyticsRequestDescriptor : RequestDescriptor<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsRequestParameters>

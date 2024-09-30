@@ -35,7 +35,7 @@ public sealed partial class PutBehavioralAnalyticsRequestParameters : RequestPar
 
 /// <summary>
 /// <para>
-/// Creates a behavioral analytics collection.
+/// Create a behavioral analytics collection.
 /// </para>
 /// </summary>
 public sealed partial class PutBehavioralAnalyticsRequest : PlainRequest<PutBehavioralAnalyticsRequestParameters>
@@ -55,7 +55,7 @@ public sealed partial class PutBehavioralAnalyticsRequest : PlainRequest<PutBeha
 
 /// <summary>
 /// <para>
-/// Creates a behavioral analytics collection.
+/// Create a behavioral analytics collection.
 /// </para>
 /// </summary>
 public sealed partial class PutBehavioralAnalyticsRequestDescriptor : RequestDescriptor<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsRequestParameters>

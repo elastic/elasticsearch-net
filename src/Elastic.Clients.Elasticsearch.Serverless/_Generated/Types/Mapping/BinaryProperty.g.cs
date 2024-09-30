@@ -50,8 +50,6 @@ public sealed partial class BinaryProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -74,7 +72,6 @@ public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDe
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public BinaryPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Serverless.Fields? copyTo)
@@ -152,12 +149,6 @@ public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public BinaryPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public BinaryPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -209,12 +200,6 @@ public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -235,7 +220,6 @@ public sealed partial class BinaryPropertyDescriptor<TDocument> : SerializableDe
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -255,7 +239,6 @@ public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<Bi
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public BinaryPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Serverless.Fields? copyTo)
@@ -333,12 +316,6 @@ public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<Bi
 		return Self;
 	}
 
-	public BinaryPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public BinaryPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -390,12 +367,6 @@ public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<Bi
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -416,7 +387,6 @@ public sealed partial class BinaryPropertyDescriptor : SerializableDescriptor<Bi
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
