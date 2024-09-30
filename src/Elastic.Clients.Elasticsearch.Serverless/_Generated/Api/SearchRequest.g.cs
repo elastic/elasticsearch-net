@@ -373,12 +373,6 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 					continue;
 				}
 
-				if (property == "rank")
-				{
-					variant.Rank = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Rank?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "rescore")
 				{
 					variant.Rescore = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>?>(ref reader, options);
@@ -583,12 +577,6 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.Rank is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, value.Rank, options);
 		}
 
 		if (value.Rescore is not null)
@@ -1130,14 +1118,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("rank")]
-	public Elastic.Clients.Elasticsearch.Serverless.Rank? Rank { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
@@ -1401,9 +1381,6 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Rank? RankValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.RankDescriptor RankDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.RankDescriptor> RankDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? RescoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
@@ -1787,35 +1764,6 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Serverless.Rank? rank)
-	{
-		RankDescriptor = null;
-		RankDescriptorAction = null;
-		RankValue = rank;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Serverless.RankDescriptor descriptor)
-	{
-		RankValue = null;
-		RankDescriptorAction = null;
-		RankDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Rank(Action<Elastic.Clients.Elasticsearch.Serverless.RankDescriptor> configure)
-	{
-		RankValue = null;
-		RankDescriptor = null;
-		RankDescriptorAction = configure;
 		return Self;
 	}
 
@@ -2367,22 +2315,6 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
-		if (RankDescriptor is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, RankDescriptor, options);
-		}
-		else if (RankDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.RankDescriptor(RankDescriptorAction), options);
-		}
-		else if (RankValue is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, RankValue, options);
-		}
-
 		if (RescoreDescriptor is not null)
 		{
 			writer.WritePropertyName("rescore");
@@ -2668,9 +2600,6 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Rank? RankValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.RankDescriptor RankDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.RankDescriptor> RankDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? RescoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
@@ -3054,35 +2983,6 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Serverless.Rank? rank)
-	{
-		RankDescriptor = null;
-		RankDescriptorAction = null;
-		RankValue = rank;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Serverless.RankDescriptor descriptor)
-	{
-		RankValue = null;
-		RankDescriptorAction = null;
-		RankDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Rank(Action<Elastic.Clients.Elasticsearch.Serverless.RankDescriptor> configure)
-	{
-		RankValue = null;
-		RankDescriptor = null;
-		RankDescriptorAction = configure;
 		return Self;
 	}
 
@@ -3632,22 +3532,6 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (RankDescriptor is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, RankDescriptor, options);
-		}
-		else if (RankDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.RankDescriptor(RankDescriptorAction), options);
-		}
-		else if (RankValue is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, RankValue, options);
 		}
 
 		if (RescoreDescriptor is not null)

@@ -88,8 +88,6 @@ public sealed partial class IcuCollationProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("rules")]
 	public string? Rules { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("strength")]
@@ -132,7 +130,6 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 	private bool? NumericValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private string? RulesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuCollationStrength? StrengthValue { get; set; }
 	private string? VariableTopValue { get; set; }
@@ -301,12 +298,6 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IcuCollationPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IcuCollationPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -454,12 +445,6 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 			writer.WriteStringValue(RulesValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -511,7 +496,6 @@ public sealed partial class IcuCollationPropertyDescriptor<TDocument> : Serializ
 		Numeric = NumericValue,
 		Properties = PropertiesValue,
 		Rules = RulesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		Strength = StrengthValue,
 		VariableTop = VariableTopValue,
@@ -547,7 +531,6 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 	private bool? NumericValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private string? RulesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuCollationStrength? StrengthValue { get; set; }
 	private string? VariableTopValue { get; set; }
@@ -716,12 +699,6 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IcuCollationPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IcuCollationPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -869,12 +846,6 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 			writer.WriteStringValue(RulesValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -926,7 +897,6 @@ public sealed partial class IcuCollationPropertyDescriptor : SerializableDescrip
 		Numeric = NumericValue,
 		Properties = PropertiesValue,
 		Rules = RulesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		Strength = StrengthValue,
 		VariableTop = VariableTopValue,

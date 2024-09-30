@@ -90,8 +90,6 @@ public sealed partial class DynamicProperty : IProperty
 	public string? SearchAnalyzer { get; set; }
 	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("term_vector")]
@@ -142,7 +140,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
@@ -378,12 +375,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public DynamicPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -587,12 +578,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteStringValue(SearchQuoteAnalyzerValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -693,7 +678,6 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		Script = BuildScript(),
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TermVector = TermVectorValue,
 		TimeSeriesMetric = TimeSeriesMetricValue
@@ -739,7 +723,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
@@ -975,12 +958,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		return Self;
 	}
 
-	public DynamicPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public DynamicPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -1184,12 +1161,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 			writer.WriteStringValue(SearchQuoteAnalyzerValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -1290,7 +1261,6 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		Script = BuildScript(),
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TermVector = TermVectorValue,
 		TimeSeriesMetric = TimeSeriesMetricValue

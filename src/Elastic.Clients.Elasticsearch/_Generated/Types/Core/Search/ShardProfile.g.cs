@@ -31,10 +31,20 @@ public sealed partial class ShardProfile
 {
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> Aggregations { get; init; }
+	[JsonInclude, JsonPropertyName("cluster")]
+	public string Cluster { get; init; }
+	[JsonInclude, JsonPropertyName("dfs")]
+	public Elastic.Clients.Elasticsearch.Core.Search.DfsProfile? Dfs { get; init; }
 	[JsonInclude, JsonPropertyName("fetch")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfile? Fetch { get; init; }
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
+	[JsonInclude, JsonPropertyName("index")]
+	public string Index { get; init; }
+	[JsonInclude, JsonPropertyName("node_id")]
+	public string NodeId { get; init; }
 	[JsonInclude, JsonPropertyName("searches")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; init; }
+	[JsonInclude, JsonPropertyName("shard_id")]
+	public long ShardId { get; init; }
 }

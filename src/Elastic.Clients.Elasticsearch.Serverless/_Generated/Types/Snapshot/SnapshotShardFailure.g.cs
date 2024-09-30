@@ -31,6 +31,8 @@ public sealed partial class SnapshotShardFailure
 {
 	[JsonInclude, JsonPropertyName("index")]
 	public string Index { get; init; }
+	[JsonInclude, JsonPropertyName("index_uuid")]
+	public string IndexUuid { get; init; }
 	[JsonInclude, JsonPropertyName("node_id")]
 	public string? NodeId { get; init; }
 	[JsonInclude, JsonPropertyName("reason")]

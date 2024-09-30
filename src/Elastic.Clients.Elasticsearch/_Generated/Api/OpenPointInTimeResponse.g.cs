@@ -30,4 +30,12 @@ public sealed partial class OpenPointInTimeResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Shards used to create the PIT
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 }

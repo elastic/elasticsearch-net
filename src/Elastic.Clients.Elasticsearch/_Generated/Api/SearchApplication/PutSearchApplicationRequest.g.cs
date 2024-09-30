@@ -41,7 +41,7 @@ public sealed partial class PutSearchApplicationRequestParameters : RequestParam
 
 /// <summary>
 /// <para>
-/// Creates or updates a search application.
+/// Create or update a search application.
 /// </para>
 /// </summary>
 public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>, ISelfSerializable
@@ -76,7 +76,7 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 
 /// <summary>
 /// <para>
-/// Creates or updates a search application.
+/// Create or update a search application.
 /// </para>
 /// </summary>
 public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescriptor<PutSearchApplicationRequestDescriptor, PutSearchApplicationRequestParameters>

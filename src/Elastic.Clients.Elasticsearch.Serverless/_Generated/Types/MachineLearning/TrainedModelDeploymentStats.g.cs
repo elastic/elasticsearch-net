@@ -130,7 +130,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentState State { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAssignmentState State { get; init; }
 
 	/// <summary>
 	/// <para>

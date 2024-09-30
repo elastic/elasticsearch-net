@@ -100,6 +100,7 @@ public sealed partial class Aggregation
 	public static Aggregation PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation percentileRanksAggregation) => new Aggregation("percentile_ranks", percentileRanksAggregation);
 	public static Aggregation Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation percentilesAggregation) => new Aggregation("percentiles", percentilesAggregation);
 	public static Aggregation PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => new Aggregation("percentiles_bucket", percentilesBucketAggregation);
+	public static Aggregation RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation randomSamplerAggregation) => new Aggregation("random_sampler", randomSamplerAggregation);
 	public static Aggregation Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => new Aggregation("range", rangeAggregation);
 	public static Aggregation RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => new Aggregation("rare_terms", rareTermsAggregation);
 	public static Aggregation Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation rateAggregation) => new Aggregation("rate", rateAggregation);
@@ -115,6 +116,7 @@ public sealed partial class Aggregation
 	public static Aggregation Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation sumAggregation) => new Aggregation("sum", sumAggregation);
 	public static Aggregation SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation sumBucketAggregation) => new Aggregation("sum_bucket", sumBucketAggregation);
 	public static Aggregation Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new Aggregation("terms", termsAggregation);
+	public static Aggregation TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation timeSeriesAggregation) => new Aggregation("time_series", timeSeriesAggregation);
 	public static Aggregation TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => new Aggregation("top_hits", topHitsAggregation);
 	public static Aggregation TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => new Aggregation("top_metrics", topMetricsAggregation);
 	public static Aggregation TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation tTestAggregation) => new Aggregation("t_test", tTestAggregation);
@@ -563,6 +565,13 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 				continue;
 			}
 
+			if (propertyName == "random_sampler")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "range")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(ref reader, options);
@@ -664,6 +673,13 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			if (propertyName == "terms")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "time_series")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -901,6 +917,9 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 				case "percentiles_bucket":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation)value.Variant, options);
 					break;
+				case "random_sampler":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation)value.Variant, options);
+					break;
 				case "range":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation)value.Variant, options);
 					break;
@@ -945,6 +964,9 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 					break;
 				case "terms":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
+					break;
+				case "time_series":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation)value.Variant, options);
 					break;
 				case "top_hits":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation)value.Variant, options);
@@ -1131,6 +1153,8 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> Percentiles(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument>> configure) => Set(configure, "percentiles");
 	public AggregationDescriptor<TDocument> PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => Set(percentilesBucketAggregation, "percentiles_bucket");
 	public AggregationDescriptor<TDocument> PercentilesBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
+	public AggregationDescriptor<TDocument> RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation randomSamplerAggregation) => Set(randomSamplerAggregation, "random_sampler");
+	public AggregationDescriptor<TDocument> RandomSampler(Action<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor> configure) => Set(configure, "random_sampler");
 	public AggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
 	public AggregationDescriptor<TDocument> Range(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>> configure) => Set(configure, "range");
 	public AggregationDescriptor<TDocument> RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => Set(rareTermsAggregation, "rare_terms");
@@ -1161,6 +1185,8 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> SumBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
 	public AggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
 	public AggregationDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public AggregationDescriptor<TDocument> TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation timeSeriesAggregation) => Set(timeSeriesAggregation, "time_series");
+	public AggregationDescriptor<TDocument> TimeSeries(Action<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor> configure) => Set(configure, "time_series");
 	public AggregationDescriptor<TDocument> TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => Set(topHitsAggregation, "top_hits");
 	public AggregationDescriptor<TDocument> TopHits(Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>> configure) => Set(configure, "top_hits");
 	public AggregationDescriptor<TDocument> TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => Set(topMetricsAggregation, "top_metrics");
@@ -1366,6 +1392,8 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor Percentiles<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor> configure) => Set(configure, "percentiles");
 	public AggregationDescriptor PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => Set(percentilesBucketAggregation, "percentiles_bucket");
 	public AggregationDescriptor PercentilesBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
+	public AggregationDescriptor RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation randomSamplerAggregation) => Set(randomSamplerAggregation, "random_sampler");
+	public AggregationDescriptor RandomSampler(Action<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor> configure) => Set(configure, "random_sampler");
 	public AggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
 	public AggregationDescriptor Range<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor> configure) => Set(configure, "range");
 	public AggregationDescriptor RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => Set(rareTermsAggregation, "rare_terms");
@@ -1396,6 +1424,8 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor SumBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
 	public AggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
 	public AggregationDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+	public AggregationDescriptor TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation timeSeriesAggregation) => Set(timeSeriesAggregation, "time_series");
+	public AggregationDescriptor TimeSeries(Action<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor> configure) => Set(configure, "time_series");
 	public AggregationDescriptor TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => Set(topHitsAggregation, "top_hits");
 	public AggregationDescriptor TopHits<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor> configure) => Set(configure, "top_hits");
 	public AggregationDescriptor TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => Set(topMetricsAggregation, "top_metrics");
