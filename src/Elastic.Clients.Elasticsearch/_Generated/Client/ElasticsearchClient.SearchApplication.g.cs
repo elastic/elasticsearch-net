@@ -41,7 +41,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +55,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +68,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +82,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +97,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +113,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +126,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +140,8 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a search application.
+	/// Delete a search application.
+	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -148,6 +156,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -161,6 +170,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -173,6 +183,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -186,6 +197,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -200,6 +212,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -215,6 +228,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -227,6 +241,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -240,6 +255,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a behavioral analytics collection.
+	/// The associated data stream is also deleted.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -253,7 +269,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -266,7 +282,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -278,7 +294,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -291,7 +307,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -305,7 +321,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -320,7 +336,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -332,7 +348,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -345,7 +361,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a search application
+	/// Get search application details.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -359,7 +375,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -372,7 +388,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -384,7 +400,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -397,7 +413,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -411,7 +427,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -426,7 +442,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -440,7 +456,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -455,7 +471,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -467,7 +483,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -480,7 +496,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -494,7 +510,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -507,7 +523,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the existing behavioral analytics collections.
+	/// Get behavioral analytics collections.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -627,7 +643,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -640,7 +656,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -652,7 +668,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -665,7 +681,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -679,7 +695,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -694,7 +710,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -706,7 +722,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -719,7 +735,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a search application.
+	/// Create or update a search application.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -733,7 +749,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -746,7 +762,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -758,7 +774,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -771,7 +787,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -785,7 +801,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -800,7 +816,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -812,7 +828,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -825,7 +841,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a behavioral analytics collection.
+	/// Create a behavioral analytics collection.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -839,7 +855,9 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform a search against a search application.
+	/// Run a search application search.
+	/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+	/// Unspecified template parameters are assigned their default values if applicable.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -852,7 +870,9 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform a search against a search application.
+	/// Run a search application search.
+	/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+	/// Unspecified template parameters are assigned their default values if applicable.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

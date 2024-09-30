@@ -105,6 +105,97 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 	}
 }
 
+[JsonConverter(typeof(GeoGridTargetFormatConverter))]
+public enum GeoGridTargetFormat
+{
+	[EnumMember(Value = "wkt")]
+	Wkt,
+	[EnumMember(Value = "geojson")]
+	Geojson
+}
+
+internal sealed class GeoGridTargetFormatConverter : JsonConverter<GeoGridTargetFormat>
+{
+	public override GeoGridTargetFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "wkt":
+				return GeoGridTargetFormat.Wkt;
+			case "geojson":
+				return GeoGridTargetFormat.Geojson;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GeoGridTargetFormat value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GeoGridTargetFormat.Wkt:
+				writer.WriteStringValue("wkt");
+				return;
+			case GeoGridTargetFormat.Geojson:
+				writer.WriteStringValue("geojson");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GeoGridTileTypeConverter))]
+public enum GeoGridTileType
+{
+	[EnumMember(Value = "geotile")]
+	Geotile,
+	[EnumMember(Value = "geohex")]
+	Geohex,
+	[EnumMember(Value = "geohash")]
+	Geohash
+}
+
+internal sealed class GeoGridTileTypeConverter : JsonConverter<GeoGridTileType>
+{
+	public override GeoGridTileType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "geotile":
+				return GeoGridTileType.Geotile;
+			case "geohex":
+				return GeoGridTileType.Geohex;
+			case "geohash":
+				return GeoGridTileType.Geohash;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GeoGridTileType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GeoGridTileType.Geotile:
+				writer.WriteStringValue("geotile");
+				return;
+			case GeoGridTileType.Geohex:
+				writer.WriteStringValue("geohex");
+				return;
+			case GeoGridTileType.Geohash:
+				writer.WriteStringValue("geohash");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(JsonProcessorConflictStrategyConverter))]
 public enum JsonProcessorConflictStrategy
 {
@@ -202,26 +293,16 @@ internal sealed class ShapeTypeConverter : JsonConverter<ShapeType>
 [JsonConverter(typeof(UserAgentPropertyConverter))]
 public enum UserAgentProperty
 {
-	[EnumMember(Value = "PATCH")]
-	Patch,
-	[EnumMember(Value = "OS_NAME")]
-	OsName,
-	[EnumMember(Value = "OS_MINOR")]
-	OsMinor,
-	[EnumMember(Value = "OS_MAJOR")]
-	OsMajor,
-	[EnumMember(Value = "OS")]
+	[EnumMember(Value = "version")]
+	Version,
+	[EnumMember(Value = "os")]
 	Os,
-	[EnumMember(Value = "NAME")]
+	[EnumMember(Value = "original")]
+	Original,
+	[EnumMember(Value = "name")]
 	Name,
-	[EnumMember(Value = "MINOR")]
-	Minor,
-	[EnumMember(Value = "MAJOR")]
-	Major,
-	[EnumMember(Value = "DEVICE")]
-	Device,
-	[EnumMember(Value = "BUILD")]
-	Build
+	[EnumMember(Value = "device")]
+	Device
 }
 
 internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProperty>
@@ -231,26 +312,16 @@ internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProper
 		var enumString = reader.GetString();
 		switch (enumString)
 		{
-			case "PATCH":
-				return UserAgentProperty.Patch;
-			case "OS_NAME":
-				return UserAgentProperty.OsName;
-			case "OS_MINOR":
-				return UserAgentProperty.OsMinor;
-			case "OS_MAJOR":
-				return UserAgentProperty.OsMajor;
-			case "OS":
+			case "version":
+				return UserAgentProperty.Version;
+			case "os":
 				return UserAgentProperty.Os;
-			case "NAME":
+			case "original":
+				return UserAgentProperty.Original;
+			case "name":
 				return UserAgentProperty.Name;
-			case "MINOR":
-				return UserAgentProperty.Minor;
-			case "MAJOR":
-				return UserAgentProperty.Major;
-			case "DEVICE":
+			case "device":
 				return UserAgentProperty.Device;
-			case "BUILD":
-				return UserAgentProperty.Build;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -261,35 +332,20 @@ internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProper
 	{
 		switch (value)
 		{
-			case UserAgentProperty.Patch:
-				writer.WriteStringValue("PATCH");
-				return;
-			case UserAgentProperty.OsName:
-				writer.WriteStringValue("OS_NAME");
-				return;
-			case UserAgentProperty.OsMinor:
-				writer.WriteStringValue("OS_MINOR");
-				return;
-			case UserAgentProperty.OsMajor:
-				writer.WriteStringValue("OS_MAJOR");
+			case UserAgentProperty.Version:
+				writer.WriteStringValue("version");
 				return;
 			case UserAgentProperty.Os:
-				writer.WriteStringValue("OS");
+				writer.WriteStringValue("os");
+				return;
+			case UserAgentProperty.Original:
+				writer.WriteStringValue("original");
 				return;
 			case UserAgentProperty.Name:
-				writer.WriteStringValue("NAME");
-				return;
-			case UserAgentProperty.Minor:
-				writer.WriteStringValue("MINOR");
-				return;
-			case UserAgentProperty.Major:
-				writer.WriteStringValue("MAJOR");
+				writer.WriteStringValue("name");
 				return;
 			case UserAgentProperty.Device:
-				writer.WriteStringValue("DEVICE");
-				return;
-			case UserAgentProperty.Build:
-				writer.WriteStringValue("BUILD");
+				writer.WriteStringValue("device");
 				return;
 		}
 

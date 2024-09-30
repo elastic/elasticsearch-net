@@ -62,8 +62,6 @@ public sealed partial class IpProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -94,7 +92,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public IpPropertyDescriptor<TDocument> Boost(double? boost)
@@ -226,12 +223,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IpPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IpPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -329,12 +320,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -385,7 +370,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -413,7 +397,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public IpPropertyDescriptor Boost(double? boost)
@@ -545,12 +528,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
-	public IpPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public IpPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -648,12 +625,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -704,7 +675,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

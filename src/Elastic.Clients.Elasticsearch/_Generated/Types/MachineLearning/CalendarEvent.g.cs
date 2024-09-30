@@ -57,6 +57,30 @@ public sealed partial class CalendarEvent
 
 	/// <summary>
 	/// <para>
+	/// Shift time by this many seconds. For example adjust time for daylight savings changes
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("force_time_shift")]
+	public int? ForceTimeShift { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When true the model will not be updated for this calendar period.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("skip_model_update")]
+	public bool? SkipModelUpdate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When true the model will not create results for this calendar period.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("skip_result")]
+	public bool? SkipResult { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
@@ -76,6 +100,9 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 	private string DescriptionValue { get; set; }
 	private DateTimeOffset EndTimeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Id? EventIdValue { get; set; }
+	private int? ForceTimeShiftValue { get; set; }
+	private bool? SkipModelUpdateValue { get; set; }
+	private bool? SkipResultValue { get; set; }
 	private DateTimeOffset StartTimeValue { get; set; }
 
 	/// <summary>
@@ -119,6 +146,39 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 
 	/// <summary>
 	/// <para>
+	/// Shift time by this many seconds. For example adjust time for daylight savings changes
+	/// </para>
+	/// </summary>
+	public CalendarEventDescriptor ForceTimeShift(int? forceTimeShift)
+	{
+		ForceTimeShiftValue = forceTimeShift;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true the model will not be updated for this calendar period.
+	/// </para>
+	/// </summary>
+	public CalendarEventDescriptor SkipModelUpdate(bool? skipModelUpdate = true)
+	{
+		SkipModelUpdateValue = skipModelUpdate;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true the model will not create results for this calendar period.
+	/// </para>
+	/// </summary>
+	public CalendarEventDescriptor SkipResult(bool? skipResult = true)
+	{
+		SkipResultValue = skipResult;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
@@ -145,6 +205,24 @@ public sealed partial class CalendarEventDescriptor : SerializableDescriptor<Cal
 		{
 			writer.WritePropertyName("event_id");
 			JsonSerializer.Serialize(writer, EventIdValue, options);
+		}
+
+		if (ForceTimeShiftValue.HasValue)
+		{
+			writer.WritePropertyName("force_time_shift");
+			writer.WriteNumberValue(ForceTimeShiftValue.Value);
+		}
+
+		if (SkipModelUpdateValue.HasValue)
+		{
+			writer.WritePropertyName("skip_model_update");
+			writer.WriteBooleanValue(SkipModelUpdateValue.Value);
+		}
+
+		if (SkipResultValue.HasValue)
+		{
+			writer.WritePropertyName("skip_result");
+			writer.WriteBooleanValue(SkipResultValue.Value);
 		}
 
 		writer.WritePropertyName("start_time");

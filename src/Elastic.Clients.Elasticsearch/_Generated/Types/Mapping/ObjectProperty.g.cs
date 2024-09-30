@@ -50,8 +50,6 @@ public sealed partial class ObjectProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("subobjects")]
@@ -76,7 +74,6 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? SubobjectsValue { get; set; }
 
@@ -155,12 +152,6 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public ObjectPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ObjectPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -218,12 +209,6 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -250,7 +235,6 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		Subobjects = SubobjectsValue
 	};
@@ -271,7 +255,6 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? SubobjectsValue { get; set; }
 
@@ -350,12 +333,6 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 		return Self;
 	}
 
-	public ObjectPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ObjectPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -413,12 +390,6 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -445,7 +416,6 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue,
 		Subobjects = SubobjectsValue
 	};

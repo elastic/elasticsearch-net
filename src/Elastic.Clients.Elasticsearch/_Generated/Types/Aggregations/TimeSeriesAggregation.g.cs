@@ -17,83 +17,83 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class RrfRank
+public sealed partial class TimeSeriesAggregation
 {
 	/// <summary>
 	/// <para>
-	/// How much influence documents in individual result sets per query have over the final ranked result set
+	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_constant")]
-	public long? RankConstant { get; set; }
+	[JsonInclude, JsonPropertyName("keyed")]
+	public bool? Keyed { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Size of the individual result sets per query
+	/// The maximum number of results to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank_window_size")]
-	public long? RankWindowSize { get; set; }
+	[JsonInclude, JsonPropertyName("size")]
+	public int? Size { get; set; }
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Rank(RrfRank rrfRank) => Elastic.Clients.Elasticsearch.Serverless.Rank.Rrf(rrfRank);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TimeSeriesAggregation timeSeriesAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TimeSeries(timeSeriesAggregation);
 }
 
-public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDescriptor>
+public sealed partial class TimeSeriesAggregationDescriptor : SerializableDescriptor<TimeSeriesAggregationDescriptor>
 {
-	internal RrfRankDescriptor(Action<RrfRankDescriptor> configure) => configure.Invoke(this);
+	internal TimeSeriesAggregationDescriptor(Action<TimeSeriesAggregationDescriptor> configure) => configure.Invoke(this);
 
-	public RrfRankDescriptor() : base()
+	public TimeSeriesAggregationDescriptor() : base()
 	{
 	}
 
-	private long? RankConstantValue { get; set; }
-	private long? RankWindowSizeValue { get; set; }
+	private bool? KeyedValue { get; set; }
+	private int? SizeValue { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// How much influence documents in individual result sets per query have over the final ranked result set
+	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
 	/// </para>
 	/// </summary>
-	public RrfRankDescriptor RankConstant(long? rankConstant)
+	public TimeSeriesAggregationDescriptor Keyed(bool? keyed = true)
 	{
-		RankConstantValue = rankConstant;
+		KeyedValue = keyed;
 		return Self;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Size of the individual result sets per query
+	/// The maximum number of results to return.
 	/// </para>
 	/// </summary>
-	public RrfRankDescriptor RankWindowSize(long? rankWindowSize)
+	public TimeSeriesAggregationDescriptor Size(int? size)
 	{
-		RankWindowSizeValue = rankWindowSize;
+		SizeValue = size;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (RankConstantValue.HasValue)
+		if (KeyedValue.HasValue)
 		{
-			writer.WritePropertyName("rank_constant");
-			writer.WriteNumberValue(RankConstantValue.Value);
+			writer.WritePropertyName("keyed");
+			writer.WriteBooleanValue(KeyedValue.Value);
 		}
 
-		if (RankWindowSizeValue.HasValue)
+		if (SizeValue.HasValue)
 		{
-			writer.WritePropertyName("rank_window_size");
-			writer.WriteNumberValue(RankWindowSizeValue.Value);
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		writer.WriteEndObject();

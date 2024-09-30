@@ -94,6 +94,7 @@ public sealed partial class AppendProcessor
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
+	[SingleOrManyCollectionConverter(typeof(object))]
 	public ICollection<object> Value { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(AppendProcessor appendProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Append(appendProcessor);
@@ -331,7 +332,7 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 		}
 
 		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
+		SingleOrManySerializationHelper.Serialize<object>(ValueValue, writer, options);
 		writer.WriteEndObject();
 	}
 }
@@ -568,7 +569,7 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 		}
 
 		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
+		SingleOrManySerializationHelper.Serialize<object>(ValueValue, writer, options);
 		writer.WriteEndObject();
 	}
 }

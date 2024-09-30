@@ -90,7 +90,7 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
 
@@ -136,6 +136,14 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("index_filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 }
 
 /// <summary>
@@ -164,7 +172,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
 
@@ -180,8 +188,59 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	{
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterValue = indexFilter;
+		return Self;
+	}
+
+	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		if (IndexFilterDescriptor is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
+		}
+		else if (IndexFilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
+		}
+		else if (IndexFilterValue is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, IndexFilterValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }
 
@@ -207,7 +266,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
 
@@ -223,7 +282,58 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Allows to filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	public OpenPointInTimeRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	{
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterValue = indexFilter;
+		return Self;
+	}
+
+	public OpenPointInTimeRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public OpenPointInTimeRequestDescriptor IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		if (IndexFilterDescriptor is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
+		}
+		else if (IndexFilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
+		}
+		else if (IndexFilterValue is not null)
+		{
+			writer.WritePropertyName("index_filter");
+			JsonSerializer.Serialize(writer, IndexFilterValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

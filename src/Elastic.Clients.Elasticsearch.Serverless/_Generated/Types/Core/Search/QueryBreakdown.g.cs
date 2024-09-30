@@ -41,6 +41,10 @@ public sealed partial class QueryBreakdown
 	public long ComputeMaxScore { get; init; }
 	[JsonInclude, JsonPropertyName("compute_max_score_count")]
 	public long ComputeMaxScoreCount { get; init; }
+	[JsonInclude, JsonPropertyName("count_weight")]
+	public long CountWeight { get; init; }
+	[JsonInclude, JsonPropertyName("count_weight_count")]
+	public long CountWeightCount { get; init; }
 	[JsonInclude, JsonPropertyName("create_weight")]
 	public long CreateWeight { get; init; }
 	[JsonInclude, JsonPropertyName("create_weight_count")]
