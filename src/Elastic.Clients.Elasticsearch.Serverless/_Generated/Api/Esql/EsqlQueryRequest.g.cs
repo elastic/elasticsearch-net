@@ -51,7 +51,7 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 	/// A short version of the Accept header, e.g. json, yaml.
 	/// </para>
 	/// </summary>
-	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+	public Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 }
 
 /// <summary>
@@ -92,7 +92,7 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+	public Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
@@ -163,7 +163,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 
 	public EsqlQueryRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public EsqlQueryRequestDescriptor<TDocument> DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public EsqlQueryRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
+	public EsqlQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat? format) => Qs("format", format);
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
@@ -328,7 +328,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 
 	public EsqlQueryRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public EsqlQueryRequestDescriptor DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public EsqlQueryRequestDescriptor Format(string? format) => Qs("format", format);
+	public EsqlQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Serverless.Esql.EsqlFormat? format) => Qs("format", format);
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }

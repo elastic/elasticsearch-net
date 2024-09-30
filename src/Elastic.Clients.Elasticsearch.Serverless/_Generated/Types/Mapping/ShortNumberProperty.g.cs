@@ -64,8 +64,6 @@ public sealed partial class ShortNumberProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -97,7 +95,6 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ShortNumberPropertyDescriptor<TDocument> Boost(double? boost)
@@ -235,12 +232,6 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ShortNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -344,12 +335,6 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -401,7 +386,6 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -430,7 +414,6 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public ShortNumberPropertyDescriptor Boost(double? boost)
@@ -568,12 +551,6 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public ShortNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -677,12 +654,6 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -734,7 +705,6 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		Script = BuildScript(),
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

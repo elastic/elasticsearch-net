@@ -39,6 +39,8 @@ public sealed partial class ShardHealthStats
 	public int RelocatingShards { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
+	[JsonInclude, JsonPropertyName("unassigned_primary_shards")]
+	public int UnassignedPrimaryShards { get; init; }
 	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }
 }

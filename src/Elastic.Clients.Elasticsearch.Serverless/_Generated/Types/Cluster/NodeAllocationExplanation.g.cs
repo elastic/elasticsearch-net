@@ -39,6 +39,8 @@ public sealed partial class NodeAllocationExplanation
 	public string NodeId { get; init; }
 	[JsonInclude, JsonPropertyName("node_name")]
 	public string NodeName { get; init; }
+	[JsonInclude, JsonPropertyName("roles")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.NodeRole> Roles { get; init; }
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.Serverless.Cluster.AllocationStore? Store { get; init; }
 	[JsonInclude, JsonPropertyName("transport_address")]

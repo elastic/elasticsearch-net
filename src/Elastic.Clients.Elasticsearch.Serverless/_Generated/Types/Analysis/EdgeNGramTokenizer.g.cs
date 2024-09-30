@@ -36,7 +36,7 @@ public sealed partial class EdgeNGramTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int MinGram { get; set; }
 	[JsonInclude, JsonPropertyName("token_chars")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar> TokenChars { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar>? TokenChars { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "edge_ngram";
@@ -56,7 +56,7 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 	private string? CustomTokenCharsValue { get; set; }
 	private int MaxGramValue { get; set; }
 	private int MinGramValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar> TokenCharsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar>? TokenCharsValue { get; set; }
 	private string? VersionValue { get; set; }
 
 	public EdgeNGramTokenizerDescriptor CustomTokenChars(string? customTokenChars)
@@ -77,7 +77,7 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public EdgeNGramTokenizerDescriptor TokenChars(ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar> tokenChars)
+	public EdgeNGramTokenizerDescriptor TokenChars(ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar>? tokenChars)
 	{
 		TokenCharsValue = tokenChars;
 		return Self;
@@ -102,8 +102,12 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 		writer.WriteNumberValue(MaxGramValue);
 		writer.WritePropertyName("min_gram");
 		writer.WriteNumberValue(MinGramValue);
-		writer.WritePropertyName("token_chars");
-		JsonSerializer.Serialize(writer, TokenCharsValue, options);
+		if (TokenCharsValue is not null)
+		{
+			writer.WritePropertyName("token_chars");
+			JsonSerializer.Serialize(writer, TokenCharsValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("edge_ngram");
 		if (!string.IsNullOrEmpty(VersionValue))

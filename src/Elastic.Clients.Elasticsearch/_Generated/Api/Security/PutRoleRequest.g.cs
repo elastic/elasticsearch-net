@@ -117,6 +117,14 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 
 	/// <summary>
 	/// <para>
+	/// A list of remote indices permissions entries.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("remote_indices")]
+	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -174,6 +182,10 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> RemoteIndicesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> RemoteIndicesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] RemoteIndicesDescriptorActions { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -305,6 +317,47 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 
 	/// <summary>
 	/// <para>
+	/// A list of remote indices permissions entries.
+	/// </para>
+	/// </summary>
+	public PutRoleRequestDescriptor<TDocument> RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
+	{
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesValue = remoteIndices;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> descriptor)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -414,6 +467,37 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
+		if (RemoteIndicesDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(RemoteIndicesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			foreach (var action in RemoteIndicesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesValue is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
+		}
+
 		if (RunAsValue is not null)
 		{
 			writer.WritePropertyName("run_as");
@@ -472,6 +556,10 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor RemoteIndicesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> RemoteIndicesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] RemoteIndicesDescriptorActions { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -603,6 +691,47 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 
 	/// <summary>
 	/// <para>
+	/// A list of remote indices permissions entries.
+	/// </para>
+	/// </summary>
+	public PutRoleRequestDescriptor RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
+	{
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesValue = remoteIndices;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor descriptor)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -710,6 +839,37 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, MetadataValue, options);
+		}
+
+		if (RemoteIndicesDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(RemoteIndicesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			foreach (var action in RemoteIndicesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesValue is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
 		}
 
 		if (RunAsValue is not null)

@@ -54,8 +54,6 @@ public sealed partial class NestedProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -80,7 +78,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 	private bool? IncludeInRootValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public NestedPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -170,12 +167,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public NestedPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public NestedPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -239,12 +230,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -267,7 +252,6 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 		IncludeInRoot = IncludeInRootValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -289,7 +273,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 	private bool? IncludeInRootValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public NestedPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -379,12 +362,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 		return Self;
 	}
 
-	public NestedPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public NestedPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -448,12 +425,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -476,7 +447,6 @@ public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<Ne
 		IncludeInRoot = IncludeInRootValue,
 		Meta = MetaValue,
 		Properties = PropertiesValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

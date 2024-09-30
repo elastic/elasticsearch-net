@@ -40,7 +40,7 @@ public sealed partial class Hit<TDocument>
 	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
 	[JsonInclude, JsonPropertyName("ignored_field_values")]
-	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
+	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>>? IgnoredFieldValues { get; init; }
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("inner_hits")]

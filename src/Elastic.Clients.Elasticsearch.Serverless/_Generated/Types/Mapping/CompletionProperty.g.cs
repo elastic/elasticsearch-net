@@ -62,8 +62,6 @@ public sealed partial class CompletionProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
-	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -95,7 +93,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	private bool? PreserveSeparatorsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public CompletionPropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -239,12 +236,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public CompletionPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -357,12 +348,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 			writer.WriteStringValue(SearchAnalyzerValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -413,7 +398,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		PreserveSeparators = PreserveSeparatorsValue,
 		Properties = PropertiesValue,
 		SearchAnalyzer = SearchAnalyzerValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }
@@ -442,7 +426,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	private bool? PreserveSeparatorsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
-	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
 	public CompletionPropertyDescriptor Analyzer(string? analyzer)
@@ -586,12 +569,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Similarity(string? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
 	public CompletionPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -704,12 +681,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 			writer.WriteStringValue(SearchAnalyzerValue);
 		}
 
-		if (!string.IsNullOrEmpty(SimilarityValue))
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(SimilarityValue);
-		}
-
 		if (StoreValue.HasValue)
 		{
 			writer.WritePropertyName("store");
@@ -760,7 +731,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		PreserveSeparators = PreserveSeparatorsValue,
 		Properties = PropertiesValue,
 		SearchAnalyzer = SearchAnalyzerValue,
-		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
 }

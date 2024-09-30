@@ -44,8 +44,6 @@ public sealed partial class NodeAttributes
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ephemeral_id")]
 	public string EphemeralId { get; init; }
-	[JsonInclude, JsonPropertyName("external_id")]
-	public string? ExternalId { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -62,8 +60,6 @@ public sealed partial class NodeAttributes
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
 
 	/// <summary>
 	/// <para>

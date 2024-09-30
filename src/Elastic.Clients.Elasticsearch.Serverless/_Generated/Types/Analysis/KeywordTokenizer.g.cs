@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Analysis;
 public sealed partial class KeywordTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
-	public int BufferSize { get; set; }
+	public int? BufferSize { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
@@ -47,10 +47,10 @@ public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private int BufferSizeValue { get; set; }
+	private int? BufferSizeValue { get; set; }
 	private string? VersionValue { get; set; }
 
-	public KeywordTokenizerDescriptor BufferSize(int bufferSize)
+	public KeywordTokenizerDescriptor BufferSize(int? bufferSize)
 	{
 		BufferSizeValue = bufferSize;
 		return Self;
@@ -65,8 +65,12 @@ public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("buffer_size");
-		writer.WriteNumberValue(BufferSizeValue);
+		if (BufferSizeValue.HasValue)
+		{
+			writer.WritePropertyName("buffer_size");
+			writer.WriteNumberValue(BufferSizeValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("keyword");
 		if (!string.IsNullOrEmpty(VersionValue))
