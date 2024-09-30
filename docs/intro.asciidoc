@@ -49,5 +49,6 @@ backward compatible with default distributions only and without guarantees.
 To submit a bug report or feature request, use 
 {github}/issues[GitHub issues].
 
-For more general questions and comments, try the community forum on https://discuss.elastic.co/c/elasticsearch[discuss.elastic.co]. 
+For more general questions and comments, try the community forum 
+on https://discuss.elastic.co/c/elasticsearch[discuss.elastic.co]. 
 Mention `.NET` in the title to indicate the discussion topic.
