@@ -1,0 +1,50 @@
+[[query]]
+== Query Examples
+
+This page demonstrates how to perform a search request.
+
+[discrete]
+=== Fluent API
+
+[source,csharp]
+----
+var response = await client
+	.SearchAsync<Person>(search => search
+		.Index("persons")
+		.Query(query => query
+			.Term(term => term
+				.Field(x => x.FirstName)
+				.Value("Florian")
+			)
+		)
+		.Size(10)
+	);
+----
+
+[discrete]
+=== Object Initializer API
+
+[source,csharp]
+----
+var response = await client
+	.SearchAsync<Person>(new SearchRequest<Person>("persons")
+	{
+		Query = Query.Term(new TermQuery("firstName"!)
+		{
+			Value = "Florian"
+		}),
+		Size = 10
+	});
+----
+
+
+[discrete]
+=== Consuming the Response
+
+[source,csharp]
+----
+foreach (var person in response.Documents)
+{
+	Console.WriteLine(person.FirstName);
+}
+----
