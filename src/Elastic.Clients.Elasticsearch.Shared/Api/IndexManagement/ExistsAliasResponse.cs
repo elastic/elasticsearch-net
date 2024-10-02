@@ -5,7 +5,7 @@
 using Elastic.Transport.Products.Elasticsearch;
 
 #if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Serverless;
+namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 #else
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 #endif
