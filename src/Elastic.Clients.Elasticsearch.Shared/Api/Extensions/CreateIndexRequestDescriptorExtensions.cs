@@ -32,34 +32,6 @@ public static class CreateIndexRequestDescriptorExtensions
 	}
 
 	/// <summary>
-	/// Add multiple aliases to the index at creation time.
-	/// </summary>
-	/// <param name="descriptor">A descriptor for an index request.</param>
-	/// <param name="aliasNames">The names of the aliases.</param>
-	/// <returns>The <see cref="CreateIndexRequestDescriptor"/> to allow fluent chaining of calls to configure the indexing request.</returns>
-	public static CreateIndexRequestDescriptor WithAliases(this CreateIndexRequestDescriptor descriptor, params ReadOnlySpan<string> aliasNames)
-	{
-		foreach (var name in aliasNames)
-			descriptor.Aliases(a => a.Add(name, static _ => { }));
-
-		return descriptor;
-	}
-
-	/// <summary>
-	/// Add multiple aliases to the index at creation time.
-	/// </summary>
-	/// <param name="descriptor">A descriptor for an index request.</param>
-	/// <param name="aliasNames">The names of the aliases.</param>
-	/// <returns>The <see cref="CreateIndexRequestDescriptor"/> to allow fluent chaining of calls to configure the indexing request.</returns>
-	public static CreateIndexRequestDescriptor WithAliases(this CreateIndexRequestDescriptor descriptor, params string[] aliasNames)
-	{
-		foreach (var name in aliasNames)
-			descriptor.Aliases(a => a.Add(name, static _ => { }));
-
-		return descriptor;
-	}
-
-	/// <summary>
 	/// Adds an alias to the index at creation time.
 	/// </summary>
 	/// <typeparam name="TDocument">The type representing documents stored in this index.</typeparam>
@@ -76,36 +48,6 @@ public static class CreateIndexRequestDescriptorExtensions
 #endif
 
 		descriptor.Aliases(a => a.Add(aliasName, static _ => { }));
-		return descriptor;
-	}
-
-	/// <summary>
-	/// Add multiple aliases to the index at creation time.
-	/// </summary>
-	/// <typeparam name="TDocument">The type representing documents stored in this index.</typeparam>
-	/// <param name="descriptor">A fluent descriptor for an index request.</param>
-	/// <param name="aliasNames">The names of the aliases.</param>
-	/// <returns>The <see cref="CreateIndexRequestDescriptor{TDocument}"/> to allow fluent chaining of calls to configure the indexing request.</returns>
-	public static CreateIndexRequestDescriptor<TDocument> WithAliases<TDocument>(this CreateIndexRequestDescriptor<TDocument> descriptor, params ReadOnlySpan<string> aliasNames)
-	{
-		foreach (var name in aliasNames)
-			descriptor.Aliases(a => a.Add(name, static _ => { }));
-
-		return descriptor;
-	}
-
-	/// <summary>
-	/// Add multiple aliases to the index at creation time.
-	/// </summary>
-	/// <typeparam name="TDocument">The type representing documents stored in this index.</typeparam>
-	/// <param name="descriptor">A fluent descriptor for an index request.</param>
-	/// <param name="aliasNames">The names of the aliases.</param>
-	/// <returns>The <see cref="CreateIndexRequestDescriptor{TDocument}"/> to allow fluent chaining of calls to configure the indexing request.</returns>
-	public static CreateIndexRequestDescriptor<TDocument> WithAliases<TDocument>(this CreateIndexRequestDescriptor<TDocument> descriptor, params string[] aliasNames)
-	{
-		foreach (var name in aliasNames)
-			descriptor.Aliases(a => a.Add(name, static _ => { }));
-
 		return descriptor;
 	}
 }
