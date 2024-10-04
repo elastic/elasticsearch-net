@@ -22,7 +22,7 @@ var response = await client
 ----
 
 [discrete]
-=== Object Initializer API
+=== Object initializer API
 
 [source,csharp]
 ----
