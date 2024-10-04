@@ -39,7 +39,7 @@ var response = await client
 
 
 [discrete]
-=== Consuming the Response
+=== Consume the response
 
 [source,csharp]
 ----
