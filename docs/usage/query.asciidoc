@@ -1,5 +1,5 @@
 [[query]]
-== Query Examples
+== Query examples
 
 This page demonstrates how to perform a search request.
 
