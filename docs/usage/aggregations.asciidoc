@@ -48,7 +48,7 @@ var response = await client.SearchAsync<Person>(new SearchRequest("persons")
 ----
 
 [discrete]
-==== Consuming the Response
+==== Consume the response
 ==== Consume the response
 
 [source,csharp]
