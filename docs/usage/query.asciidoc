@@ -29,7 +29,7 @@ var response = await client
 var response = await client
 	.SearchAsync<Person>(new SearchRequest<Person>("persons")
 	{
-		Query = Query.Term(new TermQuery("firstName"!)
+		Query = Query.Term(new TermQuery(Infer.Field<Person>(x => x.FirstName))
 		{
 			Value = "Florian"
 		}),

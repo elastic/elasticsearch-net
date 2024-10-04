@@ -29,6 +29,26 @@ var response = await client
 ----
 
 [discrete]
+==== Object initializer API
+
+[source,csharp]
+----
+var response = await client.SearchAsync<Person>(new SearchRequest("persons")
+{
+	Query = Query.MatchAll(new MatchAllQuery()),
+	Aggregations = new Dictionary<string, Aggregation>
+	{
+		{ "agg_name", Aggregation.Max(new MaxAggregation
+		{
+			Field = Infer.Field<Person>(x => x.Age)
+		})}
+	},
+	Size = 10
+});
+----
+
+[discrete]
+==== Consuming the Response
 ==== Consume the response
 
 [source,csharp]
@@ -70,6 +90,36 @@ var response = await client
 ----
 
 [discrete]
+==== Object initializer API
+
+[source,csharp]
+----
+var topLevelAggregation = Aggregation.Terms(new TermsAggregation
+{
+	Field = Infer.Field<Person>(x => x.FirstName)
+});
+
+topLevelAggregation.Aggregations = new Dictionary<string, Aggregation>
+{
+	{ "avg_age", new MaxAggregation
+	{
+		Field = Infer.Field<Person>(x => x.Age)
+	}}
+};
+
+var response = await client.SearchAsync<Person>(new SearchRequest("persons")
+{
+	Query = Query.MatchAll(new MatchAllQuery()),
+	Aggregations = new Dictionary<string, Aggregation>
+	{
+		{ "firstnames", topLevelAggregation}
+	},
+	Size = 10
+});
+----
+
+[discrete]
+==== Consuming the Response
 ==== Consume the response
 
 [source,csharp]
