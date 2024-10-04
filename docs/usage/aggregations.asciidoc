@@ -38,7 +38,7 @@ Console.WriteLine(max.Value);
 ----
 
 [discrete]
-=== Sub Aggregation
+=== Sub-aggregation
 
 [discrete]
 ==== Fluent API
