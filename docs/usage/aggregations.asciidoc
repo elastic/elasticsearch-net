@@ -4,7 +4,7 @@
 This page demonstrates how to use aggregations.
 
 [discrete]
-=== Top Level Aggreggation
+=== Top-level aggreggation
 
 [discrete]
 ==== Fluent API
