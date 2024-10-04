@@ -4,7 +4,7 @@
 This page demonstrates how to configure custom mappings on an index.
 
 [discrete]
-=== Configure Mappings during Index Creation
+=== Configure mappings during index creation
 
 [source,csharp]
 ----
