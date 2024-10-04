@@ -1,5 +1,5 @@
 [[aggregations]]
-== Aggregation Examples
+== Aggregation examples
 
 This page demonstrates how to use aggregations.
 
