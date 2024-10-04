@@ -20,7 +20,7 @@ await client.Indices.CreateAsync<Person>(index => index
 ----
 
 [discrete]
-=== Configure Mappings after Index Creation
+=== Configure mappings after index creation
 
 [source,csharp]
 ----
