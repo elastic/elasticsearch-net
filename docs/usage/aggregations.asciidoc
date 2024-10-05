@@ -1,0 +1,131 @@
+[[aggregations]]
+== Aggregation examples
+
+This page demonstrates how to use aggregations.
+
+[discrete]
+=== Top-level aggreggation
+
+[discrete]
+==== Fluent API
+
+[source,csharp]
+----
+var response = await client
+	.SearchAsync<Person>(search => search
+		.Index("persons")
+		.Query(query => query
+			.MatchAll(_ => {})
+		)
+		.Aggregations(aggregations => aggregations
+			.Add("agg_name", aggregation => aggregation
+				.Max(max => max
+					.Field(x => x.Age)
+				)
+			)
+		)
+		.Size(10)
+	);
+----
+
+[discrete]
+==== Object initializer API
+
+[source,csharp]
+----
+var response = await client.SearchAsync<Person>(new SearchRequest("persons")
+{
+	Query = Query.MatchAll(new MatchAllQuery()),
+	Aggregations = new Dictionary<string, Aggregation>
+	{
+		{ "agg_name", Aggregation.Max(new MaxAggregation
+		{
+			Field = Infer.Field<Person>(x => x.Age)
+		})}
+	},
+	Size = 10
+});
+----
+
+[discrete]
+==== Consume the response
+
+[source,csharp]
+----
+var max = response.Aggregations!.GetMax("agg_name")!;
+Console.WriteLine(max.Value);
+----
+
+[discrete]
+=== Sub-aggregation
+
+[discrete]
+==== Fluent API
+
+[source,csharp]
+----
+var response = await client
+	.SearchAsync<Person>(search => search
+		.Index("persons")
+		.Query(query => query
+			.MatchAll(_ => {})
+		)
+		.Aggregations(aggregations => aggregations
+			.Add("firstnames", aggregation => aggregation
+				.Terms(terms => terms
+					.Field(x => x.FirstName)
+				)
+				.Aggregations(aggregations => aggregations
+					.Add("avg_age", aggregation => aggregation
+						.Max(avg => avg
+							.Field(x => x.Age)
+						)
+					)
+				)
+			)
+		)
+		.Size(10)
+	);
+----
+
+[discrete]
+==== Object initializer API
+
+[source,csharp]
+----
+var topLevelAggregation = Aggregation.Terms(new TermsAggregation
+{
+	Field = Infer.Field<Person>(x => x.FirstName)
+});
+
+topLevelAggregation.Aggregations = new Dictionary<string, Aggregation>
+{
+	{ "avg_age", new MaxAggregation
+	{
+		Field = Infer.Field<Person>(x => x.Age)
+	}}
+};
+
+var response = await client.SearchAsync<Person>(new SearchRequest("persons")
+{
+	Query = Query.MatchAll(new MatchAllQuery()),
+	Aggregations = new Dictionary<string, Aggregation>
+	{
+		{ "firstnames", topLevelAggregation}
+	},
+	Size = 10
+});
+----
+
+[discrete]
+==== Consume the response
+
+[source,csharp]
+----
+var firstnames = response.Aggregations!.GetStringTerms("firstnames")!;
+foreach (var bucket in firstnames.Buckets)
+{
+	var avg = bucket.Aggregations.GetAverage("avg_age")!;
+	Console.WriteLine($"The average age for persons named '{bucket.Key}' is {avg}");
+}
+----
