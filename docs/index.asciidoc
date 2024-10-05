@@ -6,7 +6,7 @@ include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
 :doc-tests-src: {docdir}/../tests/Tests/Documentation
 :net-client: Elasticsearch .NET Client
-:latest-version: 8.1.0
+:latest-version: 8.15.8
 
 include::intro.asciidoc[]
 
