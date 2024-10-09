@@ -15,6 +15,7 @@
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <MajorVersion>$(Version.Split('.')[0])</MajorVersion>
+    <ArtifactsPath>.artifacts</ArtifactsPath>
   </PropertyGroup>
   
   <!-- Common Nuget metadata-->

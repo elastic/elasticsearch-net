@@ -43,5 +43,8 @@
   <ItemGroup>
     <Folder Include="Api\IndexManagement\" />
   </ItemGroup>
-  <Import Project="..\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <Compile Include="..\Elastic.Clients.Elasticsearch.Shared\*.cs"/>
+    <Compile Include="..\Elastic.Clients.Elasticsearch.Shared\**\*.cs"/>
+  </ItemGroup>
 </Project>
