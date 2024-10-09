@@ -17,9 +17,10 @@ module Paths =
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     
     let InplaceBuildOutput project tfm = 
-        sprintf "src/%s/bin/Release/%s" project tfm
+        //sprintf "src/%s/bin/Release/%s" project tfm
+        sprintf ".artifacts/bin/%s/release_%s" project tfm
     let InplaceBuildTestOutput project tfm = 
-        sprintf "tests/%s/bin/Release/%s" project tfm
+        sprintf "artifacts/bin/%s/release_%s" project tfm
     let MagicDocumentationFile  = 
         "src/Elasticsearch.Net/obj/Release/netstandard2.1/Elasticsearch.Net.csprojAssemblyReference.cache" 
   

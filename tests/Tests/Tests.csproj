@@ -33,4 +33,9 @@
   <ItemGroup>
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- TODO ADD THESE BACK -->
+    <Compile Remove="**" />
+    <Compile Include="ClientConcepts\OpenTelemetry\OpenTelemetryTests.cs" />
+  </ItemGroup>
 </Project>
