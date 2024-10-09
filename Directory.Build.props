@@ -15,7 +15,8 @@
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <MajorVersion>$(Version.Split('.')[0])</MajorVersion>
-    <ArtifactsPath>.artifacts</ArtifactsPath>
+    <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.sh))</SolutionRoot>
+    <ArtifactsPath>$(MSBuildThisFileDirectory).artifacts</ArtifactsPath>
   </PropertyGroup>
   
   <!-- Common Nuget metadata-->

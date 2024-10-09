@@ -55,8 +55,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsearch.Serverless", "src\Elastic.Clients.Elasticsearch.Serverless\Elastic.Clients.Elasticsearch.Serverless.csproj", "{49D7F5A7-AA32-492B-B957-0E3325861F55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsearch.Shared", "src\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.csproj", "{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,10 +109,6 @@ Global
 		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,7 +126,6 @@ Global
 		{F6162603-D134-4121-8106-2BA4DAD7350B} = {362B2776-4B29-46AB-B237-56776B5372B6}
 		{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
 		{49D7F5A7-AA32-492B-B957-0E3325861F55} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
-		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE74F821-B001-4C69-A58D-CF81F8B0B632}

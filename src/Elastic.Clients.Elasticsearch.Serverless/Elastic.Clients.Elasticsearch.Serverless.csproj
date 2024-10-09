@@ -41,8 +41,7 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Elastic.Clients.Elasticsearch.Shared\*.cs"/>
-    <Compile Include="..\Elastic.Clients.Elasticsearch.Shared\**\*.cs"/>
+    <Compile Include="..\Elastic.Clients.Elasticsearch\_Shared\**\*.cs"  />
   </ItemGroup>
   
 </Project>
