@@ -22,10 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Elastic.Transport" Version="0.4.22" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
@@ -39,8 +35,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Api\IndexManagement\" />
   </ItemGroup>
 </Project>

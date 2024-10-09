@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D455EC79-E1E0-4509-B297-0DA3AED8DFF7}"
+	ProjectSection(SolutionItems) = preProject
+		src\_PublishArtifacts.Build.props = src\_PublishArtifacts.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "src\Playground\Playground.csproj", "{8F2EA767-8746-4816-B6EE-342BCB8F1AAB}"
 EndProject
