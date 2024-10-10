@@ -4,6 +4,8 @@
 
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Tests.Core.Client;
 using Tests.Domain;
 using Xunit;
@@ -36,7 +38,7 @@ public class ActivityTest
 
 		VerifyActivity(oTelActivity, "ping");
 
-		await client.SearchAsync<Project>(s => s.Index("test").Query(q => q.MatchAll()));
+		await client.SearchAsync<Project>(s => s.Index("test").Query(q => q.MatchAll(m => { })));
 
 		VerifyActivity(oTelActivity, "search", "http://localhost:9200/test/_search?pretty=true&error_trace=true");
 

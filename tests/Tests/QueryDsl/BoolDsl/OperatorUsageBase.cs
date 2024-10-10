@@ -25,7 +25,7 @@ public abstract class OperatorUsageBase
 		boolQueryAssert(boolQuery);
 	}
 
-	protected static void ReturnsSingleQuery<T>(Query combined, Action<T> queryAssert) where T : SearchQuery
+	protected static void ReturnsSingleQuery<T>(Query combined, Action<T> queryAssert) where T : Query
 	{
 		combined.Should().NotBeNull();
 		combined.TryGet<T>(out var query).Should().BeTrue();
