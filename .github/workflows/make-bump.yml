@@ -20,7 +20,7 @@ jobs:
       - run: "./.ci/make.sh bump ${{ github.event.inputs.version }}"
         name: "Bump ${{ github.event.inputs.version }} on ${{ github.event.inputs.branch }}"
       - name: "Version bump PR ${{ github.event.inputs.version }}"
-        # fixate to known release. 
+        # fixate to known release.
         uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -30,15 +30,15 @@ jobs:
           commit-message: "[version] ${{ github.event.inputs.version }} bump"
           title: '[version] ${{ github.event.inputs.version }} bump'
           body: |
-            Updates ${{ github.event.inputs.branch }} to version ${{ github.event.inputs.version }}. 
+            Updates ${{ github.event.inputs.branch }} to version ${{ github.event.inputs.version }}.
           labels: "infra,code-gen"
       # Add version and backport labels automatically
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
+          global-json-file: 'global.json'
       - name: Install dotnet-script
         run: dotnet tool install release-notes --tool-path dotnet-tool
 
       - name: Run build script
         run: >
-          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.login }} ${{ github.event.repository.name }} --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH" 
+          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.login }} ${{ github.event.repository.name }} --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH"

@@ -14,6 +14,9 @@ on:
       - '[0-9]+.[0-9]+'
       - '[0-9]+.x'
 
+env:
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
 jobs:
   integration-tests:
     name: Tests
@@ -34,17 +37,17 @@ jobs:
           '8.9.0-SNAPSHOT',
           'latest-8'
         ]
-        
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
+          global-json-file: 'global.json'
       - uses: actions/cache@v3
         with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          path: ${{ github.workspace }}/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.[cf]sproj*', '**/*.Build.props') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
       - uses: actions/cache@v3
@@ -53,7 +56,7 @@ jobs:
           key: ${{ runner.os }}-elastic-managed-${{ matrix.stack_version }}
           restore-keys: |
             ${{ runner.os }}-elastic-managed-
-            
+
       - run: "./build.sh integrate ${{ matrix.stack_version }} random:test_only_one --report"
         name: ${{ matrix.stack_version }}
       - name: Results ${{ matrix.stack_version }}
@@ -66,4 +69,4 @@ jobs:
           fail_on_failure: true
           require_tests: true
           check_name: ${{ matrix.stack_version }}
-          
+

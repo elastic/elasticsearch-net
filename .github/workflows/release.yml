@@ -31,7 +31,7 @@ env:
   # Configuration
   BUILD_CONFIG: 'Release'
   GLOBAL_JSON_FILE: 'global.json'
-  LOCKFILE_PATTERN: '**/packages.lock.json'
+  CACHE_PATTERNS: '["**/*.[cf]sproj*", "**/*.Build.props"]'
   PACKAGE_PATH: 'nupkg'
   # .NET SDK related environment variables
   DOTNET_NOLOGO: 1
@@ -63,7 +63,7 @@ jobs:
         uses: 'actions/cache@v4'
         with:
           path: '~/.nuget/packages'
-          key: '${{ runner.os }}-nuget-${{ inputs.flavor }}-${{ hashFiles(env.LOCKFILE_PATTERN) }}'
+          key: '${{ runner.os }}-nuget-${{ inputs.flavor }}-${{ hashFiles(fromJson(env.CACHE_PATTERNS)) }}'
           restore-keys: '${{ runner.os }}-nuget-${{ inputs.flavor }}-'
 
       - name: '.NET Restore'

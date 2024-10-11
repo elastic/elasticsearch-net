@@ -93,3 +93,4 @@ docs-temp
 
 # Verify Tests
 *.received.*
+.artifacts

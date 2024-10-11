@@ -22,13 +22,13 @@ jobs:
       fail-fast: false
       matrix:
         stack_version: [ '9.0.0-SNAPSHOT']
-        
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
-            
+          global-json-file: 'global.json'
+
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
         name: Assemble ${{ matrix.stack_version }}
