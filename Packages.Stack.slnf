@@ -2,7 +2,6 @@
   "solution": {
     "path": "Elasticsearch.sln",
     "projects": [
-      "src\\Elastic.Clients.Elasticsearch.Shared\\Elastic.Clients.Elasticsearch.Shared.shproj",
       "src\\Elastic.Clients.Elasticsearch\\Elastic.Clients.Elasticsearch.csproj"
     ]
   }
