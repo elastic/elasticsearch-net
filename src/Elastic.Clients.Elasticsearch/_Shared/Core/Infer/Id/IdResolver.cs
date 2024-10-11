@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Globalization;
 using System.Reflection;
 
 #if ELASTICSEARCH_SERVERLESS
@@ -71,7 +72,7 @@ public class IdResolver
 		cachedLookup = o =>
 		{
 			var v = func(o);
-			return v?.ToString();
+			return (v is IFormattable f) ? f.ToString(null, CultureInfo.InvariantCulture) : v?.ToString();
 		};
 		if (preferLocal)
 			_localIdDelegates.TryAdd(type, cachedLookup);
