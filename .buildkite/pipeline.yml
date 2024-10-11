@@ -5,7 +5,7 @@ steps:
     env:
       TEST_SUITE: "{{ matrix.suite }}"
       STACK_VERSION: master-SNAPSHOT
-      DOTNET_VERSION: 8.0.100
+      DOTNET_VERSION: 8.0.400
     matrix:
       setup:
         suite:
