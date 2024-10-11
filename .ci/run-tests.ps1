@@ -8,7 +8,7 @@ param (
     $TEST_SUITE = "free",
 
     [string]
-    $DOTNET_VERSION = "8.0.100"
+    $DOTNET_VERSION = "8.0.400"
 )
 
 $ESC = [char]27
@@ -29,7 +29,7 @@ function cleanup {
     $runParams = @{
       NODE_NAME= $NODE_NAME
       NETWORK_NAME = "elasticsearch"
-      CLEANUP = $true  
+      CLEANUP = $true
     }
 
     ./.ci/run-elasticsearch.ps1 @runParams
@@ -69,7 +69,7 @@ try {
 
     ./.ci/run-repository.ps1 @runParams
 
-    cleanup   
+    cleanup
 }
 catch {
     cleanup

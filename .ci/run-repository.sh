@@ -9,7 +9,7 @@ script_path=$(dirname $(realpath -s $0))
 source $script_path/functions/imports.sh
 set -euo pipefail
 
-DOTNET_VERSION=${DOTNET_VERSION-8.0.100}
+DOTNET_VERSION=${DOTNET_VERSION-8.0.400}
 ELASTICSEARCH_URL=${ELASTICSEARCH_URL-"$elasticsearch_url"}
 elasticsearch_container=${elasticsearch_container-}
 
@@ -27,13 +27,13 @@ fi
 if [[ "$TEST_SECTION" != "" ]]; then
   run_script_args="${run_script_args} -s ${TEST_SECTION}"
 fi
- 
+
 echo -e "\033[34;1mINFO:\033[0m VERSION ${STACK_VERSION}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m TEST_SUITE ${TEST_SUITE}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m URL ${ELASTICSEARCH_URL}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m CONTAINER ${elasticsearch_container}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m DOTNET_VERSION ${DOTNET_VERSION}\033[0m"
- 
+
 echo -e "\033[1m>>>>> Build [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
 docker build --file .ci/DockerFile --tag elastic/elasticsearch-net \
