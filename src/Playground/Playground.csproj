@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />
     <ProjectReference Include="..\Elastic.Clients.Elasticsearch.Serverless\Elastic.Clients.Elasticsearch.Serverless.csproj" />
     <ProjectReference Include="..\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
   </ItemGroup>
