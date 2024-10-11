@@ -56,7 +56,7 @@ internal class ApiUrls
 	}
 
 	/// <summary>
-	///     Creates a lookup for number of parts <=> list of routes with that number of parts.
+	///     Creates a lookup for number of parts %lt;=&gt; list of routes with that number of parts.
 	///     <see cref="UrlLookup.Matches" /> allows us to quickly find the right url to use in the list.
 	/// </summary>
 	public Dictionary<int, List<UrlLookup>> Routes { get; }
