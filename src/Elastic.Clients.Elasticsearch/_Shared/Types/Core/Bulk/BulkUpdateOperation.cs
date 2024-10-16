@@ -13,6 +13,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 #endif
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;

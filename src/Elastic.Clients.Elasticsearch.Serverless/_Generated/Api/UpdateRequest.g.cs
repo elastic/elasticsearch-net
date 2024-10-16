@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Requests;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -473,7 +474,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(DocValue, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(DocValue, writer);
 		}
 
 		if (DocAsUpsertValue.HasValue)
@@ -513,7 +514,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (UpsertValue is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialization.Serialize(UpsertValue, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(UpsertValue, writer);
 		}
 
 		writer.WriteEndObject();

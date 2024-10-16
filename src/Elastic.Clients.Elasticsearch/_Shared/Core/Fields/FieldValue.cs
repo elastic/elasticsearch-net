@@ -8,6 +8,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Globalization;
+
+using Elastic.Transport.Extensions;
+
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -27,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch;
 [JsonConverter(typeof(FieldValueConverter))]
 public readonly struct FieldValue : IEquatable<FieldValue>
 {
-	internal FieldValue(ValueKind kind, object? value) { Kind = kind; Value = value; }
+	internal FieldValue(ValueKind kind, object? value)
+	{
+		Kind = kind;
+		Value = value;
+	}
 
 	/// <summary>
 	/// The kind of value contained within this <see cref="FieldValue"/>.
@@ -98,6 +105,7 @@ public readonly struct FieldValue : IEquatable<FieldValue>
 
 	// These are not expected to be required for consumer values but are used internally.
 	internal static FieldValue Any(LazyJson value) => new(ValueKind.LazyDocument, value);
+
 	internal static FieldValue Composite(object value) => new(ValueKind.Composite, value);
 
 	/// <summary>
@@ -269,6 +277,7 @@ public readonly struct FieldValue : IEquatable<FieldValue>
 		};
 
 	public override bool Equals(object? obj) => obj is FieldValue value && Equals(value);
+
 	public bool Equals(FieldValue other) => Kind == other.Kind && EqualityComparer<object?>.Default.Equals(Value, other.Value);
 
 	public override int GetHashCode()
@@ -283,12 +292,17 @@ public readonly struct FieldValue : IEquatable<FieldValue>
 	}
 
 	public static bool operator ==(FieldValue left, FieldValue right) => left.Equals(right);
+
 	public static bool operator !=(FieldValue left, FieldValue right) => !(left == right);
 
 	public static implicit operator FieldValue(string value) => String(value);
+
 	public static implicit operator FieldValue(bool value) => Boolean(value);
+
 	public static implicit operator FieldValue(int value) => Long(value);
+
 	public static implicit operator FieldValue(long value) => Long(value);
+
 	public static implicit operator FieldValue(double value) => Double(value);
 }
 
@@ -340,40 +354,33 @@ internal sealed class FieldValueConverter : JsonConverter<FieldValue>
 		{
 			writer.WriteStringValue(stringValue);
 		}
-
 		else if (value.TryGetBool(out var boolValue))
 		{
 			writer.WriteBooleanValue(boolValue.Value);
 		}
-
 		else if (value.TryGetLong(out var longValue))
 		{
 			writer.WriteNumberValue(longValue.Value);
 		}
-
 		else if (value.TryGetDouble(out var doubleValue))
 		{
 			writer.WriteNumberValue(doubleValue.Value);
 		}
-
 		else if (value.TryGetLazyDocument(out var lazyDocument))
 		{
 			writer.WriteRawValue(lazyDocument.Value.Bytes);
 		}
-
 		else if (value.TryGetComposite(out var objectValue))
 		{
 			if (!options.TryGetClientSettings(out var settings))
 				ThrowHelper.ThrowJsonExceptionForMissingSettings();
 
-			SourceSerialization.Serialize(objectValue, objectValue.GetType(), writer, settings);
+			settings.SourceSerializer.Serialize(objectValue, objectValue.GetType(), writer, null);
 		}
-
 		else if (value.Kind == FieldValue.ValueKind.Null)
 		{
 			writer.WriteNullValue();
 		}
-
 		else
 		{
 			throw new JsonException($"Unsupported FieldValue kind. This is likely a bug and should be reported as an issue.");

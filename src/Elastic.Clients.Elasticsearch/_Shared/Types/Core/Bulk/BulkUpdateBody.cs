@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 #else
@@ -69,7 +70,7 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 		if (PartialUpdate is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(PartialUpdate, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(PartialUpdate, writer);
 		}
 
 		if (Script is not null)
@@ -93,7 +94,7 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialization.Serialize(Upsert, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(Upsert, writer, null);
 		}
 
 		if (Source is not null)

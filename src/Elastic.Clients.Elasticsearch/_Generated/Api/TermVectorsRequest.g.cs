@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -380,7 +381,7 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(DocValue, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(DocValue, writer);
 		}
 
 		if (FilterDescriptor is not null)

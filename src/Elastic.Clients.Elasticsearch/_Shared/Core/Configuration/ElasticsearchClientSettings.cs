@@ -8,17 +8,21 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 #else
 using Elastic.Clients.Elasticsearch.Fluent;
 #endif
+
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
 using Elastic.Clients.Elasticsearch.Serialization;
 #endif
+
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
@@ -62,12 +66,16 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	{
 	}
 
-	public ElasticsearchClientSettings(NodePool nodePool) : this(nodePool, null, null) { }
+	public ElasticsearchClientSettings(NodePool nodePool) : this(nodePool, null, null)
+	{
+	}
 
 	public ElasticsearchClientSettings(NodePool nodePool, SourceSerializerFactory sourceSerializer)
 		: this(nodePool, null, sourceSerializer) { }
 
-	public ElasticsearchClientSettings(NodePool nodePool, IRequestInvoker requestInvoker) : this(nodePool, requestInvoker, null) { }
+	public ElasticsearchClientSettings(NodePool nodePool, IRequestInvoker requestInvoker) : this(nodePool, requestInvoker, null)
+	{
+	}
 
 	public ElasticsearchClientSettings(NodePool nodePool, IRequestInvoker requestInvoker, SourceSerializerFactory sourceSerializer) : this(
 		nodePool,
@@ -113,7 +121,7 @@ public abstract class
 	private readonly FluentDictionary<Type, string> _routeProperties = new();
 	private readonly Serializer _sourceSerializer;
 	private bool _experimentalEnableSerializeNullInferredValues;
-	private ExperimentalSettings _experimentalSettings = new ();
+	private ExperimentalSettings _experimentalSettings = new();
 
 	private bool _defaultDisableAllInference;
 	private Func<string, string> _defaultFieldNameInferrer;
@@ -133,7 +141,9 @@ public abstract class
 
 		_sourceSerializer = sourceSerializerFactory?.Invoke(sourceSerializer, this) ?? sourceSerializer;
 		_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
-		_defaultFieldNameInferrer = (_sourceSerializer is DefaultSourceSerializer dfs) ? p => dfs.Options?.PropertyNamingPolicy?.ConvertName(p) ?? p : p => p.ToCamelCase();
+		_defaultFieldNameInferrer = _sourceSerializer.TryGetJsonSerializerOptions(out var options)
+			? p => options.PropertyNamingPolicy?.ConvertName(p) ?? p
+			: p => p.ToCamelCase();
 		_defaultIndices = new FluentDictionary<Type, string>();
 		_defaultRelationNames = new FluentDictionary<Type, string>();
 		_inferrer = new Inferrer(this);
@@ -180,12 +190,13 @@ public abstract class
 	/// </example>
 	public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 	{
-		if (_sourceSerializer is DefaultSourceSerializer dss)
-		{
-			dss.Options.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
-		}
+		if (_sourceSerializer.TryGetJsonSerializerOptions(out var options, SerializationFormatting.None))
+			options.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
 
-		return Assign<Func<string, string>>(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+		if (_sourceSerializer.TryGetJsonSerializerOptions(out var indentedOptions, SerializationFormatting.Indented))
+			indentedOptions.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
+
+		return Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 	}
 
 	public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
@@ -346,7 +357,9 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	{
 	}
 
-	public ConnectionConfiguration(NodePool nodePool) : this(nodePool, null, null) { }
+	public ConnectionConfiguration(NodePool nodePool) : this(nodePool, null, null)
+	{
+	}
 
 	public ConnectionConfiguration(NodePool nodePool, IRequestInvoker requestInvoker) : this(nodePool,
 		requestInvoker, null)
