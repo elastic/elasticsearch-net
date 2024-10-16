@@ -12,6 +12,8 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 #endif
 
+using Elastic.Transport.Extensions;
+
 internal sealed class SourceConverter<T> : JsonConverter<SourceMarker<T>>
 {
 	private readonly IElasticsearchClientSettings _settings;
@@ -20,8 +22,8 @@ internal sealed class SourceConverter<T> : JsonConverter<SourceMarker<T>>
 
 	public override SourceMarker<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new()
 	{
-		Source = SourceSerialization.Deserialize<T>(ref reader, _settings)
+		Source = _settings.SourceSerializer.Deserialize<T>(ref reader, null)
 	};
 
-	public override void Write(Utf8JsonWriter writer, SourceMarker<T> value, JsonSerializerOptions options) => SourceSerialization.Serialize<T>(value.Source, writer, _settings);
+	public override void Write(Utf8JsonWriter writer, SourceMarker<T> value, JsonSerializerOptions options) => _settings.SourceSerializer.Serialize(value.Source, writer, null);
 }

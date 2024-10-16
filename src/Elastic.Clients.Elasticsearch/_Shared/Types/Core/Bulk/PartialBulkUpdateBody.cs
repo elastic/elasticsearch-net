@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -32,7 +33,7 @@ internal class PartialBulkUpdateBody<TPartialUpdate> : BulkUpdateBody
 		if (PartialUpdate is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(PartialUpdate, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(PartialUpdate, writer, null);
 		}
 	}
 }

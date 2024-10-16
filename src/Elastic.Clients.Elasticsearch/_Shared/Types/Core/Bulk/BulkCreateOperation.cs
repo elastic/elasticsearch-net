@@ -8,6 +8,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -129,8 +130,7 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 		var requestResponseSerializer = settings.RequestResponseSerializer;
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkCreateOperation<T>>(writer, this, options);
+		requestResponseSerializer.Serialize(this, writer, settings.MemoryStreamFactory);
 		writer.WriteEndObject();
 	}
 }

@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 #else
@@ -151,7 +152,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		if (_document is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(_document, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(_document, writer, null);
 		}
 
 		if (_scriptedUpsert.HasValue)
@@ -169,7 +170,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		if (_upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialization.Serialize(_upsert, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(_upsert, writer, null);
 		}
 
 		if (_source is not null)
