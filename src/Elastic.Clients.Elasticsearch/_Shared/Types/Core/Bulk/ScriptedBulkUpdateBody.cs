@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -44,7 +45,7 @@ internal class ScriptedBulkUpdateBody<TDocument> : ScriptedBulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialization.Serialize(Upsert, writer, settings.SourceSerializer);
+			settings.SourceSerializer.Serialize(Upsert, writer, null);
 		}
 	}
 }

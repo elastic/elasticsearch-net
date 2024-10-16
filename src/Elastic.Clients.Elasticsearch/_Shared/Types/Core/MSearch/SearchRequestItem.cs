@@ -11,6 +11,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 #endif
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
@@ -37,13 +38,10 @@ public sealed class SearchRequestItem : IStreamSerializable
 		if (Body is null)
 			return;
 
-		if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
-		{
-			JsonSerializer.Serialize(stream, Header, options);
-			stream.WriteByte((byte)'\n');
-			JsonSerializer.Serialize(stream, Body, options);
-			stream.WriteByte((byte)'\n');
-		}
+		settings.RequestResponseSerializer.Serialize(Header, stream, formatting);
+		stream.WriteByte((byte)'\n');
+		settings.RequestResponseSerializer.Serialize(Body, stream, formatting);
+		stream.WriteByte((byte)'\n');
 	}
 
 	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
@@ -51,12 +49,9 @@ public sealed class SearchRequestItem : IStreamSerializable
 		if (Body is null)
 			return;
 
-		if (settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
-		{
-			await JsonSerializer.SerializeAsync(stream, Header, options).ConfigureAwait(false);
-			stream.WriteByte((byte)'\n');
-			await JsonSerializer.SerializeAsync(stream, Body, options).ConfigureAwait(false);
-			stream.WriteByte((byte)'\n');
-		}
+		await settings.RequestResponseSerializer.SerializeAsync(Header, stream, formatting).ConfigureAwait(false);
+		stream.WriteByte((byte)'\n');
+		await settings.RequestResponseSerializer.SerializeAsync(Body, stream, formatting).ConfigureAwait(false);
+		stream.WriteByte((byte)'\n');
 	}
 }
