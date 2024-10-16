@@ -19,20 +19,16 @@
 
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 
-public sealed partial class PutTemplateResponse : ElasticsearchResponse
+public sealed partial class NodeInfoXpackMl
 {
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("acknowledged")]
-	public bool Acknowledged { get; init; }
+	[JsonInclude, JsonPropertyName("use_auto_machine_memory_percent")]
+	public bool? UseAutoMachineMemoryPercent { get; init; }
 }

@@ -40,6 +40,15 @@ public sealed partial class GrokProcessor
 
 	/// <summary>
 	/// <para>
+	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
+	/// Common Schema (ECS) field names.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("ecs_compatibility")]
+	public string? EcsCompatibility { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The field to use for grok expression parsing.
 	/// </para>
 	/// </summary>
@@ -125,6 +134,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	private string? DescriptionValue { get; set; }
+	private string? EcsCompatibilityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
@@ -147,6 +157,18 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	public GrokProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
+	/// Common Schema (ECS) field names.
+	/// </para>
+	/// </summary>
+	public GrokProcessorDescriptor<TDocument> EcsCompatibility(string? ecsCompatibility)
+	{
+		EcsCompatibilityValue = ecsCompatibility;
 		return Self;
 	}
 
@@ -313,6 +335,12 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 			writer.WriteStringValue(DescriptionValue);
 		}
 
+		if (!string.IsNullOrEmpty(EcsCompatibilityValue))
+		{
+			writer.WritePropertyName("ecs_compatibility");
+			writer.WriteStringValue(EcsCompatibilityValue);
+		}
+
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(IfValue))
@@ -397,6 +425,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	}
 
 	private string? DescriptionValue { get; set; }
+	private string? EcsCompatibilityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
@@ -419,6 +448,18 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	public GrokProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
+	/// Common Schema (ECS) field names.
+	/// </para>
+	/// </summary>
+	public GrokProcessorDescriptor EcsCompatibility(string? ecsCompatibility)
+	{
+		EcsCompatibilityValue = ecsCompatibility;
 		return Self;
 	}
 
@@ -583,6 +624,12 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		{
 			writer.WritePropertyName("description");
 			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (!string.IsNullOrEmpty(EcsCompatibilityValue))
+		{
+			writer.WritePropertyName("ecs_compatibility");
+			writer.WriteStringValue(EcsCompatibilityValue);
 		}
 
 		writer.WritePropertyName("field");

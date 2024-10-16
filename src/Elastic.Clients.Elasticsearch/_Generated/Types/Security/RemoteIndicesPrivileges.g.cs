@@ -59,7 +59,7 @@ public sealed partial class RemoteIndicesPrivileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("names")]
-	public Elastic.Clients.Elasticsearch.Indices Names { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,7 +91,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor<TDocument> : Seria
 	private Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument> FieldSecurityDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>> FieldSecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices NamesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.IndexName> NamesValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> PrivilegesValue { get; set; }
 	private object? QueryValue { get; set; }
 
@@ -151,7 +151,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor<TDocument> : Seria
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public RemoteIndicesPrivilegesDescriptor<TDocument> Names(Elastic.Clients.Elasticsearch.Indices names)
+	public RemoteIndicesPrivilegesDescriptor<TDocument> Names(ICollection<Elastic.Clients.Elasticsearch.IndexName> names)
 	{
 		NamesValue = names;
 		return Self;
@@ -233,7 +233,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor FieldSecurityDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor> FieldSecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices NamesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.IndexName> NamesValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> PrivilegesValue { get; set; }
 	private object? QueryValue { get; set; }
 
@@ -293,7 +293,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor : SerializableDesc
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public RemoteIndicesPrivilegesDescriptor Names(Elastic.Clients.Elasticsearch.Indices names)
+	public RemoteIndicesPrivilegesDescriptor Names(ICollection<Elastic.Clients.Elasticsearch.IndexName> names)
 	{
 		NamesValue = names;
 		return Self;

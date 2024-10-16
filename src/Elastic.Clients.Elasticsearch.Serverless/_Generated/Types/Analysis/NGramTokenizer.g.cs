@@ -32,9 +32,9 @@ public sealed partial class NGramTokenizer : ITokenizer
 	[JsonInclude, JsonPropertyName("custom_token_chars")]
 	public string? CustomTokenChars { get; set; }
 	[JsonInclude, JsonPropertyName("max_gram")]
-	public int MaxGram { get; set; }
+	public int? MaxGram { get; set; }
 	[JsonInclude, JsonPropertyName("min_gram")]
-	public int MinGram { get; set; }
+	public int? MinGram { get; set; }
 	[JsonInclude, JsonPropertyName("token_chars")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar>? TokenChars { get; set; }
 
@@ -54,8 +54,8 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 	}
 
 	private string? CustomTokenCharsValue { get; set; }
-	private int MaxGramValue { get; set; }
-	private int MinGramValue { get; set; }
+	private int? MaxGramValue { get; set; }
+	private int? MinGramValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Analysis.TokenChar>? TokenCharsValue { get; set; }
 	private string? VersionValue { get; set; }
 
@@ -65,13 +65,13 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 		return Self;
 	}
 
-	public NGramTokenizerDescriptor MaxGram(int maxGram)
+	public NGramTokenizerDescriptor MaxGram(int? maxGram)
 	{
 		MaxGramValue = maxGram;
 		return Self;
 	}
 
-	public NGramTokenizerDescriptor MinGram(int minGram)
+	public NGramTokenizerDescriptor MinGram(int? minGram)
 	{
 		MinGramValue = minGram;
 		return Self;
@@ -98,10 +98,18 @@ public sealed partial class NGramTokenizerDescriptor : SerializableDescriptor<NG
 			writer.WriteStringValue(CustomTokenCharsValue);
 		}
 
-		writer.WritePropertyName("max_gram");
-		writer.WriteNumberValue(MaxGramValue);
-		writer.WritePropertyName("min_gram");
-		writer.WriteNumberValue(MinGramValue);
+		if (MaxGramValue.HasValue)
+		{
+			writer.WritePropertyName("max_gram");
+			writer.WriteNumberValue(MaxGramValue.Value);
+		}
+
+		if (MinGramValue.HasValue)
+		{
+			writer.WritePropertyName("min_gram");
+			writer.WriteNumberValue(MinGramValue.Value);
+		}
+
 		if (TokenCharsValue is not null)
 		{
 			writer.WritePropertyName("token_chars");
