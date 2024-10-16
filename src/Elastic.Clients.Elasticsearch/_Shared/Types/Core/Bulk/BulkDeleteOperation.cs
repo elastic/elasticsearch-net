@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -51,8 +52,7 @@ public class BulkDeleteOperation : BulkOperation
 		var requestResponseSerializer = settings.RequestResponseSerializer;
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkDeleteOperation>(writer, this, options);
+		requestResponseSerializer.Serialize(this, writer, settings.MemoryStreamFactory);
 		writer.WriteEndObject();
 	}
 

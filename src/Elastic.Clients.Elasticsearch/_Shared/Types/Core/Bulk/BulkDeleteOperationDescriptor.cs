@@ -13,6 +13,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 #endif
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
@@ -38,8 +39,7 @@ public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteO
 		var internalWriter = new Utf8JsonWriter(stream);
 		internalWriter.WriteStartObject();
 		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, options);
+		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
 		internalWriter.WriteEndObject();
 		internalWriter.Flush();
 	}
@@ -50,10 +50,9 @@ public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteO
 		var internalWriter = new Utf8JsonWriter(stream);
 		internalWriter.WriteStartObject();
 		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, options);
+		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
 		internalWriter.WriteEndObject();
-		await internalWriter.FlushAsync().ConfigureAwait(false);
+		await internalWriter.FlushAsync(cancellationToken).ConfigureAwait(false);
 	}
 
 	protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

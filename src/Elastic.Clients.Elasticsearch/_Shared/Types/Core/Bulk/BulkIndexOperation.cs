@@ -8,6 +8,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Elastic.Transport.Extensions;
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -112,8 +113,7 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this, options);
+		requestResponseSerializer.Serialize(this, writer);
 		writer.WriteEndObject();
 	}
 }
