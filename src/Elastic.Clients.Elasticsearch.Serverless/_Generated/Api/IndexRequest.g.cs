@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Requests;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -246,7 +247,7 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 
 	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		SourceSerialization.Serialize(Document, writer, settings.SourceSerializer);
+		settings.SourceSerializer.Serialize(Document, writer);
 	}
 }
 
@@ -316,6 +317,6 @@ public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescripto
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		SourceSerialization.Serialize(DocumentValue, writer, settings.SourceSerializer);
+		settings.SourceSerializer.Serialize(DocumentValue, writer);
 	}
 }

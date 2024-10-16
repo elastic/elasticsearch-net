@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -172,7 +173,7 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		SourceSerialization.Serialize(Document, writer, settings.SourceSerializer);
+		settings.SourceSerializer.Serialize(Document, writer);
 	}
 }
 
@@ -238,6 +239,6 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		SourceSerialization.Serialize(DocumentValue, writer, settings.SourceSerializer);
+		settings.SourceSerializer.Serialize(DocumentValue, writer);
 	}
 }

@@ -29,6 +29,8 @@ namespace Playground
 		[DataMember(Name = "STEVE")]
 		[IgnoreDataMember]
 		public string Data { get; init; } = "NOTHING";
+
+		public DateTimeKind Enum { get; init; }
 	}
 
 	public class PersonV3
