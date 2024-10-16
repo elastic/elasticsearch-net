@@ -31,6 +31,8 @@ public sealed partial class IngestInfo
 {
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; init; }
+	[JsonInclude, JsonPropertyName("_redact")]
+	public Elastic.Clients.Elasticsearch.Serverless.Ingest.Redact? Redact { get; init; }
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public DateTimeOffset Timestamp { get; init; }
 }

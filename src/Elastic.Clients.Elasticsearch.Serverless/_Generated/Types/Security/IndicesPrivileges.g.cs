@@ -43,7 +43,7 @@ public sealed partial class IndicesPrivileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("names")]
-	public Elastic.Clients.Elasticsearch.Serverless.Indices Names { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> Names { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -73,7 +73,7 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurity? FieldSecurityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurityDescriptor<TDocument> FieldSecurityDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurityDescriptor<TDocument>> FieldSecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Indices NamesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> NamesValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Security.IndexPrivilege> PrivilegesValue { get; set; }
 	private object? QueryValue { get; set; }
 
@@ -111,7 +111,7 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor<TDocument> Names(Elastic.Clients.Elasticsearch.Serverless.Indices names)
+	public IndicesPrivilegesDescriptor<TDocument> Names(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> names)
 	{
 		NamesValue = names;
 		return Self;
@@ -183,7 +183,7 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurity? FieldSecurityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurityDescriptor FieldSecurityDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.FieldSecurityDescriptor> FieldSecurityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Indices NamesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> NamesValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Security.IndexPrivilege> PrivilegesValue { get; set; }
 	private object? QueryValue { get; set; }
 
@@ -221,7 +221,7 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public IndicesPrivilegesDescriptor Names(Elastic.Clients.Elasticsearch.Serverless.Indices names)
+	public IndicesPrivilegesDescriptor Names(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> names)
 	{
 		NamesValue = names;
 		return Self;

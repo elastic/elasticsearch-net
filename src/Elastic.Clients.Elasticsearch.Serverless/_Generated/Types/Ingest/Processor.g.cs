@@ -50,6 +50,7 @@ public sealed partial class Processor
 	public static Processor Attachment(Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessor attachmentProcessor) => new Processor("attachment", attachmentProcessor);
 	public static Processor Bytes(Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessor bytesProcessor) => new Processor("bytes", bytesProcessor);
 	public static Processor Circle(Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor circleProcessor) => new Processor("circle", circleProcessor);
+	public static Processor CommunityId(Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor communityIDProcessor) => new Processor("community_id", communityIDProcessor);
 	public static Processor Convert(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor convertProcessor) => new Processor("convert", convertProcessor);
 	public static Processor Csv(Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor csvProcessor) => new Processor("csv", csvProcessor);
 	public static Processor Date(Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessor dateProcessor) => new Processor("date", dateProcessor);
@@ -59,6 +60,7 @@ public sealed partial class Processor
 	public static Processor Drop(Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessor dropProcessor) => new Processor("drop", dropProcessor);
 	public static Processor Enrich(Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessor enrichProcessor) => new Processor("enrich", enrichProcessor);
 	public static Processor Fail(Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor failProcessor) => new Processor("fail", failProcessor);
+	public static Processor Fingerprint(Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor fingerprintProcessor) => new Processor("fingerprint", fingerprintProcessor);
 	public static Processor Foreach(Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor foreachProcessor) => new Processor("foreach", foreachProcessor);
 	public static Processor GeoGrid(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoGridProcessor geoGridProcessor) => new Processor("geo_grid", geoGridProcessor);
 	public static Processor Geoip(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor geoIpProcessor) => new Processor("geoip", geoIpProcessor);
@@ -70,8 +72,10 @@ public sealed partial class Processor
 	public static Processor Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => new Processor("json", jsonProcessor);
 	public static Processor Kv(Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor keyValueProcessor) => new Processor("kv", keyValueProcessor);
 	public static Processor Lowercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor lowercaseProcessor) => new Processor("lowercase", lowercaseProcessor);
+	public static Processor NetworkDirection(Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor networkDirectionProcessor) => new Processor("network_direction", networkDirectionProcessor);
 	public static Processor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => new Processor("pipeline", pipelineProcessor);
 	public static Processor Redact(Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor redactProcessor) => new Processor("redact", redactProcessor);
+	public static Processor RegisteredDomain(Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor registeredDomainProcessor) => new Processor("registered_domain", registeredDomainProcessor);
 	public static Processor Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => new Processor("remove", removeProcessor);
 	public static Processor Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => new Processor("rename", renameProcessor);
 	public static Processor Reroute(Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor rerouteProcessor) => new Processor("reroute", rerouteProcessor);
@@ -80,6 +84,7 @@ public sealed partial class Processor
 	public static Processor SetSecurityUser(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => new Processor("set_security_user", setSecurityUserProcessor);
 	public static Processor Sort(Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor sortProcessor) => new Processor("sort", sortProcessor);
 	public static Processor Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => new Processor("split", splitProcessor);
+	public static Processor Terminate(Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor terminateProcessor) => new Processor("terminate", terminateProcessor);
 	public static Processor Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => new Processor("trim", trimProcessor);
 	public static Processor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => new Processor("uppercase", uppercaseProcessor);
 	public static Processor UriParts(Elastic.Clients.Elasticsearch.Serverless.Ingest.UriPartsProcessor uriPartsProcessor) => new Processor("uri_parts", uriPartsProcessor);
@@ -152,6 +157,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				continue;
 			}
 
+			if (propertyName == "community_id")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "convert")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor?>(ref reader, options);
@@ -211,6 +223,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			if (propertyName == "fail")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "fingerprint")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -292,6 +311,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				continue;
 			}
 
+			if (propertyName == "network_direction")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "pipeline")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor?>(ref reader, options);
@@ -302,6 +328,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			if (propertyName == "redact")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "registered_domain")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -358,6 +391,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			if (propertyName == "split")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "terminate")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -424,6 +464,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "circle":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor)value.Variant, options);
 					break;
+				case "community_id":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor)value.Variant, options);
+					break;
 				case "convert":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor)value.Variant, options);
 					break;
@@ -450,6 +493,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 					break;
 				case "fail":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor)value.Variant, options);
+					break;
+				case "fingerprint":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor)value.Variant, options);
 					break;
 				case "foreach":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor)value.Variant, options);
@@ -484,11 +530,17 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "lowercase":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor)value.Variant, options);
 					break;
+				case "network_direction":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor)value.Variant, options);
+					break;
 				case "pipeline":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor)value.Variant, options);
 					break;
 				case "redact":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor)value.Variant, options);
+					break;
+				case "registered_domain":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor)value.Variant, options);
 					break;
 				case "remove":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor)value.Variant, options);
@@ -513,6 +565,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 					break;
 				case "split":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor)value.Variant, options);
+					break;
+				case "terminate":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor)value.Variant, options);
 					break;
 				case "trim":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor)value.Variant, options);
@@ -575,6 +630,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Bytes(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessorDescriptor<TDocument>> configure) => Set(configure, "bytes");
 	public ProcessorDescriptor<TDocument> Circle(Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
 	public ProcessorDescriptor<TDocument> Circle(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessorDescriptor<TDocument>> configure) => Set(configure, "circle");
+	public ProcessorDescriptor<TDocument> CommunityId(Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor communityIDProcessor) => Set(communityIDProcessor, "community_id");
+	public ProcessorDescriptor<TDocument> CommunityId(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessorDescriptor<TDocument>> configure) => Set(configure, "community_id");
 	public ProcessorDescriptor<TDocument> Convert(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
 	public ProcessorDescriptor<TDocument> Convert(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessorDescriptor<TDocument>> configure) => Set(configure, "convert");
 	public ProcessorDescriptor<TDocument> Csv(Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
@@ -593,6 +650,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Enrich(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
 	public ProcessorDescriptor<TDocument> Fail(Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor failProcessor) => Set(failProcessor, "fail");
 	public ProcessorDescriptor<TDocument> Fail(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
+	public ProcessorDescriptor<TDocument> Fingerprint(Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor fingerprintProcessor) => Set(fingerprintProcessor, "fingerprint");
+	public ProcessorDescriptor<TDocument> Fingerprint(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessorDescriptor<TDocument>> configure) => Set(configure, "fingerprint");
 	public ProcessorDescriptor<TDocument> Foreach(Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
 	public ProcessorDescriptor<TDocument> Foreach(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
 	public ProcessorDescriptor<TDocument> GeoGrid(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoGridProcessor geoGridProcessor) => Set(geoGridProcessor, "geo_grid");
@@ -615,10 +674,14 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Kv(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessorDescriptor<TDocument>> configure) => Set(configure, "kv");
 	public ProcessorDescriptor<TDocument> Lowercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
 	public ProcessorDescriptor<TDocument> Lowercase(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
+	public ProcessorDescriptor<TDocument> NetworkDirection(Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor networkDirectionProcessor) => Set(networkDirectionProcessor, "network_direction");
+	public ProcessorDescriptor<TDocument> NetworkDirection(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessorDescriptor<TDocument>> configure) => Set(configure, "network_direction");
 	public ProcessorDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
 	public ProcessorDescriptor<TDocument> Pipeline(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
 	public ProcessorDescriptor<TDocument> Redact(Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor redactProcessor) => Set(redactProcessor, "redact");
 	public ProcessorDescriptor<TDocument> Redact(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessorDescriptor<TDocument>> configure) => Set(configure, "redact");
+	public ProcessorDescriptor<TDocument> RegisteredDomain(Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor registeredDomainProcessor) => Set(registeredDomainProcessor, "registered_domain");
+	public ProcessorDescriptor<TDocument> RegisteredDomain(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessorDescriptor<TDocument>> configure) => Set(configure, "registered_domain");
 	public ProcessorDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
 	public ProcessorDescriptor<TDocument> Remove(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
 	public ProcessorDescriptor<TDocument> Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
@@ -635,6 +698,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessorDescriptor<TDocument>> configure) => Set(configure, "sort");
 	public ProcessorDescriptor<TDocument> Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => Set(splitProcessor, "split");
 	public ProcessorDescriptor<TDocument> Split(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessorDescriptor<TDocument>> configure) => Set(configure, "split");
+	public ProcessorDescriptor<TDocument> Terminate(Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor terminateProcessor) => Set(terminateProcessor, "terminate");
+	public ProcessorDescriptor<TDocument> Terminate(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessorDescriptor<TDocument>> configure) => Set(configure, "terminate");
 	public ProcessorDescriptor<TDocument> Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
 	public ProcessorDescriptor<TDocument> Trim(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
 	public ProcessorDescriptor<TDocument> Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
@@ -705,6 +770,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Bytes<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessorDescriptor> configure) => Set(configure, "bytes");
 	public ProcessorDescriptor Circle(Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
 	public ProcessorDescriptor Circle<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessorDescriptor> configure) => Set(configure, "circle");
+	public ProcessorDescriptor CommunityId(Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessor communityIDProcessor) => Set(communityIDProcessor, "community_id");
+	public ProcessorDescriptor CommunityId<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CommunityIDProcessorDescriptor> configure) => Set(configure, "community_id");
 	public ProcessorDescriptor Convert(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
 	public ProcessorDescriptor Convert<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessorDescriptor> configure) => Set(configure, "convert");
 	public ProcessorDescriptor Csv(Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
@@ -723,6 +790,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Enrich<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessorDescriptor> configure) => Set(configure, "enrich");
 	public ProcessorDescriptor Fail(Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor failProcessor) => Set(failProcessor, "fail");
 	public ProcessorDescriptor Fail<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessorDescriptor> configure) => Set(configure, "fail");
+	public ProcessorDescriptor Fingerprint(Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessor fingerprintProcessor) => Set(fingerprintProcessor, "fingerprint");
+	public ProcessorDescriptor Fingerprint<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FingerprintProcessorDescriptor> configure) => Set(configure, "fingerprint");
 	public ProcessorDescriptor Foreach(Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
 	public ProcessorDescriptor Foreach<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessorDescriptor> configure) => Set(configure, "foreach");
 	public ProcessorDescriptor GeoGrid(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoGridProcessor geoGridProcessor) => Set(geoGridProcessor, "geo_grid");
@@ -745,10 +814,14 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Kv<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessorDescriptor> configure) => Set(configure, "kv");
 	public ProcessorDescriptor Lowercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
 	public ProcessorDescriptor Lowercase<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessorDescriptor> configure) => Set(configure, "lowercase");
+	public ProcessorDescriptor NetworkDirection(Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessor networkDirectionProcessor) => Set(networkDirectionProcessor, "network_direction");
+	public ProcessorDescriptor NetworkDirection<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.NetworkDirectionProcessorDescriptor> configure) => Set(configure, "network_direction");
 	public ProcessorDescriptor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
 	public ProcessorDescriptor Pipeline<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
 	public ProcessorDescriptor Redact(Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessor redactProcessor) => Set(redactProcessor, "redact");
 	public ProcessorDescriptor Redact<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RedactProcessorDescriptor> configure) => Set(configure, "redact");
+	public ProcessorDescriptor RegisteredDomain(Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessor registeredDomainProcessor) => Set(registeredDomainProcessor, "registered_domain");
+	public ProcessorDescriptor RegisteredDomain<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RegisteredDomainProcessorDescriptor> configure) => Set(configure, "registered_domain");
 	public ProcessorDescriptor Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
 	public ProcessorDescriptor Remove<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessorDescriptor> configure) => Set(configure, "remove");
 	public ProcessorDescriptor Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
@@ -765,6 +838,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Sort<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessorDescriptor> configure) => Set(configure, "sort");
 	public ProcessorDescriptor Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => Set(splitProcessor, "split");
 	public ProcessorDescriptor Split<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessorDescriptor> configure) => Set(configure, "split");
+	public ProcessorDescriptor Terminate(Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessor terminateProcessor) => Set(terminateProcessor, "terminate");
+	public ProcessorDescriptor Terminate<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TerminateProcessorDescriptor> configure) => Set(configure, "terminate");
 	public ProcessorDescriptor Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
 	public ProcessorDescriptor Trim<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor> configure) => Set(configure, "trim");
 	public ProcessorDescriptor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
