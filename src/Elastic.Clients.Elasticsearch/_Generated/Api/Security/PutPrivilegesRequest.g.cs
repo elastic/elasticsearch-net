@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;

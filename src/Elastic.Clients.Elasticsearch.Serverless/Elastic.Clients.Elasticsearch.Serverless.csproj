@@ -21,7 +21,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.4.22" />
+    <PackageReference Include="Elastic.Transport" Version="0.4.26" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
@@ -37,7 +37,7 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Elastic.Clients.Elasticsearch\_Shared\**\*.cs" LinkBase="_Shared"  />
+    <Compile Include="..\Elastic.Clients.Elasticsearch\_Shared\**\*.cs" LinkBase="_Shared" />
   </ItemGroup>
   
 </Project>

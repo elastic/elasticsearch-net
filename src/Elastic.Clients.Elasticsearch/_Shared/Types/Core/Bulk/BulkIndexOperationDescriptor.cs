@@ -19,6 +19,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 #endif
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
@@ -56,8 +57,7 @@ public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescrip
 		var internalWriter = new Utf8JsonWriter(stream);
 		internalWriter.WriteStartObject();
 		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this, options);
+		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory);
 		internalWriter.WriteEndObject();
 		internalWriter.Flush();
 		stream.WriteByte(_newline);
@@ -70,12 +70,11 @@ public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescrip
 		var internalWriter = new Utf8JsonWriter(stream);
 		internalWriter.WriteStartObject();
 		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this, options);
+		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory);
 		internalWriter.WriteEndObject();
-		await internalWriter.FlushAsync().ConfigureAwait(false);
+		await internalWriter.FlushAsync(cancellationToken).ConfigureAwait(false);
 		stream.WriteByte(_newline);
-		await settings.SourceSerializer.SerializeAsync(_document, stream).ConfigureAwait(false);
+		await settings.SourceSerializer.SerializeAsync(_document, stream, formatting, cancellationToken).ConfigureAwait(false);
 	}
 
 	protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
