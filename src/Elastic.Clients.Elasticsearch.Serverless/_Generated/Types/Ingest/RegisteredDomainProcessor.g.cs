@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
-public sealed partial class RedactProcessor
+public sealed partial class RegisteredDomainProcessor
 {
 	/// <summary>
 	/// <para>
@@ -40,7 +40,7 @@ public sealed partial class RedactProcessor
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
@@ -64,7 +64,8 @@ public sealed partial class RedactProcessor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// If true and any required fields are missing, the processor quietly exits
+	/// without modifying the document.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
@@ -77,40 +78,6 @@ public sealed partial class RedactProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
-	[JsonInclude, JsonPropertyName("pattern_definitions")]
-	public IDictionary<string, string>? PatternDefinitions { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("patterns")]
-	public ICollection<string> Patterns { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
-	public string? Prefix { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("skip_if_unlicensed")]
-	public bool? SkipIfUnlicensed { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("suffix")]
-	public string? Suffix { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -123,20 +90,21 @@ public sealed partial class RedactProcessor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trace_redact")]
-	public bool? TraceRedact { get; set; }
+	[JsonInclude, JsonPropertyName("target_field")]
+	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor(RedactProcessor redactProcessor) => Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor.Redact(redactProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor(RegisteredDomainProcessor registeredDomainProcessor) => Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor.RegisteredDomain(registeredDomainProcessor);
 }
 
-public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableDescriptor<RedactProcessorDescriptor<TDocument>>
+public sealed partial class RegisteredDomainProcessorDescriptor<TDocument> : SerializableDescriptor<RegisteredDomainProcessorDescriptor<TDocument>>
 {
-	internal RedactProcessorDescriptor(Action<RedactProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal RegisteredDomainProcessorDescriptor(Action<RegisteredDomainProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public RedactProcessorDescriptor() : base()
+	public RegisteredDomainProcessorDescriptor() : base()
 	{
 	}
 
@@ -149,13 +117,8 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-	private ICollection<string> PatternsValue { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? SkipIfUnlicensedValue { get; set; }
-	private string? SuffixValue { get; set; }
 	private string? TagValue { get; set; }
-	private bool? TraceRedactValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -163,7 +126,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Description(string? description)
+	public RegisteredDomainProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
 		return Self;
@@ -171,10 +134,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	public RegisteredDomainProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		FieldValue = field;
 		return Self;
@@ -182,10 +145,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public RegisteredDomainProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -193,10 +156,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public RegisteredDomainProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -207,7 +170,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> If(string? value)
+	public RegisteredDomainProcessorDescriptor<TDocument> If(string? value)
 	{
 		IfValue = value;
 		return Self;
@@ -218,7 +181,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public RegisteredDomainProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
 		return Self;
@@ -226,10 +189,11 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// If true and any required fields are missing, the processor quietly exits
+	/// without modifying the document.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public RegisteredDomainProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
@@ -240,7 +204,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	public RegisteredDomainProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
 		OnFailureDescriptorAction = null;
@@ -249,7 +213,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	public RegisteredDomainProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -258,7 +222,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> configure)
+	public RegisteredDomainProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -267,62 +231,12 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	public RegisteredDomainProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
 		OnFailureDescriptorAction = null;
 		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	public RedactProcessorDescriptor<TDocument> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-	{
-		PatternDefinitionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Patterns(ICollection<string> patterns)
-	{
-		PatternsValue = patterns;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Prefix(string? prefix)
-	{
-		PrefixValue = prefix;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor<TDocument> SkipIfUnlicensed(bool? skipIfUnlicensed = true)
-	{
-		SkipIfUnlicensedValue = skipIfUnlicensed;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Suffix(string? suffix)
-	{
-		SuffixValue = suffix;
 		return Self;
 	}
 
@@ -332,7 +246,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Tag(string? tag)
+	public RegisteredDomainProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
 		return Self;
@@ -340,12 +254,37 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> TraceRedact(bool? traceRedact = true)
+	public RegisteredDomainProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
-		TraceRedactValue = traceRedact;
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
+	/// </para>
+	/// </summary>
+	public RegisteredDomainProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
+	/// </para>
+	/// </summary>
+	public RegisteredDomainProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	{
+		TargetFieldValue = targetField;
 		return Self;
 	}
 
@@ -409,53 +348,27 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (PatternDefinitionsValue is not null)
-		{
-			writer.WritePropertyName("pattern_definitions");
-			JsonSerializer.Serialize(writer, PatternDefinitionsValue, options);
-		}
-
-		writer.WritePropertyName("patterns");
-		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (SkipIfUnlicensedValue.HasValue)
-		{
-			writer.WritePropertyName("skip_if_unlicensed");
-			writer.WriteBooleanValue(SkipIfUnlicensedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(SuffixValue))
-		{
-			writer.WritePropertyName("suffix");
-			writer.WriteStringValue(SuffixValue);
-		}
-
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
 			writer.WriteStringValue(TagValue);
 		}
 
-		if (TraceRedactValue.HasValue)
+		if (TargetFieldValue is not null)
 		{
-			writer.WritePropertyName("trace_redact");
-			writer.WriteBooleanValue(TraceRedactValue.Value);
+			writer.WritePropertyName("target_field");
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 		}
 
 		writer.WriteEndObject();
 	}
 }
 
-public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<RedactProcessorDescriptor>
+public sealed partial class RegisteredDomainProcessorDescriptor : SerializableDescriptor<RegisteredDomainProcessorDescriptor>
 {
-	internal RedactProcessorDescriptor(Action<RedactProcessorDescriptor> configure) => configure.Invoke(this);
+	internal RegisteredDomainProcessorDescriptor(Action<RegisteredDomainProcessorDescriptor> configure) => configure.Invoke(this);
 
-	public RedactProcessorDescriptor() : base()
+	public RegisteredDomainProcessorDescriptor() : base()
 	{
 	}
 
@@ -468,13 +381,8 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-	private ICollection<string> PatternsValue { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? SkipIfUnlicensedValue { get; set; }
-	private string? SuffixValue { get; set; }
 	private string? TagValue { get; set; }
-	private bool? TraceRedactValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -482,7 +390,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Description(string? description)
+	public RegisteredDomainProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
 		return Self;
@@ -490,10 +398,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	public RegisteredDomainProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		FieldValue = field;
 		return Self;
@@ -501,10 +409,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public RegisteredDomainProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -512,10 +420,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 
 	/// <summary>
 	/// <para>
-	/// The field to be redacted
+	/// Field containing the source FQDN.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public RegisteredDomainProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -526,7 +434,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor If(string? value)
+	public RegisteredDomainProcessorDescriptor If(string? value)
 	{
 		IfValue = value;
 		return Self;
@@ -537,7 +445,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public RegisteredDomainProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
 		return Self;
@@ -545,10 +453,11 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// If true and any required fields are missing, the processor quietly exits
+	/// without modifying the document.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public RegisteredDomainProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
@@ -559,7 +468,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	public RegisteredDomainProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
 		OnFailureDescriptorAction = null;
@@ -568,7 +477,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
-	public RedactProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor descriptor)
+	public RegisteredDomainProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -577,7 +486,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
-	public RedactProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> configure)
+	public RegisteredDomainProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -586,62 +495,12 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
-	public RedactProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] configure)
+	public RegisteredDomainProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
 		OnFailureDescriptorAction = null;
 		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	public RedactProcessorDescriptor PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
-	{
-		PatternDefinitionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor Patterns(ICollection<string> patterns)
-	{
-		PatternsValue = patterns;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor Prefix(string? prefix)
-	{
-		PrefixValue = prefix;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor SkipIfUnlicensed(bool? skipIfUnlicensed = true)
-	{
-		SkipIfUnlicensedValue = skipIfUnlicensed;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor Suffix(string? suffix)
-	{
-		SuffixValue = suffix;
 		return Self;
 	}
 
@@ -651,7 +510,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Tag(string? tag)
+	public RegisteredDomainProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
 		return Self;
@@ -659,12 +518,37 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor TraceRedact(bool? traceRedact = true)
+	public RegisteredDomainProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Serverless.Field? targetField)
 	{
-		TraceRedactValue = traceRedact;
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
+	/// </para>
+	/// </summary>
+	public RegisteredDomainProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Object field containing extracted domain components. If an empty string,
+	/// the processor adds components to the document’s root.
+	/// </para>
+	/// </summary>
+	public RegisteredDomainProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	{
+		TargetFieldValue = targetField;
 		return Self;
 	}
 
@@ -728,42 +612,16 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (PatternDefinitionsValue is not null)
-		{
-			writer.WritePropertyName("pattern_definitions");
-			JsonSerializer.Serialize(writer, PatternDefinitionsValue, options);
-		}
-
-		writer.WritePropertyName("patterns");
-		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (SkipIfUnlicensedValue.HasValue)
-		{
-			writer.WritePropertyName("skip_if_unlicensed");
-			writer.WriteBooleanValue(SkipIfUnlicensedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(SuffixValue))
-		{
-			writer.WritePropertyName("suffix");
-			writer.WriteStringValue(SuffixValue);
-		}
-
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
 			writer.WriteStringValue(TagValue);
 		}
 
-		if (TraceRedactValue.HasValue)
+		if (TargetFieldValue is not null)
 		{
-			writer.WritePropertyName("trace_redact");
-			writer.WriteBooleanValue(TraceRedactValue.Value);
+			writer.WritePropertyName("target_field");
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 		}
 
 		writer.WriteEndObject();

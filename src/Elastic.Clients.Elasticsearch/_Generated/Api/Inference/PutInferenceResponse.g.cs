@@ -58,7 +58,7 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
-	public object TaskSettings { get; init; }
+	public object? TaskSettings { get; init; }
 
 	/// <summary>
 	/// <para>
