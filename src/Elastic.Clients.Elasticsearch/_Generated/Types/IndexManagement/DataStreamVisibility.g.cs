@@ -29,6 +29,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class DataStreamVisibility
 {
+	[JsonInclude, JsonPropertyName("allow_custom_routing")]
+	public bool? AllowCustomRouting { get; set; }
 	[JsonInclude, JsonPropertyName("hidden")]
 	public bool? Hidden { get; set; }
 }
@@ -41,7 +43,14 @@ public sealed partial class DataStreamVisibilityDescriptor : SerializableDescrip
 	{
 	}
 
+	private bool? AllowCustomRoutingValue { get; set; }
 	private bool? HiddenValue { get; set; }
+
+	public DataStreamVisibilityDescriptor AllowCustomRouting(bool? allowCustomRouting = true)
+	{
+		AllowCustomRoutingValue = allowCustomRouting;
+		return Self;
+	}
 
 	public DataStreamVisibilityDescriptor Hidden(bool? hidden = true)
 	{
@@ -52,6 +61,12 @@ public sealed partial class DataStreamVisibilityDescriptor : SerializableDescrip
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AllowCustomRoutingValue.HasValue)
+		{
+			writer.WritePropertyName("allow_custom_routing");
+			writer.WriteBooleanValue(AllowCustomRoutingValue.Value);
+		}
+
 		if (HiddenValue.HasValue)
 		{
 			writer.WritePropertyName("hidden");

@@ -34,7 +34,7 @@ public sealed partial class NodeInfoXpackSecurity
 	[JsonInclude, JsonPropertyName("enabled")]
 	public string Enabled { get; init; }
 	[JsonInclude, JsonPropertyName("http")]
-	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecuritySsl Http { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecuritySsl? Http { get; init; }
 	[JsonInclude, JsonPropertyName("transport")]
 	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecuritySsl? Transport { get; init; }
 }

@@ -31,6 +31,8 @@ public sealed partial class NodeInfoXpack
 {
 	[JsonInclude, JsonPropertyName("license")]
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense? License { get; init; }
+	[JsonInclude, JsonPropertyName("ml")]
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl? Ml { get; init; }
 	[JsonInclude, JsonPropertyName("notification")]
 	public IReadOnlyDictionary<string, object>? Notification { get; init; }
 	[JsonInclude, JsonPropertyName("security")]

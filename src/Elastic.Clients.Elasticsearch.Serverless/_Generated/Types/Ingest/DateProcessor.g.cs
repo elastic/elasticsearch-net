@@ -90,6 +90,15 @@ public sealed partial class DateProcessor
 
 	/// <summary>
 	/// <para>
+	/// The format to use when writing the date to target_field. Must be a valid
+	/// java time pattern.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("output_format")]
+	public string? OutputFormat { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Identifier for the processor.
 	/// Useful for debugging and metrics.
 	/// </para>
@@ -135,6 +144,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private string? OutputFormatValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 	private string? TimezoneValue { get; set; }
@@ -273,6 +283,18 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 
 	/// <summary>
 	/// <para>
+	/// The format to use when writing the date to target_field. Must be a valid
+	/// java time pattern.
+	/// </para>
+	/// </summary>
+	public DateProcessorDescriptor<TDocument> OutputFormat(string? outputFormat)
+	{
+		OutputFormatValue = outputFormat;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Identifier for the processor.
 	/// Useful for debugging and metrics.
 	/// </para>
@@ -390,6 +412,12 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(OutputFormatValue))
+		{
+			writer.WritePropertyName("output_format");
+			writer.WriteStringValue(OutputFormatValue);
+		}
+
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
@@ -430,6 +458,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private string? OutputFormatValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 	private string? TimezoneValue { get; set; }
@@ -568,6 +597,18 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 
 	/// <summary>
 	/// <para>
+	/// The format to use when writing the date to target_field. Must be a valid
+	/// java time pattern.
+	/// </para>
+	/// </summary>
+	public DateProcessorDescriptor OutputFormat(string? outputFormat)
+	{
+		OutputFormatValue = outputFormat;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Identifier for the processor.
 	/// Useful for debugging and metrics.
 	/// </para>
@@ -683,6 +724,12 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(OutputFormatValue))
+		{
+			writer.WritePropertyName("output_format");
+			writer.WriteStringValue(OutputFormatValue);
 		}
 
 		if (!string.IsNullOrEmpty(TagValue))
