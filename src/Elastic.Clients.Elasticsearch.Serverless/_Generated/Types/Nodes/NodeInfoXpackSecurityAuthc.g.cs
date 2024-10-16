@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class NodeInfoXpackSecurityAuthc
 {
 	[JsonInclude, JsonPropertyName("realms")]
-	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecurityAuthcRealms Realms { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecurityAuthcRealms? Realms { get; init; }
 	[JsonInclude, JsonPropertyName("token")]
-	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecurityAuthcToken Token { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Nodes.NodeInfoXpackSecurityAuthcToken? Token { get; init; }
 }

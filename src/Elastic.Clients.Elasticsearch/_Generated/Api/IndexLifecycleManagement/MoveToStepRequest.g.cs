@@ -53,9 +53,9 @@ public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestPa
 	internal override string OperationName => "ilm.move_to_step";
 
 	[JsonInclude, JsonPropertyName("current_step")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? CurrentStep { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
 	[JsonInclude, JsonPropertyName("next_step")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? NextStep { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
 }
 
 /// <summary>
@@ -89,14 +89,14 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? CurrentStepValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor CurrentStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? NextStepValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
-	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? currentStep)
+	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
 	{
 		CurrentStepDescriptor = null;
 		CurrentStepDescriptorAction = null;
@@ -120,7 +120,7 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? nextStep)
+	public MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
 	{
 		NextStepDescriptor = null;
 		NextStepDescriptorAction = null;
@@ -157,7 +157,7 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 			writer.WritePropertyName("current_step");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(CurrentStepDescriptorAction), options);
 		}
-		else if (CurrentStepValue is not null)
+		else
 		{
 			writer.WritePropertyName("current_step");
 			JsonSerializer.Serialize(writer, CurrentStepValue, options);
@@ -173,7 +173,7 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 			writer.WritePropertyName("next_step");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(NextStepDescriptorAction), options);
 		}
-		else if (NextStepValue is not null)
+		else
 		{
 			writer.WritePropertyName("next_step");
 			JsonSerializer.Serialize(writer, NextStepValue, options);
@@ -210,14 +210,14 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? CurrentStepValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor CurrentStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? NextStepValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
 
-	public MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? currentStep)
+	public MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
 	{
 		CurrentStepDescriptor = null;
 		CurrentStepDescriptorAction = null;
@@ -241,7 +241,7 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 		return Self;
 	}
 
-	public MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey? nextStep)
+	public MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
 	{
 		NextStepDescriptor = null;
 		NextStepDescriptorAction = null;
@@ -278,7 +278,7 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 			writer.WritePropertyName("current_step");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(CurrentStepDescriptorAction), options);
 		}
-		else if (CurrentStepValue is not null)
+		else
 		{
 			writer.WritePropertyName("current_step");
 			JsonSerializer.Serialize(writer, CurrentStepValue, options);
@@ -294,7 +294,7 @@ public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<Move
 			writer.WritePropertyName("next_step");
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(NextStepDescriptorAction), options);
 		}
-		else if (NextStepValue is not null)
+		else
 		{
 			writer.WritePropertyName("next_step");
 			JsonSerializer.Serialize(writer, NextStepValue, options);

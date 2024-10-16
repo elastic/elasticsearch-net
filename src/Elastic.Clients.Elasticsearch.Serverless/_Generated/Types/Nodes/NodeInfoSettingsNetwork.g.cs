@@ -30,5 +30,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Nodes;
 public sealed partial class NodeInfoSettingsNetwork
 {
 	[JsonInclude, JsonPropertyName("host")]
-	public string? Host { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string>? Host { get; init; }
 }

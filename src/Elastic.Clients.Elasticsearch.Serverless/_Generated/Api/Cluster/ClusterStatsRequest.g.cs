@@ -33,10 +33,10 @@ public sealed partial class ClusterStatsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
+	/// Include remote cluster data into the response
 	/// </para>
 	/// </summary>
-	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+	public bool? IncludeRemotes { get => Q<bool?>("include_remotes"); set => Q("include_remotes", value); }
 
 	/// <summary>
 	/// <para>
@@ -74,11 +74,11 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
+	/// Include remote cluster data into the response
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+	public bool? IncludeRemotes { get => Q<bool?>("include_remotes"); set => Q("include_remotes", value); }
 
 	/// <summary>
 	/// <para>
@@ -117,7 +117,7 @@ public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<Cl
 
 	internal override string OperationName => "cluster.stats";
 
-	public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public ClusterStatsRequestDescriptor IncludeRemotes(bool? includeRemotes = true) => Qs("include_remotes", includeRemotes);
 	public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
 	public ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId)

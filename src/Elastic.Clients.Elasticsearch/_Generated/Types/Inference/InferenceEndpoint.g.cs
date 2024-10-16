@@ -56,7 +56,7 @@ public sealed partial class InferenceEndpoint
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
-	public object TaskSettings { get; set; }
+	public object? TaskSettings { get; set; }
 }
 
 /// <summary>
@@ -74,7 +74,7 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 
 	private string ServiceValue { get; set; }
 	private object ServiceSettingsValue { get; set; }
-	private object TaskSettingsValue { get; set; }
+	private object? TaskSettingsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -103,7 +103,7 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	/// Task settings specific to the service and task type
 	/// </para>
 	/// </summary>
-	public InferenceEndpointDescriptor TaskSettings(object taskSettings)
+	public InferenceEndpointDescriptor TaskSettings(object? taskSettings)
 	{
 		TaskSettingsValue = taskSettings;
 		return Self;
@@ -116,8 +116,12 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 		writer.WriteStringValue(ServiceValue);
 		writer.WritePropertyName("service_settings");
 		JsonSerializer.Serialize(writer, ServiceSettingsValue, options);
-		writer.WritePropertyName("task_settings");
-		JsonSerializer.Serialize(writer, TaskSettingsValue, options);
+		if (TaskSettingsValue is not null)
+		{
+			writer.WritePropertyName("task_settings");
+			JsonSerializer.Serialize(writer, TaskSettingsValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }

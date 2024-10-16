@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ForcemergeResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 
 	/// <summary>
 	/// <para>

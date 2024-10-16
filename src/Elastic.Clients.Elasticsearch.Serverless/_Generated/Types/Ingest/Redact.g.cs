@@ -19,17 +19,21 @@
 
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
+namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
-public sealed partial class RestoreResponse : ElasticsearchResponse
+public sealed partial class Redact
 {
-	[JsonInclude, JsonPropertyName("accepted")]
-	public bool? Accepted { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public Elastic.Clients.Elasticsearch.Serverless.Snapshot.SnapshotRestore? Snapshot { get; init; }
+	/// <summary>
+	/// <para>
+	/// indicates if document has been redacted
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_is_redacted")]
+	public bool IsRedacted { get; init; }
 }

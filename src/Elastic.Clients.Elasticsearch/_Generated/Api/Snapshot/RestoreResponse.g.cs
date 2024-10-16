@@ -28,6 +28,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public sealed partial class RestoreResponse : ElasticsearchResponse
 {
+	[JsonInclude, JsonPropertyName("accepted")]
+	public bool? Accepted { get; init; }
 	[JsonInclude, JsonPropertyName("snapshot")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotRestore Snapshot { get; init; }
+	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotRestore? Snapshot { get; init; }
 }
