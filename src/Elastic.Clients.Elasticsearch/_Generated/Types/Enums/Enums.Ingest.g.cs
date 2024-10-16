@@ -35,6 +35,8 @@ public enum ConvertType
 	String,
 	[EnumMember(Value = "long")]
 	Long,
+	[EnumMember(Value = "ip")]
+	Ip,
 	[EnumMember(Value = "integer")]
 	Integer,
 	[EnumMember(Value = "float")]
@@ -58,6 +60,8 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 				return ConvertType.String;
 			case "long":
 				return ConvertType.Long;
+			case "ip":
+				return ConvertType.Ip;
 			case "integer":
 				return ConvertType.Integer;
 			case "float":
@@ -84,6 +88,9 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 			case ConvertType.Long:
 				writer.WriteStringValue("long");
 				return;
+			case ConvertType.Ip:
+				writer.WriteStringValue("ip");
+				return;
 			case ConvertType.Integer:
 				writer.WriteStringValue("integer");
 				return;
@@ -98,6 +105,69 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 				return;
 			case ConvertType.Auto:
 				writer.WriteStringValue("auto");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(FingerprintDigestConverter))]
+public enum FingerprintDigest
+{
+	[EnumMember(Value = "SHA-512")]
+	Sha512,
+	[EnumMember(Value = "SHA-256")]
+	Sha256,
+	[EnumMember(Value = "SHA-1")]
+	Sha1,
+	[EnumMember(Value = "MurmurHash3")]
+	Murmurhash3,
+	[EnumMember(Value = "MD5")]
+	Md5
+}
+
+internal sealed class FingerprintDigestConverter : JsonConverter<FingerprintDigest>
+{
+	public override FingerprintDigest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "SHA-512":
+				return FingerprintDigest.Sha512;
+			case "SHA-256":
+				return FingerprintDigest.Sha256;
+			case "SHA-1":
+				return FingerprintDigest.Sha1;
+			case "MurmurHash3":
+				return FingerprintDigest.Murmurhash3;
+			case "MD5":
+				return FingerprintDigest.Md5;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, FingerprintDigest value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case FingerprintDigest.Sha512:
+				writer.WriteStringValue("SHA-512");
+				return;
+			case FingerprintDigest.Sha256:
+				writer.WriteStringValue("SHA-256");
+				return;
+			case FingerprintDigest.Sha1:
+				writer.WriteStringValue("SHA-1");
+				return;
+			case FingerprintDigest.Murmurhash3:
+				writer.WriteStringValue("MurmurHash3");
+				return;
+			case FingerprintDigest.Md5:
+				writer.WriteStringValue("MD5");
 				return;
 		}
 

@@ -78,7 +78,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
 	internal static ApiUrls IndexManagementPutMapping = new ApiUrls(new[] { "{index}/_mapping" });
 	internal static ApiUrls IndexManagementPutSettings = new ApiUrls(new[] { "_settings", "{index}/_settings" });
-	internal static ApiUrls IndexManagementPutTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementRecovery = new ApiUrls(new[] { "_recovery", "{index}/_recovery" });
 	internal static ApiUrls IndexManagementRefresh = new ApiUrls(new[] { "_refresh", "{index}/_refresh" });
 	internal static ApiUrls IndexManagementResolveIndex = new ApiUrls(new[] { "_resolve/index/{name}" });

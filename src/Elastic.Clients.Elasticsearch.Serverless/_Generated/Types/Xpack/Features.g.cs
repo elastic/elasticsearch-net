@@ -33,14 +33,8 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature AggregateMetric { get; init; }
 	[JsonInclude, JsonPropertyName("analytics")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Analytics { get; init; }
-	[JsonInclude, JsonPropertyName("archive")]
-	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Archive { get; init; }
 	[JsonInclude, JsonPropertyName("ccr")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Ccr { get; init; }
-	[JsonInclude, JsonPropertyName("data_frame")]
-	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature? DataFrame { get; init; }
-	[JsonInclude, JsonPropertyName("data_science")]
-	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature? DataScience { get; init; }
 	[JsonInclude, JsonPropertyName("data_streams")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature DataStreams { get; init; }
 	[JsonInclude, JsonPropertyName("data_tiers")]
@@ -49,8 +43,6 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Enrich { get; init; }
 	[JsonInclude, JsonPropertyName("eql")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Eql { get; init; }
-	[JsonInclude, JsonPropertyName("flattened")]
-	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature? Flattened { get; init; }
 	[JsonInclude, JsonPropertyName("frozen_indices")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature FrozenIndices { get; init; }
 	[JsonInclude, JsonPropertyName("graph")]
@@ -79,8 +71,6 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Sql { get; init; }
 	[JsonInclude, JsonPropertyName("transform")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature Transform { get; init; }
-	[JsonInclude, JsonPropertyName("vectors")]
-	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature? Vectors { get; init; }
 	[JsonInclude, JsonPropertyName("voting_only")]
 	public Elastic.Clients.Elasticsearch.Serverless.Xpack.Feature VotingOnly { get; init; }
 	[JsonInclude, JsonPropertyName("watcher")]

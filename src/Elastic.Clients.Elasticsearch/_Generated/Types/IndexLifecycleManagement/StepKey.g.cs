@@ -30,9 +30,9 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public sealed partial class StepKey
 {
 	[JsonInclude, JsonPropertyName("action")]
-	public string Action { get; set; }
+	public string? Action { get; set; }
 	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; set; }
+	public string? Name { get; set; }
 	[JsonInclude, JsonPropertyName("phase")]
 	public string Phase { get; set; }
 }
@@ -45,17 +45,17 @@ public sealed partial class StepKeyDescriptor : SerializableDescriptor<StepKeyDe
 	{
 	}
 
-	private string ActionValue { get; set; }
-	private string NameValue { get; set; }
+	private string? ActionValue { get; set; }
+	private string? NameValue { get; set; }
 	private string PhaseValue { get; set; }
 
-	public StepKeyDescriptor Action(string action)
+	public StepKeyDescriptor Action(string? action)
 	{
 		ActionValue = action;
 		return Self;
 	}
 
-	public StepKeyDescriptor Name(string name)
+	public StepKeyDescriptor Name(string? name)
 	{
 		NameValue = name;
 		return Self;
@@ -70,10 +70,18 @@ public sealed partial class StepKeyDescriptor : SerializableDescriptor<StepKeyDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("action");
-		writer.WriteStringValue(ActionValue);
-		writer.WritePropertyName("name");
-		writer.WriteStringValue(NameValue);
+		if (!string.IsNullOrEmpty(ActionValue))
+		{
+			writer.WritePropertyName("action");
+			writer.WriteStringValue(ActionValue);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		writer.WritePropertyName("phase");
 		writer.WriteStringValue(PhaseValue);
 		writer.WriteEndObject();

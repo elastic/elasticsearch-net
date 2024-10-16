@@ -17,19 +17,18 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless.Snapshot;
+namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public sealed partial class RestoreResponse : ElasticsearchResponse
+public sealed partial class NodeInfoXpackMl
 {
-	[JsonInclude, JsonPropertyName("accepted")]
-	public bool? Accepted { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public Elastic.Clients.Elasticsearch.Serverless.Snapshot.SnapshotRestore? Snapshot { get; init; }
+	[JsonInclude, JsonPropertyName("use_auto_machine_memory_percent")]
+	public bool? UseAutoMachineMemoryPercent { get; init; }
 }

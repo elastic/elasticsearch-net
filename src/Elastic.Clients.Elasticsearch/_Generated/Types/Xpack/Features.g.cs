@@ -37,20 +37,18 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Archive { get; init; }
 	[JsonInclude, JsonPropertyName("ccr")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Ccr { get; init; }
-	[JsonInclude, JsonPropertyName("data_frame")]
-	public Elastic.Clients.Elasticsearch.Xpack.Feature? DataFrame { get; init; }
-	[JsonInclude, JsonPropertyName("data_science")]
-	public Elastic.Clients.Elasticsearch.Xpack.Feature? DataScience { get; init; }
 	[JsonInclude, JsonPropertyName("data_streams")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature DataStreams { get; init; }
 	[JsonInclude, JsonPropertyName("data_tiers")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature DataTiers { get; init; }
 	[JsonInclude, JsonPropertyName("enrich")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Enrich { get; init; }
+	[JsonInclude, JsonPropertyName("enterprise_search")]
+	public Elastic.Clients.Elasticsearch.Xpack.Feature EnterpriseSearch { get; init; }
 	[JsonInclude, JsonPropertyName("eql")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Eql { get; init; }
-	[JsonInclude, JsonPropertyName("flattened")]
-	public Elastic.Clients.Elasticsearch.Xpack.Feature? Flattened { get; init; }
+	[JsonInclude, JsonPropertyName("esql")]
+	public Elastic.Clients.Elasticsearch.Xpack.Feature Esql { get; init; }
 	[JsonInclude, JsonPropertyName("frozen_indices")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature FrozenIndices { get; init; }
 	[JsonInclude, JsonPropertyName("graph")]
@@ -79,8 +77,8 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Sql { get; init; }
 	[JsonInclude, JsonPropertyName("transform")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Transform { get; init; }
-	[JsonInclude, JsonPropertyName("vectors")]
-	public Elastic.Clients.Elasticsearch.Xpack.Feature? Vectors { get; init; }
+	[JsonInclude, JsonPropertyName("universal_profiling")]
+	public Elastic.Clients.Elasticsearch.Xpack.Feature UniversalProfiling { get; init; }
 	[JsonInclude, JsonPropertyName("voting_only")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature VotingOnly { get; init; }
 	[JsonInclude, JsonPropertyName("watcher")]
