@@ -4,7 +4,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -15,7 +14,6 @@ using Elastic.Transport;
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless;
 #else
-
 namespace Elastic.Clients.Elasticsearch;
 #endif
 
@@ -25,6 +23,10 @@ public sealed class Field :
 	IEquatable<Field>,
 	IUrlParameter
 {
+#if !NET && !NETSTANDARD2_1_OR_GREATER
+	private static readonly char[] BoostSplit = ['^'];
+#endif
+
 	private readonly object _comparisonValue;
 	private readonly Type? _type;
 
@@ -67,28 +69,26 @@ public sealed class Field :
 
 	#region Constructors
 
-	public Field(string name) : this(name, null, null)
-	{
-	}
-
-	public Field(string name, double boost) : this(name, boost, null)
-	{
-	}
-
-	public Field(string name, string format) : this(name, null, format)
-	{
-	}
-
-	public Field(string name, double? boost, string? format)
+	public Field(string name, double? boost = null, string? format = null)
 	{
 		if (string.IsNullOrEmpty(name))
-			throw new ArgumentException($"{name} can not be null or empty.", nameof(name));
+			throw new ArgumentException("Field name can not be null or empty.", nameof(name));
 
 		Name = ParseFieldName(name, out var b);
 		Boost = b ?? boost;
 		Format = format;
 
 		_comparisonValue = Name;
+	}
+
+	public Field(string name, double boost) :
+		this(name, boost, null)
+	{
+	}
+
+	public Field(string name, string format) :
+		this(name, null, format)
+	{
 	}
 
 	public Field(Expression expression, double? boost = null, string? format = null)
@@ -117,21 +117,21 @@ public sealed class Field :
 
 	#region Factory Methods
 
-	public static Field? FromString(string? name) => string.IsNullOrEmpty(name) ? null : new Field(name);
+	public static Field FromString(string name) => new(name);
 
-	public static Field? FromExpression(Expression? expression) => expression is null ? null : new Field(expression);
+	public static Field FromExpression(Expression expression) => new(expression);
 
-	public static Field? FromProperty(PropertyInfo? property) => property is null ? null : new Field(property);
+	public static Field FromProperty(PropertyInfo property) => new(property);
 
 	#endregion Factory Methods
 
 	#region Conversion Operators
 
-	public static implicit operator Field?(string? name) => FromString(name);
+	public static implicit operator Field(string name) => FromString(name);
 
-	public static implicit operator Field?(Expression? expression) => FromExpression(expression);
+	public static implicit operator Field(Expression expression) => FromExpression(expression);
 
-	public static implicit operator Field?(PropertyInfo? property) => FromProperty(property);
+	public static implicit operator Field(PropertyInfo property) => FromProperty(property);
 
 	#endregion Conversion Operators
 
@@ -203,15 +203,7 @@ public sealed class Field :
 			_ => false
 		};
 
-	public override int GetHashCode()
-	{
-		unchecked
-		{
-			var hashCode = _comparisonValue?.GetHashCode() ?? 0;
-			hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
-			return hashCode;
-		}
-	}
+	public override int GetHashCode() => HashCode.Combine(_comparisonValue, _type);
 
 	#endregion Equality
 
@@ -243,20 +235,29 @@ public sealed class Field :
 
 	#endregion Debugging
 
-	[return: NotNullIfNotNull(nameof(name))]
-	private static string? ParseFieldName(string? name, out double? boost)
+	private static string ParseFieldName(string name, out double? boost)
 	{
 		boost = null;
-		if (name is null)
-			return null;
 
-		var caretIndex = name.IndexOf('^');
-		if (caretIndex == -1)
+#if NET || NETSTANDARD2_1_OR_GREATER
+		if (!name.Contains('^', StringComparison.Ordinal))
 			return name;
+#else
+		if (name.IndexOf('^') == -1)
+			return name;
+#endif
 
-		var parts = name.Split(new[] { '^' }, 2, StringSplitOptions.RemoveEmptyEntries);
+#if NET || NETSTANDARD2_1_OR_GREATER
+		var parts = name.Split('^', 2, StringSplitOptions.RemoveEmptyEntries);
+#else
+		var parts = name.Split(BoostSplit, 2, StringSplitOptions.RemoveEmptyEntries);
+#endif
 		name = parts[0];
 		boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
+
+		if (string.IsNullOrWhiteSpace(name))
+			throw new ArgumentException("Field name can not be null or empty.", nameof(name));
+
 		return name;
 	}
 }

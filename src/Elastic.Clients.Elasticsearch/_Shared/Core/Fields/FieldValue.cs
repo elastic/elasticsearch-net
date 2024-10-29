@@ -28,7 +28,8 @@ namespace Elastic.Clients.Elasticsearch;
 /// therefore cannot be specifically typed.
 /// </summary>
 [JsonConverter(typeof(FieldValueConverter))]
-public readonly struct FieldValue : IEquatable<FieldValue>
+public readonly struct FieldValue :
+	IEquatable<FieldValue>
 {
 	internal FieldValue(ValueKind kind, object? value)
 	{
@@ -42,7 +43,7 @@ public readonly struct FieldValue : IEquatable<FieldValue>
 	public readonly ValueKind Kind { get; }
 
 	/// <summary>
-	/// The value contained within within this <see cref="FieldValue"/>.
+	/// The value contained within this <see cref="FieldValue"/>.
 	/// </summary>
 	public readonly object? Value { get; }
 
