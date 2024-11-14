@@ -25,14 +25,14 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 
 	public override string ServiceIdentifier => "esv";
 
-	public override string DefaultMimeType => null; // Prevent base 'ElasticsearchProductRegistration' from sending the compatibility header
+	public override string? DefaultContentType => null; // Prevent base 'ElasticsearchProductRegistration' from sending the compatibility header
 
 	public override MetaHeaderProvider MetaHeaderProvider => _metaHeaderProvider;
 
 	/// <summary>
 	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValidResponse" />, we do not want the low level client throwing
 	///     exceptions
-	///     when <see cref="ITransportConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
+	///     when <see cref="IRequestConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
 	///     composing paths
 	///     so a 404 never signals a wrong URL but a missing entity.
 	/// </summary>
@@ -77,7 +77,7 @@ public class ApiVersionMetaHeaderProducer : MetaHeaderProducer
 
 	public override string HeaderName => "Elastic-Api-Version";
 
-	public override string ProduceHeaderValue(RequestData requestData) => _apiVersion;
+	public override string ProduceHeaderValue(RequestData requestData, bool isAsync) => _apiVersion;
 
 	public ApiVersionMetaHeaderProducer(VersionInfo version)
 	{

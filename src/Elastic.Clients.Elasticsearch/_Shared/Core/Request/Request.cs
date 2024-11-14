@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
-using Elastic.Transport.Diagnostics;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
@@ -23,9 +22,7 @@ public abstract class Request
 	// We don't expect consumers to derive from this public base class.
 	internal Request() { }
 
-	internal virtual string? Accept { get; } = null;
-
-	internal virtual string? ContentType { get; } = null;
+	[JsonIgnore] protected internal virtual IRequestConfiguration? RequestConfig { get; set; }
 
 	/// <summary>
 	/// The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.
@@ -68,28 +65,19 @@ public abstract class Request
 public abstract class Request<TParameters> : Request
 	where TParameters : RequestParameters, new()
 {
-	private readonly TParameters _parameters;
-
-	internal Request() => _parameters = new TParameters();
+	internal Request() => RequestParameters = new TParameters();
 
 	protected Request(Func<RouteValues, RouteValues> pathSelector)
 	{
 		pathSelector(RouteValues);
-		_parameters = new TParameters();
+		RequestParameters = new TParameters();
 	}
 
-	[JsonIgnore] internal TParameters RequestParameters => _parameters;
+	[JsonIgnore] internal TParameters RequestParameters { get; }
 
 	protected TOut? Q<TOut>(string name) => RequestParameters.GetQueryStringValue<TOut>(name);
 
 	protected void Q(string name, object? value) => RequestParameters.SetQueryString(name, value);
 
 	protected void Q(string name, IStringable value) => RequestParameters.SetQueryString(name, value.GetString());
-
-	protected void SetAcceptHeader(string format)
-	{
-		RequestParameters.RequestConfiguration ??= new RequestConfiguration();
-		RequestParameters.RequestConfiguration.Accept =
-			RequestParameters.AcceptHeaderFromFormat(format);
-	}
 }
