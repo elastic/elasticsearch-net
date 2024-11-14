@@ -12,18 +12,19 @@ using Elastic.Transport;
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
 #else
-
 namespace Elastic.Clients.Elasticsearch.Esql;
 #endif
 
-internal sealed class EsqlResponseBuilder : CustomResponseBuilder
+internal sealed class EsqlResponseBuilder : TypedResponseBuilder<EsqlQueryResponse>
 {
-	public override object DeserializeResponse(Serializer serializer, ApiCallDetails response, Stream stream)
+	protected override EsqlQueryResponse? Build(ApiCallDetails apiCallDetails, RequestData requestData,
+		Stream responseStream,
+		string contentType, long contentLength)
 	{
-		var bytes = stream switch
+		var bytes = responseStream switch
 		{
 			MemoryStream ms => ms.ToArray(),
-			_ => BytesFromStream(stream)
+			_ => BytesFromStream(responseStream)
 		};
 
 		return new EsqlQueryResponse { Data = bytes };
@@ -37,13 +38,14 @@ internal sealed class EsqlResponseBuilder : CustomResponseBuilder
 		}
 	}
 
-	public override async Task<object> DeserializeResponseAsync(Serializer serializer, ApiCallDetails response, Stream stream,
-		CancellationToken ctx = new CancellationToken())
+	protected override async Task<EsqlQueryResponse?> BuildAsync(ApiCallDetails apiCallDetails, RequestData requestData,
+		Stream responseStream,
+		string contentType, long contentLength, CancellationToken cancellationToken = default)
 	{
-		var bytes = stream switch
+		var bytes = responseStream switch
 		{
 			MemoryStream ms => ms.ToArray(),
-			_ => await BytesFromStreamAsync(stream, ctx).ConfigureAwait(false)
+			_ => await BytesFromStreamAsync(responseStream, cancellationToken).ConfigureAwait(false)
 		};
 
 		return new EsqlQueryResponse { Data = bytes };
@@ -61,11 +63,4 @@ internal sealed class EsqlResponseBuilder : CustomResponseBuilder
 			return ms.ToArray();
 		}
 	}
-}
-
-public sealed partial class EsqlQueryRequestParameters
-{
-	private static readonly EsqlResponseBuilder ResponseBuilder = new();
-
-	public EsqlQueryRequestParameters() => CustomResponseBuilder = ResponseBuilder;
 }

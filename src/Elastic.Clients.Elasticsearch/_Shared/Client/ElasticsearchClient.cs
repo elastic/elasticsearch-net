@@ -21,7 +21,6 @@ using Elastic.Clients.Elasticsearch.Requests;
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless;
 #else
-
 namespace Elastic.Clients.Elasticsearch;
 #endif
 
@@ -154,119 +153,121 @@ public partial class ElasticsearchClient
 			(int)ProductCheckStatus.NotChecked
 		);
 
-		return productCheckStatus switch
-		{
-			(int)ProductCheckStatus.NotChecked => SendRequestWithProductCheck(),
-			(int)ProductCheckStatus.InProgress or
-			(int)ProductCheckStatus.Succeeded => SendRequest(),
-			(int)ProductCheckStatus.Failed => throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError),
-			_ => throw new InvalidOperationException("unreachable")
-		};
+		// TODO: Re-enable product check
+		//return productCheckStatus switch
+		//{
+		//	(int)ProductCheckStatus.NotChecked => SendRequestWithProductCheck(),
+		//	(int)ProductCheckStatus.InProgress or
+		//	(int)ProductCheckStatus.Succeeded => SendRequest(),
+		//	(int)ProductCheckStatus.Failed => throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError),
+		//	_ => throw new InvalidOperationException("unreachable")
+		//};
+		return SendRequest();
 
 		ValueTask<TResponse> SendRequest()
 		{
-			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
+			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
 			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			return isAsync
 				? new ValueTask<TResponse>(_transport
-					.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData, cancellationToken))
+					.RequestAsync<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, request.RequestConfig, cancellationToken))
 				: new ValueTask<TResponse>(_transport
-					.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData));
+					.Request<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, request.RequestConfig));
 		}
 
-		async ValueTask<TResponse> SendRequestWithProductCheck()
-		{
-			try
-			{
-				return await SendRequestWithProductCheckCore().ConfigureAwait(false);
-			}
-			catch
-			{
-				// Re-try product check on next request.
+		//async ValueTask<TResponse> SendRequestWithProductCheck()
+		//{
+		//	try
+		//	{
+		//		return await SendRequestWithProductCheckCore().ConfigureAwait(false);
+		//	}
+		//	catch
+		//	{
+		//		// Re-try product check on next request.
 
-				// 32-bit read/write operations are atomic and due to the initial memory barrier, we can be sure that
-				// no other thread executes the product check at the same time. Locked access is not required here.
-				if (_productCheckStatus is (int)ProductCheckStatus.InProgress)
-					_productCheckStatus = (int)ProductCheckStatus.NotChecked;
+		//		// 32-bit read/write operations are atomic and due to the initial memory barrier, we can be sure that
+		//		// no other thread executes the product check at the same time. Locked access is not required here.
+		//		if (_productCheckStatus is (int)ProductCheckStatus.InProgress)
+		//			_productCheckStatus = (int)ProductCheckStatus.NotChecked;
 
-				throw;
-			}
-		}
+		//		throw;
+		//	}
+		//}
 
-		async ValueTask<TResponse> SendRequestWithProductCheckCore()
-		{
-			// Attach product check header
+		//async ValueTask<TResponse> SendRequestWithProductCheckCore()
+		//{
+		//	// Attach product check header
 
-			var hadRequestConfig = false;
-			HeadersList? originalHeaders = null;
+		//	var hadRequestConfig = false;
+		//	HeadersList? originalHeaders = null;
 
-			if (request.RequestParameters.RequestConfiguration is null)
-				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
-			else
-			{
-				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
-				hadRequestConfig = true;
-			}
+		//	if (request.RequestConfiguration is null)
+		//		request.RequestParameters.RequestConfiguration = new RequestConfiguration();
+		//	else
+		//	{
+		//		originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
+		//		hadRequestConfig = true;
+		//	}
 
-			request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0
-				? new HeadersList("x-elastic-product")
-				: new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
+		//	request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0
+		//		? new HeadersList("x-elastic-product")
+		//		: new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
 
-			// Send request
+		//	// Send request
 
-			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
-			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
+		//	var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
+		//	var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
-			TResponse response;
+		//	TResponse response;
 
-			if (isAsync)
-			{
-				response = await _transport
-					.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData, cancellationToken)
-					.ConfigureAwait(false);
-			}
-			else
-			{
-				response = _transport
-					.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData);
-			}
+		//	if (isAsync)
+		//	{
+		//		response = await _transport
+		//			.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData, cancellationToken)
+		//			.ConfigureAwait(false);
+		//	}
+		//	else
+		//	{
+		//		response = _transport
+		//			.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData);
+		//	}
 
-			// Evaluate product check result
+		//	// Evaluate product check result
 
-			var hasSuccessStatusCode = response.ApiCallDetails.HttpStatusCode is >= 200 and <= 299;
-			if (hasSuccessStatusCode)
-			{
-				var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
-											values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
+		//	var hasSuccessStatusCode = response.ApiCallDetails.HttpStatusCode is >= 200 and <= 299;
+		//	if (hasSuccessStatusCode)
+		//	{
+		//		var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
+		//									values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
 
-				_productCheckStatus = productCheckSucceeded
-					? (int)ProductCheckStatus.Succeeded
-					: (int)ProductCheckStatus.Failed;
+		//		_productCheckStatus = productCheckSucceeded
+		//			? (int)ProductCheckStatus.Succeeded
+		//			: (int)ProductCheckStatus.Failed;
 
-				if (_productCheckStatus == (int)ProductCheckStatus.Failed)
-					throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-			}
+		//		if (_productCheckStatus == (int)ProductCheckStatus.Failed)
+		//			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+		//	}
 
-			if (request.RequestParameters.RequestConfiguration is null)
-				return response;
+		//	if (request.RequestParameters.RequestConfiguration is null)
+		//		return response;
 
-			// Reset request configuration
+		//	// Reset request configuration
 
-			if (!hadRequestConfig)
-				request.RequestParameters.RequestConfiguration = null;
-			else if (originalHeaders is { Count: > 0 })
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
+		//	if (!hadRequestConfig)
+		//		request.RequestParameters.RequestConfiguration = null;
+		//	else if (originalHeaders is { Count: > 0 })
+		//		request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
 
-			if (!hasSuccessStatusCode)
-			{
-				// The product check is unreliable for non success status codes.
-				// We have to re-try on the next request.
-				_productCheckStatus = (int)ProductCheckStatus.NotChecked;
-			}
+		//	if (!hasSuccessStatusCode)
+		//	{
+		//		// The product check is unreliable for non success status codes.
+		//		// We have to re-try on the next request.
+		//		_productCheckStatus = (int)ProductCheckStatus.NotChecked;
+		//	}
 
-			return response;
-		}
+		//	return response;
+		//}
 	}
 
 	private static OpenTelemetryData PrepareOpenTelemetryData<TRequest, TRequestParameters>(TRequest request, Dictionary<string, string> resolvedRouteValues)
@@ -304,21 +305,11 @@ public partial class ElasticsearchClient
 		return openTelemetryData;
 	}
 
-	private (string resolvedUrl, string urlTemplate, Dictionary<string, string>? resolvedRouteValues, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request,
-		Action<IRequestConfiguration>? forceConfiguration)
+	private (string resolvedUrl, string urlTemplate, Dictionary<string, string>? resolvedRouteValues, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
 		where TRequestParameters : RequestParameters, new()
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
-
-		if (forceConfiguration is not null)
-			ForceConfiguration(request, forceConfiguration);
-
-		if (request.ContentType is not null)
-			ForceContentType<TRequest, TRequestParameters>(request, request.ContentType);
-
-		if (request.Accept is not null)
-			ForceAccept<TRequest, TRequestParameters>(request, request.Accept);
 
 		var (resolvedUrl, urlTemplate, routeValues) = request.GetUrl(ElasticsearchClientSettings);
 
@@ -329,44 +320,5 @@ public partial class ElasticsearchClient
 				: PostData.Serializable(request);
 
 		return (resolvedUrl, urlTemplate, routeValues, postData);
-	}
-
-	private static void ForceConfiguration<TRequestParameters>(Request<TRequestParameters> request, Action<IRequestConfiguration> forceConfiguration)
-		where TRequestParameters : RequestParameters, new()
-	{
-		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-		forceConfiguration(configuration);
-		request.RequestParameters.RequestConfiguration = configuration;
-	}
-
-	private static void ForceContentType<TRequest, TRequestParameters>(TRequest request, string contentType)
-		where TRequest : Request<TRequestParameters>
-		where TRequestParameters : RequestParameters, new()
-	{
-		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-		configuration.Accept = contentType;
-		configuration.ContentType = contentType;
-		request.RequestParameters.RequestConfiguration = configuration;
-	}
-
-	private static void ForceAccept<TRequest, TRequestParameters>(TRequest request, string acceptType)
-		where TRequest : Request<TRequestParameters>
-		where TRequestParameters : RequestParameters, new()
-	{
-		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-		configuration.Accept = acceptType;
-		request.RequestParameters.RequestConfiguration = configuration;
-	}
-
-	internal static void ForceJson(IRequestConfiguration requestConfiguration)
-	{
-		requestConfiguration.Accept = RequestData.DefaultMimeType;
-		requestConfiguration.ContentType = RequestData.DefaultMimeType;
-	}
-
-	internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
-	{
-		requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
-		requestConfiguration.ContentType = RequestData.MimeTypeTextPlain;
 	}
 }

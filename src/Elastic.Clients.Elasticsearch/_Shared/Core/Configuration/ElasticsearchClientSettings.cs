@@ -10,8 +10,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 #if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Esql;
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 #else
+using Elastic.Clients.Elasticsearch.Esql;
 using Elastic.Clients.Elasticsearch.Fluent;
 #endif
 
@@ -104,9 +106,9 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 /// <inheritdoc cref="IElasticsearchClientSettings" />
 [Browsable(false)]
 [EditorBrowsable(EditorBrowsableState.Never)]
-public abstract class
-	ElasticsearchClientSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>,
-		IElasticsearchClientSettings
+public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
+	ConnectionConfigurationBase<TConnectionSettings>,
+	IElasticsearchClientSettings
 	where TConnectionSettings : ElasticsearchClientSettingsBase<TConnectionSettings>, IElasticsearchClientSettings
 {
 	private readonly FluentDictionary<Type, string> _defaultIndices;
@@ -381,19 +383,21 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 /// <inheritdoc cref="TransportClientConfigurationValues" />
 [Browsable(false)]
 [EditorBrowsable(EditorBrowsableState.Never)]
-public abstract class
-	ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>,
-		TransportClientConfigurationValues
-	where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>,
+public abstract class ConnectionConfigurationBase<TConnectionConfiguration> :
+	TransportConfigurationDescriptorBase<TConnectionConfiguration>,
 	TransportClientConfigurationValues
+	where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, TransportClientConfigurationValues
 {
 	private bool _includeServerStackTraceOnError;
 
 	protected ConnectionConfigurationBase(NodePool nodePool, IRequestInvoker requestInvoker,
 		Serializer? serializer,
 		ProductRegistration registration = null)
-		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
-			UserAgent(ConnectionConfiguration.DefaultUserAgent);
+		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient)))
+	{
+		UserAgent(ConnectionConfiguration.DefaultUserAgent);
+		ResponseBuilder(new EsqlResponseBuilder());
+	}
 
 	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
 
