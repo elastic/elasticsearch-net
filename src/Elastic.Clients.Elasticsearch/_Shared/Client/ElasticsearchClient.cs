@@ -164,14 +164,12 @@ public partial class ElasticsearchClient
 
 		ValueTask<TResponse> SendRequest()
 		{
-			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
+			var (endpointPath, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
 			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			return isAsync
-				? new ValueTask<TResponse>(_transport
-					.RequestAsync<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, request.RequestConfig, cancellationToken))
-				: new ValueTask<TResponse>(_transport
-					.Request<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, request.RequestConfig));
+				? new ValueTask<TResponse>(_transport.RequestAsync<TResponse>(endpointPath, postData, in openTelemetryData, request.RequestConfig, cancellationToken))
+				: new ValueTask<TResponse>(_transport.Request<TResponse>(endpointPath, postData, in openTelemetryData, request.RequestConfig));
 		}
 
 		async ValueTask<TResponse> SendRequestWithProductCheck()
@@ -212,7 +210,7 @@ public partial class ElasticsearchClient
 
 			// Send request
 
-			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
+			var (endpointPath, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
 			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			TResponse response;
@@ -220,13 +218,12 @@ public partial class ElasticsearchClient
 			if (isAsync)
 			{
 				response = await _transport
-					.RequestAsync<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, requestConfig, cancellationToken)
+					.RequestAsync<TResponse>(endpointPath, postData, in openTelemetryData, requestConfig, cancellationToken)
 					.ConfigureAwait(false);
 			}
 			else
 			{
-				response = _transport
-					.Request<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, requestConfig);
+				response = _transport.Request<TResponse>(endpointPath, postData, in openTelemetryData, requestConfig);
 			}
 
 			// Evaluate product check result
@@ -290,13 +287,14 @@ public partial class ElasticsearchClient
 		return openTelemetryData;
 	}
 
-	private (string resolvedUrl, string urlTemplate, Dictionary<string, string>? resolvedRouteValues, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request)
+	private (EndpointPath endpointPath, Dictionary<string, string>? resolvedRouteValues, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
 		where TRequestParameters : RequestParameters, new()
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
 
-		var (resolvedUrl, urlTemplate, routeValues) = request.GetUrl(ElasticsearchClientSettings);
+		var (resolvedUrl, _, routeValues) = request.GetUrl(ElasticsearchClientSettings);
+		var pathAndQuery = request.RequestParameters.CreatePathWithQueryStrings(resolvedUrl, ElasticsearchClientSettings);
 
 		var postData =
 			request.HttpMethod == HttpMethod.GET ||
@@ -304,6 +302,6 @@ public partial class ElasticsearchClient
 				? null
 				: PostData.Serializable(request);
 
-		return (resolvedUrl, urlTemplate, routeValues, postData);
+		return (new EndpointPath(request.HttpMethod, pathAndQuery), routeValues, postData);
 	}
 }
