@@ -22,9 +22,10 @@ namespace Elastic.Clients.Elasticsearch.Requests;
 /// <summary>
 /// Base class for all request descriptor types.
 /// </summary>
-public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Request<TParameters>, ISelfSerializable
-		where TDescriptor : RequestDescriptor<TDescriptor, TParameters>
-		where TParameters : RequestParameters, new()
+public abstract partial class RequestDescriptor<TDescriptor, TParameters> :
+	Request<TParameters>, ISelfSerializable
+	where TDescriptor : RequestDescriptor<TDescriptor, TParameters>
+	where TParameters : RequestParameters, new()
 {
 	private readonly TDescriptor _descriptor;
 
@@ -56,12 +57,10 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 	/// <summary>
 	///     Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 	/// </summary>
-	public TDescriptor RequestConfiguration(
-		Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
+	public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 	{
-		var rc = RequestParameters.RequestConfiguration;
-		RequestParameters.RequestConfiguration =
-			configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
+		var rc = RequestConfig;
+		RequestConfig = configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
 		return _descriptor;
 	}
 

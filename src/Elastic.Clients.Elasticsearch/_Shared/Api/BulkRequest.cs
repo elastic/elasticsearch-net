@@ -32,13 +32,17 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class BulkRequest : IStreamSerializable
 {
+	private static readonly IRequestConfiguration RequestConfigSingleton = new RequestConfiguration
+	{
+		Accept = "application/json",
+		ContentType = "application/x-ndjson"
+	};
+
 	internal Request Self => this;
 
+	protected internal override IRequestConfiguration RequestConfig => RequestConfigSingleton;
+
 	public BulkOperationsCollection Operations { get; set; }
-
-	internal override string ContentType => "application/x-ndjson";
-
-	internal override string Accept => "application/json";
 
 	public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 	{
@@ -87,9 +91,13 @@ public partial class BulkRequest : IStreamSerializable
 
 public sealed partial class BulkRequestDescriptor : IStreamSerializable
 {
-	internal override string ContentType => "application/x-ndjson";
+	private static readonly IRequestConfiguration RequestConfigSingleton = new RequestConfiguration
+	{
+		Accept = "application/json",
+		ContentType = "application/x-ndjson"
+	};
 
-	internal override string Accept => "application/json";
+	protected internal override IRequestConfiguration RequestConfig => RequestConfigSingleton;
 
 	private readonly BulkOperationsCollection _operations = new();
 
