@@ -21,7 +21,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.4.26" />
+    <PackageReference Include="Elastic.Transport" Version="0.5.2" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
