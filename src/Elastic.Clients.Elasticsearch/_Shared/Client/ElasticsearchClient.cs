@@ -153,16 +153,14 @@ public partial class ElasticsearchClient
 			(int)ProductCheckStatus.NotChecked
 		);
 
-		// TODO: Re-enable product check
-		//return productCheckStatus switch
-		//{
-		//	(int)ProductCheckStatus.NotChecked => SendRequestWithProductCheck(),
-		//	(int)ProductCheckStatus.InProgress or
-		//	(int)ProductCheckStatus.Succeeded => SendRequest(),
-		//	(int)ProductCheckStatus.Failed => throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError),
-		//	_ => throw new InvalidOperationException("unreachable")
-		//};
-		return SendRequest();
+		return productCheckStatus switch
+		{
+			(int)ProductCheckStatus.NotChecked => SendRequestWithProductCheck(),
+			(int)ProductCheckStatus.InProgress or
+			(int)ProductCheckStatus.Succeeded => SendRequest(),
+			(int)ProductCheckStatus.Failed => throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError),
+			_ => throw new InvalidOperationException("unreachable")
+		};
 
 		ValueTask<TResponse> SendRequest()
 		{
@@ -176,98 +174,85 @@ public partial class ElasticsearchClient
 					.Request<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, request.RequestConfig));
 		}
 
-		//async ValueTask<TResponse> SendRequestWithProductCheck()
-		//{
-		//	try
-		//	{
-		//		return await SendRequestWithProductCheckCore().ConfigureAwait(false);
-		//	}
-		//	catch
-		//	{
-		//		// Re-try product check on next request.
+		async ValueTask<TResponse> SendRequestWithProductCheck()
+		{
+			try
+			{
+				return await SendRequestWithProductCheckCore().ConfigureAwait(false);
+			}
+			catch
+			{
+				// Re-try product check on next request.
 
-		//		// 32-bit read/write operations are atomic and due to the initial memory barrier, we can be sure that
-		//		// no other thread executes the product check at the same time. Locked access is not required here.
-		//		if (_productCheckStatus is (int)ProductCheckStatus.InProgress)
-		//			_productCheckStatus = (int)ProductCheckStatus.NotChecked;
+				// 32-bit read/write operations are atomic and due to the initial memory barrier, we can be sure that
+				// no other thread executes the product check at the same time. Locked access is not required here.
+				if (_productCheckStatus is (int)ProductCheckStatus.InProgress)
+					_productCheckStatus = (int)ProductCheckStatus.NotChecked;
 
-		//		throw;
-		//	}
-		//}
+				throw;
+			}
+		}
 
-		//async ValueTask<TResponse> SendRequestWithProductCheckCore()
-		//{
-		//	// Attach product check header
+		async ValueTask<TResponse> SendRequestWithProductCheckCore()
+		{
+			// Attach product check header
 
-		//	var hadRequestConfig = false;
-		//	HeadersList? originalHeaders = null;
+			// TODO: The copy constructor should accept null values
+			var requestConfig = (request.RequestConfig is null)
+				? new RequestConfiguration()
+				{
+					ResponseHeadersToParse = new HeadersList("x-elastic-product")
+				}
+				: new RequestConfiguration(request.RequestConfig)
+				{
+					ResponseHeadersToParse = (request.RequestConfig.ResponseHeadersToParse is { Count: > 0 })
+						? new HeadersList(request.RequestConfig.ResponseHeadersToParse, "x-elastic-product")
+						: new HeadersList("x-elastic-product")
+				};
 
-		//	if (request.RequestConfiguration is null)
-		//		request.RequestParameters.RequestConfiguration = new RequestConfiguration();
-		//	else
-		//	{
-		//		originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
-		//		hadRequestConfig = true;
-		//	}
+			// Send request
 
-		//	request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0
-		//		? new HeadersList("x-elastic-product")
-		//		: new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
+			var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
+			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
-		//	// Send request
+			TResponse response;
 
-		//	var (resolvedUrl, _, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
-		//	var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
+			if (isAsync)
+			{
+				response = await _transport
+					.RequestAsync<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, requestConfig, cancellationToken)
+					.ConfigureAwait(false);
+			}
+			else
+			{
+				response = _transport
+					.Request<TResponse>(new EndpointPath(request.HttpMethod, resolvedUrl), postData, in openTelemetryData, requestConfig);
+			}
 
-		//	TResponse response;
+			// Evaluate product check result
 
-		//	if (isAsync)
-		//	{
-		//		response = await _transport
-		//			.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData, cancellationToken)
-		//			.ConfigureAwait(false);
-		//	}
-		//	else
-		//	{
-		//		response = _transport
-		//			.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, in openTelemetryData);
-		//	}
+			var hasSuccessStatusCode = response.ApiCallDetails.HttpStatusCode is >= 200 and <= 299;
+			if (!hasSuccessStatusCode)
+			{
+				// The product check is unreliable for non success status codes.
+				// We have to re-try on the next request.
+				_productCheckStatus = (int)ProductCheckStatus.NotChecked;
 
-		//	// Evaluate product check result
+				return response;
+			}
 
-		//	var hasSuccessStatusCode = response.ApiCallDetails.HttpStatusCode is >= 200 and <= 299;
-		//	if (hasSuccessStatusCode)
-		//	{
-		//		var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
-		//									values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
+			var productCheckSucceeded = response.ApiCallDetails.TryGetHeader("x-elastic-product", out var values) &&
+										values.FirstOrDefault(x => x.Equals("Elasticsearch", StringComparison.Ordinal)) is not null;
 
-		//		_productCheckStatus = productCheckSucceeded
-		//			? (int)ProductCheckStatus.Succeeded
-		//			: (int)ProductCheckStatus.Failed;
+			_productCheckStatus = productCheckSucceeded
+				? (int)ProductCheckStatus.Succeeded
+				: (int)ProductCheckStatus.Failed;
 
-		//		if (_productCheckStatus == (int)ProductCheckStatus.Failed)
-		//			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-		//	}
+			if (_productCheckStatus == (int)ProductCheckStatus.Failed)
+				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 
-		//	if (request.RequestParameters.RequestConfiguration is null)
-		//		return response;
-
-		//	// Reset request configuration
-
-		//	if (!hadRequestConfig)
-		//		request.RequestParameters.RequestConfiguration = null;
-		//	else if (originalHeaders is { Count: > 0 })
-		//		request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
-
-		//	if (!hasSuccessStatusCode)
-		//	{
-		//		// The product check is unreliable for non success status codes.
-		//		// We have to re-try on the next request.
-		//		_productCheckStatus = (int)ProductCheckStatus.NotChecked;
-		//	}
-
-		//	return response;
-		//}
+			return response;
+		}
 	}
 
 	private static OpenTelemetryData PrepareOpenTelemetryData<TRequest, TRequestParameters>(TRequest request, Dictionary<string, string> resolvedRouteValues)
