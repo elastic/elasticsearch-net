@@ -42,7 +42,10 @@ public sealed partial class DeleteRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Removes roles in the native realm.
+/// Delete roles.
+/// </para>
+/// <para>
+/// Delete roles in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestPa
 
 /// <summary>
 /// <para>
-/// Removes roles in the native realm.
+/// Delete roles.
+/// </para>
+/// <para>
+/// Delete roles in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleRequestDescriptor : RequestDescriptor<DeleteRoleRequestDescriptor, DeleteRoleRequestParameters>

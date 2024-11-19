@@ -103,7 +103,12 @@ public sealed partial class MultiGetRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Allows to get multiple documents in one request.
+/// Get multiple documents.
+/// </para>
+/// <para>
+/// Get multiple JSON documents by ID from one or more indices.
+/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 /// </para>
 /// </summary>
 public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParameters>
@@ -220,7 +225,12 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 
 /// <summary>
 /// <para>
-/// Allows to get multiple documents in one request.
+/// Get multiple documents.
+/// </para>
+/// <para>
+/// Get multiple JSON documents by ID from one or more indices.
+/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 /// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescriptor<MultiGetRequestDescriptor<TDocument>, MultiGetRequestParameters>
@@ -363,7 +373,12 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Allows to get multiple documents in one request.
+/// Get multiple documents.
+/// </para>
+/// <para>
+/// Get multiple JSON documents by ID from one or more indices.
+/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 /// </para>
 /// </summary>
 public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiGetRequestDescriptor, MultiGetRequestParameters>

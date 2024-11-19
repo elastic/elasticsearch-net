@@ -265,6 +265,29 @@ public readonly partial struct IndexPrivilege : IEnumStruct<IndexPrivilege>
 	public static bool operator !=(IndexPrivilege a, IndexPrivilege b) => !(a == b);
 }
 
+[JsonConverter(typeof(EnumStructConverter<RestrictionWorkflow>))]
+public readonly partial struct RestrictionWorkflow : IEnumStruct<RestrictionWorkflow>
+{
+	public RestrictionWorkflow(string value) => Value = value;
+
+	RestrictionWorkflow IEnumStruct<RestrictionWorkflow>.Create(string value) => value;
+
+	public readonly string Value { get; }
+	public static RestrictionWorkflow SearchApplicationQuery { get; } = new RestrictionWorkflow("search_application_query");
+
+	public override string ToString() => Value ?? string.Empty;
+
+	public static implicit operator string(RestrictionWorkflow restrictionWorkflow) => restrictionWorkflow.Value;
+	public static implicit operator RestrictionWorkflow(string value) => new(value);
+
+	public override int GetHashCode() => Value.GetHashCode();
+	public override bool Equals(object obj) => obj is RestrictionWorkflow other && this.Equals(other);
+	public bool Equals(RestrictionWorkflow other) => Value == other.Value;
+
+	public static bool operator ==(RestrictionWorkflow a, RestrictionWorkflow b) => a.Equals(b);
+	public static bool operator !=(RestrictionWorkflow a, RestrictionWorkflow b) => !(a == b);
+}
+
 [JsonConverter(typeof(TemplateFormatConverter))]
 public enum TemplateFormat
 {

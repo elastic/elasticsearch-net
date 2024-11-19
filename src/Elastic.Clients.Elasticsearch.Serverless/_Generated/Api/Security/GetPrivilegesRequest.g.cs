@@ -36,7 +36,7 @@ public sealed partial class GetPrivilegesRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves application privileges.
+/// Get application privileges.
 /// </para>
 /// </summary>
 public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesRequestParameters>
@@ -64,7 +64,7 @@ public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesReq
 
 /// <summary>
 /// <para>
-/// Retrieves application privileges.
+/// Get application privileges.
 /// </para>
 /// </summary>
 public sealed partial class GetPrivilegesRequestDescriptor : RequestDescriptor<GetPrivilegesRequestDescriptor, GetPrivilegesRequestParameters>

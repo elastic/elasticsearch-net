@@ -27,6 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <summary>
+/// <para>
+/// The subset of index level privileges that can be defined for remote clusters.
+/// </para>
+/// </summary>
 public sealed partial class RemoteIndicesPrivileges
 {
 	/// <summary>
@@ -59,6 +64,7 @@ public sealed partial class RemoteIndicesPrivileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("names")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexName))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
@@ -78,6 +84,11 @@ public sealed partial class RemoteIndicesPrivileges
 	public object? Query { get; set; }
 }
 
+/// <summary>
+/// <para>
+/// The subset of index level privileges that can be defined for remote clusters.
+/// </para>
+/// </summary>
 public sealed partial class RemoteIndicesPrivilegesDescriptor<TDocument> : SerializableDescriptor<RemoteIndicesPrivilegesDescriptor<TDocument>>
 {
 	internal RemoteIndicesPrivilegesDescriptor(Action<RemoteIndicesPrivilegesDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -207,7 +218,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor<TDocument> : Seria
 		}
 
 		writer.WritePropertyName("names");
-		JsonSerializer.Serialize(writer, NamesValue, options);
+		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
 		writer.WritePropertyName("privileges");
 		JsonSerializer.Serialize(writer, PrivilegesValue, options);
 		if (QueryValue is not null)
@@ -220,6 +231,11 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor<TDocument> : Seria
 	}
 }
 
+/// <summary>
+/// <para>
+/// The subset of index level privileges that can be defined for remote clusters.
+/// </para>
+/// </summary>
 public sealed partial class RemoteIndicesPrivilegesDescriptor : SerializableDescriptor<RemoteIndicesPrivilegesDescriptor>
 {
 	internal RemoteIndicesPrivilegesDescriptor(Action<RemoteIndicesPrivilegesDescriptor> configure) => configure.Invoke(this);
@@ -349,7 +365,7 @@ public sealed partial class RemoteIndicesPrivilegesDescriptor : SerializableDesc
 		}
 
 		writer.WritePropertyName("names");
-		JsonSerializer.Serialize(writer, NamesValue, options);
+		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
 		writer.WritePropertyName("privileges");
 		JsonSerializer.Serialize(writer, PrivilegesValue, options);
 		if (QueryValue is not null)

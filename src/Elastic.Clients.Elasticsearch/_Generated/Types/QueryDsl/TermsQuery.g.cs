@@ -53,7 +53,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 
 				variant.Field = property;
 				reader.Read();
-				variant.Term = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField>(ref reader, options);
+				variant.Terms = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField>(ref reader, options);
 			}
 		}
 
@@ -63,7 +63,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 	public override void Write(Utf8JsonWriter writer, TermsQuery value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Term is not null)
+		if (value.Field is not null && value.Terms is not null)
 		{
 			if (!options.TryGetClientSettings(out var settings))
 			{
@@ -72,7 +72,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 
 			var propertyName = settings.Inferrer.Field(value.Field);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Term, options);
+			JsonSerializer.Serialize(writer, value.Terms, options);
 		}
 
 		if (value.Boost.HasValue)
@@ -105,7 +105,7 @@ public sealed partial class TermsQuery
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Term { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Terms(termsQuery);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Terms(termsQuery);
@@ -124,7 +124,7 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -164,20 +164,20 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public TermsQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField term)
+	public TermsQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField terms)
 	{
-		TermValue = term;
+		TermsValue = terms;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && TermValue is not null)
+		if (FieldValue is not null && TermsValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, TermValue, options);
+			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
 		if (BoostValue.HasValue)
@@ -207,7 +207,7 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -247,20 +247,20 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 		return Self;
 	}
 
-	public TermsQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField term)
+	public TermsQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField terms)
 	{
-		TermValue = term;
+		TermsValue = terms;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && TermValue is not null)
+		if (FieldValue is not null && TermsValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, TermValue, options);
+			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
 		if (BoostValue.HasValue)

@@ -121,6 +121,14 @@ public sealed partial class RedactProcessor
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("trace_redact")]
+	public bool? TraceRedact { get; set; }
+
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(RedactProcessor redactProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Redact(redactProcessor);
 }
 
@@ -147,6 +155,7 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	private bool? SkipIfUnlicensedValue { get; set; }
 	private string? SuffixValue { get; set; }
 	private string? TagValue { get; set; }
+	private bool? TraceRedactValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -329,6 +338,17 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// </para>
+	/// </summary>
+	public RedactProcessorDescriptor<TDocument> TraceRedact(bool? traceRedact = true)
+	{
+		TraceRedactValue = traceRedact;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -421,6 +441,12 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 			writer.WriteStringValue(TagValue);
 		}
 
+		if (TraceRedactValue.HasValue)
+		{
+			writer.WritePropertyName("trace_redact");
+			writer.WriteBooleanValue(TraceRedactValue.Value);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -448,6 +474,7 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	private bool? SkipIfUnlicensedValue { get; set; }
 	private string? SuffixValue { get; set; }
 	private string? TagValue { get; set; }
+	private bool? TraceRedactValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -630,6 +657,17 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+	/// </para>
+	/// </summary>
+	public RedactProcessorDescriptor TraceRedact(bool? traceRedact = true)
+	{
+		TraceRedactValue = traceRedact;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -720,6 +758,12 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 		{
 			writer.WritePropertyName("tag");
 			writer.WriteStringValue(TagValue);
+		}
+
+		if (TraceRedactValue.HasValue)
+		{
+			writer.WritePropertyName("trace_redact");
+			writer.WriteBooleanValue(TraceRedactValue.Value);
 		}
 
 		writer.WriteEndObject();

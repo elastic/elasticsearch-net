@@ -56,6 +56,14 @@ public sealed partial class KnnRetriever
 
 	/// <summary>
 	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("min_score")]
+	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
@@ -103,6 +111,7 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 	private int kValue { get; set; }
+	private float? MinScoreValue { get; set; }
 	private int NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
@@ -170,6 +179,17 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	public KnnRetrieverDescriptor<TDocument> k(int k)
 	{
 		kValue = k;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public KnnRetrieverDescriptor<TDocument> MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
 		return Self;
 	}
 
@@ -271,6 +291,12 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 
 		writer.WritePropertyName("k");
 		writer.WriteNumberValue(kValue);
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		writer.WritePropertyName("num_candidates");
 		writer.WriteNumberValue(NumCandidatesValue);
 		if (QueryVectorValue is not null)
@@ -319,6 +345,7 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 	private int kValue { get; set; }
+	private float? MinScoreValue { get; set; }
 	private int NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
@@ -386,6 +413,17 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	public KnnRetrieverDescriptor k(int k)
 	{
 		kValue = k;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public KnnRetrieverDescriptor MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
 		return Self;
 	}
 
@@ -487,6 +525,12 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 
 		writer.WritePropertyName("k");
 		writer.WriteNumberValue(kValue);
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		writer.WritePropertyName("num_candidates");
 		writer.WriteNumberValue(NumCandidatesValue);
 		if (QueryVectorValue is not null)

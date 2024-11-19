@@ -42,7 +42,10 @@ public sealed partial class EnableUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Enables users in the native realm.
+/// Enable users.
+/// </para>
+/// <para>
+/// Enable users in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class EnableUserRequest : PlainRequest<EnableUserRequestPa
 
 /// <summary>
 /// <para>
-/// Enables users in the native realm.
+/// Enable users.
+/// </para>
+/// <para>
+/// Enable users in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserRequestDescriptor : RequestDescriptor<EnableUserRequestDescriptor, EnableUserRequestParameters>

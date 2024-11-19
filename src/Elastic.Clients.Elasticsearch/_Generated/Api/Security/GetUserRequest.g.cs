@@ -42,7 +42,10 @@ public sealed partial class GetUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves information about users in the native realm and built-in users.
+/// Get users.
+/// </para>
+/// <para>
+/// Get information about users in the native realm and built-in users.
 /// </para>
 /// </summary>
 public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParameters>
@@ -74,7 +77,10 @@ public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves information about users in the native realm and built-in users.
+/// Get users.
+/// </para>
+/// <para>
+/// Get information about users in the native realm and built-in users.
 /// </para>
 /// </summary>
 public sealed partial class GetUserRequestDescriptor : RequestDescriptor<GetUserRequestDescriptor, GetUserRequestParameters>
