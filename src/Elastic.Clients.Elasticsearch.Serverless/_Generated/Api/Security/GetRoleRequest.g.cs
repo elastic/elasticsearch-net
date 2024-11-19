@@ -36,8 +36,10 @@ public sealed partial class GetRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The get roles API cannot retrieve roles that are defined in roles files.
+/// Get roles.
+/// </para>
+/// <para>
+/// Get roles in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class GetRoleRequest : PlainRequest<GetRoleRequestParameters>
@@ -61,8 +63,10 @@ public sealed partial class GetRoleRequest : PlainRequest<GetRoleRequestParamete
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The get roles API cannot retrieve roles that are defined in roles files.
+/// Get roles.
+/// </para>
+/// <para>
+/// Get roles in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class GetRoleRequestDescriptor : RequestDescriptor<GetRoleRequestDescriptor, GetRoleRequestParameters>

@@ -62,7 +62,10 @@ public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves the results of a previously submitted async search request given its identifier.
+/// Get async search results.
+/// </para>
+/// <para>
+/// Retrieve the results of a previously submitted asynchronous search request.
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
 /// </para>
 /// </summary>
@@ -113,7 +116,10 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 
 /// <summary>
 /// <para>
-/// Retrieves the results of a previously submitted async search request given its identifier.
+/// Get async search results.
+/// </para>
+/// <para>
+/// Retrieve the results of a previously submitted asynchronous search request.
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
 /// </para>
 /// </summary>
@@ -150,7 +156,10 @@ public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : Request
 
 /// <summary>
 /// <para>
-/// Retrieves the results of a previously submitted async search request given its identifier.
+/// Get async search results.
+/// </para>
+/// <para>
+/// Retrieve the results of a previously submitted asynchronous search request.
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
 /// </para>
 /// </summary>

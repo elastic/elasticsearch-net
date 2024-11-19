@@ -36,7 +36,10 @@ public sealed partial class EnrollNodeRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Allows a new node to join an existing cluster with security features enabled.
+/// Enroll a node.
+/// </para>
+/// <para>
+/// Enroll a new node to allow it to join an existing cluster with security features enabled.
 /// </para>
 /// </summary>
 public sealed partial class EnrollNodeRequest : PlainRequest<EnrollNodeRequestParameters>
@@ -52,7 +55,10 @@ public sealed partial class EnrollNodeRequest : PlainRequest<EnrollNodeRequestPa
 
 /// <summary>
 /// <para>
-/// Allows a new node to join an existing cluster with security features enabled.
+/// Enroll a node.
+/// </para>
+/// <para>
+/// Enroll a new node to allow it to join an existing cluster with security features enabled.
 /// </para>
 /// </summary>
 public sealed partial class EnrollNodeRequestDescriptor : RequestDescriptor<EnrollNodeRequestDescriptor, EnrollNodeRequestParameters>

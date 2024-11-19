@@ -42,6 +42,9 @@ public sealed partial class BulkPutRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Bulk create or update roles.
+/// </para>
+/// <para>
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk create or update roles API cannot update roles that are defined in roles files.
 /// </para>
@@ -74,6 +77,9 @@ public sealed partial class BulkPutRoleRequest : PlainRequest<BulkPutRoleRequest
 }
 
 /// <summary>
+/// <para>
+/// Bulk create or update roles.
+/// </para>
 /// <para>
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk create or update roles API cannot update roles that are defined in roles files.
@@ -120,6 +126,9 @@ public sealed partial class BulkPutRoleRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
+/// <para>
+/// Bulk create or update roles.
+/// </para>
 /// <para>
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk create or update roles API cannot update roles that are defined in roles files.

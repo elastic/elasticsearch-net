@@ -36,6 +36,9 @@ public sealed partial class SamlCompleteLogoutRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
+/// Logout of SAML completely.
+/// </para>
+/// <para>
 /// Verifies the logout response sent from the SAML IdP.
 /// </para>
 /// </summary>
@@ -83,6 +86,9 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 }
 
 /// <summary>
+/// <para>
+/// Logout of SAML completely.
+/// </para>
 /// <para>
 /// Verifies the logout response sent from the SAML IdP.
 /// </para>

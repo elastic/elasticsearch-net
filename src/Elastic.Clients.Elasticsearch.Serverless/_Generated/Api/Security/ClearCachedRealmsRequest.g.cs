@@ -42,7 +42,10 @@ public sealed partial class ClearCachedRealmsRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+/// Clear the user cache.
+/// </para>
+/// <para>
+/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedRealmsRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 
 /// <summary>
 /// <para>
-/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+/// Clear the user cache.
+/// </para>
+/// <para>
+/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRealmsRequestDescriptor : RequestDescriptor<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsRequestParameters>

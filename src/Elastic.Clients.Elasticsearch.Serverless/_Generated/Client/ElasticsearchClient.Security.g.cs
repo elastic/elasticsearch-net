@@ -41,7 +41,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a user profile on behalf of another user.
+	/// Activate a user profile.
+	/// </para>
+	/// <para>
+	/// Create or update a user profile on behalf of another user.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -53,7 +56,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a user profile on behalf of another user.
+	/// Activate a user profile.
+	/// </para>
+	/// <para>
+	/// Create or update a user profile on behalf of another user.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -65,7 +71,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a user profile on behalf of another user.
+	/// Activate a user profile.
+	/// </para>
+	/// <para>
+	/// Create or update a user profile on behalf of another user.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -78,7 +87,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a user profile on behalf of another user.
+	/// Activate a user profile.
+	/// </para>
+	/// <para>
+	/// Create or update a user profile on behalf of another user.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,6 +105,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Authenticate a user.
+	/// </para>
+	/// <para>
 	/// Authenticates a user and returns information about the authenticated user.
 	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
@@ -109,6 +123,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Authenticate a user.
+	/// </para>
+	/// <para>
 	/// Authenticates a user and returns information about the authenticated user.
 	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
@@ -125,6 +141,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Authenticate a user.
+	/// </para>
+	/// <para>
 	/// Authenticates a user and returns information about the authenticated user.
 	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
@@ -142,6 +160,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Authenticate a user.
+	/// </para>
+	/// <para>
 	/// Authenticates a user and returns information about the authenticated user.
 	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
@@ -159,6 +179,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Bulk delete roles.
+	/// </para>
+	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
@@ -171,6 +194,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk delete roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
@@ -185,6 +211,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Bulk delete roles.
+	/// </para>
+	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
@@ -198,6 +227,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk delete roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
@@ -214,6 +246,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
+	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
@@ -226,6 +261,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
@@ -240,6 +278,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
+	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
@@ -253,6 +294,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
@@ -269,6 +313,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
+	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
@@ -281,6 +328,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
@@ -295,6 +345,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Bulk create or update roles.
+	/// </para>
 	/// <para>
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
@@ -311,7 +364,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts a subset of all entries from the API key cache.
+	/// Clear the API key cache.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -324,7 +380,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts a subset of all entries from the API key cache.
+	/// Clear the API key cache.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -337,7 +396,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts a subset of all entries from the API key cache.
+	/// Clear the API key cache.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -351,7 +413,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts a subset of all entries from the API key cache.
+	/// Clear the API key cache.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -366,7 +431,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts application privileges from the native application privileges cache.
+	/// Clear the privileges cache.
+	/// </para>
+	/// <para>
+	/// Evict privileges from the native application privilege cache.
+	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -378,7 +447,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts application privileges from the native application privileges cache.
+	/// Clear the privileges cache.
+	/// </para>
+	/// <para>
+	/// Evict privileges from the native application privilege cache.
+	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -390,7 +463,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts application privileges from the native application privileges cache.
+	/// Clear the privileges cache.
+	/// </para>
+	/// <para>
+	/// Evict privileges from the native application privilege cache.
+	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -403,7 +480,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts application privileges from the native application privileges cache.
+	/// Clear the privileges cache.
+	/// </para>
+	/// <para>
+	/// Evict privileges from the native application privilege cache.
+	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -417,7 +498,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+	/// Clear the user cache.
+	/// </para>
+	/// <para>
+	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -429,7 +513,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+	/// Clear the user cache.
+	/// </para>
+	/// <para>
+	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -441,7 +528,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+	/// Clear the user cache.
+	/// </para>
+	/// <para>
+	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -454,7 +544,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts users from the user cache. Can completely clear the cache or evict specific users.
+	/// Clear the user cache.
+	/// </para>
+	/// <para>
+	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -468,7 +561,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts roles from the native role cache.
+	/// Clear the roles cache.
+	/// </para>
+	/// <para>
+	/// Evict roles from the native role cache.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -480,7 +576,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts roles from the native role cache.
+	/// Clear the roles cache.
+	/// </para>
+	/// <para>
+	/// Evict roles from the native role cache.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -492,7 +591,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts roles from the native role cache.
+	/// Clear the roles cache.
+	/// </para>
+	/// <para>
+	/// Evict roles from the native role cache.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -505,7 +607,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts roles from the native role cache.
+	/// Clear the roles cache.
+	/// </para>
+	/// <para>
+	/// Evict roles from the native role cache.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -519,7 +624,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts tokens from the service account token caches.
+	/// Clear service account token caches.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the service account token caches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -531,7 +639,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts tokens from the service account token caches.
+	/// Clear service account token caches.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the service account token caches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -543,7 +654,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts tokens from the service account token caches.
+	/// Clear service account token caches.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the service account token caches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -556,7 +670,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Evicts tokens from the service account token caches.
+	/// Clear service account token caches.
+	/// </para>
+	/// <para>
+	/// Evict a subset of all entries from the service account token caches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -571,7 +688,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -587,7 +706,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -603,7 +724,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -620,7 +743,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -638,7 +763,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -654,7 +781,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -671,7 +800,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an API key.
-	/// Creates an API key for access without requiring basic authentication.
+	/// </para>
+	/// <para>
+	/// Create an API key for access without requiring basic authentication.
 	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 	/// If applicable, it also returns expiration information for the API key in milliseconds.
 	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -688,7 +819,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -700,7 +834,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -712,7 +849,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -725,7 +865,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -739,7 +882,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -752,7 +898,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a service accounts token for access without requiring basic authentication.
+	/// Create a service account token.
+	/// </para>
+	/// <para>
+	/// Create a service accounts token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -766,7 +915,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes application privileges.
+	/// Delete application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -778,7 +927,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes application privileges.
+	/// Delete application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -790,7 +939,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes application privileges.
+	/// Delete application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -803,7 +952,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes application privileges.
+	/// Delete application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -817,7 +966,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes roles in the native realm.
+	/// Delete roles.
+	/// </para>
+	/// <para>
+	/// Delete roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -829,7 +981,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes roles in the native realm.
+	/// Delete roles.
+	/// </para>
+	/// <para>
+	/// Delete roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -841,7 +996,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes roles in the native realm.
+	/// Delete roles.
+	/// </para>
+	/// <para>
+	/// Delete roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -854,7 +1012,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes roles in the native realm.
+	/// Delete roles.
+	/// </para>
+	/// <para>
+	/// Delete roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -868,7 +1029,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes role mappings.
+	/// Delete role mappings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -880,7 +1041,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes role mappings.
+	/// Delete role mappings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -892,7 +1053,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes role mappings.
+	/// Delete role mappings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -905,7 +1066,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Removes role mappings.
+	/// Delete role mappings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -919,7 +1080,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a service account token.
+	/// Delete service account tokens.
+	/// </para>
+	/// <para>
+	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -931,7 +1095,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a service account token.
+	/// Delete service account tokens.
+	/// </para>
+	/// <para>
+	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -943,7 +1110,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a service account token.
+	/// Delete service account tokens.
+	/// </para>
+	/// <para>
+	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -956,7 +1126,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a service account token.
+	/// Delete service account tokens.
+	/// </para>
+	/// <para>
+	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -970,7 +1143,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Disables a user profile so it's not visible in user profile searches.
+	/// Disable a user profile.
+	/// </para>
+	/// <para>
+	/// Disable user profiles so that they are not visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -982,7 +1158,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Disables a user profile so it's not visible in user profile searches.
+	/// Disable a user profile.
+	/// </para>
+	/// <para>
+	/// Disable user profiles so that they are not visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -994,7 +1173,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Disables a user profile so it's not visible in user profile searches.
+	/// Disable a user profile.
+	/// </para>
+	/// <para>
+	/// Disable user profiles so that they are not visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1007,7 +1189,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Disables a user profile so it's not visible in user profile searches.
+	/// Disable a user profile.
+	/// </para>
+	/// <para>
+	/// Disable user profiles so that they are not visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1021,7 +1206,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables a user profile so it's visible in user profile searches.
+	/// Enable a user profile.
+	/// </para>
+	/// <para>
+	/// Enable user profiles to make them visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1033,7 +1221,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables a user profile so it's visible in user profile searches.
+	/// Enable a user profile.
+	/// </para>
+	/// <para>
+	/// Enable user profiles to make them visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1045,7 +1236,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables a user profile so it's visible in user profile searches.
+	/// Enable a user profile.
+	/// </para>
+	/// <para>
+	/// Enable user profiles to make them visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1058,7 +1252,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Enables a user profile so it's visible in user profile searches.
+	/// Enable a user profile.
+	/// </para>
+	/// <para>
+	/// Enable user profiles to make them visible in user profile searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1073,6 +1270,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get API key information.
+	/// </para>
+	/// <para>
 	/// Retrieves information for one or more API keys.
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
@@ -1088,6 +1287,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get API key information.
+	/// </para>
+	/// <para>
 	/// Retrieves information for one or more API keys.
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
@@ -1103,6 +1304,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get API key information.
+	/// </para>
+	/// <para>
 	/// Retrieves information for one or more API keys.
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
@@ -1119,6 +1322,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get API key information.
+	/// </para>
+	/// <para>
 	/// Retrieves information for one or more API keys.
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
@@ -1135,7 +1340,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+	/// Get builtin privileges.
+	/// </para>
+	/// <para>
+	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1147,7 +1355,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+	/// Get builtin privileges.
+	/// </para>
+	/// <para>
+	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1159,7 +1370,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+	/// Get builtin privileges.
+	/// </para>
+	/// <para>
+	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1172,7 +1386,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+	/// Get builtin privileges.
+	/// </para>
+	/// <para>
+	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1186,7 +1403,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1198,7 +1415,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1210,7 +1427,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1223,7 +1440,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1237,7 +1454,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1250,7 +1467,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves application privileges.
+	/// Get application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1264,8 +1481,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1277,8 +1496,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1290,8 +1511,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1304,8 +1527,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1319,8 +1544,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1333,8 +1560,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The get roles API cannot retrieve roles that are defined in roles files.
+	/// Get roles.
+	/// </para>
+	/// <para>
+	/// Get roles in the native realm.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1348,7 +1577,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1360,7 +1594,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1372,7 +1611,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1385,7 +1629,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1399,7 +1648,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1412,7 +1666,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves role mappings.
+	/// Get role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1426,7 +1685,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1438,7 +1700,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1450,7 +1715,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1463,7 +1731,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1477,7 +1748,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1490,7 +1764,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API returns a list of service accounts that match the provided path parameter(s).
+	/// Get service accounts.
+	/// </para>
+	/// <para>
+	/// Get a list of service accounts that match the provided path parameters.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1504,7 +1781,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information of all service credentials for a service account.
+	/// Get service account credentials.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1516,7 +1793,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information of all service credentials for a service account.
+	/// Get service account credentials.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1528,7 +1805,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information of all service credentials for a service account.
+	/// Get service account credentials.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1541,7 +1818,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information of all service credentials for a service account.
+	/// Get service account credentials.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1555,7 +1832,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a bearer token for access without requiring basic authentication.
+	/// Get a token.
+	/// </para>
+	/// <para>
+	/// Create a bearer token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1567,7 +1847,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a bearer token for access without requiring basic authentication.
+	/// Get a token.
+	/// </para>
+	/// <para>
+	/// Create a bearer token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1579,7 +1862,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a bearer token for access without requiring basic authentication.
+	/// Get a token.
+	/// </para>
+	/// <para>
+	/// Create a bearer token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1592,7 +1878,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a bearer token for access without requiring basic authentication.
+	/// Get a token.
+	/// </para>
+	/// <para>
+	/// Create a bearer token for access without requiring basic authentication.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1606,7 +1895,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves security privileges for the logged in user.
+	/// Get user privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1618,7 +1907,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves security privileges for the logged in user.
+	/// Get user privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1630,7 +1919,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves security privileges for the logged in user.
+	/// Get user privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1643,7 +1932,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves security privileges for the logged in user.
+	/// Get user privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1657,7 +1946,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a user's profile using the unique profile ID.
+	/// Get a user profile.
+	/// </para>
+	/// <para>
+	/// Get a user's profile using the unique profile ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1669,7 +1961,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a user's profile using the unique profile ID.
+	/// Get a user profile.
+	/// </para>
+	/// <para>
+	/// Get a user's profile using the unique profile ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1681,7 +1976,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a user's profile using the unique profile ID.
+	/// Get a user profile.
+	/// </para>
+	/// <para>
+	/// Get a user's profile using the unique profile ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1694,7 +1992,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a user's profile using the unique profile ID.
+	/// Get a user profile.
+	/// </para>
+	/// <para>
+	/// Get a user's profile using the unique profile ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1708,8 +2009,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1735,8 +2039,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1762,8 +2069,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1790,8 +2100,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1819,8 +2132,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1846,8 +2162,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1874,8 +2193,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates an API key on behalf of another user.
-	/// This API is similar to Create API keys, however it creates the API key for a user that is different than the user that runs the API.
+	/// Grant an API key.
+	/// </para>
+	/// <para>
+	/// Create an API key on behalf of another user.
+	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
 	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
 	/// It is not possible to use this API to create an API key without that user’s credentials.
 	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
@@ -1904,7 +2226,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1917,7 +2241,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1930,7 +2256,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1944,7 +2272,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1959,7 +2289,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1973,7 +2305,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check user privileges.
-	/// Determines whether the specified user has a specified list of privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the specified user has a specified list of privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1987,7 +2321,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+	/// Check user profile privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1999,7 +2336,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+	/// Check user profile privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2011,7 +2351,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+	/// Check user profile privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2024,7 +2367,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+	/// Check user profile privileges.
+	/// </para>
+	/// <para>
+	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2039,7 +2385,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Invalidate API keys.
-	/// Invalidates one or more API keys.
+	/// </para>
+	/// <para>
+	/// This API invalidates API keys created by the create API key or grant API key APIs.
+	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
 	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -2057,7 +2406,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </item>
 	/// <item>
 	/// <para>
-	/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 	/// </para>
 	/// </item>
 	/// </list>
@@ -2072,7 +2421,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Invalidate API keys.
-	/// Invalidates one or more API keys.
+	/// </para>
+	/// <para>
+	/// This API invalidates API keys created by the create API key or grant API key APIs.
+	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
 	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -2090,7 +2442,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </item>
 	/// <item>
 	/// <para>
-	/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 	/// </para>
 	/// </item>
 	/// </list>
@@ -2105,7 +2457,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Invalidate API keys.
-	/// Invalidates one or more API keys.
+	/// </para>
+	/// <para>
+	/// This API invalidates API keys created by the create API key or grant API key APIs.
+	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
 	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -2123,7 +2478,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </item>
 	/// <item>
 	/// <para>
-	/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 	/// </para>
 	/// </item>
 	/// </list>
@@ -2139,7 +2494,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Invalidate API keys.
-	/// Invalidates one or more API keys.
+	/// </para>
+	/// <para>
+	/// This API invalidates API keys created by the create API key or grant API key APIs.
+	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
 	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -2157,7 +2515,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </item>
 	/// <item>
 	/// <para>
-	/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 	/// </para>
 	/// </item>
 	/// </list>
@@ -2173,7 +2531,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Invalidates one or more access tokens or refresh tokens.
+	/// Invalidate a token.
+	/// </para>
+	/// <para>
+	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+	/// After that time period, they can no longer be used.
+	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+	/// </para>
+	/// <para>
+	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2185,7 +2552,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Invalidates one or more access tokens or refresh tokens.
+	/// Invalidate a token.
+	/// </para>
+	/// <para>
+	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+	/// After that time period, they can no longer be used.
+	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+	/// </para>
+	/// <para>
+	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2197,7 +2573,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Invalidates one or more access tokens or refresh tokens.
+	/// Invalidate a token.
+	/// </para>
+	/// <para>
+	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+	/// After that time period, they can no longer be used.
+	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+	/// </para>
+	/// <para>
+	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2210,7 +2595,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Invalidates one or more access tokens or refresh tokens.
+	/// Invalidate a token.
+	/// </para>
+	/// <para>
+	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+	/// After that time period, they can no longer be used.
+	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+	/// </para>
+	/// <para>
+	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2224,7 +2618,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds or updates application privileges.
+	/// Create or update application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2236,7 +2630,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds or updates application privileges.
+	/// Create or update application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2248,7 +2642,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds or updates application privileges.
+	/// Create or update application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2261,7 +2655,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Adds or updates application privileges.
+	/// Create or update application privileges.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2275,8 +2669,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2288,8 +2686,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2301,8 +2703,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2315,8 +2721,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2330,8 +2740,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2343,8 +2757,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2357,8 +2775,12 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+	/// Create or update roles.
+	/// </para>
+	/// <para>
+	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 	/// The create or update roles API cannot update roles that are defined in roles files.
+	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2372,7 +2794,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates and updates role mappings.
+	/// Create or update role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+	/// </para>
+	/// <para>
+	/// This API does not create roles. Rather, it maps users to existing roles.
+	/// Roles can be created by using the create or update roles API or roles files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2384,7 +2815,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates and updates role mappings.
+	/// Create or update role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+	/// </para>
+	/// <para>
+	/// This API does not create roles. Rather, it maps users to existing roles.
+	/// Roles can be created by using the create or update roles API or roles files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2396,7 +2836,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates and updates role mappings.
+	/// Create or update role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+	/// </para>
+	/// <para>
+	/// This API does not create roles. Rather, it maps users to existing roles.
+	/// Roles can be created by using the create or update roles API or roles files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2409,7 +2858,16 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates and updates role mappings.
+	/// Create or update role mappings.
+	/// </para>
+	/// <para>
+	/// Role mappings define which roles are assigned to each user.
+	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+	/// </para>
+	/// <para>
+	/// This API does not create roles. Rather, it maps users to existing roles.
+	/// Roles can be created by using the create or update roles API or roles files.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2423,8 +2881,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2436,8 +2896,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2449,8 +2911,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2463,8 +2927,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2478,8 +2944,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2491,8 +2959,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2505,8 +2975,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Query API keys.
-	/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+	/// Find API keys with a query.
+	/// </para>
+	/// <para>
+	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2520,7 +2992,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2532,7 +3007,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2544,7 +3022,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2557,7 +3038,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2571,7 +3055,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2583,7 +3070,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2596,7 +3086,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+	/// Find roles with a query.
+	/// </para>
+	/// <para>
+	/// Get roles in a paginated manner. You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2610,7 +3103,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2622,7 +3119,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2634,7 +3135,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2647,7 +3152,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2661,7 +3170,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2673,7 +3186,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2686,7 +3203,11 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+	/// Find users with a query.
+	/// </para>
+	/// <para>
+	/// Get information for users in a paginated manner.
+	/// You can optionally filter the results with a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2700,7 +3221,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Submits a SAML Response message to Elasticsearch for consumption.
+	/// Authenticate SAML.
+	/// </para>
+	/// <para>
+	/// Submits a SAML response message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2712,7 +3236,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Submits a SAML Response message to Elasticsearch for consumption.
+	/// Authenticate SAML.
+	/// </para>
+	/// <para>
+	/// Submits a SAML response message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2724,7 +3251,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Submits a SAML Response message to Elasticsearch for consumption.
+	/// Authenticate SAML.
+	/// </para>
+	/// <para>
+	/// Submits a SAML response message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2737,7 +3267,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Submits a SAML Response message to Elasticsearch for consumption.
+	/// Authenticate SAML.
+	/// </para>
+	/// <para>
+	/// Submits a SAML response message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2751,6 +3284,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Logout of SAML completely.
+	/// </para>
+	/// <para>
 	/// Verifies the logout response sent from the SAML IdP.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2762,6 +3298,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Logout of SAML completely.
+	/// </para>
 	/// <para>
 	/// Verifies the logout response sent from the SAML IdP.
 	/// </para>
@@ -2775,6 +3314,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Logout of SAML completely.
+	/// </para>
+	/// <para>
 	/// Verifies the logout response sent from the SAML IdP.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2787,6 +3329,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Logout of SAML completely.
+	/// </para>
 	/// <para>
 	/// Verifies the logout response sent from the SAML IdP.
 	/// </para>
@@ -2802,6 +3347,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Invalidate SAML.
+	/// </para>
+	/// <para>
 	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2813,6 +3361,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Invalidate SAML.
+	/// </para>
 	/// <para>
 	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 	/// </para>
@@ -2826,6 +3377,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Invalidate SAML.
+	/// </para>
+	/// <para>
 	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2838,6 +3392,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Invalidate SAML.
+	/// </para>
 	/// <para>
 	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 	/// </para>
@@ -2853,6 +3410,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Logout of SAML.
+	/// </para>
+	/// <para>
 	/// Submits a request to invalidate an access token and refresh token.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2864,6 +3424,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Logout of SAML.
+	/// </para>
 	/// <para>
 	/// Submits a request to invalidate an access token and refresh token.
 	/// </para>
@@ -2877,6 +3440,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Logout of SAML.
+	/// </para>
+	/// <para>
 	/// Submits a request to invalidate an access token and refresh token.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2889,6 +3455,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Logout of SAML.
+	/// </para>
 	/// <para>
 	/// Submits a request to invalidate an access token and refresh token.
 	/// </para>
@@ -2904,7 +3473,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+	/// Prepare SAML authentication.
+	/// </para>
+	/// <para>
+	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2916,7 +3488,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+	/// Prepare SAML authentication.
+	/// </para>
+	/// <para>
+	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2928,7 +3503,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+	/// Prepare SAML authentication.
+	/// </para>
+	/// <para>
+	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2941,7 +3519,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+	/// Prepare SAML authentication.
+	/// </para>
+	/// <para>
+	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2955,6 +3536,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Create SAML service provider metadata.
+	/// </para>
+	/// <para>
 	/// Generate SAML metadata for a SAML 2.0 Service Provider.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2966,6 +3550,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Create SAML service provider metadata.
+	/// </para>
 	/// <para>
 	/// Generate SAML metadata for a SAML 2.0 Service Provider.
 	/// </para>
@@ -2979,6 +3566,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Create SAML service provider metadata.
+	/// </para>
+	/// <para>
 	/// Generate SAML metadata for a SAML 2.0 Service Provider.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -2991,6 +3581,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Create SAML service provider metadata.
+	/// </para>
 	/// <para>
 	/// Generate SAML metadata for a SAML 2.0 Service Provider.
 	/// </para>
@@ -3006,6 +3599,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Suggest a user profile.
+	/// </para>
+	/// <para>
 	/// Get suggestions for user profiles that match specified search criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3017,6 +3613,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Suggest a user profile.
+	/// </para>
 	/// <para>
 	/// Get suggestions for user profiles that match specified search criteria.
 	/// </para>
@@ -3030,6 +3629,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Suggest a user profile.
+	/// </para>
+	/// <para>
 	/// Get suggestions for user profiles that match specified search criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3042,6 +3644,9 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>
+	/// Suggest a user profile.
+	/// </para>
 	/// <para>
 	/// Get suggestions for user profiles that match specified search criteria.
 	/// </para>
@@ -3058,6 +3663,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3083,6 +3690,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3108,6 +3717,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3134,6 +3745,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3161,6 +3774,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3186,6 +3801,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3212,6 +3829,8 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Update an API key.
+	/// </para>
+	/// <para>
 	/// Updates attributes of an existing API key.
 	/// Users can only update API keys that they created or that were granted to them.
 	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -3238,7 +3857,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates specific data for the user profile that's associated with the specified unique ID.
+	/// Update user profile data.
+	/// </para>
+	/// <para>
+	/// Update specific data for the user profile that is associated with a unique ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3250,7 +3872,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates specific data for the user profile that's associated with the specified unique ID.
+	/// Update user profile data.
+	/// </para>
+	/// <para>
+	/// Update specific data for the user profile that is associated with a unique ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3262,7 +3887,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates specific data for the user profile that's associated with the specified unique ID.
+	/// Update user profile data.
+	/// </para>
+	/// <para>
+	/// Update specific data for the user profile that is associated with a unique ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3275,7 +3903,10 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Updates specific data for the user profile that's associated with the specified unique ID.
+	/// Update user profile data.
+	/// </para>
+	/// <para>
+	/// Update specific data for the user profile that is associated with a unique ID.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

@@ -37,6 +37,8 @@ public sealed partial class AuthenticateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Authenticate a user.
+/// </para>
+/// <para>
 /// Authenticates a user and returns information about the authenticated user.
 /// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 /// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
@@ -57,6 +59,8 @@ public sealed partial class AuthenticateRequest : PlainRequest<AuthenticateReque
 /// <summary>
 /// <para>
 /// Authenticate a user.
+/// </para>
+/// <para>
 /// Authenticates a user and returns information about the authenticated user.
 /// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
 /// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.

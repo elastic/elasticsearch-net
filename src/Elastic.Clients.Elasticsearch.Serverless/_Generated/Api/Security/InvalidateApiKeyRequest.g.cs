@@ -37,7 +37,10 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// <summary>
 /// <para>
 /// Invalidate API keys.
-/// Invalidates one or more API keys.
+/// </para>
+/// <para>
+/// This API invalidates API keys created by the create API key or grant API key APIs.
+/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 /// The <c>manage_api_key</c> privilege allows deleting any API keys.
 /// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -55,7 +58,7 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// </item>
 /// <item>
 /// <para>
-/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 /// </para>
 /// </item>
 /// </list>
@@ -122,7 +125,10 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// <summary>
 /// <para>
 /// Invalidate API keys.
-/// Invalidates one or more API keys.
+/// </para>
+/// <para>
+/// This API invalidates API keys created by the create API key or grant API key APIs.
+/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
 /// The <c>manage_api_key</c> privilege allows deleting any API keys.
 /// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
@@ -140,7 +146,7 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// </item>
 /// <item>
 /// <para>
-/// Or, if the request is issued by an API key, i.e. an API key invalidates itself, specify its ID in the <c>ids</c> field.
+/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
 /// </para>
 /// </item>
 /// </list>

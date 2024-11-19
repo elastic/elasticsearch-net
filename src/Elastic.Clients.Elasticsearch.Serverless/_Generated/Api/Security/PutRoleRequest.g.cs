@@ -42,8 +42,12 @@ public sealed partial class PutRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParameters>
@@ -127,8 +131,12 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescriptor<PutRoleRequestDescriptor<TDocument>, PutRoleRequestParameters>
@@ -407,8 +415,12 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRoleRequestDescriptor, PutRoleRequestParameters>

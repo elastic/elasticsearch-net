@@ -44,7 +44,7 @@ public sealed partial class PutPrivilegesRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Adds or updates application privileges.
+/// Create or update application privileges.
 /// </para>
 /// </summary>
 public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesRequestParameters>, ISelfSerializable
@@ -74,7 +74,7 @@ public sealed partial class PutPrivilegesRequest : PlainRequest<PutPrivilegesReq
 
 /// <summary>
 /// <para>
-/// Adds or updates application privileges.
+/// Create or update application privileges.
 /// </para>
 /// </summary>
 public sealed partial class PutPrivilegesRequestDescriptor : RequestDescriptor<PutPrivilegesRequestDescriptor, PutPrivilegesRequestParameters>, ISelfSerializable

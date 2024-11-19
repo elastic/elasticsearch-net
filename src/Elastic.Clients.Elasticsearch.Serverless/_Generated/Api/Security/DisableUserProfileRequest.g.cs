@@ -44,7 +44,10 @@ public sealed partial class DisableUserProfileRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Disables a user profile so it's not visible in user profile searches.
+/// Disable a user profile.
+/// </para>
+/// <para>
+/// Disable user profiles so that they are not visible in user profile searches.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserProfileRequest : PlainRequest<DisableUserProfileRequestParameters>
@@ -74,7 +77,10 @@ public sealed partial class DisableUserProfileRequest : PlainRequest<DisableUser
 
 /// <summary>
 /// <para>
-/// Disables a user profile so it's not visible in user profile searches.
+/// Disable a user profile.
+/// </para>
+/// <para>
+/// Disable user profiles so that they are not visible in user profile searches.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserProfileRequestDescriptor : RequestDescriptor<DisableUserProfileRequestDescriptor, DisableUserProfileRequestParameters>

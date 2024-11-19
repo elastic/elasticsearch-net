@@ -48,7 +48,9 @@ public sealed partial class Retriever
 
 	public static Retriever Knn(Elastic.Clients.Elasticsearch.Serverless.KnnRetriever knnRetriever) => new Retriever("knn", knnRetriever);
 	public static Retriever Rrf(Elastic.Clients.Elasticsearch.Serverless.RRFRetriever rRFRetriever) => new Retriever("rrf", rRFRetriever);
+	public static Retriever Rule(Elastic.Clients.Elasticsearch.Serverless.RuleRetriever ruleRetriever) => new Retriever("rule", ruleRetriever);
 	public static Retriever Standard(Elastic.Clients.Elasticsearch.Serverless.StandardRetriever standardRetriever) => new Retriever("standard", standardRetriever);
+	public static Retriever TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker textSimilarityReranker) => new Retriever("text_similarity_reranker", textSimilarityReranker);
 
 	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
 	{
@@ -102,9 +104,23 @@ internal sealed partial class RetrieverConverter : JsonConverter<Retriever>
 				continue;
 			}
 
+			if (propertyName == "rule")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.RuleRetriever?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "standard")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.StandardRetriever?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "text_similarity_reranker")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -130,8 +146,14 @@ internal sealed partial class RetrieverConverter : JsonConverter<Retriever>
 				case "rrf":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.RRFRetriever>(writer, (Elastic.Clients.Elasticsearch.Serverless.RRFRetriever)value.Variant, options);
 					break;
+				case "rule":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.RuleRetriever>(writer, (Elastic.Clients.Elasticsearch.Serverless.RuleRetriever)value.Variant, options);
+					break;
 				case "standard":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.StandardRetriever>(writer, (Elastic.Clients.Elasticsearch.Serverless.StandardRetriever)value.Variant, options);
+					break;
+				case "text_similarity_reranker":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker>(writer, (Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker)value.Variant, options);
 					break;
 			}
 		}
@@ -175,8 +197,12 @@ public sealed partial class RetrieverDescriptor<TDocument> : SerializableDescrip
 	public RetrieverDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.Serverless.KnnRetrieverDescriptor<TDocument>> configure) => Set(configure, "knn");
 	public RetrieverDescriptor<TDocument> Rrf(Elastic.Clients.Elasticsearch.Serverless.RRFRetriever rRFRetriever) => Set(rRFRetriever, "rrf");
 	public RetrieverDescriptor<TDocument> Rrf(Action<Elastic.Clients.Elasticsearch.Serverless.RRFRetrieverDescriptor<TDocument>> configure) => Set(configure, "rrf");
+	public RetrieverDescriptor<TDocument> Rule(Elastic.Clients.Elasticsearch.Serverless.RuleRetriever ruleRetriever) => Set(ruleRetriever, "rule");
+	public RetrieverDescriptor<TDocument> Rule(Action<Elastic.Clients.Elasticsearch.Serverless.RuleRetrieverDescriptor<TDocument>> configure) => Set(configure, "rule");
 	public RetrieverDescriptor<TDocument> Standard(Elastic.Clients.Elasticsearch.Serverless.StandardRetriever standardRetriever) => Set(standardRetriever, "standard");
 	public RetrieverDescriptor<TDocument> Standard(Action<Elastic.Clients.Elasticsearch.Serverless.StandardRetrieverDescriptor<TDocument>> configure) => Set(configure, "standard");
+	public RetrieverDescriptor<TDocument> TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker textSimilarityReranker) => Set(textSimilarityReranker, "text_similarity_reranker");
+	public RetrieverDescriptor<TDocument> TextSimilarityReranker(Action<Elastic.Clients.Elasticsearch.Serverless.TextSimilarityRerankerDescriptor<TDocument>> configure) => Set(configure, "text_similarity_reranker");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -233,8 +259,12 @@ public sealed partial class RetrieverDescriptor : SerializableDescriptor<Retriev
 	public RetrieverDescriptor Knn<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.KnnRetrieverDescriptor> configure) => Set(configure, "knn");
 	public RetrieverDescriptor Rrf(Elastic.Clients.Elasticsearch.Serverless.RRFRetriever rRFRetriever) => Set(rRFRetriever, "rrf");
 	public RetrieverDescriptor Rrf<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.RRFRetrieverDescriptor> configure) => Set(configure, "rrf");
+	public RetrieverDescriptor Rule(Elastic.Clients.Elasticsearch.Serverless.RuleRetriever ruleRetriever) => Set(ruleRetriever, "rule");
+	public RetrieverDescriptor Rule<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.RuleRetrieverDescriptor> configure) => Set(configure, "rule");
 	public RetrieverDescriptor Standard(Elastic.Clients.Elasticsearch.Serverless.StandardRetriever standardRetriever) => Set(standardRetriever, "standard");
 	public RetrieverDescriptor Standard<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.StandardRetrieverDescriptor> configure) => Set(configure, "standard");
+	public RetrieverDescriptor TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serverless.TextSimilarityReranker textSimilarityReranker) => Set(textSimilarityReranker, "text_similarity_reranker");
+	public RetrieverDescriptor TextSimilarityReranker<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.TextSimilarityRerankerDescriptor> configure) => Set(configure, "text_similarity_reranker");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

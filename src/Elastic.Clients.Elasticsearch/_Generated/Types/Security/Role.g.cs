@@ -32,13 +32,17 @@ public sealed partial class Role
 	[JsonInclude, JsonPropertyName("applications")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications { get; init; }
 	[JsonInclude, JsonPropertyName("cluster")]
-	public IReadOnlyCollection<string> Cluster { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; init; }
 	[JsonInclude, JsonPropertyName("global")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyCollection<string>>>>? Global { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; init; }
 	[JsonInclude, JsonPropertyName("metadata")]
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
+	[JsonInclude, JsonPropertyName("remote_cluster")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
+	[JsonInclude, JsonPropertyName("remote_indices")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; init; }
 	[JsonInclude, JsonPropertyName("role_templates")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; init; }
 	[JsonInclude, JsonPropertyName("run_as")]
