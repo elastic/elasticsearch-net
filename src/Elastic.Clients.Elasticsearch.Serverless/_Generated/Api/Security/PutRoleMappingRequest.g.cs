@@ -42,7 +42,16 @@ public sealed partial class PutRoleMappingRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates and updates role mappings.
+/// Create or update role mappings.
+/// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+/// </para>
+/// <para>
+/// This API does not create roles. Rather, it maps users to existing roles.
+/// Roles can be created by using the create or update roles API or roles files.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingRequestParameters>
@@ -82,7 +91,16 @@ public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingR
 
 /// <summary>
 /// <para>
-/// Creates and updates role mappings.
+/// Create or update role mappings.
+/// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// Each mapping has rules that identify users and a list of roles that are granted to those users.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+/// </para>
+/// <para>
+/// This API does not create roles. Rather, it maps users to existing roles.
+/// Roles can be created by using the create or update roles API or roles files.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleMappingRequestDescriptor : RequestDescriptor<PutRoleMappingRequestDescriptor, PutRoleMappingRequestParameters>

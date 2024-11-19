@@ -36,7 +36,10 @@ public sealed partial class ActivateUserProfileRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Creates or updates a user profile on behalf of another user.
+/// Activate a user profile.
+/// </para>
+/// <para>
+/// Create or update a user profile on behalf of another user.
 /// </para>
 /// </summary>
 public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUserProfileRequestParameters>
@@ -61,7 +64,10 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 
 /// <summary>
 /// <para>
-/// Creates or updates a user profile on behalf of another user.
+/// Activate a user profile.
+/// </para>
+/// <para>
+/// Create or update a user profile on behalf of another user.
 /// </para>
 /// </summary>
 public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescriptor<ActivateUserProfileRequestDescriptor, ActivateUserProfileRequestParameters>

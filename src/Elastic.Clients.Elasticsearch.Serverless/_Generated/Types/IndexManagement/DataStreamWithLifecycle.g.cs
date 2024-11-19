@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStreamWithLifecycle
 {
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? Lifecycle { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

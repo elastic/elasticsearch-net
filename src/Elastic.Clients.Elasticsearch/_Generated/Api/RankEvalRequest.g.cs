@@ -63,7 +63,10 @@ public sealed partial class RankEvalRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// Evaluate ranked search results.
+/// </para>
+/// <para>
+/// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
 public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
@@ -135,7 +138,10 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 
 /// <summary>
 /// <para>
-/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// Evaluate ranked search results.
+/// </para>
+/// <para>
+/// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
 public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescriptor<RankEvalRequestDescriptor<TDocument>, RankEvalRequestParameters>
@@ -303,7 +309,10 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+/// Evaluate ranked search results.
+/// </para>
+/// <para>
+/// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
 public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEvalRequestDescriptor, RankEvalRequestParameters>

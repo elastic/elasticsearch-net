@@ -29,24 +29,88 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowerIndexParameters
 {
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
-	public int MaxOutstandingReadRequests { get; init; }
+	public long? MaxOutstandingReadRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding write requests on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
-	public int MaxOutstandingWriteRequests { get; init; }
+	public int? MaxOutstandingWriteRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_read_request_operation_count")]
-	public int MaxReadRequestOperationCount { get; init; }
+	public int? MaxReadRequestOperationCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_read_request_size")]
-	public string MaxReadRequestSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+	/// retrying.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_retry_delay")]
-	public Elastic.Clients.Elasticsearch.Duration MaxRetryDelay { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+	/// deferred until the number of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_buffer_count")]
-	public int MaxWriteBufferCount { get; init; }
+	public int? MaxWriteBufferCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_buffer_size")]
-	public string MaxWriteBufferSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_request_operation_count")]
-	public int MaxWriteRequestOperationCount { get; init; }
+	public int? MaxWriteRequestOperationCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_write_request_size")]
-	public string MaxWriteRequestSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+	/// Then the follower will immediately attempt to read from the leader again.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("read_poll_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration ReadPollTimeout { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; init; }
 }

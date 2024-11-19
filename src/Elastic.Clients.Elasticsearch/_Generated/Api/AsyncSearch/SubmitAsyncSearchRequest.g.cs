@@ -138,7 +138,6 @@ public sealed partial class SubmitAsyncSearchRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -652,10 +651,16 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 
 /// <summary>
 /// <para>
-/// Runs a search request asynchronously.
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
-/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
-/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+/// Run an async search.
+/// </para>
+/// <para>
+/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+/// </para>
+/// <para>
+/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+/// </para>
+/// <para>
+/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
@@ -799,8 +804,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	[JsonIgnore]
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -1145,10 +1148,16 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 /// <summary>
 /// <para>
-/// Runs a search request asynchronously.
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
-/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
-/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+/// Run an async search.
+/// </para>
+/// <para>
+/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+/// </para>
+/// <para>
+/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+/// </para>
+/// <para>
+/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
@@ -1187,7 +1196,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	public SubmitAsyncSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
@@ -2264,10 +2272,16 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 
 /// <summary>
 /// <para>
-/// Runs a search request asynchronously.
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.
-/// Warning: Async search does not support scroll nor search requests that only include the suggest section.
-/// By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
+/// Run an async search.
+/// </para>
+/// <para>
+/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
+/// </para>
+/// <para>
+/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
+/// </para>
+/// <para>
+/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
 /// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
 /// </para>
 /// </summary>
@@ -2306,7 +2320,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	public SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 	public SubmitAsyncSearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SubmitAsyncSearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public SubmitAsyncSearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);

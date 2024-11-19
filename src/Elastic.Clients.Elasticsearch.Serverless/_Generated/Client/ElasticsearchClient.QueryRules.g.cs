@@ -395,4 +395,55 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutRulesetRequestDescriptor, PutRulesetResponse, PutRulesetRequestParameters>(descriptor, cancellationToken);
 	}
+
+	/// <summary>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TestResponse> TestAsync(TestRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<TestRequest, TestResponse, TestRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TestResponse> TestAsync(TestRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TestRequestDescriptor, TestResponse, TestRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TestResponse> TestAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TestRequestDescriptor(rulesetId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TestRequestDescriptor, TestResponse, TestRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Creates or updates a query ruleset.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TestResponse> TestAsync(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId, Action<TestRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TestRequestDescriptor(rulesetId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TestRequestDescriptor, TestResponse, TestRequestParameters>(descriptor, cancellationToken);
+	}
 }

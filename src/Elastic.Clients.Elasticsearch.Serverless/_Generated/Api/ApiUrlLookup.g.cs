@@ -88,6 +88,10 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementStats = new ApiUrls(new[] { "_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}" });
 	internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "_aliases" });
 	internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "_validate/query", "{index}/_validate/query" });
+	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls IngestDeleteGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database/{id}" });
 	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "_ingest/geoip/stats" });
@@ -218,6 +222,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls QueryRulesListRulesets = new ApiUrls(new[] { "_query_rules" });
 	internal static ApiUrls QueryRulesPutRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesPutRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesTest = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_test" });
 	internal static ApiUrls SecurityActivateUserProfile = new ApiUrls(new[] { "_security/profile/_activate" });
 	internal static ApiUrls SecurityAuthenticate = new ApiUrls(new[] { "_security/_authenticate" });
 	internal static ApiUrls SecurityBulkDeleteRole = new ApiUrls(new[] { "_security/role" });

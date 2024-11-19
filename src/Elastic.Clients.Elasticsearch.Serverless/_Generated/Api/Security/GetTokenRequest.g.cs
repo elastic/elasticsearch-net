@@ -36,7 +36,10 @@ public sealed partial class GetTokenRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a bearer token for access without requiring basic authentication.
+/// Get a token.
+/// </para>
+/// <para>
+/// Create a bearer token for access without requiring basic authentication.
 /// </para>
 /// </summary>
 public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParameters>
@@ -65,7 +68,10 @@ public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParame
 
 /// <summary>
 /// <para>
-/// Creates a bearer token for access without requiring basic authentication.
+/// Get a token.
+/// </para>
+/// <para>
+/// Create a bearer token for access without requiring basic authentication.
 /// </para>
 /// </summary>
 public sealed partial class GetTokenRequestDescriptor : RequestDescriptor<GetTokenRequestDescriptor, GetTokenRequestParameters>

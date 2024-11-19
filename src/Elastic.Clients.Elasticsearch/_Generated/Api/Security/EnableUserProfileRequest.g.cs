@@ -44,7 +44,10 @@ public sealed partial class EnableUserProfileRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Enables a user profile so it's visible in user profile searches.
+/// Enable a user profile.
+/// </para>
+/// <para>
+/// Enable user profiles to make them visible in user profile searches.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserProfileRequestParameters>
@@ -74,7 +77,10 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 
 /// <summary>
 /// <para>
-/// Enables a user profile so it's visible in user profile searches.
+/// Enable a user profile.
+/// </para>
+/// <para>
+/// Enable user profiles to make them visible in user profile searches.
 /// </para>
 /// </summary>
 public sealed partial class EnableUserProfileRequestDescriptor : RequestDescriptor<EnableUserProfileRequestDescriptor, EnableUserProfileRequestParameters>

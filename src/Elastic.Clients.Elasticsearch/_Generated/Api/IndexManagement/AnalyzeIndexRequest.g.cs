@@ -36,7 +36,8 @@ public sealed partial class AnalyzeIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Performs analysis on a text string and returns the resulting tokens.
+/// Get tokens from text analysis.
+/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexRequestParameters>
@@ -137,7 +138,8 @@ public sealed partial class AnalyzeIndexRequest : PlainRequest<AnalyzeIndexReque
 
 /// <summary>
 /// <para>
-/// Performs analysis on a text string and returns the resulting tokens.
+/// Get tokens from text analysis.
+/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDescriptor<AnalyzeIndexRequestDescriptor<TDocument>, AnalyzeIndexRequestParameters>
@@ -368,7 +370,8 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Performs analysis on a text string and returns the resulting tokens.
+/// Get tokens from text analysis.
+/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 /// </para>
 /// </summary>
 public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptor<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>

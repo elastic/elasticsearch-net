@@ -32,7 +32,7 @@ public sealed partial class Role
 	[JsonInclude, JsonPropertyName("applications")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Security.ApplicationPrivileges> Applications { get; init; }
 	[JsonInclude, JsonPropertyName("cluster")]
-	public IReadOnlyCollection<string> Cluster { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Security.ClusterPrivilege> Cluster { get; init; }
 	[JsonInclude, JsonPropertyName("global")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyCollection<string>>>>? Global { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]

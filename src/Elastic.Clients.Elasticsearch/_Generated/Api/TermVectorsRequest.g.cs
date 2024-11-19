@@ -115,7 +115,9 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get term vector information.
-/// Returns information and statistics about terms in the fields of a particular document.
+/// </para>
+/// <para>
+/// Get information and statistics about terms in the fields of a particular document.
 /// </para>
 /// </summary>
 public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVectorsRequestParameters>
@@ -255,7 +257,9 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 /// <summary>
 /// <para>
 /// Get term vector information.
-/// Returns information and statistics about terms in the fields of a particular document.
+/// </para>
+/// <para>
+/// Get information and statistics about terms in the fields of a particular document.
 /// </para>
 /// </summary>
 public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDescriptor<TermVectorsRequestDescriptor<TDocument>, TermVectorsRequestParameters>

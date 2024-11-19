@@ -121,7 +121,25 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Allows to execute several search operations in one request.
+/// Run multiple searches.
+/// </para>
+/// <para>
+/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+/// The structure is as follows:
+/// </para>
+/// <code>
+/// header\n
+/// body\n
+/// header\n
+/// body\n
+/// </code>
+/// <para>
+/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+/// </para>
+/// <para>
+/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+/// Each newline character may be preceded by a carriage return <c>\r</c>.
+/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequestParameters>, IStreamSerializable
@@ -264,7 +282,25 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 
 /// <summary>
 /// <para>
-/// Allows to execute several search operations in one request.
+/// Run multiple searches.
+/// </para>
+/// <para>
+/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+/// The structure is as follows:
+/// </para>
+/// <code>
+/// header\n
+/// body\n
+/// header\n
+/// body\n
+/// </code>
+/// <para>
+/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+/// </para>
+/// <para>
+/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+/// Each newline character may be preceded by a carriage return <c>\r</c>.
+/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>, IStreamSerializable
@@ -343,7 +379,25 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Allows to execute several search operations in one request.
+/// Run multiple searches.
+/// </para>
+/// <para>
+/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+/// The structure is as follows:
+/// </para>
+/// <code>
+/// header\n
+/// body\n
+/// header\n
+/// body\n
+/// </code>
+/// <para>
+/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+/// </para>
+/// <para>
+/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+/// Each newline character may be preceded by a carriage return <c>\r</c>.
+/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>, IStreamSerializable

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Security;
 public sealed partial class GetBuiltinPrivilegesResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("cluster")]
-	public IReadOnlyCollection<string> Cluster { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Security.ClusterPrivilege> Cluster { get; init; }
 	[JsonInclude, JsonPropertyName("index")]
 	public IReadOnlyCollection<string> Index { get; init; }
 }
