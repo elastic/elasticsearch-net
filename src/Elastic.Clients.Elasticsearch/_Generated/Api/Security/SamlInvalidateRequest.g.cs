@@ -36,6 +36,9 @@ public sealed partial class SamlInvalidateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Invalidate SAML.
+/// </para>
+/// <para>
 /// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 /// </para>
 /// </summary>
@@ -79,6 +82,9 @@ public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateR
 }
 
 /// <summary>
+/// <para>
+/// Invalidate SAML.
+/// </para>
 /// <para>
 /// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
 /// </para>

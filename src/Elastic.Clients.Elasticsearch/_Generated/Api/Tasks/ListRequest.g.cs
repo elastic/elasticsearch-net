@@ -65,7 +65,7 @@ public sealed partial class ListRequestParameters : RequestParameters
 	/// Comma-separated list of node IDs or names used to limit returned information.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? NodeId { get => Q<ICollection<string>?>("node_id"); set => Q("node_id", value); }
+	public Elastic.Clients.Elasticsearch.NodeIds? Nodes { get => Q<Elastic.Clients.Elasticsearch.NodeIds?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -142,7 +142,7 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public ICollection<string>? NodeId { get => Q<ICollection<string>?>("node_id"); set => Q("node_id", value); }
+	public Elastic.Clients.Elasticsearch.NodeIds? Nodes { get => Q<Elastic.Clients.Elasticsearch.NodeIds?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -194,7 +194,7 @@ public sealed partial class ListRequestDescriptor : RequestDescriptor<ListReques
 	public ListRequestDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 	public ListRequestDescriptor GroupBy(Elastic.Clients.Elasticsearch.Tasks.GroupBy? groupBy) => Qs("group_by", groupBy);
 	public ListRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public ListRequestDescriptor NodeId(ICollection<string>? nodeId) => Qs("node_id", nodeId);
+	public ListRequestDescriptor Nodes(Elastic.Clients.Elasticsearch.NodeIds? nodes) => Qs("nodes", nodes);
 	public ListRequestDescriptor ParentTaskId(Elastic.Clients.Elasticsearch.Id? parentTaskId) => Qs("parent_task_id", parentTaskId);
 	public ListRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public ListRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);

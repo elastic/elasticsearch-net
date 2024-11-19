@@ -42,7 +42,10 @@ public sealed partial class DisableUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Disables users in the native realm.
+/// Disable users.
+/// </para>
+/// <para>
+/// Disable users in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 
 /// <summary>
 /// <para>
-/// Disables users in the native realm.
+/// Disable users.
+/// </para>
+/// <para>
+/// Disable users in the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DisableUserRequestDescriptor : RequestDescriptor<DisableUserRequestDescriptor, DisableUserRequestParameters>

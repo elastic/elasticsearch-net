@@ -17,47 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.SearchApplication;
+namespace Elastic.Clients.Elasticsearch.Serverless.Security;
 
-public sealed partial class SearchApplicationListItem
+public sealed partial class Restriction
 {
-	/// <summary>
-	/// <para>
-	/// Analytics collection associated to the Search Application
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("analytics_collection_name")]
-	public string? AnalyticsCollectionName { get; init; }
+	[JsonInclude, JsonPropertyName("workflows")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionWorkflow> Workflows { get; set; }
+}
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	public IReadOnlyCollection<string> Indices { get; init; }
+public sealed partial class RestrictionDescriptor : SerializableDescriptor<RestrictionDescriptor>
+{
+	internal RestrictionDescriptor(Action<RestrictionDescriptor> configure) => configure.Invoke(this);
 
-	/// <summary>
-	/// <para>
-	/// Search Application name
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public RestrictionDescriptor() : base()
+	{
+	}
 
-	/// <summary>
-	/// <para>
-	/// Last time the Search Application was updated
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("updated_at_millis")]
-	public long UpdatedAtMillis { get; init; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionWorkflow> WorkflowsValue { get; set; }
+
+	public RestrictionDescriptor Workflows(ICollection<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionWorkflow> workflows)
+	{
+		WorkflowsValue = workflows;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("workflows");
+		JsonSerializer.Serialize(writer, WorkflowsValue, options);
+		writer.WriteEndObject();
+	}
 }

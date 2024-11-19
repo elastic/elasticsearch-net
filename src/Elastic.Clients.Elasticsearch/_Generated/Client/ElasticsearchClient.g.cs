@@ -124,7 +124,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequest request)
@@ -139,7 +139,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
@@ -153,7 +153,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(BulkRequestDescriptor<TDocument> descriptor)
@@ -168,7 +168,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -184,7 +184,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -201,7 +201,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>()
@@ -217,7 +217,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -234,7 +234,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequestDescriptor descriptor)
@@ -249,7 +249,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -265,7 +265,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest)
@@ -282,7 +282,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk()
@@ -298,7 +298,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
@@ -315,7 +315,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -329,7 +329,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -344,7 +344,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -360,7 +360,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -375,7 +375,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -391,7 +391,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -405,7 +405,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -420,7 +420,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -436,7 +436,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
 	{
@@ -451,7 +451,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -463,9 +463,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
@@ -476,9 +479,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -488,9 +494,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequestDescriptor descriptor)
@@ -501,9 +510,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll()
@@ -515,9 +527,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
@@ -530,9 +545,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -542,9 +560,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
 	{
@@ -555,9 +576,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Clears the search context and results for a scrolling search.
+	/// Clear a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Clear the search context and results for a scrolling search.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -569,9 +593,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
@@ -582,9 +612,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -594,9 +630,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequestDescriptor descriptor)
@@ -607,9 +649,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime()
@@ -621,9 +669,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
@@ -636,9 +690,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -648,9 +708,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
 	{
@@ -661,9 +727,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Closes a point-in-time.
+	/// Close a point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1990,7 +2062,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2003,7 +2079,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2015,7 +2095,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2028,7 +2112,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2042,7 +2130,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2057,7 +2149,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2069,7 +2165,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2082,7 +2182,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Delete By Query operation.
+	/// Throttle a delete by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular delete by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3533,9 +3637,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3548,9 +3658,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3562,9 +3678,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3577,9 +3699,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3593,9 +3721,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3610,9 +3744,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3626,9 +3766,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3643,9 +3789,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3658,9 +3810,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3674,9 +3832,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3691,9 +3855,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3707,9 +3877,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3724,9 +3900,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3738,9 +3920,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3753,9 +3941,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3769,9 +3963,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3784,9 +3984,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3800,9 +4006,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3814,9 +4026,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3829,9 +4047,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3845,9 +4069,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3860,9 +4090,15 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-	/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-	/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+	/// Get the field capabilities.
+	/// </para>
+	/// <para>
+	/// Get information about the capabilities of fields among multiple indices.
+	/// </para>
+	/// <para>
+	/// For data streams, the API returns field capabilities among the stream’s backing indices.
+	/// It returns runtime fields like any other field.
+	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4431,7 +4667,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4444,7 +4683,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4456,7 +4698,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4469,7 +4714,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4483,7 +4731,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4498,7 +4749,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4510,7 +4764,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4523,7 +4780,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns all script contexts.
+	/// Get script contexts.
+	/// </para>
+	/// <para>
+	/// Get a list of supported script contexts and their methods.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4537,7 +4797,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4550,7 +4813,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4562,7 +4828,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4575,7 +4844,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4589,7 +4861,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4604,7 +4879,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4616,7 +4894,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4629,7 +4910,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns available script types, languages and contexts
+	/// Get script languages.
+	/// </para>
+	/// <para>
+	/// Get a list of available script types, languages, and contexts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5587,7 +5871,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5600,7 +5890,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5612,7 +5908,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5625,7 +5927,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5639,7 +5947,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5654,7 +5968,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5668,7 +5988,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5683,7 +6009,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5696,7 +6028,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5710,7 +6048,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5725,7 +6069,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5739,7 +6089,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5754,7 +6110,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5766,7 +6128,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5779,7 +6147,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5793,7 +6167,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5806,7 +6186,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5820,7 +6206,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5832,7 +6224,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5845,7 +6243,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5859,7 +6263,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5872,7 +6282,13 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns multiple termvectors in one request.
+	/// Get multiple term vectors.
+	/// </para>
+	/// <para>
+	/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+	/// You can specify the index in the request body or request URI.
+	/// The response contains a <c>docs</c> array with all the fetched termvectors.
+	/// Each element has the structure provided by the termvectors API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5886,7 +6302,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5899,7 +6320,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5911,7 +6337,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5924,7 +6355,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5938,7 +6374,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5953,7 +6394,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5967,7 +6413,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5982,7 +6433,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -5994,7 +6450,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6007,7 +6468,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6021,7 +6487,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6034,7 +6505,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to get multiple documents in one request.
+	/// Get multiple documents.
+	/// </para>
+	/// <para>
+	/// Get multiple JSON documents by ID from one or more indices.
+	/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+	/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6048,7 +6524,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6061,7 +6555,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6073,7 +6585,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6086,7 +6616,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6100,7 +6648,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6115,7 +6681,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6129,7 +6713,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6144,7 +6746,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6156,7 +6776,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6169,7 +6807,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6183,7 +6839,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6196,7 +6870,25 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to execute several search operations in one request.
+	/// Run multiple searches.
+	/// </para>
+	/// <para>
+	/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+	/// The structure is as follows:
+	/// </para>
+	/// <code>
+	/// header\n
+	/// body\n
+	/// header\n
+	/// body\n
+	/// </code>
+	/// <para>
+	/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+	/// Each newline character may be preceded by a carriage return <c>\r</c>.
+	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6210,7 +6902,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6223,7 +6915,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6235,7 +6927,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6248,7 +6940,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6262,7 +6954,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6277,7 +6969,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6291,7 +6983,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6306,7 +6998,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6318,7 +7010,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6331,7 +7023,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6345,7 +7037,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6358,7 +7050,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs multiple templated searches with a single request.
+	/// Run multiple templated searches.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6372,14 +7064,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
@@ -6390,14 +7089,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6407,14 +7113,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor)
@@ -6425,14 +7138,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6444,14 +7164,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -6464,14 +7191,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>()
@@ -6483,14 +7217,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -6503,14 +7244,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequestDescriptor descriptor)
@@ -6521,14 +7269,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6540,14 +7295,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
@@ -6560,14 +7322,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6577,14 +7346,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6595,14 +7371,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6614,14 +7397,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -6632,14 +7422,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6651,14 +7448,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6668,14 +7472,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6686,14 +7497,21 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// A search request by default executes against the most recent visible data of the target indices,
+	/// Open a point in time.
+	/// </para>
+	/// <para>
+	/// A search request by default runs against the most recent visible data of the target indices,
 	/// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 	/// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 	/// search requests using the same point in time. For example, if refreshes happen between
 	/// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 	/// between searches are only visible to the more recent point in time.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A point in time must be opened explicitly before being used in search requests.
+	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7140,7 +7958,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7153,7 +7974,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7165,7 +7989,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7178,7 +8005,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7192,7 +8022,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7207,7 +8040,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7221,7 +8057,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7236,7 +8075,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7249,7 +8091,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7263,7 +8108,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7278,7 +8126,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7292,7 +8143,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7307,7 +8161,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7319,7 +8176,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7332,7 +8192,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7346,7 +8209,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7359,7 +8225,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7373,7 +8242,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7385,7 +8257,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7398,7 +8273,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7412,7 +8290,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7425,7 +8306,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+	/// Evaluate ranked search results.
+	/// </para>
+	/// <para>
+	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7640,7 +8524,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7653,7 +8540,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7665,7 +8555,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7678,7 +8571,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7692,7 +8588,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7707,7 +8606,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7719,7 +8621,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7732,7 +8637,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Copies documents from a source to a destination.
+	/// Throttle a reindex operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular reindex operation.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7746,7 +8654,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7759,7 +8670,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7771,7 +8685,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7784,7 +8701,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7798,7 +8718,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7813,7 +8736,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7827,7 +8753,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7842,7 +8771,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7855,7 +8787,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7869,7 +8804,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7884,7 +8822,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7898,7 +8839,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7913,7 +8857,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7925,7 +8872,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7938,7 +8888,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7952,7 +8905,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7965,7 +8921,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7979,7 +8938,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -7991,7 +8953,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8004,7 +8969,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8018,7 +8986,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8031,7 +9002,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Renders a search template as a search request body.
+	/// Render a search template.
+	/// </para>
+	/// <para>
+	/// Render a search template as a search request body.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8159,7 +9133,24 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to retrieve a large numbers of results from a single search request.
+	/// Run a scrolling search.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
+	/// </para>
+	/// <para>
+	/// The scroll API gets large sets of results from a single scrolling search request.
+	/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
+	/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
+	/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
+	/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+	/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+	/// </para>
+	/// <para>
+	/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8172,7 +9163,24 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Allows to retrieve a large numbers of results from a single search request.
+	/// Run a scrolling search.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
+	/// </para>
+	/// <para>
+	/// The scroll API gets large sets of results from a single scrolling search request.
+	/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
+	/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
+	/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
+	/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+	/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+	/// </para>
+	/// <para>
+	/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8184,7 +9192,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8199,7 +9210,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8213,7 +9227,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8228,7 +9245,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8244,7 +9264,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8261,7 +9284,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8277,7 +9303,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8294,7 +9323,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8308,7 +9340,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8323,7 +9358,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8339,7 +9377,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8354,7 +9395,10 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns search hits that match the query defined in the request.
+	/// Run a search.
+	/// </para>
+	/// <para>
+	/// Get search hits that match the query defined in the request.
 	/// You can provide search queries using the <c>q</c> query string parameter or the request body.
 	/// If both are specified, only the query parameter is used.
 	/// </para>
@@ -8371,7 +9415,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8385,7 +9431,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8398,7 +9446,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8412,7 +9462,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8427,7 +9479,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8443,7 +9497,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8458,7 +9514,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8474,7 +9532,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8488,7 +9548,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8503,7 +9565,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8519,7 +9583,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8532,7 +9598,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8546,7 +9614,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8561,7 +9631,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8575,7 +9647,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8590,7 +9664,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8603,7 +9679,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8617,7 +9695,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Search a vector tile.
-	/// Searches a vector tile for geospatial values.
+	/// </para>
+	/// <para>
+	/// Search a vector tile for geospatial values.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8631,7 +9711,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8644,7 +9729,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8656,7 +9746,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8669,7 +9764,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8683,7 +9783,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8698,7 +9803,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8712,7 +9822,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8727,7 +9842,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8740,7 +9860,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8754,7 +9879,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8769,7 +9899,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8783,7 +9918,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8798,7 +9938,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8810,7 +9955,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8823,7 +9973,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8837,7 +9992,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8850,7 +10010,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8864,7 +10029,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8876,7 +10046,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8889,7 +10064,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8903,7 +10083,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8916,7 +10101,12 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the indices and shards that a search request would be executed against.
+	/// Get the search shards.
+	/// </para>
+	/// <para>
+	/// Get the indices and shards that a search request would be run against.
+	/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+	/// When filtered aliases are used, the filter is returned as part of the indices section.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8930,7 +10120,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8943,7 +10133,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8955,7 +10145,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8968,7 +10158,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8982,7 +10172,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -8997,7 +10187,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9011,7 +10201,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9026,7 +10216,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9038,7 +10228,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9051,7 +10241,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9065,7 +10255,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9078,7 +10268,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Runs a search with a search template.
+	/// Run a search with a search template.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9092,7 +10282,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9105,7 +10306,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9117,7 +10329,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9130,7 +10353,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9144,7 +10378,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9159,7 +10404,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9173,7 +10429,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9188,7 +10455,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9201,7 +10479,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9215,7 +10504,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9230,7 +10530,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9242,7 +10553,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9255,7 +10577,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9269,7 +10602,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9282,7 +10626,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9296,7 +10651,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9308,7 +10674,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9321,7 +10698,18 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
+	/// Get terms in an index.
+	/// </para>
+	/// <para>
+	/// Discover terms that match a partial string in an index.
+	/// This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+	/// </para>
+	/// <para>
+	/// If the <c>complete</c> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+	/// This can occur due to a few reasons, such as a request timeout or a node error.
+	/// </para>
+	/// <para>
+	/// NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9336,7 +10724,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9350,7 +10740,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9363,7 +10755,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9377,7 +10771,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9392,7 +10788,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9408,7 +10806,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9423,7 +10823,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9439,7 +10841,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9454,7 +10858,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9470,7 +10876,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9485,7 +10893,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9501,7 +10911,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9516,7 +10928,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9532,7 +10946,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9547,7 +10963,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9563,7 +10981,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9576,7 +10996,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9590,7 +11012,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9605,7 +11029,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9619,7 +11045,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9634,7 +11062,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9648,7 +11078,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9663,7 +11095,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9677,7 +11111,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9692,7 +11128,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9706,7 +11144,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9721,7 +11161,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -9735,7 +11177,9 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Get term vector information.
-	/// Returns information and statistics about terms in the fields of a particular document.
+	/// </para>
+	/// <para>
+	/// Get information and statistics about terms in the fields of a particular document.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10382,7 +11826,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10395,7 +11843,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10407,7 +11859,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10420,7 +11876,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10434,7 +11894,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10449,7 +11913,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10461,7 +11929,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -10474,7 +11946,11 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Changes the number of requests per second for a particular Update By Query operation.
+	/// Throttle an update by query operation.
+	/// </para>
+	/// <para>
+	/// Change the number of requests per second for a particular update by query operation.
+	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

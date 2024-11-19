@@ -36,7 +36,10 @@ public sealed partial class SamlAuthenticateRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Submits a SAML Response message to Elasticsearch for consumption.
+/// Authenticate SAML.
+/// </para>
+/// <para>
+/// Submits a SAML response message to Elasticsearch for consumption.
 /// </para>
 /// </summary>
 public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthenticateRequestParameters>
@@ -76,7 +79,10 @@ public sealed partial class SamlAuthenticateRequest : PlainRequest<SamlAuthentic
 
 /// <summary>
 /// <para>
-/// Submits a SAML Response message to Elasticsearch for consumption.
+/// Authenticate SAML.
+/// </para>
+/// <para>
+/// Submits a SAML response message to Elasticsearch for consumption.
 /// </para>
 /// </summary>
 public sealed partial class SamlAuthenticateRequestDescriptor : RequestDescriptor<SamlAuthenticateRequestDescriptor, SamlAuthenticateRequestParameters>

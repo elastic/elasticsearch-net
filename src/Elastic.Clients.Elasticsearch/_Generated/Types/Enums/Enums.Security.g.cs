@@ -302,6 +302,64 @@ public readonly partial struct IndexPrivilege : IEnumStruct<IndexPrivilege>
 	public static bool operator !=(IndexPrivilege a, IndexPrivilege b) => !(a == b);
 }
 
+[JsonConverter(typeof(RemoteClusterPrivilegeConverter))]
+public enum RemoteClusterPrivilege
+{
+	[EnumMember(Value = "monitor_enrich")]
+	MonitorEnrich
+}
+
+internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClusterPrivilege>
+{
+	public override RemoteClusterPrivilege Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "monitor_enrich":
+				return RemoteClusterPrivilege.MonitorEnrich;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, RemoteClusterPrivilege value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case RemoteClusterPrivilege.MonitorEnrich:
+				writer.WriteStringValue("monitor_enrich");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(EnumStructConverter<RestrictionWorkflow>))]
+public readonly partial struct RestrictionWorkflow : IEnumStruct<RestrictionWorkflow>
+{
+	public RestrictionWorkflow(string value) => Value = value;
+
+	RestrictionWorkflow IEnumStruct<RestrictionWorkflow>.Create(string value) => value;
+
+	public readonly string Value { get; }
+	public static RestrictionWorkflow SearchApplicationQuery { get; } = new RestrictionWorkflow("search_application_query");
+
+	public override string ToString() => Value ?? string.Empty;
+
+	public static implicit operator string(RestrictionWorkflow restrictionWorkflow) => restrictionWorkflow.Value;
+	public static implicit operator RestrictionWorkflow(string value) => new(value);
+
+	public override int GetHashCode() => Value.GetHashCode();
+	public override bool Equals(object obj) => obj is RestrictionWorkflow other && this.Equals(other);
+	public bool Equals(RestrictionWorkflow other) => Value == other.Value;
+
+	public static bool operator ==(RestrictionWorkflow a, RestrictionWorkflow b) => a.Equals(b);
+	public static bool operator !=(RestrictionWorkflow a, RestrictionWorkflow b) => !(a == b);
+}
+
 [JsonConverter(typeof(TemplateFormatConverter))]
 public enum TemplateFormat
 {

@@ -254,7 +254,12 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
+/// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed
+/// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
 [JsonConverter(typeof(PutDatafeedRequestConverter))]
@@ -438,7 +443,12 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
+/// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed
+/// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
 public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDescriptor<PutDatafeedRequestDescriptor<TDocument>, PutDatafeedRequestParameters>
@@ -871,7 +881,12 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
-/// If you are concerned about delayed data, you can add a delay (<c>query_delay') at each interval. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead. You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed directly to the </c>.ml-config<c>index. Do not give users</c>write<c>privileges on the</c>.ml-config` index.
+/// If you are concerned about delayed data, you can add a delay (<c>query_delay</c>) at each interval.
+/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
+/// at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
+/// those credentials are used instead.
+/// You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed
+/// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
 public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<PutDatafeedRequestDescriptor, PutDatafeedRequestParameters>

@@ -42,6 +42,9 @@ public sealed partial class BulkDeleteRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Bulk delete roles.
+/// </para>
+/// <para>
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk delete roles API cannot delete roles that are defined in roles files.
 /// </para>
@@ -74,6 +77,9 @@ public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleR
 }
 
 /// <summary>
+/// <para>
+/// Bulk delete roles.
+/// </para>
 /// <para>
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk delete roles API cannot delete roles that are defined in roles files.
