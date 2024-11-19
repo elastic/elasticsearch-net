@@ -36,7 +36,16 @@ public sealed partial class InvalidateTokenRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Invalidates one or more access tokens or refresh tokens.
+/// Invalidate a token.
+/// </para>
+/// <para>
+/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+/// After that time period, they can no longer be used.
+/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+/// </para>
+/// <para>
+/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 /// </para>
 /// </summary>
 public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateTokenRequestParameters>
@@ -61,7 +70,16 @@ public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateToke
 
 /// <summary>
 /// <para>
-/// Invalidates one or more access tokens or refresh tokens.
+/// Invalidate a token.
+/// </para>
+/// <para>
+/// The access tokens returned by the get token API have a finite period of time for which they are valid.
+/// After that time period, they can no longer be used.
+/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+/// </para>
+/// <para>
+/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 /// </para>
 /// </summary>
 public sealed partial class InvalidateTokenRequestDescriptor : RequestDescriptor<InvalidateTokenRequestDescriptor, InvalidateTokenRequestParameters>

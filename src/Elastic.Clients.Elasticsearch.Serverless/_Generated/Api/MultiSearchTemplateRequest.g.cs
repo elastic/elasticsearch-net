@@ -74,7 +74,7 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Runs multiple templated searches with a single request.
+/// Run multiple templated searches.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
@@ -163,7 +163,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 
 /// <summary>
 /// <para>
-/// Runs multiple templated searches with a single request.
+/// Run multiple templated searches.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
@@ -235,7 +235,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 
 /// <summary>
 /// <para>
-/// Runs multiple templated searches with a single request.
+/// Run multiple templated searches.
 /// </para>
 /// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable

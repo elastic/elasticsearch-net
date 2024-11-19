@@ -36,7 +36,10 @@ public sealed partial class GetServiceAccountsRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// This API returns a list of service accounts that match the provided path parameter(s).
+/// Get service accounts.
+/// </para>
+/// <para>
+/// Get a list of service accounts that match the provided path parameters.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceAccountsRequestParameters>
@@ -64,7 +67,10 @@ public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceA
 
 /// <summary>
 /// <para>
-/// This API returns a list of service accounts that match the provided path parameter(s).
+/// Get service accounts.
+/// </para>
+/// <para>
+/// Get a list of service accounts that match the provided path parameters.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceAccountsRequestDescriptor : RequestDescriptor<GetServiceAccountsRequestDescriptor, GetServiceAccountsRequestParameters>

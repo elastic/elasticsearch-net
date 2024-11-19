@@ -40,6 +40,14 @@ public sealed partial class RRFRetriever
 
 	/// <summary>
 	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("min_score")]
+	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
 	/// </para>
 	/// </summary>
@@ -77,6 +85,7 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private float? MinScoreValue { get; set; }
 	private int? RankConstantValue { get; set; }
 	private int? RankWindowSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Retriever> RetrieversValue { get; set; }
@@ -122,6 +131,17 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public RRFRetrieverDescriptor<TDocument> MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
 		return Self;
 	}
 
@@ -220,6 +240,12 @@ public sealed partial class RRFRetrieverDescriptor<TDocument> : SerializableDesc
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		if (RankConstantValue.HasValue)
 		{
 			writer.WritePropertyName("rank_constant");
@@ -279,6 +305,7 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
+	private float? MinScoreValue { get; set; }
 	private int? RankConstantValue { get; set; }
 	private int? RankWindowSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Retriever> RetrieversValue { get; set; }
@@ -324,6 +351,17 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public RRFRetrieverDescriptor MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
 		return Self;
 	}
 
@@ -420,6 +458,12 @@ public sealed partial class RRFRetrieverDescriptor : SerializableDescriptor<RRFR
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+		}
+
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
 		}
 
 		if (RankConstantValue.HasValue)

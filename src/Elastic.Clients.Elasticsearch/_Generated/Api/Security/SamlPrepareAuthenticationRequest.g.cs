@@ -36,7 +36,10 @@ public sealed partial class SamlPrepareAuthenticationRequestParameters : Request
 
 /// <summary>
 /// <para>
-/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+/// Prepare SAML authentication.
+/// </para>
+/// <para>
+/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<SamlPrepareAuthenticationRequestParameters>
@@ -79,7 +82,10 @@ public sealed partial class SamlPrepareAuthenticationRequest : PlainRequest<Saml
 
 /// <summary>
 /// <para>
-/// Creates a SAML authentication request (&lt;AuthnRequest>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
+/// Prepare SAML authentication.
+/// </para>
+/// <para>
+/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class SamlPrepareAuthenticationRequestDescriptor : RequestDescriptor<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationRequestParameters>

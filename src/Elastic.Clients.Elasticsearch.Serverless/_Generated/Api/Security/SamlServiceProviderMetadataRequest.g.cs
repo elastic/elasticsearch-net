@@ -36,6 +36,9 @@ public sealed partial class SamlServiceProviderMetadataRequestParameters : Reque
 
 /// <summary>
 /// <para>
+/// Create SAML service provider metadata.
+/// </para>
+/// <para>
 /// Generate SAML metadata for a SAML 2.0 Service Provider.
 /// </para>
 /// </summary>
@@ -55,6 +58,9 @@ public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<Sa
 }
 
 /// <summary>
+/// <para>
+/// Create SAML service provider metadata.
+/// </para>
 /// <para>
 /// Generate SAML metadata for a SAML 2.0 Service Provider.
 /// </para>

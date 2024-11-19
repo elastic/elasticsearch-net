@@ -39,6 +39,7 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivileges>? indices = default;
 		IReadOnlyDictionary<string, object>? metadata = default;
 		string name = default;
+		Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? restriction = default;
 		IReadOnlyCollection<string>? runAs = default;
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? sort = default;
 		IReadOnlyDictionary<string, object>? transientMetadata = default;
@@ -83,6 +84,12 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 					continue;
 				}
 
+				if (property == "restriction")
+				{
+					restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Security.Restriction?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "run_as")
 				{
 					runAs = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
@@ -103,7 +110,7 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 			}
 		}
 
-		return new QueryRole { Applications = applications, Cluster = cluster, Description = description, Indices = indices, Metadata = metadata, Name = name, RunAs = runAs, Sort = sort, TransientMetadata = transientMetadata };
+		return new QueryRole { Applications = applications, Cluster = cluster, Description = description, Indices = indices, Metadata = metadata, Name = name, Restriction = restriction, RunAs = runAs, Sort = sort, TransientMetadata = transientMetadata };
 	}
 
 	public override void Write(Utf8JsonWriter writer, QueryRole value, JsonSerializerOptions options)
@@ -156,6 +163,13 @@ public sealed partial class QueryRole
 	/// </para>
 	/// </summary>
 	public string Name { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? Restriction { get; init; }
 
 	/// <summary>
 	/// <para>

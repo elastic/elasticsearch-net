@@ -686,7 +686,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name)
+	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		descriptor.BeforeRequest();
@@ -700,7 +700,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest)
+	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		configureRequest?.Invoke(descriptor);
@@ -726,7 +726,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		descriptor.BeforeRequest();
@@ -739,7 +739,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
 		configureRequest?.Invoke(descriptor);

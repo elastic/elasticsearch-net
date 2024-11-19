@@ -69,6 +69,12 @@ internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescri
 					continue;
 				}
 
+				if (property == "restriction")
+				{
+					variant.Restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Security.Restriction?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "run_as")
 				{
 					variant.RunAs = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
@@ -117,6 +123,12 @@ internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescri
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, value.Metadata, options);
+		}
+
+		if (value.Restriction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, value.Restriction, options);
 		}
 
 		if (value.RunAs is not null)
@@ -175,6 +187,13 @@ public sealed partial class RoleDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? Restriction { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -201,6 +220,9 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivilegesDescriptor<TDocument>> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivilegesDescriptor<TDocument>>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? RestrictionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -321,6 +343,35 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? restriction)
+	{
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = null;
+		RestrictionValue = restriction;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor descriptor)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptorAction = null;
+		RestrictionDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> Restriction(Action<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor> configure)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -419,6 +470,22 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
+		if (RestrictionDescriptor is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
+		}
+		else if (RestrictionDescriptorAction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
+		}
+		else if (RestrictionValue is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionValue, options);
+		}
+
 		if (RunAsValue is not null)
 		{
 			writer.WritePropertyName("run_as");
@@ -454,6 +521,9 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? RestrictionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -574,6 +644,35 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 
 	/// <summary>
 	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? restriction)
+	{
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = null;
+		RestrictionValue = restriction;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor descriptor)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptorAction = null;
+		RestrictionDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor Restriction(Action<Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor> configure)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -670,6 +769,22 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, MetadataValue, options);
+		}
+
+		if (RestrictionDescriptor is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
+		}
+		else if (RestrictionDescriptorAction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
+		}
+		else if (RestrictionValue is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionValue, options);
 		}
 
 		if (RunAsValue is not null)

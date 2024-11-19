@@ -73,12 +73,19 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// A search request by default executes against the most recent visible data of the target indices,
+/// Open a point in time.
+/// </para>
+/// <para>
+/// A search request by default runs against the most recent visible data of the target indices,
 /// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 /// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 /// search requests using the same point in time. For example, if refreshes happen between
 /// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 /// between searches are only visible to the more recent point in time.
+/// </para>
+/// <para>
+/// A point in time must be opened explicitly before being used in search requests.
+/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 /// </para>
 /// </summary>
 public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTimeRequestParameters>
@@ -149,12 +156,19 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 
 /// <summary>
 /// <para>
-/// A search request by default executes against the most recent visible data of the target indices,
+/// Open a point in time.
+/// </para>
+/// <para>
+/// A search request by default runs against the most recent visible data of the target indices,
 /// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 /// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 /// search requests using the same point in time. For example, if refreshes happen between
 /// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 /// between searches are only visible to the more recent point in time.
+/// </para>
+/// <para>
+/// A point in time must be opened explicitly before being used in search requests.
+/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 /// </para>
 /// </summary>
 public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : RequestDescriptor<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeRequestParameters>
@@ -247,12 +261,19 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 
 /// <summary>
 /// <para>
-/// A search request by default executes against the most recent visible data of the target indices,
+/// Open a point in time.
+/// </para>
+/// <para>
+/// A search request by default runs against the most recent visible data of the target indices,
 /// which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
 /// state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
 /// search requests using the same point in time. For example, if refreshes happen between
 /// <c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
 /// between searches are only visible to the more recent point in time.
+/// </para>
+/// <para>
+/// A point in time must be opened explicitly before being used in search requests.
+/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 /// </para>
 /// </summary>
 public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>

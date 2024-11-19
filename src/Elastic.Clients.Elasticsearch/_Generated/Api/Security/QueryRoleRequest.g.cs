@@ -36,7 +36,10 @@ public sealed partial class QueryRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+/// Find roles with a query.
+/// </para>
+/// <para>
+/// Get roles in a paginated manner. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestParameters>
@@ -103,7 +106,10 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 
 /// <summary>
 /// <para>
-/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+/// Find roles with a query.
+/// </para>
+/// <para>
+/// Get roles in a paginated manner. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescriptor<QueryRoleRequestDescriptor<TDocument>, QueryRoleRequestParameters>
@@ -318,7 +324,10 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Retrieves roles in a paginated manner. You can optionally filter the results with a query.
+/// Find roles with a query.
+/// </para>
+/// <para>
+/// Get roles in a paginated manner. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<QueryRoleRequestDescriptor, QueryRoleRequestParameters>

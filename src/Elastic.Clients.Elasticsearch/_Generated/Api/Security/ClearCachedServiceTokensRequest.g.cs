@@ -36,7 +36,10 @@ public sealed partial class ClearCachedServiceTokensRequestParameters : RequestP
 
 /// <summary>
 /// <para>
-/// Evicts tokens from the service account token caches.
+/// Clear service account token caches.
+/// </para>
+/// <para>
+/// Evict a subset of all entries from the service account token caches.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<ClearCachedServiceTokensRequestParameters>
@@ -56,7 +59,10 @@ public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<Clear
 
 /// <summary>
 /// <para>
-/// Evicts tokens from the service account token caches.
+/// Clear service account token caches.
+/// </para>
+/// <para>
+/// Evict a subset of all entries from the service account token caches.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedServiceTokensRequestDescriptor : RequestDescriptor<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensRequestParameters>

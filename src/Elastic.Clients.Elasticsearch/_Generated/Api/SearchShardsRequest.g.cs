@@ -83,7 +83,12 @@ public sealed partial class SearchShardsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information about the indices and shards that a search request would be executed against.
+/// Get the search shards.
+/// </para>
+/// <para>
+/// Get the indices and shards that a search request would be run against.
+/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+/// When filtered aliases are used, the filter is returned as part of the indices section.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsRequestParameters>
@@ -161,7 +166,12 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 
 /// <summary>
 /// <para>
-/// Returns information about the indices and shards that a search request would be executed against.
+/// Get the search shards.
+/// </para>
+/// <para>
+/// Get the indices and shards that a search request would be run against.
+/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+/// When filtered aliases are used, the filter is returned as part of the indices section.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDescriptor<SearchShardsRequestDescriptor<TDocument>, SearchShardsRequestParameters>
@@ -204,7 +214,12 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Returns information about the indices and shards that a search request would be executed against.
+/// Get the search shards.
+/// </para>
+/// <para>
+/// Get the indices and shards that a search request would be run against.
+/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+/// When filtered aliases are used, the filter is returned as part of the indices section.
 /// </para>
 /// </summary>
 public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<SearchShardsRequestDescriptor, SearchShardsRequestParameters>

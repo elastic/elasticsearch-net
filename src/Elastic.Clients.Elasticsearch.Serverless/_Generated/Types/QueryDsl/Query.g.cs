@@ -28,9 +28,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
 {
@@ -108,8 +105,6 @@ public sealed partial class Query
 	public static Query Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => new Query("term", termQuery);
 	public static Query Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => new Query("terms", termsQuery);
 	public static Query TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => new Query("terms_set", termsSetQuery);
-	public static Query TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => new Query("text_expansion", textExpansionQuery);
-	public static Query WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => new Query("weighted_tokens", weightedTokensQuery);
 	public static Query Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => new Query("wildcard", wildcardQuery);
 	public static Query Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => new Query("wrapper", wrapperQuery);
 
@@ -529,20 +524,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
-			if (propertyName == "text_expansion")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "weighted_tokens")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
 			if (propertyName == "wildcard")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery?>(ref reader, options);
@@ -734,12 +715,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "terms_set":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery)value.Variant, options);
 					break;
-				case "text_expansion":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery)value.Variant, options);
-					break;
-				case "weighted_tokens":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery)value.Variant, options);
-					break;
 				case "wildcard":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery)value.Variant, options);
 					break;
@@ -894,10 +869,6 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
 	public QueryDescriptor<TDocument> TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
 	public QueryDescriptor<TDocument> TermsSet(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
-	public QueryDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
-	public QueryDescriptor<TDocument> TextExpansion(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
-	public QueryDescriptor<TDocument> WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => Set(weightedTokensQuery, "weighted_tokens");
-	public QueryDescriptor<TDocument> WeightedTokens(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQueryDescriptor<TDocument>> configure) => Set(configure, "weighted_tokens");
 	public QueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
 	public QueryDescriptor<TDocument> Wildcard(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	public QueryDescriptor<TDocument> Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
@@ -1064,10 +1035,6 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryDescriptor> configure) => Set(configure, "terms");
 	public QueryDescriptor TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
 	public QueryDescriptor TermsSet<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQueryDescriptor> configure) => Set(configure, "terms_set");
-	public QueryDescriptor TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
-	public QueryDescriptor TextExpansion<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQueryDescriptor> configure) => Set(configure, "text_expansion");
-	public QueryDescriptor WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => Set(weightedTokensQuery, "weighted_tokens");
-	public QueryDescriptor WeightedTokens<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQueryDescriptor> configure) => Set(configure, "weighted_tokens");
 	public QueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
 	public QueryDescriptor Wildcard<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
 	public QueryDescriptor Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
