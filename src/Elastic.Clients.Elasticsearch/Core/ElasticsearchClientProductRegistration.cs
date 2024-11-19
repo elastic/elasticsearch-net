@@ -18,7 +18,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 	/// <summary>
 	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValidResponse" />, we do not want the low level client throwing
 	///     exceptions
-	///     when <see cref="ITransportConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
+	///     when <see cref="IRequestConfiguration.ThrowExceptions" /> is enabled for 404's. The client is in charge of
 	///     composing paths
 	///     so a 404 never signals a wrong URL but a missing entity.
 	/// </summary>
