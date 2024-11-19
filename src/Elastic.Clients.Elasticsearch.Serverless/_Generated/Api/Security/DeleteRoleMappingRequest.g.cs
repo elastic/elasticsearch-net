@@ -42,7 +42,7 @@ public sealed partial class DeleteRoleMappingRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Removes role mappings.
+/// Delete role mappings.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleMappingRequest : PlainRequest<DeleteRoleMappingRequestParameters>
@@ -70,7 +70,7 @@ public sealed partial class DeleteRoleMappingRequest : PlainRequest<DeleteRoleMa
 
 /// <summary>
 /// <para>
-/// Removes role mappings.
+/// Delete role mappings.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRoleMappingRequestDescriptor : RequestDescriptor<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingRequestParameters>

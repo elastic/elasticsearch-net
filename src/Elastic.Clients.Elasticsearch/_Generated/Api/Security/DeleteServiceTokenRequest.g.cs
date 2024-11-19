@@ -42,7 +42,10 @@ public sealed partial class DeleteServiceTokenRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Deletes a service account token.
+/// Delete service account tokens.
+/// </para>
+/// <para>
+/// Delete service account tokens for a service in a specified namespace.
 /// </para>
 /// </summary>
 public sealed partial class DeleteServiceTokenRequest : PlainRequest<DeleteServiceTokenRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class DeleteServiceTokenRequest : PlainRequest<DeleteServi
 
 /// <summary>
 /// <para>
-/// Deletes a service account token.
+/// Delete service account tokens.
+/// </para>
+/// <para>
+/// Delete service account tokens for a service in a specified namespace.
 /// </para>
 /// </summary>
 public sealed partial class DeleteServiceTokenRequestDescriptor : RequestDescriptor<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenRequestParameters>

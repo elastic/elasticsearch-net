@@ -45,7 +45,10 @@ public sealed partial class GetUserProfileRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a user's profile using the unique profile ID.
+/// Get a user profile.
+/// </para>
+/// <para>
+/// Get a user's profile using the unique profile ID.
 /// </para>
 /// </summary>
 public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileRequestParameters>
@@ -76,7 +79,10 @@ public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileR
 
 /// <summary>
 /// <para>
-/// Retrieves a user's profile using the unique profile ID.
+/// Get a user profile.
+/// </para>
+/// <para>
+/// Get a user's profile using the unique profile ID.
 /// </para>
 /// </summary>
 public sealed partial class GetUserProfileRequestDescriptor : RequestDescriptor<GetUserProfileRequestDescriptor, GetUserProfileRequestParameters>

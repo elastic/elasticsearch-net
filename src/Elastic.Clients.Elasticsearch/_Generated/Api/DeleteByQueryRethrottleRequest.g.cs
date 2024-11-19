@@ -42,7 +42,11 @@ public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestPa
 
 /// <summary>
 /// <para>
-/// Changes the number of requests per second for a particular Delete By Query operation.
+/// Throttle a delete by query operation.
+/// </para>
+/// <para>
+/// Change the number of requests per second for a particular delete by query operation.
+/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<DeleteByQueryRethrottleRequestParameters>
@@ -70,7 +74,11 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 
 /// <summary>
 /// <para>
-/// Changes the number of requests per second for a particular Delete By Query operation.
+/// Throttle a delete by query operation.
+/// </para>
+/// <para>
+/// Change the number of requests per second for a particular delete by query operation.
+/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
 public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptor<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>

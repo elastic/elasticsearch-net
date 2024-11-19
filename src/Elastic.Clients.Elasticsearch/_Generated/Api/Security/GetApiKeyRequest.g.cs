@@ -101,6 +101,8 @@ public sealed partial class GetApiKeyRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get API key information.
+/// </para>
+/// <para>
 /// Retrieves information for one or more API keys.
 /// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 /// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
@@ -193,6 +195,8 @@ public sealed partial class GetApiKeyRequest : PlainRequest<GetApiKeyRequestPara
 /// <summary>
 /// <para>
 /// Get API key information.
+/// </para>
+/// <para>
 /// Retrieves information for one or more API keys.
 /// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 /// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.

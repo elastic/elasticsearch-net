@@ -55,6 +55,15 @@ public sealed partial class DataStreamLifecycleWithRollover
 
 	/// <summary>
 	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("enabled")]
+	public bool? Enabled { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
 	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
 	/// The contents of this field are subject to change.

@@ -36,7 +36,10 @@ public sealed partial class ClearCachedRolesRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Evicts roles from the native role cache.
+/// Clear the roles cache.
+/// </para>
+/// <para>
+/// Evict roles from the native role cache.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRolesRequestParameters>
@@ -56,7 +59,10 @@ public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRo
 
 /// <summary>
 /// <para>
-/// Evicts roles from the native role cache.
+/// Clear the roles cache.
+/// </para>
+/// <para>
+/// Evict roles from the native role cache.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedRolesRequestDescriptor : RequestDescriptor<ClearCachedRolesRequestDescriptor, ClearCachedRolesRequestParameters>

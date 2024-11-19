@@ -68,6 +68,7 @@ public sealed partial class Processor
 	public static Processor Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => new Processor("gsub", gsubProcessor);
 	public static Processor HtmlStrip(Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessor htmlStripProcessor) => new Processor("html_strip", htmlStripProcessor);
 	public static Processor Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => new Processor("inference", inferenceProcessor);
+	public static Processor IpLocation(Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor ipLocationProcessor) => new Processor("ip_location", ipLocationProcessor);
 	public static Processor Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => new Processor("join", joinProcessor);
 	public static Processor Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => new Processor("json", jsonProcessor);
 	public static Processor Kv(Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor keyValueProcessor) => new Processor("kv", keyValueProcessor);
@@ -279,6 +280,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			if (propertyName == "inference")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "ip_location")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -518,6 +526,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "inference":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor)value.Variant, options);
 					break;
+				case "ip_location":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor)value.Variant, options);
+					break;
 				case "join":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor)value.Variant, options);
 					break;
@@ -666,6 +677,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> HtmlStrip(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessorDescriptor<TDocument>> configure) => Set(configure, "html_strip");
 	public ProcessorDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
 	public ProcessorDescriptor<TDocument> Inference(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
+	public ProcessorDescriptor<TDocument> IpLocation(Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor ipLocationProcessor) => Set(ipLocationProcessor, "ip_location");
+	public ProcessorDescriptor<TDocument> IpLocation(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessorDescriptor<TDocument>> configure) => Set(configure, "ip_location");
 	public ProcessorDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
 	public ProcessorDescriptor<TDocument> Join(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessorDescriptor<TDocument>> configure) => Set(configure, "join");
 	public ProcessorDescriptor<TDocument> Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");
@@ -806,6 +819,8 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor HtmlStrip<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.HtmlStripProcessorDescriptor> configure) => Set(configure, "html_strip");
 	public ProcessorDescriptor Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
 	public ProcessorDescriptor Inference<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor> configure) => Set(configure, "inference");
+	public ProcessorDescriptor IpLocation(Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessor ipLocationProcessor) => Set(ipLocationProcessor, "ip_location");
+	public ProcessorDescriptor IpLocation<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.IpLocationProcessorDescriptor> configure) => Set(configure, "ip_location");
 	public ProcessorDescriptor Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
 	public ProcessorDescriptor Join<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessorDescriptor> configure) => Set(configure, "join");
 	public ProcessorDescriptor Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");

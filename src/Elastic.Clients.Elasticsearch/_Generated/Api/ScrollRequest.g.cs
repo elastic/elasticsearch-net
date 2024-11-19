@@ -42,7 +42,24 @@ public sealed partial class ScrollRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Allows to retrieve a large numbers of results from a single search request.
+/// Run a scrolling search.
+/// </para>
+/// <para>
+/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
+/// </para>
+/// <para>
+/// The scroll API gets large sets of results from a single scrolling search request.
+/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
+/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
+/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
+/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+/// </para>
+/// <para>
+/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+/// </para>
+/// <para>
+/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 /// </para>
 /// </summary>
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
@@ -82,7 +99,24 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 /// <summary>
 /// <para>
-/// Allows to retrieve a large numbers of results from a single search request.
+/// Run a scrolling search.
+/// </para>
+/// <para>
+/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
+/// </para>
+/// <para>
+/// The scroll API gets large sets of results from a single scrolling search request.
+/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
+/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
+/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
+/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+/// </para>
+/// <para>
+/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+/// </para>
+/// <para>
+/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 /// </para>
 /// </summary>
 public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRequestDescriptor, ScrollRequestParameters>

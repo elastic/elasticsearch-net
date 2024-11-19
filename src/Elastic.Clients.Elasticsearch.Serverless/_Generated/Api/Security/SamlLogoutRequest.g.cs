@@ -36,6 +36,9 @@ public sealed partial class SamlLogoutRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
+/// Logout of SAML.
+/// </para>
+/// <para>
 /// Submits a request to invalidate an access token and refresh token.
 /// </para>
 /// </summary>
@@ -69,6 +72,9 @@ public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestPa
 }
 
 /// <summary>
+/// <para>
+/// Logout of SAML.
+/// </para>
 /// <para>
 /// Submits a request to invalidate an access token and refresh token.
 /// </para>

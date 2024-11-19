@@ -38,6 +38,7 @@ internal sealed partial class RoleDescriptorReadConverter : JsonConverter<RoleDe
 		string? description = default;
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Security.IndicesPrivileges> indices = default;
 		IReadOnlyDictionary<string, object>? metadata = default;
+		Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? restriction = default;
 		IReadOnlyCollection<string>? runAs = default;
 		IReadOnlyDictionary<string, object>? transientMetadata = default;
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -75,6 +76,12 @@ internal sealed partial class RoleDescriptorReadConverter : JsonConverter<RoleDe
 					continue;
 				}
 
+				if (property == "restriction")
+				{
+					restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Security.Restriction?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "run_as")
 				{
 					runAs = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
@@ -89,7 +96,7 @@ internal sealed partial class RoleDescriptorReadConverter : JsonConverter<RoleDe
 			}
 		}
 
-		return new RoleDescriptorRead { Applications = applications, Cluster = cluster, Description = description, Indices = indices, Metadata = metadata, RunAs = runAs, TransientMetadata = transientMetadata };
+		return new RoleDescriptorRead { Applications = applications, Cluster = cluster, Description = description, Indices = indices, Metadata = metadata, Restriction = restriction, RunAs = runAs, TransientMetadata = transientMetadata };
 	}
 
 	public override void Write(Utf8JsonWriter writer, RoleDescriptorRead value, JsonSerializerOptions options)
@@ -135,6 +142,13 @@ public sealed partial class RoleDescriptorRead
 	/// </para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object>? Metadata { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Security.Restriction? Restriction { get; init; }
 
 	/// <summary>
 	/// <para>

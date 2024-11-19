@@ -36,7 +36,10 @@ public sealed partial class GetScriptLanguagesRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Returns available script types, languages and contexts
+/// Get script languages.
+/// </para>
+/// <para>
+/// Get a list of available script types, languages, and contexts.
 /// </para>
 /// </summary>
 public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLanguagesRequestParameters>
@@ -52,7 +55,10 @@ public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLa
 
 /// <summary>
 /// <para>
-/// Returns available script types, languages and contexts
+/// Get script languages.
+/// </para>
+/// <para>
+/// Get a list of available script types, languages, and contexts.
 /// </para>
 /// </summary>
 public sealed partial class GetScriptLanguagesRequestDescriptor : RequestDescriptor<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesRequestParameters>

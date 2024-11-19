@@ -42,7 +42,10 @@ public sealed partial class ReindexRethrottleRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Copies documents from a source to a destination.
+/// Throttle a reindex operation.
+/// </para>
+/// <para>
+/// Change the number of requests per second for a particular reindex operation.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethrottleRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 
 /// <summary>
 /// <para>
-/// Copies documents from a source to a destination.
+/// Throttle a reindex operation.
+/// </para>
+/// <para>
+/// Change the number of requests per second for a particular reindex operation.
 /// </para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescriptor<ReindexRethrottleRequestDescriptor, ReindexRethrottleRequestParameters>

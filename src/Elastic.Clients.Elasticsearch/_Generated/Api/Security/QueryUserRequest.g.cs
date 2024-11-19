@@ -42,7 +42,11 @@ public sealed partial class QueryUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+/// Find users with a query.
+/// </para>
+/// <para>
+/// Get information for users in a paginated manner.
+/// You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestParameters>
@@ -116,7 +120,11 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 
 /// <summary>
 /// <para>
-/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+/// Find users with a query.
+/// </para>
+/// <para>
+/// Get information for users in a paginated manner.
+/// You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescriptor<QueryUserRequestDescriptor<TDocument>, QueryUserRequestParameters>
@@ -332,7 +340,11 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Retrieves information for Users in a paginated manner. You can optionally filter the results with a query.
+/// Find users with a query.
+/// </para>
+/// <para>
+/// Get information for users in a paginated manner.
+/// You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<QueryUserRequestDescriptor, QueryUserRequestParameters>

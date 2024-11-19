@@ -945,6 +945,112 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(RepositoryVerifyIntegrityRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<RepositoryVerifyIntegrityRequest, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(RepositoryVerifyIntegrityRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<RepositoryVerifyIntegrityRequest, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(RepositoryVerifyIntegrityRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var descriptor = new RepositoryVerifyIntegrityRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(Elastic.Clients.Elasticsearch.Names name, Action<RepositoryVerifyIntegrityRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RepositoryVerifyIntegrityRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(RepositoryVerifyIntegrityRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RepositoryVerifyIntegrityRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Verifies the integrity of the contents of a snapshot repository
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(Elastic.Clients.Elasticsearch.Names name, Action<RepositoryVerifyIntegrityRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RepositoryVerifyIntegrityRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RepositoryVerifyIntegrityRequestDescriptor, RepositoryVerifyIntegrityResponse, RepositoryVerifyIntegrityRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Restores a snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>

@@ -36,6 +36,9 @@ public sealed partial class SuggestUserProfilesRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
+/// Suggest a user profile.
+/// </para>
+/// <para>
 /// Get suggestions for user profiles that match specified search criteria.
 /// </para>
 /// </summary>
@@ -91,6 +94,9 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 }
 
 /// <summary>
+/// <para>
+/// Suggest a user profile.
+/// </para>
 /// <para>
 /// Get suggestions for user profiles that match specified search criteria.
 /// </para>

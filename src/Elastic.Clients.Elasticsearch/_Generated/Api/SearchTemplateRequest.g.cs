@@ -119,7 +119,7 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Runs a search with a search template.
+/// Run a search with a search template.
 /// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateRequestParameters>
@@ -283,7 +283,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 /// <summary>
 /// <para>
-/// Runs a search with a search template.
+/// Run a search with a search template.
 /// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateRequestParameters>
@@ -429,7 +429,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 
 /// <summary>
 /// <para>
-/// Runs a search with a search template.
+/// Run a search with a search template.
 /// </para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<SearchTemplateRequestDescriptor, SearchTemplateRequestParameters>

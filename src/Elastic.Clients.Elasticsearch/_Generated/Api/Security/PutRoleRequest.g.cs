@@ -42,8 +42,12 @@ public sealed partial class PutRoleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParameters>
@@ -118,6 +122,14 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 
 	/// <summary>
 	/// <para>
+	/// A list of remote cluster permissions entries.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("remote_cluster")]
+	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A list of remote indices permissions entries.
 	/// </para>
 	/// </summary>
@@ -143,8 +155,12 @@ public sealed partial class PutRoleRequest : PlainRequest<PutRoleRequestParamete
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescriptor<PutRoleRequestDescriptor<TDocument>, PutRoleRequestParameters>
@@ -183,6 +199,10 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> RemoteIndicesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> RemoteIndicesDescriptorAction { get; set; }
@@ -313,6 +333,47 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 	public PutRoleRequestDescriptor<TDocument> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of remote cluster permissions entries.
+	/// </para>
+	/// </summary>
+	public PutRoleRequestDescriptor<TDocument> RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
+	{
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterValue = remoteCluster;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor<TDocument> RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = configure;
 		return Self;
 	}
 
@@ -468,6 +529,37 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
+		if (RemoteClusterDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			foreach (var action in RemoteClusterDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterValue is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
+		}
+
 		if (RemoteIndicesDescriptor is not null)
 		{
 			writer.WritePropertyName("remote_indices");
@@ -517,8 +609,12 @@ public sealed partial class PutRoleRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+/// Create or update roles.
+/// </para>
+/// <para>
+/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
+/// File-based role management is not available in Elastic Serverless.
 /// </para>
 /// </summary>
 public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRoleRequestDescriptor, PutRoleRequestParameters>
@@ -557,6 +653,10 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor RemoteIndicesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> RemoteIndicesDescriptorAction { get; set; }
@@ -687,6 +787,47 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 	public PutRoleRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of remote cluster permissions entries.
+	/// </para>
+	/// </summary>
+	public PutRoleRequestDescriptor RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
+	{
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterValue = remoteCluster;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptorAction = configure;
+		return Self;
+	}
+
+	public PutRoleRequestDescriptor RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = configure;
 		return Self;
 	}
 
@@ -840,6 +981,37 @@ public sealed partial class PutRoleRequestDescriptor : RequestDescriptor<PutRole
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, MetadataValue, options);
+		}
+
+		if (RemoteClusterDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			foreach (var action in RemoteClusterDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterValue is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
 		}
 
 		if (RemoteIndicesDescriptor is not null)

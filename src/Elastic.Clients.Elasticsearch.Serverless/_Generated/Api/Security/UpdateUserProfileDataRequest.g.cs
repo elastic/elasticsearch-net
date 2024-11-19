@@ -58,7 +58,10 @@ public sealed partial class UpdateUserProfileDataRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Updates specific data for the user profile that's associated with the specified unique ID.
+/// Update user profile data.
+/// </para>
+/// <para>
+/// Update specific data for the user profile that is associated with a unique ID.
 /// </para>
 /// </summary>
 public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUserProfileDataRequestParameters>
@@ -122,7 +125,10 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 
 /// <summary>
 /// <para>
-/// Updates specific data for the user profile that's associated with the specified unique ID.
+/// Update user profile data.
+/// </para>
+/// <para>
+/// Update specific data for the user profile that is associated with a unique ID.
 /// </para>
 /// </summary>
 public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDescriptor<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataRequestParameters>

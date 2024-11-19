@@ -36,7 +36,11 @@ public sealed partial class ClearCachedPrivilegesRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Evicts application privileges from the native application privileges cache.
+/// Clear the privileges cache.
+/// </para>
+/// <para>
+/// Evict privileges from the native application privilege cache.
+/// The cache is also automatically cleared for applications that have their privileges updated.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCachedPrivilegesRequestParameters>
@@ -56,7 +60,11 @@ public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCac
 
 /// <summary>
 /// <para>
-/// Evicts application privileges from the native application privileges cache.
+/// Clear the privileges cache.
+/// </para>
+/// <para>
+/// Evict privileges from the native application privilege cache.
+/// The cache is also automatically cleared for applications that have their privileges updated.
 /// </para>
 /// </summary>
 public sealed partial class ClearCachedPrivilegesRequestDescriptor : RequestDescriptor<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesRequestParameters>

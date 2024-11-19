@@ -43,7 +43,9 @@ public sealed partial class CreateApiKeyRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Create an API key.
-/// Creates an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// Create an API key for access without requiring basic authentication.
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -103,7 +105,9 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 /// <summary>
 /// <para>
 /// Create an API key.
-/// Creates an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// Create an API key for access without requiring basic authentication.
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
@@ -210,7 +214,9 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 /// <summary>
 /// <para>
 /// Create an API key.
-/// Creates an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// Create an API key for access without requiring basic authentication.
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.

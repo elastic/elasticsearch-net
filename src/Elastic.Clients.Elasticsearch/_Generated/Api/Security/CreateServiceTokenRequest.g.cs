@@ -42,7 +42,10 @@ public sealed partial class CreateServiceTokenRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Creates a service accounts token for access without requiring basic authentication.
+/// Create a service account token.
+/// </para>
+/// <para>
+/// Create a service accounts token for access without requiring basic authentication.
 /// </para>
 /// </summary>
 public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServiceTokenRequestParameters>
@@ -74,7 +77,10 @@ public sealed partial class CreateServiceTokenRequest : PlainRequest<CreateServi
 
 /// <summary>
 /// <para>
-/// Creates a service accounts token for access without requiring basic authentication.
+/// Create a service account token.
+/// </para>
+/// <para>
+/// Create a service accounts token for access without requiring basic authentication.
 /// </para>
 /// </summary>
 public sealed partial class CreateServiceTokenRequestDescriptor : RequestDescriptor<CreateServiceTokenRequestDescriptor, CreateServiceTokenRequestParameters>
