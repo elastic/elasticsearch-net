@@ -42,7 +42,10 @@ public sealed partial class DeleteUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes users from the native realm.
+/// Delete users.
+/// </para>
+/// <para>
+/// Delete users from the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DeleteUserRequest : PlainRequest<DeleteUserRequestParameters>
@@ -70,7 +73,10 @@ public sealed partial class DeleteUserRequest : PlainRequest<DeleteUserRequestPa
 
 /// <summary>
 /// <para>
-/// Deletes users from the native realm.
+/// Delete users.
+/// </para>
+/// <para>
+/// Delete users from the native realm.
 /// </para>
 /// </summary>
 public sealed partial class DeleteUserRequestDescriptor : RequestDescriptor<DeleteUserRequestDescriptor, DeleteUserRequestParameters>

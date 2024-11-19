@@ -145,14 +145,6 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
-
-	/// <summary>
-	/// <para>
 	/// Nodes and shards used for the search.
 	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
 	/// <c>_only_local</c> to run the search only on shards on the local node;
@@ -715,7 +707,10 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 
 /// <summary>
 /// <para>
-/// Returns search hits that match the query defined in the request.
+/// Run a search.
+/// </para>
+/// <para>
+/// Get search hits that match the query defined in the request.
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
 /// </para>
@@ -863,15 +858,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-
-	/// <summary>
-	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -1326,7 +1312,10 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 /// <summary>
 /// <para>
-/// Returns search hits that match the query defined in the request.
+/// Run a search.
+/// </para>
+/// <para>
+/// Get search hits that match the query defined in the request.
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
 /// </para>
@@ -1365,7 +1354,6 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	public SearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public SearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
@@ -2594,7 +2582,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 
 /// <summary>
 /// <para>
-/// Returns search hits that match the query defined in the request.
+/// Run a search.
+/// </para>
+/// <para>
+/// Get search hits that match the query defined in the request.
 /// You can provide search queries using the <c>q</c> query string parameter or the request body.
 /// If both are specified, only the query parameter is used.
 /// </para>
@@ -2633,7 +2624,6 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	public SearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public SearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-	public SearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 	public SearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public SearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);

@@ -34,10 +34,32 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 /// </summary>
 public sealed partial class DataStreamLifecycle
 {
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("data_retention")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? DataRetention { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("downsampling")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("enabled")]
+	public bool? Enabled { get; set; }
 }
 
 /// <summary>
@@ -57,13 +79,26 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
+	private bool? EnabledValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
 	public DataStreamLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Serverless.Duration? dataRetention)
 	{
 		DataRetentionValue = dataRetention;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
 	public DataStreamLifecycleDescriptor Downsampling(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsampling? downsampling)
 	{
 		DownsamplingDescriptor = null;
@@ -85,6 +120,18 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 		DownsamplingValue = null;
 		DownsamplingDescriptor = null;
 		DownsamplingDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public DataStreamLifecycleDescriptor Enabled(bool? enabled = true)
+	{
+		EnabledValue = enabled;
 		return Self;
 	}
 
@@ -111,6 +158,12 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("downsampling");
 			JsonSerializer.Serialize(writer, DownsamplingValue, options);
+		}
+
+		if (EnabledValue.HasValue)
+		{
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue.Value);
 		}
 
 		writer.WriteEndObject();

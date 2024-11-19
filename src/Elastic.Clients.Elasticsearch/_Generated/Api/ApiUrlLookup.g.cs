@@ -279,6 +279,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls QueryRulesListRulesets = new ApiUrls(new[] { "_query_rules" });
 	internal static ApiUrls QueryRulesPutRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesPutRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesTest = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_test" });
 	internal static ApiUrls RollupDeleteJob = new ApiUrls(new[] { "_rollup/job/{id}" });
 	internal static ApiUrls RollupGetJobs = new ApiUrls(new[] { "_rollup/job/{id}", "_rollup/job" });
 	internal static ApiUrls RollupGetRollupCaps = new ApiUrls(new[] { "_rollup/data/{id}", "_rollup/data" });
@@ -310,6 +311,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[] { "_security/role/{name}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedServiceTokens = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}/_clear_cache" });
 	internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "_security/api_key" });
+	internal static ApiUrls SecurityCreateCrossClusterApiKey = new ApiUrls(new[] { "_security/cross_cluster/api_key" });
 	internal static ApiUrls SecurityCreateServiceToken = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}", "_security/service/{namespace}/{service}/credential/token" });
 	internal static ApiUrls SecurityDeletePrivileges = new ApiUrls(new[] { "_security/privilege/{application}/{name}" });
 	internal static ApiUrls SecurityDeleteRole = new ApiUrls(new[] { "_security/role/{name}" });
@@ -353,6 +355,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecuritySamlServiceProviderMetadata = new ApiUrls(new[] { "_security/saml/metadata/{realm_name}" });
 	internal static ApiUrls SecuritySuggestUserProfiles = new ApiUrls(new[] { "_security/profile/_suggest" });
 	internal static ApiUrls SecurityUpdateApiKey = new ApiUrls(new[] { "_security/api_key/{id}" });
+	internal static ApiUrls SecurityUpdateCrossClusterApiKey = new ApiUrls(new[] { "_security/cross_cluster/api_key/{id}" });
 	internal static ApiUrls SecurityUpdateUserProfileData = new ApiUrls(new[] { "_security/profile/{uid}/_data" });
 	internal static ApiUrls SnapshotCleanupRepository = new ApiUrls(new[] { "_snapshot/{repository}/_cleanup" });
 	internal static ApiUrls SnapshotClone = new ApiUrls(new[] { "_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}" });
@@ -371,6 +374,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SnapshotLifecycleManagementPutLifecycle = new ApiUrls(new[] { "_slm/policy/{policy_id}" });
 	internal static ApiUrls SnapshotLifecycleManagementStart = new ApiUrls(new[] { "_slm/start" });
 	internal static ApiUrls SnapshotLifecycleManagementStop = new ApiUrls(new[] { "_slm/stop" });
+	internal static ApiUrls SnapshotRepositoryVerifyIntegrity = new ApiUrls(new[] { "_snapshot/{repository}/_verify_integrity" });
 	internal static ApiUrls SnapshotRestore = new ApiUrls(new[] { "_snapshot/{repository}/{snapshot}/_restore" });
 	internal static ApiUrls SnapshotStatus = new ApiUrls(new[] { "_snapshot/_status", "_snapshot/{repository}/_status", "_snapshot/{repository}/{snapshot}/_status" });
 	internal static ApiUrls SnapshotVerifyRepository = new ApiUrls(new[] { "_snapshot/{repository}/_verify" });

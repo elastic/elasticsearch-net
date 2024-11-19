@@ -42,7 +42,7 @@ public sealed partial class DeletePrivilegesRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Removes application privileges.
+/// Delete application privileges.
 /// </para>
 /// </summary>
 public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivilegesRequestParameters>
@@ -70,7 +70,7 @@ public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivile
 
 /// <summary>
 /// <para>
-/// Removes application privileges.
+/// Delete application privileges.
 /// </para>
 /// </summary>
 public sealed partial class DeletePrivilegesRequestDescriptor : RequestDescriptor<DeletePrivilegesRequestDescriptor, DeletePrivilegesRequestParameters>

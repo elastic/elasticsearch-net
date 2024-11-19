@@ -56,13 +56,6 @@ public sealed partial class GetAliasRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
@@ -124,14 +117,6 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
@@ -163,7 +148,6 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	public GetAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 
 	public GetAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -211,7 +195,6 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 	public GetAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
 
 	public GetAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{

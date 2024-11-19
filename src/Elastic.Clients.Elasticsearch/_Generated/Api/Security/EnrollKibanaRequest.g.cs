@@ -36,7 +36,10 @@ public sealed partial class EnrollKibanaRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Enables a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
+/// Enroll Kibana.
+/// </para>
+/// <para>
+/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
 /// </para>
 /// </summary>
 public sealed partial class EnrollKibanaRequest : PlainRequest<EnrollKibanaRequestParameters>
@@ -52,7 +55,10 @@ public sealed partial class EnrollKibanaRequest : PlainRequest<EnrollKibanaReque
 
 /// <summary>
 /// <para>
-/// Enables a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
+/// Enroll Kibana.
+/// </para>
+/// <para>
+/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
 /// </para>
 /// </summary>
 public sealed partial class EnrollKibanaRequestDescriptor : RequestDescriptor<EnrollKibanaRequestDescriptor, EnrollKibanaRequestParameters>

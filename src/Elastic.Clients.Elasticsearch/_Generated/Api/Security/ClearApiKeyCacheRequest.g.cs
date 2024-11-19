@@ -36,7 +36,10 @@ public sealed partial class ClearApiKeyCacheRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Evicts a subset of all entries from the API key cache.
+/// Clear the API key cache.
+/// </para>
+/// <para>
+/// Evict a subset of all entries from the API key cache.
 /// The cache is also automatically cleared on state changes of the security index.
 /// </para>
 /// </summary>
@@ -57,7 +60,10 @@ public sealed partial class ClearApiKeyCacheRequest : PlainRequest<ClearApiKeyCa
 
 /// <summary>
 /// <para>
-/// Evicts a subset of all entries from the API key cache.
+/// Clear the API key cache.
+/// </para>
+/// <para>
+/// Evict a subset of all entries from the API key cache.
 /// The cache is also automatically cleared on state changes of the security index.
 /// </para>
 /// </summary>

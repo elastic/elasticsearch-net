@@ -50,7 +50,7 @@ public sealed partial class GetUserPrivilegesRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves security privileges for the logged in user.
+/// Get user privileges.
 /// </para>
 /// </summary>
 public sealed partial class GetUserPrivilegesRequest : PlainRequest<GetUserPrivilegesRequestParameters>
@@ -84,7 +84,7 @@ public sealed partial class GetUserPrivilegesRequest : PlainRequest<GetUserPrivi
 
 /// <summary>
 /// <para>
-/// Retrieves security privileges for the logged in user.
+/// Get user privileges.
 /// </para>
 /// </summary>
 public sealed partial class GetUserPrivilegesRequestDescriptor : RequestDescriptor<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesRequestParameters>
