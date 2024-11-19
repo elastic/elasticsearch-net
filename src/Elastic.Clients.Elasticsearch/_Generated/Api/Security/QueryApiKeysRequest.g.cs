@@ -153,8 +153,10 @@ internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<Query
 
 /// <summary>
 /// <para>
-/// Query API keys.
-/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Find API keys with a query.
+/// </para>
+/// <para>
+/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 [JsonConverter(typeof(QueryApiKeysRequestConverter))]
@@ -263,8 +265,10 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 
 /// <summary>
 /// <para>
-/// Query API keys.
-/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Find API keys with a query.
+/// </para>
+/// <para>
+/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDescriptor<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysRequestParameters>
@@ -505,8 +509,10 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Query API keys.
-/// Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+/// Find API keys with a query.
+/// </para>
+/// <para>
+/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
 public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<QueryApiKeysRequestDescriptor, QueryApiKeysRequestParameters>

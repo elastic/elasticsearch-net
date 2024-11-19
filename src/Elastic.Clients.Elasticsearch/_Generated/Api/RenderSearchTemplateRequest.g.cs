@@ -36,7 +36,10 @@ public sealed partial class RenderSearchTemplateRequestParameters : RequestParam
 
 /// <summary>
 /// <para>
-/// Renders a search template as a search request body.
+/// Render a search template.
+/// </para>
+/// <para>
+/// Render a search template as a search request body.
 /// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSearchTemplateRequestParameters>
@@ -84,7 +87,10 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 
 /// <summary>
 /// <para>
-/// Renders a search template as a search request body.
+/// Render a search template.
+/// </para>
+/// <para>
+/// Render a search template as a search request body.
 /// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateRequestParameters>
@@ -177,7 +183,10 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 
 /// <summary>
 /// <para>
-/// Renders a search template as a search request body.
+/// Render a search template.
+/// </para>
+/// <para>
+/// Render a search template as a search request body.
 /// </para>
 /// </summary>
 public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescriptor<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateRequestParameters>

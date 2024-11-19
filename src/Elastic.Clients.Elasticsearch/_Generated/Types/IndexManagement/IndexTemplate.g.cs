@@ -53,6 +53,25 @@ public sealed partial class IndexTemplate
 
 	/// <summary>
 	/// <para>
+	/// Marks this index template as deprecated.
+	/// When creating or updating a non-deprecated index template that uses deprecated components,
+	/// Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("deprecated")]
+	public bool? Deprecated { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A list of component template names that are allowed to be absent.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("ignore_missing_component_templates")]
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string>? IgnoreMissingComponentTemplates { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// Name of the index template.
 	/// </para>
 	/// </summary>

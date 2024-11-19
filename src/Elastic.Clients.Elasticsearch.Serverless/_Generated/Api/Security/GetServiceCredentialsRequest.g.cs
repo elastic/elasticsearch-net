@@ -36,7 +36,7 @@ public sealed partial class GetServiceCredentialsRequestParameters : RequestPara
 
 /// <summary>
 /// <para>
-/// Retrieves information of all service credentials for a service account.
+/// Get service account credentials.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServiceCredentialsRequestParameters>
@@ -56,7 +56,7 @@ public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServi
 
 /// <summary>
 /// <para>
-/// Retrieves information of all service credentials for a service account.
+/// Get service account credentials.
 /// </para>
 /// </summary>
 public sealed partial class GetServiceCredentialsRequestDescriptor : RequestDescriptor<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsRequestParameters>

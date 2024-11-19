@@ -41,7 +41,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +61,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +80,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +100,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +121,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +143,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +162,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +182,14 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns all dangling indices.
+	/// Get the dangling indices.
+	/// </para>
+	/// <para>
+	/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+	/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+	/// </para>
+	/// <para>
+	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

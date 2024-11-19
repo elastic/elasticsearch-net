@@ -36,7 +36,10 @@ public sealed partial class HasPrivilegesUserProfileRequestParameters : RequestP
 
 /// <summary>
 /// <para>
-/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+/// Check user profile privileges.
+/// </para>
+/// <para>
+/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 /// </para>
 /// </summary>
 public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPrivilegesUserProfileRequestParameters>
@@ -63,7 +66,10 @@ public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPr
 
 /// <summary>
 /// <para>
-/// Determines whether the users associated with the specified profile IDs have all the requested privileges.
+/// Check user profile privileges.
+/// </para>
+/// <para>
+/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 /// </para>
 /// </summary>
 public sealed partial class HasPrivilegesUserProfileRequestDescriptor : RequestDescriptor<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileRequestParameters>

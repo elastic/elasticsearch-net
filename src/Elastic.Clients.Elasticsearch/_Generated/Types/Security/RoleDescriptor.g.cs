@@ -75,6 +75,24 @@ internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescri
 					continue;
 				}
 
+				if (property == "remote_cluster")
+				{
+					variant.RemoteCluster = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "remote_indices")
+				{
+					variant.RemoteIndices = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "restriction")
+				{
+					variant.Restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.Restriction?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "run_as")
 				{
 					variant.RunAs = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
@@ -129,6 +147,24 @@ internal sealed partial class RoleDescriptorConverter : JsonConverter<RoleDescri
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, value.Metadata, options);
+		}
+
+		if (value.RemoteCluster is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			JsonSerializer.Serialize(writer, value.RemoteCluster, options);
+		}
+
+		if (value.RemoteIndices is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			JsonSerializer.Serialize(writer, value.RemoteIndices, options);
+		}
+
+		if (value.Restriction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, value.Restriction, options);
 		}
 
 		if (value.RunAs is not null)
@@ -194,6 +230,27 @@ public sealed partial class RoleDescriptor
 
 	/// <summary>
 	/// <para>
+	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -224,6 +281,17 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> RemoteIndicesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> RemoteIndicesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] RemoteIndicesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.Restriction? RestrictionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -385,6 +453,117 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 
 	/// <summary>
 	/// <para>
+	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor<TDocument> RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
+	{
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterValue = remoteCluster;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptorAction = configure;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor<TDocument> RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
+	{
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesValue = remoteIndices;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument> descriptor)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>> configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptorAction = configure;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? restriction)
+	{
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = null;
+		RestrictionValue = restriction;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptorAction = null;
+		RestrictionDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor<TDocument> Restriction(Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> configure)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -512,6 +691,84 @@ public sealed partial class RoleDescriptorDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
+		if (RemoteClusterDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			foreach (var action in RemoteClusterDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterValue is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
+		}
+
+		if (RemoteIndicesDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(RemoteIndicesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			foreach (var action in RemoteIndicesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesValue is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
+		}
+
+		if (RestrictionDescriptor is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
+		}
+		else if (RestrictionDescriptorAction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
+		}
+		else if (RestrictionValue is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionValue, options);
+		}
+
 		if (RunAsValue is not null)
 		{
 			writer.WritePropertyName("run_as");
@@ -551,6 +808,17 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor> IndicesDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] IndicesDescriptorActions { get; set; }
 	private IDictionary<string, object>? MetadataValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteClusterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor RemoteClusterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> RemoteClusterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] RemoteClusterDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor RemoteIndicesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> RemoteIndicesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] RemoteIndicesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.Restriction? RestrictionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor RestrictionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> RestrictionDescriptorAction { get; set; }
 	private ICollection<string>? RunAsValue { get; set; }
 	private IDictionary<string, object>? TransientMetadataValue { get; set; }
 
@@ -712,6 +980,117 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 
 	/// <summary>
 	/// <para>
+	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor RemoteCluster(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster)
+	{
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterValue = remoteCluster;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteCluster(Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorActions = null;
+		RemoteClusterDescriptorAction = configure;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteCluster(params Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] configure)
+	{
+		RemoteClusterValue = null;
+		RemoteClusterDescriptor = null;
+		RemoteClusterDescriptorAction = null;
+		RemoteClusterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor RemoteIndices(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices)
+	{
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesValue = remoteIndices;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor descriptor)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteIndices(Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor> configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorActions = null;
+		RemoteIndicesDescriptorAction = configure;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor RemoteIndices(params Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] configure)
+	{
+		RemoteIndicesValue = null;
+		RemoteIndicesDescriptor = null;
+		RemoteIndicesDescriptorAction = null;
+		RemoteIndicesDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? restriction)
+	{
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = null;
+		RestrictionValue = restriction;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptorAction = null;
+		RestrictionDescriptor = descriptor;
+		return Self;
+	}
+
+	public RoleDescriptorDescriptor Restriction(Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> configure)
+	{
+		RestrictionValue = null;
+		RestrictionDescriptor = null;
+		RestrictionDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A list of users that the API keys can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
@@ -837,6 +1216,84 @@ public sealed partial class RoleDescriptorDescriptor : SerializableDescriptor<Ro
 		{
 			writer.WritePropertyName("metadata");
 			JsonSerializer.Serialize(writer, MetadataValue, options);
+		}
+
+		if (RemoteClusterDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteClusterDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(RemoteClusterDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			writer.WriteStartArray();
+			foreach (var action in RemoteClusterDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteClusterValue is not null)
+		{
+			writer.WritePropertyName("remote_cluster");
+			JsonSerializer.Serialize(writer, RemoteClusterValue, options);
+		}
+
+		if (RemoteIndicesDescriptor is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, RemoteIndicesDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(RemoteIndicesDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesDescriptorActions is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			writer.WriteStartArray();
+			foreach (var action in RemoteIndicesDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (RemoteIndicesValue is not null)
+		{
+			writer.WritePropertyName("remote_indices");
+			JsonSerializer.Serialize(writer, RemoteIndicesValue, options);
+		}
+
+		if (RestrictionDescriptor is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionDescriptor, options);
+		}
+		else if (RestrictionDescriptorAction is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(RestrictionDescriptorAction), options);
+		}
+		else if (RestrictionValue is not null)
+		{
+			writer.WritePropertyName("restriction");
+			JsonSerializer.Serialize(writer, RestrictionValue, options);
 		}
 
 		if (RunAsValue is not null)

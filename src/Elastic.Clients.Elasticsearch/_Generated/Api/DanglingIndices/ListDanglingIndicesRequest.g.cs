@@ -36,7 +36,14 @@ public sealed partial class ListDanglingIndicesRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Returns all dangling indices.
+/// Get the dangling indices.
+/// </para>
+/// <para>
+/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+/// </para>
+/// <para>
+/// Use this API to list dangling indices, which you can then import or delete.
 /// </para>
 /// </summary>
 public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDanglingIndicesRequestParameters>
@@ -52,7 +59,14 @@ public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDangli
 
 /// <summary>
 /// <para>
-/// Returns all dangling indices.
+/// Get the dangling indices.
+/// </para>
+/// <para>
+/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+/// </para>
+/// <para>
+/// Use this API to list dangling indices, which you can then import or delete.
 /// </para>
 /// </summary>
 public sealed partial class ListDanglingIndicesRequestDescriptor : RequestDescriptor<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesRequestParameters>

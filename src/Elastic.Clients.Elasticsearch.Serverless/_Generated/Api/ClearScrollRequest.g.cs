@@ -36,7 +36,10 @@ public sealed partial class ClearScrollRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clears the search context and results for a scrolling search.
+/// Clear a scrolling search.
+/// </para>
+/// <para>
+/// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
@@ -61,7 +64,10 @@ public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequest
 
 /// <summary>
 /// <para>
-/// Clears the search context and results for a scrolling search.
+/// Clear a scrolling search.
+/// </para>
+/// <para>
+/// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>
 public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<ClearScrollRequestDescriptor, ClearScrollRequestParameters>

@@ -40,6 +40,9 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? indices = default;
 		IReadOnlyDictionary<string, object>? metadata = default;
 		string name = default;
+		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? remoteCluster = default;
+		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? remoteIndices = default;
+		Elastic.Clients.Elasticsearch.Security.Restriction? restriction = default;
 		IReadOnlyCollection<string>? runAs = default;
 		IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? sort = default;
 		IReadOnlyDictionary<string, object>? transientMetadata = default;
@@ -90,6 +93,24 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 					continue;
 				}
 
+				if (property == "remote_cluster")
+				{
+					remoteCluster = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "remote_indices")
+				{
+					remoteIndices = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "restriction")
+				{
+					restriction = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.Restriction?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "run_as")
 				{
 					runAs = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
@@ -110,7 +131,7 @@ internal sealed partial class QueryRoleConverter : JsonConverter<QueryRole>
 			}
 		}
 
-		return new QueryRole { Applications = applications, Cluster = cluster, Description = description, Global = global, Indices = indices, Metadata = metadata, Name = name, RunAs = runAs, Sort = sort, TransientMetadata = transientMetadata };
+		return new QueryRole { Applications = applications, Cluster = cluster, Description = description, Global = global, Indices = indices, Metadata = metadata, Name = name, RemoteCluster = remoteCluster, RemoteIndices = remoteIndices, Restriction = restriction, RunAs = runAs, Sort = sort, TransientMetadata = transientMetadata };
 	}
 
 	public override void Write(Utf8JsonWriter writer, QueryRole value, JsonSerializerOptions options)
@@ -170,6 +191,27 @@ public sealed partial class QueryRole
 	/// </para>
 	/// </summary>
 	public string Name { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster permissions for remote clusters. Note - this is limited a subset of the cluster permissions.
+	/// </para>
+	/// </summary>
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A list of indices permissions for remote clusters.
+	/// </para>
+	/// </summary>
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Restriction for when the role descriptor is allowed to be effective.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; init; }
 
 	/// <summary>
 	/// <para>

@@ -31,5 +31,5 @@ public sealed partial class ListResponse : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 	[JsonInclude, JsonPropertyName("results")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationListItem> Results { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication> Results { get; init; }
 }

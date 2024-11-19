@@ -37,6 +37,8 @@ public sealed partial class UpdateApiKeyRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Update an API key.
+/// </para>
+/// <para>
 /// Updates attributes of an existing API key.
 /// Users can only update API keys that they created or that were granted to them.
 /// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -94,6 +96,8 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 /// <summary>
 /// <para>
 /// Update an API key.
+/// </para>
+/// <para>
 /// Updates attributes of an existing API key.
 /// Users can only update API keys that they created or that were granted to them.
 /// Use this API to update API keys created by the create API Key or grant API Key APIs.
@@ -196,6 +200,8 @@ public sealed partial class UpdateApiKeyRequestDescriptor<TDocument> : RequestDe
 /// <summary>
 /// <para>
 /// Update an API key.
+/// </para>
+/// <para>
 /// Updates attributes of an existing API key.
 /// Users can only update API keys that they created or that were granted to them.
 /// Use this API to update API keys created by the create API Key or grant API Key APIs.

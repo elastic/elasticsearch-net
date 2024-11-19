@@ -55,6 +55,8 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; init; }
 	[JsonInclude, JsonPropertyName("ilm")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; init; }
+	[JsonInclude, JsonPropertyName("logsdb")]
+	public Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; init; }
 	[JsonInclude, JsonPropertyName("logstash")]
 	public Elastic.Clients.Elasticsearch.Xpack.Feature Logstash { get; init; }
 	[JsonInclude, JsonPropertyName("ml")]

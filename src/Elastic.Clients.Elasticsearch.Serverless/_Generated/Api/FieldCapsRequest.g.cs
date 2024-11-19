@@ -86,9 +86,15 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// Get the field capabilities.
+/// </para>
+/// <para>
+/// Get information about the capabilities of fields among multiple indices.
+/// </para>
+/// <para>
+/// For data streams, the API returns field capabilities among the stream’s backing indices.
+/// It returns runtime fields like any other field.
+/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
 public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
@@ -196,9 +202,15 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 /// <summary>
 /// <para>
-/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// Get the field capabilities.
+/// </para>
+/// <para>
+/// Get information about the capabilities of fields among multiple indices.
+/// </para>
+/// <para>
+/// For data streams, the API returns field capabilities among the stream’s backing indices.
+/// It returns runtime fields like any other field.
+/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
 public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescriptor<FieldCapsRequestDescriptor<TDocument>, FieldCapsRequestParameters>
@@ -330,9 +342,15 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// The field capabilities API returns the information about the capabilities of fields among multiple indices.
-/// The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-/// of keyword is returned as any other field that belongs to the <c>keyword</c> family.
+/// Get the field capabilities.
+/// </para>
+/// <para>
+/// Get information about the capabilities of fields among multiple indices.
+/// </para>
+/// <para>
+/// For data streams, the API returns field capabilities among the stream’s backing indices.
+/// It returns runtime fields like any other field.
+/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
 public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<FieldCapsRequestDescriptor, FieldCapsRequestParameters>

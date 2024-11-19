@@ -36,7 +36,10 @@ public sealed partial class GetBuiltinPrivilegesRequestParameters : RequestParam
 
 /// <summary>
 /// <para>
-/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+/// Get builtin privileges.
+/// </para>
+/// <para>
+/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class GetBuiltinPrivilegesRequest : PlainRequest<GetBuiltinPrivilegesRequestParameters>
@@ -52,7 +55,10 @@ public sealed partial class GetBuiltinPrivilegesRequest : PlainRequest<GetBuilti
 
 /// <summary>
 /// <para>
-/// Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+/// Get builtin privileges.
+/// </para>
+/// <para>
+/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 /// </para>
 /// </summary>
 public sealed partial class GetBuiltinPrivilegesRequestDescriptor : RequestDescriptor<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesRequestParameters>

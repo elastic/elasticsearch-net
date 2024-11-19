@@ -42,7 +42,11 @@ public sealed partial class PutUserRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Adds and updates users in the native realm. These users are commonly referred to as native users.
+/// Create or update users.
+/// </para>
+/// <para>
+/// A password is required for adding a new user but is optional when updating an existing user.
+/// To change a user’s password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
 public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParameters>
@@ -86,7 +90,11 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 
 /// <summary>
 /// <para>
-/// Adds and updates users in the native realm. These users are commonly referred to as native users.
+/// Create or update users.
+/// </para>
+/// <para>
+/// A password is required for adding a new user but is optional when updating an existing user.
+/// To change a user’s password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
 public sealed partial class PutUserRequestDescriptor : RequestDescriptor<PutUserRequestDescriptor, PutUserRequestParameters>

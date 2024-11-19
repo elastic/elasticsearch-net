@@ -42,7 +42,10 @@ public sealed partial class ChangePasswordRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Changes the passwords of users in the native realm and built-in users.
+/// Change passwords.
+/// </para>
+/// <para>
+/// Change the passwords of users in the native realm and built-in users.
 /// </para>
 /// </summary>
 public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordRequestParameters>
@@ -93,7 +96,10 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 
 /// <summary>
 /// <para>
-/// Changes the passwords of users in the native realm and built-in users.
+/// Change passwords.
+/// </para>
+/// <para>
+/// Change the passwords of users in the native realm and built-in users.
 /// </para>
 /// </summary>
 public sealed partial class ChangePasswordRequestDescriptor : RequestDescriptor<ChangePasswordRequestDescriptor, ChangePasswordRequestParameters>

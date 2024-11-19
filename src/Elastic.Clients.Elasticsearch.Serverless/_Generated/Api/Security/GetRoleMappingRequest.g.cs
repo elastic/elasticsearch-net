@@ -36,7 +36,12 @@ public sealed partial class GetRoleMappingRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves role mappings.
+/// Get role mappings.
+/// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 /// </para>
 /// </summary>
 public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingRequestParameters>
@@ -60,7 +65,12 @@ public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingR
 
 /// <summary>
 /// <para>
-/// Retrieves role mappings.
+/// Get role mappings.
+/// </para>
+/// <para>
+/// Role mappings define which roles are assigned to each user.
+/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 /// </para>
 /// </summary>
 public sealed partial class GetRoleMappingRequestDescriptor : RequestDescriptor<GetRoleMappingRequestDescriptor, GetRoleMappingRequestParameters>
