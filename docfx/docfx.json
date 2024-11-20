@@ -3,9 +3,9 @@
     {
       "src": [
         {
-          "src": "./src/Elastic.Clients.Elasticsearch",
+          "src": "../src",
           "files": [
-            "**/*.csproj"
+            "**/Elastic.Clients.Elasticsearch.csproj"
           ]
         }
       ],
@@ -38,6 +38,7 @@
     "globalMetadata": {
       "_appName": "Elasticsearch.NET",
       "_appTitle": "Elasticsearch.NET",
+      "_appLogoPath": "images/logo.svg",
       "_enableSearch": true,
       "_disableContribution": true,
       "pdf": false
