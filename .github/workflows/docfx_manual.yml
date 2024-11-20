@@ -1,0 +1,12 @@
+name: 'DocFx'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docfx:
+    name: 'Generate Documentation'
+    uses: ./.github/workflows/docfx.yml
+    with:
+      release_tag: ${{ github.ref_name }}
+    secrets: 'inherit'
