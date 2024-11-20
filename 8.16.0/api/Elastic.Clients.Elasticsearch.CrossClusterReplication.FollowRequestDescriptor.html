@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class FollowRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class FollowRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Creates a new follower index configured to follow the referenced leader index.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/docfx/apiSpec/new?filename=Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor" class="text-break">
+Class FollowRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L519"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.html">CrossClusterReplication</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Creates a new follower index configured to follow the referenced leader index.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class FollowRequestDescriptor : RequestDescriptor&lt;FollowRequestDescriptor, FollowRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters.html">FollowRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters.html">FollowRequestParameters</a>&gt;</div>
+      <div><span class="xref">FollowRequestDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;FollowRequestDescriptor, FollowRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;FollowRequestDescriptor, FollowRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;FollowRequestDescriptor, FollowRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;FollowRequestDescriptor, FollowRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexName)">
+  FollowRequestDescriptor(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L523"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor(IndexName index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/7d3a633b6c0d257ad611a60c720c1ee27688fdb1/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_DataStreamName_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.DataStreamName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_DataStreamName_System_String_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.DataStreamName(System.String)">
+  DataStreamName(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L565"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor DataStreamName(string? dataStreamName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dataStreamName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Index_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor Index(IndexName index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_LeaderIndex_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.LeaderIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_LeaderIndex_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.LeaderIndex(Elastic.Clients.Elasticsearch.IndexName)">
+  LeaderIndex(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L576"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the index in the leader cluster to follow.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor LeaderIndex(IndexName leaderIndex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>leaderIndex</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxOutstandingReadRequests_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxOutstandingReadRequests*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxOutstandingReadRequests_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxOutstandingReadRequests(System.Nullable{System.Int64})">
+  MaxOutstandingReadRequests(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L587"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of outstanding reads requests from the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxOutstandingReadRequests</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxOutstandingWriteRequests_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxOutstandingWriteRequests*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxOutstandingWriteRequests_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxOutstandingWriteRequests(System.Nullable{System.Int32})">
+  MaxOutstandingWriteRequests(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L598"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of outstanding write requests on the follower.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxOutstandingWriteRequests</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxReadRequestOperationCount_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxReadRequestOperationCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxReadRequestOperationCount_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxReadRequestOperationCount(System.Nullable{System.Int32})">
+  MaxReadRequestOperationCount(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L609"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of operations to pull per read from the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxReadRequestOperationCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxReadRequestSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxReadRequestSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxReadRequestSize_Elastic_Clients_Elasticsearch_ByteSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize)">
+  MaxReadRequestSize(ByteSize?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L620"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxReadRequestSize(ByteSize? maxReadRequestSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxReadRequestSize</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxRetryDelay_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxRetryDelay*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxRetryDelay_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration)">
+  MaxRetryDelay(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+retrying.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxRetryDelay(Duration? maxRetryDelay)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxRetryDelay</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteBufferCount_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteBufferCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteBufferCount_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteBufferCount(System.Nullable{System.Int32})">
+  MaxWriteBufferCount(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L644"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+deferred until the number of queued operations goes below the limit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxWriteBufferCount(int? maxWriteBufferCount)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxWriteBufferCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteBufferSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteBufferSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteBufferSize_Elastic_Clients_Elasticsearch_ByteSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize)">
+  MaxWriteBufferSize(ByteSize?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+be deferred until the total bytes of queued operations goes below the limit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxWriteBufferSize(ByteSize? maxWriteBufferSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxWriteBufferSize</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteRequestOperationCount_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteRequestOperationCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteRequestOperationCount_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteRequestOperationCount(System.Nullable{System.Int32})">
+  MaxWriteRequestOperationCount(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L667"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of operations per bulk write request executed on the follower.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxWriteRequestOperationCount(int? maxWriteRequestOperationCount)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxWriteRequestOperationCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteRequestSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteRequestSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_MaxWriteRequestSize_Elastic_Clients_Elasticsearch_ByteSize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize)">
+  MaxWriteRequestSize(ByteSize?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L678"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum total bytes of operations per bulk write request executed on the follower.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor MaxWriteRequestSize(ByteSize? maxWriteRequestSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxWriteRequestSize</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_ReadPollTimeout_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.ReadPollTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_ReadPollTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  ReadPollTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+Then the follower will immediately attempt to read from the leader again.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor ReadPollTimeout(Duration? readPollTimeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>readPollTimeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_RemoteCluster_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.RemoteCluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_RemoteCluster_System_String_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.RemoteCluster(System.String)">
+  RemoteCluster(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L702"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The remote cluster containing the leader index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor RemoteCluster(string remoteCluster)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>remoteCluster</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L737"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings)">
+  Settings(IndexSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings to override from the leader index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor Settings(IndexSettings? settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor)">
+  Settings(IndexSettingsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L721"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor Settings(IndexSettingsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.html">IndexSettingsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_Settings_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.Settings(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor})">
+  Settings(Action&lt;IndexSettingsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L729"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor Settings(Action&lt;IndexSettingsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.html">IndexSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_CrossClusterReplication_FollowRequestDescriptor_WaitForActiveShards_System_Nullable_Elastic_Clients_Elasticsearch_WaitForActiveShards__" data-uid="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.WaitForActiveShards(System.Nullable{Elastic.Clients.Elasticsearch.WaitForActiveShards})">
+  WaitForActiveShards(WaitForActiveShards?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/CrossClusterReplication/FollowRequest.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FollowRequestDescriptor WaitForActiveShards(WaitForActiveShards? waitForActiveShards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>waitForActiveShards</code> <a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor.html">FollowRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

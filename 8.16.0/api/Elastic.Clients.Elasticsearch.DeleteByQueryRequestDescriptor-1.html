@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DeleteByQueryRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DeleteByQueryRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Delete documents. Deletes documents that match the specified query.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/docfx/apiSpec/new?filename=Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1" class="text-break">
+Class DeleteByQueryRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Delete documents.
+Deletes documents that match the specified query.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DeleteByQueryRequestDescriptor&lt;TDocument&gt; : RequestDescriptor&lt;DeleteByQueryRequestDescriptor&lt;TDocument&gt;, DeleteByQueryRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters.html">DeleteByQueryRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters.html">DeleteByQueryRequestParameters</a>&gt;</div>
+      <div><span class="xref">DeleteByQueryRequestDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;DeleteByQueryRequestDescriptor&lt;TDocument&gt;, DeleteByQueryRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;DeleteByQueryRequestDescriptor&lt;TDocument&gt;, DeleteByQueryRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;DeleteByQueryRequestDescriptor&lt;TDocument&gt;, DeleteByQueryRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;DeleteByQueryRequestDescriptor&lt;TDocument&gt;, DeleteByQueryRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.#ctor">
+  DeleteByQueryRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L545"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  DeleteByQueryRequestDescriptor(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L541"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/7d3a633b6c0d257ad611a60c720c1ee27688fdb1/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; AllowNoIndices(bool? allowNoIndices = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>allowNoIndices</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_AnalyzeWildcard_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.AnalyzeWildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_AnalyzeWildcard_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.AnalyzeWildcard(System.Nullable{System.Boolean})">
+  AnalyzeWildcard(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L559"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; AnalyzeWildcard(bool? analyzeWildcard = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analyzeWildcard</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Analyzer(string? analyzer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analyzer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Conflicts_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Conflicts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Conflicts_System_Nullable_Elastic_Clients_Elasticsearch_Conflicts__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Conflicts(System.Nullable{Elastic.Clients.Elasticsearch.Conflicts})">
+  Conflicts(Conflicts?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L560"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Conflicts(Conflicts? conflicts)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>conflicts</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Conflicts.html">Conflicts</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_DefaultOperator_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.DefaultOperator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_DefaultOperator_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_Operator__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.DefaultOperator(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.Operator})">
+  DefaultOperator(Operator?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L561"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; DefaultOperator(Operator? defaultOperator)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>defaultOperator</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Df_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Df*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Df_System_String_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Df(System.String)">
+  Df(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L562"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Df(string? df)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>df</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L563"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? expandWildcards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expandWildcards</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_From_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_From_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.From(System.Nullable{System.Int64})">
+  From(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L564"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; From(long? from)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L565"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; IgnoreUnavailable(bool? ignoreUnavailable = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreUnavailable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L586"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Indices(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Lenient_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Lenient*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Lenient_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Lenient(System.Nullable{System.Boolean})">
+  Lenient(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L566"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Lenient(bool? lenient = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lenient</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_MaxDocs_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.MaxDocs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_MaxDocs_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.MaxDocs(System.Nullable{System.Int64})">
+  MaxDocs(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L605"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of documents to delete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; MaxDocs(long? maxDocs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxDocs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Preference_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Preference_System_String_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Preference(System.String)">
+  Preference(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L567"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Preference(string? preference)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>preference</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L616"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the documents to delete using the Query DSL.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Query(Query? query)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>query</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0})">
+  Query(QueryDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L624"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Query(QueryDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}})">
+  Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_QueryLuceneSyntax_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.QueryLuceneSyntax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_QueryLuceneSyntax_System_String_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.QueryLuceneSyntax(System.String)">
+  QueryLuceneSyntax(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; QueryLuceneSyntax(string? queryLuceneSyntax)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryLuceneSyntax</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Refresh_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Refresh_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Refresh(System.Nullable{System.Boolean})">
+  Refresh(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Refresh(bool? refresh = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>refresh</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_RequestCache_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.RequestCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_RequestCache_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.RequestCache(System.Nullable{System.Boolean})">
+  RequestCache(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L570"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; RequestCache(bool? requestCache = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_RequestsPerSecond_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.RequestsPerSecond*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_RequestsPerSecond_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.RequestsPerSecond(System.Nullable{System.Single})">
+  RequestsPerSecond(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L571"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; RequestsPerSecond(float? requestsPerSecond)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requestsPerSecond</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Routing(Routing? routing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routing</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Scroll_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Scroll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Scroll_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Scroll(Elastic.Clients.Elasticsearch.Duration)">
+  Scroll(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L573"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Scroll(Duration? scroll)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scroll</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_ScrollSize_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.ScrollSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_ScrollSize_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.ScrollSize(System.Nullable{System.Int64})">
+  ScrollSize(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L574"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; ScrollSize(long? scrollSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scrollSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_SearchTimeout_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.SearchTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_SearchTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.SearchTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  SearchTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L575"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; SearchTimeout(Duration? searchTimeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searchTimeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_SearchType_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.SearchType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_SearchType_System_Nullable_Elastic_Clients_Elasticsearch_SearchType__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.SearchType(System.Nullable{Elastic.Clients.Elasticsearch.SearchType})">
+  SearchType(SearchType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L576"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; SearchType(SearchType? searchType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searchType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchType.html">SearchType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_Elastic_Clients_Elasticsearch_SlicedScroll_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice(Elastic.Clients.Elasticsearch.SlicedScroll)">
+  Slice(SlicedScroll?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L645"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Slice the request manually using the provided slice ID and total number of slices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Slice(SlicedScroll? slice)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>slice</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScroll.html">SlicedScroll</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_Elastic_Clients_Elasticsearch_SlicedScrollDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor{`0})">
+  Slice(SlicedScrollDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L653"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Slice(SlicedScrollDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor-1.html">SlicedScrollDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slice_System_Action_Elastic_Clients_Elasticsearch_SlicedScrollDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slice(System.Action{Elastic.Clients.Elasticsearch.SlicedScrollDescriptor{`0}})">
+  Slice(Action&lt;SlicedScrollDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L661"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Slice(Action&lt;SlicedScrollDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor-1.html">SlicedScrollDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Slices_Elastic_Clients_Elasticsearch_Slices_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Slices(Elastic.Clients.Elasticsearch.Slices)">
+  Slices(Slices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L577"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Slices(Slices? slices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>slices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Sort_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Sort(System.Collections.Generic.ICollection{System.String})">
+  Sort(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L578"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Sort(ICollection&lt;string&gt;? sort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Stats_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Stats_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Stats(System.Collections.Generic.ICollection{System.String})">
+  Stats(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L579"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Stats(ICollection&lt;string&gt;? stats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_TerminateAfter_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.TerminateAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_TerminateAfter_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.TerminateAfter(System.Nullable{System.Int64})">
+  TerminateAfter(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; TerminateAfter(long? terminateAfter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>terminateAfter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Timeout_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L581"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Timeout(Duration? timeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_Version_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.Version(System.Nullable{System.Boolean})">
+  Version(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L582"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; Version(bool? version = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_WaitForActiveShards_System_Nullable_Elastic_Clients_Elasticsearch_WaitForActiveShards__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.WaitForActiveShards(System.Nullable{Elastic.Clients.Elasticsearch.WaitForActiveShards})">
+  WaitForActiveShards(WaitForActiveShards?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L583"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; WaitForActiveShards(WaitForActiveShards? waitForActiveShards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>waitForActiveShards</code> <a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryRequestDescriptor_1_WaitForCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor`1.WaitForCompletion(System.Nullable{System.Boolean})">
+  WaitForCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryRequest.g.cs/#L584"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteByQueryRequestDescriptor&lt;TDocument&gt; WaitForCompletion(bool? waitForCompletion = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>waitForCompletion</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,4660 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class QueryDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class QueryDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/docfx/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor" class="text-break">
+Class QueryDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class QueryDescriptor : SerializableDescriptor&lt;QueryDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</div>
+      <div><span class="xref">QueryDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.#ctor">
+  QueryDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L901"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Bool_Elastic_Clients_Elasticsearch_QueryDsl_BoolQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)">
+  Bool(BoolQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L928"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Bool(BoolQuery boolQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>boolQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Bool__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_BoolQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Bool``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor})">
+  Bool&lt;TDocument&gt;(Action&lt;BoolQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L929"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Bool&lt;TDocument&gt;(Action&lt;BoolQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.html">BoolQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Boosting_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Boosting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Boosting_Elastic_Clients_Elasticsearch_QueryDsl_BoostingQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Boosting(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery)">
+  Boosting(BoostingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L930"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Boosting(BoostingQuery boostingQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>boostingQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery.html">BoostingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Boosting_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Boosting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Boosting__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_BoostingQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Boosting``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor})">
+  Boosting&lt;TDocument&gt;(Action&lt;BoostingQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L931"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Boosting&lt;TDocument&gt;(Action&lt;BoostingQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor.html">BoostingQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_CombinedFields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.CombinedFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_CombinedFields_Elastic_Clients_Elasticsearch_QueryDsl_CombinedFieldsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.CombinedFields(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery)">
+  CombinedFields(CombinedFieldsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L932"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor CombinedFields(CombinedFieldsQuery combinedFieldsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>combinedFieldsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery.html">CombinedFieldsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_CombinedFields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.CombinedFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_CombinedFields__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_CombinedFieldsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.CombinedFields``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor})">
+  CombinedFields&lt;TDocument&gt;(Action&lt;CombinedFieldsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L933"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor CombinedFields&lt;TDocument&gt;(Action&lt;CombinedFieldsQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor.html">CombinedFieldsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ConstantScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ConstantScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ConstantScore_Elastic_Clients_Elasticsearch_QueryDsl_ConstantScoreQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ConstantScore(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery)">
+  ConstantScore(ConstantScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L934"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ConstantScore(ConstantScoreQuery constantScoreQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>constantScoreQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery.html">ConstantScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ConstantScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ConstantScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ConstantScore__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ConstantScoreQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ConstantScore``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor})">
+  ConstantScore&lt;TDocument&gt;(Action&lt;ConstantScoreQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L935"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ConstantScore&lt;TDocument&gt;(Action&lt;ConstantScoreQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor.html">ConstantScoreQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DisMax_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DisMax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DisMax_Elastic_Clients_Elasticsearch_QueryDsl_DisMaxQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DisMax(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery)">
+  DisMax(DisMaxQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L936"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor DisMax(DisMaxQuery disMaxQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>disMaxQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery.html">DisMaxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DisMax_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DisMax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DisMax__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_DisMaxQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DisMax``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor})">
+  DisMax&lt;TDocument&gt;(Action&lt;DisMaxQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L937"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor DisMax&lt;TDocument&gt;(Action&lt;DisMaxQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor.html">DisMaxQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_Elastic_Clients_Elasticsearch_QueryDsl_DateDistanceFeatureQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery)">
+  DistanceFeature(DateDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L940"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor DistanceFeature(DateDistanceFeatureQuery distanceFeatureQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>distanceFeatureQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery.html">DateDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_Elastic_Clients_Elasticsearch_QueryDsl_GeoDistanceFeatureQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery)">
+  DistanceFeature(GeoDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L939"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor DistanceFeature(GeoDistanceFeatureQuery distanceFeatureQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>distanceFeatureQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery.html">GeoDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_DistanceFeature_Elastic_Clients_Elasticsearch_QueryDsl_UntypedDistanceFeatureQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.DistanceFeature(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery)">
+  DistanceFeature(UntypedDistanceFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L938"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor DistanceFeature(UntypedDistanceFeatureQuery distanceFeatureQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>distanceFeatureQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery.html">UntypedDistanceFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Exists_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Exists_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)">
+  Exists(ExistsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L941"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Exists(ExistsQuery existsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>existsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Exists_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Exists__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Exists``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor})">
+  Exists&lt;TDocument&gt;(Action&lt;ExistsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L942"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Exists&lt;TDocument&gt;(Action&lt;ExistsQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.html">ExistsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_FunctionScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.FunctionScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_FunctionScore_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery)">
+  FunctionScore(FunctionScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L943"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor FunctionScore(FunctionScoreQuery functionScoreQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>functionScoreQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery.html">FunctionScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_FunctionScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.FunctionScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_FunctionScore__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.FunctionScore``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor})">
+  FunctionScore&lt;TDocument&gt;(Action&lt;FunctionScoreQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L944"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor FunctionScore&lt;TDocument&gt;(Action&lt;FunctionScoreQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor.html">FunctionScoreQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Fuzzy_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Fuzzy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Fuzzy_Elastic_Clients_Elasticsearch_QueryDsl_FuzzyQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery)">
+  Fuzzy(FuzzyQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L945"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Fuzzy(FuzzyQuery fuzzyQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fuzzyQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery.html">FuzzyQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Fuzzy_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Fuzzy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Fuzzy__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FuzzyQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Fuzzy``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor})">
+  Fuzzy&lt;TDocument&gt;(Action&lt;FuzzyQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L946"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Fuzzy&lt;TDocument&gt;(Action&lt;FuzzyQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor.html">FuzzyQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoBoundingBox_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoBoundingBox*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoBoundingBox_Elastic_Clients_Elasticsearch_QueryDsl_GeoBoundingBoxQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery)">
+  GeoBoundingBox(GeoBoundingBoxQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L947"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoBoundingBoxQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery.html">GeoBoundingBoxQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoBoundingBox_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoBoundingBox*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoBoundingBox__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_GeoBoundingBoxQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoBoundingBox``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor})">
+  GeoBoundingBox&lt;TDocument&gt;(Action&lt;GeoBoundingBoxQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L948"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoBoundingBox&lt;TDocument&gt;(Action&lt;GeoBoundingBoxQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor.html">GeoBoundingBoxQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoDistance_Elastic_Clients_Elasticsearch_QueryDsl_GeoDistanceQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery)">
+  GeoDistance(GeoDistanceQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L949"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoDistance(GeoDistanceQuery geoDistanceQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoDistanceQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery.html">GeoDistanceQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoDistance__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_GeoDistanceQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoDistance``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor})">
+  GeoDistance&lt;TDocument&gt;(Action&lt;GeoDistanceQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L950"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoDistance&lt;TDocument&gt;(Action&lt;GeoDistanceQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor.html">GeoDistanceQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoShape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoShape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoShape_Elastic_Clients_Elasticsearch_QueryDsl_GeoShapeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery)">
+  GeoShape(GeoShapeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L951"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoShape(GeoShapeQuery geoShapeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoShapeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery.html">GeoShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoShape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoShape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_GeoShape__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_GeoShapeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.GeoShape``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor})">
+  GeoShape&lt;TDocument&gt;(Action&lt;GeoShapeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L952"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor GeoShape&lt;TDocument&gt;(Action&lt;GeoShapeQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor.html">GeoShapeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasChild_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasChild*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasChild_Elastic_Clients_Elasticsearch_QueryDsl_HasChildQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery)">
+  HasChild(HasChildQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L953"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor HasChild(HasChildQuery hasChildQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hasChildQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery.html">HasChildQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasChild_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasChild*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasChild__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_HasChildQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasChild``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor})">
+  HasChild&lt;TDocument&gt;(Action&lt;HasChildQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L954"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor HasChild&lt;TDocument&gt;(Action&lt;HasChildQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor.html">HasChildQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasParent_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasParent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasParent_Elastic_Clients_Elasticsearch_QueryDsl_HasParentQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery)">
+  HasParent(HasParentQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L955"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor HasParent(HasParentQuery hasParentQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hasParentQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery.html">HasParentQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasParent_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasParent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_HasParent__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_HasParentQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.HasParent``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor})">
+  HasParent&lt;TDocument&gt;(Action&lt;HasParentQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L956"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor HasParent&lt;TDocument&gt;(Action&lt;HasParentQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor.html">HasParentQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Ids_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Ids_Elastic_Clients_Elasticsearch_QueryDsl_IdsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)">
+  Ids(IdsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L957"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Ids(IdsQuery idsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>idsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Ids_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Ids_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_IdsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Ids(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor})">
+  Ids(Action&lt;IdsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L958"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Ids(Action&lt;IdsQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.html">IdsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Intervals_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Intervals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Intervals_Elastic_Clients_Elasticsearch_QueryDsl_IntervalsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)">
+  Intervals(IntervalsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L959"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Intervals(IntervalsQuery intervalsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>intervalsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.html">IntervalsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Intervals_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Intervals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Intervals__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_IntervalsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Intervals``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor})">
+  Intervals&lt;TDocument&gt;(Action&lt;IntervalsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L960"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Intervals&lt;TDocument&gt;(Action&lt;IntervalsQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor.html">IntervalsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Knn_Elastic_Clients_Elasticsearch_KnnQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Knn(Elastic.Clients.Elasticsearch.KnnQuery)">
+  Knn(KnnQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L961"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Knn(KnnQuery knnQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>knnQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.KnnQuery.html">KnnQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Knn__1_System_Action_Elastic_Clients_Elasticsearch_KnnQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Knn``1(System.Action{Elastic.Clients.Elasticsearch.KnnQueryDescriptor})">
+  Knn&lt;TDocument&gt;(Action&lt;KnnQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L962"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Knn&lt;TDocument&gt;(Action&lt;KnnQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnQueryDescriptor.html">KnnQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Match_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Match_Elastic_Clients_Elasticsearch_QueryDsl_MatchQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)">
+  Match(MatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L963"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Match(MatchQuery matchQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchAll_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)">
+  MatchAll(MatchAllQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L965"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchAll(MatchAllQuery matchAllQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchAllQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchAll_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchAll(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor})">
+  MatchAll(Action&lt;MatchAllQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L966"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchAll(Action&lt;MatchAllQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.html">MatchAllQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchBoolPrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchBoolPrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchBoolPrefix_Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery)">
+  MatchBoolPrefix(MatchBoolPrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L967"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchBoolPrefix(MatchBoolPrefixQuery matchBoolPrefixQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchBoolPrefixQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.html">MatchBoolPrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchBoolPrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchBoolPrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchBoolPrefix__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchBoolPrefix``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor})">
+  MatchBoolPrefix&lt;TDocument&gt;(Action&lt;MatchBoolPrefixQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L968"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchBoolPrefix&lt;TDocument&gt;(Action&lt;MatchBoolPrefixQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor.html">MatchBoolPrefixQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchNone_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchNone*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchNone_Elastic_Clients_Elasticsearch_QueryDsl_MatchNoneQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchNone(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery)">
+  MatchNone(MatchNoneQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L969"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchNone(MatchNoneQuery matchNoneQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchNoneQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery.html">MatchNoneQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchNone_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchNone*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchNone_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchNoneQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchNone(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor})">
+  MatchNone(Action&lt;MatchNoneQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L970"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchNone(Action&lt;MatchNoneQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.html">MatchNoneQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrase_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrase_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhraseQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrase(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery)">
+  MatchPhrase(MatchPhraseQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L971"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchPhrase(MatchPhraseQuery matchPhraseQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchPhraseQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery.html">MatchPhraseQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrasePrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrasePrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrasePrefix_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhrasePrefixQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrasePrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery)">
+  MatchPhrasePrefix(MatchPhrasePrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L973"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchPhrasePrefix(MatchPhrasePrefixQuery matchPhrasePrefixQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchPhrasePrefixQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery.html">MatchPhrasePrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrasePrefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrasePrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrasePrefix__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhrasePrefixQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrasePrefix``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor})">
+  MatchPhrasePrefix&lt;TDocument&gt;(Action&lt;MatchPhrasePrefixQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L974"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchPhrasePrefix&lt;TDocument&gt;(Action&lt;MatchPhrasePrefixQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor.html">MatchPhrasePrefixQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrase_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MatchPhrase__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchPhraseQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MatchPhrase``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor})">
+  MatchPhrase&lt;TDocument&gt;(Action&lt;MatchPhraseQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L972"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MatchPhrase&lt;TDocument&gt;(Action&lt;MatchPhraseQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor.html">MatchPhraseQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Match_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Match__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Match``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor})">
+  Match&lt;TDocument&gt;(Action&lt;MatchQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L964"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Match&lt;TDocument&gt;(Action&lt;MatchQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.html">MatchQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MoreLikeThis_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MoreLikeThis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MoreLikeThis_Elastic_Clients_Elasticsearch_QueryDsl_MoreLikeThisQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MoreLikeThis(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery)">
+  MoreLikeThis(MoreLikeThisQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L975"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MoreLikeThis(MoreLikeThisQuery moreLikeThisQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>moreLikeThisQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery.html">MoreLikeThisQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MoreLikeThis_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MoreLikeThis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MoreLikeThis__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MoreLikeThisQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MoreLikeThis``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor})">
+  MoreLikeThis&lt;TDocument&gt;(Action&lt;MoreLikeThisQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L976"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MoreLikeThis&lt;TDocument&gt;(Action&lt;MoreLikeThisQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor.html">MoreLikeThisQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MultiMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MultiMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MultiMatch_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MultiMatch(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery)">
+  MultiMatch(MultiMatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L977"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MultiMatch(MultiMatchQuery multiMatchQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>multiMatchQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MultiMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MultiMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_MultiMatch__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.MultiMatch``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor})">
+  MultiMatch&lt;TDocument&gt;(Action&lt;MultiMatchQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L978"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor MultiMatch&lt;TDocument&gt;(Action&lt;MultiMatchQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Nested_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Nested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Nested_Elastic_Clients_Elasticsearch_QueryDsl_NestedQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Nested(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery)">
+  Nested(NestedQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L979"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Nested(NestedQuery nestedQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nestedQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery.html">NestedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Nested_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Nested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Nested__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_NestedQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Nested``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor})">
+  Nested&lt;TDocument&gt;(Action&lt;NestedQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L980"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Nested&lt;TDocument&gt;(Action&lt;NestedQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor.html">NestedQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ParentId_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ParentId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ParentId_Elastic_Clients_Elasticsearch_QueryDsl_ParentIdQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ParentId(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery)">
+  ParentId(ParentIdQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L981"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ParentId(ParentIdQuery parentIdQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parentIdQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery.html">ParentIdQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ParentId_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ParentId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ParentId_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ParentIdQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ParentId(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor})">
+  ParentId(Action&lt;ParentIdQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L982"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ParentId(Action&lt;ParentIdQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.html">ParentIdQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Percolate_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Percolate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Percolate_Elastic_Clients_Elasticsearch_QueryDsl_PercolateQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery)">
+  Percolate(PercolateQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L983"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Percolate(PercolateQuery percolateQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>percolateQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery.html">PercolateQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Percolate_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Percolate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Percolate__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_PercolateQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Percolate``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor})">
+  Percolate&lt;TDocument&gt;(Action&lt;PercolateQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L984"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Percolate&lt;TDocument&gt;(Action&lt;PercolateQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor.html">PercolateQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Pinned_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Pinned*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Pinned_Elastic_Clients_Elasticsearch_QueryDsl_PinnedQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery)">
+  Pinned(PinnedQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L985"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Pinned(PinnedQuery pinnedQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pinnedQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery.html">PinnedQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Pinned_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Pinned*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Pinned__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_PinnedQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Pinned``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor})">
+  Pinned&lt;TDocument&gt;(Action&lt;PinnedQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L986"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Pinned&lt;TDocument&gt;(Action&lt;PinnedQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor.html">PinnedQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Prefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Prefix_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)">
+  Prefix(PrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L987"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Prefix(PrefixQuery prefixQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>prefixQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Prefix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Prefix__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Prefix``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor})">
+  Prefix&lt;TDocument&gt;(Action&lt;PrefixQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L988"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Prefix&lt;TDocument&gt;(Action&lt;PrefixQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.html">PrefixQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_QueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_QueryString_Elastic_Clients_Elasticsearch_QueryDsl_QueryStringQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery)">
+  QueryString(QueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L989"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor QueryString(QueryStringQuery queryStringQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryStringQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery.html">QueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_QueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_QueryString__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryStringQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.QueryString``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor})">
+  QueryString&lt;TDocument&gt;(Action&lt;QueryStringQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L990"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor QueryString&lt;TDocument&gt;(Action&lt;QueryStringQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor.html">QueryStringQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery)">
+  Range(DateRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L992"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range(DateRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery)">
+  Range(NumberRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L993"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range(NumberRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery)">
+  Range(TermRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L994"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range(TermRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery)">
+  Range(UntypedRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L991"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range(UntypedRangeQuery rangeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rangeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery.html">UntypedRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RangeQueryDescriptor})">
+  Range(Action&lt;RangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range(Action&lt;RangeQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RangeQueryDescriptor.html">RangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Range__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Range``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RangeQueryDescriptor{``0}})">
+  Range&lt;TDocument&gt;(Action&lt;RangeQueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Range&lt;TDocument&gt;(Action&lt;RangeQueryDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RangeQueryDescriptor-1.html">RangeQueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RankFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RankFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RankFeature_Elastic_Clients_Elasticsearch_QueryDsl_RankFeatureQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery)">
+  RankFeature(RankFeatureQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L995"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor RankFeature(RankFeatureQuery rankFeatureQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rankFeatureQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery.html">RankFeatureQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RankFeature_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RankFeature*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RankFeature__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RankFeatureQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RankFeature``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor})">
+  RankFeature&lt;TDocument&gt;(Action&lt;RankFeatureQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L996"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor RankFeature&lt;TDocument&gt;(Action&lt;RankFeatureQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor.html">RankFeatureQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RawJson_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RawJson*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_RawJson_Elastic_Clients_Elasticsearch_QueryDsl_RawJsonQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery)">
+  RawJson(RawJsonQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L997"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor RawJson(RawJsonQuery rawJsonQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rawJsonQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery.html">RawJsonQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Regexp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Regexp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Regexp_Elastic_Clients_Elasticsearch_QueryDsl_RegexpQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery)">
+  Regexp(RegexpQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L998"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Regexp(RegexpQuery regexpQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>regexpQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery.html">RegexpQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Regexp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Regexp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Regexp__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RegexpQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Regexp``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor})">
+  Regexp&lt;TDocument&gt;(Action&lt;RegexpQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L999"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Regexp&lt;TDocument&gt;(Action&lt;RegexpQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor.html">RegexpQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Rule_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Rule_Elastic_Clients_Elasticsearch_QueryDsl_RuleQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Rule(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery)">
+  Rule(RuleQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1000"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Rule(RuleQuery ruleQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ruleQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery.html">RuleQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Rule_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Rule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Rule__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RuleQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Rule``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor})">
+  Rule&lt;TDocument&gt;(Action&lt;RuleQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1001"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Rule&lt;TDocument&gt;(Action&lt;RuleQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor.html">RuleQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Script_Elastic_Clients_Elasticsearch_QueryDsl_ScriptQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery)">
+  Script(ScriptQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1002"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Script(ScriptQuery scriptQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scriptQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery.html">ScriptQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Script_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ScriptQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Script(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor})">
+  Script(Action&lt;ScriptQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1003"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Script(Action&lt;ScriptQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor.html">ScriptQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ScriptScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ScriptScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ScriptScore_Elastic_Clients_Elasticsearch_QueryDsl_ScriptScoreQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery)">
+  ScriptScore(ScriptScoreQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1004"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ScriptScore(ScriptScoreQuery scriptScoreQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scriptScoreQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery.html">ScriptScoreQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ScriptScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ScriptScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_ScriptScore__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ScriptScoreQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.ScriptScore``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor})">
+  ScriptScore&lt;TDocument&gt;(Action&lt;ScriptScoreQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1005"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor ScriptScore&lt;TDocument&gt;(Action&lt;ScriptScoreQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor.html">ScriptScoreQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Semantic_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Semantic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Semantic_Elastic_Clients_Elasticsearch_QueryDsl_SemanticQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery)">
+  Semantic(SemanticQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1006"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Semantic(SemanticQuery semanticQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>semanticQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery.html">SemanticQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Semantic_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Semantic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Semantic_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SemanticQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Semantic(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor})">
+  Semantic(Action&lt;SemanticQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1007"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Semantic(Action&lt;SemanticQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor.html">SemanticQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1043"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Shape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Shape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Shape_Elastic_Clients_Elasticsearch_QueryDsl_ShapeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery)">
+  Shape(ShapeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1008"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Shape(ShapeQuery shapeQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>shapeQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery.html">ShapeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Shape_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Shape*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Shape__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ShapeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Shape``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor})">
+  Shape&lt;TDocument&gt;(Action&lt;ShapeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1009"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Shape&lt;TDocument&gt;(Action&lt;ShapeQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor.html">ShapeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SimpleQueryString_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)">
+  SimpleQueryString(SimpleQueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1010"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>simpleQueryStringQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SimpleQueryString__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SimpleQueryString``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor})">
+  SimpleQueryString&lt;TDocument&gt;(Action&lt;SimpleQueryStringQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1011"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SimpleQueryString&lt;TDocument&gt;(Action&lt;SimpleQueryStringQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanContaining_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanContaining*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanContaining_Elastic_Clients_Elasticsearch_QueryDsl_SpanContainingQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)">
+  SpanContaining(SpanContainingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1012"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanContaining(SpanContainingQuery spanContainingQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanContainingQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery.html">SpanContainingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanContaining_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanContaining*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanContaining__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanContainingQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanContaining``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor})">
+  SpanContaining&lt;TDocument&gt;(Action&lt;SpanContainingQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1013"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanContaining&lt;TDocument&gt;(Action&lt;SpanContainingQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor.html">SpanContainingQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFieldMasking_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFieldMasking*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFieldMasking_Elastic_Clients_Elasticsearch_QueryDsl_SpanFieldMaskingQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)">
+  SpanFieldMasking(SpanFieldMaskingQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1014"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanFieldMasking(SpanFieldMaskingQuery spanFieldMaskingQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanFieldMaskingQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery.html">SpanFieldMaskingQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFieldMasking_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFieldMasking*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFieldMasking__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanFieldMaskingQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFieldMasking``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor})">
+  SpanFieldMasking&lt;TDocument&gt;(Action&lt;SpanFieldMaskingQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1015"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanFieldMasking&lt;TDocument&gt;(Action&lt;SpanFieldMaskingQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor.html">SpanFieldMaskingQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFirst_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFirst*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFirst_Elastic_Clients_Elasticsearch_QueryDsl_SpanFirstQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)">
+  SpanFirst(SpanFirstQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1016"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanFirst(SpanFirstQuery spanFirstQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanFirstQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery.html">SpanFirstQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFirst_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFirst*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanFirst__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanFirstQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanFirst``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor})">
+  SpanFirst&lt;TDocument&gt;(Action&lt;SpanFirstQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1017"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanFirst&lt;TDocument&gt;(Action&lt;SpanFirstQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor.html">SpanFirstQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanMulti_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanMulti*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanMulti_Elastic_Clients_Elasticsearch_QueryDsl_SpanMultiTermQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)">
+  SpanMulti(SpanMultiTermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1018"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanMulti(SpanMultiTermQuery spanMultiTermQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanMultiTermQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery.html">SpanMultiTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanMulti_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanMulti*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanMulti__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanMultiTermQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanMulti``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor})">
+  SpanMulti&lt;TDocument&gt;(Action&lt;SpanMultiTermQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1019"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanMulti&lt;TDocument&gt;(Action&lt;SpanMultiTermQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor.html">SpanMultiTermQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNear_Elastic_Clients_Elasticsearch_QueryDsl_SpanNearQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)">
+  SpanNear(SpanNearQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1020"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanNear(SpanNearQuery spanNearQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanNearQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery.html">SpanNearQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNear__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanNearQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNear``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor})">
+  SpanNear&lt;TDocument&gt;(Action&lt;SpanNearQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1021"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanNear&lt;TDocument&gt;(Action&lt;SpanNearQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor.html">SpanNearQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNot_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNot_Elastic_Clients_Elasticsearch_QueryDsl_SpanNotQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)">
+  SpanNot(SpanNotQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1022"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanNot(SpanNotQuery spanNotQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanNotQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery.html">SpanNotQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNot_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanNot__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanNotQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanNot``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor})">
+  SpanNot&lt;TDocument&gt;(Action&lt;SpanNotQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1023"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanNot&lt;TDocument&gt;(Action&lt;SpanNotQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor.html">SpanNotQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanOr_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanOr*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanOr_Elastic_Clients_Elasticsearch_QueryDsl_SpanOrQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)">
+  SpanOr(SpanOrQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1024"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanOr(SpanOrQuery spanOrQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanOrQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery.html">SpanOrQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanOr_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanOr*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanOr__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanOrQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanOr``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor})">
+  SpanOr&lt;TDocument&gt;(Action&lt;SpanOrQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1025"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanOr&lt;TDocument&gt;(Action&lt;SpanOrQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor.html">SpanOrQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanTerm_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanTerm_Elastic_Clients_Elasticsearch_QueryDsl_SpanTermQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)">
+  SpanTerm(SpanTermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1026"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanTerm(SpanTermQuery spanTermQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanTermQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery.html">SpanTermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanTerm_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanTerm__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanTermQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanTerm``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor})">
+  SpanTerm&lt;TDocument&gt;(Action&lt;SpanTermQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1027"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanTerm&lt;TDocument&gt;(Action&lt;SpanTermQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor.html">SpanTermQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanWithin_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanWithin*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanWithin_Elastic_Clients_Elasticsearch_QueryDsl_SpanWithinQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)">
+  SpanWithin(SpanWithinQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1028"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanWithin(SpanWithinQuery spanWithinQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>spanWithinQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery.html">SpanWithinQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanWithin_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanWithin*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SpanWithin__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SpanWithinQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SpanWithin``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor})">
+  SpanWithin&lt;TDocument&gt;(Action&lt;SpanWithinQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1029"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SpanWithin&lt;TDocument&gt;(Action&lt;SpanWithinQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor.html">SpanWithinQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SparseVector_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SparseVector*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SparseVector_Elastic_Clients_Elasticsearch_QueryDsl_SparseVectorQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery)">
+  SparseVector(SparseVectorQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1030"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SparseVector(SparseVectorQuery sparseVectorQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sparseVectorQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery.html">SparseVectorQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SparseVector_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SparseVector*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_SparseVector__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SparseVectorQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.SparseVector``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor})">
+  SparseVector&lt;TDocument&gt;(Action&lt;SparseVectorQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1031"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor SparseVector&lt;TDocument&gt;(Action&lt;SparseVectorQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor.html">SparseVectorQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Term_Elastic_Clients_Elasticsearch_QueryDsl_TermQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)">
+  Term(TermQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1032"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Term(TermQuery termQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Term__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Term``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor})">
+  Term&lt;TDocument&gt;(Action&lt;TermQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1033"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Term&lt;TDocument&gt;(Action&lt;TermQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.html">TermQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Terms_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Terms_Elastic_Clients_Elasticsearch_QueryDsl_TermsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)">
+  Terms(TermsQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1034"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Terms(TermsQuery termsQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termsQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_TermsSet_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.TermsSet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_TermsSet_Elastic_Clients_Elasticsearch_QueryDsl_TermsSetQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.TermsSet(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery)">
+  TermsSet(TermsSetQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1036"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor TermsSet(TermsSetQuery termsSetQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termsSetQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery.html">TermsSetQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_TermsSet_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.TermsSet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_TermsSet__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermsSetQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.TermsSet``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor})">
+  TermsSet&lt;TDocument&gt;(Action&lt;TermsSetQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1037"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor TermsSet&lt;TDocument&gt;(Action&lt;TermsSetQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor.html">TermsSetQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Terms_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Terms__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Terms``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor})">
+  Terms&lt;TDocument&gt;(Action&lt;TermsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1035"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Terms&lt;TDocument&gt;(Action&lt;TermsQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.html">TermsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wildcard_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)">
+  Wildcard(WildcardQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1038"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Wildcard(WildcardQuery wildcardQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>wildcardQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wildcard__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wildcard``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor})">
+  Wildcard&lt;TDocument&gt;(Action&lt;WildcardQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1039"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Wildcard&lt;TDocument&gt;(Action&lt;WildcardQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.html">WildcardQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wrapper_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wrapper*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wrapper_Elastic_Clients_Elasticsearch_QueryDsl_WrapperQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wrapper(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery)">
+  Wrapper(WrapperQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1040"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Wrapper(WrapperQuery wrapperQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>wrapperQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery.html">WrapperQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wrapper_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wrapper*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_Wrapper_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_WrapperQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Wrapper(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor})">
+  Wrapper(Action&lt;WrapperQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/Query.g.cs/#L1041"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryDescriptor Wrapper(Action&lt;WrapperQueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.html">WrapperQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch">
+
+  <h1 id="Elastic_Clients_Elasticsearch" data-uid="Elastic.Clients.Elasticsearch" class="text-break">Namespace Elastic.Clients.Elasticsearch</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BlockingSubscribeExtensions.html">BlockingSubscribeExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllObservable-1.html">BulkAllObservable&lt;T&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllObserver.html">BulkAllObserver</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllRequestDescriptor-1.html">BulkAllRequestDescriptor&lt;T&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllRequest-1.html">BulkAllRequest&lt;T&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkAllResponse.html">BulkAllResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure.html">BulkIndexByScrollFailure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequest.html">BulkRequest</a></dt>
+      <dd><p>
+Bulk index or delete documents.
+Performs multiple indexing or delete operations in a single API call.
+This reduces overhead and can greatly increase indexing speed.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor.html">BulkRequestDescriptor</a></dt>
+      <dd><p>
+Bulk index or delete documents.
+Performs multiple indexing or delete operations in a single API call.
+This reduces overhead and can greatly increase indexing speed.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Bulk index or delete documents.
+Performs multiple indexing or delete operations in a single API call.
+This reduces overhead and can greatly increase indexing speed.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestParameters.html">BulkRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkResponse.html">BulkResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkStats.html">BulkStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+      <dd><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/api-conventions.html#byte-units">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClearScrollRequest.html">ClearScrollRequest</a></dt>
+      <dd><p>
+Clear a scrolling search.
+</p>
+<p>
+Clear the search context and results for a scrolling search.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor.html">ClearScrollRequestDescriptor</a></dt>
+      <dd><p>
+Clear a scrolling search.
+</p>
+<p>
+Clear the search context and results for a scrolling search.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClearScrollRequestParameters.html">ClearScrollRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClearScrollResponse.html">ClearScrollResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClosePointInTimeRequest.html">ClosePointInTimeRequest</a></dt>
+      <dd><p>
+Close a point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+The <code>keep_alive</code> parameter tells Elasticsearch how long it should persist.
+A point in time is automatically closed when the <code>keep_alive</code> period has elapsed.
+However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor.html">ClosePointInTimeRequestDescriptor</a></dt>
+      <dd><p>
+Close a point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+The <code>keep_alive</code> parameter tells Elasticsearch how long it should persist.
+A point in time is automatically closed when the <code>keep_alive</code> period has elapsed.
+However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters.html">ClosePointInTimeRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClosePointInTimeResponse.html">ClosePointInTimeResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClrTypeMapping.html">ClrTypeMapping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClrTypeMappingDescriptor.html">ClrTypeMappingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClrTypeMappingDescriptor-1.html">ClrTypeMappingDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClrTypeMapping-1.html">ClrTypeMapping&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClusterDetails.html">ClusterDetails</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClusterStatistics.html">ClusterStatistics</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CompletionStats.html">CompletionStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ConnectionConfiguration.html">ConnectionConfiguration</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CoordinatedRequestObserverBase-1.html">CoordinatedRequestObserverBase&lt;T&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CoordsGeoBounds.html">CoordsGeoBounds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CoordsGeoBoundsDescriptor.html">CoordsGeoBoundsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequest.html">CountRequest</a></dt>
+      <dd><p>
+Returns number of documents matching a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequestDescriptor.html">CountRequestDescriptor</a></dt>
+      <dd><p>
+Returns number of documents matching a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequestDescriptor-1.html">CountRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Returns number of documents matching a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequestParameters.html">CountRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequest-1.html">CountRequest&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CountResponse.html">CountResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CreateRequestDescriptor-1.html">CreateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Index a document.
+Adds a JSON document to the specified data stream or index and makes it searchable.
+If the target is an index and the document already exists, the request updates the document and increments its version.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CreateRequestParameters.html">CreateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CreateRequest-1.html">CreateRequest&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Index a document.
+Adds a JSON document to the specified data stream or index and makes it searchable.
+If the target is an index and the document already exists, the request updates the document and increments its version.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CreateResponse.html">CreateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DataStreamName.html">DataStreamName</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DataStreamNames.html">DataStreamNames</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMath.html">DateMath</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathExpression.html">DateMathExpression</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathOperationExtensions.html">DateMathOperationExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+      <dd><p>A time representation for use within <a class="xref" href="Elastic.Clients.Elasticsearch.DateMath.html">DateMath</a> expressions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTimeUnitExtensions.html">DateMathTimeUnitExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateRange.html">DateRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DefaultPropertyMappingProvider.html">DefaultPropertyMappingProvider</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequest.html">DeleteByQueryRequest</a></dt>
+      <dd><p>
+Delete documents.
+Deletes documents that match the specified query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor.html">DeleteByQueryRequestDescriptor</a></dt>
+      <dd><p>
+Delete documents.
+Deletes documents that match the specified query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor-1.html">DeleteByQueryRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete documents.
+Deletes documents that match the specified query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters.html">DeleteByQueryRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.html">DeleteByQueryResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest.html">DeleteByQueryRethrottleRequest</a></dt>
+      <dd><p>
+Throttle a delete by query operation.
+</p>
+<p>
+Change the number of requests per second for a particular delete by query operation.
+Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor.html">DeleteByQueryRethrottleRequestDescriptor</a></dt>
+      <dd><p>
+Throttle a delete by query operation.
+</p>
+<p>
+Change the number of requests per second for a particular delete by query operation.
+Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters.html">DeleteByQueryRethrottleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse.html">DeleteByQueryRethrottleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequest.html">DeleteRequest</a></dt>
+      <dd><p>
+Delete a document.
+Removes a JSON document from the specified index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequestDescriptor.html">DeleteRequestDescriptor</a></dt>
+      <dd><p>
+Delete a document.
+Removes a JSON document from the specified index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequestDescriptor-1.html">DeleteRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete a document.
+Removes a JSON document from the specified index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequestParameters.html">DeleteRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequest-1.html">DeleteRequest&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteResponse.html">DeleteResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptRequest.html">DeleteScriptRequest</a></dt>
+      <dd><p>
+Delete a script or search template.
+Deletes a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor.html">DeleteScriptRequestDescriptor</a></dt>
+      <dd><p>
+Delete a script or search template.
+Deletes a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor-1.html">DeleteScriptRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete a script or search template.
+Deletes a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters.html">DeleteScriptRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptResponse.html">DeleteScriptResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DictionaryResponse-2.html">DictionaryResponse&lt;TKey, TValue&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DocStats.html">DocStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DoubleRange.html">DoubleRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+      <dd><p>Represents a duration value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClient.html">ElasticsearchClient</a></dt>
+      <dd><p>A strongly-typed client for communicating with Elasticsearch server endpoints.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClientSettings.html">ElasticsearchClientSettings</a></dt>
+      <dd><p>Provides the connection settings for Elastic.Clients.Elasticsearch's high level <a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClient.html">ElasticsearchClient</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchResponseExtensions.html">ElasticsearchResponseExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo.html">ElasticsearchVersionInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo.html">ElasticsearchVersionMinInfo</a></dt>
+      <dd><p>
+Reduced (minimal) info ElasticsearchVersion
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.EmptyObject.html">EmptyObject</a></dt>
+      <dd><p>
+For empty Class assignments
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.html">EmptyObjectDescriptor</a></dt>
+      <dd><p>
+For empty Class assignments
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ErrorCause.html">ErrorCause</a></dt>
+      <dd><p>
+Cause and details about a request failure. This class defines the properties common to all error types.
+Additional details are also provided, that depend on the error type.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ErrorResponseBase.html">ErrorResponseBase</a></dt>
+      <dd><p>
+The response returned by Elasticsearch when request execution did not succeed.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsRequest.html">ExistsRequest</a></dt>
+      <dd><p>
+Check a document.
+Checks if a specified document exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsRequestDescriptor.html">ExistsRequestDescriptor</a></dt>
+      <dd><p>
+Check a document.
+Checks if a specified document exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsRequestDescriptor-1.html">ExistsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Check a document.
+Checks if a specified document exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsRequestParameters.html">ExistsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsResponse.html">ExistsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceRequest.html">ExistsSourceRequest</a></dt>
+      <dd><p>
+Check for a document source.
+Checks if a document's <code>_source</code> is stored.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor.html">ExistsSourceRequestDescriptor</a></dt>
+      <dd><p>
+Check for a document source.
+Checks if a document's <code>_source</code> is stored.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor-1.html">ExistsSourceRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Check for a document source.
+Checks if a document's <code>_source</code> is stored.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters.html">ExistsSourceRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceResponse.html">ExistsSourceResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExperimentalSettings.html">ExperimentalSettings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainRequest.html">ExplainRequest</a></dt>
+      <dd><p>
+Explain a document match result.
+Returns information about why a specific document matches, or doesn’t match, a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainRequestDescriptor.html">ExplainRequestDescriptor</a></dt>
+      <dd><p>
+Explain a document match result.
+Returns information about why a specific document matches, or doesn’t match, a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainRequestDescriptor-1.html">ExplainRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Explain a document match result.
+Returns information about why a specific document matches, or doesn’t match, a query.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainRequestParameters.html">ExplainRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainResponse-1.html">ExplainResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExpressionExtensions.html">ExpressionExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsRequest.html">FieldCapsRequest</a></dt>
+      <dd><p>
+Get the field capabilities.
+</p>
+<p>
+Get information about the capabilities of fields among multiple indices.
+</p>
+<p>
+For data streams, the API returns field capabilities among the stream’s backing indices.
+It returns runtime fields like any other field.
+For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <code>keyword</code> family.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor.html">FieldCapsRequestDescriptor</a></dt>
+      <dd><p>
+Get the field capabilities.
+</p>
+<p>
+Get information about the capabilities of fields among multiple indices.
+</p>
+<p>
+For data streams, the API returns field capabilities among the stream’s backing indices.
+It returns runtime fields like any other field.
+For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <code>keyword</code> family.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor-1.html">FieldCapsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the field capabilities.
+</p>
+<p>
+Get information about the capabilities of fields among multiple indices.
+</p>
+<p>
+For data streams, the API returns field capabilities among the stream’s backing indices.
+It returns runtime fields like any other field.
+For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <code>keyword</code> family.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsRequestParameters.html">FieldCapsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsResponse.html">FieldCapsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldMemoryUsage.html">FieldMemoryUsage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSizeUsage.html">FieldSizeUsage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSort.html">FieldSort</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor.html">FieldSortDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FielddataStats.html">FielddataStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FloatRange.html">FloatRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FlushStats.html">FlushStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Fuzziness.html">Fuzziness</a></dt>
+      <dd><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoBounds.html">GeoBounds</a></dt>
+      <dd><p>
+A geo bounding box. It can be represented in various ways:
+</p>
+<ul><li>
+    <p>
+as 4 top/bottom/left/right coordinates
+</p>
+  </li><li>
+    <p>
+as 2 top_left / bottom_right points
+</p>
+  </li><li>
+    <p>
+as 2 top_right / bottom_left points
+</p>
+  </li><li>
+    <p>
+as a WKT bounding box
+</p>
+  </li></ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSort.html">GeoDistanceSort</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor.html">GeoDistanceSortDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor-1.html">GeoDistanceSortDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocation.html">GeoHashLocation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocationDescriptor.html">GeoHashLocationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLine.html">GeoLine</a></dt>
+      <dd><p>
+A GeoJson GeoLine.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+      <dd><p>
+A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
+</p>
+<ul><li>
+    <p>
+as a <code>{lat, long}</code> object
+</p>
+  </li><li>
+    <p>
+as a geo hash value
+</p>
+  </li><li>
+    <p>
+as a <code>[lon, lat]</code> array
+</p>
+  </li><li>
+    <p>
+as a string in <code>"&lt;lat&gt;, &lt;lon&gt;"</code> or WKT point formats
+</p>
+  </li></ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeohashPrecision.html">GeohashPrecision</a></dt>
+      <dd><p>
+A precision that can be expressed as a geohash length between 1 and 12, or a distance measure like "1km", "10m".
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetRequest.html">GetRequest</a></dt>
+      <dd><p>
+Get a document by its ID.
+Retrieves the document with the specified ID from an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetRequestDescriptor.html">GetRequestDescriptor</a></dt>
+      <dd><p>
+Get a document by its ID.
+Retrieves the document with the specified ID from an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetRequestDescriptor-1.html">GetRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get a document by its ID.
+Retrieves the document with the specified ID from an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetRequestParameters.html">GetRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetResponse-1.html">GetResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptContextRequest.html">GetScriptContextRequest</a></dt>
+      <dd><p>
+Get script contexts.
+</p>
+<p>
+Get a list of supported script contexts and their methods.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor.html">GetScriptContextRequestDescriptor</a></dt>
+      <dd><p>
+Get script contexts.
+</p>
+<p>
+Get a list of supported script contexts and their methods.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters.html">GetScriptContextRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptContextResponse.html">GetScriptContextResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest.html">GetScriptLanguagesRequest</a></dt>
+      <dd><p>
+Get script languages.
+</p>
+<p>
+Get a list of available script types, languages, and contexts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor.html">GetScriptLanguagesRequestDescriptor</a></dt>
+      <dd><p>
+Get script languages.
+</p>
+<p>
+Get a list of available script types, languages, and contexts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters.html">GetScriptLanguagesRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse.html">GetScriptLanguagesResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptRequest.html">GetScriptRequest</a></dt>
+      <dd><p>
+Get a script or search template.
+Retrieves a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor.html">GetScriptRequestDescriptor</a></dt>
+      <dd><p>
+Get a script or search template.
+Retrieves a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor-1.html">GetScriptRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get a script or search template.
+Retrieves a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptRequestParameters.html">GetScriptRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptResponse.html">GetScriptResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequest.html">GetSourceRequest</a></dt>
+      <dd><p>
+Get a document's source.
+Returns the source of a document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+      <dd><p>
+Get a document's source.
+Returns the source of a document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor-1.html">GetSourceRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get a document's source.
+Returns the source of a document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestParameters.html">GetSourceRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceResponse-1.html">GetSourceResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetStats.html">GetStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthReportRequest.html">HealthReportRequest</a></dt>
+      <dd><p>
+Returns the health of the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor.html">HealthReportRequestDescriptor</a></dt>
+      <dd><p>
+Returns the health of the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthReportRequestParameters.html">HealthReportRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthReportResponse.html">HealthReportResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IdResolver.html">IdResolver</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexAlias.html">IndexAlias</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManyExtensions.html">IndexManyExtensions</a></dt>
+      <dd><p>Provides GetMany extensions that make it easier to get many documents given a list of ids</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+      <dd><p>Represents the name of an index, which may be inferred from a <span class="xref">Elastic.Clients.Elasticsearch.IndexName.Type</span>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequestDescriptor-1.html">IndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Index a document.
+Adds a JSON document to the specified data stream or index and makes it searchable.
+If the target is an index and the document already exists, the request updates the document and increments its version.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequestParameters.html">IndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequest-1.html">IndexRequest&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Index a document.
+Adds a JSON document to the specified data stream or index and makes it searchable.
+If the target is an index and the document already exists, the request updates the document and increments its version.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexResponse.html">IndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexUuid.html">IndexUuid</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexingStats.html">IndexingStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndicesOptions.html">IndicesOptions</a></dt>
+      <dd><p>
+Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
+to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.html">IndicesOptionsDescriptor</a></dt>
+      <dd><p>
+Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
+to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Infer.html">Infer</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inferrer.html">Inferrer</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InfoRequest.html">InfoRequest</a></dt>
+      <dd><p>
+Get cluster info.
+Returns basic information about the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InfoRequestDescriptor.html">InfoRequestDescriptor</a></dt>
+      <dd><p>
+Get cluster info.
+Returns basic information about the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InfoRequestParameters.html">InfoRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InfoResponse.html">InfoResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InlineGet-1.html">InlineGet&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IntegerRange.html">IntegerRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IpAddressRange.html">IpAddressRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IsADictionary-2.html">IsADictionary&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>A base dictionary type for internally tagged unions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html">IsAReadOnlyDictionary&lt;TKey, TValue&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.JoinField.html">JoinField</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.JoinField.Child.html">JoinField.Child</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.JoinField.Parent.html">JoinField.Parent</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQuery.html">KnnQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQueryDescriptor.html">KnnQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnQueryDescriptor-1.html">KnnQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetriever.html">KnnRetriever</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor.html">KnnRetrieverDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor-1.html">KnnRetrieverDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearch.html">KnnSearch</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor-1.html">KnnSearchDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocation.html">LatLonGeoLocation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor.html">LatLonGeoLocationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LongRange.html">LongRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MemberInfoResolver.html">MemberInfoResolver</a></dt>
+      <dd><p>Resolves member infos in an expression, instance may NOT be shared.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MergesStats.html">MergesStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Metrics.html">Metrics</a></dt>
+      <dd><p>Represents a collection of unique metric names to be included in URL paths to limit the request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MinimumShouldMatch.html">MinimumShouldMatch</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequest.html">MultiGetRequest</a></dt>
+      <dd><p>
+Get multiple documents.
+</p>
+<p>
+Get multiple JSON documents by ID from one or more indices.
+If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor.html">MultiGetRequestDescriptor</a></dt>
+      <dd><p>
+Get multiple documents.
+</p>
+<p>
+Get multiple JSON documents by ID from one or more indices.
+If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get multiple documents.
+</p>
+<p>
+Get multiple JSON documents by ID from one or more indices.
+If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestParameters.html">MultiGetRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetResponse-1.html">MultiGetResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequest.html">MultiSearchRequest</a></dt>
+      <dd><p>
+Run multiple searches.
+</p>
+<p>
+The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+The structure is as follows:
+</p>
+<pre><code class="lang-csharp">header\n
+body\n
+header\n
+body\n</code></pre>
+<p>
+This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+</p>
+<p>
+IMPORTANT: The final line of data must end with a newline character <code>\n</code>.
+Each newline character may be preceded by a carriage return <code>\r</code>.
+When sending requests to this endpoint the <code>Content-Type</code> header should be set to <code>application/x-ndjson</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor.html">MultiSearchRequestDescriptor</a></dt>
+      <dd><p>
+Run multiple searches.
+</p>
+<p>
+The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+The structure is as follows:
+</p>
+<pre><code class="lang-csharp">header\n
+body\n
+header\n
+body\n</code></pre>
+<p>
+This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+</p>
+<p>
+IMPORTANT: The final line of data must end with a newline character <code>\n</code>.
+Each newline character may be preceded by a carriage return <code>\r</code>.
+When sending requests to this endpoint the <code>Content-Type</code> header should be set to <code>application/x-ndjson</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor-1.html">MultiSearchRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Run multiple searches.
+</p>
+<p>
+The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+The structure is as follows:
+</p>
+<pre><code class="lang-csharp">header\n
+body\n
+header\n
+body\n</code></pre>
+<p>
+This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+</p>
+<p>
+IMPORTANT: The final line of data must end with a newline character <code>\n</code>.
+Each newline character may be preceded by a carriage return <code>\r</code>.
+When sending requests to this endpoint the <code>Content-Type</code> header should be set to <code>application/x-ndjson</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequestParameters.html">MultiSearchRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchResponse-1.html">MultiSearchResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest.html">MultiSearchTemplateRequest</a></dt>
+      <dd><p>
+Run multiple templated searches.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor.html">MultiSearchTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Run multiple templated searches.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor-1.html">MultiSearchTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Run multiple templated searches.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters.html">MultiSearchTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse-1.html">MultiSearchTemplateResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsRequest.html">MultiTermVectorsRequest</a></dt>
+      <dd><p>
+Get multiple term vectors.
+</p>
+<p>
+You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+You can specify the index in the request body or request URI.
+The response contains a <code>docs</code> array with all the fetched termvectors.
+Each element has the structure provided by the termvectors API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor.html">MultiTermVectorsRequestDescriptor</a></dt>
+      <dd><p>
+Get multiple term vectors.
+</p>
+<p>
+You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+You can specify the index in the request body or request URI.
+The response contains a <code>docs</code> array with all the fetched termvectors.
+Each element has the structure provided by the termvectors API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor-1.html">MultiTermVectorsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get multiple term vectors.
+</p>
+<p>
+You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+You can specify the index in the request body or request URI.
+The response contains a <code>docs</code> array with all the fetched termvectors.
+Each element has the structure provided by the termvectors API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters.html">MultiTermVectorsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsResponse.html">MultiTermVectorsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NestedSortValue.html">NestedSortValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.html">NestedSortValueDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NestedSortValueDescriptor-1.html">NestedSortValueDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NodeAttributes.html">NodeAttributes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NodeShard.html">NodeShard</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NodeStatistics.html">NodeStatistics</a></dt>
+      <dd><p>
+Contains statistics about the number of nodes selected by the request.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequest.html">OpenPointInTimeRequest</a></dt>
+      <dd><p>
+Open a point in time.
+</p>
+<p>
+A search request by default runs against the most recent visible data of the target indices,
+which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
+state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
+search requests using the same point in time. For example, if refreshes happen between
+<code>search_after</code> requests, then the results of those requests might not be consistent as changes happening
+between searches are only visible to the more recent point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+The <code>keep_alive</code> parameter tells Elasticsearch how long it should persist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor.html">OpenPointInTimeRequestDescriptor</a></dt>
+      <dd><p>
+Open a point in time.
+</p>
+<p>
+A search request by default runs against the most recent visible data of the target indices,
+which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
+state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
+search requests using the same point in time. For example, if refreshes happen between
+<code>search_after</code> requests, then the results of those requests might not be consistent as changes happening
+between searches are only visible to the more recent point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+The <code>keep_alive</code> parameter tells Elasticsearch how long it should persist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Open a point in time.
+</p>
+<p>
+A search request by default runs against the most recent visible data of the target indices,
+which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
+state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
+search requests using the same point in time. For example, if refreshes happen between
+<code>search_after</code> requests, then the results of those requests might not be consistent as changes happening
+between searches are only visible to the more recent point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+The <code>keep_alive</code> parameter tells Elasticsearch how long it should persist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters.html">OpenPointInTimeRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeResponse.html">OpenPointInTimeResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PingRequest.html">PingRequest</a></dt>
+      <dd><p>
+Ping the cluster.
+Returns whether the cluster is running.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PingRequestDescriptor.html">PingRequestDescriptor</a></dt>
+      <dd><p>
+Ping the cluster.
+Returns whether the cluster is running.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PingRequestParameters.html">PingRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PingResponse.html">PingResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PluginStats.html">PluginStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ProducerConsumerBackPressure.html">ProducerConsumerBackPressure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PropertyName.html">PropertyName</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptRequest.html">PutScriptRequest</a></dt>
+      <dd><p>
+Create or update a script or search template.
+Creates or updates a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor.html">PutScriptRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a script or search template.
+Creates or updates a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor-1.html">PutScriptRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update a script or search template.
+Creates or updates a stored script or search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptRequestParameters.html">PutScriptRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptResponse.html">PutScriptResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryCacheStats.html">QueryCacheStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryVectorBuilder.html">QueryVectorBuilder</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.html">QueryVectorBuilderDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor-1.html">QueryVectorBuilderDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetriever.html">RRFRetriever</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor.html">RRFRetrieverDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor-1.html">RRFRetrieverDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rank.html">Rank</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankDescriptor.html">RankDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankDescriptor-1.html">RankDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalRequest.html">RankEvalRequest</a></dt>
+      <dd><p>
+Evaluate ranked search results.
+</p>
+<p>
+Evaluate the quality of ranked search results over a set of typical search queries.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor.html">RankEvalRequestDescriptor</a></dt>
+      <dd><p>
+Evaluate ranked search results.
+</p>
+<p>
+Evaluate the quality of ranked search results over a set of typical search queries.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor-1.html">RankEvalRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Evaluate ranked search results.
+</p>
+<p>
+Evaluate the quality of ranked search results over a set of typical search queries.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalRequestParameters.html">RankEvalRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalResponse.html">RankEvalResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RecoveryStats.html">RecoveryStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RefreshStats.html">RefreshStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequest.html">ReindexRequest</a></dt>
+      <dd><p>
+Reindex documents.
+Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+      <dd><p>
+Reindex documents.
+Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor-1.html">ReindexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Reindex documents.
+Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestParameters.html">ReindexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexResponse.html">ReindexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRethrottleRequest.html">ReindexRethrottleRequest</a></dt>
+      <dd><p>
+Throttle a reindex operation.
+</p>
+<p>
+Change the number of requests per second for a particular reindex operation.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor.html">ReindexRethrottleRequestDescriptor</a></dt>
+      <dd><p>
+Throttle a reindex operation.
+</p>
+<p>
+Change the number of requests per second for a particular reindex operation.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters.html">ReindexRethrottleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRethrottleResponse.html">ReindexRethrottleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RelationName.html">RelationName</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RelocationFailureInfo.html">RelocationFailureInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest.html">RenderSearchTemplateRequest</a></dt>
+      <dd><p>
+Render a search template.
+</p>
+<p>
+Render a search template as a search request body.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor.html">RenderSearchTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Render a search template.
+</p>
+<p>
+Render a search template as a search request body.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor-1.html">RenderSearchTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Render a search template.
+</p>
+<p>
+Render a search template as a search request body.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters.html">RenderSearchTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse.html">RenderSearchTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RequestCacheStats.html">RequestCacheStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ResolvableDictionaryProxy-2.html">ResolvableDictionaryProxy&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>A proxy dictionary that is settings-aware to correctly handle IUrlParameter-based keys such as IndexName.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Retries.html">Retries</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Retriever.html">Retriever</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor.html">RetrieverDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RetrieverDescriptor-1.html">RetrieverDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RoutingResolver.html">RoutingResolver</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RrfRank.html">RrfRank</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RrfRankDescriptor.html">RrfRankDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetriever.html">RuleRetriever</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor.html">RuleRetrieverDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor-1.html">RuleRetrieverDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSort.html">ScoreSort</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSortDescriptor.html">ScoreSortDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Script.html">Script</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSort.html">ScriptSort</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor.html">ScriptSortDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor-1.html">ScriptSortDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest.html">ScriptsPainlessExecuteRequest</a></dt>
+      <dd><p>
+Run a script.
+Runs a script and returns a result.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor.html">ScriptsPainlessExecuteRequestDescriptor</a></dt>
+      <dd><p>
+Run a script.
+Runs a script and returns a result.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor-1.html">ScriptsPainlessExecuteRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Run a script.
+Runs a script and returns a result.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters.html">ScriptsPainlessExecuteRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse-1.html">ScriptsPainlessExecuteResponse&lt;TResult&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollId.html">ScrollId</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollIds.html">ScrollIds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollRequest.html">ScrollRequest</a></dt>
+      <dd><p>
+Run a scrolling search.
+</p>
+<p>
+IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <code>search_after</code> parameter with a point in time (PIT).
+</p>
+<p>
+The scroll API gets large sets of results from a single scrolling search request.
+To get the necessary scroll ID, submit a search API request that includes an argument for the <code>scroll</code> query parameter.
+The <code>scroll</code> parameter indicates how long Elasticsearch should retain the search context for the request.
+The search response returns a scroll ID in the <code>_scroll_id</code> response body parameter.
+You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+</p>
+<p>
+You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+</p>
+<p>
+IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollRequestDescriptor.html">ScrollRequestDescriptor</a></dt>
+      <dd><p>
+Run a scrolling search.
+</p>
+<p>
+IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <code>search_after</code> parameter with a point in time (PIT).
+</p>
+<p>
+The scroll API gets large sets of results from a single scrolling search request.
+To get the necessary scroll ID, submit a search API request that includes an argument for the <code>scroll</code> query parameter.
+The <code>scroll</code> parameter indicates how long Elasticsearch should retain the search context for the request.
+The search response returns a scroll ID in the <code>_scroll_id</code> response body parameter.
+You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
+If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
+</p>
+<p>
+You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
+</p>
+<p>
+IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollRequestParameters.html">ScrollRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollResponse-1.html">ScrollResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequest.html">SearchMvtRequest</a></dt>
+      <dd><p>
+Search a vector tile.
+</p>
+<p>
+Search a vector tile for geospatial values.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor.html">SearchMvtRequestDescriptor</a></dt>
+      <dd><p>
+Search a vector tile.
+</p>
+<p>
+Search a vector tile for geospatial values.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Search a vector tile.
+</p>
+<p>
+Search a vector tile for geospatial values.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestParameters.html">SearchMvtRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtResponse.html">SearchMvtResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequest.html">SearchRequest</a></dt>
+      <dd><p>
+Run a search.
+</p>
+<p>
+Get search hits that match the query defined in the request.
+You can provide search queries using the <code>q</code> query string parameter or the request body.
+If both are specified, only the query parameter is used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequestDescriptor.html">SearchRequestDescriptor</a></dt>
+      <dd><p>
+Run a search.
+</p>
+<p>
+Get search hits that match the query defined in the request.
+You can provide search queries using the <code>q</code> query string parameter or the request body.
+If both are specified, only the query parameter is used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequestDescriptor-1.html">SearchRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Run a search.
+</p>
+<p>
+Get search hits that match the query defined in the request.
+You can provide search queries using the <code>q</code> query string parameter or the request body.
+If both are specified, only the query parameter is used.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequestParameters.html">SearchRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequest-1.html">SearchRequest&lt;TInferDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchResponse-1.html">SearchResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsRequest.html">SearchShardsRequest</a></dt>
+      <dd><p>
+Get the search shards.
+</p>
+<p>
+Get the indices and shards that a search request would be run against.
+This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+When filtered aliases are used, the filter is returned as part of the indices section.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor.html">SearchShardsRequestDescriptor</a></dt>
+      <dd><p>
+Get the search shards.
+</p>
+<p>
+Get the indices and shards that a search request would be run against.
+This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+When filtered aliases are used, the filter is returned as part of the indices section.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor-1.html">SearchShardsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the search shards.
+</p>
+<p>
+Get the indices and shards that a search request would be run against.
+This information can be useful for working out issues or planning optimizations with routing and shard preferences.
+When filtered aliases are used, the filter is returned as part of the indices section.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsRequestParameters.html">SearchShardsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsResponse.html">SearchShardsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchStats.html">SearchStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateRequest.html">SearchTemplateRequest</a></dt>
+      <dd><p>
+Run a search with a search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor.html">SearchTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Run a search with a search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor-1.html">SearchTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Run a search with a search template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters.html">SearchTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateResponse-1.html">SearchTemplateResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SegmentsStats.html">SegmentsStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ShardFailure.html">ShardFailure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ShardStatistics.html">ShardStatistics</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScroll.html">SlicedScroll</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.html">SlicedScrollDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SlicedScrollDescriptor-1.html">SlicedScrollDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a></dt>
+      <dd><p>
+Slices configuration used to parallelize a process.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor-1.html">SortOptionsDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetriever.html">StandardRetriever</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.html">StandardRetrieverDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StoreStats.html">StoreStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StoredScript.html">StoredScript</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StoredScriptDescriptor.html">StoredScriptDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html">SuffixExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TaskFailure.html">TaskFailure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TaskId.html">TaskId</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor-1.html">TermVectorsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get term vector information.
+</p>
+<p>
+Get information and statistics about terms in the fields of a particular document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermVectorsRequestParameters.html">TermVectorsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermVectorsRequest-1.html">TermVectorsRequest&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get term vector information.
+</p>
+<p>
+Get information and statistics about terms in the fields of a particular document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermVectorsResponse.html">TermVectorsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumRequest.html">TermsEnumRequest</a></dt>
+      <dd><p>
+Get terms in an index.
+</p>
+<p>
+Discover terms that match a partial string in an index.
+This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+</p>
+<p>
+If the <code>complete</code> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+This can occur due to a few reasons, such as a request timeout or a node error.
+</p>
+<p>
+NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor.html">TermsEnumRequestDescriptor</a></dt>
+      <dd><p>
+Get terms in an index.
+</p>
+<p>
+Discover terms that match a partial string in an index.
+This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+</p>
+<p>
+If the <code>complete</code> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+This can occur due to a few reasons, such as a request timeout or a node error.
+</p>
+<p>
+NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor-1.html">TermsEnumRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get terms in an index.
+</p>
+<p>
+Discover terms that match a partial string in an index.
+This "terms enum" API is designed for low-latency look-ups used in auto-complete scenarios.
+</p>
+<p>
+If the <code>complete</code> property in the response is false, the returned terms set may be incomplete and should be treated as approximate.
+This can occur due to a few reasons, such as a request timeout or a node error.
+</p>
+<p>
+NOTE: The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumRequestParameters.html">TermsEnumRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumResponse.html">TermsEnumResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TextEmbedding.html">TextEmbedding</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor.html">TextEmbeddingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityReranker.html">TextSimilarityReranker</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor.html">TextSimilarityRerankerDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor-1.html">TextSimilarityRerankerDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TimeUnitExtensions.html">TimeUnitExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Timestamp.html">Timestamp</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds.html">TopLeftBottomRightGeoBounds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor.html">TopLeftBottomRightGeoBoundsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds.html">TopRightBottomLeftGeoBounds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor.html">TopRightBottomLeftGeoBoundsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TranslogStats.html">TranslogStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union&lt;TFirst, TSecond&gt;</a></dt>
+      <dd><p>Represents the union of two types, <code class="typeparamref">TFirst</code> and <code class="typeparamref">TSecond</code>. Used
+in scenarios where an Elasticsearch API may accept more than one different input data structure.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UnsupportedProductException.html">UnsupportedProductException</a></dt>
+      <dd><p>Thrown when the client pre-flight check determines that the server is not a supported Elasticsearch product.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRequest.html">UpdateByQueryRequest</a></dt>
+      <dd><p>
+Update documents.
+Updates documents that match the specified query.
+If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor.html">UpdateByQueryRequestDescriptor</a></dt>
+      <dd><p>
+Update documents.
+Updates documents that match the specified query.
+If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor-1.html">UpdateByQueryRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Update documents.
+Updates documents that match the specified query.
+If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.html">UpdateByQueryRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryResponse.html">UpdateByQueryResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest.html">UpdateByQueryRethrottleRequest</a></dt>
+      <dd><p>
+Throttle an update by query operation.
+</p>
+<p>
+Change the number of requests per second for a particular update by query operation.
+Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor.html">UpdateByQueryRethrottleRequestDescriptor</a></dt>
+      <dd><p>
+Throttle an update by query operation.
+</p>
+<p>
+Change the number of requests per second for a particular update by query operation.
+Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters.html">UpdateByQueryRethrottleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse.html">UpdateByQueryRethrottleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateRequestDescriptor-2.html">UpdateRequestDescriptor&lt;TDocument, TPartialDocument&gt;</a></dt>
+      <dd><p>
+Update a document.
+Updates a document by running a script or passing a partial document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateRequestParameters.html">UpdateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateRequest-2.html">UpdateRequest&lt;TDocument, TPartialDocument&gt;</a></dt>
+      <dd><p>
+Update a document.
+Updates a document by running a script or passing a partial document.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateResponse-1.html">UpdateResponse&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Username.html">Username</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WarmerStats.html">WarmerStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WktGeoBounds.html">WktGeoBounds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WktGeoBoundsDescriptor.html">WktGeoBoundsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a></dt>
+      <dd><p>Represents a value for a field which depends on the field mapping and is only known at runtime,
+therefore cannot be specifically typed.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LazyJson.html">LazyJson</a></dt>
+      <dd><p>Lazily deserializable JSON.</p>
+<p>Holds raw JSON bytes which can be lazily deserialized to a specific <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> using the source serializer at a later time.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpType.html">OpType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.PropertyMapping.html">PropertyMapping</a></dt>
+      <dd><p>Represents meta data about a property which may be used by inferrence and during serialization.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptLanguage.html">ScriptLanguage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IBulkAllRequest-1.html">IBulkAllRequest&lt;T&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+      <dd><p>Provides the connection settings for Elastic.Clients.Elasticsearch's high level <a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClient.html">ElasticsearchClient</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IIsADictionary.html">IIsADictionary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IIsADictionary-2.html">IIsADictionary&lt;TKey, TValue&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IIsAReadOnlyDictionary.html">IIsAReadOnlyDictionary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IIsAReadOnlyDictionary-2.html">IIsAReadOnlyDictionary&lt;TKey, TValue&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IPropertyMappingProvider.html">IPropertyMappingProvider</a></dt>
+      <dd><p>Provides mappings for CLR types.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransportClientConfigurationValues.html">TransportClientConfigurationValues</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClusterInfoTarget.html">ClusterInfoTarget</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ClusterSearchStatus.html">ClusterSearchStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Conflicts.html">Conflicts</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.html">DFIIndependenceMeasure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DFRAfterEffect.html">DFRAfterEffect</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DFRBasicModel.html">DFRBasicModel</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathOperation.html">DateMathOperation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTimeUnit.html">DateMathTimeUnit</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DistanceUnit.html">DistanceUnit</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortNumericType.html">FieldSortNumericType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.ValueKind.html">FieldValue.ValueKind</a></dt>
+      <dd><p>An enumeration of the possible value kinds that the <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a> may contain.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoBounds.Kind.html">GeoBounds.Kind</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceType.html">GeoDistanceType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.Kind.html">GeoLocation.Kind</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoShapeRelation.html">GeoShapeRelation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthStatus.html">HealthStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IBDistribution.html">IBDistribution</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IBLambda.html">IBLambda</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Level.html">Level</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LifecycleOperationMode.html">LifecycleOperationMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.NodeRole.html">NodeRole</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Normalization.html">Normalization</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Result.html">Result</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortType.html">ScriptSortType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchType.html">SearchType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SlicesCalculation.html">SlicesCalculation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortMode.html">SortMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SuggestMode.html">SuggestMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ThreadType.html">ThreadType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TimeUnit.html">TimeUnit</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.VersionType.html">VersionType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForEvents.html">WaitForEvents</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClientSettings.SourceSerializerFactory.html">ElasticsearchClientSettings.SourceSerializerFactory</a></dt>
+      <dd><p>A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
+documents.
+By default, the internal serializer will be used to serializer all types.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

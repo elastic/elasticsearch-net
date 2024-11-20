@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GraphNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GraphNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/docfx/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient" class="text-break">
+Class GraphNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.html">Graph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">GraphNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.#ctor">
+  GraphNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.html">GraphNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected GraphNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_Elastic_Clients_Elasticsearch_Graph_ExploreRequest_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore(Elastic.Clients.Elasticsearch.Graph.ExploreRequest)">
+  Explore(ExploreRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore(ExploreRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequest.html">ExploreRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor)">
+  Explore(ExploreRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore(ExploreRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor.html">ExploreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore(Elastic.Clients.Elasticsearch.Indices)">
+  Explore(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor})">
+  Explore(Indices, Action&lt;ExploreRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore(Indices indices, Action&lt;ExploreRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor.html">ExploreRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_Elastic_Clients_Elasticsearch_Graph_ExploreRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync(Elastic.Clients.Elasticsearch.Graph.ExploreRequest,System.Threading.CancellationToken)">
+  ExploreAsync(ExploreRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync(ExploreRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequest.html">ExploreRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor,System.Threading.CancellationToken)">
+  ExploreAsync(ExploreRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor.html">ExploreRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor},System.Threading.CancellationToken)">
+  ExploreAsync(Indices, Action&lt;ExploreRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync(Indices indices, Action&lt;ExploreRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor.html">ExploreRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  ExploreAsync(Indices, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync(Indices indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync__1_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync``1(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0},System.Threading.CancellationToken)">
+  ExploreAsync&lt;TDocument&gt;(ExploreRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync&lt;TDocument&gt;(ExploreRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  ExploreAsync&lt;TDocument&gt;(Indices, Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync&lt;TDocument&gt;(Indices indices, Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  ExploreAsync&lt;TDocument&gt;(Indices, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync&lt;TDocument&gt;(Indices indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync__1_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync``1(System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  ExploreAsync&lt;TDocument&gt;(Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync&lt;TDocument&gt;(Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_ExploreAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.ExploreAsync``1(System.Threading.CancellationToken)">
+  ExploreAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExploreResponse&gt; ExploreAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore__1" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore``1">
+  Explore&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore__1_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore``1(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0})">
+  Explore&lt;TDocument&gt;(ExploreRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore&lt;TDocument&gt;(ExploreRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore__1_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore``1(Elastic.Clients.Elasticsearch.Indices)">
+  Explore&lt;TDocument&gt;(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore&lt;TDocument&gt;(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0}})">
+  Explore&lt;TDocument&gt;(Indices, Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore&lt;TDocument&gt;(Indices indices, Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore_" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Graph_GraphNamespacedClient_Explore__1_System_Action_Elastic_Clients_Elasticsearch_Graph_ExploreRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Graph.GraphNamespacedClient.Explore``1(System.Action{Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor{``0}})">
+  Explore&lt;TDocument&gt;(Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Graph.g.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ExploreResponse Explore&lt;TDocument&gt;(Action&lt;ExploreRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor-1.html">ExploreRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreResponse.html">ExploreResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,3911 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class IndexSettingsDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class IndexSettingsDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Learn more about this API in the Elasticsearch documentation.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/docfx/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1" class="text-break">
+Class IndexSettingsDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L845"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class IndexSettingsDescriptor&lt;TDocument&gt; : SerializableDescriptor&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><span class="xref">IndexSettingsDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.#ctor">
+  IndexSettingsDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L849"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsAnalysis_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis)">
+  Analysis(IndexSettingsAnalysis?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L953"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analysis(IndexSettingsAnalysis? analysis)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analysis</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis.html">IndexSettingsAnalysis</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsAnalysisDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor)">
+  Analysis(IndexSettingsAnalysisDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L961"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analysis(IndexSettingsAnalysisDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor.html">IndexSettingsAnalysisDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analysis_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsAnalysisDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analysis(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor})">
+  Analysis(Action&lt;IndexSettingsAnalysisDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L969"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analysis(Action&lt;IndexSettingsAnalysisDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor.html">IndexSettingsAnalysisDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_Elastic_Clients_Elasticsearch_IndexManagement_SettingsAnalyze_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze)">
+  Analyze(SettingsAnalyze?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L982"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings to define analyzers, tokenizers, token filters and character filters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analyze(SettingsAnalyze? analyze)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>analyze</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze.html">SettingsAnalyze</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_Elastic_Clients_Elasticsearch_IndexManagement_SettingsAnalyzeDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor)">
+  Analyze(SettingsAnalyzeDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L990"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analyze(SettingsAnalyzeDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.html">SettingsAnalyzeDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Analyze_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SettingsAnalyzeDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Analyze(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor})">
+  Analyze(Action&lt;SettingsAnalyzeDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L998"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Analyze(Action&lt;SettingsAnalyzeDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.html">SettingsAnalyzeDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_AutoExpandReplicas_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.AutoExpandReplicas*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_AutoExpandReplicas_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.AutoExpandReplicas(System.String)">
+  AutoExpandReplicas(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1006"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; AutoExpandReplicas(string? autoExpandReplicas)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>autoExpandReplicas</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingBlocks_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks)">
+  Blocks(IndexSettingBlocks?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1012"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Blocks(IndexSettingBlocks? blocks)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>blocks</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks.html">IndexSettingBlocks</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingBlocksDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor)">
+  Blocks(IndexSettingBlocksDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1020"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Blocks(IndexSettingBlocksDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor.html">IndexSettingBlocksDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Blocks_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingBlocksDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Blocks(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor})">
+  Blocks(Action&lt;IndexSettingBlocksDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1028"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Blocks(Action&lt;IndexSettingBlocksDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor.html">IndexSettingBlocksDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CheckOnStartup_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CheckOnStartup*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CheckOnStartup_System_Nullable_Elastic_Clients_Elasticsearch_IndexManagement_IndexCheckOnStartup__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CheckOnStartup(System.Nullable{Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup})">
+  CheckOnStartup(IndexCheckOnStartup?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1036"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; CheckOnStartup(IndexCheckOnStartup? checkOnStartup)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>checkOnStartup</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.html">IndexCheckOnStartup</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Codec_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Codec*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Codec_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Codec(System.String)">
+  Codec(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1042"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Codec(string? codec)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>codec</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CreationDate_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CreationDate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CreationDate_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CreationDate(System.Nullable{System.Int64})">
+  CreationDate(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1048"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; CreationDate(long? creationDate)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>creationDate</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CreationDateString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CreationDateString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_CreationDateString_System_Nullable_System_DateTimeOffset__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.CreationDateString(System.Nullable{System.DateTimeOffset})">
+  CreationDateString(DateTimeOffset?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1054"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; CreationDateString(DateTimeOffset? creationDateString)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>creationDateString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_DefaultPipeline_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.DefaultPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_DefaultPipeline_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.DefaultPipeline(System.String)">
+  DefaultPipeline(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1060"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; DefaultPipeline(string? defaultPipeline)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>defaultPipeline</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_FinalPipeline_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.FinalPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_FinalPipeline_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.FinalPipeline(System.String)">
+  FinalPipeline(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1066"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; FinalPipeline(string? finalPipeline)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>finalPipeline</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Format_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Format*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Format_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Format(System.Object)">
+  Format(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1072"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Format(object? format)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>format</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_GcDeletes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.GcDeletes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_GcDeletes_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.GcDeletes(Elastic.Clients.Elasticsearch.Duration)">
+  GcDeletes(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1078"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; GcDeletes(Duration? gcDeletes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>gcDeletes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Hidden_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Hidden*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Hidden_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Hidden(System.Object)">
+  Hidden(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1084"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Hidden(object? hidden)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hidden</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_Elastic_Clients_Elasticsearch_IndexManagement_SettingsHighlight_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight)">
+  Highlight(SettingsHighlight?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1090"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Highlight(SettingsHighlight? highlight)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>highlight</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight.html">SettingsHighlight</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_Elastic_Clients_Elasticsearch_IndexManagement_SettingsHighlightDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor)">
+  Highlight(SettingsHighlightDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1098"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Highlight(SettingsHighlightDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor.html">SettingsHighlightDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Highlight_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SettingsHighlightDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Highlight(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor})">
+  Highlight(Action&lt;SettingsHighlightDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Highlight(Action&lt;SettingsHighlightDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor.html">SettingsHighlightDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings)">
+  Index(IndexSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Index(IndexSettings? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0})">
+  Index(IndexSettingsDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Index(IndexSettingsDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Index_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Index(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0}})">
+  Index(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Index(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_Elastic_Clients_Elasticsearch_IndexManagement_IndexingPressure_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure)">
+  IndexingPressure(IndexingPressure?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configure indexing back pressure limits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingPressure(IndexingPressure? indexingPressure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indexingPressure</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure.html">IndexingPressure</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_Elastic_Clients_Elasticsearch_IndexManagement_IndexingPressureDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor)">
+  IndexingPressure(IndexingPressureDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingPressure(IndexingPressureDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.html">IndexingPressureDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingPressure_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexingPressureDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingPressure(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor})">
+  IndexingPressure(Action&lt;IndexingPressureDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingPressure(Action&lt;IndexingPressureDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.html">IndexingPressureDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_Elastic_Clients_Elasticsearch_IndexManagement_IndexingSlowlogSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings)">
+  IndexingSlowlog(IndexingSlowlogSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingSlowlog(IndexingSlowlogSettings? indexingSlowlog)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indexingSlowlog</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings.html">IndexingSlowlogSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_Elastic_Clients_Elasticsearch_IndexManagement_IndexingSlowlogSettingsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor)">
+  IndexingSlowlog(IndexingSlowlogSettingsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingSlowlog(IndexingSlowlogSettingsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor.html">IndexingSlowlogSettingsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_IndexingSlowlog_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexingSlowlogSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.IndexingSlowlog(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor})">
+  IndexingSlowlog(Action&lt;IndexingSlowlogSettingsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; IndexingSlowlog(Action&lt;IndexingSlowlogSettingsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor.html">IndexingSlowlogSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsLifecycle_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle)">
+  Lifecycle(IndexSettingsLifecycle?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Lifecycle(IndexSettingsLifecycle? lifecycle)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lifecycle</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle.html">IndexSettingsLifecycle</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsLifecycleDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor)">
+  Lifecycle(IndexSettingsLifecycleDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Lifecycle(IndexSettingsLifecycleDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor.html">IndexSettingsLifecycleDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Lifecycle_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsLifecycleDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Lifecycle(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor})">
+  Lifecycle(Action&lt;IndexSettingsLifecycleDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1207"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Lifecycle(Action&lt;IndexSettingsLifecycleDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor.html">IndexSettingsLifecycleDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_LoadFixedBitsetFiltersEagerly_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.LoadFixedBitsetFiltersEagerly*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_LoadFixedBitsetFiltersEagerly_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.LoadFixedBitsetFiltersEagerly(System.Nullable{System.Boolean})">
+  LoadFixedBitsetFiltersEagerly(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>loadFixedBitsetFiltersEagerly</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_Elastic_Clients_Elasticsearch_IndexManagement_MappingLimitSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings)">
+  Mapping(MappingLimitSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enable or disable dynamic mapping for an index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Mapping(MappingLimitSettings? mapping)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mapping</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings.html">MappingLimitSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_Elastic_Clients_Elasticsearch_IndexManagement_MappingLimitSettingsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor)">
+  Mapping(MappingLimitSettingsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Mapping(MappingLimitSettingsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.html">MappingLimitSettingsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mapping_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_MappingLimitSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mapping(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor})">
+  Mapping(Action&lt;MappingLimitSettingsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Mapping(Action&lt;MappingLimitSettingsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.html">MappingLimitSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxDocvalueFieldsSearch_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxDocvalueFieldsSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxDocvalueFieldsSearch_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxDocvalueFieldsSearch(System.Nullable{System.Int32})">
+  MaxDocvalueFieldsSearch(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxDocvalueFieldsSearch</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxInnerResultWindow_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxInnerResultWindow*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxInnerResultWindow_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxInnerResultWindow(System.Nullable{System.Int32})">
+  MaxInnerResultWindow(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxInnerResultWindow(int? maxInnerResultWindow)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxInnerResultWindow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxNgramDiff_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxNgramDiff*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxNgramDiff_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxNgramDiff(System.Nullable{System.Int32})">
+  MaxNgramDiff(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxNgramDiff(int? maxNgramDiff)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxNgramDiff</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRefreshListeners_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRefreshListeners*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRefreshListeners_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRefreshListeners(System.Nullable{System.Int32})">
+  MaxRefreshListeners(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxRefreshListeners(int? maxRefreshListeners)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxRefreshListeners</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRegexLength_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRegexLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRegexLength_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRegexLength(System.Nullable{System.Int32})">
+  MaxRegexLength(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxRegexLength(int? maxRegexLength)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxRegexLength</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRescoreWindow_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRescoreWindow*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxRescoreWindow_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxRescoreWindow(System.Nullable{System.Int32})">
+  MaxRescoreWindow(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1280"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxRescoreWindow(int? maxRescoreWindow)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxRescoreWindow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxResultWindow_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxResultWindow*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxResultWindow_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxResultWindow(System.Nullable{System.Int32})">
+  MaxResultWindow(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxResultWindow(int? maxResultWindow)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxResultWindow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxScriptFields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxScriptFields_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxScriptFields(System.Nullable{System.Int32})">
+  MaxScriptFields(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxScriptFields(int? maxScriptFields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxScriptFields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxShingleDiff_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxShingleDiff*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxShingleDiff_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxShingleDiff(System.Nullable{System.Int32})">
+  MaxShingleDiff(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxShingleDiff(int? maxShingleDiff)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxShingleDiff</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxSlicesPerScroll_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxSlicesPerScroll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxSlicesPerScroll_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxSlicesPerScroll(System.Nullable{System.Int32})">
+  MaxSlicesPerScroll(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxSlicesPerScroll(int? maxSlicesPerScroll)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxSlicesPerScroll</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxTermsCount_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxTermsCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_MaxTermsCount_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.MaxTermsCount(System.Nullable{System.Int32})">
+  MaxTermsCount(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; MaxTermsCount(int? maxTermsCount)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>maxTermsCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_Elastic_Clients_Elasticsearch_IndexManagement_Merge_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge(Elastic.Clients.Elasticsearch.IndexManagement.Merge)">
+  Merge(Merge?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Merge(Merge? merge)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>merge</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Merge.html">Merge</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_Elastic_Clients_Elasticsearch_IndexManagement_MergeDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge(Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor)">
+  Merge(MergeDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Merge(MergeDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor.html">MergeDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Merge_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_MergeDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Merge(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor})">
+  Merge(Action&lt;MergeDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Merge(Action&lt;MergeDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor.html">MergeDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mode_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Mode_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Mode(System.String)">
+  Mode(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Mode(string? mode)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfReplicas_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfReplicas*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfReplicas_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfReplicas(System.Object)">
+  NumberOfReplicas(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; NumberOfReplicas(object? numberOfReplicas)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>numberOfReplicas</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfRoutingShards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfRoutingShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfRoutingShards_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfRoutingShards(System.Nullable{System.Int32})">
+  NumberOfRoutingShards(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1352"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; NumberOfRoutingShards(int? numberOfRoutingShards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>numberOfRoutingShards</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfShards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_NumberOfShards_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.NumberOfShards(System.Object)">
+  NumberOfShards(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1358"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; NumberOfShards(object? numberOfShards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>numberOfShards</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_OtherSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.OtherSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_OtherSettings_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object__Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.OtherSettings(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object}})">
+  OtherSettings(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Additional settings not covered in this type. Unless these settings are defined by a plugin, please open an issue on the <a href="https://github.com/elastic/elasticsearch-specification">Elasticsearch API specification</a> so that they can be added in a future release
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; OtherSettings(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Priority_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Priority*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Priority_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Priority(System.Object)">
+  Priority(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1375"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Priority(object? priority)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>priority</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_ProvidedName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.ProvidedName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_ProvidedName_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.ProvidedName(Elastic.Clients.Elasticsearch.Name)">
+  ProvidedName(Name?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1381"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; ProvidedName(Name? providedName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>providedName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_Elastic_Clients_Elasticsearch_IndexManagement_Queries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries(Elastic.Clients.Elasticsearch.IndexManagement.Queries)">
+  Queries(Queries?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Queries(Queries? queries)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queries</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Queries.html">Queries</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_Elastic_Clients_Elasticsearch_IndexManagement_QueriesDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries(Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor)">
+  Queries(QueriesDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1395"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Queries(QueriesDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor.html">QueriesDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Queries_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_QueriesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Queries(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor})">
+  Queries(Action&lt;QueriesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Queries(Action&lt;QueriesDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor.html">QueriesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_Elastic_Clients_Elasticsearch_IndexManagement_SettingsQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString(Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString)">
+  QueryString(SettingsQueryString?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1411"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; QueryString(SettingsQueryString? queryString)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>queryString</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString.html">SettingsQueryString</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_Elastic_Clients_Elasticsearch_IndexManagement_SettingsQueryStringDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString(Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor)">
+  QueryString(SettingsQueryStringDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; QueryString(SettingsQueryStringDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor.html">SettingsQueryStringDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_QueryString_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SettingsQueryStringDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.QueryString(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor})">
+  QueryString(Action&lt;SettingsQueryStringDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1427"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; QueryString(Action&lt;SettingsQueryStringDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor.html">SettingsQueryStringDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RefreshInterval_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RefreshInterval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RefreshInterval_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RefreshInterval(Elastic.Clients.Elasticsearch.Duration)">
+  RefreshInterval(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; RefreshInterval(Duration? refreshInterval)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>refreshInterval</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_Elastic_Clients_Elasticsearch_IndexManagement_IndexRouting_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting)">
+  Routing(IndexRouting?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1441"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Routing(IndexRouting? routing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routing</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting.html">IndexRouting</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_Elastic_Clients_Elasticsearch_IndexManagement_IndexRoutingDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor)">
+  Routing(IndexRoutingDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1449"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Routing(IndexRoutingDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor.html">IndexRoutingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Routing_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexRoutingDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Routing(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor})">
+  Routing(Action&lt;IndexRoutingDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Routing(Action&lt;IndexRoutingDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor.html">IndexRoutingDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RoutingPartitionSize_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RoutingPartitionSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RoutingPartitionSize_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RoutingPartitionSize(System.Nullable{System.Int32})">
+  RoutingPartitionSize(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1465"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; RoutingPartitionSize(int? routingPartitionSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routingPartitionSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RoutingPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RoutingPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_RoutingPath_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.RoutingPath(System.Collections.Generic.ICollection{System.String})">
+  RoutingPath(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1471"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; RoutingPath(ICollection&lt;string&gt;? routingPath)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routingPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSearch_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch)">
+  Search(SettingsSearch?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Search(SettingsSearch? search)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>search</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch.html">SettingsSearch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSearchDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor)">
+  Search(SettingsSearchDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1485"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Search(SettingsSearchDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor.html">SettingsSearchDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Search_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSearchDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Search(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor})">
+  Search(Action&lt;SettingsSearchDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1493"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Search(Action&lt;SettingsSearchDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor.html">SettingsSearchDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1717"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings)">
+  Settings(IndexSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Settings(IndexSettings? settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0})">
+  Settings(IndexSettingsDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Settings(IndexSettingsDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Settings_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Settings(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{`0}})">
+  Settings(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1517"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Settings(Action&lt;IndexSettingsDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSimilarities_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities)">
+  Similarity(SettingsSimilarities?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1530"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configure custom similarity settings to customize how search results are scored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Similarity(SettingsSimilarities? similarity)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>similarity</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities.html">SettingsSimilarities</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSimilaritiesDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor)">
+  Similarity(SettingsSimilaritiesDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1536"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Similarity(SettingsSimilaritiesDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor.html">SettingsSimilaritiesDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Similarity_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SettingsSimilaritiesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Similarity(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor})">
+  Similarity(Action&lt;SettingsSimilaritiesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1542"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Similarity(Action&lt;SettingsSimilaritiesDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor.html">SettingsSimilaritiesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_Elastic_Clients_Elasticsearch_IndexManagement_SoftDeletes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes)">
+  SoftDeletes(SoftDeletes?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1550"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; SoftDeletes(SoftDeletes? softDeletes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>softDeletes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes.html">SoftDeletes</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_Elastic_Clients_Elasticsearch_IndexManagement_SoftDeletesDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor)">
+  SoftDeletes(SoftDeletesDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; SoftDeletes(SoftDeletesDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor.html">SoftDeletesDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_SoftDeletes_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_SoftDeletesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.SoftDeletes(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor})">
+  SoftDeletes(Action&lt;SoftDeletesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1566"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; SoftDeletes(Action&lt;SoftDeletesDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor.html">SoftDeletesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_Elastic_Clients_Elasticsearch_IndexManagement_IndexSegmentSort_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort)">
+  Sort(IndexSegmentSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1574"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Sort(IndexSegmentSort? sort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sort</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort.html">IndexSegmentSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_Elastic_Clients_Elasticsearch_IndexManagement_IndexSegmentSortDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor{`0})">
+  Sort(IndexSegmentSortDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1582"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Sort(IndexSegmentSortDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor-1.html">IndexSegmentSortDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Sort_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSegmentSortDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Sort(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor{`0}})">
+  Sort(Action&lt;IndexSegmentSortDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1590"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Sort(Action&lt;IndexSegmentSortDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor-1.html">IndexSegmentSortDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_Elastic_Clients_Elasticsearch_IndexManagement_Storage_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage)">
+  Store(Storage?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1603"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The store module allows you to control how index data is stored and accessed on disk.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Store(Storage? store)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>store</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Storage.html">Storage</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_Elastic_Clients_Elasticsearch_IndexManagement_StorageDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store(Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor)">
+  Store(StorageDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1611"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Store(StorageDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.html">StorageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Store_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_StorageDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Store(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor})">
+  Store(Action&lt;StorageDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Store(Action&lt;StorageDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.html">StorageDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsTimeSeries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries)">
+  TimeSeries(IndexSettingsTimeSeries?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1627"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; TimeSeries(IndexSettingsTimeSeries? timeSeries)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeSeries</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries.html">IndexSettingsTimeSeries</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsTimeSeriesDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor)">
+  TimeSeries(IndexSettingsTimeSeriesDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1635"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; TimeSeries(IndexSettingsTimeSeriesDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.html">IndexSettingsTimeSeriesDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TimeSeries_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsTimeSeriesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TimeSeries(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor})">
+  TimeSeries(Action&lt;IndexSettingsTimeSeriesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1643"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; TimeSeries(Action&lt;IndexSettingsTimeSeriesDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.html">IndexSettingsTimeSeriesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TopMetricsMaxSize_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TopMetricsMaxSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_TopMetricsMaxSize_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.TopMetricsMaxSize(System.Nullable{System.Int32})">
+  TopMetricsMaxSize(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1651"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; TopMetricsMaxSize(int? topMetricsMaxSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>topMetricsMaxSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_Elastic_Clients_Elasticsearch_IndexManagement_Translog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog(Elastic.Clients.Elasticsearch.IndexManagement.Translog)">
+  Translog(Translog?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1657"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Translog(Translog? translog)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>translog</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Translog.html">Translog</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_Elastic_Clients_Elasticsearch_IndexManagement_TranslogDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor)">
+  Translog(TranslogDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1665"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Translog(TranslogDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.html">TranslogDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Translog_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_TranslogDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Translog(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor})">
+  Translog(Action&lt;TranslogDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1673"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Translog(Action&lt;TranslogDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.html">TranslogDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Uuid_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Uuid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Uuid_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Uuid(System.String)">
+  Uuid(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1681"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Uuid(string? uuid)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uuid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_VerifiedBeforeClose_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.VerifiedBeforeClose*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_VerifiedBeforeClose_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.VerifiedBeforeClose(System.Object)">
+  VerifiedBeforeClose(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1687"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; VerifiedBeforeClose(object? verifiedBeforeClose)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>verifiedBeforeClose</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_Elastic_Clients_Elasticsearch_IndexManagement_IndexVersioning_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning)">
+  Version(IndexVersioning?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1693"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Version(IndexVersioning? version)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning.html">IndexVersioning</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_Elastic_Clients_Elasticsearch_IndexManagement_IndexVersioningDescriptor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor)">
+  Version(IndexVersioningDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1701"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Version(IndexVersioningDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor.html">IndexVersioningDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor_1_Version_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexVersioningDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor`1.Version(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor})">
+  Version(Action&lt;IndexVersioningDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/docfx/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/IndexSettings.g.cs/#L1709"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexSettingsDescriptor&lt;TDocument&gt; Version(Action&lt;IndexVersioningDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor.html">IndexVersioningDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
