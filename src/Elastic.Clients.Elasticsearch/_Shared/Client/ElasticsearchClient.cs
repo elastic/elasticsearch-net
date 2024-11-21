@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -165,11 +166,11 @@ public partial class ElasticsearchClient
 		ValueTask<TResponse> SendRequest()
 		{
 			var (endpointPath, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
-			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
+			var openTelemetryDataMutator = GetOpenTelemetryDataMutator<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			return isAsync
-				? new ValueTask<TResponse>(_transport.RequestAsync<TResponse>(endpointPath, postData, in openTelemetryData, request.RequestConfig, cancellationToken))
-				: new ValueTask<TResponse>(_transport.Request<TResponse>(endpointPath, postData, in openTelemetryData, request.RequestConfig));
+				? new ValueTask<TResponse>(_transport.RequestAsync<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfig, cancellationToken))
+				: new ValueTask<TResponse>(_transport.Request<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfig));
 		}
 
 		async ValueTask<TResponse> SendRequestWithProductCheck()
@@ -211,19 +212,19 @@ public partial class ElasticsearchClient
 			// Send request
 
 			var (endpointPath, resolvedRouteValues, postData) = PrepareRequest<TRequest, TRequestParameters>(request);
-			var openTelemetryData = PrepareOpenTelemetryData<TRequest, TRequestParameters>(request, resolvedRouteValues);
+			var openTelemetryDataMutator = GetOpenTelemetryDataMutator<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			TResponse response;
 
 			if (isAsync)
 			{
 				response = await _transport
-					.RequestAsync<TResponse>(endpointPath, postData, in openTelemetryData, requestConfig, cancellationToken)
+					.RequestAsync<TResponse>(endpointPath, postData, openTelemetryDataMutator, requestConfig, cancellationToken)
 					.ConfigureAwait(false);
 			}
 			else
 			{
-				response = _transport.Request<TResponse>(endpointPath, postData, in openTelemetryData, requestConfig);
+				response = _transport.Request<TResponse>(endpointPath, postData, openTelemetryDataMutator, requestConfig);
 			}
 
 			// Evaluate product check result
@@ -252,39 +253,41 @@ public partial class ElasticsearchClient
 		}
 	}
 
-	private static OpenTelemetryData PrepareOpenTelemetryData<TRequest, TRequestParameters>(TRequest request, Dictionary<string, string> resolvedRouteValues)
+	private static Action<Activity>? GetOpenTelemetryDataMutator<TRequest, TRequestParameters>(TRequest request, Dictionary<string, string>? resolvedRouteValues)
 		where TRequest : Request<TRequestParameters>
 		where TRequestParameters : RequestParameters, new()
 	{
 		// If there are no subscribed listeners, we avoid some work and allocations
 		if (!Elastic.Transport.Diagnostics.OpenTelemetry.ElasticTransportActivitySourceHasListeners)
-			return default;
+			return null;
 
-		// We fall back to a general operation name in cases where the derived request fails to override the property
-		var operationName = !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : request.HttpMethod.GetStringValue();
+		return OpenTelemetryDataMutator;
 
-		// TODO: Optimisation: We should consider caching these, either for cases where resolvedRouteValues is null, or
-		// caching per combination of route values.
-		// We should benchmark this first to assess the impact for common workloads.
-		// The former is likely going to save some short-lived allocations, but only for requests to endpoints without required path parts.
-		// The latter may bloat the cache as some combinations of path parts may rarely re-occur.
-		var attributes = new Dictionary<string, object>
+		void OpenTelemetryDataMutator(Activity activity)
 		{
-			[OpenTelemetry.SemanticConventions.DbOperation] = !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : "unknown",
-			[$"{OpenTelemetrySpanAttributePrefix}schema_url"] = OpenTelemetrySchemaVersion
-		};
+			// We fall back to a general operation name in cases where the derived request fails to override the property
+			var operationName = !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : request.HttpMethod.GetStringValue();
 
-		if (resolvedRouteValues is not null)
-		{
+			// TODO: Optimisation: We should consider caching these, either for cases where resolvedRouteValues is null, or
+			// caching per combination of route values.
+			// We should benchmark this first to assess the impact for common workloads.
+			// The former is likely going to save some short-lived allocations, but only for requests to endpoints without required path parts.
+			// The latter may bloat the cache as some combinations of path parts may rarely re-occur.
+
+			activity.DisplayName = operationName;
+			
+			activity.SetTag(OpenTelemetry.SemanticConventions.DbOperation, !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : "unknown");
+			activity.SetTag($"{OpenTelemetrySpanAttributePrefix}schema_url", OpenTelemetrySchemaVersion);
+
+			if (resolvedRouteValues is null)
+				return;
+
 			foreach (var value in resolvedRouteValues)
 			{
 				if (!string.IsNullOrEmpty(value.Key) && !string.IsNullOrEmpty(value.Value))
-					attributes.Add($"{OpenTelemetrySpanAttributePrefix}path_parts.{value.Key}", value.Value);
+					activity.SetTag($"{OpenTelemetrySpanAttributePrefix}path_parts.{value.Key}", value.Value);
 			}
 		}
-
-		var openTelemetryData = new OpenTelemetryData { SpanName = operationName, SpanAttributes = attributes };
-		return openTelemetryData;
 	}
 
 	private (EndpointPath endpointPath, Dictionary<string, string>? resolvedRouteValues, PostData data) PrepareRequest<TRequest, TRequestParameters>(TRequest request)
