@@ -77,7 +77,7 @@ public class ApiVersionMetaHeaderProducer : MetaHeaderProducer
 
 	public override string HeaderName => "Elastic-Api-Version";
 
-	public override string ProduceHeaderValue(RequestData requestData, bool isAsync) => _apiVersion;
+	public override string ProduceHeaderValue(BoundConfiguration boundConfiguration, bool isAsync) => _apiVersion;
 
 	public ApiVersionMetaHeaderProducer(VersionInfo version)
 	{
