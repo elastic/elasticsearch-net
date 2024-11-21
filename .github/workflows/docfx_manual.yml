@@ -5,8 +5,8 @@ on:
 
 jobs:
   docfx:
-    name: 'Generate Documentation'
+    name: 'DocFx'
     uses: ./.github/workflows/docfx.yml
     with:
-      release_tag: ${{ github.ref_name }}
+      target_branch: 'refdoc'
     secrets: 'inherit'

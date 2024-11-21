@@ -39,6 +39,8 @@ Please refer to
 [the full documentation on elastic.co](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html)
 for comprehensive information on installation, configuration and usage.
 
+The API reference documentation is available [here](https://elastic.github.io/elasticsearch-net).
+
 ## Versions
 
 ### Elasticsearch 8.x Clusters
