@@ -1,17 +1,20 @@
 name: 'CD'
 
-# TODO: Remove 'stack'
-
 on:
   workflow_call:
     inputs:
-      release_tag:
-        description: 'The release tag (release version)'
+      target_branch:
+        description: 'The target branch to which the documentation should be pushed to.'
         type: 'string'
         required: true
+      name:
+        description: 'The name to use for the documentation folder (defaults to the name of the current ref)'
+        type: 'string'
+        required: false
+        default: ${{ github.ref_name }}
 
 concurrency:
-  group: 'docfx-stack'
+  group: 'docfx'
   cancel-in-progress: false
 
 env:
@@ -26,15 +29,9 @@ env:
 
 jobs:
   docfx:
-    name: 'Generate API Documentation'
+    name: 'DocFx'
     runs-on: 'ubuntu-latest'
     steps:
-      - name: 'Parse Version'
-        id: 'version'
-        uses: 'zyactions/semver@v1'
-        with:
-          version: ${{ inputs.release_tag }}
-
       - name: 'Checkout'
         uses: 'actions/checkout@v4'
 
@@ -47,6 +44,7 @@ jobs:
         run: |-
           dotnet tool update -g docfx
 
+      # TODO: Remove 'stack'
       - name: '.NET Cache Packages'
         uses: 'actions/cache@v4'
         with:
@@ -63,14 +61,14 @@ jobs:
       - name: 'Checkout'
         uses: 'actions/checkout@v4'
         with:
-          ref: 'refdoc'
+          ref: ${{ inputs.target_branch }}
 
       - name: 'Commit'
         run: |-
-          rm -r "./${{ steps.version.outputs.version }}" || true
-          mv ../_site "./${{ steps.version.outputs.version }}"
+          rm -r "./${{ inputs.name }}" || true
+          mv ../_site "./${{ inputs.name }}"
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-          git add .
-          git commit -am "Add ${{ steps.version.outputs.version }}"
+          git add -A
+          git commit -am "Add ${{ inputs.name }}"
           git push
