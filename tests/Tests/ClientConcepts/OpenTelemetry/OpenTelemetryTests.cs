@@ -32,24 +32,24 @@ public class ActivityTest
 
 		client.Ping();
 
-		VerifyActivity(oTelActivity, "ping");
+		VerifyActivity(oTelActivity, "ping", "HEAD");
 
 		await client.PingAsync();
 
-		VerifyActivity(oTelActivity, "ping");
+		VerifyActivity(oTelActivity, "ping", "HEAD");
 
 		await client.SearchAsync<Project>(s => s.Index("test").Query(q => q.MatchAll(m => { })));
 
-		VerifyActivity(oTelActivity, "search", "http://localhost:9200/test/_search?pretty=true&error_trace=true");
+		VerifyActivity(oTelActivity, "search", "GET", "http://localhost:9200/test/_search?pretty=true&error_trace=true");
 
-		static void VerifyActivity(Activity oTelActivity, string operation, string url = null)
+		static void VerifyActivity(Activity oTelActivity, string operation, string displayName, string url = null)
 		{
 			oTelActivity.Should().NotBeNull();
 
 			oTelActivity.Kind.Should().Be(ActivityKind.Client);
 
-			oTelActivity.DisplayName.Should().Be(operation);
 			oTelActivity.OperationName.Should().Be(operation);
+			oTelActivity.DisplayName.Should().Be(displayName);
 
 			oTelActivity.Tags.Should().Contain(n => n.Key == "elastic.transport.product.name" && n.Value == "elasticsearch-net");
 			oTelActivity.Tags.Should().Contain(n => n.Key == "db.system" && n.Value == "elasticsearch");
