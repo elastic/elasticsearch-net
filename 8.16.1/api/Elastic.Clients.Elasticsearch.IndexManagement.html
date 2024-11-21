@@ -1,0 +1,2765 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.IndexManagement | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.IndexManagement | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement">
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement" data-uid="Elastic.Clients.Elasticsearch.IndexManagement" class="text-break">Namespace Elastic.Clients.Elasticsearch.IndexManagement</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AddAction.html">AddAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.html">AddActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor-1.html">AddActionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Alias.html">Alias</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition.html">AliasDefinition</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.html">AliasDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor-1.html">AliasDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail.html">AnalyzeDetail</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest.html">AnalyzeIndexRequest</a></dt>
+      <dd><p>
+Get tokens from text analysis.
+The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor.html">AnalyzeIndexRequestDescriptor</a></dt>
+      <dd><p>
+Get tokens from text analysis.
+The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get tokens from text analysis.
+The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters.html">AnalyzeIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse.html">AnalyzeIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken.html">AnalyzeToken</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzerDetail.html">AnalyzerDetail</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries.html">CacheQueries</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor.html">CacheQueriesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CharFilterDetail.html">CharFilterDetail</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest.html">ClearCacheRequest</a></dt>
+      <dd><p>
+Clears the caches of one or more indices.
+For data streams, the API clears the caches of the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor.html">ClearCacheRequestDescriptor</a></dt>
+      <dd><p>
+Clears the caches of one or more indices.
+For data streams, the API clears the caches of the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor-1.html">ClearCacheRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Clears the caches of one or more indices.
+For data streams, the API clears the caches of the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters.html">ClearCacheRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.html">CloneIndexRequest</a></dt>
+      <dd><p>
+Clones an existing index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor.html">CloneIndexRequestDescriptor</a></dt>
+      <dd><p>
+Clones an existing index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor-1.html">CloneIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Clones an existing index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters.html">CloneIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse.html">CloneIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest.html">CloseIndexRequest</a></dt>
+      <dd><p>
+Closes an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor.html">CloseIndexRequestDescriptor</a></dt>
+      <dd><p>
+Closes an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor-1.html">CloseIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Closes an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters.html">CloseIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse.html">CloseIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult.html">CloseIndexResult</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult.html">CloseShardResult</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest.html">CreateDataStreamRequest</a></dt>
+      <dd><p>
+Create a data stream.
+Creates a data stream.
+You must have a matching index template with data stream enabled.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor.html">CreateDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Create a data stream.
+Creates a data stream.
+You must have a matching index template with data stream enabled.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters.html">CreateDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse.html">CreateDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest.html">CreateIndexRequest</a></dt>
+      <dd><p>
+Create an index.
+Creates a new index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor.html">CreateIndexRequestDescriptor</a></dt>
+      <dd><p>
+Create an index.
+Creates a new index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor-1.html">CreateIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create an index.
+Creates a new index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters.html">CreateIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse.html">CreateIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.html">DataStream</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex.html">DataStreamIndex</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle.html">DataStreamLifecycle</a></dt>
+      <dd><p>
+Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.html">DataStreamLifecycleDescriptor</a></dt>
+      <dd><p>
+Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling.html">DataStreamLifecycleDownsampling</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.html">DataStreamLifecycleDownsamplingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain.html">DataStreamLifecycleExplain</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions.html">DataStreamLifecycleRolloverConditions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover.html">DataStreamLifecycleWithRollover</a></dt>
+      <dd><p>
+Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,
+if asked.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField.html">DataStreamTimestampField</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility.html">DataStreamVisibility</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.html">DataStreamVisibilityDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle.html">DataStreamWithLifecycle</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem.html">DataStreamsStatsItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest.html">DataStreamsStatsRequest</a></dt>
+      <dd><p>
+Get data stream stats.
+Retrieves statistics for one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor.html">DataStreamsStatsRequestDescriptor</a></dt>
+      <dd><p>
+Get data stream stats.
+Retrieves statistics for one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters.html">DataStreamsStatsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse.html">DataStreamsStatsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest.html">DeleteAliasRequest</a></dt>
+      <dd><p>
+Delete an alias.
+Removes a data stream or index from an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor.html">DeleteAliasRequestDescriptor</a></dt>
+      <dd><p>
+Delete an alias.
+Removes a data stream or index from an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor-1.html">DeleteAliasRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete an alias.
+Removes a data stream or index from an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters.html">DeleteAliasRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse.html">DeleteAliasResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest.html">DeleteDataLifecycleRequest</a></dt>
+      <dd><p>
+Delete data stream lifecycles.
+Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor.html">DeleteDataLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Delete data stream lifecycles.
+Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters.html">DeleteDataLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse.html">DeleteDataLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest.html">DeleteDataStreamRequest</a></dt>
+      <dd><p>
+Delete data streams.
+Deletes one or more data streams and their backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor.html">DeleteDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Delete data streams.
+Deletes one or more data streams and their backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters.html">DeleteDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse.html">DeleteDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest.html">DeleteIndexRequest</a></dt>
+      <dd><p>
+Delete indices.
+Deletes one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor.html">DeleteIndexRequestDescriptor</a></dt>
+      <dd><p>
+Delete indices.
+Deletes one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor-1.html">DeleteIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Delete indices.
+Deletes one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters.html">DeleteIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse.html">DeleteIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest.html">DeleteIndexTemplateRequest</a></dt>
+      <dd><p>
+Delete an index template.
+The provided &lt;index-template&gt; may contain multiple template names separated by a comma. If multiple template
+names are specified then there is no wildcard support and the provided names should match completely with
+existing templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor.html">DeleteIndexTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Delete an index template.
+The provided &lt;index-template&gt; may contain multiple template names separated by a comma. If multiple template
+names are specified then there is no wildcard support and the provided names should match completely with
+existing templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters.html">DeleteIndexTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse.html">DeleteIndexTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest.html">DeleteTemplateRequest</a></dt>
+      <dd><p>
+Deletes a legacy index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor.html">DeleteTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Deletes a legacy index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters.html">DeleteTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse.html">DeleteTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest.html">DiskUsageRequest</a></dt>
+      <dd><p>
+Analyzes the disk usage of each field of an index or data stream.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor.html">DiskUsageRequestDescriptor</a></dt>
+      <dd><p>
+Analyzes the disk usage of each field of an index or data stream.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor-1.html">DiskUsageRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Analyzes the disk usage of each field of an index or data stream.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters.html">DiskUsageRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse.html">DiskUsageResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig.html">DownsampleConfig</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.html">DownsampleConfigDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest.html">DownsampleRequest</a></dt>
+      <dd><p>
+Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<code>min</code>, <code>max</code>, <code>sum</code>, <code>value_count</code> and <code>avg</code>) for each metric field grouped by a configured time interval.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor.html">DownsampleRequestDescriptor</a></dt>
+      <dd><p>
+Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<code>min</code>, <code>max</code>, <code>sum</code>, <code>value_count</code> and <code>avg</code>) for each metric field grouped by a configured time interval.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor-1.html">DownsampleRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<code>min</code>, <code>max</code>, <code>sum</code>, <code>value_count</code> and <code>avg</code>) for each metric field grouped by a configured time interval.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters.html">DownsampleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse.html">DownsampleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound.html">DownsamplingRound</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor.html">DownsamplingRoundDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest.html">ExistsAliasRequest</a></dt>
+      <dd><p>
+Check aliases.
+Checks if one or more data stream or index aliases exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor.html">ExistsAliasRequestDescriptor</a></dt>
+      <dd><p>
+Check aliases.
+Checks if one or more data stream or index aliases exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor-1.html">ExistsAliasRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Check aliases.
+Checks if one or more data stream or index aliases exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters.html">ExistsAliasRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse.html">ExistsAliasResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest.html">ExistsIndexTemplateRequest</a></dt>
+      <dd><p>
+Returns information about whether a particular index template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor.html">ExistsIndexTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Returns information about whether a particular index template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters.html">ExistsIndexTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse.html">ExistsIndexTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest.html">ExistsRequest</a></dt>
+      <dd><p>
+Check indices.
+Checks if one or more indices, index aliases, or data streams exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor.html">ExistsRequestDescriptor</a></dt>
+      <dd><p>
+Check indices.
+Checks if one or more indices, index aliases, or data streams exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor-1.html">ExistsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Check indices.
+Checks if one or more indices, index aliases, or data streams exist.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters.html">ExistsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse.html">ExistsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest.html">ExistsTemplateRequest</a></dt>
+      <dd><p>
+Check existence of index templates.
+Returns information about whether a particular index template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor.html">ExistsTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Check existence of index templates.
+Returns information about whether a particular index template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters.html">ExistsTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse.html">ExistsTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainAnalyzeToken.html">ExplainAnalyzeToken</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest.html">ExplainDataLifecycleRequest</a></dt>
+      <dd><p>
+Get the status for a data stream lifecycle.
+Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor.html">ExplainDataLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Get the status for a data stream lifecycle.
+Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor-1.html">ExplainDataLifecycleRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the status for a data stream lifecycle.
+Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters.html">ExplainDataLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse.html">ExplainDataLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FailureStore.html">FailureStore</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest.html">FieldUsageStatsRequest</a></dt>
+      <dd><p>
+Returns field usage information for each shard and field of an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor.html">FieldUsageStatsRequestDescriptor</a></dt>
+      <dd><p>
+Returns field usage information for each shard and field of an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor-1.html">FieldUsageStatsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Returns field usage information for each shard and field of an index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters.html">FieldUsageStatsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse.html">FieldUsageStatsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter.html">FielddataFrequencyFilter</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor.html">FielddataFrequencyFilterDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FileDetails.html">FileDetails</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest.html">FlushRequest</a></dt>
+      <dd><p>
+Flushes one or more data streams or indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor.html">FlushRequestDescriptor</a></dt>
+      <dd><p>
+Flushes one or more data streams or indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor-1.html">FlushRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Flushes one or more data streams or indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters.html">FlushRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse.html">FlushResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest.html">ForcemergeRequest</a></dt>
+      <dd><p>
+Performs the force merge operation on one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor.html">ForcemergeRequestDescriptor</a></dt>
+      <dd><p>
+Performs the force merge operation on one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor-1.html">ForcemergeRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Performs the force merge operation on one or more indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters.html">ForcemergeRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse.html">ForcemergeResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest.html">GetAliasRequest</a></dt>
+      <dd><p>
+Get aliases.
+Retrieves information for one or more data stream or index aliases.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor.html">GetAliasRequestDescriptor</a></dt>
+      <dd><p>
+Get aliases.
+Retrieves information for one or more data stream or index aliases.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor-1.html">GetAliasRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get aliases.
+Retrieves information for one or more data stream or index aliases.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters.html">GetAliasRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse.html">GetAliasResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest.html">GetDataLifecycleRequest</a></dt>
+      <dd><p>
+Get data stream lifecycles.
+Retrieves the data stream lifecycle configuration of one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor.html">GetDataLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Get data stream lifecycles.
+Retrieves the data stream lifecycle configuration of one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters.html">GetDataLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse.html">GetDataLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest.html">GetDataStreamRequest</a></dt>
+      <dd><p>
+Get data streams.
+Retrieves information about one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor.html">GetDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Get data streams.
+Retrieves information about one or more data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters.html">GetDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse.html">GetDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest.html">GetFieldMappingRequest</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more fields.
+For data streams, the API retrieves field mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor.html">GetFieldMappingRequestDescriptor</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more fields.
+For data streams, the API retrieves field mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor-1.html">GetFieldMappingRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more fields.
+For data streams, the API retrieves field mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters.html">GetFieldMappingRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse.html">GetFieldMappingResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest.html">GetIndexRequest</a></dt>
+      <dd><p>
+Get index information.
+Returns information about one or more indices. For data streams, the API returns information about the
+stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor.html">GetIndexRequestDescriptor</a></dt>
+      <dd><p>
+Get index information.
+Returns information about one or more indices. For data streams, the API returns information about the
+stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor-1.html">GetIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get index information.
+Returns information about one or more indices. For data streams, the API returns information about the
+stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters.html">GetIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse.html">GetIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest.html">GetIndexTemplateRequest</a></dt>
+      <dd><p>
+Get index templates.
+Returns information about one or more index templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor.html">GetIndexTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Get index templates.
+Returns information about one or more index templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters.html">GetIndexTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse.html">GetIndexTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest.html">GetIndicesSettingsRequest</a></dt>
+      <dd><p>
+Get index settings.
+Returns setting information for one or more indices. For data streams,
+returns setting information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor.html">GetIndicesSettingsRequestDescriptor</a></dt>
+      <dd><p>
+Get index settings.
+Returns setting information for one or more indices. For data streams,
+returns setting information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor-1.html">GetIndicesSettingsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get index settings.
+Returns setting information for one or more indices. For data streams,
+returns setting information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters.html">GetIndicesSettingsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse.html">GetIndicesSettingsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest.html">GetMappingRequest</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more indices.
+For data streams, the API retrieves mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor.html">GetMappingRequestDescriptor</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more indices.
+For data streams, the API retrieves mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor-1.html">GetMappingRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get mapping definitions.
+Retrieves mapping definitions for one or more indices.
+For data streams, the API retrieves mappings for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters.html">GetMappingRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse.html">GetMappingResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponseExtensions.html">GetMappingResponseExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest.html">GetTemplateRequest</a></dt>
+      <dd><p>
+Get index templates.
+Retrieves information about one or more index templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor.html">GetTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Get index templates.
+Retrieves information about one or more index templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters.html">GetTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse.html">GetTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexAliases.html">IndexAliases</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction.html">IndexAndDataStreamAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.html">IndexAndDataStreamActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexMappingRecord.html">IndexMappingRecord</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction.html">IndexModifyDataStreamAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor.html">IndexModifyDataStreamActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor-1.html">IndexModifyDataStreamActionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting.html">IndexRouting</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation.html">IndexRoutingAllocation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor.html">IndexRoutingAllocationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk.html">IndexRoutingAllocationDisk</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDiskDescriptor.html">IndexRoutingAllocationDiskDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude.html">IndexRoutingAllocationInclude</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationIncludeDescriptor.html">IndexRoutingAllocationIncludeDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery.html">IndexRoutingAllocationInitialRecovery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor.html">IndexRoutingAllocationInitialRecoveryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor.html">IndexRoutingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance.html">IndexRoutingRebalance</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor.html">IndexRoutingRebalanceDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegment.html">IndexSegment</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort.html">IndexSegmentSort</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor.html">IndexSegmentSortDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor-1.html">IndexSegmentSortDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks.html">IndexSettingBlocks</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor.html">IndexSettingBlocksDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+      <dd><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis.html">IndexSettingsAnalysis</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor.html">IndexSettingsAnalysisDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.html">IndexSettingsDescriptor</a></dt>
+      <dd><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle.html">IndexSettingsLifecycle</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor.html">IndexSettingsLifecycleDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep.html">IndexSettingsLifecycleStep</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor.html">IndexSettingsLifecycleStepDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries.html">IndexSettingsTimeSeries</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.html">IndexSettingsTimeSeriesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexState.html">IndexState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.html">IndexStateDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor-1.html">IndexStateDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexStats.html">IndexStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate.html">IndexTemplate</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration.html">IndexTemplateDataStreamConfiguration</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem.html">IndexTemplateItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping.html">IndexTemplateMapping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.html">IndexTemplateMappingDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor-1.html">IndexTemplateMappingDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary.html">IndexTemplateSummary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction.html">IndexUpdateAliasesAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor.html">IndexUpdateAliasesActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor-1.html">IndexUpdateAliasesActionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning.html">IndexVersioning</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor.html">IndexVersioningDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure.html">IndexingPressure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.html">IndexingPressureDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory.html">IndexingPressureMemory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor.html">IndexingPressureMemoryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings.html">IndexingSlowlogSettings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettingsDescriptor.html">IndexingSlowlogSettingsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds.html">IndexingSlowlogTresholds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor.html">IndexingSlowlogTresholdsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesNamespacedClient.html">IndicesNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesShardStores.html">IndicesShardStores</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats.html">IndicesStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest.html">IndicesStatsRequest</a></dt>
+      <dd><p>
+Returns statistics for one or more indices.
+For data streams, the API retrieves statistics for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+      <dd><p>
+Returns statistics for one or more indices.
+For data streams, the API retrieves statistics for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor-1.html">IndicesStatsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Returns statistics for one or more indices.
+For data streams, the API retrieves statistics for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters.html">IndicesStatsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse.html">IndicesStatsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation.html">IndicesValidationExplanation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings.html">MappingLimitSettings</a></dt>
+      <dd><p>
+Mapping Limit Settings
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth.html">MappingLimitSettingsDepth</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor.html">MappingLimitSettingsDepthDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.html">MappingLimitSettingsDescriptor</a></dt>
+      <dd><p>
+Mapping Limit Settings
+</p>
+<p>
+  <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</a>
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields.html">MappingLimitSettingsDimensionFields</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor.html">MappingLimitSettingsDimensionFieldsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength.html">MappingLimitSettingsFieldNameLength</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor.html">MappingLimitSettingsFieldNameLengthDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields.html">MappingLimitSettingsNestedFields</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor.html">MappingLimitSettingsNestedFieldsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects.html">MappingLimitSettingsNestedObjects</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor.html">MappingLimitSettingsNestedObjectsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields.html">MappingLimitSettingsTotalFields</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor.html">MappingLimitSettingsTotalFieldsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingStats.html">MappingStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Merge.html">Merge</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeDescriptor.html">MergeDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler.html">MergeScheduler</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor.html">MergeSchedulerDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest.html">MigrateToDataStreamRequest</a></dt>
+      <dd><p>
+Convert an index alias to a data stream.
+Converts an index alias to a data stream.
+You must have a matching index template that is data stream enabled.
+The alias must meet the following criteria:
+The alias must have a write index;
+All indices for the alias must have a <code>@timestamp</code> field mapping of a <code>date</code> or <code>date_nanos</code> field type;
+The alias must not have any filters;
+The alias must not use custom routing.
+If successful, the request removes the alias and creates a data stream with the same name.
+The indices for the alias become hidden backing indices for the stream.
+The write index for the alias becomes the write index for the stream.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor.html">MigrateToDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Convert an index alias to a data stream.
+Converts an index alias to a data stream.
+You must have a matching index template that is data stream enabled.
+The alias must meet the following criteria:
+The alias must have a write index;
+All indices for the alias must have a <code>@timestamp</code> field mapping of a <code>date</code> or <code>date_nanos</code> field type;
+The alias must not have any filters;
+The alias must not use custom routing.
+If successful, the request removes the alias and creates a data stream with the same name.
+The indices for the alias become hidden backing indices for the stream.
+The write index for the alias becomes the write index for the stream.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters.html">MigrateToDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse.html">MigrateToDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest.html">ModifyDataStreamRequest</a></dt>
+      <dd><p>
+Update data streams.
+Performs one or more data stream modification actions in a single atomic operation.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor.html">ModifyDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Update data streams.
+Performs one or more data stream modification actions in a single atomic operation.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters.html">ModifyDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse.html">ModifyDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata.html">NumericFielddata</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor.html">NumericFielddataDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest.html">OpenIndexRequest</a></dt>
+      <dd><p>
+Opens a closed index.
+For data streams, the API opens any closed backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor.html">OpenIndexRequestDescriptor</a></dt>
+      <dd><p>
+Opens a closed index.
+For data streams, the API opens any closed backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor-1.html">OpenIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Opens a closed index.
+For data streams, the API opens any closed backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters.html">OpenIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse.html">OpenIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Overlapping.html">Overlapping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest.html">PromoteDataStreamRequest</a></dt>
+      <dd><p>
+Promotes a data stream from a replicated data stream managed by CCR to a regular data stream
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor.html">PromoteDataStreamRequestDescriptor</a></dt>
+      <dd><p>
+Promotes a data stream from a replicated data stream managed by CCR to a regular data stream
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters.html">PromoteDataStreamRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse.html">PromoteDataStreamResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest.html">PutAliasRequest</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor.html">PutAliasRequestDescriptor</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor-1.html">PutAliasRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters.html">PutAliasRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse.html">PutAliasResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest.html">PutDataLifecycleRequest</a></dt>
+      <dd><p>
+Update data stream lifecycles.
+Update the data stream lifecycle of the specified data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor.html">PutDataLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Update data stream lifecycles.
+Update the data stream lifecycle of the specified data streams.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters.html">PutDataLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse.html">PutDataLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest.html">PutIndexTemplateRequest</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor.html">PutIndexTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor-1.html">PutIndexTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters.html">PutIndexTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse.html">PutIndexTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest.html">PutIndicesSettingsRequest</a></dt>
+      <dd><p>
+Update index settings.
+Changes dynamic index settings in real time. For data streams, index setting
+changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor.html">PutIndicesSettingsRequestDescriptor</a></dt>
+      <dd><p>
+Update index settings.
+Changes dynamic index settings in real time. For data streams, index setting
+changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor-1.html">PutIndicesSettingsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Update index settings.
+Changes dynamic index settings in real time. For data streams, index setting
+changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters.html">PutIndicesSettingsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse.html">PutIndicesSettingsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest.html">PutMappingRequest</a></dt>
+      <dd><p>
+Update field mappings.
+Adds new fields to an existing data stream or index.
+You can also use this API to change the search settings of existing fields.
+For data streams, these changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+      <dd><p>
+Update field mappings.
+Adds new fields to an existing data stream or index.
+You can also use this API to change the search settings of existing fields.
+For data streams, these changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor-1.html">PutMappingRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Update field mappings.
+Adds new fields to an existing data stream or index.
+You can also use this API to change the search settings of existing fields.
+For data streams, these changes are applied to all backing indices by default.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters.html">PutMappingRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse.html">PutMappingResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest.html">PutTemplateRequest</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor.html">PutTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor-1.html">PutTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update an index template.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters.html">PutTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse.html">PutTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Queries.html">Queries</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.QueriesDescriptor.html">QueriesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes.html">RecoveryBytes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles.html">RecoveryFiles</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus.html">RecoveryIndexStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin.html">RecoveryOrigin</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest.html">RecoveryRequest</a></dt>
+      <dd><p>
+Returns information about ongoing and completed shard recoveries for one or more indices.
+For data streams, the API returns information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor.html">RecoveryRequestDescriptor</a></dt>
+      <dd><p>
+Returns information about ongoing and completed shard recoveries for one or more indices.
+For data streams, the API returns information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor-1.html">RecoveryRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Returns information about ongoing and completed shard recoveries for one or more indices.
+For data streams, the API returns information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters.html">RecoveryRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse.html">RecoveryResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus.html">RecoveryStartStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus.html">RecoveryStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest.html">RefreshRequest</a></dt>
+      <dd><p>
+Refresh an index.
+A refresh makes recent operations performed on one or more indices available for search.
+For data streams, the API runs the refresh operation on the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor.html">RefreshRequestDescriptor</a></dt>
+      <dd><p>
+Refresh an index.
+A refresh makes recent operations performed on one or more indices available for search.
+For data streams, the API runs the refresh operation on the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Refresh an index.
+A refresh makes recent operations performed on one or more indices available for search.
+For data streams, the API runs the refresh operation on the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters.html">RefreshRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse.html">RefreshResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails.html">ReloadDetails</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult.html">ReloadResult</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.html">ReloadSearchAnalyzersRequest</a></dt>
+      <dd><p>
+Reloads an index's search analyzers and their resources.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor.html">ReloadSearchAnalyzersRequestDescriptor</a></dt>
+      <dd><p>
+Reloads an index's search analyzers and their resources.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor-1.html">ReloadSearchAnalyzersRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Reloads an index's search analyzers and their resources.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters.html">ReloadSearchAnalyzersRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse.html">ReloadSearchAnalyzersResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction.html">RemoveAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.html">RemoveActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction.html">RemoveIndexAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.html">RemoveIndexActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo.html">ResolveClusterInfo</a></dt>
+      <dd><p>
+Provides information about each cluster request relevant to doing a cross-cluster search.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest.html">ResolveClusterRequest</a></dt>
+      <dd><p>
+Resolves the specified index expressions to return information about each cluster, including
+the local cluster, if included.
+Multiple patterns and remote clusters are supported.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+      <dd><p>
+Resolves the specified index expressions to return information about each cluster, including
+the local cluster, if included.
+Multiple patterns and remote clusters are supported.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters.html">ResolveClusterRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse.html">ResolveClusterResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexAliasItem.html">ResolveIndexAliasItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem.html">ResolveIndexDataStreamsItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem.html">ResolveIndexItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest.html">ResolveIndexRequest</a></dt>
+      <dd><p>
+Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+Multiple patterns and remote clusters are supported.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor.html">ResolveIndexRequestDescriptor</a></dt>
+      <dd><p>
+Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+Multiple patterns and remote clusters are supported.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters.html">ResolveIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse.html">ResolveIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease.html">RetentionLease</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor.html">RetentionLeaseDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions.html">RolloverConditions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.html">RolloverConditionsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest.html">RolloverRequest</a></dt>
+      <dd><p>
+Roll over to a new index.
+Creates a new index for a data stream or index alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+      <dd><p>
+Roll over to a new index.
+Creates a new index for a data stream or index alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor-1.html">RolloverRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Roll over to a new index.
+Creates a new index for a data stream or index alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters.html">RolloverRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse.html">RolloverResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle.html">SearchIdle</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor.html">SearchIdleDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Segment.html">Segment</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest.html">SegmentsRequest</a></dt>
+      <dd><p>
+Returns low-level information about the Lucene segments in index shards.
+For data streams, the API returns information about the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor.html">SegmentsRequestDescriptor</a></dt>
+      <dd><p>
+Returns low-level information about the Lucene segments in index shards.
+For data streams, the API returns information about the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor-1.html">SegmentsRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Returns low-level information about the Lucene segments in index shards.
+For data streams, the API returns information about the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters.html">SegmentsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse.html">SegmentsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze.html">SettingsAnalyze</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.html">SettingsAnalyzeDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight.html">SettingsHighlight</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlightDescriptor.html">SettingsHighlightDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString.html">SettingsQueryString</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryStringDescriptor.html">SettingsQueryStringDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch.html">SettingsSearch</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearchDescriptor.html">SettingsSearchDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities.html">SettingsSimilarities</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor.html">SettingsSimilaritiesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25.html">SettingsSimilarityBm25</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor.html">SettingsSimilarityBm25Descriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean.html">SettingsSimilarityBoolean</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor.html">SettingsSimilarityBooleanDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi.html">SettingsSimilarityDfi</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfiDescriptor.html">SettingsSimilarityDfiDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr.html">SettingsSimilarityDfr</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfrDescriptor.html">SettingsSimilarityDfrDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb.html">SettingsSimilarityIb</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbDescriptor.html">SettingsSimilarityIbDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd.html">SettingsSimilarityLmd</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmdDescriptor.html">SettingsSimilarityLmdDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj.html">SettingsSimilarityLmj</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor.html">SettingsSimilarityLmjDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted.html">SettingsSimilarityScripted</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor.html">SettingsSimilarityScriptedDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit.html">ShardCommit</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo.html">ShardFileSizeInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardLease.html">ShardLease</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardPath.html">ShardPath</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache.html">ShardQueryCache</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery.html">ShardRecovery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRetentionLeases.html">ShardRetentionLeases</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting.html">ShardRouting</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting.html">ShardSegmentRouting</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber.html">ShardSequenceNumber</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.html">ShardStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStore.html">ShardStore</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException.html">ShardStoreException</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode.html">ShardStoreNode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper.html">ShardStoreWrapper</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest.html">ShardStoresRequest</a></dt>
+      <dd><p>
+Retrieves store information about replica shards in one or more indices.
+For data streams, the API retrieves store information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor.html">ShardStoresRequestDescriptor</a></dt>
+      <dd><p>
+Retrieves store information about replica shards in one or more indices.
+For data streams, the API retrieves store information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor-1.html">ShardStoresRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Retrieves store information about replica shards in one or more indices.
+For data streams, the API retrieves store information for the stream’s backing indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters.html">ShardStoresRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse.html">ShardStoresResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment.html">ShardsSegment</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats.html">ShardsTotalStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest.html">ShrinkIndexRequest</a></dt>
+      <dd><p>
+Shrinks an existing index into a new index with fewer primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor.html">ShrinkIndexRequestDescriptor</a></dt>
+      <dd><p>
+Shrinks an existing index into a new index with fewer primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor-1.html">ShrinkIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Shrinks an existing index into a new index with fewer primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters.html">ShrinkIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse.html">ShrinkIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest.html">SimulateIndexTemplateRequest</a></dt>
+      <dd><p>
+Simulate an index.
+Returns the index configuration that would be applied to the specified index from an existing index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor.html">SimulateIndexTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Simulate an index.
+Returns the index configuration that would be applied to the specified index from an existing index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters.html">SimulateIndexTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse.html">SimulateIndexTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest.html">SimulateTemplateRequest</a></dt>
+      <dd><p>
+Simulate an index template.
+Returns the index configuration that would be applied by a particular index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor.html">SimulateTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Simulate an index template.
+Returns the index configuration that would be applied by a particular index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor-1.html">SimulateTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Simulate an index template.
+Returns the index configuration that would be applied by a particular index template.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters.html">SimulateTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse.html">SimulateTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings.html">SlowlogSettings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor.html">SlowlogSettingsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels.html">SlowlogTresholdLevels</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.html">SlowlogTresholdLevelsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds.html">SlowlogTresholds</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor.html">SlowlogTresholdsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes.html">SoftDeletes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor.html">SoftDeletesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest.html">SplitIndexRequest</a></dt>
+      <dd><p>
+Splits an existing index into a new index with more primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor.html">SplitIndexRequestDescriptor</a></dt>
+      <dd><p>
+Splits an existing index into a new index with more primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor-1.html">SplitIndexRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Splits an existing index into a new index with more primary shards.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters.html">SplitIndexRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse.html">SplitIndexResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Storage.html">Storage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.html">StorageDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Template.html">Template</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping.html">TemplateMapping</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TokenDetail.html">TokenDetail</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Translog.html">Translog</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.html">TranslogDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention.html">TranslogRetention</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor.html">TranslogRetentionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus.html">TranslogStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings.html">TypeFieldMappings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest.html">UpdateAliasesRequest</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor.html">UpdateAliasesRequestDescriptor</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor-1.html">UpdateAliasesRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters.html">UpdateAliasesRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse.html">UpdateAliasesResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest.html">ValidateQueryRequest</a></dt>
+      <dd><p>
+Validate a query.
+Validates a query without running it.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor.html">ValidateQueryRequestDescriptor</a></dt>
+      <dd><p>
+Validate a query.
+Validates a query without running it.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor-1.html">ValidateQueryRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Validate a query.
+Validates a query without running it.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters.html">ValidateQueryRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse.html">ValidateQueryResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex.html">VerifyIndex</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.StorageType.html">StorageType</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity.html">ISettingsSimilarity</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Feature.html">Feature</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.html">IndexCheckOnStartup</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.html">IndexMetadataState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.html">IndexRoutingAllocationOptions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.html">IndexRoutingRebalanceOptions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.html">ManagedBy</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.html">NumericFielddataFormat</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.html">SegmentSortMissing</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.html">SegmentSortMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.html">SegmentSortOrder</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.html">ShardRoutingState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.html">ShardStoreAllocation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.html">ShardStoreStatus</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.html">TranslogDurability</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

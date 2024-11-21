@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PutTransformRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PutTransformRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a transform. Creates a transform.   A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a unique row per entity.   You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If you choose to use the pivot method for your transform, the entities are defined by the set of group_by fields in the pivot object. If you choose to use the latest method, the entities are defined by the unique_key field values in the latest object.   You must have create_index, index, and read privileges on the destination index and read and view_index_metadata privileges on the source indices. When Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the time of creation and uses those same roles. If those roles do not have the required privileges on the source and destination indices, the transform fails when it attempts unauthorized operations.   NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any .transform-internal* indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do not give users any privileges on .transform-internal* indices. If you used transforms prior to 7.5, also do not give users any privileges on .data-frame-internal* indices.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.16.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest" class="text-break">
+Class PutTransformRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.html">TransformManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a transform.
+Creates a transform.
+</p>
+<p>
+A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
+a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
+unique row per entity.
+</p>
+<p>
+You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
+you choose to use the pivot method for your transform, the entities are defined by the set of <code>group_by</code> fields in
+the pivot object. If you choose to use the latest method, the entities are defined by the <code>unique_key</code> field values
+in the latest object.
+</p>
+<p>
+You must have <code>create_index</code>, <code>index</code>, and <code>read</code> privileges on the destination index and <code>read</code> and
+<code>view_index_metadata</code> privileges on the source indices. When Elasticsearch security features are enabled, the
+transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
+those roles do not have the required privileges on the source and destination indices, the transform fails when it
+attempts unauthorized operations.
+</p>
+<p>
+NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
+<code>.transform-internal*</code> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
+not give users any privileges on <code>.transform-internal*</code> indices. If you used transforms prior to 7.5, also do not
+give users any privileges on <code>.data-frame-internal*</code> indices.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PutTransformRequest : PlainRequest&lt;PutTransformRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters.html">PutTransformRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters.html">PutTransformRequestParameters</a>&gt;</div>
+      <div><span class="xref">PutTransformRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;PutTransformRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;PutTransformRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;PutTransformRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;PutTransformRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;PutTransformRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_RequestConfiguration">PlainRequest&lt;PutTransformRequestParameters&gt;.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  PutTransformRequest(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTransformRequest(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_DeferValidation_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.DeferValidation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_DeferValidation" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.DeferValidation">
+  DeferValidation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When the transform is created, a series of validations occur to ensure its success. For example, there is a
+check for the existence of the source indices and a check that the destination index is not part of the source
+index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
+until after the transform is created. The validations are always run when you start the transform, however, with
+the exception of privilege checks.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? DeferValidation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Description_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Description" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Free text description of the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;description&quot;)]
+public string? Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Dest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Dest" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Dest">
+  Dest
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;dest&quot;)]
+public Destination Dest { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Destination.html">Destination</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Frequency_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Frequency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Frequency" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Frequency">
+  Frequency
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The interval between checks for changes in the source indices when the transform is running continuously. Also
+determines the retry interval in the event of transient failures while the transform is searching or indexing.
+The minimum value is <code>1s</code> and the maximum is <code>1h</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;frequency&quot;)]
+public Duration? Frequency { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Latest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Latest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Latest" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Latest">
+  Latest
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L149"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The latest method transforms the data by finding the latest document for each unique key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;latest&quot;)]
+public Latest? Latest { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Latest.html">Latest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Meta_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Meta" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Meta">
+  Meta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_meta&quot;)]
+public IDictionary&lt;string, object&gt;? Meta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Pivot_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Pivot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Pivot" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Pivot">
+  Pivot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
+and the aggregation to reduce the data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;pivot&quot;)]
+public Pivot? Pivot { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Pivot.html">Pivot</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.RetentionPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_RetentionPolicy" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.RetentionPolicy">
+  RetentionPolicy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
+destination index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;retention_policy&quot;)]
+public RetentionPolicy? RetentionPolicy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy.html">RetentionPolicy</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Settings_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Settings" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Settings">
+  Settings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;settings&quot;)]
+public Settings? Settings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Settings.html">Settings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Source_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Source" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Source">
+  Source
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source of the data for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;source&quot;)]
+public Source Source { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Source.html">Source</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.1/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Sync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Sync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Sync" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Sync">
+  Sync
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the properties transforms require to run continuously.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;sync&quot;)]
+public Sync? Sync { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Sync.html">Sync</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Timeout_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_Timeout" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/PutTransformRequest.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

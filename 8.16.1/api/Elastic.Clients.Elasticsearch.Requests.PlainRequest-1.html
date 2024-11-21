@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PlainRequest&lt;TParameters&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PlainRequest&lt;TParameters&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.16.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Requests_PlainRequest_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Requests.PlainRequest%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1" class="text-break">
+Class PlainRequest&lt;TParameters&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Requests.html">Requests</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class PlainRequest&lt;TParameters&gt; : Request&lt;TParameters&gt; where TParameters : RequestParameters, new()</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TParameters</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;TParameters&gt;</div>
+      <div><span class="xref">PlainRequest&lt;TParameters&gt;</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest.html">AsyncSearchStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest.html">DeleteAsyncSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest.html">GetAsyncSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest.html">SubmitAsyncSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequest.html">BulkRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ClearScrollRequest.html">ClearScrollRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ClosePointInTimeRequest.html">ClosePointInTimeRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest.html">AllocationExplainRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest.html">ClusterInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest.html">ClusterStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest.html">DeleteComponentTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest.html">DeleteVotingConfigExclusionsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest.html">ExistsComponentTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest.html">GetClusterSettingsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest.html">GetComponentTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequest.html">HealthRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest.html">PendingTasksRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest.html">PostVotingConfigExclusionsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest.html">PutComponentTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CountRequest.html">CountRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CreateRequest-1.html">CreateRequest&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest.html">CcrStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest.html">DeleteAutoFollowPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest.html">FollowInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest.html">FollowRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest.html">FollowStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest.html">ForgetFollowerRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest.html">GetAutoFollowPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest.html">PauseAutoFollowPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest.html">PauseFollowRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest.html">PutAutoFollowPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest.html">ResumeAutoFollowPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest.html">ResumeFollowRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest.html">UnfollowRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest.html">ListDanglingIndicesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRequest.html">DeleteByQueryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest.html">DeleteByQueryRethrottleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequest.html">DeleteRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteScriptRequest.html">DeleteScriptRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest.html">DeletePolicyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest.html">EnrichStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest.html">ExecutePolicyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest.html">GetPolicyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest.html">PutPolicyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest.html">EqlDeleteRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlGetRequest.html">EqlGetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest.html">EqlSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest.html">GetEqlStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest.html">EsqlQueryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsRequest.html">ExistsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ExistsSourceRequest.html">ExistsSourceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ExplainRequest.html">ExplainRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest.html">GetFeaturesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest.html">ResetFeaturesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.FieldCapsRequest.html">FieldCapsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GetRequest.html">GetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptContextRequest.html">GetScriptContextRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest.html">GetScriptLanguagesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GetScriptRequest.html">GetScriptRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequest.html">GetSourceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Graph.ExploreRequest.html">ExploreRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.HealthReportRequest.html">HealthReportRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest.html">GetIlmStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest.html">MigrateToDataTiersRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest.html">MoveToStepRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest.html">RemovePolicyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest.html">RetryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest.html">StartIlmRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest.html">StopIlmRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest.html">AnalyzeIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest.html">ClearCacheRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.html">CloneIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest.html">CloseIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest.html">CreateDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest.html">CreateIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest.html">DataStreamsStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest.html">DeleteAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest.html">DeleteDataLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest.html">DeleteDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest.html">DeleteIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest.html">DeleteIndexTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest.html">DeleteTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest.html">DiskUsageRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest.html">DownsampleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest.html">ExistsAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest.html">ExistsIndexTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest.html">ExistsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest.html">ExistsTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest.html">ExplainDataLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest.html">FieldUsageStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest.html">FlushRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest.html">ForcemergeRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest.html">GetAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest.html">GetDataLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest.html">GetDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest.html">GetFieldMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest.html">GetIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest.html">GetIndexTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest.html">GetIndicesSettingsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest.html">GetMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest.html">GetTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest.html">IndicesStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest.html">MigrateToDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest.html">ModifyDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest.html">OpenIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest.html">PromoteDataStreamRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest.html">PutAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest.html">PutDataLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest.html">PutIndexTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest.html">PutIndicesSettingsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest.html">PutMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest.html">PutTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest.html">RecoveryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest.html">RefreshRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.html">ReloadSearchAnalyzersRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest.html">ResolveClusterRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest.html">ResolveIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest.html">RolloverRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest.html">SegmentsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest.html">ShardStoresRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest.html">ShrinkIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest.html">SimulateIndexTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest.html">SimulateTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest.html">SplitIndexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest.html">UpdateAliasesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest.html">ValidateQueryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequest-1.html">IndexRequest&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest.html">DeleteInferenceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest.html">GetInferenceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.InferenceRequest.html">InferenceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest.html">PutInferenceRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.InfoRequest.html">InfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest.html">DeleteGeoipDatabaseRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest.html">DeletePipelineRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest.html">GeoIpStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest.html">GetGeoipDatabaseRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest.html">GetPipelineRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest.html">ProcessorGrokRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest.html">PutGeoipDatabaseRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest.html">PutPipelineRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequest.html">SimulateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest.html">DeleteLicenseRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest.html">GetBasicStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest.html">GetLicenseRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest.html">GetTrialStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest.html">PostRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest.html">PostStartBasicRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest.html">PostStartTrialRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest.html">ClearTrainedModelDeploymentCacheRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest.html">CloseJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest.html">DeleteCalendarEventRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest.html">DeleteCalendarJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest.html">DeleteCalendarRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest.html">DeleteDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest.html">DeleteDatafeedRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest.html">DeleteExpiredDataRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest.html">DeleteFilterRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest.html">DeleteForecastRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest.html">DeleteJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest.html">DeleteModelSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest.html">DeleteTrainedModelAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest.html">DeleteTrainedModelRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest.html">EstimateModelMemoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest.html">EvaluateDataFrameRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest.html">ExplainDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest.html">FlushJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest.html">ForecastRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest.html">GetBucketsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest.html">GetCalendarEventsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest.html">GetCalendarsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest.html">GetCategoriesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest.html">GetDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest.html">GetDataFrameAnalyticsStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest.html">GetDatafeedStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest.html">GetDatafeedsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest.html">GetFiltersRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest.html">GetInfluencersRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest.html">GetJobStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest.html">GetJobsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest.html">GetMemoryStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest.html">GetModelSnapshotUpgradeStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest.html">GetModelSnapshotsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest.html">GetOverallBucketsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest.html">GetRecordsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest.html">GetTrainedModelsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest.html">GetTrainedModelsStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest.html">InferTrainedModelRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest.html">MlInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest.html">OpenJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest.html">PostCalendarEventsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest.html">PreviewDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest.html">PutCalendarJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest.html">PutCalendarRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest.html">PutDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest.html">PutDatafeedRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest.html">PutFilterRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest.html">PutJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest.html">PutTrainedModelAliasRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest.html">PutTrainedModelDefinitionPartRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.html">PutTrainedModelRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest.html">PutTrainedModelVocabularyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest.html">ResetJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest.html">RevertModelSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest.html">SetUpgradeModeRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest.html">StartDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest.html">StartDatafeedRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest.html">StartTrainedModelDeploymentRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest.html">StopDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest.html">StopDatafeedRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest.html">StopTrainedModelDeploymentRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest.html">UpdateDataFrameAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest.html">UpdateDatafeedRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest.html">UpdateFilterRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest.html">UpdateJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest.html">UpdateModelSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest.html">UpdateTrainedModelDeploymentRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest.html">UpgradeJobSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest.html">ValidateDetectorRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest.html">ValidateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequest.html">MultiGetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequest.html">MultiSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest.html">MultiSearchTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MultiTermVectorsRequest.html">MultiTermVectorsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest.html">ClearRepositoriesMeteringArchiveRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest.html">GetRepositoriesMeteringInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest.html">HotThreadsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest.html">NodesInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest.html">NodesStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest.html">NodesUsageRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest.html">ReloadSecureSettingsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequest.html">OpenPointInTimeRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.PingRequest.html">PingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.PutScriptRequest.html">PutScriptRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest.html">DeleteRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest.html">DeleteRulesetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest.html">GetRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest.html">GetRulesetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest.html">ListRulesetsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest.html">PutRulesetRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.TestRequest.html">TestRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RankEvalRequest.html">RankEvalRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequest.html">ReindexRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRethrottleRequest.html">ReindexRethrottleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest.html">RenderSearchTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest.html">DeleteJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest.html">GetJobsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest.html">GetRollupCapsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest.html">GetRollupIndexCapsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequest.html">PutJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest.html">RollupSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequest.html">StartJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequest.html">StopJobRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest.html">ScriptsPainlessExecuteRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ScrollRequest.html">ScrollRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest.html">DeleteBehavioralAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest.html">DeleteSearchApplicationRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest.html">GetBehavioralAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest.html">GetSearchApplicationRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListRequest.html">ListRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest.html">PutBehavioralAnalyticsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest.html">PutSearchApplicationRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest.html">SearchApplicationSearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequest.html">SearchMvtRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchRequest.html">SearchRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchShardsRequest.html">SearchShardsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchTemplateRequest.html">SearchTemplateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest.html">CacheStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest.html">ClearCacheRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest.html">MountRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest.html">SearchableSnapshotsStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest.html">ActivateUserProfileRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.AuthenticateRequest.html">AuthenticateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest.html">BulkDeleteRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest.html">BulkPutRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest.html">ChangePasswordRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest.html">ClearApiKeyCacheRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest.html">ClearCachedPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest.html">ClearCachedRealmsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest.html">ClearCachedRolesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest.html">ClearCachedServiceTokensRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest.html">CreateApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest.html">CreateCrossClusterApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest.html">CreateServiceTokenRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest.html">DeletePrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest.html">DeleteRoleMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest.html">DeleteRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest.html">DeleteServiceTokenRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DeleteUserRequest.html">DeleteUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest.html">DisableUserProfileRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.DisableUserRequest.html">DisableUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest.html">EnableUserProfileRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.EnableUserRequest.html">EnableUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest.html">EnrollKibanaRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest.html">EnrollNodeRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest.html">GetApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest.html">GetBuiltinPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest.html">GetPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest.html">GetRoleMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetRoleRequest.html">GetRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest.html">GetServiceAccountsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest.html">GetServiceCredentialsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetTokenRequest.html">GetTokenRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest.html">GetUserPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest.html">GetUserProfileRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GetUserRequest.html">GetUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest.html">GrantApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest.html">HasPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest.html">HasPrivilegesUserProfileRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest.html">InvalidateApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest.html">InvalidateTokenRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest.html">PutPrivilegesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.html">PutRoleMappingRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequest.html">PutRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutUserRequest.html">PutUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest.html">QueryApiKeysRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.QueryRoleRequest.html">QueryRoleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.QueryUserRequest.html">QueryUserRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest.html">SamlAuthenticateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest.html">SamlCompleteLogoutRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest.html">SamlInvalidateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest.html">SamlLogoutRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest.html">SamlPrepareAuthenticationRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest.html">SamlServiceProviderMetadataRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest.html">SuggestUserProfilesRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest.html">UpdateApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest.html">UpdateCrossClusterApiKeyRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest.html">UpdateUserProfileDataRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest.html">CleanupRepositoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest.html">CloneSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest.html">CreateRepositoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest.html">CreateSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest.html">DeleteRepositoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest.html">DeleteSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest.html">GetRepositoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.html">GetSnapshotRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest.html">RepositoryVerifyIntegrityRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest.html">RestoreRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest.html">SnapshotStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest.html">VerifyRepositoryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest.html">ExecuteLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest.html">ExecuteRetentionRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest.html">GetSlmStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest.html">GetStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest.html">StartSlmRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest.html">StopSlmRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest.html">ClearCursorRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest.html">DeleteAsyncRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest.html">GetAsyncRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest.html">GetAsyncStatusRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequest.html">QueryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequest.html">TranslateRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest.html">DeleteSynonymRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest.html">DeleteSynonymRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest.html">GetSynonymRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest.html">GetSynonymRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest.html">GetSynonymsSetsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest.html">PutSynonymRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest.html">PutSynonymRuleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Tasks.CancelRequest.html">CancelRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest.html">GetTasksRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Tasks.ListRequest.html">ListRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TermVectorsRequest-1.html">TermVectorsRequest&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TermsEnumRequest.html">TermsEnumRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest.html">TestGrokPatternRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest.html">DeleteTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest.html">GetTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest.html">GetTransformStatsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest.html">PreviewTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.html">PutTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest.html">ResetTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest.html">ScheduleNowTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest.html">StartTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest.html">StopTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest.html">UpgradeTransformsRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRequest.html">UpdateByQueryRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest.html">UpdateByQueryRethrottleRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.UpdateRequest-2.html">UpdateRequest&lt;TDocument, TPartialDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest.html">XpackInfoRequest</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest.html">XpackUsageRequest</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q__1_System_String_">Request&lt;TParameters&gt;.Q&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_System_Object_">Request&lt;TParameters&gt;.Q(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_Elastic_Transport_IStringable_">Request&lt;TParameters&gt;.Q(string, IStringable)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfig">Request.RequestConfig</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_StaticHttpMethod">Request.StaticHttpMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RouteValues">Request.RouteValues</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_DynamicHttpMethod">Request.DynamicHttpMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_ResolveUrl_Elastic_Clients_Elasticsearch_Requests_RouteValues_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_">Request.ResolveUrl(RouteValues, IElasticsearchClientSettings)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1__ctor_System_Func_Elastic_Clients_Elasticsearch_Requests_RouteValues_Elastic_Clients_Elasticsearch_Requests_RouteValues__" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.#ctor(System.Func{Elastic.Clients.Elasticsearch.Requests.RouteValues,Elastic.Clients.Elasticsearch.Requests.RouteValues})">
+  PlainRequest(Func&lt;RouteValues, RouteValues&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected PlainRequest(Func&lt;RouteValues, RouteValues&gt; pathSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pathSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RouteValues.html">RouteValues</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RouteValues.html">RouteValues</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.ErrorTrace">
+  ErrorTrace
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Include the stack trace of returned errors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? ErrorTrace { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.FilterPath">
+  FilterPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A list of filters used to reduce the response.</p>
+<p>
+    Use of response filtering can result in a response from Elasticsearch
+    that cannot be correctly deserialized to the respective response type for the request.
+    In such situations, use the low level client to issue the request and handle response deserialization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public string[] FilterPath { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.Human">
+  Human
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Return human-readable values for statistics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? Human { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.Pretty">
+  Pretty
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Pretty format the returned JSON response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? Pretty { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_RequestConfiguration" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.RequestConfiguration">
+  RequestConfiguration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public IRequestConfiguration? RequestConfiguration { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.1/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString" data-uid="Elastic.Clients.Elasticsearch.Requests.PlainRequest`1.SourceQueryString">
+  SourceQueryString
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Request/PlainRequest.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST
+requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public string SourceQueryString { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
