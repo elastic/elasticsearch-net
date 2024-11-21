@@ -16,9 +16,10 @@ If you're new to {es}, make sure also to read {ref}/getting-started.html[Elastic
 
 NOTE: This is still a work in progress, more sections will be added in the near future.
 
-include::recommendations.asciidoc[]
-include::examples.asciidoc[]
-include::query.asciidoc[]
-include::mappings.asciidoc[]
 include::aggregations.asciidoc[]
 include::esql.asciidoc[]
+include::examples.asciidoc[]
+include::mappings.asciidoc[]
+include::query.asciidoc[]
+include::recommendations.asciidoc[]
+include::transport.asciidoc[]
