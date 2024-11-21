@@ -18,9 +18,10 @@ jobs:
     secrets: 'inherit'
 
   docfx:
-    name: 'Generate Documentation'
+    name: 'DocFx'
     if: ${{ !startsWith(github.event.release.tag_name, 'serverless-') }}
     uses: ./.github/workflows/docfx.yml
     with:
-      release_tag: ${{ github.event.release.tag_name }}
+      name: ${{ github.event.release.tag_name }}
+      target_branch: 'refdoc'
     secrets: 'inherit'
