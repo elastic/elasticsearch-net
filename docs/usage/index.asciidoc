@@ -6,6 +6,8 @@ The sections below provide tutorials on the most frequently used and some less o
 
 For a full reference, see the {ref}/[Elasticsearch documentation] and in particular the {ref}/rest-apis.html[REST APIs] section. The {net-client} follows closely the JSON structures described there.
 
+A .NET API reference documentation for the Elasticsearch client package is available https://elastic.github.io/elasticsearch-net[here].
+
 If you're new to {es}, make sure also to read {ref}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
 
 * <<recommendations, Usage recommendations>>
