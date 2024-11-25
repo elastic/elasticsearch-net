@@ -24,114 +24,168 @@ public sealed class Fields :
 	IEnumerable<Field>,
 	IUrlParameter
 {
-	internal readonly List<Field> ListOfFields;
+	private readonly List<Field> _listOfFields;
+
+	/// <summary>
+	/// The list of fields.
+	/// </summary>
+	public IReadOnlyList<Field> ListOfFields => _listOfFields;
 
 	#region Constructors
 
-	internal Fields() => ListOfFields = [];
+	public Fields() => _listOfFields = [];
 
-	internal Fields(IEnumerable<Field?> fields)
+	public Fields(IEnumerable<Field> fields)
 	{
 		if (fields is null)
 			throw new ArgumentNullException(nameof(fields));
 
-		ListOfFields = [.. fields.Where(f => f is not null)];
+		_listOfFields = [.. fields];
+
+		if (_listOfFields.Any(x => x is null))
+			throw new ArgumentException("Fields enumeration must not contain 'null' values.");
 	}
 
 	#endregion Constructors
 
 	#region Factory Methods
 
-	public static Fields? FromField(Field? field) => field is null
-		? null
-		: new Fields([field]);
+	public static Fields FromField(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
 
-	public static Fields? FromFields(Field[]? fields) => fields.IsNullOrEmpty()
-		? null
-		: new Fields(fields!);
+		return new Fields([field]);
+	}
 
-	public static Fields? FromString(string? name) => name.IsNullOrEmptyCommaSeparatedList(out var split)
-		? null
-		: new Fields(split.Select(f => new Field(f)));
+	public static Fields FromFields(Field[] fields)
+	{
+		if (fields is null)
+			throw new ArgumentNullException(nameof(fields));
 
-	public static Fields? FromStrings(string[]? names) => names.IsNullOrEmpty()
-		? null
-		: new Fields(names!.Select(f => new Field(f)));
+		return new Fields(fields);
+	}
 
-	public static Fields? FromExpression(Expression? expression) => expression is null
-		? null
-		: new Fields([new Field(expression)]);
+	public static Fields FromString(string name)
+	{
+		if (name is null)
+			throw new ArgumentNullException(nameof(name));
 
-	public static Fields? FromExpressions(Expression[]? expressions) => expressions.IsNullOrEmpty()
-		? null
-		: new Fields(expressions!.Select(f => new Field(f)));
+		var split = name.Split(',');
 
-	public static Fields? FromExpression<T, TValue>(Expression<Func<T, TValue>>? expression) => expression is null
-		? null
-		: new Fields([new Field(expression)]);
+		return new Fields(split.Select(f => new Field(f)));
+	}
 
-	public static Fields? FromExpressions<T>(Expression<Func<T, object?>>[]? expressions) => expressions.IsNullOrEmpty()
-		? null
-		: new Fields(expressions!.Select(f => new Field(f)));
+	public static Fields FromStrings(string[] names)
+	{
+		if (names is null)
+			throw new ArgumentNullException(nameof(names));
 
-	public static Fields? FromProperty(PropertyInfo? property) => property is null
-		? null
-		: new Fields([property]);
+		return new Fields(names.Select(f => new Field(f)));
+	}
 
-	public static Fields? FromProperties(PropertyInfo[]? properties) => properties.IsNullOrEmpty()
-		? null
-		: new Fields(properties!.Select(f => new Field(f)));
+	public static Fields FromExpression(Expression expression)
+	{
+		if (expression is null)
+			throw new ArgumentNullException(nameof(expression));
+
+		return new Fields([new Field(expression)]);
+	}
+
+	public static Fields FromExpressions(Expression[] expressions)
+	{
+		if (expressions is null)
+			throw new ArgumentNullException(nameof(expressions));
+
+		return new Fields(expressions.Select(f => new Field(f)));
+	}
+
+	public static Fields FromExpression<T, TValue>(Expression<Func<T, TValue>> expression)
+	{
+		if (expression is null)
+			throw new ArgumentNullException(nameof(expression));
+
+		return new Fields([new Field(expression)]);
+	}
+
+	public static Fields FromExpressions<T>(Expression<Func<T, object?>>[] expressions)
+	{
+		if (expressions is null)
+			throw new ArgumentNullException(nameof(expressions));
+
+		return new Fields(expressions.Select(f => new Field(f)));
+	}
+
+	public static Fields FromProperty(PropertyInfo property)
+	{
+		if (property is null)
+			throw new ArgumentNullException(nameof(property));
+
+		return new Fields([property]);
+	}
+
+	public static Fields FromProperties(PropertyInfo[] properties)
+	{
+		if (properties is null)
+			throw new ArgumentNullException(nameof(properties));
+
+		return new Fields(properties.Select(f => new Field(f)));
+	}
 
 	#endregion Factory Methods
 
 	#region Conversion Operators
 
-	public static implicit operator Fields?(Field? field) => FromField(field);
+	public static implicit operator Fields(Field field) => FromField(field);
 
-	public static implicit operator Fields?(Field[]? fields) => FromFields(fields);
+	public static implicit operator Fields(Field[] fields) => FromFields(fields);
 
-	public static implicit operator Fields?(string? name) => FromString(name);
+	public static implicit operator Fields(string name) => FromString(name);
 
-	public static implicit operator Fields?(string[]? names) => FromStrings(names);
+	public static implicit operator Fields(string[] names) => FromStrings(names);
 
-	public static implicit operator Fields?(Expression? expression) => FromExpression(expression);
+	public static implicit operator Fields(Expression expression) => FromExpression(expression);
 
-	public static implicit operator Fields?(Expression[]? expressions) => FromExpressions(expressions);
+	public static implicit operator Fields(Expression[] expressions) => FromExpressions(expressions);
 
-	public static implicit operator Fields?(PropertyInfo? property) => FromProperty(property);
+	public static implicit operator Fields(PropertyInfo property) => FromProperty(property);
 
-	public static implicit operator Fields?(PropertyInfo[]? properties) => FromProperties(properties);
+	public static implicit operator Fields(PropertyInfo[] properties) => FromProperties(properties);
 
 	#endregion Conversion Operators
 
 	#region Combinator Methods
 
-	public Fields And(params Field?[] fields)
+	public Fields And(params Field[] fields)
 	{
 		if (fields is null)
 			throw new ArgumentNullException(nameof(fields));
 
-		ListOfFields.AddRange(fields.Where(f => f is not null));
+		// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+		if (fields.Any(x => x is null))
+			throw new ArgumentException("Fields enumeration must not contain 'null' values.");
+
+		_listOfFields.AddRange(fields);
 
 		return this;
 	}
 
-	public Fields And(params string?[] names)
+	public Fields And(params string[] names)
 	{
 		if (names is null)
 			throw new ArgumentNullException(nameof(names));
 
-		ListOfFields.AddRange(names.Where(f => f is not null).Select(f => new Field(f)));
+		_listOfFields.AddRange(names.Select(f => new Field(f)));
 
 		return this;
 	}
 
-	public Fields And<T>(params Expression<Func<T, object>>?[] expressions)
+	public Fields And<T>(params Expression<Func<T, object>>[] expressions)
 	{
 		if (expressions is null)
 			throw new ArgumentNullException(nameof(expressions));
 
-		ListOfFields.AddRange(expressions.Where(f => f is not null).Select(f => new Field(f)));
+		_listOfFields.AddRange(expressions.Select(f => new Field(f)));
 
 		return this;
 	}
@@ -142,17 +196,17 @@ public sealed class Fields :
 		if (expression is null)
 			throw new ArgumentNullException(nameof(expression));
 
-		ListOfFields.Add(new Field(expression, boost, format));
+		_listOfFields.Add(new Field(expression, boost, format));
 
 		return this;
 	}
 
-	public Fields And(params PropertyInfo?[] properties)
+	public Fields And(params PropertyInfo[] properties)
 	{
 		if (properties is null)
 			throw new ArgumentNullException(nameof(properties));
 
-		ListOfFields.AddRange(properties.Where(x => x is not null).Select(f => new Field(f)));
+		_listOfFields.AddRange(properties.Select(f => new Field(f)));
 
 		return this;
 	}
@@ -180,9 +234,9 @@ public sealed class Fields :
 			_ => false
 		};
 
-	public override int GetHashCode() => ListOfFields.GetHashCode();
+	public override int GetHashCode() => _listOfFields.GetHashCode();
 
-	public bool Equals(Fields? other) => (ListOfFields, other?.ListOfFields) switch
+	public bool Equals(Fields? other) => (_listOfFields, other?._listOfFields) switch
 	{
 		(null, null) => true,
 		({ } a, { } b) => (a.Count == b.Count) && !a.Except(b).Any(),
@@ -195,7 +249,7 @@ public sealed class Fields :
 
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-	public IEnumerator<Field> GetEnumerator() => ListOfFields.GetEnumerator();
+	public IEnumerator<Field> GetEnumerator() => _listOfFields.GetEnumerator();
 
 	#endregion IEnumerable
 
@@ -209,7 +263,7 @@ public sealed class Fields :
 				$"Can not resolve {nameof(Fields)} if no {nameof(IElasticsearchClientSettings)} is provided");
 		}
 
-		return string.Join(",", ListOfFields.Select(f => ((IUrlParameter)f).GetString(elasticsearchClientSettings)));
+		return string.Join(",", _listOfFields.Select(f => ((IUrlParameter)f).GetString(elasticsearchClientSettings)));
 	}
 
 	#endregion IUrlParameter
@@ -217,8 +271,8 @@ public sealed class Fields :
 	#region Debugging
 
 	public override string ToString() =>
-		$"Count: {ListOfFields.Count} [" +
-		string.Join(",", ListOfFields.Select((t, i) => $"({i + 1}: {t?.DebuggerDisplay})")) + "]";
+		$"Count: {_listOfFields.Count} [" +
+		string.Join(",", _listOfFields.Select((f, i) => $"({i + 1}: {f?.DebuggerDisplay})")) + "]";
 
 	private string DebuggerDisplay => ToString();
 
