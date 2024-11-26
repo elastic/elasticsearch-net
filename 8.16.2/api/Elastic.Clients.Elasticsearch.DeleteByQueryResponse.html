@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DeleteByQueryResponse | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DeleteByQueryResponse | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.16.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_DeleteByQueryResponse.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.DeleteByQueryResponse%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse" class="text-break">
+Class DeleteByQueryResponse  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DeleteByQueryResponse : ElasticsearchResponse</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Responses/TransportResponse.cs">TransportResponse</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse</a></div>
+      <div><span class="xref">DeleteByQueryResponse</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.TryGetOriginalException(out Exception)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.ElasticsearchWarnings</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.DebugInformation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.IsValidResponse</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Products/Elasticsearch/ElasticsearchResponse.cs">ElasticsearchResponse.ElasticsearchServerError</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.16.2/src/Elastic.Transport/Responses/TransportResponse.cs">TransportResponse.ApiCallDetails</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchResponseExtensions.html#Elastic_Clients_Elasticsearch_ElasticsearchResponseExtensions_IsSuccess_Elastic_Transport_Products_Elasticsearch_ElasticsearchResponse_">ElasticsearchResponseExtensions.IsSuccess(ElasticsearchResponse)</a>
+  </div>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Batches_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Batches*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Batches" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Batches">
+  Batches
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;batches&quot;)]
+public long? Batches { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Deleted_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Deleted*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Deleted" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Deleted">
+  Deleted
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;deleted&quot;)]
+public long? Deleted { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Failures_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Failures*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Failures" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Failures">
+  Failures
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;failures&quot;)]
+public IReadOnlyCollection&lt;BulkIndexByScrollFailure&gt;? Failures { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure.html">BulkIndexByScrollFailure</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Noops_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Noops*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Noops" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Noops">
+  Noops
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;noops&quot;)]
+public long? Noops { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_RequestsPerSecond_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.RequestsPerSecond*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_RequestsPerSecond" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.RequestsPerSecond">
+  RequestsPerSecond
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;requests_per_second&quot;)]
+public float? RequestsPerSecond { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Retries_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Retries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Retries" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Retries">
+  Retries
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;retries&quot;)]
+public Retries? Retries { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Retries.html">Retries</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_SliceId_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.SliceId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_SliceId" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.SliceId">
+  SliceId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;slice_id&quot;)]
+public int? SliceId { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Task_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Task*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Task" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Task">
+  Task
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;task&quot;)]
+public TaskId? Task { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TaskId.html">TaskId</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Throttled_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Throttled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Throttled" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Throttled">
+  Throttled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;throttled&quot;)]
+public Duration? Throttled { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledMillis_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledMillis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledMillis" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledMillis">
+  ThrottledMillis
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;throttled_millis&quot;)]
+public long? ThrottledMillis { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledUntil_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledUntil*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledUntil" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledUntil">
+  ThrottledUntil
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;throttled_until&quot;)]
+public Duration? ThrottledUntil { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledUntilMillis_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledUntilMillis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_ThrottledUntilMillis" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.ThrottledUntilMillis">
+  ThrottledUntilMillis
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;throttled_until_millis&quot;)]
+public long? ThrottledUntilMillis { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_TimedOut_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.TimedOut*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_TimedOut" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.TimedOut">
+  TimedOut
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;timed_out&quot;)]
+public bool? TimedOut { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Took_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Took*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Took" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Took">
+  Took
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;took&quot;)]
+public long? Took { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Total_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Total*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_Total" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.Total">
+  Total
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;total&quot;)]
+public long? Total { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_VersionConflicts_" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.VersionConflicts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteByQueryResponse_VersionConflicts" data-uid="Elastic.Clients.Elasticsearch.DeleteByQueryResponse.VersionConflicts">
+  VersionConflicts
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteByQueryResponse.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;version_conflicts&quot;)]
+public long? VersionConflicts { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
