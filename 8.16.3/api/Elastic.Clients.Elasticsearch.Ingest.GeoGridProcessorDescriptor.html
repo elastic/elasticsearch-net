@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GeoGridProcessorDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GeoGridProcessorDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.16.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor" class="text-break">
+Class GeoGridProcessorDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L581"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class GeoGridProcessorDescriptor : SerializableDescriptor&lt;GeoGridProcessorDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a>&gt;</div>
+      <div><span class="xref">GeoGridProcessorDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.#ctor">
+  GeoGridProcessorDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L585"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField(Elastic.Clients.Elasticsearch.Field)">
+  ChildrenField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L612"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and children tiles exist, save those tile addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ChildrenField(Field? childrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>childrenField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  ChildrenField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L634"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and children tiles exist, save those tile addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ChildrenField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; childrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>childrenField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ChildrenField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ChildrenField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  ChildrenField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L623"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and children tiles exist, save those tile addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ChildrenField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; childrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>childrenField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Description_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L646"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor Description(string? description)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Field_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Field(System.String)">
+  Field(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L658"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to interpret as a geo-tile.=
+The field format is determined by the <code>tile_type</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor Field(string field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_If_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.If*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_If_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.If(System.String)">
+  If(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditionally execute the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor If(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_IgnoreFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.IgnoreFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_IgnoreFailure_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.IgnoreFailure(System.Nullable{System.Boolean})">
+  IgnoreFailure(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L680"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Ignore failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_IgnoreMissing_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.IgnoreMissing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_IgnoreMissing_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.IgnoreMissing(System.Nullable{System.Boolean})">
+  IgnoreMissing(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> and <code>field</code> does not exist, the processor quietly exits without modifying the document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreMissing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField(Elastic.Clients.Elasticsearch.Field)">
+  NonChildrenField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L702"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor NonChildrenField(Field? nonChildrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nonChildrenField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  NonChildrenField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor NonChildrenField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; nonChildrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nonChildrenField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_NonChildrenField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.NonChildrenField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  NonChildrenField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor NonChildrenField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; nonChildrenField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nonChildrenField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor)">
+  OnFailure(ProcessorDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L744"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor})">
+  OnFailure(Action&lt;ProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L753"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor OnFailure(Action&lt;ProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor}[])">
+  OnFailure(params Action&lt;ProcessorDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L762"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor OnFailure(params Action&lt;ProcessorDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_OnFailure_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Processor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.OnFailure(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Processor})">
+  OnFailure(ICollection&lt;Processor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L735"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Handle failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor OnFailure(ICollection&lt;Processor&gt;? onFailure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField(Elastic.Clients.Elasticsearch.Field)">
+  ParentField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L776"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and a parent tile exists, save that tile address to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ParentField(Field? parentField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parentField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  ParentField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L798"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and a parent tile exists, save that tile address to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ParentField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; parentField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parentField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_ParentField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.ParentField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  ParentField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L787"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified and a parent tile exists, save that tile address to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor ParentField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; parentField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parentField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField(Elastic.Clients.Elasticsearch.Field)">
+  PrecisionField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L809"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified, save the tile precision (zoom) as an integer to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor PrecisionField(Field? precisionField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>precisionField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  PrecisionField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L831"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified, save the tile precision (zoom) as an integer to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor PrecisionField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; precisionField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>precisionField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_PrecisionField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.PrecisionField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  PrecisionField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L820"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If specified, save the tile precision (zoom) as an integer to this field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor PrecisionField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; precisionField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>precisionField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L904"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Tag_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Tag*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_Tag_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Tag(System.String)">
+  Tag(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the processor.
+Useful for debugging and metrics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor Tag(string? tag)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField(Elastic.Clients.Elasticsearch.Field)">
+  TargetField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L854"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the polygon shape to, by default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor TargetField(Field? targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  TargetField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L876"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the polygon shape to, by default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor TargetField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  TargetField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L865"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the polygon shape to, by default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor TargetField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetFormat_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetFormat*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TargetFormat_System_Nullable_Elastic_Clients_Elasticsearch_Ingest_GeoGridTargetFormat__" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TargetFormat(System.Nullable{Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat})">
+  TargetFormat(GeoGridTargetFormat?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L887"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Which format to save the generated polygon in.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor TargetFormat(GeoGridTargetFormat? targetFormat)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetFormat</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat.html">GeoGridTargetFormat</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TileType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TileType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor_TileType_Elastic_Clients_Elasticsearch_Ingest_GeoGridTileType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType)">
+  TileType(GeoGridTileType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.16.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/GeoGridProcessor.g.cs/#L898"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Three tile formats are understood: geohash, geotile and geohex.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoGridProcessorDescriptor TileType(GeoGridTileType tileType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tileType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.html">GeoGridTileType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
