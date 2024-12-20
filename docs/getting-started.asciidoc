@@ -27,16 +27,17 @@ Refer to the <<installation>> page to learn more.
 === Connecting
 
 You can connect to the Elastic Cloud using an API key and the Elasticsearch 
-endpoint. 
+cloud id. 
 
 [source,net]
 ----
 var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); 
 ----
 
-Your Elasticsearch endpoint can be found on the **My deployment** page of your 
+Your Elasticsearch cloud id can be found on the **My deployment** page of your 
 deployment:
 
+****** REPLACE IMAGE WITH CORRECTED ONE*****
 image::images/es-endpoint.jpg[alt="Finding Elasticsearch endpoint",align="center"]
 
 You can generate an API key on the **Management** page under Security.
