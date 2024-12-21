@@ -26,23 +26,21 @@ Refer to the <<installation>> page to learn more.
 [discrete]
 === Connecting
 
-You can connect to the Elastic Cloud using an API key and the Elasticsearch 
-cloud id. 
+You can connect to the Elastic Cloud using an API key and your Elasticsearch 
+Cloud ID. 
 
 [source,net]
 ----
 var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); 
 ----
 
-Your Elasticsearch cloud id can be found on the **My deployment** page of your 
-deployment:
+You can find your Elasticsearch Cloud ID on the deployment page: 
 
-****** REPLACE IMAGE WITH CORRECTED ONE*****
-image::images/es-endpoint.jpg[alt="Finding Elasticsearch endpoint",align="center"]
+image::images/es-cloudid.jpg[alt="Cloud ID on the deployment page",align="center"]
 
-You can generate an API key on the **Management** page under Security.
-
-image::images/create-api-key.png[alt="Create API key",align="center"]
+To generate an API key, use the
+https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html[Elasticsearch Create API key API]
+or https://www.elastic.co/guide/en/kibana/current/api-keys.html#create-api-key[Kibana Stack Management].
 
 For other connection options, refer to the <<connecting>> section.
 
