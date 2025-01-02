@@ -36,7 +36,9 @@ public sealed partial class FollowInfoRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves information about all follower indices, including parameters and status for each follower index
+/// Get follower information.
+/// Get information about all cross-cluster replication follower indices.
+/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
 /// </summary>
 public sealed partial class FollowInfoRequest : PlainRequest<FollowInfoRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class FollowInfoRequest : PlainRequest<FollowInfoRequestPa
 
 /// <summary>
 /// <para>
-/// Retrieves information about all follower indices, including parameters and status for each follower index
+/// Get follower information.
+/// Get information about all cross-cluster replication follower indices.
+/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
 /// </summary>
 public sealed partial class FollowInfoRequestDescriptor<TDocument> : RequestDescriptor<FollowInfoRequestDescriptor<TDocument>, FollowInfoRequestParameters>
@@ -92,7 +96,9 @@ public sealed partial class FollowInfoRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Retrieves information about all follower indices, including parameters and status for each follower index
+/// Get follower information.
+/// Get information about all cross-cluster replication follower indices.
+/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
 /// </summary>
 public sealed partial class FollowInfoRequestDescriptor : RequestDescriptor<FollowInfoRequestDescriptor, FollowInfoRequestParameters>

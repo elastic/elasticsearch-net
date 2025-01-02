@@ -41,9 +41,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(DeleteAutoFollowPatternRequest request)
@@ -54,9 +55,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(DeleteAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -66,9 +68,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(DeleteAutoFollowPatternRequestDescriptor descriptor)
@@ -79,9 +82,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
@@ -93,9 +97,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<DeleteAutoFollowPatternRequestDescriptor> configureRequest)
@@ -108,9 +113,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(DeleteAutoFollowPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -120,9 +126,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -133,9 +140,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Deletes auto-follow patterns.
+	/// Delete auto-follow patterns.
+	/// Delete a collection of cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -147,9 +155,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(FollowRequest request)
@@ -160,9 +170,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync(FollowRequest request, CancellationToken cancellationToken = default)
 	{
@@ -172,9 +184,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow<TDocument>(FollowRequestDescriptor<TDocument> descriptor)
@@ -185,9 +199,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -199,9 +215,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<FollowRequestDescriptor<TDocument>> configureRequest)
@@ -214,9 +232,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow<TDocument>()
@@ -228,9 +248,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow<TDocument>(Action<FollowRequestDescriptor<TDocument>> configureRequest)
@@ -243,9 +265,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(FollowRequestDescriptor descriptor)
@@ -256,9 +280,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index)
@@ -270,9 +296,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index, Action<FollowRequestDescriptor> configureRequest)
@@ -285,9 +313,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(FollowRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -297,9 +327,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -310,9 +342,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<FollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -324,9 +358,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -337,9 +373,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(Action<FollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -351,9 +389,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync(FollowRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -363,9 +403,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -376,9 +418,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new follower index configured to follow the referenced leader index.
+	/// Create a follower.
+	/// Create a cross-cluster replication follower index that follows a specific leader index.
+	/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<FollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -390,9 +434,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo(FollowInfoRequest request)
@@ -403,9 +449,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync(FollowInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -415,9 +463,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo<TDocument>(FollowInfoRequestDescriptor<TDocument> descriptor)
@@ -428,9 +478,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -442,9 +494,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowInfoRequestDescriptor<TDocument>> configureRequest)
@@ -457,9 +511,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo<TDocument>()
@@ -471,9 +527,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo<TDocument>(Action<FollowInfoRequestDescriptor<TDocument>> configureRequest)
@@ -486,9 +544,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo(FollowInfoRequestDescriptor descriptor)
@@ -499,9 +559,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices)
@@ -513,9 +575,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowInfoRequestDescriptor> configureRequest)
@@ -528,9 +592,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync<TDocument>(FollowInfoRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -540,9 +606,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -553,9 +621,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowInfoRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -567,9 +637,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -580,9 +652,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync<TDocument>(Action<FollowInfoRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -594,9 +668,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync(FollowInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -606,9 +682,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -619,9 +697,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves information about all follower indices, including parameters and status for each follower index
+	/// Get follower information.
+	/// Get information about all cross-cluster replication follower indices.
+	/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -633,9 +713,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats(FollowStatsRequest request)
@@ -646,9 +728,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync(FollowStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -658,9 +742,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats<TDocument>(FollowStatsRequestDescriptor<TDocument> descriptor)
@@ -671,9 +757,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -685,9 +773,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowStatsRequestDescriptor<TDocument>> configureRequest)
@@ -700,9 +790,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats<TDocument>()
@@ -714,9 +806,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats<TDocument>(Action<FollowStatsRequestDescriptor<TDocument>> configureRequest)
@@ -729,9 +823,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats(FollowStatsRequestDescriptor descriptor)
@@ -742,9 +838,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices)
@@ -756,9 +854,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowStatsRequestDescriptor> configureRequest)
@@ -771,9 +871,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync<TDocument>(FollowStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -783,9 +885,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -796,9 +900,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -810,9 +916,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -823,9 +931,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync<TDocument>(Action<FollowStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -837,9 +947,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync(FollowStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -849,9 +961,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -862,9 +976,11 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+	/// Get follower stats.
+	/// Get cross-cluster replication follower stats.
+	/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<FollowStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -876,9 +992,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(ForgetFollowerRequest request)
@@ -889,9 +1018,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync(ForgetFollowerRequest request, CancellationToken cancellationToken = default)
 	{
@@ -901,9 +1043,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower<TDocument>(ForgetFollowerRequestDescriptor<TDocument> descriptor)
@@ -914,9 +1069,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -928,9 +1096,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest)
@@ -943,9 +1124,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower<TDocument>()
@@ -957,9 +1151,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower<TDocument>(Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest)
@@ -972,9 +1179,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(ForgetFollowerRequestDescriptor descriptor)
@@ -985,9 +1205,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index)
@@ -999,9 +1232,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index, Action<ForgetFollowerRequestDescriptor> configureRequest)
@@ -1014,9 +1260,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(ForgetFollowerRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1026,9 +1285,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1039,9 +1311,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1053,9 +1338,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1066,9 +1364,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1080,9 +1391,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync(ForgetFollowerRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1092,9 +1416,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1105,9 +1442,22 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Removes the follower retention leases from the leader.
+	/// Forget a follower.
+	/// Remove the cross-cluster replication follower retention leases from the leader.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// A following index takes out retention leases on its leader index.
+	/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
+	/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
+	/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
+	/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
+	/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
+	/// </para>
+	/// <para>
+	/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
+	/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<ForgetFollowerRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1119,9 +1469,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(GetAutoFollowPatternRequest request)
@@ -1132,9 +1483,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(GetAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1144,9 +1496,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(GetAutoFollowPatternRequestDescriptor descriptor)
@@ -1157,9 +1510,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(Elastic.Clients.Elasticsearch.Name? name)
@@ -1171,9 +1525,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(Elastic.Clients.Elasticsearch.Name? name, Action<GetAutoFollowPatternRequestDescriptor> configureRequest)
@@ -1186,9 +1541,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern()
@@ -1200,9 +1556,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(Action<GetAutoFollowPatternRequestDescriptor> configureRequest)
@@ -1215,9 +1572,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(GetAutoFollowPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1227,9 +1585,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -1240,9 +1599,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1254,9 +1614,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(CancellationToken cancellationToken = default)
 	{
@@ -1267,9 +1628,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+	/// Get auto-follow patterns.
+	/// Get cross-cluster replication auto-follow patterns.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Action<GetAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1281,9 +1643,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseAutoFollowPatternResponse PauseAutoFollowPattern(PauseAutoFollowPatternRequest request)
@@ -1294,9 +1664,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(PauseAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1306,9 +1684,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseAutoFollowPatternResponse PauseAutoFollowPattern(PauseAutoFollowPatternRequestDescriptor descriptor)
@@ -1319,9 +1705,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
@@ -1333,9 +1727,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<PauseAutoFollowPatternRequestDescriptor> configureRequest)
@@ -1348,9 +1750,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(PauseAutoFollowPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1360,9 +1770,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -1373,9 +1791,17 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses an auto-follow pattern
+	/// Pause an auto-follow pattern.
+	/// Pause a cross-cluster replication auto-follow pattern.
+	/// When the API returns, the auto-follow pattern is inactive.
+	/// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// You can resume auto-following with the resume auto-follow pattern API.
+	/// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
+	/// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<PauseAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1387,9 +1813,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(PauseFollowRequest request)
@@ -1400,9 +1830,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync(PauseFollowRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1412,9 +1846,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow<TDocument>(PauseFollowRequestDescriptor<TDocument> descriptor)
@@ -1425,9 +1863,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1439,9 +1881,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<PauseFollowRequestDescriptor<TDocument>> configureRequest)
@@ -1454,9 +1900,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow<TDocument>()
@@ -1468,9 +1918,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow<TDocument>(Action<PauseFollowRequestDescriptor<TDocument>> configureRequest)
@@ -1483,9 +1937,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(PauseFollowRequestDescriptor descriptor)
@@ -1496,9 +1954,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1510,9 +1972,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<PauseFollowRequestDescriptor> configureRequest)
@@ -1525,9 +1991,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(PauseFollowRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1537,9 +2007,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1550,9 +2024,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<PauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1564,9 +2042,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1577,9 +2059,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(Action<PauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1591,9 +2077,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync(PauseFollowRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1603,9 +2093,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1616,9 +2110,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+	/// Pause a follower.
+	/// Pause a cross-cluster replication follower index.
+	/// The follower index will not fetch any additional operations from the leader index.
+	/// You can resume following with the resume follower API.
+	/// You can pause and resume a follower index to change the configuration of the following task.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<PauseFollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1630,9 +2128,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAutoFollowPatternResponse PutAutoFollowPattern(PutAutoFollowPatternRequest request)
@@ -1643,9 +2148,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(PutAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1655,9 +2167,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAutoFollowPatternResponse PutAutoFollowPattern(PutAutoFollowPatternRequestDescriptor descriptor)
@@ -1668,9 +2187,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
@@ -1682,9 +2208,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<PutAutoFollowPatternRequestDescriptor> configureRequest)
@@ -1697,9 +2230,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(PutAutoFollowPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1709,9 +2249,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -1722,9 +2269,16 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+	/// Create or update auto-follow patterns.
+	/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+	/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+	/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API can also be used to update auto-follow patterns.
+	/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1736,9 +2290,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(ResumeAutoFollowPatternRequest request)
@@ -1749,9 +2306,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(ResumeAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1761,9 +2321,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(ResumeAutoFollowPatternRequestDescriptor descriptor)
@@ -1774,9 +2337,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
@@ -1788,9 +2354,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, Action<ResumeAutoFollowPatternRequestDescriptor> configureRequest)
@@ -1803,9 +2372,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(ResumeAutoFollowPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1815,9 +2387,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -1828,9 +2403,12 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes an auto-follow pattern that has been paused
+	/// Resume an auto-follow pattern.
+	/// Resume a cross-cluster replication auto-follow pattern that was paused.
+	/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+	/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, Action<ResumeAutoFollowPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1842,9 +2420,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(ResumeFollowRequest request)
@@ -1855,9 +2437,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync(ResumeFollowRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1867,9 +2453,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow<TDocument>(ResumeFollowRequestDescriptor<TDocument> descriptor)
@@ -1880,9 +2470,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1894,9 +2488,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest)
@@ -1909,9 +2507,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow<TDocument>()
@@ -1923,9 +2525,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow<TDocument>(Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest)
@@ -1938,9 +2544,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(ResumeFollowRequestDescriptor descriptor)
@@ -1951,9 +2561,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1965,9 +2579,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index, Action<ResumeFollowRequestDescriptor> configureRequest)
@@ -1980,9 +2598,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(ResumeFollowRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1992,9 +2614,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -2005,9 +2631,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2019,9 +2649,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -2032,9 +2666,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2046,9 +2684,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync(ResumeFollowRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2058,9 +2700,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -2071,9 +2717,13 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Resumes a follower index that has been paused
+	/// Resume a follower.
+	/// Resume a cross-cluster replication follower index that was paused.
+	/// The follower index could have been paused with the pause follower API.
+	/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+	/// When this API returns, the follower index will resume fetching operations from the leader index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<ResumeFollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2085,9 +2735,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CcrStatsResponse Stats(CcrStatsRequest request)
@@ -2098,9 +2749,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CcrStatsResponse> StatsAsync(CcrStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2110,9 +2762,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CcrStatsResponse Stats(CcrStatsRequestDescriptor descriptor)
@@ -2123,9 +2776,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CcrStatsResponse Stats()
@@ -2137,9 +2791,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CcrStatsResponse Stats(Action<CcrStatsRequestDescriptor> configureRequest)
@@ -2152,9 +2807,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CcrStatsResponse> StatsAsync(CcrStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2164,9 +2820,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CcrStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -2177,9 +2834,10 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Gets all stats related to cross-cluster replication.
+	/// Get cross-cluster replication stats.
+	/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CcrStatsResponse> StatsAsync(Action<CcrStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2191,9 +2849,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(UnfollowRequest request)
@@ -2204,9 +2868,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync(UnfollowRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2216,9 +2886,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow<TDocument>(UnfollowRequestDescriptor<TDocument> descriptor)
@@ -2229,9 +2905,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -2243,9 +2925,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<UnfollowRequestDescriptor<TDocument>> configureRequest)
@@ -2258,9 +2946,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow<TDocument>()
@@ -2272,9 +2966,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow<TDocument>(Action<UnfollowRequestDescriptor<TDocument>> configureRequest)
@@ -2287,9 +2987,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(UnfollowRequestDescriptor descriptor)
@@ -2300,9 +3006,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index)
@@ -2314,9 +3026,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index, Action<UnfollowRequestDescriptor> configureRequest)
@@ -2329,9 +3047,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(UnfollowRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2341,9 +3065,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -2354,9 +3084,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<UnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2368,9 +3104,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -2381,9 +3123,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(Action<UnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2395,9 +3143,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync(UnfollowRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2407,9 +3161,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -2420,9 +3180,15 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 
 	/// <summary>
 	/// <para>
-	/// Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// Unfollow an index.
+	/// Convert a cross-cluster replication follower index to a regular index.
+	/// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+	/// The follower index must be paused and closed before you call the unfollow API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<UnfollowRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

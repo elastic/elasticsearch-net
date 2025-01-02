@@ -95,8 +95,9 @@ public sealed partial class HotThreadsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-/// The output is plain text with a breakdown of each node’s top hot threads.
+/// Get the hot threads for nodes.
+/// Get a breakdown of the hot threads on each selected node in the cluster.
+/// The output is plain text with a breakdown of the top hot threads for each node.
 /// </para>
 /// </summary>
 public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestParameters>
@@ -188,8 +189,9 @@ public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestPa
 
 /// <summary>
 /// <para>
-/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-/// The output is plain text with a breakdown of each node’s top hot threads.
+/// Get the hot threads for nodes.
+/// Get a breakdown of the hot threads on each selected node in the cluster.
+/// The output is plain text with a breakdown of the top hot threads for each node.
 /// </para>
 /// </summary>
 public sealed partial class HotThreadsRequestDescriptor : RequestDescriptor<HotThreadsRequestDescriptor, HotThreadsRequestParameters>

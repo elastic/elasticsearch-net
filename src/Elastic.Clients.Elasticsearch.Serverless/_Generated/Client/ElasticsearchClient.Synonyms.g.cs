@@ -41,7 +41,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -53,7 +53,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -65,7 +65,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -78,7 +78,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -92,7 +92,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -104,7 +104,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -117,7 +117,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym set
+	/// Delete a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -131,7 +131,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym rule in a synonym set
+	/// Delete a synonym rule.
+	/// Delete a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -143,7 +144,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym rule in a synonym set
+	/// Delete a synonym rule.
+	/// Delete a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -155,7 +157,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym rule in a synonym set
+	/// Delete a synonym rule.
+	/// Delete a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -168,7 +171,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a synonym rule in a synonym set
+	/// Delete a synonym rule.
+	/// Delete a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -182,7 +186,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -194,7 +198,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -206,7 +210,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -219,7 +223,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -233,7 +237,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -245,7 +249,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -258,7 +262,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym set
+	/// Get a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -272,7 +276,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym rule from a synonym set
+	/// Get a synonym rule.
+	/// Get a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -284,7 +289,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym rule from a synonym set
+	/// Get a synonym rule.
+	/// Get a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -296,7 +302,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym rule from a synonym set
+	/// Get a synonym rule.
+	/// Get a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -309,7 +316,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a synonym rule from a synonym set
+	/// Get a synonym rule.
+	/// Get a synonym rule from a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -323,7 +331,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a summary of all defined synonym sets
+	/// Get all synonym sets.
+	/// Get a summary of all defined synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -335,7 +344,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a summary of all defined synonym sets
+	/// Get all synonym sets.
+	/// Get a summary of all defined synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -347,7 +357,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a summary of all defined synonym sets
+	/// Get all synonym sets.
+	/// Get a summary of all defined synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -360,7 +371,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieves a summary of all defined synonym sets
+	/// Get all synonym sets.
+	/// Get a summary of all defined synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -374,7 +386,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -386,7 +400,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -398,7 +414,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -411,7 +429,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -425,7 +445,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -437,7 +459,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -450,7 +474,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym set.
+	/// Create or update a synonym set.
+	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+	/// If you need to manage more synonym rules, you can create multiple synonym sets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -464,7 +490,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym rule in a synonym set
+	/// Create or update a synonym rule.
+	/// Create or update a synonym rule in a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -476,7 +503,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym rule in a synonym set
+	/// Create or update a synonym rule.
+	/// Create or update a synonym rule in a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -488,7 +516,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym rule in a synonym set
+	/// Create or update a synonym rule.
+	/// Create or update a synonym rule in a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -501,7 +530,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a synonym rule in a synonym set
+	/// Create or update a synonym rule.
+	/// Create or update a synonym rule in a synonym set.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

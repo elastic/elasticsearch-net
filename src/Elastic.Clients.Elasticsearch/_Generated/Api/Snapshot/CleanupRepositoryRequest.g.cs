@@ -49,7 +49,8 @@ public sealed partial class CleanupRepositoryRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+/// Clean up the snapshot repository.
+/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 /// </para>
 /// </summary>
 public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepositoryRequestParameters>
@@ -85,7 +86,8 @@ public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepos
 
 /// <summary>
 /// <para>
-/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+/// Clean up the snapshot repository.
+/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 /// </para>
 /// </summary>
 public sealed partial class CleanupRepositoryRequestDescriptor : RequestDescriptor<CleanupRepositoryRequestDescriptor, CleanupRepositoryRequestParameters>

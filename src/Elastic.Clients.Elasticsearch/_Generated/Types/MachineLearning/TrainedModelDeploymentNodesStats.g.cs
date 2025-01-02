@@ -35,7 +35,17 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("average_inference_time_ms")]
-	public double AverageInferenceTimeMs { get; init; }
+	public double? AverageInferenceTimeMs { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The average time for each inference call to complete on this node, excluding cache
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("average_inference_time_ms_excluding_cache_hits")]
+	public double? AverageInferenceTimeMsExcludingCacheHits { get; init; }
+	[JsonInclude, JsonPropertyName("average_inference_time_ms_last_minute")]
+	public double? AverageInferenceTimeMsLastMinute { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -43,7 +53,11 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error_count")]
-	public int ErrorCount { get; init; }
+	public int? ErrorCount { get; init; }
+	[JsonInclude, JsonPropertyName("inference_cache_hit_count")]
+	public long? InferenceCacheHitCount { get; init; }
+	[JsonInclude, JsonPropertyName("inference_cache_hit_count_last_minute")]
+	public long? InferenceCacheHitCountLastMinute { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -51,7 +65,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_count")]
-	public int InferenceCount { get; init; }
+	public long? InferenceCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -59,7 +73,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("last_access")]
-	public long LastAccess { get; init; }
+	public long? LastAccess { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -67,7 +81,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNode Node { get; init; }
+	public KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? Node { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -75,7 +89,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
-	public int NumberOfAllocations { get; init; }
+	public int? NumberOfAllocations { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -83,7 +97,9 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_pending_requests")]
-	public int NumberOfPendingRequests { get; init; }
+	public int? NumberOfPendingRequests { get; init; }
+	[JsonInclude, JsonPropertyName("peak_throughput_per_minute")]
+	public long PeakThroughputPerMinute { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -91,7 +107,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rejection_execution_count")]
-	public int RejectionExecutionCount { get; init; }
+	public int? RejectionExecutionCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -107,7 +123,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("start_time")]
-	public long StartTime { get; init; }
+	public long? StartTime { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -115,7 +131,9 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("threads_per_allocation")]
-	public int ThreadsPerAllocation { get; init; }
+	public int? ThreadsPerAllocation { get; init; }
+	[JsonInclude, JsonPropertyName("throughput_last_minute")]
+	public int ThroughputLastMinute { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -123,5 +141,5 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout_count")]
-	public int TimeoutCount { get; init; }
+	public int? TimeoutCount { get; init; }
 }

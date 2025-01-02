@@ -21,22 +21,40 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <summary>
+/// <para>
+/// The configuration necessary to identify which IP geolocation provider to use to download a database, as well as any provider-specific configuration necessary for such downloading.
+/// At present, the only supported providers are <c>maxmind</c> and <c>ipinfo</c>, and the <c>maxmind</c> provider requires that an <c>account_id</c> (string) is configured.
+/// A provider (either <c>maxmind</c> or <c>ipinfo</c>) must be specified. The web and local providers can be returned as read only configurations.
+/// </para>
+/// </summary>
+[JsonConverter(typeof(DatabaseConfigurationConverter))]
 public sealed partial class DatabaseConfiguration
 {
-	/// <summary>
-	/// <para>
-	/// The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
-	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("maxmind")]
-	public Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; init; }
+	internal DatabaseConfiguration(string variantName, object variant)
+	{
+		if (variantName is null)
+			throw new ArgumentNullException(nameof(variantName));
+		if (variant is null)
+			throw new ArgumentNullException(nameof(variant));
+		if (string.IsNullOrWhiteSpace(variantName))
+			throw new ArgumentException("Variant name must not be empty or whitespace.");
+		VariantName = variantName;
+		Variant = variant;
+	}
+
+	internal object Variant { get; }
+	internal string VariantName { get; }
+
+	public static DatabaseConfiguration Ipinfo(Elastic.Clients.Elasticsearch.Ingest.Ipinfo ipinfo) => new DatabaseConfiguration("ipinfo", ipinfo);
+	public static DatabaseConfiguration Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind) => new DatabaseConfiguration("maxmind", maxmind);
 
 	/// <summary>
 	/// <para>
@@ -44,5 +62,248 @@ public sealed partial class DatabaseConfiguration
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
+}
+
+internal sealed partial class DatabaseConfigurationConverter : JsonConverter<DatabaseConfiguration>
+{
+	public override DatabaseConfiguration Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+		{
+			throw new JsonException("Expected start token.");
+		}
+
+		object? variantValue = default;
+		string? variantNameValue = default;
+		Elastic.Clients.Elasticsearch.Name nameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "name")
+			{
+				nameValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "ipinfo")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "maxmind")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DatabaseConfiguration' from the response.");
+		}
+
+		var result = new DatabaseConfiguration(variantNameValue, variantValue);
+		result.Name = nameValue;
+		return result;
+	}
+
+	public override void Write(Utf8JsonWriter writer, DatabaseConfiguration value, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		if (value.Name is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, value.Name, options);
+		}
+
+		if (value.VariantName is not null && value.Variant is not null)
+		{
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "ipinfo":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo>(writer, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo)value.Variant, options);
+					break;
+				case "maxmind":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind>(writer, (Elastic.Clients.Elasticsearch.Ingest.Maxmind)value.Variant, options);
+					break;
+			}
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class DatabaseConfigurationDescriptor<TDocument> : SerializableDescriptor<DatabaseConfigurationDescriptor<TDocument>>
+{
+	internal DatabaseConfigurationDescriptor(Action<DatabaseConfigurationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public DatabaseConfigurationDescriptor() : base()
+	{
+	}
+
+	private bool ContainsVariant { get; set; }
+	private string ContainedVariantName { get; set; }
+	private object Variant { get; set; }
+	private Descriptor Descriptor { get; set; }
+
+	private DatabaseConfigurationDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private DatabaseConfigurationDescriptor<TDocument> Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The provider-assigned name of the IP geolocation database to download.
+	/// </para>
+	/// </summary>
+	public DatabaseConfigurationDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
+	public DatabaseConfigurationDescriptor<TDocument> Ipinfo(Elastic.Clients.Elasticsearch.Ingest.Ipinfo ipinfo) => Set(ipinfo, "ipinfo");
+	public DatabaseConfigurationDescriptor<TDocument> Ipinfo(Action<Elastic.Clients.Elasticsearch.Ingest.IpinfoDescriptor> configure) => Set(configure, "ipinfo");
+	public DatabaseConfigurationDescriptor<TDocument> Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind) => Set(maxmind, "maxmind");
+	public DatabaseConfigurationDescriptor<TDocument> Maxmind(Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> configure) => Set(configure, "maxmind");
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NameValue is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(ContainedVariantName))
+		{
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class DatabaseConfigurationDescriptor : SerializableDescriptor<DatabaseConfigurationDescriptor>
+{
+	internal DatabaseConfigurationDescriptor(Action<DatabaseConfigurationDescriptor> configure) => configure.Invoke(this);
+
+	public DatabaseConfigurationDescriptor() : base()
+	{
+	}
+
+	private bool ContainsVariant { get; set; }
+	private string ContainedVariantName { get; set; }
+	private object Variant { get; set; }
+	private Descriptor Descriptor { get; set; }
+
+	private DatabaseConfigurationDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private DatabaseConfigurationDescriptor Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The provider-assigned name of the IP geolocation database to download.
+	/// </para>
+	/// </summary>
+	public DatabaseConfigurationDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
+	public DatabaseConfigurationDescriptor Ipinfo(Elastic.Clients.Elasticsearch.Ingest.Ipinfo ipinfo) => Set(ipinfo, "ipinfo");
+	public DatabaseConfigurationDescriptor Ipinfo(Action<Elastic.Clients.Elasticsearch.Ingest.IpinfoDescriptor> configure) => Set(configure, "ipinfo");
+	public DatabaseConfigurationDescriptor Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind) => Set(maxmind, "maxmind");
+	public DatabaseConfigurationDescriptor Maxmind(Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> configure) => Set(configure, "maxmind");
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NameValue is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(ContainedVariantName))
+		{
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
+	}
 }

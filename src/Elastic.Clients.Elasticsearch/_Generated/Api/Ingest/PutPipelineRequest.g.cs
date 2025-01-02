@@ -56,7 +56,7 @@ public sealed partial class PutPipelineRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates an ingest pipeline.
+/// Create or update a pipeline.
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -150,7 +150,7 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 
 /// <summary>
 /// <para>
-/// Creates or updates an ingest pipeline.
+/// Create or update a pipeline.
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -415,7 +415,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Creates or updates an ingest pipeline.
+/// Create or update a pipeline.
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>

@@ -403,6 +403,8 @@ public enum FieldType
 	RankFeature,
 	[EnumMember(Value = "percolator")]
 	Percolator,
+	[EnumMember(Value = "passthrough")]
+	Passthrough,
 	[EnumMember(Value = "object")]
 	Object,
 	[EnumMember(Value = "none")]
@@ -504,6 +506,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.RankFeature;
 			case "percolator":
 				return FieldType.Percolator;
+			case "passthrough":
+				return FieldType.Passthrough;
 			case "object":
 				return FieldType.Object;
 			case "none":
@@ -617,6 +621,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Percolator:
 				writer.WriteStringValue("percolator");
+				return;
+			case FieldType.Passthrough:
+				writer.WriteStringValue("passthrough");
 				return;
 			case FieldType.Object:
 				writer.WriteStringValue("object");

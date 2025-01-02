@@ -52,6 +52,7 @@ public sealed partial class TokenizationConfig
 	internal string VariantName { get; }
 
 	public static TokenizationConfig Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert", nlpBertTokenizationConfig);
+	public static TokenizationConfig BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert_ja", nlpBertTokenizationConfig);
 	public static TokenizationConfig Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("mpnet", nlpBertTokenizationConfig);
 	public static TokenizationConfig Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfig("roberta", nlpRobertaTokenizationConfig);
 
@@ -100,6 +101,13 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 				continue;
 			}
 
+			if (propertyName == "bert_ja")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "mpnet")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
@@ -130,6 +138,9 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 			switch (value.VariantName)
 			{
 				case "bert":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
+					break;
+				case "bert_ja":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
 					break;
 				case "mpnet":
@@ -178,6 +189,8 @@ public sealed partial class TokenizationConfigDescriptor<TDocument> : Serializab
 
 	public TokenizationConfigDescriptor<TDocument> Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
 	public TokenizationConfigDescriptor<TDocument> Bert(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+	public TokenizationConfigDescriptor<TDocument> BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert_ja");
+	public TokenizationConfigDescriptor<TDocument> BertJa(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert_ja");
 	public TokenizationConfigDescriptor<TDocument> Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
 	public TokenizationConfigDescriptor<TDocument> Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 	public TokenizationConfigDescriptor<TDocument> Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
@@ -236,6 +249,8 @@ public sealed partial class TokenizationConfigDescriptor : SerializableDescripto
 
 	public TokenizationConfigDescriptor Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert");
 	public TokenizationConfigDescriptor Bert(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert");
+	public TokenizationConfigDescriptor BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "bert_ja");
+	public TokenizationConfigDescriptor BertJa(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "bert_ja");
 	public TokenizationConfigDescriptor Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => Set(nlpBertTokenizationConfig, "mpnet");
 	public TokenizationConfigDescriptor Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 	public TokenizationConfigDescriptor Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");

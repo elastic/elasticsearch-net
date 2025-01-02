@@ -36,7 +36,7 @@ public sealed partial class ClearCursorRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clears the SQL cursor
+/// Clear an SQL search cursor.
 /// </para>
 /// </summary>
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
@@ -60,7 +60,7 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 
 /// <summary>
 /// <para>
-/// Clears the SQL cursor
+/// Clear an SQL search cursor.
 /// </para>
 /// </summary>
 public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<ClearCursorRequestDescriptor, ClearCursorRequestParameters>

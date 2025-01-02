@@ -42,7 +42,9 @@ public sealed partial class TestGrokPatternRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Tests a Grok pattern on some text.
+/// Test a Grok pattern.
+/// Test a Grok pattern on one or more lines of text.
+/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 /// </para>
 /// </summary>
 public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatternRequestParameters>
@@ -82,7 +84,9 @@ public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatter
 
 /// <summary>
 /// <para>
-/// Tests a Grok pattern on some text.
+/// Test a Grok pattern.
+/// Test a Grok pattern on one or more lines of text.
+/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 /// </para>
 /// </summary>
 public sealed partial class TestGrokPatternRequestDescriptor : RequestDescriptor<TestGrokPatternRequestDescriptor, TestGrokPatternRequestParameters>

@@ -34,6 +34,14 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
+	/// If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+	/// If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
@@ -101,6 +109,15 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+	/// If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
 	/// <para>
@@ -191,6 +208,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 
 	internal override string OperationName => "open_point_in_time";
 
+	public OpenPointInTimeRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 	public OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
@@ -292,6 +310,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 
 	internal override string OperationName => "open_point_in_time";
 
+	public OpenPointInTimeRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 	public OpenPointInTimeRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);

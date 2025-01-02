@@ -126,6 +126,48 @@ internal sealed class ApiKeyGrantTypeConverter : JsonConverter<ApiKeyGrantType>
 	}
 }
 
+[JsonConverter(typeof(ApiKeyTypeConverter))]
+public enum ApiKeyType
+{
+	[EnumMember(Value = "rest")]
+	Rest,
+	[EnumMember(Value = "cross_cluster")]
+	CrossCluster
+}
+
+internal sealed class ApiKeyTypeConverter : JsonConverter<ApiKeyType>
+{
+	public override ApiKeyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "rest":
+				return ApiKeyType.Rest;
+			case "cross_cluster":
+				return ApiKeyType.CrossCluster;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ApiKeyType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ApiKeyType.Rest:
+				writer.WriteStringValue("rest");
+				return;
+			case ApiKeyType.CrossCluster:
+				writer.WriteStringValue("cross_cluster");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(EnumStructConverter<ClusterPrivilege>))]
 public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 {

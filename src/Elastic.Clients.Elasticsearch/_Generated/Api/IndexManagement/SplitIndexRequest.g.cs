@@ -59,8 +59,81 @@ public sealed partial class SplitIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Splits an existing index into a new index with more primary shards.
+/// Split an index.
+/// Split an index into a new index with more primary shards.
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Before you can split an index:
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The cluster health status must be green.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
+/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
+/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
+/// </para>
+/// <para>
+/// A split operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have fewer primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestParameters>
 {
@@ -122,8 +195,81 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 
 /// <summary>
 /// <para>
-/// Splits an existing index into a new index with more primary shards.
+/// Split an index.
+/// Split an index into a new index with more primary shards.
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Before you can split an index:
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The cluster health status must be green.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
+/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
+/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
+/// </para>
+/// <para>
+/// A split operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have fewer primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDescriptor<SplitIndexRequestDescriptor<TDocument>, SplitIndexRequestParameters>
 {
@@ -203,8 +349,81 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Splits an existing index into a new index with more primary shards.
+/// Split an index.
+/// Split an index into a new index with more primary shards.
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Before you can split an index:
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The cluster health status must be green.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
+/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
+/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
+/// </para>
+/// <para>
+/// A split operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have fewer primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
 {

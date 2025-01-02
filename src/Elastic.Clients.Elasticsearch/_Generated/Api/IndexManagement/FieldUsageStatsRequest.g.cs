@@ -91,7 +91,10 @@ public sealed partial class FieldUsageStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns field usage information for each shard and field of an index.
+/// Get field usage stats.
+/// Get field usage information for each shard and field of an index.
+/// Field usage statistics are automatically captured when queries are running on a cluster.
+/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
 /// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStatsRequestParameters>
@@ -174,7 +177,10 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 
 /// <summary>
 /// <para>
-/// Returns field usage information for each shard and field of an index.
+/// Get field usage stats.
+/// Get field usage information for each shard and field of an index.
+/// Field usage statistics are automatically captured when queries are running on a cluster.
+/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
 /// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : RequestDescriptor<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsRequestParameters>
@@ -218,7 +224,10 @@ public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : Reques
 
 /// <summary>
 /// <para>
-/// Returns field usage information for each shard and field of an index.
+/// Get field usage stats.
+/// Get field usage information for each shard and field of an index.
+/// Field usage statistics are automatically captured when queries are running on a cluster.
+/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
 /// </para>
 /// </summary>
 public sealed partial class FieldUsageStatsRequestDescriptor : RequestDescriptor<FieldUsageStatsRequestDescriptor, FieldUsageStatsRequestParameters>

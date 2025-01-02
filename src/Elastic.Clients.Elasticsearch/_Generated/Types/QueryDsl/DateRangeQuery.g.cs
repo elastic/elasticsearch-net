@@ -54,12 +54,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 					continue;
 				}
 
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DateMath?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "gt")
 				{
 					variant.Gt = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DateMath?>(ref reader, options);
@@ -101,12 +95,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 					variant.TimeZone = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
-
-				if (property == "to")
-				{
-					variant.To = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DateMath?>(ref reader, options);
-					continue;
-				}
 			}
 		}
 
@@ -133,12 +121,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.From is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, value.From, options);
 		}
 
 		if (value.Gt is not null)
@@ -183,12 +165,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 			writer.WriteStringValue(value.TimeZone);
 		}
 
-		if (value.To is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, value.To, options);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -221,7 +197,6 @@ public sealed partial class DateRangeQuery
 	/// </para>
 	/// </summary>
 	public string? Format { get; set; }
-	public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -265,7 +240,6 @@ public sealed partial class DateRangeQuery
 	/// </para>
 	/// </summary>
 	public string? TimeZone { get; set; }
-	public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
 }
 
 public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptor<DateRangeQueryDescriptor<TDocument>>
@@ -279,7 +253,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DateMath? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? GtValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
@@ -287,7 +260,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -329,12 +301,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	public DateRangeQueryDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public DateRangeQueryDescriptor<TDocument> From(Elastic.Clients.Elasticsearch.DateMath? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -410,12 +376,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public DateRangeQueryDescriptor<TDocument> To(Elastic.Clients.Elasticsearch.DateMath? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -433,12 +393,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
 		if (GtValue is not null)
@@ -483,12 +437,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(TimeZoneValue);
 		}
 
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -505,7 +453,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DateMath? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? GtValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
@@ -513,7 +460,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -555,12 +501,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	public DateRangeQueryDescriptor Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public DateRangeQueryDescriptor From(Elastic.Clients.Elasticsearch.DateMath? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -636,12 +576,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
-	public DateRangeQueryDescriptor To(Elastic.Clients.Elasticsearch.DateMath? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -659,12 +593,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
 		if (GtValue is not null)
@@ -707,12 +635,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		{
 			writer.WritePropertyName("time_zone");
 			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
 		}
 
 		writer.WriteEndObject();

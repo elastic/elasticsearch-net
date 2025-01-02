@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 /// <para>
 /// Mean Reciprocal Rank
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
@@ -56,7 +56,7 @@ public sealed partial class RankEvalMetricMeanReciprocalRank
 /// <para>
 /// Mean Reciprocal Rank
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricMeanReciprocalRankDescriptor>
 {

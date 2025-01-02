@@ -36,7 +36,9 @@ public sealed partial class PutSynonymRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates a synonym set.
+/// Create or update a synonym set.
+/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+/// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestParameters>
@@ -65,7 +67,9 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 
 /// <summary>
 /// <para>
-/// Creates or updates a synonym set.
+/// Create or update a synonym set.
+/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+/// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDescriptor<PutSynonymRequestDescriptor<TDocument>, PutSynonymRequestParameters>
@@ -174,7 +178,9 @@ public sealed partial class PutSynonymRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Creates or updates a synonym set.
+/// Create or update a synonym set.
+/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+/// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class PutSynonymRequestDescriptor : RequestDescriptor<PutSynonymRequestDescriptor, PutSynonymRequestParameters>
