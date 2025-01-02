@@ -16,3 +16,12 @@ jobs:
       release_tag: ${{ github.event.release.tag_name }}
       release_body: ${{ github.event.release.body }}
     secrets: 'inherit'
+
+  docfx:
+    name: 'DocFx'
+    if: ${{ !startsWith(github.event.release.tag_name, 'serverless-') }}
+    uses: ./.github/workflows/docfx.yml
+    with:
+      name: ${{ github.event.release.tag_name }}
+      target_branch: 'refdoc'
+    secrets: 'inherit'

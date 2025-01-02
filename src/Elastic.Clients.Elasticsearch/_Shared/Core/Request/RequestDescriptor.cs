@@ -59,8 +59,9 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> :
 	/// </summary>
 	public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 	{
-		var rc = RequestConfig;
-		RequestConfig = configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
+		RequestConfig = configurationSelector?.Invoke(RequestConfig is null
+			? new RequestConfigurationDescriptor()
+			: new RequestConfigurationDescriptor(RequestConfig)) ?? RequestConfig;
 		return _descriptor;
 	}
 

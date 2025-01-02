@@ -17,7 +17,7 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null,
-			string contentType = RequestData.DefaultContentType,
+			string contentType = BoundConfiguration.DefaultContentType,
 			Exception exception = null
 		)
 		{
@@ -29,7 +29,7 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null,
-			string contentType = RequestData.DefaultContentType,
+			string contentType = BoundConfiguration.DefaultContentType,
 			Exception exception = null,
 			Serializer serializer = null
 		)
@@ -46,7 +46,7 @@ namespace Tests.Core.Client
 					break;
 				default:
 					{
-						responseBytes = contentType == RequestData.DefaultContentType
+						responseBytes = contentType == BoundConfiguration.DefaultContentType
 							? serializer.SerializeToBytes(response,
 								TestClient.Default.ElasticsearchClientSettings.MemoryStreamFactory)
 							: Encoding.UTF8.GetBytes(response.ToString());

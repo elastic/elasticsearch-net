@@ -292,13 +292,43 @@ As a last resort, the low-level client `Elastic.Transport` can be used to create
 
 [source,csharp]
 ----
-var body = """
-	{
-	  "name": "my-api-key",
-	  "expiration": "1d",   
-	  "...": "..."
-	}
-	""";
+public class MyRequestParameters : RequestParameters
+{
+    public bool Pretty
+    {
+        get => Q<bool>("pretty");
+        init => Q("pretty", value);
+    }
+}
 
-var response = await client.Transport.RequestAsync<StringResponse>(HttpMethod.POST, "/_security/api_key", PostData.String(body));
+// ...
+
+var body = """
+           {
+             "name": "my-api-key",
+             "expiration": "1d",   
+             "...": "..."
+           }
+           """;
+
+MyRequestParameters requestParameters = new()
+{
+    Pretty = true
+};
+
+var pathAndQuery = requestParameters.CreatePathWithQueryStrings("/_security/api_key",
+    client.ElasticsearchClientSettings);
+var endpointPath = new EndpointPath(Elastic.Transport.HttpMethod.POST, pathAndQuery);
+
+// Or, if the path does not contain query parameters: 
+// new EndpointPath(Elastic.Transport.HttpMethod.POST, "my_path")
+
+var response = await client.Transport
+    .RequestAsync<StringResponse>(
+        endpointPath,
+        PostData.String(body),
+        null,
+        null,
+        cancellationToken: default)
+    .ConfigureAwait(false);
 ----

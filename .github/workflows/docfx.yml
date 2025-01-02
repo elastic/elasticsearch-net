@@ -1,0 +1,74 @@
+name: 'CD'
+
+on:
+  workflow_call:
+    inputs:
+      target_branch:
+        description: 'The target branch to which the documentation should be pushed to.'
+        type: 'string'
+        required: true
+      name:
+        description: 'The name to use for the documentation folder (defaults to the name of the current ref)'
+        type: 'string'
+        required: false
+        default: ${{ github.ref_name }}
+
+concurrency:
+  group: 'docfx'
+  cancel-in-progress: false
+
+env:
+  # Configuration
+  GLOBAL_JSON_FILE: 'global.json'
+  CACHE_PATTERNS: '["**/*.[cf]sproj*", "**/*.Build.props"]'
+  # .NET SDK related environment variables
+  DOTNET_NOLOGO: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: 0
+
+jobs:
+  docfx:
+    name: 'DocFx'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: '.NET Setup'
+        uses: 'actions/setup-dotnet@v4'
+        with:
+          global-json-file: '${{ github.workspace }}/${{ env.GLOBAL_JSON_FILE }}'
+
+      - name: 'DocFX Setup'
+        run: |-
+          dotnet tool update -g docfx
+
+      # TODO: Remove 'stack'
+      - name: '.NET Cache Packages'
+        uses: 'actions/cache@v4'
+        with:
+          path: '~/.nuget/packages'
+          key: '${{ runner.os }}-nuget-stack-${{ hashFiles(fromJson(env.CACHE_PATTERNS)) }}'
+          restore-keys: '${{ runner.os }}-nuget-stack-'
+
+      - name: 'DocFx Build'
+        working-directory: 'docfx'
+        run: |-
+          docfx docfx.json
+          mv ./_site ./../..
+
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+        with:
+          ref: ${{ inputs.target_branch }}
+
+      - name: 'Commit'
+        run: |-
+          rm -r "./${{ inputs.name }}" || true
+          mv ../_site "./${{ inputs.name }}"
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git add -A
+          git commit -am "Add ${{ inputs.name }}"
+          git push
