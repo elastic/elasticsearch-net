@@ -41,8 +41,26 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Provides general information about the installed X-Pack features.
+	/// Get information.
+	/// The information provided by the API includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Build information including the build number and timestamp.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// License information about the currently installed license.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Feature information for the features that are currently enabled and available under the current license.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequest request, CancellationToken cancellationToken = default)
@@ -53,8 +71,26 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Provides general information about the installed X-Pack features.
+	/// Get information.
+	/// The information provided by the API includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Build information including the build number and timestamp.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// License information about the currently installed license.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Feature information for the features that are currently enabled and available under the current license.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -65,8 +101,26 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Provides general information about the installed X-Pack features.
+	/// Get information.
+	/// The information provided by the API includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Build information including the build number and timestamp.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// License information about the currently installed license.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Feature information for the features that are currently enabled and available under the current license.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
@@ -78,8 +132,26 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Provides general information about the installed X-Pack features.
+	/// Get information.
+	/// The information provided by the API includes:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Build information including the build number and timestamp.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// License information about the currently installed license.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Feature information for the features that are currently enabled and available under the current license.
+	/// </para>
+	/// </item>
+	/// </list>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -92,7 +164,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// Get usage information.
+	/// Get information about the features that are currently enabled and available under the current license.
+	/// The API also provides some usage statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -104,7 +178,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// Get usage information.
+	/// Get information about the features that are currently enabled and available under the current license.
+	/// The API also provides some usage statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -116,7 +192,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// Get usage information.
+	/// Get information about the features that are currently enabled and available under the current license.
+	/// The API also provides some usage statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -129,7 +207,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+	/// Get usage information.
+	/// Get information about the features that are currently enabled and available under the current license.
+	/// The API also provides some usage statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

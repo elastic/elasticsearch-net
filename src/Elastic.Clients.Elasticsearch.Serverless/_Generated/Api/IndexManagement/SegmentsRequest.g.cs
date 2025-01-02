@@ -60,8 +60,9 @@ public sealed partial class SegmentsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream’s backing indices.
+/// Get index segments.
+/// Get low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParameters>
@@ -113,8 +114,9 @@ public sealed partial class SegmentsRequest : PlainRequest<SegmentsRequestParame
 
 /// <summary>
 /// <para>
-/// Returns low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream’s backing indices.
+/// Get index segments.
+/// Get low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescriptor<SegmentsRequestDescriptor<TDocument>, SegmentsRequestParameters>
@@ -154,8 +156,9 @@ public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Returns low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream’s backing indices.
+/// Get index segments.
+/// Get low-level information about the Lucene segments in index shards.
+/// For data streams, the API returns information about the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class SegmentsRequestDescriptor : RequestDescriptor<SegmentsRequestDescriptor, SegmentsRequestParameters>

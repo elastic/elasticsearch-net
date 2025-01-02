@@ -66,7 +66,8 @@ public sealed partial class GetAsyncRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// Get async SQL search results.
+/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParameters>
@@ -121,7 +122,8 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// Get async SQL search results.
+/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncRequestDescriptor<TDocument>, GetAsyncRequestParameters>
@@ -158,7 +160,8 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// Get async SQL search results.
+/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 /// </para>
 /// </summary>
 public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsyncRequestDescriptor, GetAsyncRequestParameters>

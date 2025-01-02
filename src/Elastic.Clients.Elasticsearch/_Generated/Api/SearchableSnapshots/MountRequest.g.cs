@@ -56,7 +56,10 @@ public sealed partial class MountRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Mount a snapshot as a searchable index.
+/// Mount a snapshot.
+/// Mount a snapshot as a searchable snapshot index.
+/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
 public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
@@ -108,7 +111,10 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 
 /// <summary>
 /// <para>
-/// Mount a snapshot as a searchable index.
+/// Mount a snapshot.
+/// Mount a snapshot as a searchable snapshot index.
+/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
 public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequestDescriptor, MountRequestParameters>

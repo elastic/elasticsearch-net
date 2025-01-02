@@ -36,7 +36,8 @@ public sealed partial class CcrStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Gets all stats related to cross-cluster replication.
+/// Get cross-cluster replication stats.
+/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 /// </para>
 /// </summary>
 public sealed partial class CcrStatsRequest : PlainRequest<CcrStatsRequestParameters>
@@ -52,7 +53,8 @@ public sealed partial class CcrStatsRequest : PlainRequest<CcrStatsRequestParame
 
 /// <summary>
 /// <para>
-/// Gets all stats related to cross-cluster replication.
+/// Get cross-cluster replication stats.
+/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
 /// </para>
 /// </summary>
 public sealed partial class CcrStatsRequestDescriptor : RequestDescriptor<CcrStatsRequestDescriptor, CcrStatsRequestParameters>

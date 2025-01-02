@@ -53,7 +53,7 @@ public sealed partial class DatafeedStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNode? Node { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -78,5 +78,5 @@ public sealed partial class DatafeedStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timing_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats TimingStats { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats? TimingStats { get; init; }
 }

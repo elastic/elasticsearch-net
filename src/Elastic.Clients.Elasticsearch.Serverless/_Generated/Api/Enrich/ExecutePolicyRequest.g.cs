@@ -42,7 +42,8 @@ public sealed partial class ExecutePolicyRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates the enrich index for an existing enrich policy.
+/// Run an enrich policy.
+/// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>
 public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyRequestParameters>
@@ -70,7 +71,8 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 
 /// <summary>
 /// <para>
-/// Creates the enrich index for an existing enrich policy.
+/// Run an enrich policy.
+/// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>
 public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<ExecutePolicyRequestDescriptor, ExecutePolicyRequestParameters>

@@ -36,7 +36,13 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves the configuration, stats, and status of rollup jobs.
+/// Get rollup job information.
+/// Get the configuration, stats, and status of rollup jobs.
+/// </para>
+/// <para>
+/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 /// </para>
 /// </summary>
 public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
@@ -60,7 +66,13 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 
 /// <summary>
 /// <para>
-/// Retrieves the configuration, stats, and status of rollup jobs.
+/// Get rollup job information.
+/// Get the configuration, stats, and status of rollup jobs.
+/// </para>
+/// <para>
+/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 /// </para>
 /// </summary>
 public sealed partial class GetJobsRequestDescriptor<TDocument> : RequestDescriptor<GetJobsRequestDescriptor<TDocument>, GetJobsRequestParameters>
@@ -96,7 +108,13 @@ public sealed partial class GetJobsRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// Retrieves the configuration, stats, and status of rollup jobs.
+/// Get rollup job information.
+/// Get the configuration, stats, and status of rollup jobs.
+/// </para>
+/// <para>
+/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 /// </para>
 /// </summary>
 public sealed partial class GetJobsRequestDescriptor : RequestDescriptor<GetJobsRequestDescriptor, GetJobsRequestParameters>

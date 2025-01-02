@@ -49,8 +49,26 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Provides general information about the installed X-Pack features.
+/// Get information.
+/// The information provided by the API includes:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Build information including the build number and timestamp.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// License information about the currently installed license.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Feature information for the features that are currently enabled and available under the current license.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestParameters>
 {
@@ -81,8 +99,26 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 
 /// <summary>
 /// <para>
-/// Provides general information about the installed X-Pack features.
+/// Get information.
+/// The information provided by the API includes:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Build information including the build number and timestamp.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// License information about the currently installed license.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Feature information for the features that are currently enabled and available under the current license.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class XpackInfoRequestDescriptor : RequestDescriptor<XpackInfoRequestDescriptor, XpackInfoRequestParameters>
 {

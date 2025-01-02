@@ -50,7 +50,8 @@ public sealed partial class DeleteGeoipDatabaseRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Deletes a geoip database configuration.
+/// Delete GeoIP database configurations.
+/// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoipDatabaseRequestParameters>
@@ -87,7 +88,8 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 
 /// <summary>
 /// <para>
-/// Deletes a geoip database configuration.
+/// Delete GeoIP database configurations.
+/// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class DeleteGeoipDatabaseRequestDescriptor<TDocument> : RequestDescriptor<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseRequestParameters>
@@ -122,7 +124,8 @@ public sealed partial class DeleteGeoipDatabaseRequestDescriptor<TDocument> : Re
 
 /// <summary>
 /// <para>
-/// Deletes a geoip database configuration.
+/// Delete GeoIP database configurations.
+/// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class DeleteGeoipDatabaseRequestDescriptor : RequestDescriptor<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseRequestParameters>

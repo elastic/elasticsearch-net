@@ -34,7 +34,7 @@ public sealed partial class ModelSnapshotUpgrade
 	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
 	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNode Node { get; init; }
+	public KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> Node { get; init; }
 	[JsonInclude, JsonPropertyName("snapshot_id")]
 	public string SnapshotId { get; init; }
 	[JsonInclude, JsonPropertyName("state")]

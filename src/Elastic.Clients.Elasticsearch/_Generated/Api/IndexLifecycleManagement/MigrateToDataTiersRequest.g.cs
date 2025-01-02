@@ -43,9 +43,35 @@ public sealed partial class MigrateToDataTiersRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Migrate to data tiers routing.
+/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+/// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.
+/// </para>
+/// <para>
+/// Migrating away from custom node attributes routing can be manually performed.
+/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Stop setting the custom hot attribute on new indices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Remove custom allocation settings from existing ILM policies.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// ILM must be stopped before performing the migration.
+/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 /// </para>
 /// </summary>
 public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDataTiersRequestParameters>
@@ -74,9 +100,35 @@ public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDa
 
 /// <summary>
 /// <para>
-/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Migrate to data tiers routing.
+/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+/// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.
+/// </para>
+/// <para>
+/// Migrating away from custom node attributes routing can be manually performed.
+/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Stop setting the custom hot attribute on new indices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Remove custom allocation settings from existing ILM policies.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// ILM must be stopped before performing the migration.
+/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 /// </para>
 /// </summary>
 public sealed partial class MigrateToDataTiersRequestDescriptor : RequestDescriptor<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersRequestParameters>

@@ -100,7 +100,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
@@ -114,7 +114,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -128,7 +128,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -143,7 +143,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -159,7 +159,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -174,7 +174,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -190,7 +190,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -204,7 +204,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -219,7 +219,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -235,7 +235,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
 	{
@@ -250,7 +250,7 @@ public partial class ElasticsearchClient
 	/// Performs multiple indexing or delete operations in a single API call.
 	/// This reduces overhead and can greatly increase indexing speed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -267,7 +267,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -282,7 +282,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -297,7 +297,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
 	{
@@ -313,7 +313,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -333,7 +333,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -351,7 +351,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -369,7 +369,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
 	{
@@ -388,7 +388,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -400,7 +400,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -412,7 +413,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -424,7 +426,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -437,7 +440,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -451,7 +455,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -464,7 +469,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -478,7 +484,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -490,7 +497,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -503,7 +511,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -517,7 +526,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -530,7 +540,8 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns number of documents matching a query.
+	/// Count search results.
+	/// Get the number of documents matching a query.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2467,7 +2478,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2479,7 +2512,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2491,7 +2546,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2504,7 +2581,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2518,7 +2617,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2531,7 +2652,29 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>
-	/// Returns the health of the cluster.
+	/// Get the cluster health.
+	/// Get a report with the health status of an Elasticsearch cluster.
+	/// The report contains a list of indicators that compose Elasticsearch functionality.
+	/// </para>
+	/// <para>
+	/// Each indicator has a health status of: green, unknown, yellow or red.
+	/// The indicator will provide an explanation and metadata describing the reason for its current health status.
+	/// </para>
+	/// <para>
+	/// The cluster’s status is controlled by the worst indicator status.
+	/// </para>
+	/// <para>
+	/// In the event that an indicator’s status is non-green, a list of impacts may be present in the indicator result which detail the functionalities that are negatively affected by the health issue.
+	/// Each impact carries with it a severity level, an area of the system that is affected, and a simple description of the impact on the system.
+	/// </para>
+	/// <para>
+	/// Some health indicators can determine the root cause of a health problem and prescribe a set of steps that can be performed in order to improve the health of the system.
+	/// The root cause and remediation steps are encapsulated in a diagnosis.
+	/// A diagnosis contains a cause detailing a root cause analysis, an action containing a brief description of the steps to take to fix the problem, the list of affected resources (if applicable), and a detailed step-by-step troubleshooting guide to fix the diagnosed problem.
+	/// </para>
+	/// <para>
+	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
+	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3348,7 +3491,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3372,7 +3515,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3396,7 +3539,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -3421,7 +3564,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3447,7 +3590,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -3472,7 +3615,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3498,7 +3641,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3522,7 +3665,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -3547,7 +3690,7 @@ public partial class ElasticsearchClient
 	/// A point in time must be opened explicitly before being used in search requests.
 	/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3560,7 +3703,7 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Ping the cluster.
-	/// Returns whether the cluster is running.
+	/// Get information about whether the cluster is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3573,7 +3716,7 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Ping the cluster.
-	/// Returns whether the cluster is running.
+	/// Get information about whether the cluster is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3586,7 +3729,7 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Ping the cluster.
-	/// Returns whether the cluster is running.
+	/// Get information about whether the cluster is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3600,7 +3743,7 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Ping the cluster.
-	/// Returns whether the cluster is running.
+	/// Get information about whether the cluster is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

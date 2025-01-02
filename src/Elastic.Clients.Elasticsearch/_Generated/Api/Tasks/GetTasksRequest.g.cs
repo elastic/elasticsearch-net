@@ -51,7 +51,7 @@ public sealed partial class GetTasksRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get task information.
-/// Returns information about the tasks currently executing in the cluster.
+/// Get information about a task currently running in the cluster.
 /// </para>
 /// </summary>
 public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParameters>
@@ -89,7 +89,7 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 /// <summary>
 /// <para>
 /// Get task information.
-/// Returns information about the tasks currently executing in the cluster.
+/// Get information about a task currently running in the cluster.
 /// </para>
 /// </summary>
 public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTasksRequestDescriptor, GetTasksRequestParameters>

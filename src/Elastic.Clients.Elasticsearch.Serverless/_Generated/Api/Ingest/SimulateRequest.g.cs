@@ -42,7 +42,9 @@ public sealed partial class SimulateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Executes an ingest pipeline against a set of provided documents.
+/// Simulate a pipeline.
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
 /// </summary>
 public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParameters>
@@ -92,7 +94,9 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 
 /// <summary>
 /// <para>
-/// Executes an ingest pipeline against a set of provided documents.
+/// Simulate a pipeline.
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
 /// </summary>
 public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescriptor<SimulateRequestDescriptor<TDocument>, SimulateRequestParameters>
@@ -259,7 +263,9 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Executes an ingest pipeline against a set of provided documents.
+/// Simulate a pipeline.
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
 /// </summary>
 public sealed partial class SimulateRequestDescriptor : RequestDescriptor<SimulateRequestDescriptor, SimulateRequestParameters>

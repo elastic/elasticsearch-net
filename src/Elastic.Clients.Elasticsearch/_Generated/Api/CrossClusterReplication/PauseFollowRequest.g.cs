@@ -36,7 +36,11 @@ public sealed partial class PauseFollowRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// Pause a follower.
+/// Pause a cross-cluster replication follower index.
+/// The follower index will not fetch any additional operations from the leader index.
+/// You can resume following with the resume follower API.
+/// You can pause and resume a follower index to change the configuration of the following task.
 /// </para>
 /// </summary>
 public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequestParameters>
@@ -56,7 +60,11 @@ public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequest
 
 /// <summary>
 /// <para>
-/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// Pause a follower.
+/// Pause a cross-cluster replication follower index.
+/// The follower index will not fetch any additional operations from the leader index.
+/// You can resume following with the resume follower API.
+/// You can pause and resume a follower index to change the configuration of the following task.
 /// </para>
 /// </summary>
 public sealed partial class PauseFollowRequestDescriptor<TDocument> : RequestDescriptor<PauseFollowRequestDescriptor<TDocument>, PauseFollowRequestParameters>
@@ -92,7 +100,11 @@ public sealed partial class PauseFollowRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Pauses a follower index. The follower index will not fetch any additional operations from the leader index.
+/// Pause a follower.
+/// Pause a cross-cluster replication follower index.
+/// The follower index will not fetch any additional operations from the leader index.
+/// You can resume following with the resume follower API.
+/// You can pause and resume a follower index to change the configuration of the following task.
 /// </para>
 /// </summary>
 public sealed partial class PauseFollowRequestDescriptor : RequestDescriptor<PauseFollowRequestDescriptor, PauseFollowRequestParameters>

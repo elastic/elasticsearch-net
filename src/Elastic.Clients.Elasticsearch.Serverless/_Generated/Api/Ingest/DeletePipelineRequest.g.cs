@@ -51,7 +51,8 @@ public sealed partial class DeletePipelineRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes one or more existing ingest pipeline.
+/// Delete pipelines.
+/// Delete one or more ingest pipelines.
 /// </para>
 /// </summary>
 public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineRequestParameters>
@@ -89,7 +90,8 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 
 /// <summary>
 /// <para>
-/// Deletes one or more existing ingest pipeline.
+/// Delete pipelines.
+/// Delete one or more ingest pipelines.
 /// </para>
 /// </summary>
 public sealed partial class DeletePipelineRequestDescriptor<TDocument> : RequestDescriptor<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineRequestParameters>
@@ -124,7 +126,8 @@ public sealed partial class DeletePipelineRequestDescriptor<TDocument> : Request
 
 /// <summary>
 /// <para>
-/// Deletes one or more existing ingest pipeline.
+/// Delete pipelines.
+/// Delete one or more ingest pipelines.
 /// </para>
 /// </summary>
 public sealed partial class DeletePipelineRequestDescriptor : RequestDescriptor<DeletePipelineRequestDescriptor, DeletePipelineRequestParameters>

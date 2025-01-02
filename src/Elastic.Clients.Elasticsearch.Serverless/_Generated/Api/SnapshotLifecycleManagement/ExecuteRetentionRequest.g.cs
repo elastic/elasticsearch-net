@@ -36,7 +36,9 @@ public sealed partial class ExecuteRetentionRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Deletes any snapshots that are expired according to the policy's retention rules.
+/// Run a retention policy.
+/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+/// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetentionRequestParameters>
@@ -52,7 +54,9 @@ public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetent
 
 /// <summary>
 /// <para>
-/// Deletes any snapshots that are expired according to the policy's retention rules.
+/// Run a retention policy.
+/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+/// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteRetentionRequestDescriptor : RequestDescriptor<ExecuteRetentionRequestDescriptor, ExecuteRetentionRequestParameters>

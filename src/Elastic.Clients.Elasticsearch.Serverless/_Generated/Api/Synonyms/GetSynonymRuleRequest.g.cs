@@ -36,7 +36,8 @@ public sealed partial class GetSynonymRuleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a synonym rule from a synonym set
+/// Get a synonym rule.
+/// Get a synonym rule from a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymRuleRequest : PlainRequest<GetSynonymRuleRequestParameters>
@@ -56,7 +57,8 @@ public sealed partial class GetSynonymRuleRequest : PlainRequest<GetSynonymRuleR
 
 /// <summary>
 /// <para>
-/// Retrieves a synonym rule from a synonym set
+/// Get a synonym rule.
+/// Get a synonym rule from a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymRuleRequestDescriptor : RequestDescriptor<GetSynonymRuleRequestDescriptor, GetSynonymRuleRequestParameters>

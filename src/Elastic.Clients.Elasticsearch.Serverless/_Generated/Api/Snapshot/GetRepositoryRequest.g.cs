@@ -49,7 +49,7 @@ public sealed partial class GetRepositoryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information about a repository.
+/// Get snapshot repository information.
 /// </para>
 /// </summary>
 public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryRequestParameters>
@@ -89,7 +89,7 @@ public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryReq
 
 /// <summary>
 /// <para>
-/// Returns information about a repository.
+/// Get snapshot repository information.
 /// </para>
 /// </summary>
 public sealed partial class GetRepositoryRequestDescriptor : RequestDescriptor<GetRepositoryRequestDescriptor, GetRepositoryRequestParameters>

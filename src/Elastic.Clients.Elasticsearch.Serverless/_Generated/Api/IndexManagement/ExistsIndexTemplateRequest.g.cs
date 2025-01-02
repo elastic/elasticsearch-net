@@ -42,7 +42,8 @@ public sealed partial class ExistsIndexTemplateRequestParameters : RequestParame
 
 /// <summary>
 /// <para>
-/// Returns information about whether a particular index template exists.
+/// Check index templates.
+/// Check whether index templates exist.
 /// </para>
 /// </summary>
 public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsIndexTemplateRequestParameters>
@@ -70,7 +71,8 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 
 /// <summary>
 /// <para>
-/// Returns information about whether a particular index template exists.
+/// Check index templates.
+/// Check whether index templates exist.
 /// </para>
 /// </summary>
 public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptor<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>

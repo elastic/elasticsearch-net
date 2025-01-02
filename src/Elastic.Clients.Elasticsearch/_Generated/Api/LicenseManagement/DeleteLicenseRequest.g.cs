@@ -36,7 +36,11 @@ public sealed partial class DeleteLicenseRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes licensing information for the cluster
+/// Delete the license.
+/// When the license expires, your subscription level reverts to Basic.
+/// </para>
+/// <para>
+/// If the operator privileges feature is enabled, only operator users can use this API.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLicenseRequest : PlainRequest<DeleteLicenseRequestParameters>
@@ -52,7 +56,11 @@ public sealed partial class DeleteLicenseRequest : PlainRequest<DeleteLicenseReq
 
 /// <summary>
 /// <para>
-/// Deletes licensing information for the cluster
+/// Delete the license.
+/// When the license expires, your subscription level reverts to Basic.
+/// </para>
+/// <para>
+/// If the operator privileges feature is enabled, only operator users can use this API.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLicenseRequestDescriptor : RequestDescriptor<DeleteLicenseRequestDescriptor, DeleteLicenseRequestParameters>

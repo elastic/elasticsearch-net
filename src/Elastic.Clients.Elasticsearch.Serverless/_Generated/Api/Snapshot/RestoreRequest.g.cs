@@ -49,7 +49,28 @@ public sealed partial class RestoreRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Restores a snapshot.
+/// Restore a snapshot.
+/// Restore a snapshot of a cluster or data streams and indices.
+/// </para>
+/// <para>
+/// You can restore a snapshot only to a running cluster with an elected master node.
+/// The snapshot repository must be registered and available to the cluster.
+/// The snapshot and cluster versions must be compatible.
+/// </para>
+/// <para>
+/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+/// </para>
+/// <para>
+/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+/// </para>
+/// <code>
+/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+/// </code>
+/// <para>
+/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+/// </para>
+/// <para>
+/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
 public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParameters>
@@ -105,7 +126,28 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 
 /// <summary>
 /// <para>
-/// Restores a snapshot.
+/// Restore a snapshot.
+/// Restore a snapshot of a cluster or data streams and indices.
+/// </para>
+/// <para>
+/// You can restore a snapshot only to a running cluster with an elected master node.
+/// The snapshot repository must be registered and available to the cluster.
+/// The snapshot and cluster versions must be compatible.
+/// </para>
+/// <para>
+/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+/// </para>
+/// <para>
+/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+/// </para>
+/// <code>
+/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+/// </code>
+/// <para>
+/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+/// </para>
+/// <para>
+/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
 public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescriptor<RestoreRequestDescriptor<TDocument>, RestoreRequestParameters>
@@ -309,7 +351,28 @@ public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// Restores a snapshot.
+/// Restore a snapshot.
+/// Restore a snapshot of a cluster or data streams and indices.
+/// </para>
+/// <para>
+/// You can restore a snapshot only to a running cluster with an elected master node.
+/// The snapshot repository must be registered and available to the cluster.
+/// The snapshot and cluster versions must be compatible.
+/// </para>
+/// <para>
+/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+/// </para>
+/// <para>
+/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+/// </para>
+/// <code>
+/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+/// </code>
+/// <para>
+/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+/// </para>
+/// <para>
+/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
 public sealed partial class RestoreRequestDescriptor : RequestDescriptor<RestoreRequestDescriptor, RestoreRequestParameters>

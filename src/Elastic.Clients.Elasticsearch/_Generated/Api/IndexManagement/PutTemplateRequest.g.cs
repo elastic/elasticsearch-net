@@ -54,6 +54,19 @@ public sealed partial class PutTemplateRequestParameters : RequestParameters
 /// <para>
 /// Create or update an index template.
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+/// </para>
+/// <para>
+/// Composable templates always take precedence over legacy templates.
+/// If no composable template matches a new index, matching legacy templates are applied according to their order.
+/// </para>
+/// <para>
+/// Index templates are only applied during index creation.
+/// Changes to index templates do not affect existing indices.
+/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
 /// </para>
 /// </summary>
 public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequestParameters>
@@ -151,6 +164,19 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 /// <para>
 /// Create or update an index template.
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+/// </para>
+/// <para>
+/// Composable templates always take precedence over legacy templates.
+/// If no composable template matches a new index, matching legacy templates are applied according to their order.
+/// </para>
+/// <para>
+/// Index templates are only applied during index creation.
+/// Changes to index templates do not affect existing indices.
+/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
 /// </para>
 /// </summary>
 public sealed partial class PutTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutTemplateRequestDescriptor<TDocument>, PutTemplateRequestParameters>
@@ -366,6 +392,19 @@ public sealed partial class PutTemplateRequestDescriptor<TDocument> : RequestDes
 /// <para>
 /// Create or update an index template.
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
+/// </para>
+/// <para>
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+/// </para>
+/// <para>
+/// Composable templates always take precedence over legacy templates.
+/// If no composable template matches a new index, matching legacy templates are applied according to their order.
+/// </para>
+/// <para>
+/// Index templates are only applied during index creation.
+/// Changes to index templates do not affect existing indices.
+/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
 /// </para>
 /// </summary>
 public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<PutTemplateRequestDescriptor, PutTemplateRequestParameters>

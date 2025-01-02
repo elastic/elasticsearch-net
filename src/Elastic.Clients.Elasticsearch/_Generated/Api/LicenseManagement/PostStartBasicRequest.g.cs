@@ -42,8 +42,18 @@ public sealed partial class PostStartBasicRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+/// Start a basic license.
+/// Start an indefinite basic license, which gives access to all the basic features.
+/// </para>
+/// <para>
+/// NOTE: In order to start a basic license, you must not currently have a basic license.
+/// </para>
+/// <para>
+/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+/// </para>
+/// <para>
+/// To check the status of your basic license, use the get basic license API.
 /// </para>
 /// </summary>
 public sealed partial class PostStartBasicRequest : PlainRequest<PostStartBasicRequestParameters>
@@ -67,8 +77,18 @@ public sealed partial class PostStartBasicRequest : PlainRequest<PostStartBasicR
 
 /// <summary>
 /// <para>
-/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
+/// Start a basic license.
+/// Start an indefinite basic license, which gives access to all the basic features.
+/// </para>
+/// <para>
+/// NOTE: In order to start a basic license, you must not currently have a basic license.
+/// </para>
+/// <para>
+/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+/// </para>
+/// <para>
+/// To check the status of your basic license, use the get basic license API.
 /// </para>
 /// </summary>
 public sealed partial class PostStartBasicRequestDescriptor : RequestDescriptor<PostStartBasicRequestDescriptor, PostStartBasicRequestParameters>

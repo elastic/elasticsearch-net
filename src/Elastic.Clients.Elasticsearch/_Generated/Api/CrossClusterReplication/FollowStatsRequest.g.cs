@@ -36,7 +36,9 @@ public sealed partial class FollowStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+/// Get follower stats.
+/// Get cross-cluster replication follower stats.
+/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
 /// </summary>
 public sealed partial class FollowStatsRequest : PlainRequest<FollowStatsRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class FollowStatsRequest : PlainRequest<FollowStatsRequest
 
 /// <summary>
 /// <para>
-/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+/// Get follower stats.
+/// Get cross-cluster replication follower stats.
+/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
 /// </summary>
 public sealed partial class FollowStatsRequestDescriptor<TDocument> : RequestDescriptor<FollowStatsRequestDescriptor<TDocument>, FollowStatsRequestParameters>
@@ -92,7 +96,9 @@ public sealed partial class FollowStatsRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.
+/// Get follower stats.
+/// Get cross-cluster replication follower stats.
+/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
 /// </summary>
 public sealed partial class FollowStatsRequestDescriptor : RequestDescriptor<FollowStatsRequestDescriptor, FollowStatsRequestParameters>

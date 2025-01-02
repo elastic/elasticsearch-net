@@ -54,12 +54,6 @@ internal sealed partial class UntypedRangeQueryConverter : JsonConverter<Untyped
 					continue;
 				}
 
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "gt")
 				{
 					variant.Gt = JsonSerializer.Deserialize<object?>(ref reader, options);
@@ -101,12 +95,6 @@ internal sealed partial class UntypedRangeQueryConverter : JsonConverter<Untyped
 					variant.TimeZone = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
-
-				if (property == "to")
-				{
-					variant.To = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
 			}
 		}
 
@@ -133,12 +121,6 @@ internal sealed partial class UntypedRangeQueryConverter : JsonConverter<Untyped
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.From is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, value.From, options);
 		}
 
 		if (value.Gt is not null)
@@ -183,12 +165,6 @@ internal sealed partial class UntypedRangeQueryConverter : JsonConverter<Untyped
 			writer.WriteStringValue(value.TimeZone);
 		}
 
-		if (value.To is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, value.To, options);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -221,7 +197,6 @@ public sealed partial class UntypedRangeQuery
 	/// </para>
 	/// </summary>
 	public string? Format { get; set; }
-	public object? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -265,7 +240,6 @@ public sealed partial class UntypedRangeQuery
 	/// </para>
 	/// </summary>
 	public string? TimeZone { get; set; }
-	public object? To { get; set; }
 }
 
 public sealed partial class UntypedRangeQueryDescriptor<TDocument> : SerializableDescriptor<UntypedRangeQueryDescriptor<TDocument>>
@@ -279,7 +253,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private object? FromValue { get; set; }
 	private object? GtValue { get; set; }
 	private object? GteValue { get; set; }
 	private object? LtValue { get; set; }
@@ -287,7 +260,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
-	private object? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -329,12 +301,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	public UntypedRangeQueryDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public UntypedRangeQueryDescriptor<TDocument> From(object? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -410,12 +376,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> To(object? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -433,12 +393,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
 		if (GtValue is not null)
@@ -483,12 +437,6 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 			writer.WriteStringValue(TimeZoneValue);
 		}
 
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -505,7 +453,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private object? FromValue { get; set; }
 	private object? GtValue { get; set; }
 	private object? GteValue { get; set; }
 	private object? LtValue { get; set; }
@@ -513,7 +460,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
-	private object? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -555,12 +501,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	public UntypedRangeQueryDescriptor Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public UntypedRangeQueryDescriptor From(object? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -636,12 +576,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public UntypedRangeQueryDescriptor To(object? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -659,12 +593,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
 		}
 
 		if (GtValue is not null)
@@ -707,12 +635,6 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 		{
 			writer.WritePropertyName("time_zone");
 			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
 		}
 
 		writer.WriteEndObject();

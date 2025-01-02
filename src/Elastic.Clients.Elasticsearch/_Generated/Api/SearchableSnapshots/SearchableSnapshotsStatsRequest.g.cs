@@ -42,7 +42,7 @@ public sealed partial class SearchableSnapshotsStatsRequestParameters : RequestP
 
 /// <summary>
 /// <para>
-/// Retrieve shard-level statistics about searchable snapshots.
+/// Get searchable snapshot statistics.
 /// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<SearchableSnapshotsStatsRequestParameters>
@@ -74,7 +74,7 @@ public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<Searc
 
 /// <summary>
 /// <para>
-/// Retrieve shard-level statistics about searchable snapshots.
+/// Get searchable snapshot statistics.
 /// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequestDescriptor<TDocument> : RequestDescriptor<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsRequestParameters>
@@ -112,7 +112,7 @@ public sealed partial class SearchableSnapshotsStatsRequestDescriptor<TDocument>
 
 /// <summary>
 /// <para>
-/// Retrieve shard-level statistics about searchable snapshots.
+/// Get searchable snapshot statistics.
 /// </para>
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequestDescriptor : RequestDescriptor<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsRequestParameters>

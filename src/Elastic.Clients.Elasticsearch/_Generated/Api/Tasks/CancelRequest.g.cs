@@ -63,7 +63,15 @@ public sealed partial class CancelRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Cancels a task, if it can be cancelled through an API.
+/// Cancel a task.
+/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+/// The get task information API will continue to list these cancelled tasks until they complete.
+/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
+/// </para>
+/// <para>
+/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
 /// </para>
 /// </summary>
 public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters>
@@ -119,7 +127,15 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 /// <summary>
 /// <para>
-/// Cancels a task, if it can be cancelled through an API.
+/// Cancel a task.
+/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+/// The get task information API will continue to list these cancelled tasks until they complete.
+/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
+/// </para>
+/// <para>
+/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
 /// </para>
 /// </summary>
 public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRequestDescriptor, CancelRequestParameters>

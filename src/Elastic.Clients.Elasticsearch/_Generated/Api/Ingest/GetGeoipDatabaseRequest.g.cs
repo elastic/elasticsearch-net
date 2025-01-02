@@ -43,7 +43,8 @@ public sealed partial class GetGeoipDatabaseRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Returns information about one or more geoip database configurations.
+/// Get GeoIP database configurations.
+/// Get information about one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatabaseRequestParameters>
@@ -76,7 +77,8 @@ public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatab
 
 /// <summary>
 /// <para>
-/// Returns information about one or more geoip database configurations.
+/// Get GeoIP database configurations.
+/// Get information about one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class GetGeoipDatabaseRequestDescriptor<TDocument> : RequestDescriptor<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseRequestParameters>
@@ -114,7 +116,8 @@ public sealed partial class GetGeoipDatabaseRequestDescriptor<TDocument> : Reque
 
 /// <summary>
 /// <para>
-/// Returns information about one or more geoip database configurations.
+/// Get GeoIP database configurations.
+/// Get information about one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
 public sealed partial class GetGeoipDatabaseRequestDescriptor : RequestDescriptor<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseRequestParameters>

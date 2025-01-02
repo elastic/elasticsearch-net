@@ -89,8 +89,9 @@ public sealed partial class ClearCacheRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clears the caches of one or more indices.
-/// For data streams, the API clears the caches of the stream’s backing indices.
+/// Clear the cache.
+/// Clear the cache of one or more indices.
+/// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestParameters>
@@ -175,8 +176,9 @@ public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestPa
 
 /// <summary>
 /// <para>
-/// Clears the caches of one or more indices.
-/// For data streams, the API clears the caches of the stream’s backing indices.
+/// Clear the cache.
+/// Clear the cache of one or more indices.
+/// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDescriptor<ClearCacheRequestDescriptor<TDocument>, ClearCacheRequestParameters>
@@ -220,8 +222,9 @@ public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Clears the caches of one or more indices.
-/// For data streams, the API clears the caches of the stream’s backing indices.
+/// Clear the cache.
+/// Clear the cache of one or more indices.
+/// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor : RequestDescriptor<ClearCacheRequestDescriptor, ClearCacheRequestParameters>
