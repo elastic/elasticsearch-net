@@ -36,7 +36,8 @@ public sealed partial class GetAutoFollowPatternRequestParameters : RequestParam
 
 /// <summary>
 /// <para>
-/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+/// Get auto-follow patterns.
+/// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
 public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFollowPatternRequestParameters>
@@ -60,7 +61,8 @@ public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFo
 
 /// <summary>
 /// <para>
-/// Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.
+/// Get auto-follow patterns.
+/// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
 public sealed partial class GetAutoFollowPatternRequestDescriptor : RequestDescriptor<GetAutoFollowPatternRequestDescriptor, GetAutoFollowPatternRequestParameters>

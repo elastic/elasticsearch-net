@@ -47,7 +47,8 @@ public sealed partial class DeleteVotingConfigExclusionsRequestParameters : Requ
 
 /// <summary>
 /// <para>
-/// Clears cluster voting config exclusions.
+/// Clear cluster voting config exclusions.
+/// Remove master-eligible nodes from the voting configuration exclusion list.
 /// </para>
 /// </summary>
 public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<DeleteVotingConfigExclusionsRequestParameters>
@@ -76,7 +77,8 @@ public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<D
 
 /// <summary>
 /// <para>
-/// Clears cluster voting config exclusions.
+/// Clear cluster voting config exclusions.
+/// Remove master-eligible nodes from the voting configuration exclusion list.
 /// </para>
 /// </summary>
 public sealed partial class DeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptor<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsRequestParameters>

@@ -49,7 +49,8 @@ public sealed partial class CreateSnapshotRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a snapshot in a repository.
+/// Create a snapshot.
+/// Take a snapshot of a cluster or of data streams and indices.
 /// </para>
 /// </summary>
 public sealed partial class CreateSnapshotRequest : PlainRequest<CreateSnapshotRequestParameters>
@@ -133,7 +134,8 @@ public sealed partial class CreateSnapshotRequest : PlainRequest<CreateSnapshotR
 
 /// <summary>
 /// <para>
-/// Creates a snapshot in a repository.
+/// Create a snapshot.
+/// Take a snapshot of a cluster or of data streams and indices.
 /// </para>
 /// </summary>
 public sealed partial class CreateSnapshotRequestDescriptor : RequestDescriptor<CreateSnapshotRequestDescriptor, CreateSnapshotRequestParameters>

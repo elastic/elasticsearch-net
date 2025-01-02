@@ -143,7 +143,8 @@ public sealed partial class CountRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns number of documents matching a query.
+/// Count search results.
+/// Get the number of documents matching a query.
 /// </para>
 /// </summary>
 public partial class CountRequest : PlainRequest<CountRequestParameters>
@@ -297,7 +298,8 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 
 /// <summary>
 /// <para>
-/// Returns number of documents matching a query.
+/// Count search results.
+/// Get the number of documents matching a query.
 /// </para>
 /// </summary>
 public sealed partial class CountRequestDescriptor<TDocument> : RequestDescriptor<CountRequestDescriptor<TDocument>, CountRequestParameters>
@@ -399,7 +401,8 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 
 /// <summary>
 /// <para>
-/// Returns number of documents matching a query.
+/// Count search results.
+/// Get the number of documents matching a query.
 /// </para>
 /// </summary>
 public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequestDescriptor, CountRequestParameters>

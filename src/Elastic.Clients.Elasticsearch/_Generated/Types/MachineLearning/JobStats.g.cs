@@ -87,7 +87,7 @@ public sealed partial class JobStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNode? Node { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; init; }
 
 	/// <summary>
 	/// <para>

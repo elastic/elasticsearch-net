@@ -56,7 +56,8 @@ public sealed partial class ClearCacheRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clear the cache of searchable snapshots.
+/// Clear the cache.
+/// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestParameters>
@@ -104,7 +105,8 @@ public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestPa
 
 /// <summary>
 /// <para>
-/// Clear the cache of searchable snapshots.
+/// Clear the cache.
+/// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDescriptor<ClearCacheRequestDescriptor<TDocument>, ClearCacheRequestParameters>
@@ -144,7 +146,8 @@ public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Clear the cache of searchable snapshots.
+/// Clear the cache.
+/// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
 public sealed partial class ClearCacheRequestDescriptor : RequestDescriptor<ClearCacheRequestDescriptor, ClearCacheRequestParameters>

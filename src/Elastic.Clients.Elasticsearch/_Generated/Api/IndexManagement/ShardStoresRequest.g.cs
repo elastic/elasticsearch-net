@@ -66,8 +66,37 @@ public sealed partial class ShardStoresRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// Get index shard stores.
+/// Get store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream's backing indices.
+/// </para>
+/// <para>
+/// The index shard stores API returns the following information:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The node on which each replica shard exists.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The allocation ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A unique ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Any errors encountered while opening the shard index or from an earlier failure.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 /// </para>
 /// </summary>
 public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequestParameters>
@@ -126,8 +155,37 @@ public sealed partial class ShardStoresRequest : PlainRequest<ShardStoresRequest
 
 /// <summary>
 /// <para>
-/// Retrieves store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// Get index shard stores.
+/// Get store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream's backing indices.
+/// </para>
+/// <para>
+/// The index shard stores API returns the following information:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The node on which each replica shard exists.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The allocation ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A unique ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Any errors encountered while opening the shard index or from an earlier failure.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 /// </para>
 /// </summary>
 public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDescriptor<ShardStoresRequestDescriptor<TDocument>, ShardStoresRequestParameters>
@@ -168,8 +226,37 @@ public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Retrieves store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream’s backing indices.
+/// Get index shard stores.
+/// Get store information about replica shards in one or more indices.
+/// For data streams, the API retrieves store information for the stream's backing indices.
+/// </para>
+/// <para>
+/// The index shard stores API returns the following information:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The node on which each replica shard exists.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The allocation ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A unique ID for each replica shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Any errors encountered while opening the shard index or from an earlier failure.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 /// </para>
 /// </summary>
 public sealed partial class ShardStoresRequestDescriptor : RequestDescriptor<ShardStoresRequestDescriptor, ShardStoresRequestParameters>

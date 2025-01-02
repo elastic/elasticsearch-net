@@ -48,12 +48,6 @@ internal sealed partial class TermRangeQueryConverter : JsonConverter<TermRangeQ
 					continue;
 				}
 
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "gt")
 				{
 					variant.Gt = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -89,12 +83,6 @@ internal sealed partial class TermRangeQueryConverter : JsonConverter<TermRangeQ
 					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
 					continue;
 				}
-
-				if (property == "to")
-				{
-					variant.To = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
 			}
 		}
 
@@ -115,12 +103,6 @@ internal sealed partial class TermRangeQueryConverter : JsonConverter<TermRangeQ
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.From))
-		{
-			writer.WritePropertyName("from");
-			writer.WriteStringValue(value.From);
 		}
 
 		if (!string.IsNullOrEmpty(value.Gt))
@@ -159,12 +141,6 @@ internal sealed partial class TermRangeQueryConverter : JsonConverter<TermRangeQ
 			JsonSerializer.Serialize(writer, value.Relation, options);
 		}
 
-		if (!string.IsNullOrEmpty(value.To))
-		{
-			writer.WritePropertyName("to");
-			writer.WriteStringValue(value.To);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -190,7 +166,6 @@ public sealed partial class TermRangeQuery
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	public string? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -227,7 +202,6 @@ public sealed partial class TermRangeQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
-	public string? To { get; set; }
 }
 
 public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDescriptor<TermRangeQueryDescriptor<TDocument>>
@@ -240,14 +214,12 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FromValue { get; set; }
 	private string? GtValue { get; set; }
 	private string? GteValue { get; set; }
 	private string? LtValue { get; set; }
 	private string? LteValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private string? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -278,12 +250,6 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 	public TermRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public TermRangeQueryDescriptor<TDocument> From(string? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -348,12 +314,6 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public TermRangeQueryDescriptor<TDocument> To(string? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -365,12 +325,6 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FromValue))
-		{
-			writer.WritePropertyName("from");
-			writer.WriteStringValue(FromValue);
 		}
 
 		if (!string.IsNullOrEmpty(GtValue))
@@ -409,12 +363,6 @@ public sealed partial class TermRangeQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, RelationValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(ToValue))
-		{
-			writer.WritePropertyName("to");
-			writer.WriteStringValue(ToValue);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -430,14 +378,12 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FromValue { get; set; }
 	private string? GtValue { get; set; }
 	private string? GteValue { get; set; }
 	private string? LtValue { get; set; }
 	private string? LteValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private string? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -468,12 +414,6 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 	public TermRangeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public TermRangeQueryDescriptor From(string? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -538,12 +478,6 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
-	public TermRangeQueryDescriptor To(string? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -555,12 +489,6 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FromValue))
-		{
-			writer.WritePropertyName("from");
-			writer.WriteStringValue(FromValue);
 		}
 
 		if (!string.IsNullOrEmpty(GtValue))
@@ -597,12 +525,6 @@ public sealed partial class TermRangeQueryDescriptor : SerializableDescriptor<Te
 		{
 			writer.WritePropertyName("relation");
 			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(ToValue))
-		{
-			writer.WritePropertyName("to");
-			writer.WriteStringValue(ToValue);
 		}
 
 		writer.WriteEndObject();

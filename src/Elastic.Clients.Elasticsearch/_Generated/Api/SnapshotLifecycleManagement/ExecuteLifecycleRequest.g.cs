@@ -36,7 +36,9 @@ public sealed partial class ExecuteLifecycleRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+/// Run a policy.
+/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteLifecycleRequest : PlainRequest<ExecuteLifecycleRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class ExecuteLifecycleRequest : PlainRequest<ExecuteLifecy
 
 /// <summary>
 /// <para>
-/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+/// Run a policy.
+/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 /// </para>
 /// </summary>
 public sealed partial class ExecuteLifecycleRequestDescriptor : RequestDescriptor<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleRequestParameters>

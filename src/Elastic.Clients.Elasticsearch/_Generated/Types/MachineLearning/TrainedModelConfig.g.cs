@@ -129,6 +129,8 @@ public sealed partial class TrainedModelConfig
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public string ModelId { get; init; }
+	[JsonInclude, JsonPropertyName("model_package")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig? ModelPackage { get; init; }
 	[JsonInclude, JsonPropertyName("model_size_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelSizeBytes { get; init; }
 

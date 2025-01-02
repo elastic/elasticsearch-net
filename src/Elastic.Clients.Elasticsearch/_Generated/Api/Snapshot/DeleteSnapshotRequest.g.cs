@@ -42,7 +42,7 @@ public sealed partial class DeleteSnapshotRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes one or more snapshots.
+/// Delete snapshots.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotRequestParameters>
@@ -70,7 +70,7 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 
 /// <summary>
 /// <para>
-/// Deletes one or more snapshots.
+/// Delete snapshots.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSnapshotRequestDescriptor : RequestDescriptor<DeleteSnapshotRequestDescriptor, DeleteSnapshotRequestParameters>

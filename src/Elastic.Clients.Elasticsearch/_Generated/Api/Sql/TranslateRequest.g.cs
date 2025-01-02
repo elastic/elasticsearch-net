@@ -36,7 +36,8 @@ public sealed partial class TranslateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequest : PlainRequest<TranslateRequestParameters>
@@ -84,7 +85,8 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescriptor<TranslateRequestDescriptor<TDocument>, TranslateRequestParameters>
@@ -211,7 +213,8 @@ public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
 /// </para>
 /// </summary>
 public sealed partial class TranslateRequestDescriptor : RequestDescriptor<TranslateRequestDescriptor, TranslateRequestParameters>

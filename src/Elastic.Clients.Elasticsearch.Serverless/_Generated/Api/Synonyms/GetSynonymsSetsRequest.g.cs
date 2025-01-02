@@ -49,7 +49,8 @@ public sealed partial class GetSynonymsSetsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a summary of all defined synonym sets
+/// Get all synonym sets.
+/// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSetsRequestParameters>
@@ -81,7 +82,8 @@ public sealed partial class GetSynonymsSetsRequest : PlainRequest<GetSynonymsSet
 
 /// <summary>
 /// <para>
-/// Retrieves a summary of all defined synonym sets
+/// Get all synonym sets.
+/// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>
 public sealed partial class GetSynonymsSetsRequestDescriptor : RequestDescriptor<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsRequestParameters>

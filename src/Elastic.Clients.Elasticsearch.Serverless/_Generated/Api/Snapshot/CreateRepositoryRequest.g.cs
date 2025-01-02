@@ -56,7 +56,10 @@ public sealed partial class CreateRepositoryRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Creates a repository.
+/// Create or update a snapshot repository.
+/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+/// To register a snapshot repository, the cluster's global metadata must be writeable.
+/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 /// </para>
 /// </summary>
 public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>, ISelfSerializable
@@ -107,7 +110,10 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 
 /// <summary>
 /// <para>
-/// Creates a repository.
+/// Create or update a snapshot repository.
+/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+/// To register a snapshot repository, the cluster's global metadata must be writeable.
+/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 /// </para>
 /// </summary>
 public sealed partial class CreateRepositoryRequestDescriptor : RequestDescriptor<CreateRepositoryRequestDescriptor, CreateRepositoryRequestParameters>

@@ -36,7 +36,9 @@ public sealed partial class DeleteAsyncRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+/// Delete an async SQL search.
+/// Delete an async SQL search or a stored synchronous SQL search.
+/// If the search is still running, the API cancels it.
 /// </para>
 /// </summary>
 public sealed partial class DeleteAsyncRequest : PlainRequest<DeleteAsyncRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class DeleteAsyncRequest : PlainRequest<DeleteAsyncRequest
 
 /// <summary>
 /// <para>
-/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+/// Delete an async SQL search.
+/// Delete an async SQL search or a stored synchronous SQL search.
+/// If the search is still running, the API cancels it.
 /// </para>
 /// </summary>
 public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncRequestParameters>
@@ -88,7 +92,9 @@ public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+/// Delete an async SQL search.
+/// Delete an async SQL search or a stored synchronous SQL search.
+/// If the search is still running, the API cancels it.
 /// </para>
 /// </summary>
 public sealed partial class DeleteAsyncRequestDescriptor : RequestDescriptor<DeleteAsyncRequestDescriptor, DeleteAsyncRequestParameters>

@@ -51,7 +51,12 @@ public sealed partial class ExploreRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// Explore graph analytics.
+/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+/// Subsequent requests enable you to spider out from one more vertices of interest.
+/// You can exclude vertices that have already been returned.
 /// </para>
 /// </summary>
 public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParameters>
@@ -121,7 +126,12 @@ public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParamete
 
 /// <summary>
 /// <para>
-/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// Explore graph analytics.
+/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+/// Subsequent requests enable you to spider out from one more vertices of interest.
+/// You can exclude vertices that have already been returned.
 /// </para>
 /// </summary>
 public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescriptor<ExploreRequestDescriptor<TDocument>, ExploreRequestParameters>
@@ -383,7 +393,12 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
+/// Explore graph analytics.
+/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+/// Subsequent requests enable you to spider out from one more vertices of interest.
+/// You can exclude vertices that have already been returned.
 /// </para>
 /// </summary>
 public sealed partial class ExploreRequestDescriptor : RequestDescriptor<ExploreRequestDescriptor, ExploreRequestParameters>

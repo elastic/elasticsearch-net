@@ -48,12 +48,6 @@ internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRa
 					continue;
 				}
 
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "gt")
 				{
 					variant.Gt = JsonSerializer.Deserialize<double?>(ref reader, options);
@@ -89,12 +83,6 @@ internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRa
 					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
 					continue;
 				}
-
-				if (property == "to")
-				{
-					variant.To = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
 			}
 		}
 
@@ -115,12 +103,6 @@ internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRa
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
 		}
 
 		if (value.Gt.HasValue)
@@ -159,12 +141,6 @@ internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRa
 			JsonSerializer.Serialize(writer, value.Relation, options);
 		}
 
-		if (value.To.HasValue)
-		{
-			writer.WritePropertyName("to");
-			writer.WriteNumberValue(value.To.Value);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -190,7 +166,6 @@ public sealed partial class NumberRangeQuery
 	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	public double? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -227,7 +202,6 @@ public sealed partial class NumberRangeQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
-	public double? To { get; set; }
 }
 
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>
@@ -240,14 +214,12 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? FromValue { get; set; }
 	private double? GtValue { get; set; }
 	private double? GteValue { get; set; }
 	private double? LtValue { get; set; }
 	private double? LteValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private double? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -278,12 +250,6 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	public NumberRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public NumberRangeQueryDescriptor<TDocument> From(double? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -348,12 +314,6 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public NumberRangeQueryDescriptor<TDocument> To(double? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -365,12 +325,6 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
 		}
 
 		if (GtValue.HasValue)
@@ -409,12 +363,6 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, RelationValue, options);
 		}
 
-		if (ToValue.HasValue)
-		{
-			writer.WritePropertyName("to");
-			writer.WriteNumberValue(ToValue.Value);
-		}
-
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -430,14 +378,12 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? FromValue { get; set; }
 	private double? GtValue { get; set; }
 	private double? GteValue { get; set; }
 	private double? LtValue { get; set; }
 	private double? LteValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private double? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -468,12 +414,6 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	public NumberRangeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public NumberRangeQueryDescriptor From(double? from)
-	{
-		FromValue = from;
 		return Self;
 	}
 
@@ -538,12 +478,6 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public NumberRangeQueryDescriptor To(double? to)
-	{
-		ToValue = to;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -555,12 +489,6 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
 		}
 
 		if (GtValue.HasValue)
@@ -597,12 +525,6 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("relation");
 			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		if (ToValue.HasValue)
-		{
-			writer.WritePropertyName("to");
-			writer.WriteNumberValue(ToValue.Value);
 		}
 
 		writer.WriteEndObject();

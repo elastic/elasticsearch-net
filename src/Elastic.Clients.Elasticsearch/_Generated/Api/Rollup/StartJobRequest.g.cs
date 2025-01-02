@@ -36,7 +36,9 @@ public sealed partial class StartJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Starts an existing, stopped rollup job.
+/// Start rollup jobs.
+/// If you try to start a job that does not exist, an exception occurs.
+/// If you try to start a job that is already started, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StartJobRequest : PlainRequest<StartJobRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class StartJobRequest : PlainRequest<StartJobRequestParame
 
 /// <summary>
 /// <para>
-/// Starts an existing, stopped rollup job.
+/// Start rollup jobs.
+/// If you try to start a job that does not exist, an exception occurs.
+/// If you try to start a job that is already started, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StartJobRequestDescriptor<TDocument> : RequestDescriptor<StartJobRequestDescriptor<TDocument>, StartJobRequestParameters>
@@ -88,7 +92,9 @@ public sealed partial class StartJobRequestDescriptor<TDocument> : RequestDescri
 
 /// <summary>
 /// <para>
-/// Starts an existing, stopped rollup job.
+/// Start rollup jobs.
+/// If you try to start a job that does not exist, an exception occurs.
+/// If you try to start a job that is already started, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StartJobRequestDescriptor : RequestDescriptor<StartJobRequestDescriptor, StartJobRequestParameters>

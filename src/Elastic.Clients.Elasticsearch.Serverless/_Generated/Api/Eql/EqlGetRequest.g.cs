@@ -51,7 +51,8 @@ public sealed partial class EqlGetRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// Get async EQL search results.
+/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 /// </para>
 /// </summary>
 public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters>
@@ -89,7 +90,8 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// Get async EQL search results.
+/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 /// </para>
 /// </summary>
 public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescriptor<EqlGetRequestDescriptor<TDocument>, EqlGetRequestParameters>
@@ -124,7 +126,8 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// Get async EQL search results.
+/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 /// </para>
 /// </summary>
 public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRequestDescriptor, EqlGetRequestParameters>

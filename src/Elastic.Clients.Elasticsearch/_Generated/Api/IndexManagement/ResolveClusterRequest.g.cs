@@ -68,10 +68,47 @@ public sealed partial class ResolveClusterRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Resolves the specified index expressions to return information about each cluster, including
-/// the local cluster, if included.
+/// Resolve the cluster.
+/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
 /// Multiple patterns and remote clusters are supported.
 /// </para>
+/// <para>
+/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+/// </para>
+/// <para>
+/// You use the same index expression with this endpoint as you would for cross-cluster search.
+/// Index and cluster exclusions are also supported with this endpoint.
+/// </para>
+/// <para>
+/// For each cluster in the index expression, information is returned about:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cluster version information, including the Elasticsearch server version.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterRequestParameters>
 {
@@ -127,10 +164,47 @@ public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterR
 
 /// <summary>
 /// <para>
-/// Resolves the specified index expressions to return information about each cluster, including
-/// the local cluster, if included.
+/// Resolve the cluster.
+/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
 /// Multiple patterns and remote clusters are supported.
 /// </para>
+/// <para>
+/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+/// </para>
+/// <para>
+/// You use the same index expression with this endpoint as you would for cross-cluster search.
+/// Index and cluster exclusions are also supported with this endpoint.
+/// </para>
+/// <para>
+/// For each cluster in the index expression, information is returned about:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cluster version information, including the Elasticsearch server version.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class ResolveClusterRequestDescriptor : RequestDescriptor<ResolveClusterRequestDescriptor, ResolveClusterRequestParameters>
 {

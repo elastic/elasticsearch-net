@@ -105,7 +105,9 @@ public sealed partial class NodesStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns cluster nodes statistics.
+/// Get node statistics.
+/// Get statistics for nodes in a cluster.
+/// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
 /// </summary>
 public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestParameters>
@@ -225,7 +227,9 @@ public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestPa
 
 /// <summary>
 /// <para>
-/// Returns cluster nodes statistics.
+/// Get node statistics.
+/// Get statistics for nodes in a cluster.
+/// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
 /// </summary>
 public sealed partial class NodesStatsRequestDescriptor<TDocument> : RequestDescriptor<NodesStatsRequestDescriptor<TDocument>, NodesStatsRequestParameters>
@@ -284,7 +288,9 @@ public sealed partial class NodesStatsRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Returns cluster nodes statistics.
+/// Get node statistics.
+/// Get statistics for nodes in a cluster.
+/// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
 /// </summary>
 public sealed partial class NodesStatsRequestDescriptor : RequestDescriptor<NodesStatsRequestDescriptor, NodesStatsRequestParameters>

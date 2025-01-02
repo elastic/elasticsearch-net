@@ -100,8 +100,20 @@ public sealed partial class IndicesStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns statistics for one or more indices.
-/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// Get index statistics.
+/// For data streams, the API retrieves statistics for the stream's backing indices.
+/// </para>
+/// <para>
+/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+/// <c>primaries</c> are the values for only the primary shards.
+/// <c>total</c> are the accumulated values for both primary and replica shards.
+/// </para>
+/// <para>
+/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+/// </para>
+/// <para>
+/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsRequestParameters>
@@ -207,8 +219,20 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 
 /// <summary>
 /// <para>
-/// Returns statistics for one or more indices.
-/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// Get index statistics.
+/// For data streams, the API retrieves statistics for the stream's backing indices.
+/// </para>
+/// <para>
+/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+/// <c>primaries</c> are the values for only the primary shards.
+/// <c>total</c> are the accumulated values for both primary and replica shards.
+/// </para>
+/// <para>
+/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+/// </para>
+/// <para>
+/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDescriptor<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsRequestParameters>
@@ -260,8 +284,20 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Returns statistics for one or more indices.
-/// For data streams, the API retrieves statistics for the stream’s backing indices.
+/// Get index statistics.
+/// For data streams, the API retrieves statistics for the stream's backing indices.
+/// </para>
+/// <para>
+/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+/// <c>primaries</c> are the values for only the primary shards.
+/// <c>total</c> are the accumulated values for both primary and replica shards.
+/// </para>
+/// <para>
+/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+/// </para>
+/// <para>
+/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 /// </para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<IndicesStatsRequestDescriptor, IndicesStatsRequestParameters>

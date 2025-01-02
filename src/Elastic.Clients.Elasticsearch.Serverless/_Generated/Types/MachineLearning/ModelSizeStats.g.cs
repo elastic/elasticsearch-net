@@ -55,6 +55,8 @@ public sealed partial class ModelSizeStats
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? ModelBytesExceeded { get; init; }
 	[JsonInclude, JsonPropertyName("model_bytes_memory_limit")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? ModelBytesMemoryLimit { get; init; }
+	[JsonInclude, JsonPropertyName("output_memory_allocator_bytes")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? OutputMemoryAllocatorBytes { get; init; }
 	[JsonInclude, JsonPropertyName("peak_model_bytes")]
 	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? PeakModelBytes { get; init; }
 	[JsonInclude, JsonPropertyName("rare_category_count")]

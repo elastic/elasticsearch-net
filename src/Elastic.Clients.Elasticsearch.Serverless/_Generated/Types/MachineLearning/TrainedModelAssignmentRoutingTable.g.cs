@@ -44,7 +44,7 @@ public sealed partial class TrainedModelAssignmentRoutingTable
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reason")]
-	public string Reason { get; init; }
+	public string? Reason { get; init; }
 
 	/// <summary>
 	/// <para>

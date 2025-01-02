@@ -29,13 +29,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class TrainedModelDeploymentStats
 {
+	[JsonInclude, JsonPropertyName("adaptive_allocations")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; init; }
+
 	/// <summary>
 	/// <para>
 	/// The detailed allocation status for the deployment.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allocation_status")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus AllocationStatus { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus? AllocationStatus { get; init; }
 	[JsonInclude, JsonPropertyName("cache_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; init; }
 
@@ -53,7 +56,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("error_count")]
-	public int ErrorCount { get; init; }
+	public int? ErrorCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -61,7 +64,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_count")]
-	public int InferenceCount { get; init; }
+	public int? InferenceCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -86,7 +89,11 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
-	public int NumberOfAllocations { get; init; }
+	public int? NumberOfAllocations { get; init; }
+	[JsonInclude, JsonPropertyName("peak_throughput_per_minute")]
+	public long PeakThroughputPerMinute { get; init; }
+	[JsonInclude, JsonPropertyName("priority")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -94,7 +101,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("queue_capacity")]
-	public int QueueCapacity { get; init; }
+	public int? QueueCapacity { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -103,7 +110,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("reason")]
-	public string Reason { get; init; }
+	public string? Reason { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -114,7 +121,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rejected_execution_count")]
-	public int RejectedExecutionCount { get; init; }
+	public int? RejectedExecutionCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -130,7 +137,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState State { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState? State { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -138,7 +145,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("threads_per_allocation")]
-	public int ThreadsPerAllocation { get; init; }
+	public int? ThreadsPerAllocation { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -146,5 +153,5 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout_count")]
-	public int TimeoutCount { get; init; }
+	public int? TimeoutCount { get; init; }
 }

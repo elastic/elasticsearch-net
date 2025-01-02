@@ -76,7 +76,10 @@ public sealed partial class DiskUsageRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestParameters>
@@ -142,7 +145,10 @@ public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestPara
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescriptor<DiskUsageRequestDescriptor<TDocument>, DiskUsageRequestParameters>
@@ -184,7 +190,10 @@ public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Analyzes the disk usage of each field of an index or data stream.
+/// Analyze the index disk usage.
+/// Analyze the disk usage of each field of an index or data stream.
+/// This API might not support indices created in previous Elasticsearch versions.
+/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
 /// </para>
 /// </summary>
 public sealed partial class DiskUsageRequestDescriptor : RequestDescriptor<DiskUsageRequestDescriptor, DiskUsageRequestParameters>

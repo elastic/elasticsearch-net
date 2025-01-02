@@ -34,6 +34,13 @@ public sealed partial class BulkRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the response will include the ingest pipelines that were executed for each index or create.
+	/// </para>
+	/// </summary>
+	public bool? ListExecutedPipelines { get => Q<bool?>("list_executed_pipelines"); set => Q("list_executed_pipelines", value); }
+
+	/// <summary>
+	/// <para>
 	/// ID of the pipeline to use to preprocess incoming documents.
 	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
 	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
@@ -55,6 +62,13 @@ public sealed partial class BulkRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to-be-created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
 	/// <summary>
 	/// <para>
@@ -127,6 +141,14 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the response will include the ingest pipelines that were executed for each index or create.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? ListExecutedPipelines { get => Q<bool?>("list_executed_pipelines"); set => Q("list_executed_pipelines", value); }
+
+	/// <summary>
+	/// <para>
 	/// ID of the pipeline to use to preprocess incoming documents.
 	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
 	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
@@ -151,6 +173,14 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to-be-created).
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
 	/// <summary>
 	/// <para>
@@ -229,9 +259,11 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 
 	internal override string OperationName => "bulk";
 
+	public BulkRequestDescriptor<TDocument> ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
 	public BulkRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public BulkRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 	public BulkRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
+	public BulkRequestDescriptor<TDocument> RequireDataStream(bool? requireDataStream = true) => Qs("require_data_stream", requireDataStream);
 	public BulkRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public BulkRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
@@ -279,9 +311,11 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 
 	internal override string OperationName => "bulk";
 
+	public BulkRequestDescriptor ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
 	public BulkRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public BulkRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 	public BulkRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
+	public BulkRequestDescriptor RequireDataStream(bool? requireDataStream = true) => Qs("require_data_stream", requireDataStream);
 	public BulkRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

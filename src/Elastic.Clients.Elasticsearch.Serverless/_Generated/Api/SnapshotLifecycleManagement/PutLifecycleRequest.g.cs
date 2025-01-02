@@ -49,7 +49,10 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates a snapshot lifecycle policy.
+/// Create or update a policy.
+/// Create or update a snapshot lifecycle policy.
+/// If the policy already exists, this request increments the policy version.
+/// Only the latest version of a policy is stored.
 /// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
@@ -125,7 +128,10 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 
 /// <summary>
 /// <para>
-/// Creates or updates a snapshot lifecycle policy.
+/// Create or update a policy.
+/// Create or update a snapshot lifecycle policy.
+/// If the policy already exists, this request increments the policy version.
+/// Only the latest version of a policy is stored.
 /// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>

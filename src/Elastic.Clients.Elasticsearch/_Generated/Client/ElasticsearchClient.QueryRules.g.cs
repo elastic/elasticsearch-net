@@ -41,7 +41,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +55,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +68,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +82,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +97,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +113,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +126,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +140,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query rule within a query ruleset.
+	/// Delete a query rule.
+	/// Delete a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -147,7 +155,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -160,7 +168,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -172,7 +180,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -185,7 +193,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -199,7 +207,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -214,7 +222,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -226,7 +234,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -239,7 +247,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a query ruleset.
+	/// Delete a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -253,7 +261,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -266,7 +275,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -278,7 +288,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -291,7 +302,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -305,7 +317,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -320,7 +333,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -332,7 +346,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -345,7 +360,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query rule within a query ruleset
+	/// Get a query rule.
+	/// Get details about a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -359,7 +375,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -372,7 +389,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -384,7 +402,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -397,7 +416,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -411,7 +431,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -426,7 +447,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -438,7 +460,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -451,7 +474,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the details about a query ruleset
+	/// Get a query ruleset.
+	/// Get details about a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -465,7 +489,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -478,7 +503,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -490,7 +516,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -503,7 +530,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -517,7 +545,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -532,7 +561,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -544,7 +574,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -557,7 +588,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns summarized information about existing query rulesets.
+	/// Get all query rulesets.
+	/// Get summarized information about the query rulesets.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -571,7 +603,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -584,7 +617,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -596,7 +630,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -609,7 +644,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -623,7 +659,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -638,7 +675,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -650,7 +688,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -663,7 +702,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query rule within a query ruleset.
+	/// Create or update a query rule.
+	/// Create or update a query rule within a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -677,7 +717,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -690,7 +730,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -702,7 +742,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -715,7 +755,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -729,7 +769,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -744,7 +784,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -756,7 +796,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -769,7 +809,7 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Create or update a query ruleset.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -783,7 +823,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -796,7 +837,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -808,7 +850,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -821,7 +864,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -835,7 +879,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -850,7 +895,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -862,7 +908,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -875,7 +922,8 @@ public partial class QueryRulesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a query ruleset.
+	/// Test a query ruleset.
+	/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

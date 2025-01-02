@@ -45,7 +45,9 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
@@ -74,6 +76,10 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
+	public bool? AllowPartialSearchResults { get; set; }
+	[JsonInclude, JsonPropertyName("allow_partial_sequence_results")]
+	public bool? AllowPartialSequenceResults { get; set; }
 	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
 
@@ -166,7 +172,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
@@ -199,6 +207,8 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	private bool? AllowPartialSearchResultsValue { get; set; }
+	private bool? AllowPartialSequenceResultsValue { get; set; }
 	private bool? CaseSensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
@@ -220,6 +230,18 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public EqlSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true)
+	{
+		AllowPartialSearchResultsValue = allowPartialSearchResults;
+		return Self;
+	}
+
+	public EqlSearchRequestDescriptor<TDocument> AllowPartialSequenceResults(bool? allowPartialSequenceResults = true)
+	{
+		AllowPartialSequenceResultsValue = allowPartialSequenceResults;
+		return Self;
+	}
 
 	public EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? caseSensitive = true)
 	{
@@ -487,6 +509,18 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AllowPartialSearchResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_search_results");
+			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
+		}
+
+		if (AllowPartialSequenceResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_sequence_results");
+			writer.WriteBooleanValue(AllowPartialSequenceResultsValue.Value);
+		}
+
 		if (CaseSensitiveValue.HasValue)
 		{
 			writer.WritePropertyName("case_sensitive");
@@ -625,7 +659,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
 public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
@@ -654,6 +690,8 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
+	private bool? AllowPartialSearchResultsValue { get; set; }
+	private bool? AllowPartialSequenceResultsValue { get; set; }
 	private bool? CaseSensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
@@ -675,6 +713,18 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public EqlSearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)
+	{
+		AllowPartialSearchResultsValue = allowPartialSearchResults;
+		return Self;
+	}
+
+	public EqlSearchRequestDescriptor AllowPartialSequenceResults(bool? allowPartialSequenceResults = true)
+	{
+		AllowPartialSequenceResultsValue = allowPartialSequenceResults;
+		return Self;
+	}
 
 	public EqlSearchRequestDescriptor CaseSensitive(bool? caseSensitive = true)
 	{
@@ -942,6 +992,18 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AllowPartialSearchResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_search_results");
+			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
+		}
+
+		if (AllowPartialSequenceResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_sequence_results");
+			writer.WriteBooleanValue(AllowPartialSequenceResultsValue.Value);
+		}
+
 		if (CaseSensitiveValue.HasValue)
 		{
 			writer.WritePropertyName("case_sensitive");

@@ -62,6 +62,14 @@ public sealed partial class EqlGetResponse<TEvent> : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
+	/// Contains information about shard failures (if any), in case allow_partial_search_results=true
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_failures")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ShardFailure>? ShardFailures { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// If true, the request timed out before completion.
 	/// </para>
 	/// </summary>
