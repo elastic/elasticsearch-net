@@ -38,7 +38,10 @@ public sealed partial class StartIlmRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Start the index lifecycle management (ILM) plugin.
+/// Start the ILM plugin.
+/// Start the index lifecycle management plugin if it is currently stopped.
+/// ILM is started automatically when the cluster is formed.
+/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 /// </para>
 /// </summary>
 public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParameters>
@@ -59,7 +62,10 @@ public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParame
 
 /// <summary>
 /// <para>
-/// Start the index lifecycle management (ILM) plugin.
+/// Start the ILM plugin.
+/// Start the index lifecycle management plugin if it is currently stopped.
+/// ILM is started automatically when the cluster is formed.
+/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 /// </para>
 /// </summary>
 public sealed partial class StartIlmRequestDescriptor : RequestDescriptor<StartIlmRequestDescriptor, StartIlmRequestParameters>

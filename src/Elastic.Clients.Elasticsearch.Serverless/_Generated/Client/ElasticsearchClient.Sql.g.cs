@@ -41,7 +41,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the SQL cursor
+	/// Clear an SQL search cursor.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -53,7 +53,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the SQL cursor
+	/// Clear an SQL search cursor.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -65,7 +65,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the SQL cursor
+	/// Clear an SQL search cursor.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -78,7 +78,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the SQL cursor
+	/// Clear an SQL search cursor.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -92,7 +92,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -104,7 +106,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -116,7 +120,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -129,7 +135,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -143,7 +151,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -155,7 +165,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -168,7 +180,9 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
+	/// Delete an async SQL search.
+	/// Delete an async SQL search or a stored synchronous SQL search.
+	/// If the search is still running, the API cancels it.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -182,7 +196,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -194,7 +209,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -206,7 +222,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -219,7 +236,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -233,7 +251,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -245,7 +264,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -258,7 +278,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+	/// Get async SQL search results.
+	/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -272,7 +293,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -284,7 +306,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -296,7 +319,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -309,7 +333,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -323,7 +348,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -335,7 +361,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -348,7 +375,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status of an async SQL search or a stored synchronous SQL search
+	/// Get the async SQL search status.
+	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -362,7 +390,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -374,7 +403,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -386,7 +416,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -399,7 +430,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -413,7 +445,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -425,7 +458,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -438,7 +472,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Executes a SQL request
+	/// Get SQL search results.
+	/// Run an SQL request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -452,7 +487,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -464,7 +500,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -476,7 +513,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -489,7 +527,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -503,7 +542,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -515,7 +555,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -528,7 +569,8 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Translates SQL into Elasticsearch queries
+	/// Translate SQL into Elasticsearch queries.
+	/// Translate an SQL search into a search API request containing Query DSL.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

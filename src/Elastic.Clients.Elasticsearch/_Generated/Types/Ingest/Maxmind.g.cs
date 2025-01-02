@@ -31,6 +31,9 @@ public sealed partial class Maxmind
 {
 	[JsonInclude, JsonPropertyName("account_id")]
 	public Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration(Maxmind maxmind) => Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration.Maxmind(maxmind);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull(Maxmind maxmind) => Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull.Maxmind(maxmind);
 }
 
 public sealed partial class MaxmindDescriptor : SerializableDescriptor<MaxmindDescriptor>

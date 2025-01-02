@@ -49,7 +49,9 @@ public sealed partial class DeleteRepositoryRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Deletes a repository.
+/// Delete snapshot repositories.
+/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+/// The snapshots themselves are left untouched and in place.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRepositoryRequest : PlainRequest<DeleteRepositoryRequestParameters>
@@ -85,7 +87,9 @@ public sealed partial class DeleteRepositoryRequest : PlainRequest<DeleteReposit
 
 /// <summary>
 /// <para>
-/// Deletes a repository.
+/// Delete snapshot repositories.
+/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+/// The snapshots themselves are left untouched and in place.
 /// </para>
 /// </summary>
 public sealed partial class DeleteRepositoryRequestDescriptor : RequestDescriptor<DeleteRepositoryRequestDescriptor, DeleteRepositoryRequestParameters>

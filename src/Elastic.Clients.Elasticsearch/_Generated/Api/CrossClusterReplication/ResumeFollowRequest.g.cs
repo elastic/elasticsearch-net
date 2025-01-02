@@ -36,7 +36,11 @@ public sealed partial class ResumeFollowRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Resumes a follower index that has been paused
+/// Resume a follower.
+/// Resume a cross-cluster replication follower index that was paused.
+/// The follower index could have been paused with the pause follower API.
+/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+/// When this API returns, the follower index will resume fetching operations from the leader index.
 /// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowRequestParameters>
@@ -77,7 +81,11 @@ public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowReque
 
 /// <summary>
 /// <para>
-/// Resumes a follower index that has been paused
+/// Resume a follower.
+/// Resume a cross-cluster replication follower index that was paused.
+/// The follower index could have been paused with the pause follower API.
+/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+/// When this API returns, the follower index will resume fetching operations from the leader index.
 /// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDescriptor<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowRequestParameters>
@@ -246,7 +254,11 @@ public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Resumes a follower index that has been paused
+/// Resume a follower.
+/// Resume a cross-cluster replication follower index that was paused.
+/// The follower index could have been paused with the pause follower API.
+/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+/// When this API returns, the follower index will resume fetching operations from the leader index.
 /// </para>
 /// </summary>
 public sealed partial class ResumeFollowRequestDescriptor : RequestDescriptor<ResumeFollowRequestDescriptor, ResumeFollowRequestParameters>

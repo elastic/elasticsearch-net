@@ -43,7 +43,7 @@ public sealed partial class NodesUsageRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information on the usage of features.
+/// Get feature usage information.
 /// </para>
 /// </summary>
 public sealed partial class NodesUsageRequest : PlainRequest<NodesUsageRequestParameters>
@@ -84,7 +84,7 @@ public sealed partial class NodesUsageRequest : PlainRequest<NodesUsageRequestPa
 
 /// <summary>
 /// <para>
-/// Returns information on the usage of features.
+/// Get feature usage information.
 /// </para>
 /// </summary>
 public sealed partial class NodesUsageRequestDescriptor : RequestDescriptor<NodesUsageRequestDescriptor, NodesUsageRequestParameters>

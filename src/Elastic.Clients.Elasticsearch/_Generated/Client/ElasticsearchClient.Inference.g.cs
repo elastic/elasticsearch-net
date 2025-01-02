@@ -527,7 +527,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -540,7 +550,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -552,7 +572,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -565,7 +595,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -579,7 +619,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -594,7 +644,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -608,7 +668,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -623,7 +693,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -635,7 +715,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -648,7 +738,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -662,7 +762,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -675,7 +785,17 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create an inference endpoint
+	/// Create an inference endpoint.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

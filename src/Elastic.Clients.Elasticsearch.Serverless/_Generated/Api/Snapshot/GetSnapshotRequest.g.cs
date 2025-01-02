@@ -126,7 +126,7 @@ public sealed partial class GetSnapshotRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information about a snapshot.
+/// Get snapshot information.
 /// </para>
 /// </summary>
 public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequestParameters>
@@ -250,7 +250,7 @@ public sealed partial class GetSnapshotRequest : PlainRequest<GetSnapshotRequest
 
 /// <summary>
 /// <para>
-/// Returns information about a snapshot.
+/// Get snapshot information.
 /// </para>
 /// </summary>
 public sealed partial class GetSnapshotRequestDescriptor : RequestDescriptor<GetSnapshotRequestDescriptor, GetSnapshotRequestParameters>

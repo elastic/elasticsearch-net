@@ -49,6 +49,8 @@ public sealed partial class TextExpansionInferenceOptions
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+	[JsonInclude, JsonPropertyName("vocabulary")]
+	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Vocabulary Vocabulary { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.MachineLearning.InferenceConfigCreate(TextExpansionInferenceOptions textExpansionInferenceOptions) => Elastic.Clients.Elasticsearch.Serverless.MachineLearning.InferenceConfigCreate.TextExpansion(textExpansionInferenceOptions);
 }
@@ -70,6 +72,9 @@ public sealed partial class TextExpansionInferenceOptionsDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Vocabulary VocabularyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor VocabularyDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,6 +116,30 @@ public sealed partial class TextExpansionInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
+	public TextExpansionInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.Vocabulary vocabulary)
+	{
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = null;
+		VocabularyValue = vocabulary;
+		return Self;
+	}
+
+	public TextExpansionInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor descriptor)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptorAction = null;
+		VocabularyDescriptor = descriptor;
+		return Self;
+	}
+
+	public TextExpansionInferenceOptionsDescriptor Vocabulary(Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor> configure)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -134,6 +163,22 @@ public sealed partial class TextExpansionInferenceOptionsDescriptor : Serializab
 		{
 			writer.WritePropertyName("tokenization");
 			JsonSerializer.Serialize(writer, TokenizationValue, options);
+		}
+
+		if (VocabularyDescriptor is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyDescriptor, options);
+		}
+		else if (VocabularyDescriptorAction is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.MachineLearning.VocabularyDescriptor(VocabularyDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyValue, options);
 		}
 
 		writer.WriteEndObject();

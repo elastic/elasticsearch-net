@@ -42,8 +42,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -56,8 +59,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -70,8 +76,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -85,8 +94,11 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
+	/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+	/// </para>
+	/// <para>
+	/// NOTE: If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+	/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

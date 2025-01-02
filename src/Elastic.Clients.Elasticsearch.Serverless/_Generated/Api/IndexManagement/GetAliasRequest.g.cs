@@ -56,6 +56,14 @@ public sealed partial class GetAliasRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -117,6 +125,15 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -148,6 +165,7 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	public GetAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public GetAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
@@ -195,6 +213,7 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 	public GetAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public GetAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{

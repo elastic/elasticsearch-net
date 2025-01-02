@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 public sealed partial class TrainedModelAssignment
 {
+	[JsonInclude, JsonPropertyName("adaptive_allocations")]
+	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; init; }
+
 	/// <summary>
 	/// <para>
 	/// The overall assignment state.
@@ -38,6 +41,8 @@ public sealed partial class TrainedModelAssignment
 	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DeploymentAssignmentState AssignmentState { get; init; }
 	[JsonInclude, JsonPropertyName("max_assigned_allocations")]
 	public int? MaxAssignedAllocations { get; init; }
+	[JsonInclude, JsonPropertyName("reason")]
+	public string? Reason { get; init; }
 
 	/// <summary>
 	/// <para>

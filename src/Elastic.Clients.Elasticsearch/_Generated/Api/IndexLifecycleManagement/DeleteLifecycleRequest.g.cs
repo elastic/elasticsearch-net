@@ -49,7 +49,8 @@ public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+/// Delete a lifecycle policy.
+/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycleRequestParameters>
@@ -85,7 +86,8 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 
 /// <summary>
 /// <para>
-/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+/// Delete a lifecycle policy.
+/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 /// </para>
 /// </summary>
 public sealed partial class DeleteLifecycleRequestDescriptor : RequestDescriptor<DeleteLifecycleRequestDescriptor, DeleteLifecycleRequestParameters>

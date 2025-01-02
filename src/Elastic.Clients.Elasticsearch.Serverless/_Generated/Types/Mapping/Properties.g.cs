@@ -236,6 +236,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, ObjectProperty objectProperty) => AssignVariant(propertyName, objectProperty);
 	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, PassthroughObjectProperty passthroughObjectProperty) => AssignVariant(propertyName, passthroughObjectProperty);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, PercolatorProperty percolatorProperty) => AssignVariant(propertyName, percolatorProperty);
@@ -395,6 +400,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.NestedProperty>(ref reader, options);
 			case "object":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.ObjectProperty>(ref reader, options);
+			case "passthrough":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectProperty>(ref reader, options);
 			case "percolator":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.PercolatorProperty>(ref reader, options);
 			case "point":
@@ -541,6 +548,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "object":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.ObjectProperty), options);
+				return;
+			case "passthrough":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.PassthroughObjectProperty), options);
 				return;
 			case "percolator":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.PercolatorProperty), options);

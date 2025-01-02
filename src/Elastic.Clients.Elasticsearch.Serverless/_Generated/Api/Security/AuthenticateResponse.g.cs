@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Security;
 public sealed partial class AuthenticateResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("api_key")]
-	public Elastic.Clients.Elasticsearch.Serverless.Security.ApiKey? ApiKey { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Security.AuthenticateApiKey? ApiKey { get; init; }
 	[JsonInclude, JsonPropertyName("authentication_realm")]
 	public Elastic.Clients.Elasticsearch.Serverless.Security.RealmInfo AuthenticationRealm { get; init; }
 	[JsonInclude, JsonPropertyName("authentication_type")]

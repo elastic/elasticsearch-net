@@ -41,7 +41,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +65,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +88,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +112,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +137,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +163,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +186,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +210,18 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+	/// Get the features.
+	/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+	/// You can use this API to determine which feature states to include when taking a snapshot.
+	/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+	/// </para>
+	/// <para>
+	/// A feature state includes one or more system indices necessary for a given feature to function.
+	/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+	/// </para>
+	/// <para>
+	/// The features listed by this API are a combination of built-in features and features defined by plugins.
+	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -147,7 +235,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -160,7 +270,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -172,7 +304,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -185,7 +339,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -199,7 +375,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -214,7 +412,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -226,7 +446,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -239,7 +481,29 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resets the internal state of features, usually by deleting system indices
+	/// Reset the features.
+	/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+	/// </para>
+	/// <para>
+	/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+	/// </para>
+	/// <para>
+	/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+	/// This deletes all state information stored in system indices.
+	/// </para>
+	/// <para>
+	/// The response code is HTTP 200 if the state is successfully reset for all features.
+	/// It is HTTP 500 if the reset operation failed for any feature.
+	/// </para>
+	/// <para>
+	/// Note that select features might provide a way to reset particular system indices.
+	/// Using this API resets all features, both those that are built-in and implemented as plugins.
+	/// </para>
+	/// <para>
+	/// To list the features that will be affected, use the get features API.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

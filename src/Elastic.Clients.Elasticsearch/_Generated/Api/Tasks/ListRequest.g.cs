@@ -42,6 +42,7 @@ public sealed partial class ListRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// This information is useful to distinguish tasks from each other but is more costly to run.
 	/// </para>
 	/// </summary>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
@@ -91,7 +92,8 @@ public sealed partial class ListRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// Get all tasks.
+/// Get information about the tasks currently running on one or more nodes in the cluster.
 /// </para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
@@ -115,6 +117,7 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes detailed information about shard recoveries.
+	/// This information is useful to distinguish tasks from each other but is more costly to run.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -171,7 +174,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 /// <summary>
 /// <para>
-/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+/// Get all tasks.
+/// Get information about the tasks currently running on one or more nodes in the cluster.
 /// </para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>

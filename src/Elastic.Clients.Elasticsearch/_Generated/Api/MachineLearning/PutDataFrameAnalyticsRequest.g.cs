@@ -143,6 +143,8 @@ public sealed partial class PutDataFrameAnalyticsRequest : PlainRequest<PutDataF
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
+	[JsonInclude, JsonPropertyName("_meta")]
+	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -209,6 +211,7 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> DestDescriptorAction { get; set; }
 	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
 	private int? MaxNumThreadsValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private string? ModelMemoryLimitValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> SourceDescriptor { get; set; }
@@ -380,6 +383,12 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
+	public PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The approximate maximum amount of memory resources that are permitted for
@@ -505,6 +514,12 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor<TDocument> : 
 			writer.WriteNumberValue(MaxNumThreadsValue.Value);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
 		{
 			writer.WritePropertyName("model_memory_limit");
@@ -579,6 +594,7 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> DestDescriptorAction { get; set; }
 	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
 	private int? MaxNumThreadsValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private string? ModelMemoryLimitValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor SourceDescriptor { get; set; }
@@ -750,6 +766,12 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 		return Self;
 	}
 
+	public PutDataFrameAnalyticsRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The approximate maximum amount of memory resources that are permitted for
@@ -873,6 +895,12 @@ public sealed partial class PutDataFrameAnalyticsRequestDescriptor : RequestDesc
 		{
 			writer.WritePropertyName("max_num_threads");
 			writer.WriteNumberValue(MaxNumThreadsValue.Value);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))

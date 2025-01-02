@@ -50,7 +50,8 @@ public sealed partial class GetPipelineRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns information about one or more ingest pipelines.
+/// Get pipelines.
+/// Get information about one or more ingest pipelines.
 /// This API returns a local reference of the pipeline.
 /// </para>
 /// </summary>
@@ -92,7 +93,8 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 
 /// <summary>
 /// <para>
-/// Returns information about one or more ingest pipelines.
+/// Get pipelines.
+/// Get information about one or more ingest pipelines.
 /// This API returns a local reference of the pipeline.
 /// </para>
 /// </summary>
@@ -132,7 +134,8 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 
 /// <summary>
 /// <para>
-/// Returns information about one or more ingest pipelines.
+/// Get pipelines.
+/// Get information about one or more ingest pipelines.
 /// This API returns a local reference of the pipeline.
 /// </para>
 /// </summary>

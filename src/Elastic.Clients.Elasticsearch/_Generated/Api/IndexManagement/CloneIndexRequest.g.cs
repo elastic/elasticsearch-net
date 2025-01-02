@@ -59,8 +59,60 @@ public sealed partial class CloneIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestParameters>
 {
@@ -122,8 +174,60 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDescriptor<CloneIndexRequestDescriptor<TDocument>, CloneIndexRequestParameters>
 {
@@ -207,8 +311,60 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Clones an existing index.
+/// Clone an index.
+/// Clone an existing index into a new index.
+/// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>
+/// <para>
+/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+/// The API also does not copy index metadata from the original index.
+/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+/// </para>
+/// <para>
+/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
+/// To set the number of replicas in the resulting index, configure these settings in the clone request.
+/// </para>
+/// <para>
+/// Cloning works as follows:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// First, it creates a new target index with the same definition as the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have the same number of primary shards as the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<CloneIndexRequestDescriptor, CloneIndexRequestParameters>
 {

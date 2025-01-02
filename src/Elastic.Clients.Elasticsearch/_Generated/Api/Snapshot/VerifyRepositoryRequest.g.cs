@@ -49,7 +49,8 @@ public sealed partial class VerifyRepositoryRequestParameters : RequestParameter
 
 /// <summary>
 /// <para>
-/// Verifies a repository.
+/// Verify a snapshot repository.
+/// Check for common misconfigurations in a snapshot repository.
 /// </para>
 /// </summary>
 public sealed partial class VerifyRepositoryRequest : PlainRequest<VerifyRepositoryRequestParameters>
@@ -85,7 +86,8 @@ public sealed partial class VerifyRepositoryRequest : PlainRequest<VerifyReposit
 
 /// <summary>
 /// <para>
-/// Verifies a repository.
+/// Verify a snapshot repository.
+/// Check for common misconfigurations in a snapshot repository.
 /// </para>
 /// </summary>
 public sealed partial class VerifyRepositoryRequestDescriptor : RequestDescriptor<VerifyRepositoryRequestDescriptor, VerifyRepositoryRequestParameters>

@@ -83,5 +83,5 @@ public sealed partial class OverallBucket
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp_string")]
-	public DateTimeOffset TimestampString { get; init; }
+	public DateTimeOffset? TimestampString { get; init; }
 }

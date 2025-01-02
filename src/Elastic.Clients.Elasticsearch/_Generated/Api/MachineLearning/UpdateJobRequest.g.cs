@@ -129,7 +129,7 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("detectors")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? Detectors { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? Detectors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -222,10 +222,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	private IDictionary<string, object>? CustomSettingsValue { get; set; }
 	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
 	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? DetectorsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> DetectorsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
 	private ICollection<string>? GroupsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> ModelPlotConfigDescriptor { get; set; }
@@ -353,7 +353,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? detectors)
+	public UpdateJobRequestDescriptor<TDocument> Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? detectors)
 	{
 		DetectorsDescriptor = null;
 		DetectorsDescriptorAction = null;
@@ -362,7 +362,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor)
+	public UpdateJobRequestDescriptor<TDocument> Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> descriptor)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptorAction = null;
@@ -371,7 +371,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> configure)
+	public UpdateJobRequestDescriptor<TDocument> Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>> configure)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptor = null;
@@ -380,7 +380,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] configure)
+	public UpdateJobRequestDescriptor<TDocument> Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>>[] configure)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptor = null;
@@ -567,7 +567,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 		{
 			writer.WritePropertyName("detectors");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(DetectorsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DetectorsDescriptorActions is not null)
@@ -576,7 +576,7 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 			writer.WriteStartArray();
 			foreach (var action in DetectorsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -690,10 +690,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	private IDictionary<string, object>? CustomSettingsValue { get; set; }
 	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
 	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? DetectorsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor DetectorsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor> DetectorsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor>[] DetectorsDescriptorActions { get; set; }
 	private ICollection<string>? GroupsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor ModelPlotConfigDescriptor { get; set; }
@@ -821,7 +821,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? detectors)
+	public UpdateJobRequestDescriptor Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? detectors)
 	{
 		DetectorsDescriptor = null;
 		DetectorsDescriptorAction = null;
@@ -830,7 +830,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor)
+	public UpdateJobRequestDescriptor Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor descriptor)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptorAction = null;
@@ -839,7 +839,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> configure)
+	public UpdateJobRequestDescriptor Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor> configure)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptor = null;
@@ -848,7 +848,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 		return Self;
 	}
 
-	public UpdateJobRequestDescriptor Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] configure)
+	public UpdateJobRequestDescriptor Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor>[] configure)
 	{
 		DetectorsValue = null;
 		DetectorsDescriptor = null;
@@ -1035,7 +1035,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 		{
 			writer.WritePropertyName("detectors");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(DetectorsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(DetectorsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DetectorsDescriptorActions is not null)
@@ -1044,7 +1044,7 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 			writer.WriteStartArray();
 			foreach (var action in DetectorsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

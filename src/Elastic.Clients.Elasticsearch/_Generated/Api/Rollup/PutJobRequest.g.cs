@@ -36,7 +36,19 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a rollup job.
+/// Create a rollup job.
+/// </para>
+/// <para>
+/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+/// </para>
+/// <para>
+/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+/// </para>
+/// <para>
+/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+/// </para>
+/// <para>
+/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
@@ -127,7 +139,19 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a rollup job.
+/// Create a rollup job.
+/// </para>
+/// <para>
+/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+/// </para>
+/// <para>
+/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+/// </para>
+/// <para>
+/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+/// </para>
+/// <para>
+/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
@@ -386,7 +410,19 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 
 /// <summary>
 /// <para>
-/// Creates a rollup job.
+/// Create a rollup job.
+/// </para>
+/// <para>
+/// WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+/// </para>
+/// <para>
+/// The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+/// </para>
+/// <para>
+/// There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+/// </para>
+/// <para>
+/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>

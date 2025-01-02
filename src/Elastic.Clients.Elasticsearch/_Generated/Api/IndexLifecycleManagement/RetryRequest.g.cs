@@ -36,7 +36,10 @@ public sealed partial class RetryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retries executing the policy for an index that is in the ERROR step.
+/// Retry a policy.
+/// Retry running the lifecycle policy for an index that is in the ERROR step.
+/// The API sets the policy back to the step where the error occurred and runs the step.
+/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 /// </para>
 /// </summary>
 public sealed partial class RetryRequest : PlainRequest<RetryRequestParameters>
@@ -56,7 +59,10 @@ public sealed partial class RetryRequest : PlainRequest<RetryRequestParameters>
 
 /// <summary>
 /// <para>
-/// Retries executing the policy for an index that is in the ERROR step.
+/// Retry a policy.
+/// Retry running the lifecycle policy for an index that is in the ERROR step.
+/// The API sets the policy back to the step where the error occurred and runs the step.
+/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 /// </para>
 /// </summary>
 public sealed partial class RetryRequestDescriptor<TDocument> : RequestDescriptor<RetryRequestDescriptor<TDocument>, RetryRequestParameters>
@@ -92,7 +98,10 @@ public sealed partial class RetryRequestDescriptor<TDocument> : RequestDescripto
 
 /// <summary>
 /// <para>
-/// Retries executing the policy for an index that is in the ERROR step.
+/// Retry a policy.
+/// Retry running the lifecycle policy for an index that is in the ERROR step.
+/// The API sets the policy back to the step where the error occurred and runs the step.
+/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 /// </para>
 /// </summary>
 public sealed partial class RetryRequestDescriptor : RequestDescriptor<RetryRequestDescriptor, RetryRequestParameters>

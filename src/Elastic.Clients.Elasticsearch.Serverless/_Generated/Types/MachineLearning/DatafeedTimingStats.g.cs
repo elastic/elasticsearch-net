@@ -44,6 +44,8 @@ public sealed partial class DatafeedTimingStats
 	/// </summary>
 	[JsonInclude, JsonPropertyName("bucket_count")]
 	public long BucketCount { get; init; }
+	[JsonInclude, JsonPropertyName("exponential_average_calculation_context")]
+	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ExponentialAverageCalculationContext? ExponentialAverageCalculationContext { get; init; }
 
 	/// <summary>
 	/// <para>

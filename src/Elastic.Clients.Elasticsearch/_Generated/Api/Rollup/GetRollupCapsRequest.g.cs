@@ -36,8 +36,26 @@ public sealed partial class GetRollupCapsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// Get the rollup job capabilities.
+/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
+/// <para>
+/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+/// This API enables you to inspect an index and determine:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Does this index have associated rollup data somewhere in the cluster?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsRequestParameters>
 {
@@ -60,8 +78,26 @@ public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsReq
 
 /// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// Get the rollup job capabilities.
+/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
+/// <para>
+/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+/// This API enables you to inspect an index and determine:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Does this index have associated rollup data somewhere in the cluster?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupCapsRequestDescriptor<TDocument> : RequestDescriptor<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsRequestParameters>
 {
@@ -96,8 +132,26 @@ public sealed partial class GetRollupCapsRequestDescriptor<TDocument> : RequestD
 
 /// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// Get the rollup job capabilities.
+/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
+/// <para>
+/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+/// This API enables you to inspect an index and determine:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Does this index have associated rollup data somewhere in the cluster?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public sealed partial class GetRollupCapsRequestDescriptor : RequestDescriptor<GetRollupCapsRequestDescriptor, GetRollupCapsRequestParameters>
 {

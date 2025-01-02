@@ -36,7 +36,9 @@ public sealed partial class StartSlmRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Turns on snapshot lifecycle management (SLM).
+/// Start snapshot lifecycle management.
+/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 /// </para>
 /// </summary>
 public sealed partial class StartSlmRequest : PlainRequest<StartSlmRequestParameters>
@@ -52,7 +54,9 @@ public sealed partial class StartSlmRequest : PlainRequest<StartSlmRequestParame
 
 /// <summary>
 /// <para>
-/// Turns on snapshot lifecycle management (SLM).
+/// Start snapshot lifecycle management.
+/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 /// </para>
 /// </summary>
 public sealed partial class StartSlmRequestDescriptor : RequestDescriptor<StartSlmRequestDescriptor, StartSlmRequestParameters>

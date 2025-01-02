@@ -17,26 +17,45 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.MachineLearning;
+namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
-public sealed partial class DiscoveryNode
+public sealed partial class Local
 {
-	[JsonInclude, JsonPropertyName("attributes")]
-	public IReadOnlyDictionary<string, string> Attributes { get; init; }
-	[JsonInclude, JsonPropertyName("ephemeral_id")]
-	public string EphemeralId { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string TransportAddress { get; init; }
+	[JsonInclude, JsonPropertyName("type")]
+	public string Type { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.DatabaseConfigurationFull(Local local) => Elastic.Clients.Elasticsearch.Serverless.Ingest.DatabaseConfigurationFull.Local(local);
+}
+
+public sealed partial class LocalDescriptor : SerializableDescriptor<LocalDescriptor>
+{
+	internal LocalDescriptor(Action<LocalDescriptor> configure) => configure.Invoke(this);
+
+	public LocalDescriptor() : base()
+	{
+	}
+
+	private string TypeValue { get; set; }
+
+	public LocalDescriptor Type(string type)
+	{
+		TypeValue = type;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("type");
+		writer.WriteStringValue(TypeValue);
+		writer.WriteEndObject();
+	}
 }

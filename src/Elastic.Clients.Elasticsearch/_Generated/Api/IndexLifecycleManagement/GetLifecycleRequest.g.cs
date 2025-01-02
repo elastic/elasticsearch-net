@@ -49,7 +49,7 @@ public sealed partial class GetLifecycleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves a lifecycle policy.
+/// Get lifecycle policies.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleRequestParameters>
@@ -89,7 +89,7 @@ public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleReque
 
 /// <summary>
 /// <para>
-/// Retrieves a lifecycle policy.
+/// Get lifecycle policies.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequestDescriptor : RequestDescriptor<GetLifecycleRequestDescriptor, GetLifecycleRequestParameters>

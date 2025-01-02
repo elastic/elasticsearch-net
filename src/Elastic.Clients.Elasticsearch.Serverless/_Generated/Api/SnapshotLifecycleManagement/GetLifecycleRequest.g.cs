@@ -36,7 +36,8 @@ public sealed partial class GetLifecycleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+/// Get policy information.
+/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleRequestParameters>
@@ -60,7 +61,8 @@ public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleReque
 
 /// <summary>
 /// <para>
-/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+/// Get policy information.
+/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>
 public sealed partial class GetLifecycleRequestDescriptor : RequestDescriptor<GetLifecycleRequestDescriptor, GetLifecycleRequestParameters>

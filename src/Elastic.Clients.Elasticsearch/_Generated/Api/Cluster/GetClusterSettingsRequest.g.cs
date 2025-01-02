@@ -65,7 +65,7 @@ public sealed partial class GetClusterSettingsRequestParameters : RequestParamet
 
 /// <summary>
 /// <para>
-/// Returns cluster-wide settings.
+/// Get cluster-wide settings.
 /// By default, it returns only settings that have been explicitly defined.
 /// </para>
 /// </summary>
@@ -116,7 +116,7 @@ public sealed partial class GetClusterSettingsRequest : PlainRequest<GetClusterS
 
 /// <summary>
 /// <para>
-/// Returns cluster-wide settings.
+/// Get cluster-wide settings.
 /// By default, it returns only settings that have been explicitly defined.
 /// </para>
 /// </summary>
