@@ -36,7 +36,8 @@ public sealed partial class DeleteSynonymRuleRequestParameters : RequestParamete
 
 /// <summary>
 /// <para>
-/// Deletes a synonym rule in a synonym set
+/// Delete a synonym rule.
+/// Delete a synonym rule from a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRuleRequest : PlainRequest<DeleteSynonymRuleRequestParameters>
@@ -56,7 +57,8 @@ public sealed partial class DeleteSynonymRuleRequest : PlainRequest<DeleteSynony
 
 /// <summary>
 /// <para>
-/// Deletes a synonym rule in a synonym set
+/// Delete a synonym rule.
+/// Delete a synonym rule from a synonym set.
 /// </para>
 /// </summary>
 public sealed partial class DeleteSynonymRuleRequestDescriptor : RequestDescriptor<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleRequestParameters>

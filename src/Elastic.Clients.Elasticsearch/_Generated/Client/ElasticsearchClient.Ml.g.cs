@@ -185,7 +185,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseJobResponse CloseJob(CloseJobRequest request)
@@ -202,7 +202,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(CloseJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -218,7 +218,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseJobResponse CloseJob(CloseJobRequestDescriptor descriptor)
@@ -235,7 +235,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseJobResponse CloseJob(Elastic.Clients.Elasticsearch.Id jobId)
@@ -253,7 +253,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseJobResponse CloseJob(Elastic.Clients.Elasticsearch.Id jobId, Action<CloseJobRequestDescriptor> configureRequest)
@@ -272,7 +272,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(CloseJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -288,7 +288,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Id jobId, CancellationToken cancellationToken = default)
 	{
@@ -305,7 +305,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
 	/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Id jobId, Action<CloseJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -320,7 +320,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarResponse DeleteCalendar(DeleteCalendarRequest request)
@@ -334,7 +334,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(DeleteCalendarRequest request, CancellationToken cancellationToken = default)
 	{
@@ -347,7 +347,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarResponse DeleteCalendar(DeleteCalendarRequestDescriptor descriptor)
@@ -361,7 +361,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarResponse DeleteCalendar(Elastic.Clients.Elasticsearch.Id calendarId)
@@ -376,7 +376,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarResponse DeleteCalendar(Elastic.Clients.Elasticsearch.Id calendarId, Action<DeleteCalendarRequestDescriptor> configureRequest)
@@ -392,7 +392,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(DeleteCalendarRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -405,7 +405,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, CancellationToken cancellationToken = default)
 	{
@@ -419,7 +419,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// Delete a calendar.
 	/// Removes all scheduled events from a calendar, then deletes it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, Action<DeleteCalendarRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -433,7 +433,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(DeleteCalendarEventRequest request)
@@ -446,7 +446,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(DeleteCalendarEventRequest request, CancellationToken cancellationToken = default)
 	{
@@ -458,7 +458,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(DeleteCalendarEventRequestDescriptor descriptor)
@@ -471,7 +471,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId)
@@ -485,7 +485,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, Action<DeleteCalendarEventRequestDescriptor> configureRequest)
@@ -500,7 +500,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(DeleteCalendarEventRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -512,7 +512,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, CancellationToken cancellationToken = default)
 	{
@@ -525,7 +525,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete events from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, Action<DeleteCalendarEventRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -539,7 +539,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarJobResponse DeleteCalendarJob(DeleteCalendarJobRequest request)
@@ -552,7 +552,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(DeleteCalendarJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -564,7 +564,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarJobResponse DeleteCalendarJob(DeleteCalendarJobRequestDescriptor descriptor)
@@ -577,7 +577,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarJobResponse DeleteCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId)
@@ -591,7 +591,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarJobResponse DeleteCalendarJob(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, Action<DeleteCalendarJobRequestDescriptor> configureRequest)
@@ -606,7 +606,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(DeleteCalendarJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -618,7 +618,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, CancellationToken cancellationToken = default)
 	{
@@ -631,7 +631,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete anomaly jobs from a calendar.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, Action<DeleteCalendarJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -645,7 +645,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDatafeedResponse DeleteDatafeed(DeleteDatafeedRequest request)
@@ -658,7 +658,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(DeleteDatafeedRequest request, CancellationToken cancellationToken = default)
 	{
@@ -670,7 +670,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDatafeedResponse DeleteDatafeed(DeleteDatafeedRequestDescriptor descriptor)
@@ -683,7 +683,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDatafeedResponse DeleteDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId)
@@ -697,7 +697,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDatafeedResponse DeleteDatafeed(Elastic.Clients.Elasticsearch.Id datafeedId, Action<DeleteDatafeedRequestDescriptor> configureRequest)
@@ -712,7 +712,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(DeleteDatafeedRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -724,7 +724,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, CancellationToken cancellationToken = default)
 	{
@@ -737,7 +737,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a datafeed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, Action<DeleteDatafeedRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -751,7 +751,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(DeleteDataFrameAnalyticsRequest request)
@@ -764,7 +764,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(DeleteDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -776,7 +776,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics<TDocument>(DeleteDataFrameAnalyticsRequestDescriptor<TDocument> descriptor)
@@ -789,7 +789,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -803,7 +803,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest)
@@ -818,7 +818,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(DeleteDataFrameAnalyticsRequestDescriptor descriptor)
@@ -831,7 +831,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
@@ -845,7 +845,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor> configureRequest)
@@ -860,7 +860,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(DeleteDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -872,7 +872,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -885,7 +885,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -899,7 +899,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(DeleteDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -911,7 +911,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -924,7 +924,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a data frame analytics job.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7866,8 +7866,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7886,8 +7886,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7905,8 +7905,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7925,8 +7925,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7946,8 +7946,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7968,8 +7968,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -7987,8 +7987,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -8007,8 +8007,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Return ML defaults and limits.
-	/// Returns defaults and limits used by machine learning.
+	/// Get machine learning information.
+	/// Get defaults and limits used by machine learning.
 	/// This endpoint is designed to be used by a user interface that needs to fully
 	/// understand machine learning configurations where some options are not
 	/// specified, meaning that the defaults should be used. This endpoint may be
@@ -9138,7 +9138,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(PutDataFrameAnalyticsRequest request)
@@ -9153,7 +9153,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(PutDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -9167,7 +9167,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics<TDocument>(PutDataFrameAnalyticsRequestDescriptor<TDocument> descriptor)
@@ -9182,7 +9182,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -9198,7 +9198,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest)
@@ -9215,7 +9215,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(PutDataFrameAnalyticsRequestDescriptor descriptor)
@@ -9230,7 +9230,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id)
@@ -9246,7 +9246,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Elastic.Clients.Elasticsearch.Id id, Action<PutDataFrameAnalyticsRequestDescriptor> configureRequest)
@@ -9263,7 +9263,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync<TDocument>(PutDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9277,7 +9277,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -9292,7 +9292,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9308,7 +9308,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(PutDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9322,7 +9322,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -9337,7 +9337,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// This API creates a data frame analytics job that performs an analysis on the
 	/// source indices and stores the outcome in a destination index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9518,70 +9518,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id jobId)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(jobId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, Action<PutJobRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(jobId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id jobId)
-	{
-		var descriptor = new PutJobRequestDescriptor(jobId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id jobId, Action<PutJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutJobRequestDescriptor(jobId);
-		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
 	}
@@ -9606,66 +9544,8 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(jobId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor<TDocument>(jobId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id jobId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor(jobId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an anomaly detection job.
-	/// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id jobId, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutJobRequestDescriptor(jobId);
-		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
 	}
@@ -13299,7 +13179,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13312,7 +13192,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13324,7 +13204,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13337,7 +13217,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13351,7 +13231,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13366,7 +13246,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13379,7 +13259,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13393,7 +13273,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13408,7 +13288,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13420,7 +13300,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13433,7 +13313,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13447,7 +13327,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13459,7 +13339,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13472,7 +13352,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Validates an anomaly detection detector.
+	/// Validate an anomaly detection job.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

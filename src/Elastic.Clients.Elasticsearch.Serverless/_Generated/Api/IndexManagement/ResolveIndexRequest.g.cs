@@ -61,7 +61,8 @@ public sealed partial class ResolveIndexRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+/// Resolve indices.
+/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 /// Multiple patterns and remote clusters are supported.
 /// </para>
 /// </summary>
@@ -111,7 +112,8 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 
 /// <summary>
 /// <para>
-/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+/// Resolve indices.
+/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 /// Multiple patterns and remote clusters are supported.
 /// </para>
 /// </summary>

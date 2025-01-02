@@ -46,6 +46,8 @@ public sealed partial class PutDataFrameAnalyticsResponse : ElasticsearchRespons
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int MaxNumThreads { get; init; }
+	[JsonInclude, JsonPropertyName("_meta")]
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string ModelMemoryLimit { get; init; }
 	[JsonInclude, JsonPropertyName("source")]

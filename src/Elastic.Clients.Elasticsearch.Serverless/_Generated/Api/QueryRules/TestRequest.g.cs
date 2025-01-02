@@ -36,7 +36,8 @@ public sealed partial class TestRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates a query ruleset.
+/// Test a query ruleset.
+/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>
 public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
@@ -59,7 +60,8 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 
 /// <summary>
 /// <para>
-/// Creates or updates a query ruleset.
+/// Test a query ruleset.
+/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>
 public sealed partial class TestRequestDescriptor : RequestDescriptor<TestRequestDescriptor, TestRequestParameters>

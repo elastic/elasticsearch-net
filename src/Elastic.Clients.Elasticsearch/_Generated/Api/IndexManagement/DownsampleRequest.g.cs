@@ -36,7 +36,15 @@ public sealed partial class DownsampleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
+/// </para>
+/// <para>
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>, ISelfSerializable
@@ -64,7 +72,15 @@ public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestPa
 
 /// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
+/// </para>
+/// <para>
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 public sealed partial class DownsampleRequestDescriptor<TDocument> : RequestDescriptor<DownsampleRequestDescriptor<TDocument>, DownsampleRequestParameters>
@@ -128,7 +144,15 @@ public sealed partial class DownsampleRequestDescriptor<TDocument> : RequestDesc
 
 /// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
+/// </para>
+/// <para>
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 public sealed partial class DownsampleRequestDescriptor : RequestDescriptor<DownsampleRequestDescriptor, DownsampleRequestParameters>

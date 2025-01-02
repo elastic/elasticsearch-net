@@ -42,7 +42,8 @@ public sealed partial class QueryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
@@ -197,7 +198,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescriptor<QueryRequestDescriptor<TDocument>, QueryRequestParameters>
@@ -549,7 +551,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
 public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequestDescriptor, QueryRequestParameters>

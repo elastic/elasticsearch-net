@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapeProperty : IProperty
 {
@@ -77,7 +77,7 @@ public sealed partial class ShapeProperty : IProperty
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptor<ShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<ShapeProperty>
 {
@@ -307,7 +307,7 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
 {

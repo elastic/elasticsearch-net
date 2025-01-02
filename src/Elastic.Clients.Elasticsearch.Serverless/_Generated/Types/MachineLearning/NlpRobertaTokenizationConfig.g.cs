@@ -44,6 +44,14 @@ public sealed partial class NlpRobertaTokenizationConfig
 
 	/// <summary>
 	/// <para>
+	/// Should the tokenizer lower case the text
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("do_lower_case")]
+	public bool? DoLowerCase { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Maximum input sequence length for the model
 	/// </para>
 	/// </summary>
@@ -91,6 +99,7 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	}
 
 	private bool? AddPrefixSpaceValue { get; set; }
+	private bool? DoLowerCaseValue { get; set; }
 	private int? MaxSequenceLengthValue { get; set; }
 	private int? SpanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.TokenizationTruncate? TruncateValue { get; set; }
@@ -104,6 +113,17 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)
 	{
 		AddPrefixSpaceValue = addPrefixSpace;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should the tokenizer lower case the text
+	/// </para>
+	/// </summary>
+	public NlpRobertaTokenizationConfigDescriptor DoLowerCase(bool? doLowerCase = true)
+	{
+		DoLowerCaseValue = doLowerCase;
 		return Self;
 	}
 
@@ -158,6 +178,12 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 		{
 			writer.WritePropertyName("add_prefix_space");
 			writer.WriteBooleanValue(AddPrefixSpaceValue.Value);
+		}
+
+		if (DoLowerCaseValue.HasValue)
+		{
+			writer.WritePropertyName("do_lower_case");
+			writer.WriteBooleanValue(DoLowerCaseValue.Value);
 		}
 
 		if (MaxSequenceLengthValue.HasValue)

@@ -56,7 +56,8 @@ public sealed partial class NodesInfoRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns cluster nodes information.
+/// Get node information.
+/// By default, the API returns all attributes and core settings for cluster nodes.
 /// </para>
 /// </summary>
 public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestParameters>
@@ -112,7 +113,8 @@ public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestPara
 
 /// <summary>
 /// <para>
-/// Returns cluster nodes information.
+/// Get node information.
+/// By default, the API returns all attributes and core settings for cluster nodes.
 /// </para>
 /// </summary>
 public sealed partial class NodesInfoRequestDescriptor : RequestDescriptor<NodesInfoRequestDescriptor, NodesInfoRequestParameters>

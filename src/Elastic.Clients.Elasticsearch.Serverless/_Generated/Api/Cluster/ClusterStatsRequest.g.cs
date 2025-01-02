@@ -51,8 +51,8 @@ public sealed partial class ClusterStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns cluster statistics.
-/// It returns basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+/// Get cluster statistics.
+/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>
 public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsRequestParameters>
@@ -94,8 +94,8 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 
 /// <summary>
 /// <para>
-/// Returns cluster statistics.
-/// It returns basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+/// Get cluster statistics.
+/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>
 public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>

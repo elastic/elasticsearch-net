@@ -70,5 +70,5 @@ public sealed partial class DatafeedStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timing_stats")]
-	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedTimingStats TimingStats { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedTimingStats? TimingStats { get; init; }
 }

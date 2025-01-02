@@ -41,9 +41,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(CancelRequest request)
@@ -54,9 +62,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequest request, CancellationToken cancellationToken = default)
 	{
@@ -66,9 +82,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(CancelRequestDescriptor descriptor)
@@ -79,9 +103,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId)
@@ -93,9 +125,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest)
@@ -108,9 +148,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel()
@@ -122,9 +170,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(Action<CancelRequestDescriptor> configureRequest)
@@ -137,9 +193,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -149,9 +213,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, CancellationToken cancellationToken = default)
 	{
@@ -162,9 +234,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -176,9 +256,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
 	{
@@ -189,9 +277,17 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Cancels a task, if it can be cancelled through an API.
+	/// Cancel a task.
+	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
+	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
+	/// The get task information API will continue to list these cancelled tasks until they complete.
+	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
+	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -204,9 +300,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTasksResponse Get(GetTasksRequest request)
@@ -218,9 +314,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequest request, CancellationToken cancellationToken = default)
 	{
@@ -231,9 +327,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTasksResponse Get(GetTasksRequestDescriptor descriptor)
@@ -245,9 +341,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId)
@@ -260,9 +356,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId, Action<GetTasksRequestDescriptor> configureRequest)
@@ -276,9 +372,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -289,9 +385,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
 	{
@@ -303,9 +399,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get task information.
-	/// Returns information about the tasks currently executing in the cluster.
+	/// Get information about a task currently running in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, Action<GetTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -317,9 +413,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(ListRequest request)
@@ -330,9 +427,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequest request, CancellationToken cancellationToken = default)
 	{
@@ -342,9 +440,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(ListRequestDescriptor descriptor)
@@ -355,9 +454,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List()
@@ -369,9 +469,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(Action<ListRequestDescriptor> configureRequest)
@@ -384,9 +485,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -396,9 +498,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
 	{
@@ -409,9 +512,10 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// The task management API returns information about tasks currently executing on one or more nodes in the cluster.
+	/// Get all tasks.
+	/// Get information about the tasks currently running on one or more nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(Action<ListRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

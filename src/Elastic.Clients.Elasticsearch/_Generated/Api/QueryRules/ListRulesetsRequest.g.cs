@@ -49,7 +49,8 @@ public sealed partial class ListRulesetsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns summarized information about existing query rulesets.
+/// Get all query rulesets.
+/// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>
 public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsRequestParameters>
@@ -81,7 +82,8 @@ public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsReque
 
 /// <summary>
 /// <para>
-/// Returns summarized information about existing query rulesets.
+/// Get all query rulesets.
+/// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>
 public sealed partial class ListRulesetsRequestDescriptor : RequestDescriptor<ListRulesetsRequestDescriptor, ListRulesetsRequestParameters>

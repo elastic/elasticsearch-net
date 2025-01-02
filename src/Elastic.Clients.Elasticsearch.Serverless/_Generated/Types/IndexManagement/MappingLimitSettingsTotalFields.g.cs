@@ -39,7 +39,7 @@ public sealed partial class MappingLimitSettingsTotalFields
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_dynamic_beyond_limit")]
-	public bool? IgnoreDynamicBeyondLimit { get; set; }
+	public object? IgnoreDynamicBeyondLimit { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -49,7 +49,7 @@ public sealed partial class MappingLimitSettingsTotalFields
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
-	public long? Limit { get; set; }
+	public object? Limit { get; set; }
 }
 
 public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsTotalFieldsDescriptor>
@@ -60,8 +60,8 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	{
 	}
 
-	private bool? IgnoreDynamicBeyondLimitValue { get; set; }
-	private long? LimitValue { get; set; }
+	private object? IgnoreDynamicBeyondLimitValue { get; set; }
+	private object? LimitValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,7 +72,7 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	/// The fields that were not added to the mapping will be added to the _ignored field.
 	/// </para>
 	/// </summary>
-	public MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(bool? ignoreDynamicBeyondLimit = true)
+	public MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(object? ignoreDynamicBeyondLimit)
 	{
 		IgnoreDynamicBeyondLimitValue = ignoreDynamicBeyondLimit;
 		return Self;
@@ -85,7 +85,7 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	/// degradations and memory issues, especially in clusters with a high load or few resources.
 	/// </para>
 	/// </summary>
-	public MappingLimitSettingsTotalFieldsDescriptor Limit(long? limit)
+	public MappingLimitSettingsTotalFieldsDescriptor Limit(object? limit)
 	{
 		LimitValue = limit;
 		return Self;
@@ -94,16 +94,16 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IgnoreDynamicBeyondLimitValue.HasValue)
+		if (IgnoreDynamicBeyondLimitValue is not null)
 		{
 			writer.WritePropertyName("ignore_dynamic_beyond_limit");
-			writer.WriteBooleanValue(IgnoreDynamicBeyondLimitValue.Value);
+			JsonSerializer.Serialize(writer, IgnoreDynamicBeyondLimitValue, options);
 		}
 
-		if (LimitValue.HasValue)
+		if (LimitValue is not null)
 		{
 			writer.WritePropertyName("limit");
-			writer.WriteNumberValue(LimitValue.Value);
+			JsonSerializer.Serialize(writer, LimitValue, options);
 		}
 
 		writer.WriteEndObject();

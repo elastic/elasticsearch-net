@@ -38,7 +38,13 @@ public sealed partial class StopIlmRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+/// Stop the ILM plugin.
+/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+/// </para>
+/// <para>
+/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+/// Use the get ILM status API to check whether ILM is running.
 /// </para>
 /// </summary>
 public sealed partial class StopIlmRequest : PlainRequest<StopIlmRequestParameters>
@@ -59,7 +65,13 @@ public sealed partial class StopIlmRequest : PlainRequest<StopIlmRequestParamete
 
 /// <summary>
 /// <para>
-/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
+/// Stop the ILM plugin.
+/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
+/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+/// </para>
+/// <para>
+/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+/// Use the get ILM status API to check whether ILM is running.
 /// </para>
 /// </summary>
 public sealed partial class StopIlmRequestDescriptor : RequestDescriptor<StopIlmRequestDescriptor, StopIlmRequestParameters>

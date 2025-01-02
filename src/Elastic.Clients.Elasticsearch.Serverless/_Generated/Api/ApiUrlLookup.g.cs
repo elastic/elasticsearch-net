@@ -93,12 +93,15 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls IngestDeleteGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database/{id}" });
+	internal static ApiUrls IngestDeleteIpLocationDatabase = new ApiUrls(new[] { "_ingest/ip_location/database/{id}" });
 	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "_ingest/geoip/stats" });
 	internal static ApiUrls IngestGetGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database", "_ingest/geoip/database/{id}" });
+	internal static ApiUrls IngestGetIpLocationDatabase = new ApiUrls(new[] { "_ingest/ip_location/database", "_ingest/ip_location/database/{id}" });
 	internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "_ingest/pipeline", "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "_ingest/processor/grok" });
 	internal static ApiUrls IngestPutGeoipDatabase = new ApiUrls(new[] { "_ingest/geoip/database/{id}" });
+	internal static ApiUrls IngestPutIpLocationDatabase = new ApiUrls(new[] { "_ingest/ip_location/database/{id}" });
 	internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "_ingest/pipeline/_simulate", "_ingest/pipeline/{id}/_simulate" });
 	internal static ApiUrls LicenseManagementGet = new ApiUrls(new[] { "_license" });

@@ -32,6 +32,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed partial class AsyncSearchStatusRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 }
 
 /// <summary>
@@ -56,6 +63,15 @@ public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "async_search.status";
+
+	/// <summary>
+	/// <para>
+	/// Specifies how long the async search needs to be available.
+	/// Ongoing async searches and any saved search results are deleted after this period.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 }
 
 /// <summary>
@@ -82,6 +98,8 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "async_search.status";
+
+	public AsyncSearchStatusRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 
 	public AsyncSearchStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -118,6 +136,8 @@ public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescript
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "async_search.status";
+
+	public AsyncSearchStatusRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 
 	public AsyncSearchStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

@@ -36,7 +36,10 @@ public sealed partial class ResumeAutoFollowPatternRequestParameters : RequestPa
 
 /// <summary>
 /// <para>
-/// Resumes an auto-follow pattern that has been paused
+/// Resume an auto-follow pattern.
+/// Resume a cross-cluster replication auto-follow pattern that was paused.
+/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 /// </para>
 /// </summary>
 public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<ResumeAutoFollowPatternRequestParameters>
@@ -56,7 +59,10 @@ public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<Resume
 
 /// <summary>
 /// <para>
-/// Resumes an auto-follow pattern that has been paused
+/// Resume an auto-follow pattern.
+/// Resume a cross-cluster replication auto-follow pattern that was paused.
+/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
+/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
 /// </para>
 /// </summary>
 public sealed partial class ResumeAutoFollowPatternRequestDescriptor : RequestDescriptor<ResumeAutoFollowPatternRequestDescriptor, ResumeAutoFollowPatternRequestParameters>

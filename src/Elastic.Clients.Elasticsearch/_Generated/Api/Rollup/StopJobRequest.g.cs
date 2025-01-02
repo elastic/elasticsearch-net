@@ -51,7 +51,9 @@ public sealed partial class StopJobRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParameters>
@@ -89,7 +91,9 @@ public sealed partial class StopJobRequest : PlainRequest<StopJobRequestParamete
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescriptor<StopJobRequestDescriptor<TDocument>, StopJobRequestParameters>
@@ -124,7 +128,9 @@ public sealed partial class StopJobRequestDescriptor<TDocument> : RequestDescrip
 
 /// <summary>
 /// <para>
-/// Stops an existing, started rollup job.
+/// Stop rollup jobs.
+/// If you try to stop a job that does not exist, an exception occurs.
+/// If you try to stop a job that is already stopped, nothing happens.
 /// </para>
 /// </summary>
 public sealed partial class StopJobRequestDescriptor : RequestDescriptor<StopJobRequestDescriptor, StopJobRequestParameters>

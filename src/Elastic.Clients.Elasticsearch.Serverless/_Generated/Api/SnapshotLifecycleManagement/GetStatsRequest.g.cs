@@ -36,7 +36,8 @@ public sealed partial class GetStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+/// Get snapshot lifecycle management statistics.
+/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 /// </para>
 /// </summary>
 public sealed partial class GetStatsRequest : PlainRequest<GetStatsRequestParameters>
@@ -52,7 +53,8 @@ public sealed partial class GetStatsRequest : PlainRequest<GetStatsRequestParame
 
 /// <summary>
 /// <para>
-/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+/// Get snapshot lifecycle management statistics.
+/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 /// </para>
 /// </summary>
 public sealed partial class GetStatsRequestDescriptor : RequestDescriptor<GetStatsRequestDescriptor, GetStatsRequestParameters>
