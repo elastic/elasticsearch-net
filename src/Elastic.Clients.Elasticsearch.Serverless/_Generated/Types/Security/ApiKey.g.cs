@@ -31,11 +31,22 @@ public sealed partial class ApiKey
 {
 	/// <summary>
 	/// <para>
+	/// The access granted to cross-cluster API keys.
+	/// The access is composed of permissions for cross cluster search and cross cluster replication.
+	/// At least one of them must be specified.
+	/// When specified, the new access assignment fully replaces the previously assigned access.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("access")]
+	public Elastic.Clients.Elasticsearch.Serverless.Security.Access? Access { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// Creation time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("creation")]
-	public long? Creation { get; init; }
+	public long Creation { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -60,7 +71,15 @@ public sealed partial class ApiKey
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("invalidated")]
-	public bool? Invalidated { get; init; }
+	public bool Invalidated { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// If the key has been invalidated, invalidation time in milliseconds.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("invalidation")]
+	public long? Invalidation { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -78,7 +97,7 @@ public sealed partial class ApiKey
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metadata")]
-	public IReadOnlyDictionary<string, object>? Metadata { get; init; }
+	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -102,7 +121,7 @@ public sealed partial class ApiKey
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("realm")]
-	public string? Realm { get; init; }
+	public string Realm { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -120,8 +139,22 @@ public sealed partial class ApiKey
 	/// </summary>
 	[JsonInclude, JsonPropertyName("role_descriptors")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Security.RoleDescriptor>? RoleDescriptors { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Sorting values when using the <c>sort</c> parameter with the <c>security.query_api_keys</c> API.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_sort")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? Sort { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The type of the API key (e.g. <c>rest</c> or <c>cross_cluster</c>).
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("type")]
+	public Elastic.Clients.Elasticsearch.Serverless.Security.ApiKeyType Type { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -129,5 +162,5 @@ public sealed partial class ApiKey
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
-	public string? Username { get; init; }
+	public string Username { get; init; }
 }

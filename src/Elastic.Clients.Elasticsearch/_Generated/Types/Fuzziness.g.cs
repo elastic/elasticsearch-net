@@ -31,7 +31,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class Fuzziness : Union<string, int>
 {

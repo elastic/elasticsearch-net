@@ -41,7 +41,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
+	/// Delete a policy.
+	/// Delete a snapshot lifecycle policy definition.
+	/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -53,7 +55,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
+	/// Delete a policy.
+	/// Delete a snapshot lifecycle policy definition.
+	/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -65,7 +69,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
+	/// Delete a policy.
+	/// Delete a snapshot lifecycle policy definition.
+	/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -78,7 +84,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
+	/// Delete a policy.
+	/// Delete a snapshot lifecycle policy definition.
+	/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -92,7 +100,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+	/// Run a policy.
+	/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+	/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -104,7 +114,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+	/// Run a policy.
+	/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+	/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -116,7 +128,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+	/// Run a policy.
+	/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+	/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -129,7 +143,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
+	/// Run a policy.
+	/// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+	/// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -143,7 +159,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
+	/// Run a retention policy.
+	/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+	/// The retention policy is normally applied according to its schedule.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -155,7 +173,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
+	/// Run a retention policy.
+	/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+	/// The retention policy is normally applied according to its schedule.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -167,7 +187,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
+	/// Run a retention policy.
+	/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+	/// The retention policy is normally applied according to its schedule.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -180,7 +202,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
+	/// Run a retention policy.
+	/// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+	/// The retention policy is normally applied according to its schedule.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -194,7 +218,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -206,7 +231,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -218,7 +244,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -231,7 +258,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -245,7 +273,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -258,7 +287,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+	/// Get policy information.
+	/// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -272,7 +302,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+	/// Get snapshot lifecycle management statistics.
+	/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -284,7 +315,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+	/// Get snapshot lifecycle management statistics.
+	/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -296,7 +328,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+	/// Get snapshot lifecycle management statistics.
+	/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -309,7 +342,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
+	/// Get snapshot lifecycle management statistics.
+	/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -323,7 +357,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
+	/// Get the snapshot lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -335,7 +369,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
+	/// Get the snapshot lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -347,7 +381,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
+	/// Get the snapshot lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -360,7 +394,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
+	/// Get the snapshot lifecycle management status.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -374,7 +408,10 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
+	/// Create or update a policy.
+	/// Create or update a snapshot lifecycle policy.
+	/// If the policy already exists, this request increments the policy version.
+	/// Only the latest version of a policy is stored.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -386,7 +423,10 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
+	/// Create or update a policy.
+	/// Create or update a snapshot lifecycle policy.
+	/// If the policy already exists, this request increments the policy version.
+	/// Only the latest version of a policy is stored.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -398,7 +438,10 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
+	/// Create or update a policy.
+	/// Create or update a snapshot lifecycle policy.
+	/// If the policy already exists, this request increments the policy version.
+	/// Only the latest version of a policy is stored.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -411,7 +454,10 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
+	/// Create or update a policy.
+	/// Create or update a snapshot lifecycle policy.
+	/// If the policy already exists, this request increments the policy version.
+	/// Only the latest version of a policy is stored.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -425,7 +471,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
+	/// Start snapshot lifecycle management.
+	/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+	/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -437,7 +485,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
+	/// Start snapshot lifecycle management.
+	/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+	/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -449,7 +499,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
+	/// Start snapshot lifecycle management.
+	/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+	/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -462,7 +514,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
+	/// Start snapshot lifecycle management.
+	/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+	/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -476,7 +530,15 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
+	/// Stop snapshot lifecycle management.
+	/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+	/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+	/// Stopping SLM does not stop any snapshots that are in progress.
+	/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+	/// </para>
+	/// <para>
+	/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+	/// Use the get snapshot lifecycle management status API to see if SLM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -488,7 +550,15 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
+	/// Stop snapshot lifecycle management.
+	/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+	/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+	/// Stopping SLM does not stop any snapshots that are in progress.
+	/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+	/// </para>
+	/// <para>
+	/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+	/// Use the get snapshot lifecycle management status API to see if SLM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -500,7 +570,15 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
+	/// Stop snapshot lifecycle management.
+	/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+	/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+	/// Stopping SLM does not stop any snapshots that are in progress.
+	/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+	/// </para>
+	/// <para>
+	/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+	/// Use the get snapshot lifecycle management status API to see if SLM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -513,7 +591,15 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 
 	/// <summary>
 	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
+	/// Stop snapshot lifecycle management.
+	/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+	/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+	/// Stopping SLM does not stop any snapshots that are in progress.
+	/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+	/// </para>
+	/// <para>
+	/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+	/// Use the get snapshot lifecycle management status API to see if SLM is running.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

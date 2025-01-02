@@ -44,7 +44,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(AnalyzeIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -57,7 +57,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(AnalyzeIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -70,7 +70,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -84,7 +84,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -99,7 +99,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -113,7 +113,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -128,7 +128,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(AnalyzeIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -141,7 +141,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -155,7 +155,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<AnalyzeIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -170,7 +170,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(CancellationToken cancellationToken = default)
 	{
@@ -184,7 +184,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get tokens from text analysis.
 	/// The analyze API performs <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html">analysis</a> on a text string and returns the resulting tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Action<AnalyzeIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -196,8 +196,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -209,8 +210,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -222,8 +224,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -236,8 +239,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -251,8 +255,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -265,8 +270,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -280,8 +286,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -293,8 +300,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -307,8 +315,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -322,8 +331,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -336,8 +346,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clears the caches of one or more indices.
-	/// For data streams, the API clears the caches of the stream’s backing indices.
+	/// Clear the cache.
+	/// Clear the cache of one or more indices.
+	/// For data streams, the API clears the caches of the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -351,9 +362,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(CloseIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -363,9 +395,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CloseIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -375,9 +428,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -388,9 +462,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -402,9 +497,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -415,9 +531,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -429,9 +566,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(CloseIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -441,9 +599,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -454,9 +633,30 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Closes an index.
+	/// Close an index.
+	/// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
+	/// It is not possible to index documents or to search for documents in a closed index.
+	/// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When opening or closing an index, the master node is responsible for restarting the index shards to reflect the new state of the index.
+	/// The shards will then go through the normal recovery process.
+	/// The data of opened and closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
+	/// </para>
+	/// <para>
+	/// You can open and close multiple indices.
+	/// An error is thrown if the request explicitly refers to a missing index.
+	/// This behaviour can be turned off using the <c>ignore_unavailable=true</c> parameter.
+	/// </para>
+	/// <para>
+	/// By default, you must explicitly name the indices you are opening or closing.
+	/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the<c> action.destructive_requires_name</c> setting to <c>false</c>. This setting can also be changed with the cluster update settings API.
+	/// </para>
+	/// <para>
+	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
+	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<CloseIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -471,7 +671,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(CreateIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -484,7 +684,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(CreateIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -497,7 +697,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -511,7 +711,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -526,7 +726,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -540,7 +740,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -555,7 +755,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(CreateIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -568,7 +768,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -582,7 +782,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create an index.
 	/// Creates a new index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1443,7 +1643,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about whether a particular index template exists.
+	/// Check index templates.
+	/// Check whether index templates exist.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1455,7 +1656,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about whether a particular index template exists.
+	/// Check index templates.
+	/// Check whether index templates exist.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1467,7 +1669,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about whether a particular index template exists.
+	/// Check index templates.
+	/// Check whether index templates exist.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1480,7 +1683,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about whether a particular index template exists.
+	/// Check index templates.
+	/// Check whether index templates exist.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1495,7 +1699,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1508,7 +1712,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1521,7 +1725,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1535,7 +1739,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1550,7 +1754,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1564,7 +1768,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1579,7 +1783,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1592,7 +1796,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1606,7 +1810,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get the status for a data stream lifecycle.
-	/// Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1620,9 +1824,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(FlushRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1632,9 +1848,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(FlushRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1644,9 +1872,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -1657,9 +1897,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1671,9 +1923,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1684,9 +1948,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1698,9 +1974,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(FlushRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1710,9 +1998,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -1723,9 +2023,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1737,9 +2049,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(CancellationToken cancellationToken = default)
 	{
@@ -1750,9 +2074,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Flushes one or more data streams or indices.
+	/// Flush data streams or indices.
+	/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
+	/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
+	/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// After each operation has been flushed it is permanently stored in the Lucene index.
+	/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
+	/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
+	/// </para>
+	/// <para>
+	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
+	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1764,7 +2100,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1776,7 +2126,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1788,7 +2152,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1801,7 +2179,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1815,7 +2207,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1828,7 +2234,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1842,7 +2262,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1854,7 +2288,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1867,7 +2315,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1881,7 +2343,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1894,7 +2370,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Performs the force merge operation on one or more indices.
+	/// Force a merge.
+	/// Perform the force merge operation on the shards of one or more indices.
+	/// For data streams, the API forces a merge on the shards of the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
+	/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
+	/// </para>
+	/// <para>
+	/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
+	/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
+	/// These soft-deleted documents are automatically cleaned up during regular segment merges.
+	/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
+	/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
+	/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3613,8 +4103,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3626,8 +4164,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3639,8 +4225,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3653,8 +4287,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3668,8 +4350,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3682,8 +4412,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3697,8 +4475,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3710,8 +4536,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3724,8 +4598,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3739,8 +4661,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3753,8 +4723,56 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about ongoing and completed shard recoveries for one or more indices.
-	/// For data streams, the API returns information for the stream’s backing indices.
+	/// Get index recovery information.
+	/// Get information about ongoing and completed shard recoveries for one or more indices.
+	/// For data streams, the API returns information for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+	/// When a shard recovery completes, the recovered shard is available for search and indexing.
+	/// </para>
+	/// <para>
+	/// Recovery automatically occurs during the following processes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// When creating an index for the first time.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Creation of new replica shard copies from the primary.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Relocation of a shard copy to a different node in the same cluster.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A snapshot restore operation.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A clone, shrink, or split operation.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+	/// </para>
+	/// <para>
+	/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3934,7 +4952,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+	/// Resolve indices.
+	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3947,7 +4966,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+	/// Resolve indices.
+	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3960,7 +4980,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+	/// Resolve indices.
+	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3974,7 +4995,8 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+	/// Resolve indices.
+	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -3992,7 +5014,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(RolloverRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4005,7 +5027,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(RolloverRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4018,7 +5040,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Elastic.Clients.Elasticsearch.Serverless.IndexName? newIndex, CancellationToken cancellationToken = default)
 	{
@@ -4032,7 +5054,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Elastic.Clients.Elasticsearch.Serverless.IndexName? newIndex, Action<RolloverRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4047,7 +5069,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, CancellationToken cancellationToken = default)
 	{
@@ -4061,7 +5083,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Action<RolloverRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4076,7 +5098,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(RolloverRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4089,7 +5111,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Elastic.Clients.Elasticsearch.Serverless.IndexName? newIndex, CancellationToken cancellationToken = default)
 	{
@@ -4103,7 +5125,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Elastic.Clients.Elasticsearch.Serverless.IndexName? newIndex, Action<RolloverRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4118,7 +5140,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, CancellationToken cancellationToken = default)
 	{
@@ -4132,7 +5154,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Roll over to a new index.
 	/// Creates a new index for a data stream or index alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias, Action<RolloverRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4144,8 +5166,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4157,8 +5180,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4170,8 +5194,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4184,8 +5209,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4199,8 +5225,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4213,8 +5240,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4228,8 +5256,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4241,8 +5270,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4255,8 +5285,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4270,8 +5301,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4284,8 +5316,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns low-level information about the Lucene segments in index shards.
-	/// For data streams, the API returns information about the stream’s backing indices.
+	/// Get index segments.
+	/// Get low-level information about the Lucene segments in index shards.
+	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4509,8 +5542,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4522,8 +5567,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4535,8 +5592,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4549,8 +5618,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4564,8 +5645,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4578,8 +5671,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4593,8 +5698,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4606,8 +5723,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4620,8 +5749,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4635,8 +5776,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4649,8 +5802,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns statistics for one or more indices.
-	/// For data streams, the API retrieves statistics for the stream’s backing indices.
+	/// Get index statistics.
+	/// For data streams, the API retrieves statistics for the stream's backing indices.
+	/// </para>
+	/// <para>
+	/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+	/// <c>primaries</c> are the values for only the primary shards.
+	/// <c>total</c> are the accumulated values for both primary and replica shards.
+	/// </para>
+	/// <para>
+	/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

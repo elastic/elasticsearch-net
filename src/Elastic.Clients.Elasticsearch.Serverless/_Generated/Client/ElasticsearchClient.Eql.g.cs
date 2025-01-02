@@ -41,7 +41,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -54,7 +55,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -67,7 +69,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -81,7 +84,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -96,7 +100,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -109,7 +114,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -123,7 +129,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
+	/// Delete an async EQL search.
+	/// Delete an async EQL search or a stored synchronous EQL search.
 	/// The API also deletes results for the search.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -138,9 +145,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+	/// Get async EQL search results.
+	/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequest request, CancellationToken cancellationToken = default)
 	{
@@ -150,9 +158,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+	/// Get async EQL search results.
+	/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequestDescriptor<TEvent> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -162,9 +171,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+	/// Get async EQL search results.
+	/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
@@ -175,9 +185,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+	/// Get async EQL search results.
+	/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<EqlGetRequestDescriptor<TEvent>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -189,9 +200,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequest request, CancellationToken cancellationToken = default)
 	{
@@ -201,9 +213,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(GetEqlStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -213,9 +226,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
@@ -226,9 +240,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetEqlStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -240,9 +255,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -252,9 +268,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
@@ -265,9 +282,10 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+	/// Get the async EQL status.
+	/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -279,7 +297,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -291,7 +311,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -303,7 +325,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -316,7 +340,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -330,7 +356,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -343,7 +371,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
+	/// Get EQL search results.
+	/// Returns search results for an Event Query Language (EQL) query.
+	/// EQL assumes each document in a data stream or index corresponds to an event.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

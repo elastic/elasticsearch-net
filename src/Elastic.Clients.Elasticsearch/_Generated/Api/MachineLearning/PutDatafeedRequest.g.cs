@@ -68,7 +68,7 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "aggregations")
+				if (property == "aggregations" || property == "aggs")
 				{
 					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
 					continue;

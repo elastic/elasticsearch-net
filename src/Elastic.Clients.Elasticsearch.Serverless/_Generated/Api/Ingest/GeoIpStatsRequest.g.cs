@@ -36,7 +36,8 @@ public sealed partial class GeoIpStatsRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Gets download statistics for GeoIP2 databases used with the geoip processor.
+/// Get GeoIP statistics.
+/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 /// </para>
 /// </summary>
 public sealed partial class GeoIpStatsRequest : PlainRequest<GeoIpStatsRequestParameters>
@@ -52,7 +53,8 @@ public sealed partial class GeoIpStatsRequest : PlainRequest<GeoIpStatsRequestPa
 
 /// <summary>
 /// <para>
-/// Gets download statistics for GeoIP2 databases used with the geoip processor.
+/// Get GeoIP statistics.
+/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 /// </para>
 /// </summary>
 public sealed partial class GeoIpStatsRequestDescriptor : RequestDescriptor<GeoIpStatsRequestDescriptor, GeoIpStatsRequestParameters>

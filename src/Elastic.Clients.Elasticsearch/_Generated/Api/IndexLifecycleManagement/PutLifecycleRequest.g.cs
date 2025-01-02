@@ -49,7 +49,11 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+/// Create or update a lifecycle policy.
+/// If the specified policy exists, it is replaced and the policy version is incremented.
+/// </para>
+/// <para>
+/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 /// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
@@ -87,7 +91,11 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 
 /// <summary>
 /// <para>
-/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
+/// Create or update a lifecycle policy.
+/// If the specified policy exists, it is replaced and the policy version is incremented.
+/// </para>
+/// <para>
+/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 /// </para>
 /// </summary>
 public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>

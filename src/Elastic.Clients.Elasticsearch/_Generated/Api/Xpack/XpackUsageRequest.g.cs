@@ -42,7 +42,9 @@ public sealed partial class XpackUsageRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+/// Get usage information.
+/// Get information about the features that are currently enabled and available under the current license.
+/// The API also provides some usage statistics.
 /// </para>
 /// </summary>
 public sealed partial class XpackUsageRequest : PlainRequest<XpackUsageRequestParameters>
@@ -66,7 +68,9 @@ public sealed partial class XpackUsageRequest : PlainRequest<XpackUsageRequestPa
 
 /// <summary>
 /// <para>
-/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
+/// Get usage information.
+/// Get information about the features that are currently enabled and available under the current license.
+/// The API also provides some usage statistics.
 /// </para>
 /// </summary>
 public sealed partial class XpackUsageRequestDescriptor : RequestDescriptor<XpackUsageRequestDescriptor, XpackUsageRequestParameters>

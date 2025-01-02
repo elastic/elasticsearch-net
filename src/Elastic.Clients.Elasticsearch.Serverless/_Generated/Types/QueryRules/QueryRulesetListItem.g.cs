@@ -31,7 +31,7 @@ public sealed partial class QueryRulesetListItem
 {
 	/// <summary>
 	/// <para>
-	/// A map of criteria type to the number of rules of that type
+	/// A map of criteria type (e.g. exact) to the number of rules of that type
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_criteria_types_counts")]
@@ -52,4 +52,12 @@ public sealed partial class QueryRulesetListItem
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_total_count")]
 	public int RuleTotalCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// A map of rule type (e.g. pinned) to the number of rules of that type
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("rule_type_counts")]
+	public IReadOnlyDictionary<string, int> RuleTypeCounts { get; init; }
 }

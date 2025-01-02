@@ -36,7 +36,7 @@ public sealed partial class PutRulesetRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Creates or updates a query ruleset.
+/// Create or update a query ruleset.
 /// </para>
 /// </summary>
 public sealed partial class PutRulesetRequest : PlainRequest<PutRulesetRequestParameters>
@@ -60,7 +60,7 @@ public sealed partial class PutRulesetRequest : PlainRequest<PutRulesetRequestPa
 
 /// <summary>
 /// <para>
-/// Creates or updates a query ruleset.
+/// Create or update a query ruleset.
 /// </para>
 /// </summary>
 public sealed partial class PutRulesetRequestDescriptor : RequestDescriptor<PutRulesetRequestDescriptor, PutRulesetRequestParameters>

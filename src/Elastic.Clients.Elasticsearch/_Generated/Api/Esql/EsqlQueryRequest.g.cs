@@ -57,7 +57,8 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Executes an ES|QL request
+/// Run an ES|QL query.
+/// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestParameters>
@@ -143,7 +144,8 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 
 /// <summary>
 /// <para>
-/// Executes an ES|QL request
+/// Run an ES|QL query.
+/// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescriptor<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryRequestParameters>
@@ -308,7 +310,8 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 
 /// <summary>
 /// <para>
-/// Executes an ES|QL request
+/// Run an ES|QL query.
+/// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQueryRequestDescriptor, EsqlQueryRequestParameters>

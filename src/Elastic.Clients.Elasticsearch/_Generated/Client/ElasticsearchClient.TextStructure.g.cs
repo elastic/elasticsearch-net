@@ -41,7 +41,803 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure(FindFieldStructureRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<FindFieldStructureRequest, FindFieldStructureResponse, FindFieldStructureRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequest, FindFieldStructureResponse, FindFieldStructureRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>(FindFieldStructureRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>()
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>(Action<FindFieldStructureRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure(FindFieldStructureRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure()
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindFieldStructureResponse FindFieldStructure(Action<FindFieldStructureRequestDescriptor> configureRequest)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(FindFieldStructureRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(Action<FindFieldStructureRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor<TDocument>, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of a text field.
+	/// Find the structure of a text field in an Elasticsearch index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(Action<FindFieldStructureRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindFieldStructureRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindFieldStructureRequestDescriptor, FindFieldStructureResponse, FindFieldStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure(FindMessageStructureRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<FindMessageStructureRequest, FindMessageStructureResponse, FindMessageStructureRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(FindMessageStructureRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequest, FindMessageStructureResponse, FindMessageStructureRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>(FindMessageStructureRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>()
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>(Action<FindMessageStructureRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure(FindMessageStructureRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure()
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FindMessageStructureResponse FindMessageStructure(Action<FindMessageStructureRequestDescriptor> configureRequest)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(FindMessageStructureRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(Action<FindMessageStructureRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor<TDocument>, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(FindMessageStructureRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Find the structure of text messages.
+	/// Find the structure of a list of text messages.
+	/// The messages must contain data that is suitable to be ingested into Elasticsearch.
+	/// </para>
+	/// <para>
+	/// This API provides a starting point for ingesting data into Elasticsearch in a format that is suitable for subsequent use with other Elastic Stack functionality.
+	/// Use this API rather than the find text structure API if your input text has already been split up into separate messages by some other process.
+	/// The response from the API contains:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Sample messages.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Statistics that reveal the most common values for all fields detected within the text and basic numeric statistics for numeric fields.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Information about the structure of the text, which is useful when you write ingest configurations to index it or similarly formatted text.
+	/// Appropriate mappings for an Elasticsearch index, which you could use to ingest the text.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All this information can be calculated by the structure finder with no guidance.
+	/// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(Action<FindMessageStructureRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FindMessageStructureRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FindMessageStructureRequestDescriptor, FindMessageStructureResponse, FindMessageStructureRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +850,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +864,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +879,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +895,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +912,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +926,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +941,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Tests a Grok pattern on some text.
+	/// Test a Grok pattern.
+	/// Test a Grok pattern on one or more lines of text.
+	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

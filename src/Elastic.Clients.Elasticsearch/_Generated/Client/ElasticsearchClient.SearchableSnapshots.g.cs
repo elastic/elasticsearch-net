@@ -41,7 +41,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +55,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +68,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +82,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +97,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +113,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -122,7 +128,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -137,7 +144,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -149,7 +157,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -162,7 +171,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -176,7 +186,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -189,7 +200,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve node-level cache statistics about searchable snapshots.
+	/// Get cache statistics.
+	/// Get statistics about the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -203,7 +215,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -216,7 +229,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -228,7 +242,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -241,7 +256,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -255,7 +271,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -270,7 +287,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -284,7 +302,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -299,7 +318,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -312,7 +332,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -326,7 +347,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -341,7 +363,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -355,7 +378,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -370,7 +394,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -382,7 +407,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -395,7 +421,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -409,7 +436,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -422,7 +450,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -436,7 +465,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -448,7 +478,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -461,7 +492,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -475,7 +507,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -488,7 +521,8 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clear the cache of searchable snapshots.
+	/// Clear the cache.
+	/// Clear indices and data streams from the shared cache for partially mounted indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -502,7 +536,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -515,7 +552,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -527,7 +567,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -540,7 +583,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -554,7 +600,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -569,7 +618,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -581,7 +633,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -594,7 +649,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Mount a snapshot as a searchable index.
+	/// Mount a snapshot.
+	/// Mount a snapshot as a searchable snapshot index.
+	/// Do not use this API for snapshots managed by index lifecycle management (ILM).
+	/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -608,7 +666,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -621,7 +679,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -633,7 +691,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -646,7 +704,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -660,7 +718,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -675,7 +733,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -689,7 +747,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -704,7 +762,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -717,7 +775,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -731,7 +789,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -746,7 +804,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -760,7 +818,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -775,7 +833,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -787,7 +845,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -800,7 +858,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -814,7 +872,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -827,7 +885,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -841,7 +899,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -853,7 +911,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -866,7 +924,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -880,7 +938,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -893,7 +951,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Retrieve shard-level statistics about searchable snapshots.
+	/// Get searchable snapshot statistics.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

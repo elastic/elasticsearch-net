@@ -36,7 +36,8 @@ public sealed partial class GetEqlStatusRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+/// Get the async EQL status.
+/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 /// </para>
 /// </summary>
 public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusRequestParameters>
@@ -56,7 +57,8 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 
 /// <summary>
 /// <para>
-/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+/// Get the async EQL status.
+/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 /// </para>
 /// </summary>
 public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDescriptor<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusRequestParameters>
@@ -88,7 +90,8 @@ public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+/// Get the async EQL status.
+/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 /// </para>
 /// </summary>
 public sealed partial class GetEqlStatusRequestDescriptor : RequestDescriptor<GetEqlStatusRequestDescriptor, GetEqlStatusRequestParameters>

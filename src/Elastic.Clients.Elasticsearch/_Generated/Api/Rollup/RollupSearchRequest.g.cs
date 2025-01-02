@@ -109,7 +109,9 @@ internal sealed partial class RollupSearchRequestConverter : JsonConverter<Rollu
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
 /// </summary>
 [JsonConverter(typeof(RollupSearchRequestConverter))]
@@ -174,7 +176,9 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDescriptor<RollupSearchRequestDescriptor<TDocument>, RollupSearchRequestParameters>
@@ -300,7 +304,9 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
 /// </summary>
 public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<RollupSearchRequestDescriptor, RollupSearchRequestParameters>

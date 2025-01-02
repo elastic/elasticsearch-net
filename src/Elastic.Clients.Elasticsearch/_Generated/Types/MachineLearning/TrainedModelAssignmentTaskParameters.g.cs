@@ -35,7 +35,7 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cache_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize CacheSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -51,7 +51,7 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_bytes")]
-	public int ModelBytes { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -68,6 +68,10 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
 	public int NumberOfAllocations { get; init; }
+	[JsonInclude, JsonPropertyName("per_allocation_memory_bytes")]
+	public Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; init; }
+	[JsonInclude, JsonPropertyName("per_deployment_memory_bytes")]
+	public Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; init; }
 	[JsonInclude, JsonPropertyName("priority")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; init; }
 

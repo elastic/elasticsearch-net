@@ -43,7 +43,8 @@ public sealed partial class CloneSnapshotRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Clones indices from one snapshot into another snapshot in the same repository.
+/// Clone a snapshot.
+/// Clone part of all of a snapshot into another snapshot in the same repository.
 /// </para>
 /// </summary>
 public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotRequestParameters>
@@ -75,7 +76,8 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 
 /// <summary>
 /// <para>
-/// Clones indices from one snapshot into another snapshot in the same repository.
+/// Clone a snapshot.
+/// Clone part of all of a snapshot into another snapshot in the same repository.
 /// </para>
 /// </summary>
 public sealed partial class CloneSnapshotRequestDescriptor : RequestDescriptor<CloneSnapshotRequestDescriptor, CloneSnapshotRequestParameters>

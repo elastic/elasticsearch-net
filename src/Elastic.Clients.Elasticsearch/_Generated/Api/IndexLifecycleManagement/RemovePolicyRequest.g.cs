@@ -36,7 +36,9 @@ public sealed partial class RemovePolicyRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Removes the assigned lifecycle policy and stops managing the specified index
+/// Remove policies from an index.
+/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+/// It also stops managing the indices.
 /// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyRequestParameters>
@@ -56,7 +58,9 @@ public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyReque
 
 /// <summary>
 /// <para>
-/// Removes the assigned lifecycle policy and stops managing the specified index
+/// Remove policies from an index.
+/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+/// It also stops managing the indices.
 /// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequestDescriptor<TDocument> : RequestDescriptor<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyRequestParameters>
@@ -92,7 +96,9 @@ public sealed partial class RemovePolicyRequestDescriptor<TDocument> : RequestDe
 
 /// <summary>
 /// <para>
-/// Removes the assigned lifecycle policy and stops managing the specified index
+/// Remove policies from an index.
+/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+/// It also stops managing the indices.
 /// </para>
 /// </summary>
 public sealed partial class RemovePolicyRequestDescriptor : RequestDescriptor<RemovePolicyRequestDescriptor, RemovePolicyRequestParameters>

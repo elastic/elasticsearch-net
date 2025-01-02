@@ -30,9 +30,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Limits
 {
 	[JsonInclude, JsonPropertyName("effective_max_model_memory_limit")]
-	public string EffectiveMaxModelMemoryLimit { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? EffectiveMaxModelMemoryLimit { get; init; }
 	[JsonInclude, JsonPropertyName("max_model_memory_limit")]
-	public string? MaxModelMemoryLimit { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxModelMemoryLimit { get; init; }
+	[JsonInclude, JsonPropertyName("max_single_ml_node_processors")]
+	public int? MaxSingleMlNodeProcessors { get; init; }
 	[JsonInclude, JsonPropertyName("total_ml_memory")]
-	public string TotalMlMemory { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize TotalMlMemory { get; init; }
+	[JsonInclude, JsonPropertyName("total_ml_processors")]
+	public int? TotalMlProcessors { get; init; }
 }

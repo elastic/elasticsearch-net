@@ -126,6 +126,48 @@ internal sealed class ApiKeyGrantTypeConverter : JsonConverter<ApiKeyGrantType>
 	}
 }
 
+[JsonConverter(typeof(ApiKeyTypeConverter))]
+public enum ApiKeyType
+{
+	[EnumMember(Value = "rest")]
+	Rest,
+	[EnumMember(Value = "cross_cluster")]
+	CrossCluster
+}
+
+internal sealed class ApiKeyTypeConverter : JsonConverter<ApiKeyType>
+{
+	public override ApiKeyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "rest":
+				return ApiKeyType.Rest;
+			case "cross_cluster":
+				return ApiKeyType.CrossCluster;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ApiKeyType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ApiKeyType.Rest:
+				writer.WriteStringValue("rest");
+				return;
+			case ApiKeyType.CrossCluster:
+				writer.WriteStringValue("cross_cluster");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(EnumStructConverter<ClusterPrivilege>))]
 public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 {
@@ -148,6 +190,7 @@ public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 	public static ClusterPrivilege MonitorWatcher { get; } = new ClusterPrivilege("monitor_watcher");
 	public static ClusterPrivilege MonitorTransform { get; } = new ClusterPrivilege("monitor_transform");
 	public static ClusterPrivilege MonitorTextStructure { get; } = new ClusterPrivilege("monitor_text_structure");
+	public static ClusterPrivilege MonitorStats { get; } = new ClusterPrivilege("monitor_stats");
 	public static ClusterPrivilege MonitorSnapshot { get; } = new ClusterPrivilege("monitor_snapshot");
 	public static ClusterPrivilege MonitorRollup { get; } = new ClusterPrivilege("monitor_rollup");
 	public static ClusterPrivilege MonitorMl { get; } = new ClusterPrivilege("monitor_ml");
@@ -305,6 +348,8 @@ public readonly partial struct IndexPrivilege : IEnumStruct<IndexPrivilege>
 [JsonConverter(typeof(RemoteClusterPrivilegeConverter))]
 public enum RemoteClusterPrivilege
 {
+	[EnumMember(Value = "monitor_stats")]
+	MonitorStats,
 	[EnumMember(Value = "monitor_enrich")]
 	MonitorEnrich
 }
@@ -316,6 +361,8 @@ internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClus
 		var enumString = reader.GetString();
 		switch (enumString)
 		{
+			case "monitor_stats":
+				return RemoteClusterPrivilege.MonitorStats;
 			case "monitor_enrich":
 				return RemoteClusterPrivilege.MonitorEnrich;
 		}
@@ -328,6 +375,9 @@ internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClus
 	{
 		switch (value)
 		{
+			case RemoteClusterPrivilege.MonitorStats:
+				writer.WriteStringValue("monitor_stats");
+				return;
 			case RemoteClusterPrivilege.MonitorEnrich:
 				writer.WriteStringValue("monitor_enrich");
 				return;

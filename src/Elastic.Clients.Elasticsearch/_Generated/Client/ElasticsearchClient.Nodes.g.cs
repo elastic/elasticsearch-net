@@ -41,7 +41,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -54,7 +55,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -66,7 +68,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -79,7 +82,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -93,7 +97,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -108,7 +113,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -120,7 +126,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -133,7 +140,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
+	/// Clear the archived repositories metering.
+	/// Clear the archived repositories metering information in the cluster.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -147,10 +155,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -163,10 +171,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -178,10 +186,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -194,10 +202,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -211,10 +219,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -229,10 +237,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -244,10 +252,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -260,10 +268,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
+	/// Get cluster repositories metering.
+	/// Get repositories metering information for a cluster.
+	/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
+	/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -277,10 +285,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(HotThreadsRequest request)
@@ -291,10 +300,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -304,10 +314,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(HotThreadsRequestDescriptor descriptor)
@@ -318,10 +329,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
@@ -333,10 +345,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest)
@@ -349,10 +362,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads()
@@ -364,10 +378,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Action<HotThreadsRequestDescriptor> configureRequest)
@@ -380,10 +395,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -393,10 +409,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
@@ -407,10 +424,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -422,10 +440,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
 	{
@@ -436,10 +455,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
+	/// Get the hot threads for nodes.
+	/// Get a breakdown of the hot threads on each selected node in the cluster.
+	/// The output is plain text with a breakdown of the top hot threads for each node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -451,9 +471,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(NodesInfoRequest request)
@@ -464,9 +485,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -476,9 +498,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(NodesInfoRequestDescriptor descriptor)
@@ -489,9 +512,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -503,9 +527,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest)
@@ -518,9 +543,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info()
@@ -532,9 +558,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Action<NodesInfoRequestDescriptor> configureRequest)
@@ -547,9 +574,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -559,9 +587,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -572,9 +601,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -586,9 +616,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
 	{
@@ -599,9 +630,10 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes information.
+	/// Get node information.
+	/// By default, the API returns all attributes and core settings for cluster nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -613,7 +645,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -626,7 +668,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -638,7 +690,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -651,7 +713,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -665,7 +737,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -680,7 +762,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -694,7 +786,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -709,7 +811,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -721,7 +833,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -734,7 +856,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -748,7 +880,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -761,7 +903,17 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
+	/// Reload the keystore on nodes in the cluster.
+	/// </para>
+	/// <para>
+	/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
+	/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
+	/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
+	/// </para>
+	/// <para>
+	/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
+	/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
+	/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -775,9 +927,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(NodesStatsRequest request)
@@ -788,9 +942,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -800,9 +956,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor)
@@ -813,9 +971,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
@@ -827,9 +987,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -842,9 +1004,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>()
@@ -856,9 +1020,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -871,9 +1037,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(NodesStatsRequestDescriptor descriptor)
@@ -884,9 +1052,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
@@ -898,9 +1068,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest)
@@ -913,9 +1085,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats()
@@ -927,9 +1101,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Action<NodesStatsRequestDescriptor> configureRequest)
@@ -942,9 +1118,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -954,9 +1132,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -967,9 +1147,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -981,9 +1163,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -994,9 +1178,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1008,9 +1194,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1020,9 +1208,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -1033,9 +1223,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1047,9 +1239,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -1060,9 +1254,11 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns cluster nodes statistics.
+	/// Get node statistics.
+	/// Get statistics for nodes in a cluster.
+	/// By default, all stats are returned. You can limit the returned information by using metrics.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1074,9 +1270,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(NodesUsageRequest request)
@@ -1087,9 +1283,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1099,9 +1295,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(NodesUsageRequestDescriptor descriptor)
@@ -1112,9 +1308,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -1126,9 +1322,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest)
@@ -1141,9 +1337,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage()
@@ -1155,9 +1351,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Action<NodesUsageRequestDescriptor> configureRequest)
@@ -1170,9 +1366,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1182,9 +1378,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -1195,9 +1391,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1209,9 +1405,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
 	{
@@ -1222,9 +1418,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information on the usage of features.
+	/// Get feature usage information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

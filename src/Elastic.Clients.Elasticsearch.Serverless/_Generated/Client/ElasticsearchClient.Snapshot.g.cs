@@ -41,7 +41,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+	/// Clean up the snapshot repository.
+	/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -53,7 +54,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+	/// Clean up the snapshot repository.
+	/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -65,7 +67,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+	/// Clean up the snapshot repository.
+	/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -78,7 +81,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.
+	/// Clean up the snapshot repository.
+	/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -92,7 +96,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clones indices from one snapshot into another snapshot in the same repository.
+	/// Clone a snapshot.
+	/// Clone part of all of a snapshot into another snapshot in the same repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -104,7 +109,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clones indices from one snapshot into another snapshot in the same repository.
+	/// Clone a snapshot.
+	/// Clone part of all of a snapshot into another snapshot in the same repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -116,7 +122,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clones indices from one snapshot into another snapshot in the same repository.
+	/// Clone a snapshot.
+	/// Clone part of all of a snapshot into another snapshot in the same repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -129,7 +136,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Clones indices from one snapshot into another snapshot in the same repository.
+	/// Clone a snapshot.
+	/// Clone part of all of a snapshot into another snapshot in the same repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -143,7 +151,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a snapshot in a repository.
+	/// Create a snapshot.
+	/// Take a snapshot of a cluster or of data streams and indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -155,7 +164,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a snapshot in a repository.
+	/// Create a snapshot.
+	/// Take a snapshot of a cluster or of data streams and indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -167,7 +177,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a snapshot in a repository.
+	/// Create a snapshot.
+	/// Take a snapshot of a cluster or of data streams and indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -180,7 +191,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a snapshot in a repository.
+	/// Create a snapshot.
+	/// Take a snapshot of a cluster or of data streams and indices.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -194,7 +206,10 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a repository.
+	/// Create or update a snapshot repository.
+	/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+	/// To register a snapshot repository, the cluster's global metadata must be writeable.
+	/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -206,7 +221,10 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a repository.
+	/// Create or update a snapshot repository.
+	/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+	/// To register a snapshot repository, the cluster's global metadata must be writeable.
+	/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -218,7 +236,10 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a repository.
+	/// Create or update a snapshot repository.
+	/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+	/// To register a snapshot repository, the cluster's global metadata must be writeable.
+	/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -231,7 +252,10 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Creates a repository.
+	/// Create or update a snapshot repository.
+	/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
+	/// To register a snapshot repository, the cluster's global metadata must be writeable.
+	/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -245,7 +269,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes one or more snapshots.
+	/// Delete snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -257,7 +281,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes one or more snapshots.
+	/// Delete snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -269,7 +293,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes one or more snapshots.
+	/// Delete snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -282,7 +306,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes one or more snapshots.
+	/// Delete snapshots.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -296,7 +320,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a repository.
+	/// Delete snapshot repositories.
+	/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+	/// The snapshots themselves are left untouched and in place.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -308,7 +334,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a repository.
+	/// Delete snapshot repositories.
+	/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+	/// The snapshots themselves are left untouched and in place.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -320,7 +348,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a repository.
+	/// Delete snapshot repositories.
+	/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+	/// The snapshots themselves are left untouched and in place.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -333,7 +363,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Deletes a repository.
+	/// Delete snapshot repositories.
+	/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+	/// The snapshots themselves are left untouched and in place.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -347,7 +379,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a snapshot.
+	/// Get snapshot information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -359,7 +391,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a snapshot.
+	/// Get snapshot information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -371,7 +403,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a snapshot.
+	/// Get snapshot information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -384,7 +416,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a snapshot.
+	/// Get snapshot information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -398,7 +430,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -410,7 +442,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -422,7 +454,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -435,7 +467,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -449,7 +481,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -462,7 +494,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about a repository.
+	/// Get snapshot repository information.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -476,7 +508,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -488,7 +541,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -500,7 +574,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -513,7 +608,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -527,7 +643,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -539,7 +676,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -552,7 +710,28 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Restores a snapshot.
+	/// Restore a snapshot.
+	/// Restore a snapshot of a cluster or data streams and indices.
+	/// </para>
+	/// <para>
+	/// You can restore a snapshot only to a running cluster with an elected master node.
+	/// The snapshot repository must be registered and available to the cluster.
+	/// The snapshot and cluster versions must be compatible.
+	/// </para>
+	/// <para>
+	/// To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+	/// </para>
+	/// <para>
+	/// Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+	/// </para>
+	/// <code>
+	/// GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+	/// </code>
+	/// <para>
+	/// If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+	/// </para>
+	/// <para>
+	/// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -566,7 +745,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -578,7 +769,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -590,7 +793,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -603,7 +818,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -617,7 +844,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -630,7 +869,19 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Returns information about the status of a snapshot.
+	/// Get the snapshot status.
+	/// Get a detailed description of the current state for each shard participating in the snapshot.
+	/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
+	/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
+	/// </para>
+	/// <para>
+	/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
+	/// The API requires a read from the repository for each shard in each snapshot.
+	/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
+	/// </para>
+	/// <para>
+	/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
+	/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -644,7 +895,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Verifies a repository.
+	/// Verify a snapshot repository.
+	/// Check for common misconfigurations in a snapshot repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -656,7 +908,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Verifies a repository.
+	/// Verify a snapshot repository.
+	/// Check for common misconfigurations in a snapshot repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -668,7 +921,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Verifies a repository.
+	/// Verify a snapshot repository.
+	/// Check for common misconfigurations in a snapshot repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -681,7 +935,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Verifies a repository.
+	/// Verify a snapshot repository.
+	/// Check for common misconfigurations in a snapshot repository.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

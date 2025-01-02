@@ -32,6 +32,55 @@ namespace Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 
 public sealed partial class PutJobRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
 /// <summary>
@@ -53,6 +102,59 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_job";
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
 	/// <para>
@@ -136,6 +238,14 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 
 	/// <summary>
 	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("job_id")]
+	public Elastic.Clients.Elasticsearch.Serverless.Id? JobId { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
@@ -185,10 +295,6 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 {
 	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id jobId) : base(r => r.Required("job_id", jobId))
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -197,11 +303,9 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 
 	internal override string OperationName => "ml.put_job";
 
-	public PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Serverless.Id jobId)
-	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
-	}
+	public PutJobRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public PutJobRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public PutJobRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 
 	private bool? AllowLazyOpenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig AnalysisConfigValue { get; set; }
@@ -221,6 +325,7 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedConfigDescriptor<TDocument>> DatafeedConfigDescriptorAction { get; set; }
 	private string? DescriptionValue { get; set; }
 	private ICollection<string>? GroupsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id? JobIdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfigDescriptor<TDocument> ModelPlotConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfigDescriptor<TDocument>> ModelPlotConfigDescriptorAction { get; set; }
@@ -413,6 +518,17 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 
 	/// <summary>
 	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Serverless.Id? jobId)
+	{
+		JobIdValue = jobId;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
@@ -587,6 +703,12 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 			JsonSerializer.Serialize(writer, GroupsValue, options);
 		}
 
+		if (JobIdValue is not null)
+		{
+			writer.WritePropertyName("job_id");
+			JsonSerializer.Serialize(writer, JobIdValue, options);
+		}
+
 		if (ModelPlotConfigDescriptor is not null)
 		{
 			writer.WritePropertyName("model_plot_config");
@@ -641,10 +763,6 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 {
 	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor> configure) => configure.Invoke(this);
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id jobId) : base(r => r.Required("job_id", jobId))
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -653,11 +771,9 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 
 	internal override string OperationName => "ml.put_job";
 
-	public PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Serverless.Id jobId)
-	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
-	}
+	public PutJobRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+	public PutJobRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public PutJobRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 
 	private bool? AllowLazyOpenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.AnalysisConfig AnalysisConfigValue { get; set; }
@@ -677,6 +793,7 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DatafeedConfigDescriptor> DatafeedConfigDescriptorAction { get; set; }
 	private string? DescriptionValue { get; set; }
 	private ICollection<string>? GroupsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id? JobIdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfigDescriptor ModelPlotConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.ModelPlotConfigDescriptor> ModelPlotConfigDescriptorAction { get; set; }
@@ -869,6 +986,17 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 
 	/// <summary>
 	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Serverless.Id? jobId)
+	{
+		JobIdValue = jobId;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
@@ -1041,6 +1169,12 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 		{
 			writer.WritePropertyName("groups");
 			JsonSerializer.Serialize(writer, GroupsValue, options);
+		}
+
+		if (JobIdValue is not null)
+		{
+			writer.WritePropertyName("job_id");
+			JsonSerializer.Serialize(writer, JobIdValue, options);
 		}
 
 		if (ModelPlotConfigDescriptor is not null)
