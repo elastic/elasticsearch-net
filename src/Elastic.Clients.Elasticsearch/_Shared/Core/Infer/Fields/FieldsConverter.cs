@@ -31,7 +31,7 @@ internal sealed class FieldsConverter : JsonConverter<Fields>
 		}
 	}
 
-	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, Fields? value, JsonSerializerOptions options)
 	{
 		if (value is null)
 		{
@@ -65,7 +65,7 @@ internal sealed class SingleOrManyFieldsConverter : JsonConverter<Fields>
 		}
 	}
 
-	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, Fields? value, JsonSerializerOptions options)
 	{
 		if (value is null)
 		{
