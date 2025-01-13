@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MultisearchBodyDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MultisearchBodyDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor" class="text-break">
+Class MultisearchBodyDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1634"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.html">MSearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MultisearchBodyDescriptor : SerializableDescriptor&lt;MultisearchBodyDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a>&gt;</div>
+      <div><span class="xref">MultisearchBodyDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.#ctor">
+  MultisearchBodyDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1638"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Aggregations_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor___" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Aggregations(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor}})">
+  Aggregations(Func&lt;FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;, FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1701"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Aggregations(Func&lt;FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;, FluentDescriptorDictionary&lt;string, AggregationDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.html">AggregationDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.html">AggregationDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapse_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse)">
+  Collapse(FieldCollapse?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1707"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Collapse(FieldCollapse? collapse)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collapse</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse.html">FieldCollapse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor)">
+  Collapse(FieldCollapseDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1715"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Collapse(FieldCollapseDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.html">FieldCollapseDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Collapse_System_Action_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Collapse(System.Action{Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor})">
+  Collapse(Action&lt;FieldCollapseDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1723"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Collapse(Action&lt;FieldCollapseDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.html">FieldCollapseDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor)">
+  DocvalueFields(FieldAndFormatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1746"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor DocvalueFields(FieldAndFormatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor})">
+  DocvalueFields(Action&lt;FieldAndFormatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1755"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor DocvalueFields(Action&lt;FieldAndFormatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor}[])">
+  DocvalueFields(params Action&lt;FieldAndFormatDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1764"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor DocvalueFields(params Action&lt;FieldAndFormatDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_DocvalueFields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.DocvalueFields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  DocvalueFields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1737"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The request returns doc values for field
+names matching these patterns in the hits.fields property of the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor DocvalueFields(ICollection&lt;FieldAndFormat&gt;? docvalueFields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>docvalueFields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Explain_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Explain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Explain_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Explain(System.Nullable{System.Boolean})">
+  Explain(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1778"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns detailed information about score computation as part of a hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Explain(bool? explain = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>explain</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Ext_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Ext*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Ext_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object__Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Ext(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object}})">
+  Ext(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1789"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration of search extensions defined by Elasticsearch plugins.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Ext(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor)">
+  Fields(FieldAndFormatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1810"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Fields(FieldAndFormatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor})">
+  Fields(Action&lt;FieldAndFormatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Fields(Action&lt;FieldAndFormatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor}[])">
+  Fields(params Action&lt;FieldAndFormatDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1828"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Fields(params Action&lt;FieldAndFormatDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Fields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Fields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  Fields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1801"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The request returns values for field names
+matching these patterns in the hits.fields property of the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Fields(ICollection&lt;FieldAndFormat&gt;? fields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_From_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_From_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.From(System.Nullable{System.Int32})">
+  From(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1844"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Starting document offset. By default, you cannot page through more than 10,000
+hits using the from and size parameters. To page through more hits, use the
+search_after parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor From(int? from)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_Elastic_Clients_Elasticsearch_Core_Search_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight)">
+  Highlight(Highlight?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1850"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Highlight(Highlight? highlight)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>highlight</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Highlight.html">Highlight</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_Elastic_Clients_Elasticsearch_Core_Search_HighlightDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor)">
+  Highlight(HighlightDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1858"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Highlight(HighlightDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.html">HighlightDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Highlight_System_Action_Elastic_Clients_Elasticsearch_Core_Search_HighlightDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Highlight(System.Action{Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor})">
+  Highlight(Action&lt;HighlightDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1866"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Highlight(Action&lt;HighlightDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.html">HighlightDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_IndicesBoost_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.IndicesBoost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_IndicesBoost_System_Collections_Generic_ICollection_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_IndexName_System_Double___" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.IndicesBoost(System.Collections.Generic.ICollection{System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.IndexName,System.Double}})">
+  IndicesBoost(ICollection&lt;IDictionary&lt;IndexName, double&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1879"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boosts the _score of documents from specified indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor IndicesBoost(ICollection&lt;IDictionary&lt;IndexName, double&gt;&gt;? indicesBoost)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indicesBoost</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_Elastic_Clients_Elasticsearch_KnnSearchDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor)">
+  Knn(KnnSearchDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1899"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Knn(KnnSearchDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_System_Action_Elastic_Clients_Elasticsearch_KnnSearchDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn(System.Action{Elastic.Clients.Elasticsearch.KnnSearchDescriptor})">
+  Knn(Action&lt;KnnSearchDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1908"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Knn(Action&lt;KnnSearchDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_System_Action_Elastic_Clients_Elasticsearch_KnnSearchDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn(System.Action{Elastic.Clients.Elasticsearch.KnnSearchDescriptor}[])">
+  Knn(params Action&lt;KnnSearchDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1917"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Knn(params Action&lt;KnnSearchDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearchDescriptor.html">KnnSearchDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Knn_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_KnnSearch__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Knn(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.KnnSearch})">
+  Knn(ICollection&lt;KnnSearch&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1890"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the approximate kNN search to run.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Knn(ICollection&lt;KnnSearch&gt;? knn)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>knn</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.KnnSearch.html">KnnSearch</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_MinScore_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.MinScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_MinScore_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.MinScore(System.Nullable{System.Double})">
+  MinScore(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1932"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum _score for matching documents. Documents with a lower _score are
+not included in the search results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor MinScore(double? minScore)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minScore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReference_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference)">
+  Pit(PointInTimeReference?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1944"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits the search to a point in time (PIT). If you provide a PIT, you
+cannot specify an &lt;index&gt; in the request path.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Pit(PointInTimeReference? pit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pit</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference.html">PointInTimeReference</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReferenceDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor)">
+  Pit(PointInTimeReferenceDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1952"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Pit(PointInTimeReferenceDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.html">PointInTimeReferenceDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Pit_System_Action_Elastic_Clients_Elasticsearch_Core_Search_PointInTimeReferenceDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Pit(System.Action{Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor})">
+  Pit(Action&lt;PointInTimeReferenceDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1960"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Pit(Action&lt;PointInTimeReferenceDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.html">PointInTimeReferenceDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  PostFilter(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1968"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor PostFilter(Query? postFilter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>postFilter</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor)">
+  PostFilter(QueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1976"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor PostFilter(QueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_PostFilter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.PostFilter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor})">
+  PostFilter(Action&lt;QueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1984"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor PostFilter(Action&lt;QueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Profile_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Profile*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Profile_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Profile(System.Nullable{System.Boolean})">
+  Profile(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L1992"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Profile(bool? profile = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>profile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2003"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the search definition using the Query DSL.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Query(Query? query)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>query</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor)">
+  Query(QueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2011"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Query(QueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor})">
+  Query(Action&lt;QueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2019"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Query(Action&lt;QueryDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor)">
+  Rescore(RescoreDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2036"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Rescore(RescoreDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_System_Action_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore(System.Action{Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor})">
+  Rescore(Action&lt;RescoreDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2045"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Rescore(Action&lt;RescoreDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_System_Action_Elastic_Clients_Elasticsearch_Core_Search_RescoreDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore(System.Action{Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor}[])">
+  Rescore(params Action&lt;RescoreDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2054"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Rescore(params Action&lt;RescoreDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor.html">RescoreDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Rescore_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Core_Search_Rescore__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Rescore(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Core.Search.Rescore})">
+  Rescore(ICollection&lt;Rescore&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2027"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Rescore(ICollection&lt;Rescore&gt;? rescore)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rescore</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Rescore.html">Rescore</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_RuntimeMappings_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.RuntimeMappings(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor}})">
+  RuntimeMappings(Func&lt;FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2069"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines one or more runtime fields in the search request. These fields take
+precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor RuntimeMappings(Func&lt;FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;Field, RuntimeFieldDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_ScriptFields_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor___" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.ScriptFields(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.ScriptFieldDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.ScriptFieldDescriptor}})">
+  ScriptFields(Func&lt;FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2080"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Retrieve a script evaluation (based on different fields) for each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor ScriptFields(Func&lt;FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, ScriptFieldDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_SearchAfter_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.SearchAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_SearchAfter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_FieldValue__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.SearchAfter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.FieldValue})">
+  SearchAfter(ICollection&lt;FieldValue&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2086"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor SearchAfter(ICollection&lt;FieldValue&gt;? searchAfter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searchAfter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_SeqNoPrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.SeqNoPrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_SeqNoPrimaryTerm_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.SeqNoPrimaryTerm(System.Nullable{System.Boolean})">
+  SeqNoPrimaryTerm(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2098"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns sequence number and primary term of the last modification
+of each hit. See Optimistic concurrency control.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>seqNoPrimaryTerm</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of hits to return. By default, you cannot page through more
+than 10,000 hits using the from and size parameters. To page through more
+hits, use the search_after parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Size(int? size)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_Elastic_Clients_Elasticsearch_SortOptionsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor)">
+  Sort(SortOptionsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Sort(SortOptionsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor})">
+  Sort(Action&lt;SortOptionsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Sort(Action&lt;SortOptionsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor}[])">
+  Sort(params Action&lt;SortOptionsDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Sort(params Action&lt;SortOptionsDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Sort_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_SortOptions__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Sort(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.SortOptions})">
+  Sort(ICollection&lt;SortOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Sort(ICollection&lt;SortOptions&gt;? sort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfig_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig)">
+  Source(SourceConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates which source fields are returned for matching documents. These
+fields are returned in the hits._source property of the search response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Source(SourceConfig? source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfig.html">SourceConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Stats_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Stats_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Stats(System.Collections.Generic.ICollection{System.String})">
+  Stats(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Stats groups to associate with the search. Each group maintains a statistics
+aggregation for its associated searches. You can retrieve these stats using
+the indices stats API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Stats(ICollection&lt;string&gt;? stats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_StoredFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.StoredFields(Elastic.Clients.Elasticsearch.Fields)">
+  StoredFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+List of stored fields to return as part of a hit. If no fields are specified,
+no stored fields are included in the response. If this field is specified, the _source
+parameter defaults to false. You can pass _source: true to return both source fields
+and stored fields in the search response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor StoredFields(Fields? storedFields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>storedFields</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_Elastic_Clients_Elasticsearch_Core_Search_Suggester_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester)">
+  Suggest(Suggester?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Suggest(Suggester? suggest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>suggest</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Suggester.html">Suggester</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_Elastic_Clients_Elasticsearch_Core_Search_SuggesterDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor)">
+  Suggest(SuggesterDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Suggest(SuggesterDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.html">SuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Suggest_System_Action_Elastic_Clients_Elasticsearch_Core_Search_SuggesterDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Suggest(System.Action{Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor})">
+  Suggest(Action&lt;SuggesterDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Suggest(Action&lt;SuggesterDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.html">SuggesterDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TerminateAfter_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TerminateAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TerminateAfter_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TerminateAfter(System.Nullable{System.Int64})">
+  TerminateAfter(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of documents to collect for each shard. If a query reaches this
+limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+before sorting. Defaults to 0, which does not terminate query execution early.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor TerminateAfter(long? terminateAfter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>terminateAfter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Timeout_System_String_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Timeout(System.String)">
+  Timeout(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the period of time to wait for a response from each shard. If no response
+is received before the timeout expires, the request fails and returns an error.
+Defaults to no timeout.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Timeout(string? timeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TrackScores_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TrackScores*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TrackScores_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TrackScores(System.Nullable{System.Boolean})">
+  TrackScores(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, calculate and return document scores, even if the scores are not used for sorting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor TrackScores(bool? trackScores = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trackScores</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TrackTotalHits_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TrackTotalHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_TrackTotalHits_Elastic_Clients_Elasticsearch_Core_Search_TrackHits_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits)">
+  TrackTotalHits(TrackHits?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Number of hits matching the query to count accurately. If true, the exact
+number of hits is returned at the cost of some performance. If false, the
+response does not include the total number of hits matching the query.
+Defaults to 10,000 hits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor TrackTotalHits(TrackHits? trackTotalHits)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trackTotalHits</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHits.html">TrackHits</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Version_" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_MSearch_MultisearchBodyDescriptor_Version_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.Version(System.Nullable{System.Boolean})">
+  Version(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/MSearch/MultisearchBody.g.cs/#L2272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, returns document version as part of a hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultisearchBodyDescriptor Version(bool? version = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor.html">MultisearchBodyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

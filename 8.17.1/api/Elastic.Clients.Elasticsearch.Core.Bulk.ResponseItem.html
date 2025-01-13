@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ResponseItem | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ResponseItem | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem" class="text-break">
+Class ResponseItem  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Shared/Api/ResponseItem.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.html">Bulk</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class ResponseItem</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ResponseItem</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.BulkDeleteResponseItem.html">BulkDeleteResponseItem</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.BulkIndexResponseItem.html">BulkIndexResponseItem</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.BulkUpdateResponseItem.html">BulkUpdateResponseItem</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Bulk.CreateResponseItem.html">CreateResponseItem</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Error_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Error*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Error" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Error">
+  Error
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Contains additional information about the failed operation.
+The parameter is only returned for failed operations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;error&quot;)]
+public ErrorCause? Error { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ErrorCause.html">ErrorCause</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_ForcedRefresh_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.ForcedRefresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_ForcedRefresh" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.ForcedRefresh">
+  ForcedRefresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;forced_refresh&quot;)]
+public bool? ForcedRefresh { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Get_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Get" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Get">
+  Get
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;get&quot;)]
+public InlineGet&lt;IReadOnlyDictionary&lt;string, object&gt;&gt;? Get { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.InlineGet-1.html">InlineGet</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Id_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Id" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The document ID associated with the operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_id&quot;)]
+public string? Id { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Index_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Index" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the index associated with the operation.
+If the operation targeted a data stream, this is the backing index into which the document was written.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_index&quot;)]
+public string Index { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_IsValid_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.IsValid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_IsValid" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.IsValid">
+  IsValid
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Shared/Api/ResponseItem.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsValid { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Operation_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Operation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Operation" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Operation">
+  Operation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Shared/Api/ResponseItem.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract string Operation { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_PrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.PrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_PrimaryTerm" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.PrimaryTerm">
+  PrimaryTerm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The primary term assigned to the document for the operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_primary_term&quot;)]
+public long? PrimaryTerm { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Result_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Result*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Result" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Result">
+  Result
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Result of the operation.
+Successful values are <code>created</code>, <code>deleted</code>, and <code>updated</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;result&quot;)]
+public string? Result { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_SeqNo_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.SeqNo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_SeqNo" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.SeqNo">
+  SeqNo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sequence number assigned to the document for the operation.
+Sequence numbers are used to ensure an older version of a document doesn’t overwrite a newer version.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_seq_no&quot;)]
+public long? SeqNo { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Shards_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Shards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Shards" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Shards">
+  Shards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Contains shard information for the operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_shards&quot;)]
+public ShardStatistics? Shards { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ShardStatistics.html">ShardStatistics</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Status_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Status" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Status">
+  Status
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+HTTP status code returned for the operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;status&quot;)]
+public int Status { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Version_" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Bulk_ResponseItem_Version" data-uid="Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Bulk/ResponseItem.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The document version associated with the operation.
+The document version is incremented each time the document is updated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonInclude]
+[JsonPropertyName(&quot;_version&quot;)]
+public long? Version { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
