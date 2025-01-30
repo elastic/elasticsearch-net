@@ -5,11 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 namespace Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
 /// <summary>
 /// Used in the "fluent" syntax to support chained configuration of dictionary entries.

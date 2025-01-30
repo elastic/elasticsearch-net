@@ -5,18 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 using Elastic.Clients.Elasticsearch.Fluent;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 ///     Provides the connection settings for Elastic.Clients.Elasticsearch's high level <see cref="ElasticsearchClient" />

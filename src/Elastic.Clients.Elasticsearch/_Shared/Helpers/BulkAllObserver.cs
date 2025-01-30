@@ -5,11 +5,7 @@
 using System;
 using System.Threading;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public sealed class BulkAllObserver : CoordinatedRequestObserverBase<BulkAllResponse>
 {

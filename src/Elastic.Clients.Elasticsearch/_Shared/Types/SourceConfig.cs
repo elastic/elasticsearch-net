@@ -7,11 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Search;
-#endif
 
 [JsonConverter(typeof(SourceConfigConverter))]
 public partial class SourceConfig

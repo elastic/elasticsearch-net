@@ -10,22 +10,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Search;
-#else
 using Elastic.Clients.Elasticsearch.Core.Search;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> : BulkOperationDescriptor<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>
 {

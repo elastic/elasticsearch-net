@@ -1,8 +1,0 @@
-{
-  "solution": {
-    "path": "Elasticsearch.sln",
-    "projects": [
-      "src\\Elastic.Clients.Elasticsearch.Serverless\\Elastic.Clients.Elasticsearch.Serverless.csproj"
-    ]
-  }
-}

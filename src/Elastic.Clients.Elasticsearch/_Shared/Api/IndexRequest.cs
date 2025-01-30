@@ -3,18 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 using Elastic.Clients.Elasticsearch.Requests;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class IndexRequest<TDocument>
 {

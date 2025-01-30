@@ -7,11 +7,7 @@ using System.Diagnostics;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Represents the name of an index, which may be inferred from a <see cref="Type"/>.

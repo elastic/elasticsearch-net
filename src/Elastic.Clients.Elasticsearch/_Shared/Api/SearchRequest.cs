@@ -4,17 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 using Elastic.Clients.Elasticsearch.Requests;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class SearchRequest
 {

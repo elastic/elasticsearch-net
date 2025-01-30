@@ -7,11 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 // TODO - In .NET 7 we could review supporting IParsable as a type constraint?
 internal sealed class StringAliasConverter<T> : JsonConverter<T>

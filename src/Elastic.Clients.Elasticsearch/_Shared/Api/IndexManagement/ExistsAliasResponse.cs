@@ -4,11 +4,7 @@
 
 using Elastic.Transport.Products.Elasticsearch;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
-#else
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-#endif
 
 public sealed partial class ExistsAliasResponse : ElasticsearchResponse
 {
