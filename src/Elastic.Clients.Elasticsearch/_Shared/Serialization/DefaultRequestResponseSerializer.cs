@@ -11,11 +11,7 @@ using System.Threading.Tasks;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// The built-in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize built in types.

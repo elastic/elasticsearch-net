@@ -4,22 +4,10 @@
 
 using System.Text.Json;
 using Elastic.Transport.Extensions;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Search;
-#else
 using Elastic.Clients.Elasticsearch.Core.Search;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 internal abstract class BulkUpdateBody : ISelfSerializable
 {

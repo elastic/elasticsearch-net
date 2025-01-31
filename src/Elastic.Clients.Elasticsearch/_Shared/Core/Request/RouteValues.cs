@@ -6,11 +6,7 @@ using System;
 using System.Collections.Generic;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 internal sealed class ResolvedRouteValues : Dictionary<string, string>
 {

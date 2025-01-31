@@ -6,18 +6,10 @@ using System;
 using System.ComponentModel;
 using System.Text.Json;
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 /// <summary>
 /// Base class for all request descriptor types.

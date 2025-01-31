@@ -4,11 +4,7 @@
 
 #nullable enable
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-#else
 using Elastic.Clients.Elasticsearch.Core;
-#endif
 
 using System;
 using System.Collections.Generic;
@@ -16,11 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
-#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-#endif
 
 /// <summary>
 /// <para>Buckets path can be expressed in different ways, and an aggregation may accept some or all of these<br/>forms depending on its type. Please refer to each aggregation's documentation to know what buckets<br/>path forms they accept.</para>

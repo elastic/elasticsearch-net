@@ -9,11 +9,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Represents a duration value.

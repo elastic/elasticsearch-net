@@ -6,11 +6,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
 /// <summary>
 /// Allows a query represented as a string of JSON to be defined. This can be useful when support for a built-in query is not yet available.

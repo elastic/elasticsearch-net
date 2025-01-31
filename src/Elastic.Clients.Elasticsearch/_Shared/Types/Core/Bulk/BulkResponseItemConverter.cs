@@ -7,11 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<ResponseItem>>
 {

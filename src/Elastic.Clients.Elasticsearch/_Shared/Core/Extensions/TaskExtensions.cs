@@ -10,11 +10,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal static class TaskExtensions
 {

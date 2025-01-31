@@ -6,11 +6,7 @@ using System;
 using System.Collections.Generic;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Represents a collection of unique metric names to be included in URL paths to limit the request.

@@ -5,17 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 using Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
-#else
 namespace Elastic.Clients.Elasticsearch.Mapping;
-#endif
 
 public sealed partial class PropertiesDescriptor<TDocument>
 		: IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>

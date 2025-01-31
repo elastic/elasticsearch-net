@@ -6,11 +6,7 @@ using Elastic.Transport;
 using System.Collections;
 using System.Collections.Generic;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// A proxy dictionary that is settings-aware to correctly handle IUrlParameter-based keys such as IndexName.

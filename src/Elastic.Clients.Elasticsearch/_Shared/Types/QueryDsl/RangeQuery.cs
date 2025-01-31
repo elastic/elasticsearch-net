@@ -4,17 +4,9 @@
 
 using System;
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 using Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
 // TODO: This should be removed after implementing descriptor generation for union types
 

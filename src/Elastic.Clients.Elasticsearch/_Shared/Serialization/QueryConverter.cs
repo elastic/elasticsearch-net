@@ -4,11 +4,7 @@
 
 using System;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
 // This converter is generated for the Query container type. We add the CanConvert override here (for now)
 // as the Query type may be used in source POCOs.

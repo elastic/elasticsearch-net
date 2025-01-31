@@ -11,11 +11,7 @@ using System.Buffers;
 
 #endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 internal static class JsonConstants
 {

@@ -7,11 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 internal class SingleOrManyCollectionConverter<TItem> : JsonConverter<ICollection<TItem>>
 {

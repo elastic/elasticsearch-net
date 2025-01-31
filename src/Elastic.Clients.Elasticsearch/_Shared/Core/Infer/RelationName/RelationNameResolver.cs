@@ -5,11 +5,7 @@
 using System;
 using System.Collections.Concurrent;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal sealed class RelationNameResolver
 {

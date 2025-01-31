@@ -8,27 +8,11 @@ using Elastic.Transport;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 using Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 using Elastic.Clients.Elasticsearch.Requests;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class BulkRequest : IStreamSerializable
 {
