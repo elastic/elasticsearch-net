@@ -52,6 +52,11 @@ public sealed partial class GetLicenseRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestParameters>
 {
+	[JsonConstructor]
+	internal GetLicenseRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

@@ -82,6 +82,11 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsAliasRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -89,6 +94,23 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.exists_alias";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices used to limit the request. Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of aliases to check. Supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

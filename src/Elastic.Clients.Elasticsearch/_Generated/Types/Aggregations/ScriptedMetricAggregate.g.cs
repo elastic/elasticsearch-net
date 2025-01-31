@@ -33,4 +33,6 @@ public sealed partial class ScriptedMetricAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("value")]
 	public object Value { get; init; }
+
+	string IAggregate.Type => "scripted_metric";
 }

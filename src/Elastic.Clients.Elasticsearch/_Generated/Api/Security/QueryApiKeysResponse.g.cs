@@ -22,10 +22,76 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class QueryApiKeysResponseConverter : System.Text.Json.Serialization.JsonConverter<QueryApiKeysResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKeys = System.Text.Json.JsonEncodedText.Encode("api_keys");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override QueryApiKeysResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary?> propAggregations = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey>> propApiKeys = default;
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryRead(ref reader, options, PropAggregations))
+			{
+				continue;
+			}
+
+			if (propApiKeys.TryRead(ref reader, options, PropApiKeys))
+			{
+				continue;
+			}
+
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propTotal.TryRead(ref reader, options, PropTotal))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryApiKeysResponse
+		{
+			Aggregations = propAggregations.Value
+,
+			ApiKeys = propApiKeys.Value
+,
+			Count = propCount.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryApiKeysResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropApiKeys, value.ApiKeys);
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(QueryApiKeysResponseConverter))]
 public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +99,6 @@ public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
 	/// The aggregations result, if requested.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; init; }
 
 	/// <summary>
@@ -41,7 +106,6 @@ public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
 	/// A list of API key information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("api_keys")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; init; }
 
 	/// <summary>
@@ -49,7 +113,6 @@ public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
 	/// The number of API keys returned in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -57,6 +120,5 @@ public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
 	/// The total number of API keys found.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

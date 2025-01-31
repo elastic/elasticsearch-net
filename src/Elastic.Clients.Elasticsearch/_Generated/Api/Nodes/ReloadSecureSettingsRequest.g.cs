@@ -58,6 +58,7 @@ public sealed partial class ReloadSecureSettingsRequestParameters : RequestParam
 /// </summary>
 public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSecureSettingsRequestParameters>
 {
+	[JsonConstructor]
 	public ReloadSecureSettingsRequest()
 	{
 	}
@@ -73,6 +74,14 @@ public sealed partial class ReloadSecureSettingsRequest : PlainRequest<ReloadSec
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "nodes.reload_secure_settings";
+
+	/// <summary>
+	/// <para>
+	/// The names of particular nodes in the cluster to target.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -131,6 +131,7 @@ public sealed partial class ValidateQueryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryRequestParameters>
 {
+	[JsonConstructor]
 	public ValidateQueryRequest()
 	{
 	}
@@ -146,6 +147,16 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.validate_query";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

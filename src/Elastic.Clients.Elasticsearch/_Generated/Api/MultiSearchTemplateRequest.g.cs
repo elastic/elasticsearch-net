@@ -79,6 +79,7 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 /// </summary>
 public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
+	[JsonConstructor]
 	public MultiSearchTemplateRequest()
 	{
 	}
@@ -94,6 +95,16 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "msearch_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

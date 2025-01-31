@@ -46,6 +46,7 @@ public sealed partial class GetRoleMappingRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingRequestParameters>
 {
+	[JsonConstructor]
 	public GetRoleMappingRequest()
 	{
 	}
@@ -61,6 +62,14 @@ public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_role_mapping";
+
+	/// <summary>
+	/// <para>
+	/// The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

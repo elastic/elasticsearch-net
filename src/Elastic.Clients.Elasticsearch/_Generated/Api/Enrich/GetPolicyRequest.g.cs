@@ -42,6 +42,7 @@ public sealed partial class GetPolicyRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestParameters>
 {
+	[JsonConstructor]
 	public GetPolicyRequest()
 	{
 	}
@@ -57,6 +58,15 @@ public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.get_policy";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of enrich policy names used to limit the request.
+	/// To return information for all enrich policies, omit this parameter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

@@ -22,10 +22,86 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+internal sealed partial class PutInferenceResponseConverter : System.Text.Json.Serialization.JsonConverter<PutInferenceResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
+	private static readonly System.Text.Json.JsonEncodedText PropService = System.Text.Json.JsonEncodedText.Encode("service");
+	private static readonly System.Text.Json.JsonEncodedText PropServiceSettings = System.Text.Json.JsonEncodedText.Encode("service_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskType = System.Text.Json.JsonEncodedText.Encode("task_type");
+
+	public override PutInferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propInferenceId = default;
+		LocalJsonValue<string> propService = default;
+		LocalJsonValue<object> propServiceSettings = default;
+		LocalJsonValue<object?> propTaskSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.TaskType> propTaskType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInferenceId.TryRead(ref reader, options, PropInferenceId))
+			{
+				continue;
+			}
+
+			if (propService.TryRead(ref reader, options, PropService))
+			{
+				continue;
+			}
+
+			if (propServiceSettings.TryRead(ref reader, options, PropServiceSettings))
+			{
+				continue;
+			}
+
+			if (propTaskSettings.TryRead(ref reader, options, PropTaskSettings))
+			{
+				continue;
+			}
+
+			if (propTaskType.TryRead(ref reader, options, PropTaskType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutInferenceResponse
+		{
+			InferenceId = propInferenceId.Value
+,
+			Service = propService.Value
+,
+			ServiceSettings = propServiceSettings.Value
+,
+			TaskSettings = propTaskSettings.Value
+,
+			TaskType = propTaskType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutInferenceResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInferenceId, value.InferenceId);
+		writer.WriteProperty(options, PropService, value.Service);
+		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings);
+		writer.WriteProperty(options, PropTaskType, value.TaskType);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutInferenceResponseConverter))]
 public sealed partial class PutInferenceResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +109,6 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_id")]
 	public string InferenceId { get; init; }
 
 	/// <summary>
@@ -41,7 +116,6 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// The service type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("service")]
 	public string Service { get; init; }
 
 	/// <summary>
@@ -49,7 +123,6 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("service_settings")]
 	public object ServiceSettings { get; init; }
 
 	/// <summary>
@@ -57,7 +130,6 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// Task settings specific to the service and task type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_settings")]
 	public object? TaskSettings { get; init; }
 
 	/// <summary>
@@ -65,6 +137,5 @@ public sealed partial class PutInferenceResponse : ElasticsearchResponse
 	/// The task type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_type")]
 	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }
 }

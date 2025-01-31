@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class GetDataStreamResponseConverter : System.Text.Json.Serialization.JsonConverter<GetDataStreamResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
+
+	public override GetDataStreamResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStream>> propDataStreams = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataStreams.TryRead(ref reader, options, PropDataStreams))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetDataStreamResponse
+		{
+			DataStreams = propDataStreams.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetDataStreamResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetDataStreamResponseConverter))]
 public sealed partial class GetDataStreamResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("data_streams")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStream> DataStreams { get; init; }
 }

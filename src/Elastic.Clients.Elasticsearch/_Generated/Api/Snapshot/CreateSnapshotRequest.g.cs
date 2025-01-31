@@ -59,6 +59,11 @@ public sealed partial class CreateSnapshotRequest : PlainRequest<CreateSnapshotR
 	{
 	}
 
+	[JsonConstructor]
+	internal CreateSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -66,6 +71,22 @@ public sealed partial class CreateSnapshotRequest : PlainRequest<CreateSnapshotR
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "snapshot.create";
+
+	/// <summary>
+	/// <para>
+	/// Repository for the snapshot.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the snapshot. Must be unique in the repository.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>

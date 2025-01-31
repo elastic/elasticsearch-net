@@ -45,6 +45,11 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 	{
 	}
 
+	[JsonConstructor]
+	internal PutTrainedModelDefinitionPartRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelDefinitionPart;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -52,6 +57,23 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : PlainRequest<
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_trained_model_definition_part";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The definition part number. When the definition is loaded for inference the definition parts are streamed in the
+	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public int Part { get => P<int>("part"); set => PR("part", value); }
 
 	/// <summary>
 	/// <para>

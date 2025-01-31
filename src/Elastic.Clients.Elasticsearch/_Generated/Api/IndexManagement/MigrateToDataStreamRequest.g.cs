@@ -68,6 +68,11 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	{
 	}
 
+	[JsonConstructor]
+	internal MigrateToDataStreamRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementMigrateToDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -75,6 +80,14 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.migrate_to_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index alias to convert to a data stream.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Name { get => P<Elastic.Clients.Elasticsearch.IndexName>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

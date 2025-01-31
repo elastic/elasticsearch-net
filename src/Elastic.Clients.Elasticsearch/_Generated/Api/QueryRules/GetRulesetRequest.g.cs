@@ -46,6 +46,11 @@ public sealed partial class GetRulesetRequest : PlainRequest<GetRulesetRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal GetRulesetRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesGetRuleset;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -53,6 +58,14 @@ public sealed partial class GetRulesetRequest : PlainRequest<GetRulesetRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "query_rules.get_ruleset";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
 /// <summary>

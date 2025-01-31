@@ -72,6 +72,11 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 	{
 	}
 
+	[JsonConstructor]
+	internal ResolveIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementResolveIndex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -79,6 +84,15 @@ public sealed partial class ResolveIndexRequest : PlainRequest<ResolveIndexReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.resolve_index";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated name(s) or index pattern(s) of the indices, aliases, and data streams to resolve.
+	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

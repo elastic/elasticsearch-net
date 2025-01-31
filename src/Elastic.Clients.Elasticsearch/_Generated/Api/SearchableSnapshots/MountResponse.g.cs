@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+internal sealed partial class MountResponseConverter : System.Text.Json.Serialization.JsonConverter<MountResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+
+	public override MountResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot> propSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSnapshot.TryRead(ref reader, options, PropSnapshot))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MountResponse
+		{
+			Snapshot = propSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MountResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MountResponseConverter))]
 public sealed partial class MountResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("snapshot")]
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot Snapshot { get; init; }
 }

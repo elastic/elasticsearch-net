@@ -47,6 +47,11 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal EqlDeleteRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -54,6 +59,16 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "eql.delete";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the search to delete.
+	/// A search ID is provided in the EQL search API's response for an async search.
+	/// A search ID is also provided if the request’s <c>keep_on_completion</c> parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>

@@ -27,22 +27,97 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<StopTokenFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoveTrailing = System.Text.Json.JsonEncodedText.Encode("remove_trailing");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override StopTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propIgnoreCase = default;
+		LocalJsonValue<bool?> propRemoveTrailing = default;
+		LocalJsonValue<ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIgnoreCase.TryRead(ref reader, options, PropIgnoreCase))
+			{
+				continue;
+			}
+
+			if (propRemoveTrailing.TryRead(ref reader, options, PropRemoveTrailing))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryRead(ref reader, options, PropStopwordsPath))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StopTokenFilter
+		{
+			IgnoreCase = propIgnoreCase.Value
+,
+			RemoveTrailing = propRemoveTrailing.Value
+,
+			Stopwords = propStopwords.Value
+,
+			StopwordsPath = propStopwordsPath.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StopTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase);
+		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StopTokenFilterConverter))]
 public sealed partial class StopTokenFilter : ITokenFilter
 {
-	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
-	[JsonInclude, JsonPropertyName("remove_trailing")]
 	public bool? RemoveTrailing { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stop";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 

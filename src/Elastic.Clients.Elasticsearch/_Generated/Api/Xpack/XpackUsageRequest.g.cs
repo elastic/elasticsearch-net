@@ -49,6 +49,11 @@ public sealed partial class XpackUsageRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class XpackUsageRequest : PlainRequest<XpackUsageRequestParameters>
 {
+	[JsonConstructor]
+	internal XpackUsageRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.XpackUsage;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

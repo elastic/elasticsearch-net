@@ -35,4 +35,6 @@ public sealed partial class CompositeAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.CompositeBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "composite";
 }

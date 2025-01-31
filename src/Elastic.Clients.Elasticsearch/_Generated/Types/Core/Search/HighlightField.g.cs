@@ -27,6 +27,250 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class HighlightFieldConverter : System.Text.Json.Serialization.JsonConverter<HighlightField>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryChars = System.Text.Json.JsonEncodedText.Encode("boundary_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryMaxScan = System.Text.Json.JsonEncodedText.Encode("boundary_max_scan");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScanner = System.Text.Json.JsonEncodedText.Encode("boundary_scanner");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale");
+	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter");
+	private static readonly System.Text.Json.JsonEncodedText PropFragmentOffset = System.Text.Json.JsonEncodedText.Encode("fragment_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightFilter = System.Text.Json.JsonEncodedText.Encode("highlight_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightQuery = System.Text.Json.JsonEncodedText.Encode("highlight_query");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchedFields = System.Text.Json.JsonEncodedText.Encode("matched_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFragmentLength = System.Text.Json.JsonEncodedText.Encode("max_fragment_length");
+	private static readonly System.Text.Json.JsonEncodedText PropNoMatchSize = System.Text.Json.JsonEncodedText.Encode("no_match_size");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFragments = System.Text.Json.JsonEncodedText.Encode("number_of_fragments");
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropPhraseLimit = System.Text.Json.JsonEncodedText.Encode("phrase_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropPostTags = System.Text.Json.JsonEncodedText.Encode("post_tags");
+	private static readonly System.Text.Json.JsonEncodedText PropPreTags = System.Text.Json.JsonEncodedText.Encode("pre_tags");
+	private static readonly System.Text.Json.JsonEncodedText PropRequireFieldMatch = System.Text.Json.JsonEncodedText.Encode("require_field_match");
+	private static readonly System.Text.Json.JsonEncodedText PropTagsSchema = System.Text.Json.JsonEncodedText.Encode("tags_schema");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override HighlightField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propBoundaryChars = default;
+		LocalJsonValue<int?> propBoundaryMaxScan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner?> propBoundaryScanner = default;
+		LocalJsonValue<string?> propBoundaryScannerLocale = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter?> propFragmenter = default;
+		LocalJsonValue<int?> propFragmentOffset = default;
+		LocalJsonValue<int?> propFragmentSize = default;
+		LocalJsonValue<bool?> propHighlightFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propHighlightQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propMatchedFields = default;
+		LocalJsonValue<int?> propMaxAnalyzedOffset = default;
+		LocalJsonValue<int?> propMaxFragmentLength = default;
+		LocalJsonValue<int?> propNoMatchSize = default;
+		LocalJsonValue<int?> propNumberOfFragments = default;
+		LocalJsonValue<IDictionary<string, object>?> propOptions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder?> propOrder = default;
+		LocalJsonValue<int?> propPhraseLimit = default;
+		LocalJsonValue<ICollection<string>?> propPostTags = default;
+		LocalJsonValue<ICollection<string>?> propPreTags = default;
+		LocalJsonValue<bool?> propRequireFieldMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema?> propTagsSchema = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoundaryChars.TryRead(ref reader, options, PropBoundaryChars))
+			{
+				continue;
+			}
+
+			if (propBoundaryMaxScan.TryRead(ref reader, options, PropBoundaryMaxScan))
+			{
+				continue;
+			}
+
+			if (propBoundaryScanner.TryRead(ref reader, options, PropBoundaryScanner))
+			{
+				continue;
+			}
+
+			if (propBoundaryScannerLocale.TryRead(ref reader, options, PropBoundaryScannerLocale))
+			{
+				continue;
+			}
+
+			if (propFragmenter.TryRead(ref reader, options, PropFragmenter))
+			{
+				continue;
+			}
+
+			if (propFragmentOffset.TryRead(ref reader, options, PropFragmentOffset))
+			{
+				continue;
+			}
+
+			if (propFragmentSize.TryRead(ref reader, options, PropFragmentSize))
+			{
+				continue;
+			}
+
+			if (propHighlightFilter.TryRead(ref reader, options, PropHighlightFilter))
+			{
+				continue;
+			}
+
+			if (propHighlightQuery.TryRead(ref reader, options, PropHighlightQuery))
+			{
+				continue;
+			}
+
+			if (propMatchedFields.TryRead(ref reader, options, PropMatchedFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propMaxAnalyzedOffset.TryRead(ref reader, options, PropMaxAnalyzedOffset))
+			{
+				continue;
+			}
+
+			if (propMaxFragmentLength.TryRead(ref reader, options, PropMaxFragmentLength))
+			{
+				continue;
+			}
+
+			if (propNoMatchSize.TryRead(ref reader, options, PropNoMatchSize))
+			{
+				continue;
+			}
+
+			if (propNumberOfFragments.TryRead(ref reader, options, PropNumberOfFragments))
+			{
+				continue;
+			}
+
+			if (propOptions.TryRead(ref reader, options, PropOptions))
+			{
+				continue;
+			}
+
+			if (propOrder.TryRead(ref reader, options, PropOrder))
+			{
+				continue;
+			}
+
+			if (propPhraseLimit.TryRead(ref reader, options, PropPhraseLimit))
+			{
+				continue;
+			}
+
+			if (propPostTags.TryRead(ref reader, options, PropPostTags))
+			{
+				continue;
+			}
+
+			if (propPreTags.TryRead(ref reader, options, PropPreTags))
+			{
+				continue;
+			}
+
+			if (propRequireFieldMatch.TryRead(ref reader, options, PropRequireFieldMatch))
+			{
+				continue;
+			}
+
+			if (propTagsSchema.TryRead(ref reader, options, PropTagsSchema))
+			{
+				continue;
+			}
+
+			if (propType.TryRead(ref reader, options, PropType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HighlightField
+		{
+			BoundaryChars = propBoundaryChars.Value
+,
+			BoundaryMaxScan = propBoundaryMaxScan.Value
+,
+			BoundaryScanner = propBoundaryScanner.Value
+,
+			BoundaryScannerLocale = propBoundaryScannerLocale.Value
+,
+			Fragmenter = propFragmenter.Value
+,
+			FragmentOffset = propFragmentOffset.Value
+,
+			FragmentSize = propFragmentSize.Value
+,
+			HighlightFilter = propHighlightFilter.Value
+,
+			HighlightQuery = propHighlightQuery.Value
+,
+			MatchedFields = propMatchedFields.Value
+,
+			MaxAnalyzedOffset = propMaxAnalyzedOffset.Value
+,
+			MaxFragmentLength = propMaxFragmentLength.Value
+,
+			NoMatchSize = propNoMatchSize.Value
+,
+			NumberOfFragments = propNumberOfFragments.Value
+,
+			Options = propOptions.Value
+,
+			Order = propOrder.Value
+,
+			PhraseLimit = propPhraseLimit.Value
+,
+			PostTags = propPostTags.Value
+,
+			PreTags = propPreTags.Value
+,
+			RequireFieldMatch = propRequireFieldMatch.Value
+,
+			TagsSchema = propTagsSchema.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlightField value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoundaryChars, value.BoundaryChars);
+		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan);
+		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner);
+		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale);
+		writer.WriteProperty(options, PropFragmenter, value.Fragmenter);
+		writer.WriteProperty(options, PropFragmentOffset, value.FragmentOffset);
+		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize);
+		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter);
+		writer.WriteProperty(options, PropHighlightQuery, value.HighlightQuery);
+		writer.WriteProperty(options, PropMatchedFields, value.MatchedFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset);
+		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength);
+		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize);
+		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments);
+		writer.WriteProperty(options, PropOptions, value.Options);
+		writer.WriteProperty(options, PropOrder, value.Order);
+		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit);
+		writer.WriteProperty(options, PropPostTags, value.PostTags);
+		writer.WriteProperty(options, PropPreTags, value.PreTags);
+		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch);
+		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HighlightFieldConverter))]
 public sealed partial class HighlightField
 {
 	/// <summary>
@@ -34,7 +278,6 @@ public sealed partial class HighlightField
 	/// A string that contains each boundary character.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_chars")]
 	public string? BoundaryChars { get; set; }
 
 	/// <summary>
@@ -42,7 +285,6 @@ public sealed partial class HighlightField
 	/// How far to scan for boundary characters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_max_scan")]
 	public int? BoundaryMaxScan { get; set; }
 
 	/// <summary>
@@ -52,7 +294,6 @@ public sealed partial class HighlightField
 	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_scanner")]
 	public Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
 	/// <summary>
@@ -61,7 +302,6 @@ public sealed partial class HighlightField
 	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_scanner_locale")]
 	public string? BoundaryScannerLocale { get; set; }
 
 	/// <summary>
@@ -70,9 +310,7 @@ public sealed partial class HighlightField
 	/// Only valid for the <c>plain</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fragmenter")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
-	[JsonInclude, JsonPropertyName("fragment_offset")]
 	public int? FragmentOffset { get; set; }
 
 	/// <summary>
@@ -80,9 +318,7 @@ public sealed partial class HighlightField
 	/// The size of the highlighted fragment in characters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fragment_size")]
 	public int? FragmentSize { get; set; }
-	[JsonInclude, JsonPropertyName("highlight_filter")]
 	public bool? HighlightFilter { get; set; }
 
 	/// <summary>
@@ -91,10 +327,7 @@ public sealed partial class HighlightField
 	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
-	[JsonInclude, JsonPropertyName("matched_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
 
 	/// <summary>
@@ -104,9 +337,7 @@ public sealed partial class HighlightField
 	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
-	[JsonInclude, JsonPropertyName("max_fragment_length")]
 	public int? MaxFragmentLength { get; set; }
 
 	/// <summary>
@@ -114,7 +345,6 @@ public sealed partial class HighlightField
 	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("no_match_size")]
 	public int? NoMatchSize { get; set; }
 
 	/// <summary>
@@ -126,9 +356,7 @@ public sealed partial class HighlightField
 	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_fragments")]
 	public int? NumberOfFragments { get; set; }
-	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, object>? Options { get; set; }
 
 	/// <summary>
@@ -139,7 +367,6 @@ public sealed partial class HighlightField
 	/// Each highlighter applies its own logic to compute relevancy scores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? Order { get; set; }
 
 	/// <summary>
@@ -150,7 +377,6 @@ public sealed partial class HighlightField
 	/// Only supported by the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("phrase_limit")]
 	public int? PhraseLimit { get; set; }
 
 	/// <summary>
@@ -159,7 +385,6 @@ public sealed partial class HighlightField
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("post_tags")]
 	public ICollection<string>? PostTags { get; set; }
 
 	/// <summary>
@@ -168,7 +393,6 @@ public sealed partial class HighlightField
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pre_tags")]
 	public ICollection<string>? PreTags { get; set; }
 
 	/// <summary>
@@ -177,7 +401,6 @@ public sealed partial class HighlightField
 	/// Set to <c>false</c> to highlight all fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("require_field_match")]
 	public bool? RequireFieldMatch { get; set; }
 
 	/// <summary>
@@ -185,9 +408,7 @@ public sealed partial class HighlightField
 	/// Set to <c>styled</c> to use the built-in tag schema.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tags_schema")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? Type { get; set; }
 }
 

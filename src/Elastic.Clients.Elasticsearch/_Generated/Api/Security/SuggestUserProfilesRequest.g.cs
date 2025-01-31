@@ -34,6 +34,69 @@ public sealed partial class SuggestUserProfilesRequestParameters : RequestParame
 {
 }
 
+internal sealed partial class SuggestUserProfilesRequestConverter : System.Text.Json.Serialization.JsonConverter<SuggestUserProfilesRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropHint = System.Text.Json.JsonEncodedText.Encode("hint");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override SuggestUserProfilesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>?> propData = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Hint?> propHint = default;
+		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<long?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryRead(ref reader, options, PropData, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propHint.TryRead(ref reader, options, PropHint))
+			{
+				continue;
+			}
+
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SuggestUserProfilesRequest
+		{
+			Data = propData.Value
+,
+			Hint = propHint.Value
+,
+			Name = propName.Value
+,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SuggestUserProfilesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropHint, value.Hint);
+		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Suggest a user profile.
@@ -42,8 +105,14 @@ public sealed partial class SuggestUserProfilesRequestParameters : RequestParame
 /// Get suggestions for user profiles that match specified search criteria.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(SuggestUserProfilesRequestConverter))]
 public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUserProfilesRequestParameters>
 {
+	[JsonConstructor]
+	internal SuggestUserProfilesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySuggestUserProfiles;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -60,8 +129,6 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 	/// By default returns no <c>data</c> content.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Data { get; set; }
 
 	/// <summary>
@@ -72,7 +139,6 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 	/// as long as the profile matches the <c>name</c> field query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hint")]
 	public Elastic.Clients.Elasticsearch.Security.Hint? Hint { get; set; }
 
 	/// <summary>
@@ -81,7 +147,6 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 	/// Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public string? Name { get; set; }
 
 	/// <summary>
@@ -89,7 +154,6 @@ public sealed partial class SuggestUserProfilesRequest : PlainRequest<SuggestUse
 	/// Number of profiles to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
 }
 

@@ -71,6 +71,11 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteForecastRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteForecast;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -78,6 +83,24 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_forecast";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of forecast identifiers. If you do not specify
+	/// this optional parameter or if you specify <c>_all</c> or <c>*</c> the API deletes
+	/// all forecasts from the job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? ForecastId { get => P<Elastic.Clients.Elasticsearch.Id?>("forecast_id"); set => PO("forecast_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

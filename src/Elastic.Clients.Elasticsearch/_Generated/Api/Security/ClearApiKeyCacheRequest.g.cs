@@ -49,6 +49,11 @@ public sealed partial class ClearApiKeyCacheRequest : PlainRequest<ClearApiKeyCa
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearApiKeyCacheRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearApiKeyCache;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -56,6 +61,16 @@ public sealed partial class ClearApiKeyCacheRequest : PlainRequest<ClearApiKeyCa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_api_key_cache";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of API key IDs to evict from the API key cache.
+	/// To evict all API keys, use <c>*</c>.
+	/// Does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids Ids { get => P<Elastic.Clients.Elasticsearch.Ids>("ids"); set => PR("ids", value); }
 }
 
 /// <summary>

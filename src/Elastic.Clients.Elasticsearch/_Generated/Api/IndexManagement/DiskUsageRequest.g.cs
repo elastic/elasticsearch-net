@@ -88,6 +88,11 @@ public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal DiskUsageRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDiskUsage;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -95,6 +100,15 @@ public sealed partial class DiskUsageRequest : PlainRequest<DiskUsageRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.disk_usage";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// It’s recommended to execute this API with a single index (or the latest backing index of a data stream) as the API consumes resources significantly.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

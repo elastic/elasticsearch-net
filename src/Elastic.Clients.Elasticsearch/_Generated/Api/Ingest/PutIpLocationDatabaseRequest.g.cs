@@ -56,9 +56,14 @@ public sealed partial class PutIpLocationDatabaseRequestParameters : RequestPara
 /// Create or update an IP geolocation database configuration.
 /// </para>
 /// </summary>
-public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLocationDatabaseRequestParameters>, ISelfSerializable
+public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLocationDatabaseRequestParameters>, ISelfTwoWaySerializable
 {
 	public PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
+
+	[JsonConstructor]
+	internal PutIpLocationDatabaseRequest()
 	{
 	}
 
@@ -69,6 +74,14 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ingest.put_ip_location_database";
+
+	/// <summary>
+	/// <para>
+	/// The database configuration identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -89,12 +102,16 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Configuration { get; set; }
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		JsonSerializer.Serialize(writer, Configuration, options);
+	}
+
+	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		Configuration = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(ref reader);
 	}
 }
 

@@ -56,6 +56,11 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal FollowRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -63,6 +68,14 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.follow";
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

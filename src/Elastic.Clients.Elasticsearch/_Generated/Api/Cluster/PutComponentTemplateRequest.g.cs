@@ -78,6 +78,11 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	{
 	}
 
+	[JsonConstructor]
+	internal PutComponentTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPutComponentTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -85,6 +90,18 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "cluster.put_component_template";
+
+	/// <summary>
+	/// <para>
+	/// Name of the component template to create.
+	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
+	/// Elastic Agent uses these templates to configure backing indices for its data streams.
+	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
+	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -27,6 +27,116 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class FunctionScoreQueryConverter : System.Text.Json.Serialization.JsonConverter<FunctionScoreQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropBoostMode = System.Text.Json.JsonEncodedText.Encode("boost_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropFunctions = System.Text.Json.JsonEncodedText.Encode("functions");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBoost = System.Text.Json.JsonEncodedText.Encode("max_boost");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+
+	public override FunctionScoreQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>?>(options);
+			return new FunctionScoreQuery { Functions = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode?> propBoostMode = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>?> propFunctions = default;
+		LocalJsonValue<double?> propMaxBoost = default;
+		LocalJsonValue<double?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode?> propScoreMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propBoostMode.TryRead(ref reader, options, PropBoostMode))
+			{
+				continue;
+			}
+
+			if (propFunctions.TryRead(ref reader, options, PropFunctions))
+			{
+				continue;
+			}
+
+			if (propMaxBoost.TryRead(ref reader, options, PropMaxBoost))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			if (propScoreMode.TryRead(ref reader, options, PropScoreMode))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FunctionScoreQuery
+		{
+			Boost = propBoost.Value
+,
+			BoostMode = propBoostMode.Value
+,
+			Functions = propFunctions.Value
+,
+			MaxBoost = propMaxBoost.Value
+,
+			MinScore = propMinScore.Value
+,
+			Query = propQuery.Value
+,
+			QueryName = propQueryName.Value
+,
+			ScoreMode = propScoreMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FunctionScoreQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropBoostMode, value.BoostMode);
+		writer.WriteProperty(options, PropFunctions, value.Functions);
+		writer.WriteProperty(options, PropMaxBoost, value.MaxBoost);
+		writer.WriteProperty(options, PropMinScore, value.MinScore);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FunctionScoreQueryConverter))]
 public sealed partial class FunctionScoreQuery
 {
 	/// <summary>
@@ -37,7 +147,6 @@ public sealed partial class FunctionScoreQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,7 +154,6 @@ public sealed partial class FunctionScoreQuery
 	/// Defines how he newly computed score is combined with the score of the query
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
 
 	/// <summary>
@@ -53,7 +161,6 @@ public sealed partial class FunctionScoreQuery
 	/// One or more functions that compute a new score for each document returned by the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("functions")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? Functions { get; set; }
 
 	/// <summary>
@@ -61,7 +168,6 @@ public sealed partial class FunctionScoreQuery
 	/// Restricts the new score to not exceed the provided limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_boost")]
 	public double? MaxBoost { get; set; }
 
 	/// <summary>
@@ -69,7 +175,6 @@ public sealed partial class FunctionScoreQuery
 	/// Excludes documents that do not meet the provided score threshold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
 	/// <summary>
@@ -77,9 +182,7 @@ public sealed partial class FunctionScoreQuery
 	/// A query that determines the documents for which a new score is computed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -87,7 +190,6 @@ public sealed partial class FunctionScoreQuery
 	/// Specifies how the computed scores are combined
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(FunctionScoreQuery functionScoreQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.FunctionScore(functionScoreQuery);

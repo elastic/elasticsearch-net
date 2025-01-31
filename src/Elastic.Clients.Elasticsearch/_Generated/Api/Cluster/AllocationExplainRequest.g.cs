@@ -58,6 +58,11 @@ public sealed partial class AllocationExplainRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class AllocationExplainRequest : PlainRequest<AllocationExplainRequestParameters>
 {
+	[JsonConstructor]
+	internal AllocationExplainRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterAllocationExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

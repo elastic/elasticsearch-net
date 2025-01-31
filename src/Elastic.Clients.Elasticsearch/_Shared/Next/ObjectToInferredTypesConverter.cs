@@ -8,12 +8,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal sealed class ObjectToInferredTypesConverter : JsonConverter<object>
+internal sealed class ObjectToInferredTypesConverter :
+	JsonConverter<object>
 {
-	public override object Read(
-		ref Utf8JsonReader reader,
-		Type typeToConvert,
-		JsonSerializerOptions options) => reader.TokenType switch
+	public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		return reader.TokenType switch
 		{
 			JsonTokenType.True => true,
 			JsonTokenType.False => false,
@@ -24,10 +24,14 @@ internal sealed class ObjectToInferredTypesConverter : JsonConverter<object>
 			JsonTokenType.String => reader.GetString()!,
 			_ => JsonDocument.ParseValue(ref reader).RootElement.Clone()
 		};
+	}
 
-	public override void Write(
-		Utf8JsonWriter writer,
-		object objectToWrite,
-		JsonSerializerOptions options) =>
-		JsonSerializer.Serialize(writer, objectToWrite, objectToWrite.GetType(), options);
+	public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+	{
+		// TODO: Match `SourceMarker<T>` values and delegate to the `SourceSerializer`.
+
+#pragma warning disable IL2026, IL3050
+		JsonSerializer.Serialize(writer, value, value.GetType(), options);
+#pragma warning restore IL2026, IL3050
+	}
 }

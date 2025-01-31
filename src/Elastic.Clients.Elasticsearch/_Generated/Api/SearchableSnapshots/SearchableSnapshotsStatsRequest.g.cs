@@ -47,6 +47,7 @@ public sealed partial class SearchableSnapshotsStatsRequestParameters : RequestP
 /// </summary>
 public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<SearchableSnapshotsStatsRequestParameters>
 {
+	[JsonConstructor]
 	public SearchableSnapshotsStatsRequest()
 	{
 	}
@@ -62,6 +63,14 @@ public sealed partial class SearchableSnapshotsStatsRequest : PlainRequest<Searc
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "searchable_snapshots.stats";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

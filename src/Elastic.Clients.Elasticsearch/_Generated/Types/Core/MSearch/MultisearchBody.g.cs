@@ -27,399 +27,336 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
-internal sealed partial class MultisearchBodyConverter : JsonConverter<MultisearchBody>
+internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serialization.JsonConverter<MultisearchBody>
 {
-	public override MultisearchBody Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropDocvalueFields = System.Text.Json.JsonEncodedText.Encode("docvalue_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropExt = System.Text.Json.JsonEncodedText.Encode("ext");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesBoost = System.Text.Json.JsonEncodedText.Encode("indices_boost");
+	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropPit = System.Text.Json.JsonEncodedText.Encode("pit");
+	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggest = System.Text.Json.JsonEncodedText.Encode("suggest");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminateAfter = System.Text.Json.JsonEncodedText.Encode("terminate_after");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackScores = System.Text.Json.JsonEncodedText.Encode("track_scores");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override MultisearchBody Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new MultisearchBody();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propDocvalueFields = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<IDictionary<string, object>?> propExt = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Highlight?> propHighlight = default;
+		LocalJsonValue<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?> propIndicesBoost = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?> propKnn = default;
+		LocalJsonValue<double?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?> propPit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propPostFilter = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?> propRescore = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<ICollection<string>?> propStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Suggester?> propSuggest = default;
+		LocalJsonValue<long?> propTerminateAfter = default;
+		LocalJsonValue<string?> propTimeout = default;
+		LocalJsonValue<bool?> propTrackScores = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?> propTrackTotalHits = default;
+		LocalJsonValue<bool?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "collapse")
-				{
-					variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "docvalue_fields")
-				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "explain")
-				{
-					variant.Explain = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ext")
-				{
-					variant.Ext = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fields")
-				{
-					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "highlight")
-				{
-					variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Highlight?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices_boost")
-				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "knn")
-				{
-					variant.Knn = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.KnnSearch>(ref reader, options);
-					continue;
-				}
-
-				if (property == "min_score")
-				{
-					variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "pit")
-				{
-					variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "post_filter")
-				{
-					variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "profile")
-				{
-					variant.Profile = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rescore")
-				{
-					variant.Rescore = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "script_fields")
-				{
-					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search_after")
-				{
-					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "seq_no_primary_term")
-				{
-					variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortOptions>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_source")
-				{
-					variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stats")
-				{
-					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stored_fields")
-				{
-					reader.Read();
-					variant.StoredFields = new FieldsConverter().Read(ref reader, typeToConvert, options);
-					continue;
-				}
-
-				if (property == "suggest")
-				{
-					variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Suggester?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "terminate_after")
-				{
-					variant.TerminateAfter = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "timeout")
-				{
-					variant.Timeout = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_scores")
-				{
-					variant.TrackScores = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_total_hits")
-				{
-					variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			{
+				continue;
+			}
+
+			if (propDocvalueFields.TryRead(ref reader, options, PropDocvalueFields))
+			{
+				continue;
+			}
+
+			if (propExplain.TryRead(ref reader, options, PropExplain))
+			{
+				continue;
+			}
+
+			if (propExt.TryRead(ref reader, options, PropExt))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propFrom.TryRead(ref reader, options, PropFrom))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryRead(ref reader, options, PropHighlight))
+			{
+				continue;
+			}
+
+			if (propIndicesBoost.TryRead(ref reader, options, PropIndicesBoost))
+			{
+				continue;
+			}
+
+			if (propKnn.TryRead(ref reader, options, PropKnn, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?, Elastic.Clients.Elasticsearch.KnnSearch>)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			{
+				continue;
+			}
+
+			if (propPit.TryRead(ref reader, options, PropPit))
+			{
+				continue;
+			}
+
+			if (propPostFilter.TryRead(ref reader, options, PropPostFilter))
+			{
+				continue;
+			}
+
+			if (propProfile.TryRead(ref reader, options, PropProfile))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propRescore.TryRead(ref reader, options, PropRescore, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?, Elastic.Clients.Elasticsearch.Core.Search.Rescore>)))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryRead(ref reader, options, PropScriptFields))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryRead(ref reader, options, PropSearchAfter))
+			{
+				continue;
+			}
+
+			if (propSeqNoPrimaryTerm.TryRead(ref reader, options, PropSeqNoPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propStats.TryRead(ref reader, options, PropStats))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryRead(ref reader, options, PropStoredFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propSuggest.TryRead(ref reader, options, PropSuggest))
+			{
+				continue;
+			}
+
+			if (propTerminateAfter.TryRead(ref reader, options, PropTerminateAfter))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryRead(ref reader, options, PropTimeout))
+			{
+				continue;
+			}
+
+			if (propTrackScores.TryRead(ref reader, options, PropTrackScores))
+			{
+				continue;
+			}
+
+			if (propTrackTotalHits.TryRead(ref reader, options, PropTrackTotalHits))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MultisearchBody
+		{
+			Aggregations = propAggregations.Value
+,
+			Collapse = propCollapse.Value
+,
+			DocvalueFields = propDocvalueFields.Value
+,
+			Explain = propExplain.Value
+,
+			Ext = propExt.Value
+,
+			Fields = propFields.Value
+,
+			From = propFrom.Value
+,
+			Highlight = propHighlight.Value
+,
+			IndicesBoost = propIndicesBoost.Value
+,
+			Knn = propKnn.Value
+,
+			MinScore = propMinScore.Value
+,
+			Pit = propPit.Value
+,
+			PostFilter = propPostFilter.Value
+,
+			Profile = propProfile.Value
+,
+			Query = propQuery.Value
+,
+			Rescore = propRescore.Value
+,
+			RuntimeMappings = propRuntimeMappings.Value
+,
+			ScriptFields = propScriptFields.Value
+,
+			SearchAfter = propSearchAfter.Value
+,
+			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value
+,
+			Size = propSize.Value
+,
+			Sort = propSort.Value
+,
+			Source = propSource.Value
+,
+			Stats = propStats.Value
+,
+			StoredFields = propStoredFields.Value
+,
+			Suggest = propSuggest.Value
+,
+			TerminateAfter = propTerminateAfter.Value
+,
+			Timeout = propTimeout.Value
+,
+			TrackScores = propTrackScores.Value
+,
+			TrackTotalHits = propTrackTotalHits.Value
+,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, MultisearchBody value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultisearchBody value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.Collapse is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, value.Collapse, options);
-		}
-
-		if (value.DocvalueFields is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
-		}
-
-		if (value.Explain.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(value.Explain.Value);
-		}
-
-		if (value.Ext is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, value.Ext, options);
-		}
-
-		if (value.Fields is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value.Fields, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Highlight is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, value.Highlight, options);
-		}
-
-		if (value.IndicesBoost is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, value.IndicesBoost, options);
-		}
-
-		if (value.Knn is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, value.Knn, options);
-		}
-
-		if (value.MinScore.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(value.MinScore.Value);
-		}
-
-		if (value.Pit is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, value.Pit, options);
-		}
-
-		if (value.PostFilter is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, value.PostFilter, options);
-		}
-
-		if (value.Profile.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(value.Profile.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.Rescore is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, value.Rescore, options);
-		}
-
-		if (value.RuntimeMappings is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
-		}
-
-		if (value.ScriptFields is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, value.ScriptFields, options);
-		}
-
-		if (value.SearchAfter is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, value.SearchAfter, options);
-		}
-
-		if (value.SeqNoPrimaryTerm.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
-		if (value.Source is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, value.Source, options);
-		}
-
-		if (value.Stats is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, value.Stats, options);
-		}
-
-		if (value.StoredFields is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			new FieldsConverter().Write(writer, value.StoredFields, options);
-		}
-
-		if (value.Suggest is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, value.Suggest, options);
-		}
-
-		if (value.TerminateAfter.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(value.TerminateAfter.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.Timeout))
-		{
-			writer.WritePropertyName("timeout");
-			writer.WriteStringValue(value.Timeout);
-		}
-
-		if (value.TrackScores.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(value.TrackScores.Value);
-		}
-
-		if (value.TrackTotalHits is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
-		}
-
-		if (value.Version.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(value.Version.Value);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropCollapse, value.Collapse);
+		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields);
+		writer.WriteProperty(options, PropExplain, value.Explain);
+		writer.WriteProperty(options, PropExt, value.Ext);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropFrom, value.From);
+		writer.WriteProperty(options, PropHighlight, value.Highlight);
+		writer.WriteProperty(options, PropIndicesBoost, value.IndicesBoost);
+		writer.WriteProperty(options, PropKnn, value.Knn, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?, Elastic.Clients.Elasticsearch.KnnSearch>));
+		writer.WriteProperty(options, PropMinScore, value.MinScore);
+		writer.WriteProperty(options, PropPit, value.Pit);
+		writer.WriteProperty(options, PropPostFilter, value.PostFilter);
+		writer.WriteProperty(options, PropProfile, value.Profile);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropRescore, value.Rescore, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?, Elastic.Clients.Elasticsearch.Core.Search.Rescore>));
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter);
+		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropStats, value.Stats);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropSuggest, value.Suggest);
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter);
+		writer.WriteProperty(options, PropTimeout, value.Timeout);
+		writer.WriteProperty(options, PropTrackScores, value.TrackScores);
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits);
+		writer.WriteProperty(options, PropVersion, value.Version);
 		writer.WriteEndObject();
 	}
 }

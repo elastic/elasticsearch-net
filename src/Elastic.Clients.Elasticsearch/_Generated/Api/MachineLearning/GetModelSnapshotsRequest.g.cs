@@ -62,6 +62,11 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	{
 	}
 
+	[JsonConstructor]
+	internal GetModelSnapshotsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshots;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -69,6 +74,24 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_model_snapshots";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id?>("snapshot_id"); set => PO("snapshot_id", value); }
 
 	/// <summary>
 	/// <para>

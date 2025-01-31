@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetDatafeedsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetDatafeedsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
+
+	public override GetDatafeedsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Datafeed>> propDatafeeds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propDatafeeds.TryRead(ref reader, options, PropDatafeeds))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetDatafeedsResponse
+		{
+			Count = propCount.Value
+,
+			Datafeeds = propDatafeeds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetDatafeedsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetDatafeedsResponseConverter))]
 public sealed partial class GetDatafeedsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("datafeeds")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Datafeed> Datafeeds { get; init; }
 }

@@ -48,6 +48,11 @@ public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<Sa
 	{
 	}
 
+	[JsonConstructor]
+	internal SamlServiceProviderMetadataRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlServiceProviderMetadata;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -55,6 +60,14 @@ public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<Sa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.saml_service_provider_metadata";
+
+	/// <summary>
+	/// <para>
+	/// The name of the SAML realm in Elasticsearch.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name RealmName { get => P<Elastic.Clients.Elasticsearch.Name>("realm_name"); set => PR("realm_name", value); }
 }
 
 /// <summary>

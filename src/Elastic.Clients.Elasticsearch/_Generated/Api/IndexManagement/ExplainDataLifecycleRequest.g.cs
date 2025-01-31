@@ -59,6 +59,11 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 	{
 	}
 
+	[JsonConstructor]
+	internal ExplainDataLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExplainDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -66,6 +71,14 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.explain_data_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The name of the index to explain
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -22,17 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class CloseIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<CloseIndexResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAcknowledged = System.Text.Json.JsonEncodedText.Encode("shards_acknowledged");
+
+	public override CloseIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult>> propIndices = default;
+		LocalJsonValue<bool> propShardsAcknowledged = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propShardsAcknowledged.TryRead(ref reader, options, PropShardsAcknowledged))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CloseIndexResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			Indices = propIndices.Value
+,
+			ShardsAcknowledged = propShardsAcknowledged.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CloseIndexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CloseIndexResponseConverter))]
 public sealed partial class CloseIndexResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; init; }
-	[JsonInclude, JsonPropertyName("shards_acknowledged")]
 	public bool ShardsAcknowledged { get; init; }
 }

@@ -22,10 +22,106 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<ClusterStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override ClusterStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<string> propClusterUuid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterNodes> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
+		LocalJsonValue<long> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			{
+				continue;
+			}
+
+			if (propClusterUuid.TryRead(ref reader, options, PropClusterUuid))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propNodes.TryRead(ref reader, options, PropNodes))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryRead(ref reader, options, PropNodeStats))
+			{
+				continue;
+			}
+
+			if (propStatus.TryRead(ref reader, options, PropStatus))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryRead(ref reader, options, PropTimestamp))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClusterStatsResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			ClusterUuid = propClusterUuid.Value
+,
+			Indices = propIndices.Value
+,
+			Nodes = propNodes.Value
+,
+			NodeStats = propNodeStats.Value
+,
+			Status = propStatus.Value
+,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClusterStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName);
+		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats);
+		writer.WriteProperty(options, PropStatus, value.Status);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClusterStatsResponseConverter))]
 public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +129,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Name of the cluster, based on the cluster name setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
@@ -41,7 +136,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Unique identifier for the cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_uuid")]
 	public string ClusterUuid { get; init; }
 
 	/// <summary>
@@ -49,7 +143,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Contains statistics about indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; init; }
 
 	/// <summary>
@@ -57,7 +150,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Contains statistics about nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; init; }
 
 	/// <summary>
@@ -65,7 +157,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Contains statistics about the number of nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
 
 	/// <summary>
@@ -73,7 +164,6 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Health status of the cluster, based on the state of its primary and replica shards.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 	/// <summary>
@@ -81,6 +171,5 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }
 }

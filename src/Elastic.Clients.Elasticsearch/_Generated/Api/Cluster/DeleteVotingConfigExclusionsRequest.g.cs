@@ -53,6 +53,11 @@ public sealed partial class DeleteVotingConfigExclusionsRequestParameters : Requ
 /// </summary>
 public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<DeleteVotingConfigExclusionsRequestParameters>
 {
+	[JsonConstructor]
+	internal DeleteVotingConfigExclusionsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterDeleteVotingConfigExclusions;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

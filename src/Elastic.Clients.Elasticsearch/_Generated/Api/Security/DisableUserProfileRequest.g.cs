@@ -56,6 +56,11 @@ public sealed partial class DisableUserProfileRequest : PlainRequest<DisableUser
 	{
 	}
 
+	[JsonConstructor]
+	internal DisableUserProfileRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDisableUserProfile;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -63,6 +68,14 @@ public sealed partial class DisableUserProfileRequest : PlainRequest<DisableUser
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.disable_user_profile";
+
+	/// <summary>
+	/// <para>
+	/// Unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>

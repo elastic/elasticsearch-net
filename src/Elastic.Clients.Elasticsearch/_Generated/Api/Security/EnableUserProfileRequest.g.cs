@@ -56,6 +56,11 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 	{
 	}
 
+	[JsonConstructor]
+	internal EnableUserProfileRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnableUserProfile;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -63,6 +68,14 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.enable_user_profile";
+
+	/// <summary>
+	/// <para>
+	/// Unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>

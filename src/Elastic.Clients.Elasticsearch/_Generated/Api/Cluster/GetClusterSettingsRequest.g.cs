@@ -71,6 +71,11 @@ public sealed partial class GetClusterSettingsRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class GetClusterSettingsRequest : PlainRequest<GetClusterSettingsRequestParameters>
 {
+	[JsonConstructor]
+	internal GetClusterSettingsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterGetSettings;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

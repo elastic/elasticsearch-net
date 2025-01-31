@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class UntypedDistanceFeatureQuery
+public sealed partial class UntypedDistanceFeatureQuery : IDistanceFeatureQuery
 {
 	/// <summary>
 	/// <para>
@@ -72,6 +72,9 @@ public sealed partial class UntypedDistanceFeatureQuery
 	public object Pivot { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
+
+	[JsonInclude, JsonPropertyName("")]
+	public string Type => "untypeddistancefeaturequery";
 }
 
 public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : SerializableDescriptor<UntypedDistanceFeatureQueryDescriptor<TDocument>>

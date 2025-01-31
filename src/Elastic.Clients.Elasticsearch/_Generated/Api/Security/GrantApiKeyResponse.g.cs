@@ -22,20 +22,91 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Serialization.JsonConverter<GrantApiKeyResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
+	private static readonly System.Text.Json.JsonEncodedText PropEncoded = System.Text.Json.JsonEncodedText.Encode("encoded");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override GrantApiKeyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propApiKey = default;
+		LocalJsonValue<string> propEncoded = default;
+		LocalJsonValue<long?> propExpiration = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApiKey.TryRead(ref reader, options, PropApiKey))
+			{
+				continue;
+			}
+
+			if (propEncoded.TryRead(ref reader, options, PropEncoded))
+			{
+				continue;
+			}
+
+			if (propExpiration.TryRead(ref reader, options, PropExpiration))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GrantApiKeyResponse
+		{
+			ApiKey = propApiKey.Value
+,
+			Encoded = propEncoded.Value
+,
+			Expiration = propExpiration.Value
+,
+			Id = propId.Value
+,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GrantApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApiKey, value.ApiKey);
+		writer.WriteProperty(options, PropEncoded, value.Encoded);
+		writer.WriteProperty(options, PropExpiration, value.Expiration);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GrantApiKeyResponseConverter))]
 public sealed partial class GrantApiKeyResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("api_key")]
 	public string ApiKey { get; init; }
-	[JsonInclude, JsonPropertyName("encoded")]
 	public string Encoded { get; init; }
-	[JsonInclude, JsonPropertyName("expiration")]
 	public long? Expiration { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

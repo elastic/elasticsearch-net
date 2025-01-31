@@ -44,6 +44,11 @@ public sealed partial class GetScriptContextRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptContextRequestParameters>
 {
+	[JsonConstructor]
+	internal GetScriptContextRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptContext;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

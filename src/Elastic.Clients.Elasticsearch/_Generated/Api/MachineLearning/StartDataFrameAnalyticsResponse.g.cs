@@ -22,13 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class StartDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<StartDataFrameAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+
+	public override StartDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string> propNode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propNode.TryRead(ref reader, options, PropNode))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StartDataFrameAnalyticsResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			Node = propNode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropNode, value.Node);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StartDataFrameAnalyticsResponseConverter))]
 public sealed partial class StartDataFrameAnalyticsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 
 	/// <summary>
@@ -40,6 +85,5 @@ public sealed partial class StartDataFrameAnalyticsResponse : ElasticsearchRespo
 	/// node ID will be "serverless".
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }
 }

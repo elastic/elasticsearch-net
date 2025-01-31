@@ -44,6 +44,11 @@ public sealed partial class HasPrivilegesUserProfileRequestParameters : RequestP
 /// </summary>
 public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPrivilegesUserProfileRequestParameters>
 {
+	[JsonConstructor]
+	internal HasPrivilegesUserProfileRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityHasPrivilegesUserProfile;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

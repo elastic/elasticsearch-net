@@ -27,9 +27,72 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class FieldCollapseConverter : System.Text.Json.Serialization.JsonConverter<FieldCollapse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentGroupSearches = System.Text.Json.JsonEncodedText.Encode("max_concurrent_group_searches");
+
+	public override FieldCollapse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?> propInnerHits = default;
+		LocalJsonValue<int?> propMaxConcurrentGroupSearches = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryRead(ref reader, options, PropInnerHits, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?, Elastic.Clients.Elasticsearch.Core.Search.InnerHits>)))
+			{
+				continue;
+			}
+
+			if (propMaxConcurrentGroupSearches.TryRead(ref reader, options, PropMaxConcurrentGroupSearches))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldCollapse
+		{
+			Collapse = propCollapse.Value
+,
+			Field = propField.Value
+,
+			InnerHits = propInnerHits.Value
+,
+			MaxConcurrentGroupSearches = propMaxConcurrentGroupSearches.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldCollapse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollapse, value.Collapse);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?, Elastic.Clients.Elasticsearch.Core.Search.InnerHits>));
+		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FieldCollapseConverter))]
 public sealed partial class FieldCollapse
 {
-	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
@@ -37,7 +100,6 @@ public sealed partial class FieldCollapse
 	/// The field to collapse the result set on
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
@@ -45,8 +107,6 @@ public sealed partial class FieldCollapse
 	/// The number of inner hits and their sort order
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inner_hits")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.InnerHits))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
 
 	/// <summary>
@@ -54,7 +114,6 @@ public sealed partial class FieldCollapse
 	/// The number of concurrent requests allowed to retrieve the inner_hits per group
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_concurrent_group_searches")]
 	public int? MaxConcurrentGroupSearches { get; set; }
 }
 

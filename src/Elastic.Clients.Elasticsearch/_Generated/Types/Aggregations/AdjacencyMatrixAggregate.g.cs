@@ -33,4 +33,6 @@ public sealed partial class AdjacencyMatrixAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "adjacency_matrix";
 }

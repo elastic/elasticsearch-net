@@ -48,6 +48,7 @@ public sealed partial class NodesUsageRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class NodesUsageRequest : PlainRequest<NodesUsageRequestParameters>
 {
+	[JsonConstructor]
 	public NodesUsageRequest()
 	{
 	}
@@ -71,6 +72,23 @@ public sealed partial class NodesUsageRequest : PlainRequest<NodesUsageRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.usage";
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics.
+	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of node IDs or names to limit the returned information; use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

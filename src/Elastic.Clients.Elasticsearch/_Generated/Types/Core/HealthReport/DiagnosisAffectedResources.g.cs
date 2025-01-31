@@ -27,17 +27,85 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class DiagnosisAffectedResourcesConverter : System.Text.Json.Serialization.JsonConverter<DiagnosisAffectedResources>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropSlmPolicies = System.Text.Json.JsonEncodedText.Encode("slm_policies");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepositories = System.Text.Json.JsonEncodedText.Encode("snapshot_repositories");
+
+	public override DiagnosisAffectedResources Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<string>?> propFeatureStates = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propIndices = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>?> propNodes = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propSlmPolicies = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propSnapshotRepositories = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureStates.TryRead(ref reader, options, PropFeatureStates))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propNodes.TryRead(ref reader, options, PropNodes))
+			{
+				continue;
+			}
+
+			if (propSlmPolicies.TryRead(ref reader, options, PropSlmPolicies))
+			{
+				continue;
+			}
+
+			if (propSnapshotRepositories.TryRead(ref reader, options, PropSnapshotRepositories))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DiagnosisAffectedResources
+		{
+			FeatureStates = propFeatureStates.Value
+,
+			Indices = propIndices.Value
+,
+			Nodes = propNodes.Value
+,
+			SlmPolicies = propSlmPolicies.Value
+,
+			SnapshotRepositories = propSnapshotRepositories.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DiagnosisAffectedResources value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>?, string>));
+		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteProperty(options, PropSlmPolicies, value.SlmPolicies);
+		writer.WriteProperty(options, PropSnapshotRepositories, value.SnapshotRepositories);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DiagnosisAffectedResourcesConverter))]
 public sealed partial class DiagnosisAffectedResources
 {
-	[JsonInclude, JsonPropertyName("feature_states")]
 	public IReadOnlyCollection<string>? FeatureStates { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string>? Indices { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode>? Nodes { get; init; }
-	[JsonInclude, JsonPropertyName("slm_policies")]
 	public IReadOnlyCollection<string>? SlmPolicies { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot_repositories")]
 	public IReadOnlyCollection<string>? SnapshotRepositories { get; init; }
 }

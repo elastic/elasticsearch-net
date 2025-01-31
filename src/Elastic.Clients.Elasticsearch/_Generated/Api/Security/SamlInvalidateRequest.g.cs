@@ -44,6 +44,11 @@ public sealed partial class SamlInvalidateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SamlInvalidateRequest : PlainRequest<SamlInvalidateRequestParameters>
 {
+	[JsonConstructor]
+	internal SamlInvalidateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlInvalidate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

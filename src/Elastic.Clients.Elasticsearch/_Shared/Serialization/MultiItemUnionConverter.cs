@@ -30,7 +30,9 @@ internal abstract class MultiItemUnionConverter<TUnion, TEnum> : JsonConverter<T
 	// Used when deserializing objects, to determine which type we have.
 	protected Dictionary<string, Type> _uniquePropertyToType;
 
+#pragma warning disable CS0649
 	protected Type _arrayType; // For now, we handle only unions with one item being defined as an array
+#pragma warning restore CS0649
 
 	public override TUnion? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

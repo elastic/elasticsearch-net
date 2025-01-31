@@ -43,6 +43,7 @@ public sealed partial class CacheStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class CacheStatsRequest : PlainRequest<CacheStatsRequestParameters>
 {
+	[JsonConstructor]
 	public CacheStatsRequest()
 	{
 	}
@@ -59,6 +60,13 @@ public sealed partial class CacheStatsRequest : PlainRequest<CacheStatsRequestPa
 
 	internal override string OperationName => "searchable_snapshots.cache_stats";
 
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of node IDs or names to limit the returned information; use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }

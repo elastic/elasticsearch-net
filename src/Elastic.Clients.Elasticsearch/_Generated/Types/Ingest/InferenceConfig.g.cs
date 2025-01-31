@@ -39,12 +39,16 @@ public sealed partial class InferenceConfig
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal InferenceConfig()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => new InferenceConfig("classification", inferenceConfigClassification);
 	public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => new InferenceConfig("regression", inferenceConfigRegression);
@@ -62,67 +66,56 @@ public sealed partial class InferenceConfig
 	}
 }
 
-internal sealed partial class InferenceConfigConverter : JsonConverter<InferenceConfig>
+internal sealed partial class InferenceConfigConverter : System.Text.Json.Serialization.JsonConverter<InferenceConfig>
 {
-	public override InferenceConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+
+	public override InferenceConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantClassification))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(options);
 				continue;
 			}
 
-			if (propertyName == "regression")
+			if (reader.ValueTextEquals(VariantRegression))
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(options);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfig' from the response.");
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new InferenceConfig(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InferenceConfig { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, InferenceConfig value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?)value.Variant);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(InferenceConfig)}'.");
 		}
 
 		writer.WriteEndObject();

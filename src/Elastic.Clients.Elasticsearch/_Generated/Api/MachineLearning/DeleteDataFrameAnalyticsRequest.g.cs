@@ -58,6 +58,11 @@ public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<Delet
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteDataFrameAnalyticsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteDataFrameAnalytics;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -65,6 +70,14 @@ public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<Delet
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

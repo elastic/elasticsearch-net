@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class TermsEnumResponseConverter : System.Text.Json.Serialization.JsonConverter<TermsEnumResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropComplete = System.Text.Json.JsonEncodedText.Encode("complete");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override TermsEnumResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propComplete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propComplete.TryRead(ref reader, options, PropComplete))
+			{
+				continue;
+			}
+
+			if (propShards.TryRead(ref reader, options, PropShards))
+			{
+				continue;
+			}
+
+			if (propTerms.TryRead(ref reader, options, PropTerms))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TermsEnumResponse
+		{
+			Complete = propComplete.Value
+,
+			Shards = propShards.Value
+,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsEnumResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropComplete, value.Complete);
+		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropTerms, value.Terms);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TermsEnumResponseConverter))]
 public sealed partial class TermsEnumResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("complete")]
 	public bool Complete { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-	[JsonInclude, JsonPropertyName("terms")]
 	public IReadOnlyCollection<string> Terms { get; init; }
 }

@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class ProcessorGrokResponseConverter : System.Text.Json.Serialization.JsonConverter<ProcessorGrokResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPatterns = System.Text.Json.JsonEncodedText.Encode("patterns");
+
+	public override ProcessorGrokResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, string>> propPatterns = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPatterns.TryRead(ref reader, options, PropPatterns))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ProcessorGrokResponse
+		{
+			Patterns = propPatterns.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ProcessorGrokResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPatterns, value.Patterns);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ProcessorGrokResponseConverter))]
 public sealed partial class ProcessorGrokResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("patterns")]
 	public IReadOnlyDictionary<string, string> Patterns { get; init; }
 }

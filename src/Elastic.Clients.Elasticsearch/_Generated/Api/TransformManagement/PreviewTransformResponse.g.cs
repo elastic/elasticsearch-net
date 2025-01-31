@@ -22,14 +22,75 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class PreviewTransformResponseConverter<TTransform> : System.Text.Json.Serialization.JsonConverter<PreviewTransformResponse<TTransform>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropGeneratedDestIndex = System.Text.Json.JsonEncodedText.Encode("generated_dest_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPreview = System.Text.Json.JsonEncodedText.Encode("preview");
+
+	public override PreviewTransformResponse<TTransform> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexState> propGeneratedDestIndex = default;
+		LocalJsonValue<IReadOnlyCollection<TTransform>> propPreview = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propGeneratedDestIndex.TryRead(ref reader, options, PropGeneratedDestIndex))
+			{
+				continue;
+			}
+
+			if (propPreview.TryRead(ref reader, options, PropPreview))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PreviewTransformResponse<TTransform>
+		{
+			GeneratedDestIndex = propGeneratedDestIndex.Value
+,
+			Preview = propPreview.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PreviewTransformResponse<TTransform> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGeneratedDestIndex, value.GeneratedDestIndex);
+		writer.WriteProperty(options, PropPreview, value.Preview);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class PreviewTransformResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(PreviewTransformResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(PreviewTransformResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(PreviewTransformResponseConverterFactory))]
 public sealed partial class PreviewTransformResponse<TTransform> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("generated_dest_index")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex { get; init; }
-	[JsonInclude, JsonPropertyName("preview")]
 	public IReadOnlyCollection<TTransform> Preview { get; init; }
 }

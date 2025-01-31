@@ -22,10 +22,153 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+internal sealed partial class GetAsyncSearchResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<GetAsyncSearchResponse<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropExpirationTime = System.Text.Json.JsonEncodedText.Encode("expiration_time");
+	private static readonly System.Text.Json.JsonEncodedText PropExpirationTimeInMillis = System.Text.Json.JsonEncodedText.Encode("expiration_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+
+	public override GetAsyncSearchResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<DateTimeOffset?> propCompletionTime = default;
+		LocalJsonValue<long?> propCompletionTimeInMillis = default;
+		LocalJsonValue<DateTimeOffset?> propExpirationTime = default;
+		LocalJsonValue<long> propExpirationTimeInMillis = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<bool> propIsPartial = default;
+		LocalJsonValue<bool> propIsRunning = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument>> propResponse = default;
+		LocalJsonValue<DateTimeOffset?> propStartTime = default;
+		LocalJsonValue<long> propStartTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompletionTime.TryRead(ref reader, options, PropCompletionTime))
+			{
+				continue;
+			}
+
+			if (propCompletionTimeInMillis.TryRead(ref reader, options, PropCompletionTimeInMillis))
+			{
+				continue;
+			}
+
+			if (propExpirationTime.TryRead(ref reader, options, PropExpirationTime))
+			{
+				continue;
+			}
+
+			if (propExpirationTimeInMillis.TryRead(ref reader, options, PropExpirationTimeInMillis))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			{
+				continue;
+			}
+
+			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			{
+				continue;
+			}
+
+			if (propResponse.TryRead(ref reader, options, PropResponse))
+			{
+				continue;
+			}
+
+			if (propStartTime.TryRead(ref reader, options, PropStartTime))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryRead(ref reader, options, PropStartTimeInMillis))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetAsyncSearchResponse<TDocument>
+		{
+			CompletionTime = propCompletionTime.Value
+,
+			CompletionTimeInMillis = propCompletionTimeInMillis.Value
+,
+			ExpirationTime = propExpirationTime.Value
+,
+			ExpirationTimeInMillis = propExpirationTimeInMillis.Value
+,
+			Id = propId.Value
+,
+			IsPartial = propIsPartial.Value
+,
+			IsRunning = propIsRunning.Value
+,
+			Response = propResponse.Value
+,
+			StartTime = propStartTime.Value
+,
+			StartTimeInMillis = propStartTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetAsyncSearchResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime);
+		writer.WriteProperty(options, PropCompletionTimeInMillis, value.CompletionTimeInMillis);
+		writer.WriteProperty(options, PropExpirationTime, value.ExpirationTime);
+		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
+		writer.WriteProperty(options, PropResponse, value.Response);
+		writer.WriteProperty(options, PropStartTime, value.StartTime);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class GetAsyncSearchResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(GetAsyncSearchResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(GetAsyncSearchResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(GetAsyncSearchResponseConverterFactory))]
 public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,9 +177,7 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 	/// when the search has completed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion_time")]
 	public DateTimeOffset? CompletionTime { get; init; }
-	[JsonInclude, JsonPropertyName("completion_time_in_millis")]
 	public long? CompletionTimeInMillis { get; init; }
 
 	/// <summary>
@@ -44,11 +185,8 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 	/// Indicates when the async search will expire.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
-	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
 	public long ExpirationTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
 	/// <summary>
@@ -57,7 +195,6 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
 
 	/// <summary>
@@ -66,12 +203,8 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 	/// NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
-	[JsonInclude, JsonPropertyName("response")]
 	public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; init; }
-	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset? StartTime { get; init; }
-	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
 }

@@ -48,6 +48,11 @@ public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<Resume
 	{
 	}
 
+	[JsonConstructor]
+	internal ResumeAutoFollowPatternRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationResumeAutoFollowPattern;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -55,6 +60,14 @@ public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<Resume
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.resume_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The name of the auto follow pattern to resume discovering new indices to follow.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

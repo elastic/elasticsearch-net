@@ -67,6 +67,11 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	{
 	}
 
+	[JsonConstructor]
+	internal PutIndexTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -74,6 +79,14 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.put_index_template";
+
+	/// <summary>
+	/// <para>
+	/// Index or template name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

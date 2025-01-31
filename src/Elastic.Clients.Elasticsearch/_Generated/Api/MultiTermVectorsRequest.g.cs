@@ -125,6 +125,7 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVectorsRequestParameters>
 {
+	[JsonConstructor]
 	public MultiTermVectorsRequest()
 	{
 	}
@@ -140,6 +141,14 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "mtermvectors";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index that contains the documents.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

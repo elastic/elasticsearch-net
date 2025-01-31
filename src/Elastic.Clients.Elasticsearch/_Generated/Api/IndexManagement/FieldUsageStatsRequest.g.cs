@@ -103,6 +103,11 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 	{
 	}
 
+	[JsonConstructor]
+	internal FieldUsageStatsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFieldUsageStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -110,6 +115,14 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.field_usage_stats";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of index names used to limit the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -47,4 +47,6 @@ public sealed partial class ValueCountAggregate : IAggregate
 	public double? Value { get; init; }
 	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
+
+	string IAggregate.Type => "value_count";
 }

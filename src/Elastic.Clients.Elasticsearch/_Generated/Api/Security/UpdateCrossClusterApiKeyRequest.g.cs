@@ -48,6 +48,11 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : PlainRequest<Updat
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateCrossClusterApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateCrossClusterApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -55,6 +60,14 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : PlainRequest<Updat
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.update_cross_cluster_api_key";
+
+	/// <summary>
+	/// <para>
+	/// The ID of the cross-cluster API key to update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class UpdateByQueryRethrottleResponseConverter : System.Text.Json.Serialization.JsonConverter<UpdateByQueryRethrottleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+
+	public override UpdateByQueryRethrottleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode>> propNodes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNodes.TryRead(ref reader, options, PropNodes))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpdateByQueryRethrottleResponse
+		{
+			Nodes = propNodes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateByQueryRethrottleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(UpdateByQueryRethrottleResponseConverter))]
 public sealed partial class UpdateByQueryRethrottleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes { get; init; }
 }

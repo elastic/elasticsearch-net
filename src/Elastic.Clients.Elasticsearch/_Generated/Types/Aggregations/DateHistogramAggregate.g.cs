@@ -33,4 +33,6 @@ public sealed partial class DateHistogramAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "date_histogram";
 }

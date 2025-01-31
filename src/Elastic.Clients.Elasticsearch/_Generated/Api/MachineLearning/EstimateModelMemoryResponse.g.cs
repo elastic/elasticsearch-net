@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class EstimateModelMemoryResponseConverter : System.Text.Json.Serialization.JsonConverter<EstimateModelMemoryResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryEstimate = System.Text.Json.JsonEncodedText.Encode("model_memory_estimate");
+
+	public override EstimateModelMemoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propModelMemoryEstimate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propModelMemoryEstimate.TryRead(ref reader, options, PropModelMemoryEstimate))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new EstimateModelMemoryResponse
+		{
+			ModelMemoryEstimate = propModelMemoryEstimate.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EstimateModelMemoryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropModelMemoryEstimate, value.ModelMemoryEstimate);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(EstimateModelMemoryResponseConverter))]
 public sealed partial class EstimateModelMemoryResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("model_memory_estimate")]
 	public string ModelMemoryEstimate { get; init; }
 }

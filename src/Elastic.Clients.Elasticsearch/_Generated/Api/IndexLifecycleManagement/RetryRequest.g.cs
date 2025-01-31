@@ -48,6 +48,11 @@ public sealed partial class RetryRequest : PlainRequest<RetryRequestParameters>
 	{
 	}
 
+	[JsonConstructor]
+	internal RetryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementRetry;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -55,6 +60,14 @@ public sealed partial class RetryRequest : PlainRequest<RetryRequestParameters>
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ilm.retry";
+
+	/// <summary>
+	/// <para>
+	/// The name of the indices (comma-separated) whose failed lifecycle step is to be retry
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 }
 
 /// <summary>

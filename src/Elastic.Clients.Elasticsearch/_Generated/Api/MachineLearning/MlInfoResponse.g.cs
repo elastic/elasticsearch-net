@@ -22,18 +22,80 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class MlInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<MlInfoResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
+	private static readonly System.Text.Json.JsonEncodedText PropLimits = System.Text.Json.JsonEncodedText.Encode("limits");
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCode = System.Text.Json.JsonEncodedText.Encode("native_code");
+	private static readonly System.Text.Json.JsonEncodedText PropUpgradeMode = System.Text.Json.JsonEncodedText.Encode("upgrade_mode");
+
+	public override MlInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Defaults> propDefaults = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Limits> propLimits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NativeCode> propNativeCode = default;
+		LocalJsonValue<bool> propUpgradeMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefaults.TryRead(ref reader, options, PropDefaults))
+			{
+				continue;
+			}
+
+			if (propLimits.TryRead(ref reader, options, PropLimits))
+			{
+				continue;
+			}
+
+			if (propNativeCode.TryRead(ref reader, options, PropNativeCode))
+			{
+				continue;
+			}
+
+			if (propUpgradeMode.TryRead(ref reader, options, PropUpgradeMode))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MlInfoResponse
+		{
+			Defaults = propDefaults.Value
+,
+			Limits = propLimits.Value
+,
+			NativeCode = propNativeCode.Value
+,
+			UpgradeMode = propUpgradeMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MlInfoResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDefaults, value.Defaults);
+		writer.WriteProperty(options, PropLimits, value.Limits);
+		writer.WriteProperty(options, PropNativeCode, value.NativeCode);
+		writer.WriteProperty(options, PropUpgradeMode, value.UpgradeMode);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MlInfoResponseConverter))]
 public sealed partial class MlInfoResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("defaults")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Defaults Defaults { get; init; }
-	[JsonInclude, JsonPropertyName("limits")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Limits Limits { get; init; }
-	[JsonInclude, JsonPropertyName("native_code")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.NativeCode NativeCode { get; init; }
-	[JsonInclude, JsonPropertyName("upgrade_mode")]
 	public bool UpgradeMode { get; init; }
 }

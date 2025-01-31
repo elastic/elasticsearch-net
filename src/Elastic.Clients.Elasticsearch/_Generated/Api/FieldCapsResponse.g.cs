@@ -22,16 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class FieldCapsResponseConverter : System.Text.Json.Serialization.JsonConverter<FieldCapsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+
+	public override FieldCapsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>>> propFields = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldCapsResponse
+		{
+			Fields = propFields.Value
+,
+			Indices = propIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldCapsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FieldCapsResponseConverter))]
 public sealed partial class FieldCapsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("fields")]
-	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Indices { get; init; }
 }

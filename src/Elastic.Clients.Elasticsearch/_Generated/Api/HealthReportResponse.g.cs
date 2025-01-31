@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class HealthReportResponseConverter : System.Text.Json.Serialization.JsonConverter<HealthReportResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicators = System.Text.Json.JsonEncodedText.Encode("indicators");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+
+	public override HealthReportResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators> propIndicators = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus?> propStatus = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			{
+				continue;
+			}
+
+			if (propIndicators.TryRead(ref reader, options, PropIndicators))
+			{
+				continue;
+			}
+
+			if (propStatus.TryRead(ref reader, options, PropStatus))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HealthReportResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			Indicators = propIndicators.Value
+,
+			Status = propStatus.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HealthReportResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName);
+		writer.WriteProperty(options, PropIndicators, value.Indicators);
+		writer.WriteProperty(options, PropStatus, value.Status);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HealthReportResponseConverter))]
 public sealed partial class HealthReportResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("indicators")]
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators Indicators { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus? Status { get; init; }
 }

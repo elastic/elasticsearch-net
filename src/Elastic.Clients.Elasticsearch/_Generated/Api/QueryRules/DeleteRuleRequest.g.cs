@@ -46,6 +46,11 @@ public sealed partial class DeleteRuleRequest : PlainRequest<DeleteRuleRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteRuleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesDeleteRule;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,22 @@ public sealed partial class DeleteRuleRequest : PlainRequest<DeleteRuleRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "query_rules.delete_rule";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query rule within the specified ruleset to delete
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset containing the rule to delete
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
 /// <summary>

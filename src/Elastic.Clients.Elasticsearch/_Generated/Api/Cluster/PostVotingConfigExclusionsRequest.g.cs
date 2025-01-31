@@ -86,6 +86,11 @@ public sealed partial class PostVotingConfigExclusionsRequestParameters : Reques
 /// </summary>
 public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<PostVotingConfigExclusionsRequestParameters>
 {
+	[JsonConstructor]
+	internal PostVotingConfigExclusionsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPostVotingConfigExclusions;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

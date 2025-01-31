@@ -95,6 +95,11 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal PutJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

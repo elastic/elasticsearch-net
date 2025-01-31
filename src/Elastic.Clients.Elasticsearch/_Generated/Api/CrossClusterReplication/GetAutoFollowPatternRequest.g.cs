@@ -42,6 +42,7 @@ public sealed partial class GetAutoFollowPatternRequestParameters : RequestParam
 /// </summary>
 public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFollowPatternRequestParameters>
 {
+	[JsonConstructor]
 	public GetAutoFollowPatternRequest()
 	{
 	}
@@ -57,6 +58,14 @@ public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFo
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.get_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// Specifies the auto-follow pattern collection that you want to retrieve. If you do not specify a name, the API returns information for all collections.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

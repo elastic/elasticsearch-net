@@ -94,6 +94,11 @@ public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal OpenIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -101,6 +106,18 @@ public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.open";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// By default, you must explicitly name the indices you using to limit the request.
+	/// To limit a request using <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to false.
+	/// You can update this setting in the <c>elasticsearch.yml</c> file or using the cluster update settings API.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -55,6 +55,11 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteByQueryRethrottleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -62,6 +67,14 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "delete_by_query_rethrottle";
+
+	/// <summary>
+	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.TaskId TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId>("task_id"); set => PR("task_id", value); }
 
 	/// <summary>
 	/// <para>

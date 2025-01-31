@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ClearCachedRealmsResponseConverter : System.Text.Json.Serialization.JsonConverter<ClearCachedRealmsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override ClearCachedRealmsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics> propNodeStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			{
+				continue;
+			}
+
+			if (propNodes.TryRead(ref reader, options, PropNodes))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryRead(ref reader, options, PropNodeStats))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClearCachedRealmsResponse
+		{
+			ClusterName = propClusterName.Value
+,
+			Nodes = propNodes.Value
+,
+			NodeStats = propNodeStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearCachedRealmsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName);
+		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClearCachedRealmsResponseConverter))]
 public sealed partial class ClearCachedRealmsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes { get; init; }
-	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics NodeStats { get; init; }
 }

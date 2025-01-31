@@ -48,6 +48,11 @@ public sealed partial class MlInfoRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class MlInfoRequest : PlainRequest<MlInfoRequestParameters>
 {
+	[JsonConstructor]
+	internal MlInfoRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

@@ -49,6 +49,11 @@ public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal PauseFollowRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPauseFollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -56,6 +61,14 @@ public sealed partial class PauseFollowRequest : PlainRequest<PauseFollowRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.pause_follow";
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index that should pause following its leader index.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 }
 
 /// <summary>

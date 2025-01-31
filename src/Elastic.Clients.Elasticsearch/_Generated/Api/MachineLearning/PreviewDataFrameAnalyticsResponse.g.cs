@@ -22,10 +22,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PreviewDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<PreviewDataFrameAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureValues = System.Text.Json.JsonEncodedText.Encode("feature_values");
+
+	public override PreviewDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<IReadOnlyDictionary<string, string>>> propFeatureValues = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureValues.TryRead(ref reader, options, PropFeatureValues))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PreviewDataFrameAnalyticsResponse
+		{
+			FeatureValues = propFeatureValues.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PreviewDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureValues, value.FeatureValues);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PreviewDataFrameAnalyticsResponseConverter))]
 public sealed partial class PreviewDataFrameAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,6 +69,5 @@ public sealed partial class PreviewDataFrameAnalyticsResponse : ElasticsearchRes
 	/// An array of objects that contain feature name and value pairs. The features have been processed and indicate what will be sent to the model for training.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_values")]
 	public IReadOnlyCollection<IReadOnlyDictionary<string, string>> FeatureValues { get; init; }
 }

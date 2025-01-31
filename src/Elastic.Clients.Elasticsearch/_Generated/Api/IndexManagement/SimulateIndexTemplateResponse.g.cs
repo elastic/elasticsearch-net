@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SimulateIndexTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<SimulateIndexTemplateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropOverlapping = System.Text.Json.JsonEncodedText.Encode("overlapping");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+
+	public override SimulateIndexTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>?> propOverlapping = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Template> propTemplate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propOverlapping.TryRead(ref reader, options, PropOverlapping))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryRead(ref reader, options, PropTemplate))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SimulateIndexTemplateResponse
+		{
+			Overlapping = propOverlapping.Value
+,
+			Template = propTemplate.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SimulateIndexTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropOverlapping, value.Overlapping);
+		writer.WriteProperty(options, PropTemplate, value.Template);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SimulateIndexTemplateResponseConverter))]
 public sealed partial class SimulateIndexTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("overlapping")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>? Overlapping { get; init; }
-	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.Template Template { get; init; }
 }

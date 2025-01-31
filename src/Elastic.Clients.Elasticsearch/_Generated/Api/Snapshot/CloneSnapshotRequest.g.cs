@@ -53,6 +53,11 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 	{
 	}
 
+	[JsonConstructor]
+	internal CloneSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -60,6 +65,30 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "snapshot.clone";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot to clone from
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the cloned snapshot to create
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name TargetSnapshot { get => P<Elastic.Clients.Elasticsearch.Name>("target_snapshot"); set => PR("target_snapshot", value); }
 
 	/// <summary>
 	/// <para>

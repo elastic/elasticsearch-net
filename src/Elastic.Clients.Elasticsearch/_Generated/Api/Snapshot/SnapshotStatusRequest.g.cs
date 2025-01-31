@@ -66,6 +66,7 @@ public sealed partial class SnapshotStatusRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusRequestParameters>
 {
+	[JsonConstructor]
 	public SnapshotStatusRequest()
 	{
 	}
@@ -85,6 +86,22 @@ public sealed partial class SnapshotStatusRequest : PlainRequest<SnapshotStatusR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.status";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Repository { get => P<Elastic.Clients.Elasticsearch.Name?>("repository"); set => PO("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshot names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Snapshot { get => P<Elastic.Clients.Elasticsearch.Names?>("snapshot"); set => PO("snapshot", value); }
 
 	/// <summary>
 	/// <para>

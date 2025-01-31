@@ -54,6 +54,11 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	{
 	}
 
+	[JsonConstructor]
+	internal ReindexRethrottleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindexRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -61,6 +66,14 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "reindex_rethrottle";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the task.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -39,22 +39,29 @@ public sealed partial class FunctionScore
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal FunctionScore()
+	{
+	}
 
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
+
+	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScore("field_value_factor", fieldValueFactorScoreFunction);
+	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
 	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
 	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
 	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
 	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
+	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
 	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
 	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
 	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
@@ -80,137 +87,129 @@ public sealed partial class FunctionScore
 	}
 }
 
-internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionScore>
+internal sealed partial class FunctionScoreConverter : System.Text.Json.Serialization.JsonConverter<FunctionScore>
 {
-	public override FunctionScore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+	private static readonly System.Text.Json.JsonEncodedText VariantExp = System.Text.Json.JsonEncodedText.Encode("exp");
+	private static readonly System.Text.Json.JsonEncodedText VariantFieldValueFactor = System.Text.Json.JsonEncodedText.Encode("field_value_factor");
+	private static readonly System.Text.Json.JsonEncodedText VariantGauss = System.Text.Json.JsonEncodedText.Encode("gauss");
+	private static readonly System.Text.Json.JsonEncodedText VariantLinear = System.Text.Json.JsonEncodedText.Encode("linear");
+	private static readonly System.Text.Json.JsonEncodedText VariantRandomScore = System.Text.Json.JsonEncodedText.Encode("random_score");
+	private static readonly System.Text.Json.JsonEncodedText VariantScriptScore = System.Text.Json.JsonEncodedText.Encode("script_score");
+
+	public override FunctionScore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<double?> propWeight = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propFilter.TryRead(ref reader, options, PropFilter))
+			{
+				continue;
+			}
+
+			if (propWeight.TryRead(ref reader, options, PropWeight))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantExp))
+			{
+				variantType = VariantExp.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFieldValueFactor))
+			{
+				variantType = VariantFieldValueFactor.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGauss))
+			{
+				variantType = VariantGauss.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLinear))
+			{
+				variantType = VariantLinear.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRandomScore))
+			{
+				variantType = VariantRandomScore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScriptScore))
+			{
+				variantType = VariantScriptScore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.Query? filterValue = default;
-		double? weightValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FunctionScore
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "filter")
-			{
-				filterValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "weight")
-			{
-				weightValue = JsonSerializer.Deserialize<double?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "exp")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "field_value_factor")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "gauss")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "linear")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "random_score")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "script_score")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScore' from the response.");
-		}
-
-		var result = new FunctionScore(variantNameValue, variantValue);
-		result.Filter = filterValue;
-		result.Weight = weightValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Filter = propFilter.Value
+,
+			Weight = propWeight.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, FunctionScore value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FunctionScore value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Filter is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, value.Filter, options);
+			case "":
+				break;
+			case "exp":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				break;
+			case "field_value_factor":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?)value.Variant);
+				break;
+			case "gauss":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				break;
+			case "linear":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)value.Variant);
+				break;
+			case "random_score":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?)value.Variant);
+				break;
+			case "script_score":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(FunctionScore)}'.");
 		}
 
-		if (value.Weight.HasValue)
-		{
-			writer.WritePropertyName("weight");
-			writer.WriteNumberValue(value.Weight.Value);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "exp":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "field_value_factor":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
-					break;
-				case "gauss":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "linear":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "random_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)value.Variant, options);
-					break;
-				case "script_score":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropFilter, value.Filter);
+		writer.WriteProperty(options, PropWeight, value.Weight);
 		writer.WriteEndObject();
 	}
 }
@@ -261,16 +260,19 @@ public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");
@@ -358,16 +360,19 @@ public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<Fun
 		return Self;
 	}
 
+	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreDescriptor FieldValueFactor<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
 	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");

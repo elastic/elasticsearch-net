@@ -33,4 +33,6 @@ public sealed partial class IpRangeAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "ip_range";
 }

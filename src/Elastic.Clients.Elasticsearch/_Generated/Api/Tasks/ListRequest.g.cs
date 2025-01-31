@@ -98,6 +98,11 @@ public sealed partial class ListRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 {
+	[JsonConstructor]
+	internal ListRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TasksList;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

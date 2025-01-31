@@ -51,6 +51,11 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 	{
 	}
 
+	[JsonConstructor]
+	internal InferTrainedModelRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningInferTrainedModel;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -58,6 +63,14 @@ public sealed partial class InferTrainedModelRequest : PlainRequest<InferTrained
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.infer_trained_model";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>

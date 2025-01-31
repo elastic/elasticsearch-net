@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SegmentsResponseConverter : System.Text.Json.Serialization.JsonConverter<SegmentsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+
+	public override SegmentsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexSegment>> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propShards.TryRead(ref reader, options, PropShards))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SegmentsResponse
+		{
+			Indices = propIndices.Value
+,
+			Shards = propShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SegmentsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SegmentsResponseConverter))]
 public sealed partial class SegmentsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexSegment> Indices { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 }

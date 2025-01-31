@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+internal sealed partial class TestResponseConverter : System.Text.Json.Serialization.JsonConverter<TestResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMatchedRules = System.Text.Json.JsonEncodedText.Encode("matched_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalMatchedRules = System.Text.Json.JsonEncodedText.Encode("total_matched_rules");
+
+	public override TestResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule>> propMatchedRules = default;
+		LocalJsonValue<int> propTotalMatchedRules = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMatchedRules.TryRead(ref reader, options, PropMatchedRules))
+			{
+				continue;
+			}
+
+			if (propTotalMatchedRules.TryRead(ref reader, options, PropTotalMatchedRules))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TestResponse
+		{
+			MatchedRules = propMatchedRules.Value
+,
+			TotalMatchedRules = propTotalMatchedRules.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TestResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMatchedRules, value.MatchedRules);
+		writer.WriteProperty(options, PropTotalMatchedRules, value.TotalMatchedRules);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TestResponseConverter))]
 public sealed partial class TestResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("matched_rules")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule> MatchedRules { get; init; }
-	[JsonInclude, JsonPropertyName("total_matched_rules")]
 	public int TotalMatchedRules { get; init; }
 }

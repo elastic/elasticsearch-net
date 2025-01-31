@@ -76,6 +76,7 @@ public sealed partial class GetDatafeedStatsRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedStatsRequestParameters>
 {
+	[JsonConstructor]
 	public GetDatafeedStatsRequest()
 	{
 	}
@@ -91,6 +92,16 @@ public sealed partial class GetDatafeedStatsRequest : PlainRequest<GetDatafeedSt
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_datafeed_stats";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the datafeed. It can be a datafeed identifier or a
+	/// wildcard expression. If you do not specify one of these options, the API
+	/// returns information about all datafeeds.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? DatafeedId { get => P<Elastic.Clients.Elasticsearch.Ids?>("datafeed_id"); set => PO("datafeed_id", value); }
 
 	/// <summary>
 	/// <para>

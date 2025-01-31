@@ -56,6 +56,11 @@ public sealed partial class PostStartTrialRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialRequestParameters>
 {
+	[JsonConstructor]
+	internal PostStartTrialRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPostStartTrial;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

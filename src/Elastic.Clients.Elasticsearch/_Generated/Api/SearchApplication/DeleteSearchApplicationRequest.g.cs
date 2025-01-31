@@ -46,6 +46,11 @@ public sealed partial class DeleteSearchApplicationRequest : PlainRequest<Delete
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteSearchApplicationRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,14 @@ public sealed partial class DeleteSearchApplicationRequest : PlainRequest<Delete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.delete";
+
+	/// <summary>
+	/// <para>
+	/// The name of the search application to delete
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

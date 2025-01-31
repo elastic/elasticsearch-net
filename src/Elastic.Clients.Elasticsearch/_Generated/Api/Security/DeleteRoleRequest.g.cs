@@ -54,6 +54,11 @@ public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteRoleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDeleteRole;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -61,6 +66,14 @@ public sealed partial class DeleteRoleRequest : PlainRequest<DeleteRoleRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.delete_role";
+
+	/// <summary>
+	/// <para>
+	/// Role name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

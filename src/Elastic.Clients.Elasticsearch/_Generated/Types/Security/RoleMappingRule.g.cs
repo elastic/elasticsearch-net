@@ -39,12 +39,16 @@ public sealed partial class RoleMappingRule
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal RoleMappingRule()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static RoleMappingRule All(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule> roleMappingRule) => new RoleMappingRule("all", roleMappingRule);
 	public static RoleMappingRule Any(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule> roleMappingRule) => new RoleMappingRule("any", roleMappingRule);
@@ -64,87 +68,80 @@ public sealed partial class RoleMappingRule
 	}
 }
 
-internal sealed partial class RoleMappingRuleConverter : JsonConverter<RoleMappingRule>
+internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serialization.JsonConverter<RoleMappingRule>
 {
-	public override RoleMappingRule Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText VariantAny = System.Text.Json.JsonEncodedText.Encode("any");
+	private static readonly System.Text.Json.JsonEncodedText VariantExcept = System.Text.Json.JsonEncodedText.Encode("except");
+	private static readonly System.Text.Json.JsonEncodedText VariantField = System.Text.Json.JsonEncodedText.Encode("field");
+
+	public override RoleMappingRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantAll))
+			{
+				variantType = VariantAll.Value;
+				reader.Read();
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantAny))
+			{
+				variantType = VariantAny.Value;
+				reader.Read();
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantExcept))
+			{
+				variantType = VariantExcept.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantField))
+			{
+				variantType = VariantField.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.FieldRule?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "all")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "any")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "except")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.RoleMappingRule?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "field")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.FieldRule?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'RoleMappingRule' from the response.");
-		}
-
-		var result = new RoleMappingRule(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RoleMappingRule { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoleMappingRule value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RoleMappingRule value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "all":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>)value.Variant, options);
-					break;
-				case "any":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>)value.Variant, options);
-					break;
-				case "except":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>(writer, (Elastic.Clients.Elasticsearch.Security.RoleMappingRule)value.Variant, options);
-					break;
-				case "field":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Security.FieldRule>(writer, (Elastic.Clients.Elasticsearch.Security.FieldRule)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "all":
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant);
+				break;
+			case "any":
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>?)value.Variant);
+				break;
+			case "except":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.RoleMappingRule?)value.Variant);
+				break;
+			case "field":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.FieldRule?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(RoleMappingRule)}'.");
 		}
 
 		writer.WriteEndObject();

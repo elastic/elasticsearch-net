@@ -27,6 +27,40 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class TermsGroupingConverter : System.Text.Json.Serialization.JsonConverter<TermsGrouping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+
+	public override TermsGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TermsGrouping
+		{
+			Fields = propFields.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsGrouping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TermsGroupingConverter))]
 public sealed partial class TermsGrouping
 {
 	/// <summary>
@@ -36,8 +70,6 @@ public sealed partial class TermsGrouping
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 }
 

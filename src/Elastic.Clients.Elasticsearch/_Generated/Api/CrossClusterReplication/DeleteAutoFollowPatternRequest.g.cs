@@ -46,6 +46,11 @@ public sealed partial class DeleteAutoFollowPatternRequest : PlainRequest<Delete
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteAutoFollowPatternRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationDeleteAutoFollowPattern;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,14 @@ public sealed partial class DeleteAutoFollowPatternRequest : PlainRequest<Delete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.delete_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The name of the auto follow pattern.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

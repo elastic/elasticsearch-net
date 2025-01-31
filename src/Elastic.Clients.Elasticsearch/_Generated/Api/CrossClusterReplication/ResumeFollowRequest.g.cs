@@ -49,6 +49,11 @@ public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowReque
 	{
 	}
 
+	[JsonConstructor]
+	internal ResumeFollowRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationResumeFollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -57,6 +62,13 @@ public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowReque
 
 	internal override string OperationName => "ccr.resume_follow";
 
+	/// <summary>
+	/// <para>
+	/// The name of the follow index to resume following.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
 	public long? MaxOutstandingReadRequests { get; set; }
 	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]

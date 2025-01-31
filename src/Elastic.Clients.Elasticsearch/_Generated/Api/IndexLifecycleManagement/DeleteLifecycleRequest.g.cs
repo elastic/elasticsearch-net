@@ -59,6 +59,11 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementDeleteLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -66,6 +71,14 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ilm.delete_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the policy.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("policy"); set => PR("policy", value); }
 
 	/// <summary>
 	/// <para>

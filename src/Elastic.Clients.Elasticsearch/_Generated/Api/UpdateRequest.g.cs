@@ -116,15 +116,131 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument> : System.Text.Json.Serialization.JsonConverter<UpdateRequest<TDocument, TPartialDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDetectNoop = System.Text.Json.JsonEncodedText.Encode("detect_noop");
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropDocAsUpsert = System.Text.Json.JsonEncodedText.Encode("doc_as_upsert");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptedUpsert = System.Text.Json.JsonEncodedText.Encode("scripted_upsert");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropUpsert = System.Text.Json.JsonEncodedText.Encode("upsert");
+
+	public override UpdateRequest<TDocument, TPartialDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDetectNoop = default;
+		LocalJsonValue<TPartialDocument?> propDoc = default;
+		LocalJsonValue<bool?> propDocAsUpsert = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<bool?> propScriptedUpsert = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<TDocument?> propUpsert = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDetectNoop.TryRead(ref reader, options, PropDetectNoop))
+			{
+				continue;
+			}
+
+			if (propDoc.TryRead(ref reader, options, PropDoc, typeof(SourceMarker<TPartialDocument?>)))
+			{
+				continue;
+			}
+
+			if (propDocAsUpsert.TryRead(ref reader, options, PropDocAsUpsert))
+			{
+				continue;
+			}
+
+			if (propScript.TryRead(ref reader, options, PropScript))
+			{
+				continue;
+			}
+
+			if (propScriptedUpsert.TryRead(ref reader, options, PropScriptedUpsert))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propUpsert.TryRead(ref reader, options, PropUpsert, typeof(SourceMarker<TDocument?>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpdateRequest<TDocument, TPartialDocument>
+		{
+			DetectNoop = propDetectNoop.Value
+	,
+			Doc = propDoc.Value
+	,
+			DocAsUpsert = propDocAsUpsert.Value
+	,
+			Script = propScript.Value
+	,
+			ScriptedUpsert = propScriptedUpsert.Value
+	,
+			Source = propSource.Value
+	,
+			Upsert = propUpsert.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateRequest<TDocument, TPartialDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDetectNoop, value.DetectNoop);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, typeof(SourceMarker<TPartialDocument?>));
+		writer.WriteProperty(options, PropDocAsUpsert, value.DocAsUpsert);
+		writer.WriteProperty(options, PropScript, value.Script);
+		writer.WriteProperty(options, PropScriptedUpsert, value.ScriptedUpsert);
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropUpsert, value.Upsert, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class UpdateRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(UpdateRequest<,>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(UpdateRequestConverter<,>).MakeGenericType(args[0], args[1]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update a document.
 /// Updates a document by running a script or passing a partial document.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(UpdateRequestConverterFactory))]
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequest<UpdateRequestParameters>
 {
 	public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	[JsonConstructor]
+	internal UpdateRequest()
 	{
 	}
 
@@ -138,10 +254,23 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	/// <summary>
 	/// <para>
+	/// Document ID
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Only perform the operation if the document has this primary term.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 	/// <summary>
@@ -149,7 +278,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Only perform the operation if the document has this sequence number.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 	/// <summary>
@@ -157,7 +285,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// The script language.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
 	/// <summary>
@@ -167,7 +294,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// visible to search, if 'false' do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -175,7 +301,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// If true, the destination must be an index alias.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
@@ -183,7 +308,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Specify how many times should the operation be retried when a conflict occurs.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
 	/// <summary>
@@ -191,7 +315,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -199,7 +322,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Specify the source fields you want to exclude.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
@@ -207,7 +329,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Specify the source fields you want to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
@@ -217,7 +338,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -227,7 +347,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// (number_of_replicas+1). Defaults to 1 meaning the primary shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -236,7 +355,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// to 'noop' if no change to the document occurred.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detect_noop")]
 	public bool? DetectNoop { get; set; }
 
 	/// <summary>
@@ -244,8 +362,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// A partial update to an existing document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc")]
-	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
 
 	/// <summary>
@@ -253,7 +369,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Set to true to use the contents of 'doc' as the value of 'upsert'
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("doc_as_upsert")]
 	public bool? DocAsUpsert { get; set; }
 
 	/// <summary>
@@ -261,7 +376,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Script to execute to update the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -269,7 +383,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// Set to true to execute the script whether or not the document exists.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scripted_upsert")]
 	public bool? ScriptedUpsert { get; set; }
 
 	/// <summary>
@@ -278,7 +391,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// list of the fields you want to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
@@ -287,8 +399,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// new document. If the document exists, the 'script' is executed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("upsert")]
-	[SourceConverter]
 	public TDocument? Upsert { get; set; }
 }
 

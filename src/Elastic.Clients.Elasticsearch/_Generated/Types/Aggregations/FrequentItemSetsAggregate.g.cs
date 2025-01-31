@@ -33,4 +33,6 @@ public sealed partial class FrequentItemSetsAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "frequent_item_sets";
 }

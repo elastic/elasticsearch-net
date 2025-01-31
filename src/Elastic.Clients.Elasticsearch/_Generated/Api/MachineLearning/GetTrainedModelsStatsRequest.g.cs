@@ -84,6 +84,7 @@ public sealed partial class GetTrainedModelsStatsRequestParameters : RequestPara
 /// </summary>
 public sealed partial class GetTrainedModelsStatsRequest : PlainRequest<GetTrainedModelsStatsRequestParameters>
 {
+	[JsonConstructor]
 	public GetTrainedModelsStatsRequest()
 	{
 	}
@@ -99,6 +100,15 @@ public sealed partial class GetTrainedModelsStatsRequest : PlainRequest<GetTrain
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_trained_models_stats";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model or a model alias. It can be a
+	/// comma-separated list or a wildcard expression.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? ModelId { get => P<Elastic.Clients.Elasticsearch.Ids?>("model_id"); set => PO("model_id", value); }
 
 	/// <summary>
 	/// <para>

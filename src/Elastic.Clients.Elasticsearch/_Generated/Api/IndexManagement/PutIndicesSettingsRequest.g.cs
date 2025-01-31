@@ -99,8 +99,9 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 /// changes are applied to all backing indices by default.
 /// </para>
 /// </summary>
-public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfSerializable
+public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfTwoWaySerializable
 {
+	[JsonConstructor]
 	public PutIndicesSettingsRequest()
 	{
 	}
@@ -116,6 +117,16 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.put_settings";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -182,12 +193,16 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		JsonSerializer.Serialize(writer, Settings, options);
+	}
+
+	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		Settings = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(ref reader);
 	}
 }
 

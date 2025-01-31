@@ -124,6 +124,7 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public SearchTemplateRequest()
 	{
 	}
@@ -139,6 +140,15 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices,
+	/// and aliases to search. Supports wildcards (*).
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

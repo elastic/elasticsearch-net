@@ -42,6 +42,11 @@ public sealed partial class ScriptsPainlessExecuteRequestParameters : RequestPar
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<ScriptsPainlessExecuteRequestParameters>
 {
+	[JsonConstructor]
+	internal ScriptsPainlessExecuteRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScriptsPainlessExecute;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

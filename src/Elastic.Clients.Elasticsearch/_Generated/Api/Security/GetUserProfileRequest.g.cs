@@ -57,6 +57,11 @@ public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileR
 	{
 	}
 
+	[JsonConstructor]
+	internal GetUserProfileRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetUserProfile;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -64,6 +69,14 @@ public sealed partial class GetUserProfileRequest : PlainRequest<GetUserProfileR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_user_profile";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<string> Uid { get => P<ICollection<string>>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>

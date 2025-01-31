@@ -34,6 +34,169 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Serialization.JsonConverter<SearchMvtRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggs = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropBuffer = System.Text.Json.JsonEncodedText.Encode("buffer");
+	private static readonly System.Text.Json.JsonEncodedText PropExactBounds = System.Text.Json.JsonEncodedText.Encode("exact_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropExtent = System.Text.Json.JsonEncodedText.Encode("extent");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropGridAgg = System.Text.Json.JsonEncodedText.Encode("grid_agg");
+	private static readonly System.Text.Json.JsonEncodedText PropGridPrecision = System.Text.Json.JsonEncodedText.Encode("grid_precision");
+	private static readonly System.Text.Json.JsonEncodedText PropGridType = System.Text.Json.JsonEncodedText.Encode("grid_type");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropWithLabels = System.Text.Json.JsonEncodedText.Encode("with_labels");
+
+	public override SearchMvtRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggs = default;
+		LocalJsonValue<int?> propBuffer = default;
+		LocalJsonValue<bool?> propExactBounds = default;
+		LocalJsonValue<int?> propExtent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType?> propGridAgg = default;
+		LocalJsonValue<int?> propGridPrecision = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType?> propGridType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?> propTrackTotalHits = default;
+		LocalJsonValue<bool?> propWithLabels = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggs.TryRead(ref reader, options, PropAggs))
+			{
+				continue;
+			}
+
+			if (propBuffer.TryRead(ref reader, options, PropBuffer))
+			{
+				continue;
+			}
+
+			if (propExactBounds.TryRead(ref reader, options, PropExactBounds))
+			{
+				continue;
+			}
+
+			if (propExtent.TryRead(ref reader, options, PropExtent))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propGridAgg.TryRead(ref reader, options, PropGridAgg))
+			{
+				continue;
+			}
+
+			if (propGridPrecision.TryRead(ref reader, options, PropGridPrecision))
+			{
+				continue;
+			}
+
+			if (propGridType.TryRead(ref reader, options, PropGridType))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			if (propTrackTotalHits.TryRead(ref reader, options, PropTrackTotalHits))
+			{
+				continue;
+			}
+
+			if (propWithLabels.TryRead(ref reader, options, PropWithLabels))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SearchMvtRequest
+		{
+			Aggs = propAggs.Value
+,
+			Buffer = propBuffer.Value
+,
+			ExactBounds = propExactBounds.Value
+,
+			Extent = propExtent.Value
+,
+			Fields = propFields.Value
+,
+			GridAgg = propGridAgg.Value
+,
+			GridPrecision = propGridPrecision.Value
+,
+			GridType = propGridType.Value
+,
+			Query = propQuery.Value
+,
+			RuntimeMappings = propRuntimeMappings.Value
+,
+			Size = propSize.Value
+,
+			Sort = propSort.Value
+,
+			TrackTotalHits = propTrackTotalHits.Value
+,
+			WithLabels = propWithLabels.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchMvtRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggs, value.Aggs);
+		writer.WriteProperty(options, PropBuffer, value.Buffer);
+		writer.WriteProperty(options, PropExactBounds, value.ExactBounds);
+		writer.WriteProperty(options, PropExtent, value.Extent);
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropGridAgg, value.GridAgg);
+		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision);
+		writer.WriteProperty(options, PropGridType, value.GridType);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits);
+		writer.WriteProperty(options, PropWithLabels, value.WithLabels);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Search a vector tile.
@@ -42,9 +205,15 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 /// Search a vector tile for geospatial values.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(SearchMvtRequestConverter))]
 public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestParameters>
 {
 	public SearchMvtRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", indices).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
+	{
+	}
+
+	[JsonConstructor]
+	internal SearchMvtRequest()
 	{
 	}
 
@@ -55,6 +224,41 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_mvt";
+
+	/// <summary>
+	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Field Field { get => P<Elastic.Clients.Elasticsearch.Field>("field"); set => PR("field", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, or aliases to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// X coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public int x { get => P<int>("x"); set => PR("x", value); }
+
+	/// <summary>
+	/// <para>
+	/// Y coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public int y { get => P<int>("y"); set => PR("y", value); }
+
+	/// <summary>
+	/// <para>
+	/// Zoom level for the vector tile to search
+	/// </para>
+	/// </summary>
+	public int Zoom { get => P<int>("zoom"); set => PR("zoom", value); }
 
 	/// <summary>
 	/// <para>
@@ -91,7 +295,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// </item>
 	/// </list>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggs")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
 
 	/// <summary>
@@ -100,7 +303,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buffer")]
 	public int? Buffer { get; set; }
 
 	/// <summary>
@@ -112,7 +314,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exact_bounds")]
 	public bool? ExactBounds { get; set; }
 
 	/// <summary>
@@ -120,7 +321,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extent")]
 	public int? Extent { get; set; }
 
 	/// <summary>
@@ -130,8 +330,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -139,7 +337,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// Aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_agg")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAgg { get; set; }
 
 	/// <summary>
@@ -149,7 +346,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// don’t include the aggs layer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_precision")]
 	public int? GridPrecision { get; set; }
 
 	/// <summary>
@@ -160,7 +356,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// of the cell.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_type")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridType { get; set; }
 
 	/// <summary>
@@ -168,7 +363,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// Query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -177,7 +371,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
@@ -186,7 +379,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// If 0, results don’t include the hits layer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -196,8 +388,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
@@ -207,7 +397,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
@@ -216,7 +405,6 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// suggested label positions for the original features.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("with_labels")]
 	public bool? WithLabels { get; set; }
 }
 

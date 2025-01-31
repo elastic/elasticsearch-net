@@ -30,7 +30,6 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public sealed partial class RollupCapabilitySummary
 {
 	[JsonInclude, JsonPropertyName("fields")]
-	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>> Fields { get; init; }
 	[JsonInclude, JsonPropertyName("index_pattern")]
 	public string IndexPattern { get; init; }

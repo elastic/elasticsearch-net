@@ -22,10 +22,216 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class HealthResponseConverter : System.Text.Json.Serialization.JsonConverter<HealthResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercentAsNumber = System.Text.Json.JsonEncodedText.Encode("active_shards_percent_as_number");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropDelayedUnassignedShards = System.Text.Json.JsonEncodedText.Encode("delayed_unassigned_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfDataNodes = System.Text.Json.JsonEncodedText.Encode("number_of_data_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfInFlightFetch = System.Text.Json.JsonEncodedText.Encode("number_of_in_flight_fetch");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfNodes = System.Text.Json.JsonEncodedText.Encode("number_of_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPendingTasks = System.Text.Json.JsonEncodedText.Encode("number_of_pending_tasks");
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueue = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueueMillis = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards");
+
+	public override HealthResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propActivePrimaryShards = default;
+		LocalJsonValue<int> propActiveShards = default;
+		LocalJsonValue<double> propActiveShardsPercentAsNumber = default;
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<int> propDelayedUnassignedShards = default;
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>?> propIndices = default;
+		LocalJsonValue<int> propInitializingShards = default;
+		LocalJsonValue<int> propNumberOfDataNodes = default;
+		LocalJsonValue<int> propNumberOfInFlightFetch = default;
+		LocalJsonValue<int> propNumberOfNodes = default;
+		LocalJsonValue<int> propNumberOfPendingTasks = default;
+		LocalJsonValue<int> propRelocatingShards = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTaskMaxWaitingInQueue = default;
+		LocalJsonValue<long> propTaskMaxWaitingInQueueMillis = default;
+		LocalJsonValue<bool> propTimedOut = default;
+		LocalJsonValue<int> propUnassignedPrimaryShards = default;
+		LocalJsonValue<int> propUnassignedShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActivePrimaryShards.TryRead(ref reader, options, PropActivePrimaryShards))
+			{
+				continue;
+			}
+
+			if (propActiveShards.TryRead(ref reader, options, PropActiveShards))
+			{
+				continue;
+			}
+
+			if (propActiveShardsPercentAsNumber.TryRead(ref reader, options, PropActiveShardsPercentAsNumber))
+			{
+				continue;
+			}
+
+			if (propClusterName.TryRead(ref reader, options, PropClusterName))
+			{
+				continue;
+			}
+
+			if (propDelayedUnassignedShards.TryRead(ref reader, options, PropDelayedUnassignedShards))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propInitializingShards.TryRead(ref reader, options, PropInitializingShards))
+			{
+				continue;
+			}
+
+			if (propNumberOfDataNodes.TryRead(ref reader, options, PropNumberOfDataNodes))
+			{
+				continue;
+			}
+
+			if (propNumberOfInFlightFetch.TryRead(ref reader, options, PropNumberOfInFlightFetch))
+			{
+				continue;
+			}
+
+			if (propNumberOfNodes.TryRead(ref reader, options, PropNumberOfNodes))
+			{
+				continue;
+			}
+
+			if (propNumberOfPendingTasks.TryRead(ref reader, options, PropNumberOfPendingTasks))
+			{
+				continue;
+			}
+
+			if (propRelocatingShards.TryRead(ref reader, options, PropRelocatingShards))
+			{
+				continue;
+			}
+
+			if (propStatus.TryRead(ref reader, options, PropStatus))
+			{
+				continue;
+			}
+
+			if (propTaskMaxWaitingInQueue.TryRead(ref reader, options, PropTaskMaxWaitingInQueue))
+			{
+				continue;
+			}
+
+			if (propTaskMaxWaitingInQueueMillis.TryRead(ref reader, options, PropTaskMaxWaitingInQueueMillis))
+			{
+				continue;
+			}
+
+			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			{
+				continue;
+			}
+
+			if (propUnassignedPrimaryShards.TryRead(ref reader, options, PropUnassignedPrimaryShards))
+			{
+				continue;
+			}
+
+			if (propUnassignedShards.TryRead(ref reader, options, PropUnassignedShards))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HealthResponse
+		{
+			ActivePrimaryShards = propActivePrimaryShards.Value
+,
+			ActiveShards = propActiveShards.Value
+,
+			ActiveShardsPercentAsNumber = propActiveShardsPercentAsNumber.Value
+,
+			ClusterName = propClusterName.Value
+,
+			DelayedUnassignedShards = propDelayedUnassignedShards.Value
+,
+			Indices = propIndices.Value
+,
+			InitializingShards = propInitializingShards.Value
+,
+			NumberOfDataNodes = propNumberOfDataNodes.Value
+,
+			NumberOfInFlightFetch = propNumberOfInFlightFetch.Value
+,
+			NumberOfNodes = propNumberOfNodes.Value
+,
+			NumberOfPendingTasks = propNumberOfPendingTasks.Value
+,
+			RelocatingShards = propRelocatingShards.Value
+,
+			Status = propStatus.Value
+,
+			TaskMaxWaitingInQueue = propTaskMaxWaitingInQueue.Value
+,
+			TaskMaxWaitingInQueueMillis = propTaskMaxWaitingInQueueMillis.Value
+,
+			TimedOut = propTimedOut.Value
+,
+			UnassignedPrimaryShards = propUnassignedPrimaryShards.Value
+,
+			UnassignedShards = propUnassignedShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HealthResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActivePrimaryShards, value.ActivePrimaryShards);
+		writer.WriteProperty(options, PropActiveShards, value.ActiveShards);
+		writer.WriteProperty(options, PropActiveShardsPercentAsNumber, value.ActiveShardsPercentAsNumber);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName);
+		writer.WriteProperty(options, PropDelayedUnassignedShards, value.DelayedUnassignedShards);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropInitializingShards, value.InitializingShards);
+		writer.WriteProperty(options, PropNumberOfDataNodes, value.NumberOfDataNodes);
+		writer.WriteProperty(options, PropNumberOfInFlightFetch, value.NumberOfInFlightFetch);
+		writer.WriteProperty(options, PropNumberOfNodes, value.NumberOfNodes);
+		writer.WriteProperty(options, PropNumberOfPendingTasks, value.NumberOfPendingTasks);
+		writer.WriteProperty(options, PropRelocatingShards, value.RelocatingShards);
+		writer.WriteProperty(options, PropStatus, value.Status);
+		writer.WriteProperty(options, PropTaskMaxWaitingInQueue, value.TaskMaxWaitingInQueue);
+		writer.WriteProperty(options, PropTaskMaxWaitingInQueueMillis, value.TaskMaxWaitingInQueueMillis);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
+		writer.WriteProperty(options, PropUnassignedPrimaryShards, value.UnassignedPrimaryShards);
+		writer.WriteProperty(options, PropUnassignedShards, value.UnassignedShards);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HealthResponseConverter))]
 public sealed partial class HealthResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +239,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of active primary shards.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("active_primary_shards")]
 	public int ActivePrimaryShards { get; init; }
 
 	/// <summary>
@@ -41,7 +246,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The total number of active primary and replica shards.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("active_shards")]
 	public int ActiveShards { get; init; }
 
 	/// <summary>
@@ -49,7 +253,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The ratio of active shards in the cluster expressed as a percentage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("active_shards_percent_as_number")]
 	public double ActiveShardsPercentAsNumber { get; init; }
 
 	/// <summary>
@@ -57,7 +260,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The name of the cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
 
 	/// <summary>
@@ -65,10 +267,7 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of shards whose allocation has been delayed by the timeout settings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delayed_unassigned_shards")]
 	public int DelayedUnassignedShards { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; init; }
 
 	/// <summary>
@@ -76,7 +275,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of shards that are under initialization.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("initializing_shards")]
 	public int InitializingShards { get; init; }
 
 	/// <summary>
@@ -84,7 +282,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of nodes that are dedicated data nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_data_nodes")]
 	public int NumberOfDataNodes { get; init; }
 
 	/// <summary>
@@ -92,7 +289,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of unfinished fetches.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_in_flight_fetch")]
 	public int NumberOfInFlightFetch { get; init; }
 
 	/// <summary>
@@ -100,7 +296,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of nodes within the cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_nodes")]
 	public int NumberOfNodes { get; init; }
 
 	/// <summary>
@@ -108,7 +303,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of cluster-level changes that have not yet been executed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_pending_tasks")]
 	public int NumberOfPendingTasks { get; init; }
 
 	/// <summary>
@@ -116,9 +310,7 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of shards that are under relocation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("relocating_shards")]
 	public int RelocatingShards { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 	/// <summary>
@@ -126,7 +318,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The time since the earliest initiated task is waiting for being performed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue")]
 	public Elastic.Clients.Elasticsearch.Duration? TaskMaxWaitingInQueue { get; init; }
 
 	/// <summary>
@@ -134,7 +325,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The time expressed in milliseconds since the earliest initiated task is waiting for being performed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_max_waiting_in_queue_millis")]
 	public long TaskMaxWaitingInQueueMillis { get; init; }
 
 	/// <summary>
@@ -142,7 +332,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// If false the response returned within the period of time that is specified by the timeout parameter (30s by default)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
 
 	/// <summary>
@@ -150,7 +339,6 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of primary shards that are not allocated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unassigned_primary_shards")]
 	public int UnassignedPrimaryShards { get; init; }
 
 	/// <summary>
@@ -158,6 +346,5 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 	/// The number of shards that are not allocated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }
 }

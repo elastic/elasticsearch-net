@@ -63,6 +63,11 @@ public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal GetBucketsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetBuckets;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -70,6 +75,23 @@ public sealed partial class GetBucketsRequest : PlainRequest<GetBucketsRequestPa
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_buckets";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The timestamp of a single bucket result. If you do not specify this
+	/// parameter, the API returns information about all buckets.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public DateTimeOffset? Timestamp { get => P<DateTimeOffset?>("timestamp"); set => PO("timestamp", value); }
 
 	/// <summary>
 	/// <para>

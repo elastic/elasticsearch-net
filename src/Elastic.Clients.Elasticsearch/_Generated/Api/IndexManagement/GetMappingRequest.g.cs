@@ -82,6 +82,7 @@ public sealed partial class GetMappingRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestParameters>
 {
+	[JsonConstructor]
 	public GetMappingRequest()
 	{
 	}
@@ -97,6 +98,16 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_mapping";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -39,12 +39,16 @@ public sealed partial class Retriever
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal Retriever()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static Retriever Knn(Elastic.Clients.Elasticsearch.KnnRetriever knnRetriever) => new Retriever("knn", knnRetriever);
 	public static Retriever Rrf(Elastic.Clients.Elasticsearch.RRFRetriever rRFRetriever) => new Retriever("rrf", rRFRetriever);
@@ -65,97 +69,92 @@ public sealed partial class Retriever
 	}
 }
 
-internal sealed partial class RetrieverConverter : JsonConverter<Retriever>
+internal sealed partial class RetrieverConverter : System.Text.Json.Serialization.JsonConverter<Retriever>
 {
-	public override Retriever Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText VariantRrf = System.Text.Json.JsonEncodedText.Encode("rrf");
+	private static readonly System.Text.Json.JsonEncodedText VariantRule = System.Text.Json.JsonEncodedText.Encode("rule");
+	private static readonly System.Text.Json.JsonEncodedText VariantStandard = System.Text.Json.JsonEncodedText.Encode("standard");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextSimilarityReranker = System.Text.Json.JsonEncodedText.Encode("text_similarity_reranker");
+
+	public override Retriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantKnn))
+			{
+				variantType = VariantKnn.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnRetriever?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRrf))
+			{
+				variantType = VariantRrf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RRFRetriever?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRule))
+			{
+				variantType = VariantRule.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RuleRetriever?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantStandard))
+			{
+				variantType = VariantStandard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.StandardRetriever?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextSimilarityReranker))
+			{
+				variantType = VariantTextSimilarityReranker.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextSimilarityReranker?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "knn")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.KnnRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "rrf")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RRFRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "rule")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RuleRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "standard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.StandardRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_similarity_reranker")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextSimilarityReranker?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Retriever' from the response.");
-		}
-
-		var result = new Retriever(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Retriever { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, Retriever value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Retriever value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "knn":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.KnnRetriever>(writer, (Elastic.Clients.Elasticsearch.KnnRetriever)value.Variant, options);
-					break;
-				case "rrf":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RRFRetriever>(writer, (Elastic.Clients.Elasticsearch.RRFRetriever)value.Variant, options);
-					break;
-				case "rule":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RuleRetriever>(writer, (Elastic.Clients.Elasticsearch.RuleRetriever)value.Variant, options);
-					break;
-				case "standard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.StandardRetriever>(writer, (Elastic.Clients.Elasticsearch.StandardRetriever)value.Variant, options);
-					break;
-				case "text_similarity_reranker":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TextSimilarityReranker>(writer, (Elastic.Clients.Elasticsearch.TextSimilarityReranker)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "knn":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever?)value.Variant);
+				break;
+			case "rrf":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RRFRetriever?)value.Variant);
+				break;
+			case "rule":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RuleRetriever?)value.Variant);
+				break;
+			case "standard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.StandardRetriever?)value.Variant);
+				break;
+			case "text_similarity_reranker":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextSimilarityReranker?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Retriever)}'.");
 		}
 
 		writer.WriteEndObject();

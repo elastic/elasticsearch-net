@@ -39,12 +39,16 @@ public sealed partial class IndexUpdateAliasesAction
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal IndexUpdateAliasesAction()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static IndexUpdateAliasesAction Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction addAction) => new IndexUpdateAliasesAction("add", addAction);
 	public static IndexUpdateAliasesAction Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction removeAction) => new IndexUpdateAliasesAction("remove", removeAction);
@@ -63,77 +67,68 @@ public sealed partial class IndexUpdateAliasesAction
 	}
 }
 
-internal sealed partial class IndexUpdateAliasesActionConverter : JsonConverter<IndexUpdateAliasesAction>
+internal sealed partial class IndexUpdateAliasesActionConverter : System.Text.Json.Serialization.JsonConverter<IndexUpdateAliasesAction>
 {
-	public override IndexUpdateAliasesAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAdd = System.Text.Json.JsonEncodedText.Encode("add");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemove = System.Text.Json.JsonEncodedText.Encode("remove");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemoveIndex = System.Text.Json.JsonEncodedText.Encode("remove_index");
+
+	public override IndexUpdateAliasesAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantAdd))
+			{
+				variantType = VariantAdd.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRemove))
+			{
+				variantType = VariantRemove.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRemoveIndex))
+			{
+				variantType = VariantRemoveIndex.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "add")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "remove")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "remove_index")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IndexUpdateAliasesAction' from the response.");
-		}
-
-		var result = new IndexUpdateAliasesAction(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IndexUpdateAliasesAction { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, IndexUpdateAliasesAction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexUpdateAliasesAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "add":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction)value.Variant, options);
-					break;
-				case "remove":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction)value.Variant, options);
-					break;
-				case "remove_index":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "add":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction?)value.Variant);
+				break;
+			case "remove":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction?)value.Variant);
+				break;
+			case "remove_index":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IndexUpdateAliasesAction)}'.");
 		}
 
 		writer.WriteEndObject();

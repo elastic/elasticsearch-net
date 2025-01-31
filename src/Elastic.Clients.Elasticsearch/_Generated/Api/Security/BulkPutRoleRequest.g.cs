@@ -51,6 +51,11 @@ public sealed partial class BulkPutRoleRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class BulkPutRoleRequest : PlainRequest<BulkPutRoleRequestParameters>
 {
+	[JsonConstructor]
+	internal BulkPutRoleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityBulkPutRole;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

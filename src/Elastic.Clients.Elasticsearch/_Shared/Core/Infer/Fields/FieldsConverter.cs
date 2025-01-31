@@ -7,74 +7,97 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed class FieldsConverter : JsonConverter<Fields>
+internal sealed class FieldsMarker;
+
+internal sealed class FieldsMarkerConverter :
+	JsonConverter<FieldsMarker>,
+	IMarkerTypeConverter
 {
-	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public JsonConverter WrappedConverter { get; }
+
+	public FieldsMarkerConverter()
 	{
-		switch (reader.TokenType)
-		{
-			case JsonTokenType.Null:
-				return null;
-
-			case JsonTokenType.StartArray:
-				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
-				return new Fields(fields);
-
-			default:
-				throw new JsonException("Unexpected token.");
-		}
+		WrappedConverter = new FieldsConverter();
 	}
 
-	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
+	public override FieldsMarker Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
+		throw new InvalidOperationException();
+	}
 
-		JsonSerializer.Serialize(writer, value.ListOfFields, options);
+	public override void Write(Utf8JsonWriter writer, FieldsMarker value, JsonSerializerOptions options)
+	{
+		throw new InvalidOperationException();
 	}
 }
 
-internal sealed class SingleOrManyFieldsConverter : JsonConverter<Fields>
+internal sealed class FieldsConverter :
+	JsonConverter<Fields>
 {
-	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Fields Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		switch (reader.TokenType)
-		{
-			case JsonTokenType.Null:
-				return null;
+		reader.ValidateToken(JsonTokenType.StartArray);
 
-			case JsonTokenType.String:
-				var field = JsonSerializer.Deserialize<Field>(ref reader, options);
-				return new Fields([field]);
+		var fields = reader.ReadValue<List<Field>>(options);
 
-			case JsonTokenType.StartArray:
-				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
-				return new Fields(fields);
-
-			default:
-				throw new JsonException("Unexpected token.");
-		}
+		return new Fields(fields);
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
+		writer.WriteValue(options, value.ListOfFields);
+	}
+}
 
+internal sealed class SingleOrManyFieldsMarker;
+
+internal sealed class SingleOrManyFieldsMarkerConverter :
+	JsonConverter<SingleOrManyFieldsMarker>,
+	IMarkerTypeConverter
+{
+	public JsonConverter WrappedConverter { get; }
+
+	public SingleOrManyFieldsMarkerConverter()
+	{
+		WrappedConverter = new SingleOrManyFieldsConverter();
+	}
+
+	public override SingleOrManyFieldsMarker Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		throw new InvalidOperationException();
+	}
+
+	public override void Write(Utf8JsonWriter writer, SingleOrManyFieldsMarker value, JsonSerializerOptions options)
+	{
+		throw new InvalidOperationException();
+	}
+}
+
+internal sealed class SingleOrManyFieldsConverter :
+	JsonConverter<Fields>
+{
+	public override Fields Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		return reader.TokenType switch
+		{
+			JsonTokenType.String => new Fields([reader.ReadValue<Field>(options)]),
+			JsonTokenType.StartArray => new Fields(reader.ReadValue<List<Field>>(options)),
+			_ => throw new JsonException($"Expected JSON '{JsonTokenType.String}' or '{JsonTokenType.StartArray}' token, but got '{reader.TokenType}'.")
+		};
+	}
+
+	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
+	{
 		if (value.ListOfFields.Count == 1)
 		{
-			JsonSerializer.Serialize(writer, value.ListOfFields[0], options);
+			writer.WriteValue(options, value.ListOfFields[0]);
 			return;
 		}
 
-		JsonSerializer.Serialize(writer, value.ListOfFields, options);
+		writer.WriteValue(options, value.ListOfFields);
 	}
 }

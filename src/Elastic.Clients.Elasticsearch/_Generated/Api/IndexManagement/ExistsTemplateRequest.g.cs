@@ -66,6 +66,11 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -73,6 +78,14 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.exists_template";
+
+	/// <summary>
+	/// <para>
+	/// The comma separated names of the index templates
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

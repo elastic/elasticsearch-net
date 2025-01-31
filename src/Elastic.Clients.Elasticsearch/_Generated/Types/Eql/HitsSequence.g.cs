@@ -27,6 +27,67 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+internal sealed partial class HitsSequenceConverter<TEvent> : System.Text.Json.Serialization.JsonConverter<HitsSequence<TEvent>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeys = System.Text.Json.JsonEncodedText.Encode("join_keys");
+
+	public override HitsSequence<TEvent> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>> propEvents = default;
+		LocalJsonValue<IReadOnlyCollection<object>?> propJoinKeys = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEvents.TryRead(ref reader, options, PropEvents))
+			{
+				continue;
+			}
+
+			if (propJoinKeys.TryRead(ref reader, options, PropJoinKeys))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HitsSequence<TEvent>
+		{
+			Events = propEvents.Value
+,
+			JoinKeys = propJoinKeys.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsSequence<TEvent> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEvents, value.Events);
+		writer.WriteProperty(options, PropJoinKeys, value.JoinKeys);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class HitsSequenceConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(HitsSequence<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(HitsSequenceConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(HitsSequenceConverterFactory))]
 public sealed partial class HitsSequence<TEvent>
 {
 	/// <summary>
@@ -34,7 +95,6 @@ public sealed partial class HitsSequence<TEvent>
 	/// Contains events matching the query. Each object represents a matching event.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events { get; init; }
 
 	/// <summary>
@@ -42,6 +102,5 @@ public sealed partial class HitsSequence<TEvent>
 	/// Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("join_keys")]
 	public IReadOnlyCollection<object>? JoinKeys { get; init; }
 }

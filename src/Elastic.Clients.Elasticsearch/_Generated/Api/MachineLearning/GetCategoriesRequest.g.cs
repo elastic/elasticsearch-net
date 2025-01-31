@@ -69,6 +69,11 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	{
 	}
 
+	[JsonConstructor]
+	internal GetCategoriesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCategories;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -76,6 +81,26 @@ public sealed partial class GetCategoriesRequest : PlainRequest<GetCategoriesReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_categories";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the category, which is unique in the job. If you specify
+	/// neither the category ID nor the partition_field_value, the API returns
+	/// information about all categories. If you specify only the
+	/// partition_field_value, it returns information about all categories for
+	/// the specified partition.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? CategoryId { get => P<string?>("category_id"); set => PO("category_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

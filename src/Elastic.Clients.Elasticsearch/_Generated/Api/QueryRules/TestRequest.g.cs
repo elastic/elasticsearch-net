@@ -46,6 +46,11 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 	{
 	}
 
+	[JsonConstructor]
+	internal TestRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesTest;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -54,6 +59,13 @@ public sealed partial class TestRequest : PlainRequest<TestRequestParameters>
 
 	internal override string OperationName => "query_rules.test";
 
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to be created or updated
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 	[JsonInclude, JsonPropertyName("match_criteria")]
 	public IDictionary<string, object> MatchCriteria { get; set; }
 }

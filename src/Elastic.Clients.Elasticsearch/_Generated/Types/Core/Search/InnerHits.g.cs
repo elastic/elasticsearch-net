@@ -27,16 +27,195 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class InnerHitsConverter : System.Text.Json.Serialization.JsonConverter<InnerHits>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropDocvalueFields = System.Text.Json.JsonEncodedText.Encode("docvalue_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackScores = System.Text.Json.JsonEncodedText.Encode("track_scores");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override InnerHits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propDocvalueFields = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Highlight?> propHighlight = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<bool?> propTrackScores = default;
+		LocalJsonValue<bool?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			{
+				continue;
+			}
+
+			if (propDocvalueFields.TryRead(ref reader, options, PropDocvalueFields))
+			{
+				continue;
+			}
+
+			if (propExplain.TryRead(ref reader, options, PropExplain))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propFrom.TryRead(ref reader, options, PropFrom))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryRead(ref reader, options, PropHighlight))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnmapped.TryRead(ref reader, options, PropIgnoreUnmapped))
+			{
+				continue;
+			}
+
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryRead(ref reader, options, PropScriptFields))
+			{
+				continue;
+			}
+
+			if (propSeqNoPrimaryTerm.TryRead(ref reader, options, PropSeqNoPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryRead(ref reader, options, PropStoredFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propTrackScores.TryRead(ref reader, options, PropTrackScores))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InnerHits
+		{
+			Collapse = propCollapse.Value
+,
+			DocvalueFields = propDocvalueFields.Value
+,
+			Explain = propExplain.Value
+,
+			Fields = propFields.Value
+,
+			From = propFrom.Value
+,
+			Highlight = propHighlight.Value
+,
+			IgnoreUnmapped = propIgnoreUnmapped.Value
+,
+			Name = propName.Value
+,
+			ScriptFields = propScriptFields.Value
+,
+			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value
+,
+			Size = propSize.Value
+,
+			Sort = propSort.Value
+,
+			Source = propSource.Value
+,
+			StoredFields = propStoredFields.Value
+,
+			TrackScores = propTrackScores.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InnerHits value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollapse, value.Collapse);
+		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields);
+		writer.WriteProperty(options, PropExplain, value.Explain);
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropFrom, value.From);
+		writer.WriteProperty(options, PropHighlight, value.Highlight);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped);
+		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields);
+		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropTrackScores, value.TrackScores);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(InnerHitsConverter))]
 public sealed partial class InnerHits
 {
-	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
-	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -44,11 +223,8 @@ public sealed partial class InnerHits
 	/// Inner hit starting document offset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
-	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
@@ -57,11 +233,8 @@ public sealed partial class InnerHits
 	/// Useful when a search request contains multiple inner hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
-	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
@@ -69,7 +242,6 @@ public sealed partial class InnerHits
 	/// The maximum number of hits to return per <c>inner_hits</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -78,17 +250,10 @@ public sealed partial class InnerHits
 	/// By default, inner hits are sorted by score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 

@@ -45,6 +45,11 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateDataFrameAnalyticsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateDataFrameAnalytics;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -52,6 +57,16 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : PlainRequest<Updat
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

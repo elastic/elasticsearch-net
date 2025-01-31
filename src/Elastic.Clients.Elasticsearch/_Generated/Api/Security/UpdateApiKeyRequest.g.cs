@@ -60,6 +60,11 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -67,6 +72,14 @@ public sealed partial class UpdateApiKeyRequest : PlainRequest<UpdateApiKeyReque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.update_api_key";
+
+	/// <summary>
+	/// <para>
+	/// The ID of the API key to update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

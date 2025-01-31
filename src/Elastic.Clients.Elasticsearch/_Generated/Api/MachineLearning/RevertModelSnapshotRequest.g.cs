@@ -52,6 +52,11 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 	{
 	}
 
+	[JsonConstructor]
+	internal RevertModelSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningRevertModelSnapshot;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -59,6 +64,24 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.revert_model_snapshot";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
+	/// snapshot means the anomaly detection job starts learning a new model from
+	/// scratch when it is started.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
 	/// <summary>
 	/// <para>

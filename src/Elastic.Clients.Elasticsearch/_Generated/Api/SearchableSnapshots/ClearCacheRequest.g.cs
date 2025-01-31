@@ -62,6 +62,7 @@ public sealed partial class ClearCacheRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestParameters>
 {
+	[JsonConstructor]
 	public ClearCacheRequest()
 	{
 	}
@@ -77,6 +78,14 @@ public sealed partial class ClearCacheRequest : PlainRequest<ClearCacheRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "searchable_snapshots.clear_cache";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

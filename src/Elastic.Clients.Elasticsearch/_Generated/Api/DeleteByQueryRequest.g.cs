@@ -256,6 +256,11 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteByQueryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -263,6 +268,16 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "delete_by_query";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

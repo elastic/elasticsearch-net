@@ -37,4 +37,6 @@ public sealed partial class GeoLineAggregate : IAggregate
 	public object Properties { get; init; }
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
+
+	string IAggregate.Type => "geo_line";
 }

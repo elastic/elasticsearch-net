@@ -55,6 +55,11 @@ public sealed partial class ListRulesetsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsRequestParameters>
 {
+	[JsonConstructor]
+	internal ListRulesetsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesListRulesets;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

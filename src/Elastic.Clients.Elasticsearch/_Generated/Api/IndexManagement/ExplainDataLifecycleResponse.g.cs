@@ -22,13 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ExplainDataLifecycleResponseConverter : System.Text.Json.Serialization.JsonConverter<ExplainDataLifecycleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+
+	public override ExplainDataLifecycleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>> propIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExplainDataLifecycleResponse
+		{
+			Indices = propIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainDataLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ExplainDataLifecycleResponseConverter))]
 public sealed partial class ExplainDataLifecycleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("indices")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain> Indices { get; init; }
 }

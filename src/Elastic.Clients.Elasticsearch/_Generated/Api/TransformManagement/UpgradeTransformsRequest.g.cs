@@ -70,6 +70,11 @@ public sealed partial class UpgradeTransformsRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTransformsRequestParameters>
 {
+	[JsonConstructor]
+	internal UpgradeTransformsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpgradeTransforms;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

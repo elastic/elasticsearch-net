@@ -27,11 +27,59 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Json.Serialization.JsonConverter<RuntimeFieldFetchFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+
+	public override RuntimeFieldFetchFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options);
+			return new RuntimeFieldFetchFields { Field = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propFormat.TryRead(ref reader, options, PropFormat))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RuntimeFieldFetchFields
+		{
+			Field = propField.Value
+,
+			Format = propFormat.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RuntimeFieldFetchFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropFormat, value.Format);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RuntimeFieldFetchFieldsConverter))]
 public sealed partial class RuntimeFieldFetchFields
 {
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 }
 

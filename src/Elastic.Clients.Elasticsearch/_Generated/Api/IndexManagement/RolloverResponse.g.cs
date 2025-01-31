@@ -22,24 +22,113 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class RolloverResponseConverter : System.Text.Json.Serialization.JsonConverter<RolloverResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions");
+	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run");
+	private static readonly System.Text.Json.JsonEncodedText PropNewIndex = System.Text.Json.JsonEncodedText.Encode("new_index");
+	private static readonly System.Text.Json.JsonEncodedText PropOldIndex = System.Text.Json.JsonEncodedText.Encode("old_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRolledOver = System.Text.Json.JsonEncodedText.Encode("rolled_over");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAcknowledged = System.Text.Json.JsonEncodedText.Encode("shards_acknowledged");
+
+	public override RolloverResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<IReadOnlyDictionary<string, bool>> propConditions = default;
+		LocalJsonValue<bool> propDryRun = default;
+		LocalJsonValue<string> propNewIndex = default;
+		LocalJsonValue<string> propOldIndex = default;
+		LocalJsonValue<bool> propRolledOver = default;
+		LocalJsonValue<bool> propShardsAcknowledged = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propConditions.TryRead(ref reader, options, PropConditions))
+			{
+				continue;
+			}
+
+			if (propDryRun.TryRead(ref reader, options, PropDryRun))
+			{
+				continue;
+			}
+
+			if (propNewIndex.TryRead(ref reader, options, PropNewIndex))
+			{
+				continue;
+			}
+
+			if (propOldIndex.TryRead(ref reader, options, PropOldIndex))
+			{
+				continue;
+			}
+
+			if (propRolledOver.TryRead(ref reader, options, PropRolledOver))
+			{
+				continue;
+			}
+
+			if (propShardsAcknowledged.TryRead(ref reader, options, PropShardsAcknowledged))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RolloverResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			Conditions = propConditions.Value
+,
+			DryRun = propDryRun.Value
+,
+			NewIndex = propNewIndex.Value
+,
+			OldIndex = propOldIndex.Value
+,
+			RolledOver = propRolledOver.Value
+,
+			ShardsAcknowledged = propShardsAcknowledged.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RolloverResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropConditions, value.Conditions);
+		writer.WriteProperty(options, PropDryRun, value.DryRun);
+		writer.WriteProperty(options, PropNewIndex, value.NewIndex);
+		writer.WriteProperty(options, PropOldIndex, value.OldIndex);
+		writer.WriteProperty(options, PropRolledOver, value.RolledOver);
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RolloverResponseConverter))]
 public sealed partial class RolloverResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("conditions")]
 	public IReadOnlyDictionary<string, bool> Conditions { get; init; }
-	[JsonInclude, JsonPropertyName("dry_run")]
 	public bool DryRun { get; init; }
-	[JsonInclude, JsonPropertyName("new_index")]
 	public string NewIndex { get; init; }
-	[JsonInclude, JsonPropertyName("old_index")]
 	public string OldIndex { get; init; }
-	[JsonInclude, JsonPropertyName("rolled_over")]
 	public bool RolledOver { get; init; }
-	[JsonInclude, JsonPropertyName("shards_acknowledged")]
 	public bool ShardsAcknowledged { get; init; }
 }

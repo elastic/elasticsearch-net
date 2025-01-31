@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ExplainDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<ExplainDataFrameAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFieldSelection = System.Text.Json.JsonEncodedText.Encode("field_selection");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryEstimation = System.Text.Json.JsonEncodedText.Encode("memory_estimation");
+
+	public override ExplainDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>> propFieldSelection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation> propMemoryEstimation = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFieldSelection.TryRead(ref reader, options, PropFieldSelection))
+			{
+				continue;
+			}
+
+			if (propMemoryEstimation.TryRead(ref reader, options, PropMemoryEstimation))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExplainDataFrameAnalyticsResponse
+		{
+			FieldSelection = propFieldSelection.Value
+,
+			MemoryEstimation = propMemoryEstimation.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFieldSelection, value.FieldSelection);
+		writer.WriteProperty(options, PropMemoryEstimation, value.MemoryEstimation);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ExplainDataFrameAnalyticsResponseConverter))]
 public sealed partial class ExplainDataFrameAnalyticsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +79,6 @@ public sealed partial class ExplainDataFrameAnalyticsResponse : ElasticsearchRes
 	/// An array of objects that explain selection for each field, sorted by the field names.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_selection")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> FieldSelection { get; init; }
 
 	/// <summary>
@@ -41,6 +86,5 @@ public sealed partial class ExplainDataFrameAnalyticsResponse : ElasticsearchRes
 	/// An array of objects that explain selection for each field, sorted by the field names.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("memory_estimation")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation MemoryEstimation { get; init; }
 }

@@ -152,6 +152,11 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal ShrinkIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -159,6 +164,22 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.shrink";
+
+	/// <summary>
+	/// <para>
+	/// Name of the source index to shrink.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Target { get => P<Elastic.Clients.Elasticsearch.IndexName>("target"); set => PR("target", value); }
 
 	/// <summary>
 	/// <para>

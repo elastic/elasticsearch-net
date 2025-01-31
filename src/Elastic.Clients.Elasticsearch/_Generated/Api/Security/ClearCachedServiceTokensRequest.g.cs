@@ -48,6 +48,11 @@ public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<Clear
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearCachedServiceTokensRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedServiceTokens;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -55,6 +60,30 @@ public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<Clear
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_service_tokens";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of service token names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the namespace
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the service name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Service { get => P<string>("service"); set => PR("service", value); }
 }
 
 /// <summary>

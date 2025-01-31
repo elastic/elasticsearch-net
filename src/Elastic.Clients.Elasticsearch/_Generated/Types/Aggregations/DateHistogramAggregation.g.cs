@@ -27,6 +27,160 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class DateHistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<DateHistogramAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropExtendedBounds = System.Text.Json.JsonEncodedText.Encode("extended_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+
+	public override DateHistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?> propCalendarInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsDate?> propExtendedBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFixedInterval = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsDate?> propHardBounds = default;
+		LocalJsonValue<int?> propMinDocCount = default;
+		LocalJsonValue<DateTimeOffset?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propOffset = default;
+		LocalJsonValue<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
+		LocalJsonValue<IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendarInterval.TryRead(ref reader, options, PropCalendarInterval))
+			{
+				continue;
+			}
+
+			if (propExtendedBounds.TryRead(ref reader, options, PropExtendedBounds))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propFixedInterval.TryRead(ref reader, options, PropFixedInterval))
+			{
+				continue;
+			}
+
+			if (propFormat.TryRead(ref reader, options, PropFormat))
+			{
+				continue;
+			}
+
+			if (propHardBounds.TryRead(ref reader, options, PropHardBounds))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			{
+				continue;
+			}
+
+			if (propMissing.TryRead(ref reader, options, PropMissing))
+			{
+				continue;
+			}
+
+			if (propOffset.TryRead(ref reader, options, PropOffset))
+			{
+				continue;
+			}
+
+			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			{
+				continue;
+			}
+
+			if (propParams.TryRead(ref reader, options, PropParams))
+			{
+				continue;
+			}
+
+			if (propScript.TryRead(ref reader, options, PropScript))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryRead(ref reader, options, PropTimeZone))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DateHistogramAggregation
+		{
+			CalendarInterval = propCalendarInterval.Value
+,
+			ExtendedBounds = propExtendedBounds.Value
+,
+			Field = propField.Value
+,
+			FixedInterval = propFixedInterval.Value
+,
+			Format = propFormat.Value
+,
+			HardBounds = propHardBounds.Value
+,
+			MinDocCount = propMinDocCount.Value
+,
+			Missing = propMissing.Value
+,
+			Offset = propOffset.Value
+,
+			Order = propOrder.Value
+,
+			Params = propParams.Value
+,
+			Script = propScript.Value
+,
+			TimeZone = propTimeZone.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DateHistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendarInterval, value.CalendarInterval);
+		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval);
+		writer.WriteProperty(options, PropFormat, value.Format);
+		writer.WriteProperty(options, PropHardBounds, value.HardBounds);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
+		writer.WriteProperty(options, PropMissing, value.Missing);
+		writer.WriteProperty(options, PropOffset, value.Offset);
+		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
+		writer.WriteProperty(options, PropParams, value.Params);
+		writer.WriteProperty(options, PropScript, value.Script);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DateHistogramAggregationConverter))]
 public sealed partial class DateHistogramAggregation
 {
 	/// <summary>
@@ -35,7 +189,6 @@ public sealed partial class DateHistogramAggregation
 	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calendar_interval")]
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
 
 	/// <summary>
@@ -43,7 +196,6 @@ public sealed partial class DateHistogramAggregation
 	/// Enables extending the bounds of the histogram beyond the data itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extended_bounds")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsDate? ExtendedBounds { get; set; }
 
 	/// <summary>
@@ -51,7 +203,6 @@ public sealed partial class DateHistogramAggregation
 	/// The date field whose values are use to build a histogram.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -59,7 +210,6 @@ public sealed partial class DateHistogramAggregation
 	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fixed_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
 
 	/// <summary>
@@ -68,7 +218,6 @@ public sealed partial class DateHistogramAggregation
 	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -76,7 +225,6 @@ public sealed partial class DateHistogramAggregation
 	/// Limits the histogram to specified bounds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hard_bounds")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsDate? HardBounds { get; set; }
 
 	/// <summary>
@@ -85,7 +233,6 @@ public sealed partial class DateHistogramAggregation
 	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
@@ -94,7 +241,6 @@ public sealed partial class DateHistogramAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public DateTimeOffset? Missing { get; set; }
 
 	/// <summary>
@@ -102,7 +248,6 @@ public sealed partial class DateHistogramAggregation
 	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 
 	/// <summary>
@@ -110,12 +255,8 @@ public sealed partial class DateHistogramAggregation
 	/// The sort order of the returned buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -124,7 +265,6 @@ public sealed partial class DateHistogramAggregation
 	/// Defaults to Coordinated Universal Time (UTC).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(DateHistogramAggregation dateHistogramAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.DateHistogram(dateHistogramAggregation);

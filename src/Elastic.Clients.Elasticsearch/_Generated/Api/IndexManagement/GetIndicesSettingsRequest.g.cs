@@ -100,6 +100,7 @@ public sealed partial class GetIndicesSettingsRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesSettingsRequestParameters>
 {
+	[JsonConstructor]
 	public GetIndicesSettingsRequest()
 	{
 	}
@@ -123,6 +124,24 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_settings";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of settings to retrieve.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -27,11 +27,80 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class HitsMetadataConverter<T> : System.Text.Json.Serialization.JsonConverter<HitsMetadata<T>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxScore = System.Text.Json.JsonEncodedText.Encode("max_score");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override HitsMetadata<T> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>>> propHits = default;
+		LocalJsonValue<double?> propMaxScore = default;
+		LocalJsonValue<Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHits.TryRead(ref reader, options, PropHits))
+			{
+				continue;
+			}
+
+			if (propMaxScore.TryRead(ref reader, options, PropMaxScore))
+			{
+				continue;
+			}
+
+			if (propTotal.TryRead(ref reader, options, PropTotal))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HitsMetadata<T>
+		{
+			Hits = propHits.Value
+,
+			MaxScore = propMaxScore.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsMetadata<T> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHits, value.Hits);
+		writer.WriteProperty(options, PropMaxScore, value.MaxScore);
+		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class HitsMetadataConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(HitsMetadata<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(HitsMetadataConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(HitsMetadataConverterFactory))]
 public sealed partial class HitsMetadata<T>
 {
-	[JsonInclude, JsonPropertyName("hits")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> Hits { get; init; }
-	[JsonInclude, JsonPropertyName("max_score")]
 	public double? MaxScore { get; init; }
 
 	/// <summary>
@@ -39,6 +108,5 @@ public sealed partial class HitsMetadata<T>
 	/// Total hit count information, present only if <c>track_total_hits</c> wasn't <c>false</c> in the search request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
 	public Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>? Total { get; init; }
 }

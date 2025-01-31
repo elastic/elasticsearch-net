@@ -27,10 +27,99 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Serialization.JsonConverter<HitsEvent<TEvent>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+
+	public override HitsEvent<TEvent> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>?> propFields = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<bool?> propMissing = default;
+		LocalJsonValue<TEvent> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propMissing.TryRead(ref reader, options, PropMissing))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TEvent>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new HitsEvent<TEvent>
+		{
+			Fields = propFields.Value
+,
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			Missing = propMissing.Value
+,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, HitsEvent<TEvent> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropMissing, value.Missing);
+		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TEvent>));
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class HitsEventConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(HitsEvent<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(HitsEventConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(HitsEventConverterFactory))]
 public sealed partial class HitsEvent<TEvent>
 {
-	[JsonInclude, JsonPropertyName("fields")]
-	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<object>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 
 	/// <summary>
@@ -38,7 +127,6 @@ public sealed partial class HitsEvent<TEvent>
 	/// Unique identifier for the event. This ID is only unique within the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 
 	/// <summary>
@@ -46,7 +134,6 @@ public sealed partial class HitsEvent<TEvent>
 	/// Name of the index containing the event.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 
 	/// <summary>
@@ -54,7 +141,6 @@ public sealed partial class HitsEvent<TEvent>
 	/// Set to <c>true</c> for events in a timespan-constrained sequence that do not meet a given condition.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public bool? Missing { get; init; }
 
 	/// <summary>
@@ -62,7 +148,5 @@ public sealed partial class HitsEvent<TEvent>
 	/// Original JSON body passed for the event at index time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TEvent Source { get; init; }
 }

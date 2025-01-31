@@ -69,6 +69,11 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateTransformRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpdateTransform;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -76,6 +81,14 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "transform.update_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>

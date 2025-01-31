@@ -47,6 +47,11 @@ public sealed partial class ExecuteLifecycleRequest : PlainRequest<ExecuteLifecy
 	{
 	}
 
+	[JsonConstructor]
+	internal ExecuteLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementExecuteLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -54,6 +59,14 @@ public sealed partial class ExecuteLifecycleRequest : PlainRequest<ExecuteLifecy
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.execute_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// The id of the snapshot lifecycle policy to be executed
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 }
 
 /// <summary>

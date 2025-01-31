@@ -89,6 +89,11 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 	{
 	}
 
+	[JsonConstructor]
+	internal GetFieldMappingRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetFieldMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -96,6 +101,24 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_field_mapping";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of fields used to limit returned information.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Fields Fields { get => P<Elastic.Clients.Elasticsearch.Fields>("fields"); set => PR("fields", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -61,6 +61,11 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 	{
 	}
 
+	[JsonConstructor]
+	internal DeletePipelineRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeletePipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -68,6 +73,15 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.delete_pipeline";
+
+	/// <summary>
+	/// <para>
+	/// Pipeline ID or wildcard expression of pipeline IDs used to limit the request.
+	/// To delete all ingest pipelines in a cluster, use a value of <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

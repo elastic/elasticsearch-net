@@ -49,6 +49,11 @@ public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCac
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearCachedPrivilegesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedPrivileges;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -56,6 +61,14 @@ public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCac
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_privileges";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of application names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
 }
 
 /// <summary>

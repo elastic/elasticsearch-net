@@ -10,7 +10,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class IndexRequest<TDocument>
 {
-	public IndexRequest() : this(typeof(TDocument)) { }
+	// TODO:
+	//public IndexRequest() : this(typeof(TDocument)) { }
 
 	public IndexRequest(TDocument document, Id id) : this(typeof(TDocument), id) => Document = document;
 
@@ -20,15 +21,11 @@ public partial class IndexRequest<TDocument>
 
 	internal Request<IndexRequestParameters> Self => this;
 
-	[JsonIgnore] private Id? Id => RouteValues.Get<Id>("id");
-
 	internal static HttpMethod GetHttpMethod(IndexRequest<TDocument> request) =>
 		request.Id?.StringOrLongValue != null || request.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 }
 
 public sealed partial class IndexRequestDescriptor<TDocument>
 {
-	internal Id _id;
-
-	protected override HttpMethod? DynamicHttpMethod => _id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
+	protected override HttpMethod? DynamicHttpMethod => RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 }

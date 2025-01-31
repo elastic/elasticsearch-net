@@ -55,6 +55,11 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 	{
 	}
 
+	[JsonConstructor]
+	internal ResetTransformRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementResetTransform;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -62,6 +67,15 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "transform.reset_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class CreateSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<CreateSnapshotResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+
+	public override CreateSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAccepted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo?> propSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccepted.TryRead(ref reader, options, PropAccepted))
+			{
+				continue;
+			}
+
+			if (propSnapshot.TryRead(ref reader, options, PropSnapshot))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CreateSnapshotResponse
+		{
+			Accepted = propAccepted.Value
+,
+			Snapshot = propSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccepted, value.Accepted);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CreateSnapshotResponseConverter))]
 public sealed partial class CreateSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +79,6 @@ public sealed partial class CreateSnapshotResponse : ElasticsearchResponse
 	/// Equals <c>true</c> if the snapshot was accepted. Present when the request had <c>wait_for_completion</c> set to <c>false</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("accepted")]
 	public bool? Accepted { get; init; }
 
 	/// <summary>
@@ -41,6 +86,5 @@ public sealed partial class CreateSnapshotResponse : ElasticsearchResponse
 	/// Snapshot information. Present when the request had <c>wait_for_completion</c> set to <c>true</c>
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("snapshot")]
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo? Snapshot { get; init; }
 }

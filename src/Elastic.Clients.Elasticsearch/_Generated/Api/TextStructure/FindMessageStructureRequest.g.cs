@@ -293,6 +293,11 @@ public sealed partial class FindMessageStructureRequestParameters : RequestParam
 /// </summary>
 public sealed partial class FindMessageStructureRequest : PlainRequest<FindMessageStructureRequestParameters>
 {
+	[JsonConstructor]
+	internal FindMessageStructureRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureFindMessageStructure;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

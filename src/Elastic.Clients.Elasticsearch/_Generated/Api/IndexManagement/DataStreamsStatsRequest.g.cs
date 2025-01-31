@@ -49,6 +49,7 @@ public sealed partial class DataStreamsStatsRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsStatsRequestParameters>
 {
+	[JsonConstructor]
 	public DataStreamsStatsRequest()
 	{
 	}
@@ -64,6 +65,16 @@ public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsSt
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.data_streams_stats";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams used to limit the request.
+	/// Wildcard expressions (<c>*</c>) are supported.
+	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName? Name { get => P<Elastic.Clients.Elasticsearch.IndexName?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

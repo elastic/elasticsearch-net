@@ -50,6 +50,7 @@ public sealed partial class ChangePasswordRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordRequestParameters>
 {
+	[JsonConstructor]
 	public ChangePasswordRequest()
 	{
 	}
@@ -65,6 +66,15 @@ public sealed partial class ChangePasswordRequest : PlainRequest<ChangePasswordR
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.change_password";
+
+	/// <summary>
+	/// <para>
+	/// The user whose password you want to change. If you do not specify this
+	/// parameter, the password is changed for the current user.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Username? Username { get => P<Elastic.Clients.Elasticsearch.Username?>("username"); set => PO("username", value); }
 
 	/// <summary>
 	/// <para>

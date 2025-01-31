@@ -27,24 +27,167 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class BooleanPropertyConverter : System.Text.Json.Serialization.JsonConverter<BooleanProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override BooleanProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> propFielddata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<bool?> propStore = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propFielddata.TryRead(ref reader, options, PropFielddata))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryRead(ref reader, options, PropNullValue))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propStore.TryRead(ref reader, options, PropStore))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new BooleanProperty
+		{
+			Boost = propBoost.Value
+,
+			CopyTo = propCopyTo.Value
+,
+			DocValues = propDocValues.Value
+,
+			Dynamic = propDynamic.Value
+,
+			Fielddata = propFielddata.Value
+,
+			Fields = propFields.Value
+,
+			IgnoreAbove = propIgnoreAbove.Value
+,
+			Index = propIndex.Value
+,
+			Meta = propMeta.Value
+,
+			NullValue = propNullValue.Value
+,
+			Properties = propProperties.Value
+,
+			Store = propStore.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, BooleanProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropDocValues, value.DocValues);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropFielddata, value.Fielddata);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropNullValue, value.NullValue);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropStore, value.Store);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(BooleanPropertyConverter))]
 public sealed partial class BooleanProperty : IProperty
 {
-	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fielddata")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
 
 	/// <summary>
@@ -52,16 +195,11 @@ public sealed partial class BooleanProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("null_value")]
 	public bool? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "boolean";
 }
 

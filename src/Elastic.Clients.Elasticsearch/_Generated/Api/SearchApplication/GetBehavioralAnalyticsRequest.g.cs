@@ -41,6 +41,7 @@ public sealed partial class GetBehavioralAnalyticsRequestParameters : RequestPar
 /// </summary>
 public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBehavioralAnalyticsRequestParameters>
 {
+	[JsonConstructor]
 	public GetBehavioralAnalyticsRequest()
 	{
 	}
@@ -56,6 +57,14 @@ public sealed partial class GetBehavioralAnalyticsRequest : PlainRequest<GetBeha
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_application.get_behavioral_analytics";
+
+	/// <summary>
+	/// <para>
+	/// A list of analytics collections to limit the returned information
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<Elastic.Clients.Elasticsearch.Name>? Name { get => P<ICollection<Elastic.Clients.Elasticsearch.Name>?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

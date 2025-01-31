@@ -44,6 +44,7 @@ public sealed partial class RenderSearchTemplateRequestParameters : RequestParam
 /// </summary>
 public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSearchTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public RenderSearchTemplateRequest()
 	{
 	}
@@ -60,6 +61,14 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 
 	internal override string OperationName => "render_search_template";
 
+	/// <summary>
+	/// <para>
+	/// ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>id</c> request body parameter is required.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 	[JsonInclude, JsonPropertyName("file")]
 	public string? File { get; set; }
 

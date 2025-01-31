@@ -51,6 +51,11 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 	{
 	}
 
+	[JsonConstructor]
+	internal OpenJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningOpenJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -58,6 +63,14 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.open_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

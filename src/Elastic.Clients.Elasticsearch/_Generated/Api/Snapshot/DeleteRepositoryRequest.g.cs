@@ -60,6 +60,11 @@ public sealed partial class DeleteRepositoryRequest : PlainRequest<DeleteReposit
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteRepositoryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotDeleteRepository;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -67,6 +72,14 @@ public sealed partial class DeleteRepositoryRequest : PlainRequest<DeleteReposit
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.delete_repository";
+
+	/// <summary>
+	/// <para>
+	/// Name of the snapshot repository to unregister. Wildcard (<c>*</c>) patterns are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>

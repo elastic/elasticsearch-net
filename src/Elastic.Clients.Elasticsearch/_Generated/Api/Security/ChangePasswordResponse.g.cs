@@ -22,10 +22,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ChangePasswordResponseConverter : System.Text.Json.Serialization.JsonConverter<ChangePasswordResponse>
+{
+	public override ChangePasswordResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ChangePasswordResponse { };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ChangePasswordResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ChangePasswordResponseConverter))]
 public sealed partial class ChangePasswordResponse : ElasticsearchResponse
 {
 }

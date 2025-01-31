@@ -63,6 +63,11 @@ public sealed partial class PromoteDataStreamRequest : PlainRequest<PromoteDataS
 	{
 	}
 
+	[JsonConstructor]
+	internal PromoteDataStreamRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPromoteDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -70,6 +75,14 @@ public sealed partial class PromoteDataStreamRequest : PlainRequest<PromoteDataS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.promote_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Name { get => P<Elastic.Clients.Elasticsearch.IndexName>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -75,6 +75,11 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -82,6 +87,14 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -47,6 +47,11 @@ public sealed partial class StartJobRequest : PlainRequest<StartJobRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal StartJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupStartJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -54,6 +59,14 @@ public sealed partial class StartJobRequest : PlainRequest<StartJobRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.start_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>

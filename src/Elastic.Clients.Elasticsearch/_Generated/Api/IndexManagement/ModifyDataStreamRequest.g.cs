@@ -42,6 +42,11 @@ public sealed partial class ModifyDataStreamRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStreamRequestParameters>
 {
+	[JsonConstructor]
+	internal ModifyDataStreamRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementModifyDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

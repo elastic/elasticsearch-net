@@ -22,10 +22,156 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+internal sealed partial class AsyncSearchStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<AsyncSearchStatusResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("_clusters");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionStatus = System.Text.Json.JsonEncodedText.Encode("completion_status");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropExpirationTime = System.Text.Json.JsonEncodedText.Encode("expiration_time");
+	private static readonly System.Text.Json.JsonEncodedText PropExpirationTimeInMillis = System.Text.Json.JsonEncodedText.Encode("expiration_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+
+	public override AsyncSearchStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ClusterStatistics?> propClusters = default;
+		LocalJsonValue<int?> propCompletionStatus = default;
+		LocalJsonValue<DateTimeOffset?> propCompletionTime = default;
+		LocalJsonValue<long?> propCompletionTimeInMillis = default;
+		LocalJsonValue<DateTimeOffset?> propExpirationTime = default;
+		LocalJsonValue<long> propExpirationTimeInMillis = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<bool> propIsPartial = default;
+		LocalJsonValue<bool> propIsRunning = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<DateTimeOffset?> propStartTime = default;
+		LocalJsonValue<long> propStartTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusters.TryRead(ref reader, options, PropClusters))
+			{
+				continue;
+			}
+
+			if (propCompletionStatus.TryRead(ref reader, options, PropCompletionStatus))
+			{
+				continue;
+			}
+
+			if (propCompletionTime.TryRead(ref reader, options, PropCompletionTime))
+			{
+				continue;
+			}
+
+			if (propCompletionTimeInMillis.TryRead(ref reader, options, PropCompletionTimeInMillis))
+			{
+				continue;
+			}
+
+			if (propExpirationTime.TryRead(ref reader, options, PropExpirationTime))
+			{
+				continue;
+			}
+
+			if (propExpirationTimeInMillis.TryRead(ref reader, options, PropExpirationTimeInMillis))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			{
+				continue;
+			}
+
+			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			{
+				continue;
+			}
+
+			if (propShards.TryRead(ref reader, options, PropShards))
+			{
+				continue;
+			}
+
+			if (propStartTime.TryRead(ref reader, options, PropStartTime))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryRead(ref reader, options, PropStartTimeInMillis))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new AsyncSearchStatusResponse
+		{
+			Clusters = propClusters.Value
+,
+			CompletionStatus = propCompletionStatus.Value
+,
+			CompletionTime = propCompletionTime.Value
+,
+			CompletionTimeInMillis = propCompletionTimeInMillis.Value
+,
+			ExpirationTime = propExpirationTime.Value
+,
+			ExpirationTimeInMillis = propExpirationTimeInMillis.Value
+,
+			Id = propId.Value
+,
+			IsPartial = propIsPartial.Value
+,
+			IsRunning = propIsRunning.Value
+,
+			Shards = propShards.Value
+,
+			StartTime = propStartTime.Value
+,
+			StartTimeInMillis = propStartTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AsyncSearchStatusResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusters, value.Clusters);
+		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus);
+		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime);
+		writer.WriteProperty(options, PropCompletionTimeInMillis, value.CompletionTimeInMillis);
+		writer.WriteProperty(options, PropExpirationTime, value.ExpirationTime);
+		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
+		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropStartTime, value.StartTime);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(AsyncSearchStatusResponseConverter))]
 public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,7 +180,6 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// Not shown for local-only searches.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_clusters")]
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 
 	/// <summary>
@@ -44,7 +189,6 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// 503 indicates that the async search was completed with an error.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion_status")]
 	public int? CompletionStatus { get; init; }
 
 	/// <summary>
@@ -53,9 +197,7 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// when the search has completed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion_time")]
 	public DateTimeOffset? CompletionTime { get; init; }
-	[JsonInclude, JsonPropertyName("completion_time_in_millis")]
 	public long? CompletionTimeInMillis { get; init; }
 
 	/// <summary>
@@ -63,11 +205,8 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// Indicates when the async search will expire.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
-	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
 	public long ExpirationTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
 	/// <summary>
@@ -76,7 +215,6 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
 
 	/// <summary>
@@ -85,7 +223,6 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
 
 	/// <summary>
@@ -93,10 +230,7 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// Indicates how many shards have run the query so far.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset? StartTime { get; init; }
-	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
 }

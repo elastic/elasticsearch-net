@@ -76,7 +76,8 @@ public class DefaultSourceSerializerOptionsProvider :
 	[
 		new JsonStringEnumConverter(),
 		new DoubleWithFractionalPortionConverter(),
-		new SingleWithFractionalPortionConverter()
+		new SingleWithFractionalPortionConverter(),
+		// TODO: Add RequestResponseSerializer
 	];
 
 	public DefaultSourceSerializerOptionsProvider(Action<JsonSerializerOptions>? configureOptions = null) :

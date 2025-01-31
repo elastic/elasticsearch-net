@@ -77,4 +77,6 @@ public sealed partial class ExtendedStatsBucketAggregate : IAggregate
 	public double? VarianceSampling { get; init; }
 	[JsonInclude, JsonPropertyName("variance_sampling_as_string")]
 	public string? VarianceSamplingAsString { get; init; }
+
+	string IAggregate.Type => "extended_stats_bucket";
 }

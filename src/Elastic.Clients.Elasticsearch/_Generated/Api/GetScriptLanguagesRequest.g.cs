@@ -44,6 +44,11 @@ public sealed partial class GetScriptLanguagesRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLanguagesRequestParameters>
 {
+	[JsonConstructor]
+	internal GetScriptLanguagesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptLanguages;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

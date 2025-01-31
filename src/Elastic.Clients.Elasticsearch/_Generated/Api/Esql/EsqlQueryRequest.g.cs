@@ -63,6 +63,11 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestParameters>
 {
+	[JsonConstructor]
+	internal EsqlQueryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

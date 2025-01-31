@@ -112,6 +112,7 @@ public sealed partial class NodesStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestParameters>
 {
+	[JsonConstructor]
 	public NodesStatsRequest()
 	{
 	}
@@ -143,6 +144,30 @@ public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.stats";
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Metrics? IndexMetric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("index_metric"); set => PO("index_metric", value); }
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned to the specified metrics
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

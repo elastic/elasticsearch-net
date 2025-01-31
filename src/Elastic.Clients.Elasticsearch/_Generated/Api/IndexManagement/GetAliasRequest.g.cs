@@ -74,6 +74,7 @@ public sealed partial class GetAliasRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParameters>
 {
+	[JsonConstructor]
 	public GetAliasRequest()
 	{
 	}
@@ -97,6 +98,26 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_alias";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams or indices used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of aliases to retrieve.
+	/// Supports wildcards (<c>*</c>).
+	/// To retrieve all aliases, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

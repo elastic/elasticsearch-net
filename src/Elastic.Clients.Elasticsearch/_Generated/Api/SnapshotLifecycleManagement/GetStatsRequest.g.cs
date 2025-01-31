@@ -42,6 +42,11 @@ public sealed partial class GetStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetStatsRequest : PlainRequest<GetStatsRequestParameters>
 {
+	[JsonConstructor]
+	internal GetStatsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementGetStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

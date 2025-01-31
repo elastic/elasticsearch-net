@@ -22,22 +22,102 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class EnrollNodeResponseConverter : System.Text.Json.Serialization.JsonConverter<EnrollNodeResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaCert = System.Text.Json.JsonEncodedText.Encode("http_ca_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaKey = System.Text.Json.JsonEncodedText.Encode("http_ca_key");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesAddresses = System.Text.Json.JsonEncodedText.Encode("nodes_addresses");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCaCert = System.Text.Json.JsonEncodedText.Encode("transport_ca_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCert = System.Text.Json.JsonEncodedText.Encode("transport_cert");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportKey = System.Text.Json.JsonEncodedText.Encode("transport_key");
+
+	public override EnrollNodeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propHttpCaCert = default;
+		LocalJsonValue<string> propHttpCaKey = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propNodesAddresses = default;
+		LocalJsonValue<string> propTransportCaCert = default;
+		LocalJsonValue<string> propTransportCert = default;
+		LocalJsonValue<string> propTransportKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHttpCaCert.TryRead(ref reader, options, PropHttpCaCert))
+			{
+				continue;
+			}
+
+			if (propHttpCaKey.TryRead(ref reader, options, PropHttpCaKey))
+			{
+				continue;
+			}
+
+			if (propNodesAddresses.TryRead(ref reader, options, PropNodesAddresses))
+			{
+				continue;
+			}
+
+			if (propTransportCaCert.TryRead(ref reader, options, PropTransportCaCert))
+			{
+				continue;
+			}
+
+			if (propTransportCert.TryRead(ref reader, options, PropTransportCert))
+			{
+				continue;
+			}
+
+			if (propTransportKey.TryRead(ref reader, options, PropTransportKey))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new EnrollNodeResponse
+		{
+			HttpCaCert = propHttpCaCert.Value
+,
+			HttpCaKey = propHttpCaKey.Value
+,
+			NodesAddresses = propNodesAddresses.Value
+,
+			TransportCaCert = propTransportCaCert.Value
+,
+			TransportCert = propTransportCert.Value
+,
+			TransportKey = propTransportKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrollNodeResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHttpCaCert, value.HttpCaCert);
+		writer.WriteProperty(options, PropHttpCaKey, value.HttpCaKey);
+		writer.WriteProperty(options, PropNodesAddresses, value.NodesAddresses);
+		writer.WriteProperty(options, PropTransportCaCert, value.TransportCaCert);
+		writer.WriteProperty(options, PropTransportCert, value.TransportCert);
+		writer.WriteProperty(options, PropTransportKey, value.TransportKey);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(EnrollNodeResponseConverter))]
 public sealed partial class EnrollNodeResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("http_ca_cert")]
 	public string HttpCaCert { get; init; }
-	[JsonInclude, JsonPropertyName("http_ca_key")]
 	public string HttpCaKey { get; init; }
-	[JsonInclude, JsonPropertyName("nodes_addresses")]
 	public IReadOnlyCollection<string> NodesAddresses { get; init; }
-	[JsonInclude, JsonPropertyName("transport_ca_cert")]
 	public string TransportCaCert { get; init; }
-	[JsonInclude, JsonPropertyName("transport_cert")]
 	public string TransportCert { get; init; }
-	[JsonInclude, JsonPropertyName("transport_key")]
 	public string TransportKey { get; init; }
 }

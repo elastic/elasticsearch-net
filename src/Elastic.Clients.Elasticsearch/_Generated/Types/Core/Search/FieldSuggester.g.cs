@@ -39,12 +39,16 @@ public sealed partial class FieldSuggester
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal FieldSuggester()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static FieldSuggester Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => new FieldSuggester("completion", completionSuggester);
 	public static FieldSuggester Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => new FieldSuggester("phrase", phraseSuggester);
@@ -88,121 +92,103 @@ public sealed partial class FieldSuggester
 	}
 }
 
-internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSuggester>
+internal sealed partial class FieldSuggesterConverter : System.Text.Json.Serialization.JsonConverter<FieldSuggester>
 {
-	public override FieldSuggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText VariantCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText VariantPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");
+
+	public override FieldSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propPrefix = default;
+		LocalJsonValue<string?> propRegex = default;
+		LocalJsonValue<string?> propText = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propPrefix.TryRead(ref reader, options, PropPrefix))
+			{
+				continue;
+			}
+
+			if (propRegex.TryRead(ref reader, options, PropRegex))
+			{
+				continue;
+			}
+
+			if (propText.TryRead(ref reader, options, PropText))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCompletion))
+			{
+				variantType = VariantCompletion.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPhrase))
+			{
+				variantType = VariantPhrase.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerm))
+			{
+				variantType = VariantTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		string? prefixValue = default;
-		string? regexValue = default;
-		string? textValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldSuggester
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "prefix")
-			{
-				prefixValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "regex")
-			{
-				regexValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "text")
-			{
-				textValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "completion")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "phrase")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FieldSuggester' from the response.");
-		}
-
-		var result = new FieldSuggester(variantNameValue, variantValue);
-		result.Prefix = prefixValue;
-		result.Regex = regexValue;
-		result.Text = textValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Prefix = propPrefix.Value
+	,
+			Regex = propRegex.Value
+	,
+			Text = propText.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, FieldSuggester value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldSuggester value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Prefix))
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(value.Prefix);
+			case "":
+				break;
+			case "completion":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?)value.Variant);
+				break;
+			case "phrase":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?)value.Variant);
+				break;
+			case "term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(FieldSuggester)}'.");
 		}
 
-		if (!string.IsNullOrEmpty(value.Regex))
-		{
-			writer.WritePropertyName("regex");
-			writer.WriteStringValue(value.Regex);
-		}
-
-		if (!string.IsNullOrEmpty(value.Text))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(value.Text);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "completion":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester)value.Variant, options);
-					break;
-				case "phrase":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)value.Variant, options);
-					break;
-				case "term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropPrefix, value.Prefix);
+		writer.WriteProperty(options, PropRegex, value.Regex);
+		writer.WriteProperty(options, PropText, value.Text);
 		writer.WriteEndObject();
 	}
 }

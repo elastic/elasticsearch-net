@@ -69,6 +69,11 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal CreateIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -76,6 +81,14 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.create";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index you wish to create.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

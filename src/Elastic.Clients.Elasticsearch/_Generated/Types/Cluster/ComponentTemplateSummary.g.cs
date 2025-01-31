@@ -38,7 +38,6 @@ public sealed partial class ComponentTemplateSummary
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("settings")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings { get; init; }
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; init; }

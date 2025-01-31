@@ -57,6 +57,7 @@ public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Request
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<ExplainDataFrameAnalyticsRequestParameters>
 {
+	[JsonConstructor]
 	public ExplainDataFrameAnalyticsRequest()
 	{
 	}
@@ -72,6 +73,16 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.explain_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

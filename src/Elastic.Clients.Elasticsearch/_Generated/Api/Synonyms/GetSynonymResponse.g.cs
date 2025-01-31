@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+internal sealed partial class GetSynonymResponseConverter : System.Text.Json.Serialization.JsonConverter<GetSynonymResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
+
+	public override GetSynonymResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead>> propSynonymsSet = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propSynonymsSet.TryRead(ref reader, options, PropSynonymsSet))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetSynonymResponse
+		{
+			Count = propCount.Value
+,
+			SynonymsSet = propSynonymsSet.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSynonymResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetSynonymResponseConverter))]
 public sealed partial class GetSynonymResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
-	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead> SynonymsSet { get; init; }
 }

@@ -209,275 +209,226 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor WordDelimiter(string tokenFilterName, WordDelimiterTokenFilter wordDelimiterTokenFilter) => AssignVariant(tokenFilterName, wordDelimiterTokenFilter);
 }
 
-internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITokenFilter>
+internal sealed partial class TokenFilterInterfaceConverter : System.Text.Json.Serialization.JsonConverter<ITokenFilter>
 {
-	public override ITokenFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ITokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "asciifolding":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(ref reader, options);
-			case "common_grams":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(ref reader, options);
-			case "condition":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(ref reader, options);
-			case "delimited_payload":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(ref reader, options);
-			case "dictionary_decompounder":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(ref reader, options);
-			case "edge_ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(ref reader, options);
-			case "elision":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(ref reader, options);
-			case "fingerprint":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(ref reader, options);
-			case "hunspell":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(ref reader, options);
-			case "hyphenation_decompounder":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(ref reader, options);
-			case "icu_collation":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>(ref reader, options);
-			case "icu_folding":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>(ref reader, options);
-			case "icu_normalizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(ref reader, options);
-			case "icu_transform":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(ref reader, options);
-			case "keep_types":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(ref reader, options);
-			case "keep":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(ref reader, options);
-			case "keyword_marker":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(ref reader, options);
-			case "kstem":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(ref reader, options);
-			case "kuromoji_part_of_speech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>(ref reader, options);
-			case "kuromoji_readingform":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>(ref reader, options);
-			case "kuromoji_stemmer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>(ref reader, options);
-			case "length":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>(ref reader, options);
-			case "limit":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(ref reader, options);
-			case "multiplexer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(ref reader, options);
-			case "ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter>(ref reader, options);
-			case "nori_part_of_speech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter>(ref reader, options);
-			case "pattern_capture":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(ref reader, options);
-			case "pattern_replace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(ref reader, options);
-			case "phonetic":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(ref reader, options);
-			case "porter_stem":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(ref reader, options);
-			case "predicate_token_filter":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(ref reader, options);
-			case "remove_duplicates":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(ref reader, options);
-			case "reverse":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(ref reader, options);
-			case "shingle":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(ref reader, options);
-			case "snowball":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(ref reader, options);
-			case "stemmer_override":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(ref reader, options);
-			case "stemmer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>(ref reader, options);
-			case "stop":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter>(ref reader, options);
-			case "synonym_graph":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>(ref reader, options);
-			case "synonym":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>(ref reader, options);
-			case "trim":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter>(ref reader, options);
-			case "truncate":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>(ref reader, options);
-			case "unique":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>(ref reader, options);
-			case "uppercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(ref reader, options);
-			case "word_delimiter_graph":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(ref reader, options);
-			case "word_delimiter":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenFilter));
-				return null;
-		}
+			"asciifolding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(options),
+			"common_grams" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(options),
+			"condition" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(options),
+			"delimited_payload" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(options),
+			"dictionary_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(options),
+			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(options),
+			"elision" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(options),
+			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(options),
+			"hunspell" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(options),
+			"hyphenation_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(options),
+			"icu_collation" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>(options),
+			"icu_folding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>(options),
+			"icu_normalizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(options),
+			"icu_transform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(options),
+			"keep_types" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(options),
+			"keep" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(options),
+			"keyword_marker" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(options),
+			"kstem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(options),
+			"kuromoji_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>(options),
+			"kuromoji_readingform" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>(options),
+			"kuromoji_stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>(options),
+			"length" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>(options),
+			"limit" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(options),
+			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(options),
+			"multiplexer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(options),
+			"ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter>(options),
+			"nori_part_of_speech" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter>(options),
+			"pattern_capture" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(options),
+			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(options),
+			"phonetic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(options),
+			"porter_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(options),
+			"predicate_token_filter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(options),
+			"remove_duplicates" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(options),
+			"reverse" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(options),
+			"shingle" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(options),
+			"snowball" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(options),
+			"stemmer_override" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(options),
+			"stemmer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>(options),
+			"stop" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter>(options),
+			"synonym_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>(options),
+			"synonym" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>(options),
+			"trim" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter>(options),
+			"truncate" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>(options),
+			"unique" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>(options),
+			"uppercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(options),
+			"word_delimiter_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(options),
+			"word_delimiter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(options),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(ITokenFilter)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, ITokenFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ITokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "asciifolding":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter)value);
+				break;
 			case "common_grams":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter)value);
+				break;
 			case "condition":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter)value);
+				break;
 			case "delimited_payload":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter)value);
+				break;
 			case "dictionary_decompounder":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter)value);
+				break;
 			case "edge_ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter)value);
+				break;
 			case "elision":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter)value);
+				break;
 			case "fingerprint":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter)value);
+				break;
 			case "hunspell":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter)value);
+				break;
 			case "hyphenation_decompounder":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter)value);
+				break;
 			case "icu_collation":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter)value);
+				break;
 			case "icu_folding":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter)value);
+				break;
 			case "icu_normalizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter)value);
+				break;
 			case "icu_transform":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter)value);
+				break;
 			case "keep_types":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter)value);
+				break;
 			case "keep":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter)value);
+				break;
 			case "keyword_marker":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter)value);
+				break;
 			case "kstem":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter)value);
+				break;
 			case "kuromoji_part_of_speech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter)value);
+				break;
 			case "kuromoji_readingform":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter)value);
+				break;
 			case "kuromoji_stemmer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter)value);
+				break;
 			case "length":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter)value);
+				break;
 			case "limit":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter)value);
+				break;
 			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter)value);
+				break;
 			case "multiplexer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter)value);
+				break;
 			case "ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter)value);
+				break;
 			case "nori_part_of_speech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter)value);
+				break;
 			case "pattern_capture":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter)value);
+				break;
 			case "pattern_replace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter)value);
+				break;
 			case "phonetic":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter)value);
+				break;
 			case "porter_stem":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter)value);
+				break;
 			case "predicate_token_filter":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter)value);
+				break;
 			case "remove_duplicates":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter)value);
+				break;
 			case "reverse":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter)value);
+				break;
 			case "shingle":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter)value);
+				break;
 			case "snowball":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter)value);
+				break;
 			case "stemmer_override":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter)value);
+				break;
 			case "stemmer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter)value);
+				break;
 			case "stop":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter)value);
+				break;
 			case "synonym_graph":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter)value);
+				break;
 			case "synonym":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter)value);
+				break;
 			case "trim":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter)value);
+				break;
 			case "truncate":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter)value);
+				break;
 			case "unique":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter)value);
+				break;
 			case "uppercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter)value);
+				break;
 			case "word_delimiter_graph":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter)value);
+				break;
 			case "word_delimiter":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter)value);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(ITokenFilter)}'.");
 		}
 	}
 }

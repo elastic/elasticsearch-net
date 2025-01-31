@@ -62,6 +62,11 @@ public sealed partial class PendingTasksRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PendingTasksRequest : PlainRequest<PendingTasksRequestParameters>
 {
+	[JsonConstructor]
+	internal PendingTasksRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPendingTasks;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

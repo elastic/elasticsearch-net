@@ -39,41 +39,49 @@ public enum DelimitedPayloadEncoding
 	Float
 }
 
-internal sealed class DelimitedPayloadEncodingConverter : JsonConverter<DelimitedPayloadEncoding>
+internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Json.Serialization.JsonConverter<DelimitedPayloadEncoding>
 {
-	public override DelimitedPayloadEncoding Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentity = System.Text.Json.JsonEncodedText.Encode("identity");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+
+	public override DelimitedPayloadEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberInteger))
 		{
-			case "int":
-				return DelimitedPayloadEncoding.Integer;
-			case "identity":
-				return DelimitedPayloadEncoding.Identity;
-			case "float":
-				return DelimitedPayloadEncoding.Float;
+			return DelimitedPayloadEncoding.Integer;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIdentity))
+		{
+			return DelimitedPayloadEncoding.Identity;
+		}
+
+		if (reader.ValueTextEquals(MemberFloat))
+		{
+			return DelimitedPayloadEncoding.Float;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(DelimitedPayloadEncoding)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, DelimitedPayloadEncoding value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DelimitedPayloadEncoding value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case DelimitedPayloadEncoding.Integer:
-				writer.WriteStringValue("int");
-				return;
+				writer.WriteStringValue(MemberInteger);
+				break;
 			case DelimitedPayloadEncoding.Identity:
-				writer.WriteStringValue("identity");
-				return;
+				writer.WriteStringValue(MemberIdentity);
+				break;
 			case DelimitedPayloadEncoding.Float:
-				writer.WriteStringValue("float");
-				return;
+				writer.WriteStringValue(MemberFloat);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(DelimitedPayloadEncoding)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -86,36 +94,40 @@ public enum EdgeNGramSide
 	Back
 }
 
-internal sealed class EdgeNGramSideConverter : JsonConverter<EdgeNGramSide>
+internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serialization.JsonConverter<EdgeNGramSide>
 {
-	public override EdgeNGramSide Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front");
+	private static readonly System.Text.Json.JsonEncodedText MemberBack = System.Text.Json.JsonEncodedText.Encode("back");
+
+	public override EdgeNGramSide Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberFront))
 		{
-			case "front":
-				return EdgeNGramSide.Front;
-			case "back":
-				return EdgeNGramSide.Back;
+			return EdgeNGramSide.Front;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberBack))
+		{
+			return EdgeNGramSide.Back;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(EdgeNGramSide)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EdgeNGramSide value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EdgeNGramSide value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case EdgeNGramSide.Front:
-				writer.WriteStringValue("front");
-				return;
+				writer.WriteStringValue(MemberFront);
+				break;
 			case EdgeNGramSide.Back:
-				writer.WriteStringValue("back");
-				return;
+				writer.WriteStringValue(MemberBack);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EdgeNGramSide)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -128,36 +140,40 @@ public enum IcuCollationAlternate
 	NonIgnorable
 }
 
-internal sealed class IcuCollationAlternateConverter : JsonConverter<IcuCollationAlternate>
+internal sealed partial class IcuCollationAlternateConverter : System.Text.Json.Serialization.JsonConverter<IcuCollationAlternate>
 {
-	public override IcuCollationAlternate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted");
+	private static readonly System.Text.Json.JsonEncodedText MemberNonIgnorable = System.Text.Json.JsonEncodedText.Encode("non-ignorable");
+
+	public override IcuCollationAlternate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberShifted))
 		{
-			case "shifted":
-				return IcuCollationAlternate.Shifted;
-			case "non-ignorable":
-				return IcuCollationAlternate.NonIgnorable;
+			return IcuCollationAlternate.Shifted;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNonIgnorable))
+		{
+			return IcuCollationAlternate.NonIgnorable;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationAlternate)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationAlternate value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationAlternate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuCollationAlternate.Shifted:
-				writer.WriteStringValue("shifted");
-				return;
+				writer.WriteStringValue(MemberShifted);
+				break;
 			case IcuCollationAlternate.NonIgnorable:
-				writer.WriteStringValue("non-ignorable");
-				return;
+				writer.WriteStringValue(MemberNonIgnorable);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuCollationAlternate)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -170,36 +186,40 @@ public enum IcuCollationCaseFirst
 	Lower
 }
 
-internal sealed class IcuCollationCaseFirstConverter : JsonConverter<IcuCollationCaseFirst>
+internal sealed partial class IcuCollationCaseFirstConverter : System.Text.Json.Serialization.JsonConverter<IcuCollationCaseFirst>
 {
-	public override IcuCollationCaseFirst Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberUpper = System.Text.Json.JsonEncodedText.Encode("upper");
+	private static readonly System.Text.Json.JsonEncodedText MemberLower = System.Text.Json.JsonEncodedText.Encode("lower");
+
+	public override IcuCollationCaseFirst Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberUpper))
 		{
-			case "upper":
-				return IcuCollationCaseFirst.Upper;
-			case "lower":
-				return IcuCollationCaseFirst.Lower;
+			return IcuCollationCaseFirst.Upper;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberLower))
+		{
+			return IcuCollationCaseFirst.Lower;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationCaseFirst)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationCaseFirst value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationCaseFirst value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuCollationCaseFirst.Upper:
-				writer.WriteStringValue("upper");
-				return;
+				writer.WriteStringValue(MemberUpper);
+				break;
 			case IcuCollationCaseFirst.Lower:
-				writer.WriteStringValue("lower");
-				return;
+				writer.WriteStringValue(MemberLower);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuCollationCaseFirst)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -212,36 +232,40 @@ public enum IcuCollationDecomposition
 	Identical
 }
 
-internal sealed class IcuCollationDecompositionConverter : JsonConverter<IcuCollationDecomposition>
+internal sealed partial class IcuCollationDecompositionConverter : System.Text.Json.Serialization.JsonConverter<IcuCollationDecomposition>
 {
-	public override IcuCollationDecomposition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
+
+	public override IcuCollationDecomposition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNo))
 		{
-			case "no":
-				return IcuCollationDecomposition.No;
-			case "identical":
-				return IcuCollationDecomposition.Identical;
+			return IcuCollationDecomposition.No;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIdentical))
+		{
+			return IcuCollationDecomposition.Identical;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationDecomposition)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationDecomposition value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationDecomposition value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuCollationDecomposition.No:
-				writer.WriteStringValue("no");
-				return;
+				writer.WriteStringValue(MemberNo);
+				break;
 			case IcuCollationDecomposition.Identical:
-				writer.WriteStringValue("identical");
-				return;
+				writer.WriteStringValue(MemberIdentical);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuCollationDecomposition)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -260,51 +284,67 @@ public enum IcuCollationStrength
 	Identical
 }
 
-internal sealed class IcuCollationStrengthConverter : JsonConverter<IcuCollationStrength>
+internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.Serialization.JsonConverter<IcuCollationStrength>
 {
-	public override IcuCollationStrength Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTertiary = System.Text.Json.JsonEncodedText.Encode("tertiary");
+	private static readonly System.Text.Json.JsonEncodedText MemberSecondary = System.Text.Json.JsonEncodedText.Encode("secondary");
+	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
+
+	public override IcuCollationStrength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTertiary))
 		{
-			case "tertiary":
-				return IcuCollationStrength.Tertiary;
-			case "secondary":
-				return IcuCollationStrength.Secondary;
-			case "quaternary":
-				return IcuCollationStrength.Quaternary;
-			case "primary":
-				return IcuCollationStrength.Primary;
-			case "identical":
-				return IcuCollationStrength.Identical;
+			return IcuCollationStrength.Tertiary;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSecondary))
+		{
+			return IcuCollationStrength.Secondary;
+		}
+
+		if (reader.ValueTextEquals(MemberQuaternary))
+		{
+			return IcuCollationStrength.Quaternary;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimary))
+		{
+			return IcuCollationStrength.Primary;
+		}
+
+		if (reader.ValueTextEquals(MemberIdentical))
+		{
+			return IcuCollationStrength.Identical;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationStrength)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuCollationStrength value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationStrength value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuCollationStrength.Tertiary:
-				writer.WriteStringValue("tertiary");
-				return;
+				writer.WriteStringValue(MemberTertiary);
+				break;
 			case IcuCollationStrength.Secondary:
-				writer.WriteStringValue("secondary");
-				return;
+				writer.WriteStringValue(MemberSecondary);
+				break;
 			case IcuCollationStrength.Quaternary:
-				writer.WriteStringValue("quaternary");
-				return;
+				writer.WriteStringValue(MemberQuaternary);
+				break;
 			case IcuCollationStrength.Primary:
-				writer.WriteStringValue("primary");
-				return;
+				writer.WriteStringValue(MemberPrimary);
+				break;
 			case IcuCollationStrength.Identical:
-				writer.WriteStringValue("identical");
-				return;
+				writer.WriteStringValue(MemberIdentical);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuCollationStrength)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -317,36 +357,40 @@ public enum IcuNormalizationMode
 	Compose
 }
 
-internal sealed class IcuNormalizationModeConverter : JsonConverter<IcuNormalizationMode>
+internal sealed partial class IcuNormalizationModeConverter : System.Text.Json.Serialization.JsonConverter<IcuNormalizationMode>
 {
-	public override IcuNormalizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompose = System.Text.Json.JsonEncodedText.Encode("compose");
+
+	public override IcuNormalizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberDecompose))
 		{
-			case "decompose":
-				return IcuNormalizationMode.Decompose;
-			case "compose":
-				return IcuNormalizationMode.Compose;
+			return IcuNormalizationMode.Decompose;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberCompose))
+		{
+			return IcuNormalizationMode.Compose;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuNormalizationMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuNormalizationMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuNormalizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuNormalizationMode.Decompose:
-				writer.WriteStringValue("decompose");
-				return;
+				writer.WriteStringValue(MemberDecompose);
+				break;
 			case IcuNormalizationMode.Compose:
-				writer.WriteStringValue("compose");
-				return;
+				writer.WriteStringValue(MemberCompose);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuNormalizationMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -361,41 +405,49 @@ public enum IcuNormalizationType
 	Nfc
 }
 
-internal sealed class IcuNormalizationTypeConverter : JsonConverter<IcuNormalizationType>
+internal sealed partial class IcuNormalizationTypeConverter : System.Text.Json.Serialization.JsonConverter<IcuNormalizationType>
 {
-	public override IcuNormalizationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkcCf = System.Text.Json.JsonEncodedText.Encode("nfkc_cf");
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkc = System.Text.Json.JsonEncodedText.Encode("nfkc");
+	private static readonly System.Text.Json.JsonEncodedText MemberNfc = System.Text.Json.JsonEncodedText.Encode("nfc");
+
+	public override IcuNormalizationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNfkcCf))
 		{
-			case "nfkc_cf":
-				return IcuNormalizationType.NfkcCf;
-			case "nfkc":
-				return IcuNormalizationType.Nfkc;
-			case "nfc":
-				return IcuNormalizationType.Nfc;
+			return IcuNormalizationType.NfkcCf;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNfkc))
+		{
+			return IcuNormalizationType.Nfkc;
+		}
+
+		if (reader.ValueTextEquals(MemberNfc))
+		{
+			return IcuNormalizationType.Nfc;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuNormalizationType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuNormalizationType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuNormalizationType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuNormalizationType.NfkcCf:
-				writer.WriteStringValue("nfkc_cf");
-				return;
+				writer.WriteStringValue(MemberNfkcCf);
+				break;
 			case IcuNormalizationType.Nfkc:
-				writer.WriteStringValue("nfkc");
-				return;
+				writer.WriteStringValue(MemberNfkc);
+				break;
 			case IcuNormalizationType.Nfc:
-				writer.WriteStringValue("nfc");
-				return;
+				writer.WriteStringValue(MemberNfc);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuNormalizationType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -408,36 +460,40 @@ public enum IcuTransformDirection
 	Forward
 }
 
-internal sealed class IcuTransformDirectionConverter : JsonConverter<IcuTransformDirection>
+internal sealed partial class IcuTransformDirectionConverter : System.Text.Json.Serialization.JsonConverter<IcuTransformDirection>
 {
-	public override IcuTransformDirection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberReverse = System.Text.Json.JsonEncodedText.Encode("reverse");
+	private static readonly System.Text.Json.JsonEncodedText MemberForward = System.Text.Json.JsonEncodedText.Encode("forward");
+
+	public override IcuTransformDirection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberReverse))
 		{
-			case "reverse":
-				return IcuTransformDirection.Reverse;
-			case "forward":
-				return IcuTransformDirection.Forward;
+			return IcuTransformDirection.Reverse;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberForward))
+		{
+			return IcuTransformDirection.Forward;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuTransformDirection)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IcuTransformDirection value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuTransformDirection value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IcuTransformDirection.Reverse:
-				writer.WriteStringValue("reverse");
-				return;
+				writer.WriteStringValue(MemberReverse);
+				break;
 			case IcuTransformDirection.Forward:
-				writer.WriteStringValue("forward");
-				return;
+				writer.WriteStringValue(MemberForward);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IcuTransformDirection)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -450,36 +506,40 @@ public enum KeepTypesMode
 	Exclude
 }
 
-internal sealed class KeepTypesModeConverter : JsonConverter<KeepTypesMode>
+internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serialization.JsonConverter<KeepTypesMode>
 {
-	public override KeepTypesMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+
+	public override KeepTypesMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberInclude))
 		{
-			case "include":
-				return KeepTypesMode.Include;
-			case "exclude":
-				return KeepTypesMode.Exclude;
+			return KeepTypesMode.Include;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberExclude))
+		{
+			return KeepTypesMode.Exclude;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(KeepTypesMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, KeepTypesMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, KeepTypesMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case KeepTypesMode.Include:
-				writer.WriteStringValue("include");
-				return;
+				writer.WriteStringValue(MemberInclude);
+				break;
 			case KeepTypesMode.Exclude:
-				writer.WriteStringValue("exclude");
-				return;
+				writer.WriteStringValue(MemberExclude);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(KeepTypesMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -494,41 +554,49 @@ public enum KuromojiTokenizationMode
 	Extended
 }
 
-internal sealed class KuromojiTokenizationModeConverter : JsonConverter<KuromojiTokenizationMode>
+internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Json.Serialization.JsonConverter<KuromojiTokenizationMode>
 {
-	public override KuromojiTokenizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
+	private static readonly System.Text.Json.JsonEncodedText MemberExtended = System.Text.Json.JsonEncodedText.Encode("extended");
+
+	public override KuromojiTokenizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSearch))
 		{
-			case "search":
-				return KuromojiTokenizationMode.Search;
-			case "normal":
-				return KuromojiTokenizationMode.Normal;
-			case "extended":
-				return KuromojiTokenizationMode.Extended;
+			return KuromojiTokenizationMode.Search;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNormal))
+		{
+			return KuromojiTokenizationMode.Normal;
+		}
+
+		if (reader.ValueTextEquals(MemberExtended))
+		{
+			return KuromojiTokenizationMode.Extended;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(KuromojiTokenizationMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, KuromojiTokenizationMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, KuromojiTokenizationMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case KuromojiTokenizationMode.Search:
-				writer.WriteStringValue("search");
-				return;
+				writer.WriteStringValue(MemberSearch);
+				break;
 			case KuromojiTokenizationMode.Normal:
-				writer.WriteStringValue("normal");
-				return;
+				writer.WriteStringValue(MemberNormal);
+				break;
 			case KuromojiTokenizationMode.Extended:
-				writer.WriteStringValue("extended");
-				return;
+				writer.WriteStringValue(MemberExtended);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(KuromojiTokenizationMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -605,196 +673,328 @@ public enum Language
 	Arabic
 }
 
-internal sealed class LanguageConverter : JsonConverter<Language>
+internal sealed partial class LanguageConverter : System.Text.Json.Serialization.JsonConverter<Language>
 {
-	public override Language Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish");
+	private static readonly System.Text.Json.JsonEncodedText MemberThai = System.Text.Json.JsonEncodedText.Encode("Thai");
+	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish");
+	private static readonly System.Text.Json.JsonEncodedText MemberSorani = System.Text.Json.JsonEncodedText.Encode("Sorani");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian");
+	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese");
+	private static readonly System.Text.Json.JsonEncodedText MemberPersian = System.Text.Json.JsonEncodedText.Encode("Persian");
+	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian");
+	private static readonly System.Text.Json.JsonEncodedText MemberLatvian = System.Text.Json.JsonEncodedText.Encode("Latvian");
+	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian");
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("Irish");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndonesian = System.Text.Json.JsonEncodedText.Encode("Indonesian");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberHindi = System.Text.Json.JsonEncodedText.Encode("Hindi");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreek = System.Text.Json.JsonEncodedText.Encode("Greek");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German");
+	private static readonly System.Text.Json.JsonEncodedText MemberGalician = System.Text.Json.JsonEncodedText.Encode("Galician");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish");
+	private static readonly System.Text.Json.JsonEncodedText MemberEstonian = System.Text.Json.JsonEncodedText.Encode("Estonian");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English");
+	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish");
+	private static readonly System.Text.Json.JsonEncodedText MemberCzech = System.Text.Json.JsonEncodedText.Encode("Czech");
+	private static readonly System.Text.Json.JsonEncodedText MemberCjk = System.Text.Json.JsonEncodedText.Encode("Cjk");
+	private static readonly System.Text.Json.JsonEncodedText MemberChinese = System.Text.Json.JsonEncodedText.Encode("Chinese");
+	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan");
+	private static readonly System.Text.Json.JsonEncodedText MemberBulgarian = System.Text.Json.JsonEncodedText.Encode("Bulgarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberBrazilian = System.Text.Json.JsonEncodedText.Encode("Brazilian");
+	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque");
+	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian");
+	private static readonly System.Text.Json.JsonEncodedText MemberArabic = System.Text.Json.JsonEncodedText.Encode("Arabic");
+
+	public override Language Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTurkish))
 		{
-			case "Turkish":
-				return Language.Turkish;
-			case "Thai":
-				return Language.Thai;
-			case "Swedish":
-				return Language.Swedish;
-			case "Spanish":
-				return Language.Spanish;
-			case "Sorani":
-				return Language.Sorani;
-			case "Russian":
-				return Language.Russian;
-			case "Romanian":
-				return Language.Romanian;
-			case "Portuguese":
-				return Language.Portuguese;
-			case "Persian":
-				return Language.Persian;
-			case "Norwegian":
-				return Language.Norwegian;
-			case "Latvian":
-				return Language.Latvian;
-			case "Italian":
-				return Language.Italian;
-			case "Irish":
-				return Language.Irish;
-			case "Indonesian":
-				return Language.Indonesian;
-			case "Hungarian":
-				return Language.Hungarian;
-			case "Hindi":
-				return Language.Hindi;
-			case "Greek":
-				return Language.Greek;
-			case "German":
-				return Language.German;
-			case "Galician":
-				return Language.Galician;
-			case "French":
-				return Language.French;
-			case "Finnish":
-				return Language.Finnish;
-			case "Estonian":
-				return Language.Estonian;
-			case "English":
-				return Language.English;
-			case "Dutch":
-				return Language.Dutch;
-			case "Danish":
-				return Language.Danish;
-			case "Czech":
-				return Language.Czech;
-			case "Cjk":
-				return Language.Cjk;
-			case "Chinese":
-				return Language.Chinese;
-			case "Catalan":
-				return Language.Catalan;
-			case "Bulgarian":
-				return Language.Bulgarian;
-			case "Brazilian":
-				return Language.Brazilian;
-			case "Basque":
-				return Language.Basque;
-			case "Armenian":
-				return Language.Armenian;
-			case "Arabic":
-				return Language.Arabic;
+			return Language.Turkish;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberThai))
+		{
+			return Language.Thai;
+		}
+
+		if (reader.ValueTextEquals(MemberSwedish))
+		{
+			return Language.Swedish;
+		}
+
+		if (reader.ValueTextEquals(MemberSpanish))
+		{
+			return Language.Spanish;
+		}
+
+		if (reader.ValueTextEquals(MemberSorani))
+		{
+			return Language.Sorani;
+		}
+
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return Language.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return Language.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberPortuguese))
+		{
+			return Language.Portuguese;
+		}
+
+		if (reader.ValueTextEquals(MemberPersian))
+		{
+			return Language.Persian;
+		}
+
+		if (reader.ValueTextEquals(MemberNorwegian))
+		{
+			return Language.Norwegian;
+		}
+
+		if (reader.ValueTextEquals(MemberLatvian))
+		{
+			return Language.Latvian;
+		}
+
+		if (reader.ValueTextEquals(MemberItalian))
+		{
+			return Language.Italian;
+		}
+
+		if (reader.ValueTextEquals(MemberIrish))
+		{
+			return Language.Irish;
+		}
+
+		if (reader.ValueTextEquals(MemberIndonesian))
+		{
+			return Language.Indonesian;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return Language.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberHindi))
+		{
+			return Language.Hindi;
+		}
+
+		if (reader.ValueTextEquals(MemberGreek))
+		{
+			return Language.Greek;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return Language.German;
+		}
+
+		if (reader.ValueTextEquals(MemberGalician))
+		{
+			return Language.Galician;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return Language.French;
+		}
+
+		if (reader.ValueTextEquals(MemberFinnish))
+		{
+			return Language.Finnish;
+		}
+
+		if (reader.ValueTextEquals(MemberEstonian))
+		{
+			return Language.Estonian;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return Language.English;
+		}
+
+		if (reader.ValueTextEquals(MemberDutch))
+		{
+			return Language.Dutch;
+		}
+
+		if (reader.ValueTextEquals(MemberDanish))
+		{
+			return Language.Danish;
+		}
+
+		if (reader.ValueTextEquals(MemberCzech))
+		{
+			return Language.Czech;
+		}
+
+		if (reader.ValueTextEquals(MemberCjk))
+		{
+			return Language.Cjk;
+		}
+
+		if (reader.ValueTextEquals(MemberChinese))
+		{
+			return Language.Chinese;
+		}
+
+		if (reader.ValueTextEquals(MemberCatalan))
+		{
+			return Language.Catalan;
+		}
+
+		if (reader.ValueTextEquals(MemberBulgarian))
+		{
+			return Language.Bulgarian;
+		}
+
+		if (reader.ValueTextEquals(MemberBrazilian))
+		{
+			return Language.Brazilian;
+		}
+
+		if (reader.ValueTextEquals(MemberBasque))
+		{
+			return Language.Basque;
+		}
+
+		if (reader.ValueTextEquals(MemberArmenian))
+		{
+			return Language.Armenian;
+		}
+
+		if (reader.ValueTextEquals(MemberArabic))
+		{
+			return Language.Arabic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(Language)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, Language value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Language value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case Language.Turkish:
-				writer.WriteStringValue("Turkish");
-				return;
+				writer.WriteStringValue(MemberTurkish);
+				break;
 			case Language.Thai:
-				writer.WriteStringValue("Thai");
-				return;
+				writer.WriteStringValue(MemberThai);
+				break;
 			case Language.Swedish:
-				writer.WriteStringValue("Swedish");
-				return;
+				writer.WriteStringValue(MemberSwedish);
+				break;
 			case Language.Spanish:
-				writer.WriteStringValue("Spanish");
-				return;
+				writer.WriteStringValue(MemberSpanish);
+				break;
 			case Language.Sorani:
-				writer.WriteStringValue("Sorani");
-				return;
+				writer.WriteStringValue(MemberSorani);
+				break;
 			case Language.Russian:
-				writer.WriteStringValue("Russian");
-				return;
+				writer.WriteStringValue(MemberRussian);
+				break;
 			case Language.Romanian:
-				writer.WriteStringValue("Romanian");
-				return;
+				writer.WriteStringValue(MemberRomanian);
+				break;
 			case Language.Portuguese:
-				writer.WriteStringValue("Portuguese");
-				return;
+				writer.WriteStringValue(MemberPortuguese);
+				break;
 			case Language.Persian:
-				writer.WriteStringValue("Persian");
-				return;
+				writer.WriteStringValue(MemberPersian);
+				break;
 			case Language.Norwegian:
-				writer.WriteStringValue("Norwegian");
-				return;
+				writer.WriteStringValue(MemberNorwegian);
+				break;
 			case Language.Latvian:
-				writer.WriteStringValue("Latvian");
-				return;
+				writer.WriteStringValue(MemberLatvian);
+				break;
 			case Language.Italian:
-				writer.WriteStringValue("Italian");
-				return;
+				writer.WriteStringValue(MemberItalian);
+				break;
 			case Language.Irish:
-				writer.WriteStringValue("Irish");
-				return;
+				writer.WriteStringValue(MemberIrish);
+				break;
 			case Language.Indonesian:
-				writer.WriteStringValue("Indonesian");
-				return;
+				writer.WriteStringValue(MemberIndonesian);
+				break;
 			case Language.Hungarian:
-				writer.WriteStringValue("Hungarian");
-				return;
+				writer.WriteStringValue(MemberHungarian);
+				break;
 			case Language.Hindi:
-				writer.WriteStringValue("Hindi");
-				return;
+				writer.WriteStringValue(MemberHindi);
+				break;
 			case Language.Greek:
-				writer.WriteStringValue("Greek");
-				return;
+				writer.WriteStringValue(MemberGreek);
+				break;
 			case Language.German:
-				writer.WriteStringValue("German");
-				return;
+				writer.WriteStringValue(MemberGerman);
+				break;
 			case Language.Galician:
-				writer.WriteStringValue("Galician");
-				return;
+				writer.WriteStringValue(MemberGalician);
+				break;
 			case Language.French:
-				writer.WriteStringValue("French");
-				return;
+				writer.WriteStringValue(MemberFrench);
+				break;
 			case Language.Finnish:
-				writer.WriteStringValue("Finnish");
-				return;
+				writer.WriteStringValue(MemberFinnish);
+				break;
 			case Language.Estonian:
-				writer.WriteStringValue("Estonian");
-				return;
+				writer.WriteStringValue(MemberEstonian);
+				break;
 			case Language.English:
-				writer.WriteStringValue("English");
-				return;
+				writer.WriteStringValue(MemberEnglish);
+				break;
 			case Language.Dutch:
-				writer.WriteStringValue("Dutch");
-				return;
+				writer.WriteStringValue(MemberDutch);
+				break;
 			case Language.Danish:
-				writer.WriteStringValue("Danish");
-				return;
+				writer.WriteStringValue(MemberDanish);
+				break;
 			case Language.Czech:
-				writer.WriteStringValue("Czech");
-				return;
+				writer.WriteStringValue(MemberCzech);
+				break;
 			case Language.Cjk:
-				writer.WriteStringValue("Cjk");
-				return;
+				writer.WriteStringValue(MemberCjk);
+				break;
 			case Language.Chinese:
-				writer.WriteStringValue("Chinese");
-				return;
+				writer.WriteStringValue(MemberChinese);
+				break;
 			case Language.Catalan:
-				writer.WriteStringValue("Catalan");
-				return;
+				writer.WriteStringValue(MemberCatalan);
+				break;
 			case Language.Bulgarian:
-				writer.WriteStringValue("Bulgarian");
-				return;
+				writer.WriteStringValue(MemberBulgarian);
+				break;
 			case Language.Brazilian:
-				writer.WriteStringValue("Brazilian");
-				return;
+				writer.WriteStringValue(MemberBrazilian);
+				break;
 			case Language.Basque:
-				writer.WriteStringValue("Basque");
-				return;
+				writer.WriteStringValue(MemberBasque);
+				break;
 			case Language.Armenian:
-				writer.WriteStringValue("Armenian");
-				return;
+				writer.WriteStringValue(MemberArmenian);
+				break;
 			case Language.Arabic:
-				writer.WriteStringValue("Arabic");
-				return;
+				writer.WriteStringValue(MemberArabic);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Language)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -809,41 +1009,49 @@ public enum NoriDecompoundMode
 	Discard
 }
 
-internal sealed class NoriDecompoundModeConverter : JsonConverter<NoriDecompoundMode>
+internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Serialization.JsonConverter<NoriDecompoundMode>
 {
-	public override NoriDecompoundMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberMixed = System.Text.Json.JsonEncodedText.Encode("mixed");
+	private static readonly System.Text.Json.JsonEncodedText MemberDiscard = System.Text.Json.JsonEncodedText.Encode("discard");
+
+	public override NoriDecompoundMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNone))
 		{
-			case "none":
-				return NoriDecompoundMode.None;
-			case "mixed":
-				return NoriDecompoundMode.Mixed;
-			case "discard":
-				return NoriDecompoundMode.Discard;
+			return NoriDecompoundMode.None;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMixed))
+		{
+			return NoriDecompoundMode.Mixed;
+		}
+
+		if (reader.ValueTextEquals(MemberDiscard))
+		{
+			return NoriDecompoundMode.Discard;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(NoriDecompoundMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, NoriDecompoundMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, NoriDecompoundMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case NoriDecompoundMode.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case NoriDecompoundMode.Mixed:
-				writer.WriteStringValue("mixed");
-				return;
+				writer.WriteStringValue(MemberMixed);
+				break;
 			case NoriDecompoundMode.Discard:
-				writer.WriteStringValue("discard");
-				return;
+				writer.WriteStringValue(MemberDiscard);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(NoriDecompoundMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -876,86 +1084,130 @@ public enum PhoneticEncoder
 	BeiderMorse
 }
 
-internal sealed class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
+internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serialization.JsonConverter<PhoneticEncoder>
 {
-	public override PhoneticEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis");
+	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberDaitchMokotoff = System.Text.Json.JsonEncodedText.Encode("daitch_mokotoff");
+	private static readonly System.Text.Json.JsonEncodedText MemberCologne = System.Text.Json.JsonEncodedText.Encode("cologne");
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone2 = System.Text.Json.JsonEncodedText.Encode("caverphone2");
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone1 = System.Text.Json.JsonEncodedText.Encode("caverphone1");
+	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse");
+
+	public override PhoneticEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSoundex))
 		{
-			case "soundex":
-				return PhoneticEncoder.Soundex;
-			case "refined_soundex":
-				return PhoneticEncoder.RefinedSoundex;
-			case "nysiis":
-				return PhoneticEncoder.Nysiis;
-			case "metaphone":
-				return PhoneticEncoder.Metaphone;
-			case "koelnerphonetik":
-				return PhoneticEncoder.Koelnerphonetik;
-			case "haasephonetik":
-				return PhoneticEncoder.Haasephonetik;
-			case "double_metaphone":
-				return PhoneticEncoder.DoubleMetaphone;
-			case "daitch_mokotoff":
-				return PhoneticEncoder.DaitchMokotoff;
-			case "cologne":
-				return PhoneticEncoder.Cologne;
-			case "caverphone2":
-				return PhoneticEncoder.Caverphone2;
-			case "caverphone1":
-				return PhoneticEncoder.Caverphone1;
-			case "beider_morse":
-				return PhoneticEncoder.BeiderMorse;
+			return PhoneticEncoder.Soundex;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberRefinedSoundex))
+		{
+			return PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (reader.ValueTextEquals(MemberNysiis))
+		{
+			return PhoneticEncoder.Nysiis;
+		}
+
+		if (reader.ValueTextEquals(MemberMetaphone))
+		{
+			return PhoneticEncoder.Metaphone;
+		}
+
+		if (reader.ValueTextEquals(MemberKoelnerphonetik))
+		{
+			return PhoneticEncoder.Koelnerphonetik;
+		}
+
+		if (reader.ValueTextEquals(MemberHaasephonetik))
+		{
+			return PhoneticEncoder.Haasephonetik;
+		}
+
+		if (reader.ValueTextEquals(MemberDoubleMetaphone))
+		{
+			return PhoneticEncoder.DoubleMetaphone;
+		}
+
+		if (reader.ValueTextEquals(MemberDaitchMokotoff))
+		{
+			return PhoneticEncoder.DaitchMokotoff;
+		}
+
+		if (reader.ValueTextEquals(MemberCologne))
+		{
+			return PhoneticEncoder.Cologne;
+		}
+
+		if (reader.ValueTextEquals(MemberCaverphone2))
+		{
+			return PhoneticEncoder.Caverphone2;
+		}
+
+		if (reader.ValueTextEquals(MemberCaverphone1))
+		{
+			return PhoneticEncoder.Caverphone1;
+		}
+
+		if (reader.ValueTextEquals(MemberBeiderMorse))
+		{
+			return PhoneticEncoder.BeiderMorse;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticEncoder)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, PhoneticEncoder value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticEncoder value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case PhoneticEncoder.Soundex:
-				writer.WriteStringValue("soundex");
-				return;
+				writer.WriteStringValue(MemberSoundex);
+				break;
 			case PhoneticEncoder.RefinedSoundex:
-				writer.WriteStringValue("refined_soundex");
-				return;
+				writer.WriteStringValue(MemberRefinedSoundex);
+				break;
 			case PhoneticEncoder.Nysiis:
-				writer.WriteStringValue("nysiis");
-				return;
+				writer.WriteStringValue(MemberNysiis);
+				break;
 			case PhoneticEncoder.Metaphone:
-				writer.WriteStringValue("metaphone");
-				return;
+				writer.WriteStringValue(MemberMetaphone);
+				break;
 			case PhoneticEncoder.Koelnerphonetik:
-				writer.WriteStringValue("koelnerphonetik");
-				return;
+				writer.WriteStringValue(MemberKoelnerphonetik);
+				break;
 			case PhoneticEncoder.Haasephonetik:
-				writer.WriteStringValue("haasephonetik");
-				return;
+				writer.WriteStringValue(MemberHaasephonetik);
+				break;
 			case PhoneticEncoder.DoubleMetaphone:
-				writer.WriteStringValue("double_metaphone");
-				return;
+				writer.WriteStringValue(MemberDoubleMetaphone);
+				break;
 			case PhoneticEncoder.DaitchMokotoff:
-				writer.WriteStringValue("daitch_mokotoff");
-				return;
+				writer.WriteStringValue(MemberDaitchMokotoff);
+				break;
 			case PhoneticEncoder.Cologne:
-				writer.WriteStringValue("cologne");
-				return;
+				writer.WriteStringValue(MemberCologne);
+				break;
 			case PhoneticEncoder.Caverphone2:
-				writer.WriteStringValue("caverphone2");
-				return;
+				writer.WriteStringValue(MemberCaverphone2);
+				break;
 			case PhoneticEncoder.Caverphone1:
-				writer.WriteStringValue("caverphone1");
-				return;
+				writer.WriteStringValue(MemberCaverphone1);
+				break;
 			case PhoneticEncoder.BeiderMorse:
-				writer.WriteStringValue("beider_morse");
-				return;
+				writer.WriteStringValue(MemberBeiderMorse);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PhoneticEncoder)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -988,86 +1240,130 @@ public enum PhoneticLanguage
 	Any
 }
 
-internal sealed class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage>
+internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Serialization.JsonConverter<PhoneticLanguage>
 {
-	public override PhoneticLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("spanish");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("romanian");
+	private static readonly System.Text.Json.JsonEncodedText MemberPolish = System.Text.Json.JsonEncodedText.Encode("polish");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberHebrew = System.Text.Json.JsonEncodedText.Encode("hebrew");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("german");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("french");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("english");
+	private static readonly System.Text.Json.JsonEncodedText MemberCyrillic = System.Text.Json.JsonEncodedText.Encode("cyrillic");
+	private static readonly System.Text.Json.JsonEncodedText MemberCommon = System.Text.Json.JsonEncodedText.Encode("common");
+	private static readonly System.Text.Json.JsonEncodedText MemberAny = System.Text.Json.JsonEncodedText.Encode("any");
+
+	public override PhoneticLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSpanish))
 		{
-			case "spanish":
-				return PhoneticLanguage.Spanish;
-			case "russian":
-				return PhoneticLanguage.Russian;
-			case "romanian":
-				return PhoneticLanguage.Romanian;
-			case "polish":
-				return PhoneticLanguage.Polish;
-			case "hungarian":
-				return PhoneticLanguage.Hungarian;
-			case "hebrew":
-				return PhoneticLanguage.Hebrew;
-			case "german":
-				return PhoneticLanguage.German;
-			case "french":
-				return PhoneticLanguage.French;
-			case "english":
-				return PhoneticLanguage.English;
-			case "cyrillic":
-				return PhoneticLanguage.Cyrillic;
-			case "common":
-				return PhoneticLanguage.Common;
-			case "any":
-				return PhoneticLanguage.Any;
+			return PhoneticLanguage.Spanish;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return PhoneticLanguage.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return PhoneticLanguage.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberPolish))
+		{
+			return PhoneticLanguage.Polish;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return PhoneticLanguage.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberHebrew))
+		{
+			return PhoneticLanguage.Hebrew;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return PhoneticLanguage.German;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return PhoneticLanguage.French;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return PhoneticLanguage.English;
+		}
+
+		if (reader.ValueTextEquals(MemberCyrillic))
+		{
+			return PhoneticLanguage.Cyrillic;
+		}
+
+		if (reader.ValueTextEquals(MemberCommon))
+		{
+			return PhoneticLanguage.Common;
+		}
+
+		if (reader.ValueTextEquals(MemberAny))
+		{
+			return PhoneticLanguage.Any;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticLanguage)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, PhoneticLanguage value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticLanguage value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case PhoneticLanguage.Spanish:
-				writer.WriteStringValue("spanish");
-				return;
+				writer.WriteStringValue(MemberSpanish);
+				break;
 			case PhoneticLanguage.Russian:
-				writer.WriteStringValue("russian");
-				return;
+				writer.WriteStringValue(MemberRussian);
+				break;
 			case PhoneticLanguage.Romanian:
-				writer.WriteStringValue("romanian");
-				return;
+				writer.WriteStringValue(MemberRomanian);
+				break;
 			case PhoneticLanguage.Polish:
-				writer.WriteStringValue("polish");
-				return;
+				writer.WriteStringValue(MemberPolish);
+				break;
 			case PhoneticLanguage.Hungarian:
-				writer.WriteStringValue("hungarian");
-				return;
+				writer.WriteStringValue(MemberHungarian);
+				break;
 			case PhoneticLanguage.Hebrew:
-				writer.WriteStringValue("hebrew");
-				return;
+				writer.WriteStringValue(MemberHebrew);
+				break;
 			case PhoneticLanguage.German:
-				writer.WriteStringValue("german");
-				return;
+				writer.WriteStringValue(MemberGerman);
+				break;
 			case PhoneticLanguage.French:
-				writer.WriteStringValue("french");
-				return;
+				writer.WriteStringValue(MemberFrench);
+				break;
 			case PhoneticLanguage.English:
-				writer.WriteStringValue("english");
-				return;
+				writer.WriteStringValue(MemberEnglish);
+				break;
 			case PhoneticLanguage.Cyrillic:
-				writer.WriteStringValue("cyrillic");
-				return;
+				writer.WriteStringValue(MemberCyrillic);
+				break;
 			case PhoneticLanguage.Common:
-				writer.WriteStringValue("common");
-				return;
+				writer.WriteStringValue(MemberCommon);
+				break;
 			case PhoneticLanguage.Any:
-				writer.WriteStringValue("any");
-				return;
+				writer.WriteStringValue(MemberAny);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PhoneticLanguage)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1082,41 +1378,49 @@ public enum PhoneticNameType
 	Ashkenazi
 }
 
-internal sealed class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType>
+internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Serialization.JsonConverter<PhoneticNameType>
 {
-	public override PhoneticNameType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSephardic = System.Text.Json.JsonEncodedText.Encode("sephardic");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic");
+	private static readonly System.Text.Json.JsonEncodedText MemberAshkenazi = System.Text.Json.JsonEncodedText.Encode("ashkenazi");
+
+	public override PhoneticNameType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSephardic))
 		{
-			case "sephardic":
-				return PhoneticNameType.Sephardic;
-			case "generic":
-				return PhoneticNameType.Generic;
-			case "ashkenazi":
-				return PhoneticNameType.Ashkenazi;
+			return PhoneticNameType.Sephardic;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGeneric))
+		{
+			return PhoneticNameType.Generic;
+		}
+
+		if (reader.ValueTextEquals(MemberAshkenazi))
+		{
+			return PhoneticNameType.Ashkenazi;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticNameType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, PhoneticNameType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticNameType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case PhoneticNameType.Sephardic:
-				writer.WriteStringValue("sephardic");
-				return;
+				writer.WriteStringValue(MemberSephardic);
+				break;
 			case PhoneticNameType.Generic:
-				writer.WriteStringValue("generic");
-				return;
+				writer.WriteStringValue(MemberGeneric);
+				break;
 			case PhoneticNameType.Ashkenazi:
-				writer.WriteStringValue("ashkenazi");
-				return;
+				writer.WriteStringValue(MemberAshkenazi);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PhoneticNameType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1129,36 +1433,40 @@ public enum PhoneticRuleType
 	Approx
 }
 
-internal sealed class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType>
+internal sealed partial class PhoneticRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<PhoneticRuleType>
 {
-	public override PhoneticRuleType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
+	private static readonly System.Text.Json.JsonEncodedText MemberApprox = System.Text.Json.JsonEncodedText.Encode("approx");
+
+	public override PhoneticRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberExact))
 		{
-			case "exact":
-				return PhoneticRuleType.Exact;
-			case "approx":
-				return PhoneticRuleType.Approx;
+			return PhoneticRuleType.Exact;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberApprox))
+		{
+			return PhoneticRuleType.Approx;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticRuleType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, PhoneticRuleType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticRuleType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case PhoneticRuleType.Exact:
-				writer.WriteStringValue("exact");
-				return;
+				writer.WriteStringValue(MemberExact);
+				break;
 			case PhoneticRuleType.Approx:
-				writer.WriteStringValue("approx");
-				return;
+				writer.WriteStringValue(MemberApprox);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PhoneticRuleType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1211,136 +1519,220 @@ public enum SnowballLanguage
 	Armenian
 }
 
-internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage>
+internal sealed partial class SnowballLanguageConverter : System.Text.Json.Serialization.JsonConverter<SnowballLanguage>
 {
-	public override SnowballLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish");
+	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian");
+	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese");
+	private static readonly System.Text.Json.JsonEncodedText MemberPorter = System.Text.Json.JsonEncodedText.Encode("Porter");
+	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian");
+	private static readonly System.Text.Json.JsonEncodedText MemberLovins = System.Text.Json.JsonEncodedText.Encode("Lovins");
+	private static readonly System.Text.Json.JsonEncodedText MemberKp = System.Text.Json.JsonEncodedText.Encode("Kp");
+	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman2 = System.Text.Json.JsonEncodedText.Encode("German2");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English");
+	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish");
+	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan");
+	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque");
+	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian");
+
+	public override SnowballLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTurkish))
 		{
-			case "Turkish":
-				return SnowballLanguage.Turkish;
-			case "Swedish":
-				return SnowballLanguage.Swedish;
-			case "Spanish":
-				return SnowballLanguage.Spanish;
-			case "Russian":
-				return SnowballLanguage.Russian;
-			case "Romanian":
-				return SnowballLanguage.Romanian;
-			case "Portuguese":
-				return SnowballLanguage.Portuguese;
-			case "Porter":
-				return SnowballLanguage.Porter;
-			case "Norwegian":
-				return SnowballLanguage.Norwegian;
-			case "Lovins":
-				return SnowballLanguage.Lovins;
-			case "Kp":
-				return SnowballLanguage.Kp;
-			case "Italian":
-				return SnowballLanguage.Italian;
-			case "Hungarian":
-				return SnowballLanguage.Hungarian;
-			case "German2":
-				return SnowballLanguage.German2;
-			case "German":
-				return SnowballLanguage.German;
-			case "French":
-				return SnowballLanguage.French;
-			case "Finnish":
-				return SnowballLanguage.Finnish;
-			case "English":
-				return SnowballLanguage.English;
-			case "Dutch":
-				return SnowballLanguage.Dutch;
-			case "Danish":
-				return SnowballLanguage.Danish;
-			case "Catalan":
-				return SnowballLanguage.Catalan;
-			case "Basque":
-				return SnowballLanguage.Basque;
-			case "Armenian":
-				return SnowballLanguage.Armenian;
+			return SnowballLanguage.Turkish;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSwedish))
+		{
+			return SnowballLanguage.Swedish;
+		}
+
+		if (reader.ValueTextEquals(MemberSpanish))
+		{
+			return SnowballLanguage.Spanish;
+		}
+
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return SnowballLanguage.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return SnowballLanguage.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberPortuguese))
+		{
+			return SnowballLanguage.Portuguese;
+		}
+
+		if (reader.ValueTextEquals(MemberPorter))
+		{
+			return SnowballLanguage.Porter;
+		}
+
+		if (reader.ValueTextEquals(MemberNorwegian))
+		{
+			return SnowballLanguage.Norwegian;
+		}
+
+		if (reader.ValueTextEquals(MemberLovins))
+		{
+			return SnowballLanguage.Lovins;
+		}
+
+		if (reader.ValueTextEquals(MemberKp))
+		{
+			return SnowballLanguage.Kp;
+		}
+
+		if (reader.ValueTextEquals(MemberItalian))
+		{
+			return SnowballLanguage.Italian;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return SnowballLanguage.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman2))
+		{
+			return SnowballLanguage.German2;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return SnowballLanguage.German;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return SnowballLanguage.French;
+		}
+
+		if (reader.ValueTextEquals(MemberFinnish))
+		{
+			return SnowballLanguage.Finnish;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return SnowballLanguage.English;
+		}
+
+		if (reader.ValueTextEquals(MemberDutch))
+		{
+			return SnowballLanguage.Dutch;
+		}
+
+		if (reader.ValueTextEquals(MemberDanish))
+		{
+			return SnowballLanguage.Danish;
+		}
+
+		if (reader.ValueTextEquals(MemberCatalan))
+		{
+			return SnowballLanguage.Catalan;
+		}
+
+		if (reader.ValueTextEquals(MemberBasque))
+		{
+			return SnowballLanguage.Basque;
+		}
+
+		if (reader.ValueTextEquals(MemberArmenian))
+		{
+			return SnowballLanguage.Armenian;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SnowballLanguage)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, SnowballLanguage value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnowballLanguage value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case SnowballLanguage.Turkish:
-				writer.WriteStringValue("Turkish");
-				return;
+				writer.WriteStringValue(MemberTurkish);
+				break;
 			case SnowballLanguage.Swedish:
-				writer.WriteStringValue("Swedish");
-				return;
+				writer.WriteStringValue(MemberSwedish);
+				break;
 			case SnowballLanguage.Spanish:
-				writer.WriteStringValue("Spanish");
-				return;
+				writer.WriteStringValue(MemberSpanish);
+				break;
 			case SnowballLanguage.Russian:
-				writer.WriteStringValue("Russian");
-				return;
+				writer.WriteStringValue(MemberRussian);
+				break;
 			case SnowballLanguage.Romanian:
-				writer.WriteStringValue("Romanian");
-				return;
+				writer.WriteStringValue(MemberRomanian);
+				break;
 			case SnowballLanguage.Portuguese:
-				writer.WriteStringValue("Portuguese");
-				return;
+				writer.WriteStringValue(MemberPortuguese);
+				break;
 			case SnowballLanguage.Porter:
-				writer.WriteStringValue("Porter");
-				return;
+				writer.WriteStringValue(MemberPorter);
+				break;
 			case SnowballLanguage.Norwegian:
-				writer.WriteStringValue("Norwegian");
-				return;
+				writer.WriteStringValue(MemberNorwegian);
+				break;
 			case SnowballLanguage.Lovins:
-				writer.WriteStringValue("Lovins");
-				return;
+				writer.WriteStringValue(MemberLovins);
+				break;
 			case SnowballLanguage.Kp:
-				writer.WriteStringValue("Kp");
-				return;
+				writer.WriteStringValue(MemberKp);
+				break;
 			case SnowballLanguage.Italian:
-				writer.WriteStringValue("Italian");
-				return;
+				writer.WriteStringValue(MemberItalian);
+				break;
 			case SnowballLanguage.Hungarian:
-				writer.WriteStringValue("Hungarian");
-				return;
+				writer.WriteStringValue(MemberHungarian);
+				break;
 			case SnowballLanguage.German2:
-				writer.WriteStringValue("German2");
-				return;
+				writer.WriteStringValue(MemberGerman2);
+				break;
 			case SnowballLanguage.German:
-				writer.WriteStringValue("German");
-				return;
+				writer.WriteStringValue(MemberGerman);
+				break;
 			case SnowballLanguage.French:
-				writer.WriteStringValue("French");
-				return;
+				writer.WriteStringValue(MemberFrench);
+				break;
 			case SnowballLanguage.Finnish:
-				writer.WriteStringValue("Finnish");
-				return;
+				writer.WriteStringValue(MemberFinnish);
+				break;
 			case SnowballLanguage.English:
-				writer.WriteStringValue("English");
-				return;
+				writer.WriteStringValue(MemberEnglish);
+				break;
 			case SnowballLanguage.Dutch:
-				writer.WriteStringValue("Dutch");
-				return;
+				writer.WriteStringValue(MemberDutch);
+				break;
 			case SnowballLanguage.Danish:
-				writer.WriteStringValue("Danish");
-				return;
+				writer.WriteStringValue(MemberDanish);
+				break;
 			case SnowballLanguage.Catalan:
-				writer.WriteStringValue("Catalan");
-				return;
+				writer.WriteStringValue(MemberCatalan);
+				break;
 			case SnowballLanguage.Basque:
-				writer.WriteStringValue("Basque");
-				return;
+				writer.WriteStringValue(MemberBasque);
+				break;
 			case SnowballLanguage.Armenian:
-				writer.WriteStringValue("Armenian");
-				return;
+				writer.WriteStringValue(MemberArmenian);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SnowballLanguage)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1353,36 +1745,40 @@ public enum SynonymFormat
 	Solr
 }
 
-internal sealed class SynonymFormatConverter : JsonConverter<SynonymFormat>
+internal sealed partial class SynonymFormatConverter : System.Text.Json.Serialization.JsonConverter<SynonymFormat>
 {
-	public override SynonymFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberWordnet = System.Text.Json.JsonEncodedText.Encode("wordnet");
+	private static readonly System.Text.Json.JsonEncodedText MemberSolr = System.Text.Json.JsonEncodedText.Encode("solr");
+
+	public override SynonymFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberWordnet))
 		{
-			case "wordnet":
-				return SynonymFormat.Wordnet;
-			case "solr":
-				return SynonymFormat.Solr;
+			return SynonymFormat.Wordnet;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSolr))
+		{
+			return SynonymFormat.Solr;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SynonymFormat)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, SynonymFormat value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SynonymFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case SynonymFormat.Wordnet:
-				writer.WriteStringValue("wordnet");
-				return;
+				writer.WriteStringValue(MemberWordnet);
+				break;
 			case SynonymFormat.Solr:
-				writer.WriteStringValue("solr");
-				return;
+				writer.WriteStringValue(MemberSolr);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SynonymFormat)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1403,55 +1799,75 @@ public enum TokenChar
 	Custom
 }
 
-internal sealed class TokenCharConverter : JsonConverter<TokenChar>
+internal sealed partial class TokenCharConverter : System.Text.Json.Serialization.JsonConverter<TokenChar>
 {
-	public override TokenChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace");
+	private static readonly System.Text.Json.JsonEncodedText MemberSymbol = System.Text.Json.JsonEncodedText.Encode("symbol");
+	private static readonly System.Text.Json.JsonEncodedText MemberPunctuation = System.Text.Json.JsonEncodedText.Encode("punctuation");
+	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter");
+	private static readonly System.Text.Json.JsonEncodedText MemberDigit = System.Text.Json.JsonEncodedText.Encode("digit");
+	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom");
+
+	public override TokenChar Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberWhitespace))
 		{
-			case "whitespace":
-				return TokenChar.Whitespace;
-			case "symbol":
-				return TokenChar.Symbol;
-			case "punctuation":
-				return TokenChar.Punctuation;
-			case "letter":
-				return TokenChar.Letter;
-			case "digit":
-				return TokenChar.Digit;
-			case "custom":
-				return TokenChar.Custom;
+			return TokenChar.Whitespace;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSymbol))
+		{
+			return TokenChar.Symbol;
+		}
+
+		if (reader.ValueTextEquals(MemberPunctuation))
+		{
+			return TokenChar.Punctuation;
+		}
+
+		if (reader.ValueTextEquals(MemberLetter))
+		{
+			return TokenChar.Letter;
+		}
+
+		if (reader.ValueTextEquals(MemberDigit))
+		{
+			return TokenChar.Digit;
+		}
+
+		if (reader.ValueTextEquals(MemberCustom))
+		{
+			return TokenChar.Custom;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TokenChar)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TokenChar value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TokenChar value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TokenChar.Whitespace:
-				writer.WriteStringValue("whitespace");
-				return;
+				writer.WriteStringValue(MemberWhitespace);
+				break;
 			case TokenChar.Symbol:
-				writer.WriteStringValue("symbol");
-				return;
+				writer.WriteStringValue(MemberSymbol);
+				break;
 			case TokenChar.Punctuation:
-				writer.WriteStringValue("punctuation");
-				return;
+				writer.WriteStringValue(MemberPunctuation);
+				break;
 			case TokenChar.Letter:
-				writer.WriteStringValue("letter");
-				return;
+				writer.WriteStringValue(MemberLetter);
+				break;
 			case TokenChar.Digit:
-				writer.WriteStringValue("digit");
-				return;
+				writer.WriteStringValue(MemberDigit);
+				break;
 			case TokenChar.Custom:
-				writer.WriteStringValue("custom");
-				return;
+				writer.WriteStringValue(MemberCustom);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TokenChar)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

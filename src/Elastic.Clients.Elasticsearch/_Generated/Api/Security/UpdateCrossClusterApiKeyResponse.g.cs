@@ -22,10 +22,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class UpdateCrossClusterApiKeyResponseConverter : System.Text.Json.Serialization.JsonConverter<UpdateCrossClusterApiKeyResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+
+	public override UpdateCrossClusterApiKeyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propUpdated = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpdateCrossClusterApiKeyResponse
+		{
+			Updated = propUpdated.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpdateCrossClusterApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(UpdateCrossClusterApiKeyResponseConverter))]
 public sealed partial class UpdateCrossClusterApiKeyResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,6 +70,5 @@ public sealed partial class UpdateCrossClusterApiKeyResponse : ElasticsearchResp
 	/// If <c>false</c>, the API key didn’t change because no change was detected.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated")]
 	public bool Updated { get; init; }
 }

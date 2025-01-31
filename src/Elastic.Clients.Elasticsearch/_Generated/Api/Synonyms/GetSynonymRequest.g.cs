@@ -58,6 +58,11 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal GetSynonymRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsGetSynonym;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -65,6 +70,14 @@ public sealed partial class GetSynonymRequest : PlainRequest<GetSynonymRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "synonyms.get_synonym";
+
+	/// <summary>
+	/// <para>
+	/// "The id of the synonyms set to be retrieved
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

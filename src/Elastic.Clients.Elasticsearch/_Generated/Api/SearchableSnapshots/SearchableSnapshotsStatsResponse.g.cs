@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+internal sealed partial class SearchableSnapshotsStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<SearchableSnapshotsStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override SearchableSnapshotsStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object> propStats = default;
+		LocalJsonValue<object> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStats.TryRead(ref reader, options, PropStats))
+			{
+				continue;
+			}
+
+			if (propTotal.TryRead(ref reader, options, PropTotal))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SearchableSnapshotsStatsResponse
+		{
+			Stats = propStats.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchableSnapshotsStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStats, value.Stats);
+		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SearchableSnapshotsStatsResponseConverter))]
 public sealed partial class SearchableSnapshotsStatsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("stats")]
 	public object Stats { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
 	public object Total { get; init; }
 }

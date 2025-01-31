@@ -44,6 +44,11 @@ public sealed partial class ActivateUserProfileRequestParameters : RequestParame
 /// </summary>
 public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUserProfileRequestParameters>
 {
+	[JsonConstructor]
+	internal ActivateUserProfileRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityActivateUserProfile;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

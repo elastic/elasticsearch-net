@@ -59,6 +59,11 @@ public sealed partial class VerifyRepositoryRequest : PlainRequest<VerifyReposit
 	{
 	}
 
+	[JsonConstructor]
+	internal VerifyRepositoryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotVerifyRepository;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -66,6 +71,14 @@ public sealed partial class VerifyRepositoryRequest : PlainRequest<VerifyReposit
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.verify_repository";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>

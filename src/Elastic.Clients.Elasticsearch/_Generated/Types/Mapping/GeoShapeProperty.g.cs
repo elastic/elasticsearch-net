@@ -27,6 +27,167 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class GeoShapePropertyConverter : System.Text.Json.Serialization.JsonConverter<GeoShapeProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreZValue = System.Text.Json.JsonEncodedText.Encode("ignore_z_value");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropOrientation = System.Text.Json.JsonEncodedText.Encode("orientation");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override GeoShapeProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCoerce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
+		LocalJsonValue<bool?> propIgnoreZValue = default;
+		LocalJsonValue<IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.GeoOrientation?> propOrientation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.GeoStrategy?> propStrategy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCoerce.TryRead(ref reader, options, PropCoerce))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryRead(ref reader, options, PropIgnoreMalformed))
+			{
+				continue;
+			}
+
+			if (propIgnoreZValue.TryRead(ref reader, options, PropIgnoreZValue))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propOrientation.TryRead(ref reader, options, PropOrientation))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propStore.TryRead(ref reader, options, PropStore))
+			{
+				continue;
+			}
+
+			if (propStrategy.TryRead(ref reader, options, PropStrategy))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GeoShapeProperty
+		{
+			Coerce = propCoerce.Value
+,
+			CopyTo = propCopyTo.Value
+,
+			DocValues = propDocValues.Value
+,
+			Dynamic = propDynamic.Value
+,
+			Fields = propFields.Value
+,
+			IgnoreAbove = propIgnoreAbove.Value
+,
+			IgnoreMalformed = propIgnoreMalformed.Value
+,
+			IgnoreZValue = propIgnoreZValue.Value
+,
+			Meta = propMeta.Value
+,
+			Orientation = propOrientation.Value
+,
+			Properties = propProperties.Value
+,
+			Store = propStore.Value
+,
+			Strategy = propStrategy.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoShapeProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCoerce, value.Coerce);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropDocValues, value.DocValues);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed);
+		writer.WriteProperty(options, PropIgnoreZValue, value.IgnoreZValue);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropOrientation, value.Orientation);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropStore, value.Store);
+		writer.WriteProperty(options, PropStrategy, value.Strategy);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
@@ -34,24 +195,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 /// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[JsonConverter(typeof(GeoShapePropertyConverter))]
 public sealed partial class GeoShapeProperty : IProperty
 {
-	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
 
 	/// <summary>
@@ -59,18 +212,12 @@ public sealed partial class GeoShapeProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("orientation")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("strategy")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_shape";
 }
 

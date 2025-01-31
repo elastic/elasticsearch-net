@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ClearScrollResponseConverter : System.Text.Json.Serialization.JsonConverter<ClearScrollResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumFreed = System.Text.Json.JsonEncodedText.Encode("num_freed");
+	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded");
+
+	public override ClearScrollResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propNumFreed = default;
+		LocalJsonValue<bool> propSucceeded = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumFreed.TryRead(ref reader, options, PropNumFreed))
+			{
+				continue;
+			}
+
+			if (propSucceeded.TryRead(ref reader, options, PropSucceeded))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClearScrollResponse
+		{
+			NumFreed = propNumFreed.Value
+,
+			Succeeded = propSucceeded.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearScrollResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumFreed, value.NumFreed);
+		writer.WriteProperty(options, PropSucceeded, value.Succeeded);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClearScrollResponseConverter))]
 public sealed partial class ClearScrollResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("num_freed")]
 	public int NumFreed { get; init; }
-	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class PutRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<PutRoleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRole = System.Text.Json.JsonEncodedText.Encode("role");
+
+	public override PutRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.CreatedStatus> propRole = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRole.TryRead(ref reader, options, PropRole))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutRoleResponse
+		{
+			Role = propRole.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRoleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRole, value.Role);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutRoleResponseConverter))]
 public sealed partial class PutRoleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("role")]
 	public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role { get; init; }
 }

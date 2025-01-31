@@ -55,6 +55,11 @@ public sealed partial class GetUserPrivilegesRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class GetUserPrivilegesRequest : PlainRequest<GetUserPrivilegesRequestParameters>
 {
+	[JsonConstructor]
+	internal GetUserPrivilegesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetUserPrivileges;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

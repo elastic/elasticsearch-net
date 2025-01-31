@@ -22,10 +22,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class CleanupRepositoryResponseConverter : System.Text.Json.Serialization.JsonConverter<CleanupRepositoryResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropResults = System.Text.Json.JsonEncodedText.Encode("results");
+
+	public override CleanupRepositoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults> propResults = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propResults.TryRead(ref reader, options, PropResults))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CleanupRepositoryResponse
+		{
+			Results = propResults.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CleanupRepositoryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropResults, value.Results);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CleanupRepositoryResponseConverter))]
 public sealed partial class CleanupRepositoryResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,6 +69,5 @@ public sealed partial class CleanupRepositoryResponse : ElasticsearchResponse
 	/// Statistics for cleanup operations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results")]
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Results { get; init; }
 }

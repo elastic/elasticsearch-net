@@ -46,6 +46,11 @@ public sealed partial class DeleteCalendarRequest : PlainRequest<DeleteCalendarR
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteCalendarRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteCalendar;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,14 @@ public sealed partial class DeleteCalendarRequest : PlainRequest<DeleteCalendarR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_calendar";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 }
 
 /// <summary>

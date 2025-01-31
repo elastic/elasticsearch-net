@@ -39,12 +39,16 @@ public sealed partial class Rank
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal Rank()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static Rank Rrf(Elastic.Clients.Elasticsearch.RrfRank rrfRank) => new Rank("rrf", rrfRank);
 
@@ -61,57 +65,44 @@ public sealed partial class Rank
 	}
 }
 
-internal sealed partial class RankConverter : JsonConverter<Rank>
+internal sealed partial class RankConverter : System.Text.Json.Serialization.JsonConverter<Rank>
 {
-	public override Rank Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantRrf = System.Text.Json.JsonEncodedText.Encode("rrf");
+
+	public override Rank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantRrf))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "rrf")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RrfRank?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantRrf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RrfRank?>(options);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Rank' from the response.");
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new Rank(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Rank { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, Rank value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Rank value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "rrf":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RrfRank>(writer, (Elastic.Clients.Elasticsearch.RrfRank)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "rrf":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RrfRank?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Rank)}'.");
 		}
 
 		writer.WriteEndObject();

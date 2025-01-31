@@ -39,12 +39,16 @@ public sealed partial class Processor
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal Processor()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static Processor Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor appendProcessor) => new Processor("append", appendProcessor);
 	public static Processor Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor attachmentProcessor) => new Processor("attachment", attachmentProcessor);
@@ -105,497 +109,572 @@ public sealed partial class Processor
 	}
 }
 
-internal sealed partial class ProcessorConverter : JsonConverter<Processor>
+internal sealed partial class ProcessorConverter : System.Text.Json.Serialization.JsonConverter<Processor>
 {
-	public override Processor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAppend = System.Text.Json.JsonEncodedText.Encode("append");
+	private static readonly System.Text.Json.JsonEncodedText VariantAttachment = System.Text.Json.JsonEncodedText.Encode("attachment");
+	private static readonly System.Text.Json.JsonEncodedText VariantBytes = System.Text.Json.JsonEncodedText.Encode("bytes");
+	private static readonly System.Text.Json.JsonEncodedText VariantCircle = System.Text.Json.JsonEncodedText.Encode("circle");
+	private static readonly System.Text.Json.JsonEncodedText VariantCommunityId = System.Text.Json.JsonEncodedText.Encode("community_id");
+	private static readonly System.Text.Json.JsonEncodedText VariantConvert = System.Text.Json.JsonEncodedText.Encode("convert");
+	private static readonly System.Text.Json.JsonEncodedText VariantCsv = System.Text.Json.JsonEncodedText.Encode("csv");
+	private static readonly System.Text.Json.JsonEncodedText VariantDate = System.Text.Json.JsonEncodedText.Encode("date");
+	private static readonly System.Text.Json.JsonEncodedText VariantDateIndexName = System.Text.Json.JsonEncodedText.Encode("date_index_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantDissect = System.Text.Json.JsonEncodedText.Encode("dissect");
+	private static readonly System.Text.Json.JsonEncodedText VariantDotExpander = System.Text.Json.JsonEncodedText.Encode("dot_expander");
+	private static readonly System.Text.Json.JsonEncodedText VariantDrop = System.Text.Json.JsonEncodedText.Encode("drop");
+	private static readonly System.Text.Json.JsonEncodedText VariantEnrich = System.Text.Json.JsonEncodedText.Encode("enrich");
+	private static readonly System.Text.Json.JsonEncodedText VariantFail = System.Text.Json.JsonEncodedText.Encode("fail");
+	private static readonly System.Text.Json.JsonEncodedText VariantFingerprint = System.Text.Json.JsonEncodedText.Encode("fingerprint");
+	private static readonly System.Text.Json.JsonEncodedText VariantForeach = System.Text.Json.JsonEncodedText.Encode("foreach");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeoGrid = System.Text.Json.JsonEncodedText.Encode("geo_grid");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeoip = System.Text.Json.JsonEncodedText.Encode("geoip");
+	private static readonly System.Text.Json.JsonEncodedText VariantGrok = System.Text.Json.JsonEncodedText.Encode("grok");
+	private static readonly System.Text.Json.JsonEncodedText VariantGsub = System.Text.Json.JsonEncodedText.Encode("gsub");
+	private static readonly System.Text.Json.JsonEncodedText VariantHtmlStrip = System.Text.Json.JsonEncodedText.Encode("html_strip");
+	private static readonly System.Text.Json.JsonEncodedText VariantInference = System.Text.Json.JsonEncodedText.Encode("inference");
+	private static readonly System.Text.Json.JsonEncodedText VariantIpLocation = System.Text.Json.JsonEncodedText.Encode("ip_location");
+	private static readonly System.Text.Json.JsonEncodedText VariantJoin = System.Text.Json.JsonEncodedText.Encode("join");
+	private static readonly System.Text.Json.JsonEncodedText VariantJson = System.Text.Json.JsonEncodedText.Encode("json");
+	private static readonly System.Text.Json.JsonEncodedText VariantKv = System.Text.Json.JsonEncodedText.Encode("kv");
+	private static readonly System.Text.Json.JsonEncodedText VariantLowercase = System.Text.Json.JsonEncodedText.Encode("lowercase");
+	private static readonly System.Text.Json.JsonEncodedText VariantNetworkDirection = System.Text.Json.JsonEncodedText.Encode("network_direction");
+	private static readonly System.Text.Json.JsonEncodedText VariantPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+	private static readonly System.Text.Json.JsonEncodedText VariantRedact = System.Text.Json.JsonEncodedText.Encode("redact");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegisteredDomain = System.Text.Json.JsonEncodedText.Encode("registered_domain");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemove = System.Text.Json.JsonEncodedText.Encode("remove");
+	private static readonly System.Text.Json.JsonEncodedText VariantRename = System.Text.Json.JsonEncodedText.Encode("rename");
+	private static readonly System.Text.Json.JsonEncodedText VariantReroute = System.Text.Json.JsonEncodedText.Encode("reroute");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText VariantSet = System.Text.Json.JsonEncodedText.Encode("set");
+	private static readonly System.Text.Json.JsonEncodedText VariantSetSecurityUser = System.Text.Json.JsonEncodedText.Encode("set_security_user");
+	private static readonly System.Text.Json.JsonEncodedText VariantSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText VariantSplit = System.Text.Json.JsonEncodedText.Encode("split");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerminate = System.Text.Json.JsonEncodedText.Encode("terminate");
+	private static readonly System.Text.Json.JsonEncodedText VariantTrim = System.Text.Json.JsonEncodedText.Encode("trim");
+	private static readonly System.Text.Json.JsonEncodedText VariantUppercase = System.Text.Json.JsonEncodedText.Encode("uppercase");
+	private static readonly System.Text.Json.JsonEncodedText VariantUriParts = System.Text.Json.JsonEncodedText.Encode("uri_parts");
+	private static readonly System.Text.Json.JsonEncodedText VariantUrlDecode = System.Text.Json.JsonEncodedText.Encode("urldecode");
+	private static readonly System.Text.Json.JsonEncodedText VariantUserAgent = System.Text.Json.JsonEncodedText.Encode("user_agent");
+
+	public override Processor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantAppend))
+			{
+				variantType = VariantAppend.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantAttachment))
+			{
+				variantType = VariantAttachment.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantBytes))
+			{
+				variantType = VariantBytes.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCircle))
+			{
+				variantType = VariantCircle.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCommunityId))
+			{
+				variantType = VariantCommunityId.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantConvert))
+			{
+				variantType = VariantConvert.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCsv))
+			{
+				variantType = VariantCsv.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDate))
+			{
+				variantType = VariantDate.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDateIndexName))
+			{
+				variantType = VariantDateIndexName.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDissect))
+			{
+				variantType = VariantDissect.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDotExpander))
+			{
+				variantType = VariantDotExpander.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDrop))
+			{
+				variantType = VariantDrop.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DropProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantEnrich))
+			{
+				variantType = VariantEnrich.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFail))
+			{
+				variantType = VariantFail.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FailProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFingerprint))
+			{
+				variantType = VariantFingerprint.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantForeach))
+			{
+				variantType = VariantForeach.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeoGrid))
+			{
+				variantType = VariantGeoGrid.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeoip))
+			{
+				variantType = VariantGeoip.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGrok))
+			{
+				variantType = VariantGrok.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGsub))
+			{
+				variantType = VariantGsub.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantHtmlStrip))
+			{
+				variantType = VariantHtmlStrip.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantInference))
+			{
+				variantType = VariantInference.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIpLocation))
+			{
+				variantType = VariantIpLocation.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantJoin))
+			{
+				variantType = VariantJoin.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantJson))
+			{
+				variantType = VariantJson.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantKv))
+			{
+				variantType = VariantKv.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLowercase))
+			{
+				variantType = VariantLowercase.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNetworkDirection))
+			{
+				variantType = VariantNetworkDirection.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPipeline))
+			{
+				variantType = VariantPipeline.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRedact))
+			{
+				variantType = VariantRedact.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegisteredDomain))
+			{
+				variantType = VariantRegisteredDomain.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRemove))
+			{
+				variantType = VariantRemove.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRename))
+			{
+				variantType = VariantRename.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantReroute))
+			{
+				variantType = VariantReroute.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSet))
+			{
+				variantType = VariantSet.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSetSecurityUser))
+			{
+				variantType = VariantSetSecurityUser.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSort))
+			{
+				variantType = VariantSort.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SortProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSplit))
+			{
+				variantType = VariantSplit.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerminate))
+			{
+				variantType = VariantTerminate.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTrim))
+			{
+				variantType = VariantTrim.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantUppercase))
+			{
+				variantType = VariantUppercase.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantUriParts))
+			{
+				variantType = VariantUriParts.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantUrlDecode))
+			{
+				variantType = VariantUrlDecode.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantUserAgent))
+			{
+				variantType = VariantUserAgent.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "append")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "attachment")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "bytes")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "circle")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "community_id")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "convert")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "csv")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "date")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DateProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "date_index_name")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "dissect")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "dot_expander")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "drop")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DropProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "enrich")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fail")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.FailProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fingerprint")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "foreach")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geo_grid")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geoip")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "grok")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "gsub")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "html_strip")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "inference")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ip_location")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "join")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "json")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "kv")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "lowercase")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "network_direction")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "pipeline")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "redact")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "registered_domain")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "remove")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "rename")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "reroute")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "script")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "set")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.SetProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "set_security_user")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "sort")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.SortProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "split")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terminate")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "trim")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "uppercase")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "uri_parts")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "urldecode")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "user_agent")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Processor' from the response.");
-		}
-
-		var result = new Processor(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Processor { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, Processor value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Processor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "append":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor)value.Variant, options);
-					break;
-				case "attachment":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor)value.Variant, options);
-					break;
-				case "bytes":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)value.Variant, options);
-					break;
-				case "circle":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)value.Variant, options);
-					break;
-				case "community_id":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor)value.Variant, options);
-					break;
-				case "convert":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor)value.Variant, options);
-					break;
-				case "csv":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor)value.Variant, options);
-					break;
-				case "date":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor)value.Variant, options);
-					break;
-				case "date_index_name":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor)value.Variant, options);
-					break;
-				case "dissect":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor)value.Variant, options);
-					break;
-				case "dot_expander":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor)value.Variant, options);
-					break;
-				case "drop":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DropProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor)value.Variant, options);
-					break;
-				case "enrich":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor)value.Variant, options);
-					break;
-				case "fail":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.FailProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor)value.Variant, options);
-					break;
-				case "fingerprint":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor)value.Variant, options);
-					break;
-				case "foreach":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)value.Variant, options);
-					break;
-				case "geo_grid":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor)value.Variant, options);
-					break;
-				case "geoip":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)value.Variant, options);
-					break;
-				case "grok":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor)value.Variant, options);
-					break;
-				case "gsub":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor)value.Variant, options);
-					break;
-				case "html_strip":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor)value.Variant, options);
-					break;
-				case "inference":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor)value.Variant, options);
-					break;
-				case "ip_location":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor)value.Variant, options);
-					break;
-				case "join":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor)value.Variant, options);
-					break;
-				case "json":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor)value.Variant, options);
-					break;
-				case "kv":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor)value.Variant, options);
-					break;
-				case "lowercase":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor)value.Variant, options);
-					break;
-				case "network_direction":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor)value.Variant, options);
-					break;
-				case "pipeline":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)value.Variant, options);
-					break;
-				case "redact":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor)value.Variant, options);
-					break;
-				case "registered_domain":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor)value.Variant, options);
-					break;
-				case "remove":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)value.Variant, options);
-					break;
-				case "rename":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor)value.Variant, options);
-					break;
-				case "reroute":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor)value.Variant, options);
-					break;
-				case "script":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor)value.Variant, options);
-					break;
-				case "set":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor)value.Variant, options);
-					break;
-				case "set_security_user":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor)value.Variant, options);
-					break;
-				case "sort":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SortProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor)value.Variant, options);
-					break;
-				case "split":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor)value.Variant, options);
-					break;
-				case "terminate":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor)value.Variant, options);
-					break;
-				case "trim":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor)value.Variant, options);
-					break;
-				case "uppercase":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor)value.Variant, options);
-					break;
-				case "uri_parts":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor)value.Variant, options);
-					break;
-				case "urldecode":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor)value.Variant, options);
-					break;
-				case "user_agent":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "append":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor?)value.Variant);
+				break;
+			case "attachment":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor?)value.Variant);
+				break;
+			case "bytes":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor?)value.Variant);
+				break;
+			case "circle":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor?)value.Variant);
+				break;
+			case "community_id":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor?)value.Variant);
+				break;
+			case "convert":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor?)value.Variant);
+				break;
+			case "csv":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor?)value.Variant);
+				break;
+			case "date":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor?)value.Variant);
+				break;
+			case "date_index_name":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor?)value.Variant);
+				break;
+			case "dissect":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor?)value.Variant);
+				break;
+			case "dot_expander":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor?)value.Variant);
+				break;
+			case "drop":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor?)value.Variant);
+				break;
+			case "enrich":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor?)value.Variant);
+				break;
+			case "fail":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor?)value.Variant);
+				break;
+			case "fingerprint":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor?)value.Variant);
+				break;
+			case "foreach":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor?)value.Variant);
+				break;
+			case "geo_grid":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor?)value.Variant);
+				break;
+			case "geoip":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor?)value.Variant);
+				break;
+			case "grok":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor?)value.Variant);
+				break;
+			case "gsub":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor?)value.Variant);
+				break;
+			case "html_strip":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor?)value.Variant);
+				break;
+			case "inference":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor?)value.Variant);
+				break;
+			case "ip_location":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor?)value.Variant);
+				break;
+			case "join":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor?)value.Variant);
+				break;
+			case "json":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor?)value.Variant);
+				break;
+			case "kv":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor?)value.Variant);
+				break;
+			case "lowercase":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor?)value.Variant);
+				break;
+			case "network_direction":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor?)value.Variant);
+				break;
+			case "pipeline":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor?)value.Variant);
+				break;
+			case "redact":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor?)value.Variant);
+				break;
+			case "registered_domain":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor?)value.Variant);
+				break;
+			case "remove":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor?)value.Variant);
+				break;
+			case "rename":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor?)value.Variant);
+				break;
+			case "reroute":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor?)value.Variant);
+				break;
+			case "script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor?)value.Variant);
+				break;
+			case "set":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor?)value.Variant);
+				break;
+			case "set_security_user":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor?)value.Variant);
+				break;
+			case "sort":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor?)value.Variant);
+				break;
+			case "split":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor?)value.Variant);
+				break;
+			case "terminate":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor?)value.Variant);
+				break;
+			case "trim":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor?)value.Variant);
+				break;
+			case "uppercase":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor?)value.Variant);
+				break;
+			case "uri_parts":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor?)value.Variant);
+				break;
+			case "urldecode":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor?)value.Variant);
+				break;
+			case "user_agent":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Processor)}'.");
 		}
 
 		writer.WriteEndObject();

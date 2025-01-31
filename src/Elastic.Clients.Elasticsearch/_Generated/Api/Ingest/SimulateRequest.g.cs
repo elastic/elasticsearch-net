@@ -49,6 +49,7 @@ public sealed partial class SimulateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParameters>
 {
+	[JsonConstructor]
 	public SimulateRequest()
 	{
 	}
@@ -64,6 +65,15 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ingest.simulate";
+
+	/// <summary>
+	/// <para>
+	/// Pipeline to test.
+	/// If you don’t specify a <c>pipeline</c> in the request body, this parameter is required.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

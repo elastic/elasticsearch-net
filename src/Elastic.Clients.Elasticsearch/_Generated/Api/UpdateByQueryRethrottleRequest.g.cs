@@ -55,6 +55,11 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateByQueryRethrottleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -62,6 +67,14 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "update_by_query_rethrottle";
+
+	/// <summary>
+	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
 	/// <summary>
 	/// <para>

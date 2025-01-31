@@ -27,11 +27,71 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class FieldAndFormatConverter : System.Text.Json.Serialization.JsonConverter<FieldAndFormat>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeUnmapped = System.Text.Json.JsonEncodedText.Encode("include_unmapped");
+
+	public override FieldAndFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options);
+			return new FieldAndFormat { Field = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<bool?> propIncludeUnmapped = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propFormat.TryRead(ref reader, options, PropFormat))
+			{
+				continue;
+			}
+
+			if (propIncludeUnmapped.TryRead(ref reader, options, PropIncludeUnmapped))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldAndFormat
+		{
+			Field = propField.Value
+,
+			Format = propFormat.Value
+,
+			IncludeUnmapped = propIncludeUnmapped.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldAndFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropFormat, value.Format);
+		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// A reference to a field with formatting instructions on how to return the value
 /// </para>
 /// </summary>
+[JsonConverter(typeof(FieldAndFormatConverter))]
 public sealed partial class FieldAndFormat
 {
 	/// <summary>
@@ -39,7 +99,6 @@ public sealed partial class FieldAndFormat
 	/// Wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
@@ -47,9 +106,7 @@ public sealed partial class FieldAndFormat
 	/// Format in which the values are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("include_unmapped")]
 	public bool? IncludeUnmapped { get; set; }
 }
 

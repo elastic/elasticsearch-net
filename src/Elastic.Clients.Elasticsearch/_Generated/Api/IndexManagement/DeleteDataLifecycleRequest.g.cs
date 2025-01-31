@@ -66,6 +66,11 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteDataLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -73,6 +78,14 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.delete_data_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted; use <c>*</c> to get all data streams
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

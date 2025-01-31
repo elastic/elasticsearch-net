@@ -39,12 +39,16 @@ public sealed partial class IntervalsFilter
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal IntervalsFilter()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static IntervalsFilter After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("after", intervalsContainer);
 	public static IntervalsFilter Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("before", intervalsContainer);
@@ -69,137 +73,140 @@ public sealed partial class IntervalsFilter
 	}
 }
 
-internal sealed partial class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
+internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serialization.JsonConverter<IntervalsFilter>
 {
-	public override IntervalsFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAfter = System.Text.Json.JsonEncodedText.Encode("after");
+	private static readonly System.Text.Json.JsonEncodedText VariantBefore = System.Text.Json.JsonEncodedText.Encode("before");
+	private static readonly System.Text.Json.JsonEncodedText VariantContainedBy = System.Text.Json.JsonEncodedText.Encode("contained_by");
+	private static readonly System.Text.Json.JsonEncodedText VariantContaining = System.Text.Json.JsonEncodedText.Encode("containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotContainedBy = System.Text.Json.JsonEncodedText.Encode("not_contained_by");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotContaining = System.Text.Json.JsonEncodedText.Encode("not_containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotOverlapping = System.Text.Json.JsonEncodedText.Encode("not_overlapping");
+	private static readonly System.Text.Json.JsonEncodedText VariantOverlapping = System.Text.Json.JsonEncodedText.Encode("overlapping");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override IntervalsFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantAfter))
+			{
+				variantType = VariantAfter.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantBefore))
+			{
+				variantType = VariantBefore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantContainedBy))
+			{
+				variantType = VariantContainedBy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantContaining))
+			{
+				variantType = VariantContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotContainedBy))
+			{
+				variantType = VariantNotContainedBy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotContaining))
+			{
+				variantType = VariantNotContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotOverlapping))
+			{
+				variantType = VariantNotOverlapping.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOverlapping))
+			{
+				variantType = VariantOverlapping.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Script?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "after")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "before")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "contained_by")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_contained_by")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_overlapping")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "overlapping")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "script")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsFilter' from the response.");
-		}
-
-		var result = new IntervalsFilter(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IntervalsFilter { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, IntervalsFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IntervalsFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "after":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "before":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "contained_by":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_contained_by":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_overlapping":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "overlapping":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "script":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Script>(writer, (Elastic.Clients.Elasticsearch.Script)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "after":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "before":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "contained_by":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "not_contained_by":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "not_containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "not_overlapping":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "overlapping":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals?)value.Variant);
+				break;
+			case "script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Script?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IntervalsFilter)}'.");
 		}
 
 		writer.WriteEndObject();

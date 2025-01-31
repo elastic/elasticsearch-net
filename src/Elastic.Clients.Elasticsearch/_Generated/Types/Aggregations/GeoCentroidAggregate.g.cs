@@ -35,4 +35,6 @@ public sealed partial class GeoCentroidAggregate : IAggregate
 	public Elastic.Clients.Elasticsearch.GeoLocation? Location { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "geo_centroid";
 }

@@ -41,6 +41,11 @@ public sealed partial class GetBasicStatusRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetBasicStatusRequest : PlainRequest<GetBasicStatusRequestParameters>
 {
+	[JsonConstructor]
+	internal GetBasicStatusRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGetBasicStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

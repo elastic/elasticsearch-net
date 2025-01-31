@@ -102,6 +102,7 @@ public sealed partial class HotThreadsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestParameters>
 {
+	[JsonConstructor]
 	public HotThreadsRequest()
 	{
 	}
@@ -117,6 +118,14 @@ public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.hot_threads";
+
+	/// <summary>
+	/// <para>
+	/// List of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>

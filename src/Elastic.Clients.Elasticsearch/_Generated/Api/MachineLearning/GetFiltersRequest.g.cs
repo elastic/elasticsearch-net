@@ -55,6 +55,7 @@ public sealed partial class GetFiltersRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetFiltersRequest : PlainRequest<GetFiltersRequestParameters>
 {
+	[JsonConstructor]
 	public GetFiltersRequest()
 	{
 	}
@@ -70,6 +71,14 @@ public sealed partial class GetFiltersRequest : PlainRequest<GetFiltersRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_filters";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? FilterId { get => P<Elastic.Clients.Elasticsearch.Ids?>("filter_id"); set => PO("filter_id", value); }
 
 	/// <summary>
 	/// <para>

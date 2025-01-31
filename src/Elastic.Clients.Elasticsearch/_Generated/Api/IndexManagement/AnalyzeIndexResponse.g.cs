@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class AnalyzeIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<AnalyzeIndexResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDetail = System.Text.Json.JsonEncodedText.Encode("detail");
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
+
+	public override AnalyzeIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail?> propDetail = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>?> propTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDetail.TryRead(ref reader, options, PropDetail))
+			{
+				continue;
+			}
+
+			if (propTokens.TryRead(ref reader, options, PropTokens))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new AnalyzeIndexResponse
+		{
+			Detail = propDetail.Value
+,
+			Tokens = propTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AnalyzeIndexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDetail, value.Detail);
+		writer.WriteProperty(options, PropTokens, value.Tokens);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(AnalyzeIndexResponseConverter))]
 public sealed partial class AnalyzeIndexResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("detail")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail? Detail { get; init; }
-	[JsonInclude, JsonPropertyName("tokens")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>? Tokens { get; init; }
 }

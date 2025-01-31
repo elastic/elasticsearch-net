@@ -35,4 +35,6 @@ public sealed partial class AutoDateHistogramAggregate : IAggregate
 	public string Interval { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "auto_date_histogram";
 }

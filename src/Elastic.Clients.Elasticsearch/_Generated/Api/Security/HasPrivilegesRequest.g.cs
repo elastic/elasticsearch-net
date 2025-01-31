@@ -44,6 +44,7 @@ public sealed partial class HasPrivilegesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class HasPrivilegesRequest : PlainRequest<HasPrivilegesRequestParameters>
 {
+	[JsonConstructor]
 	public HasPrivilegesRequest()
 	{
 	}
@@ -60,6 +61,13 @@ public sealed partial class HasPrivilegesRequest : PlainRequest<HasPrivilegesReq
 
 	internal override string OperationName => "security.has_privileges";
 
+	/// <summary>
+	/// <para>
+	/// Username
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? User { get => P<Elastic.Clients.Elasticsearch.Name?>("user"); set => PO("user", value); }
 	[JsonInclude, JsonPropertyName("application")]
 	public ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? Application { get; set; }
 

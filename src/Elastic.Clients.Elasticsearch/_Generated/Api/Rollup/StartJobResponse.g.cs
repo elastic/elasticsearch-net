@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class StartJobResponseConverter : System.Text.Json.Serialization.JsonConverter<StartJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStarted = System.Text.Json.JsonEncodedText.Encode("started");
+
+	public override StartJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propStarted = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStarted.TryRead(ref reader, options, PropStarted))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StartJobResponse
+		{
+			Started = propStarted.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStarted, value.Started);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StartJobResponseConverter))]
 public sealed partial class StartJobResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("started")]
 	public bool Started { get; init; }
 }

@@ -55,4 +55,6 @@ public sealed partial class StatsAggregate : IAggregate
 	public double Sum { get; init; }
 	[JsonInclude, JsonPropertyName("sum_as_string")]
 	public string? SumAsString { get; init; }
+
+	string IAggregate.Type => "stats";
 }

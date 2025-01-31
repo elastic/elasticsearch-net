@@ -49,6 +49,7 @@ public sealed partial class DeleteExpiredDataRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpiredDataRequestParameters>
 {
+	[JsonConstructor]
 	public DeleteExpiredDataRequest()
 	{
 	}
@@ -64,6 +65,15 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.delete_expired_data";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for an anomaly detection job. It can be a job identifier, a
+	/// group name, or a wildcard expression.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? JobId { get => P<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => PO("job_id", value); }
 
 	/// <summary>
 	/// <para>

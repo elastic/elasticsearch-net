@@ -54,6 +54,11 @@ public sealed partial class DeleteServiceTokenRequest : PlainRequest<DeleteServi
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteServiceTokenRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDeleteServiceToken;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -61,6 +66,30 @@ public sealed partial class DeleteServiceTokenRequest : PlainRequest<DeleteServi
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.delete_service_token";
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the token name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the namespace
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the service name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Service { get => P<string>("service"); set => PR("service", value); }
 
 	/// <summary>
 	/// <para>

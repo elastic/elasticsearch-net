@@ -68,6 +68,11 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	{
 	}
 
+	[JsonConstructor]
+	internal MountRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchableSnapshotsMount;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -75,6 +80,22 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "searchable_snapshots.mount";
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository containing the snapshot of the index to mount
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot of the index to mount
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>

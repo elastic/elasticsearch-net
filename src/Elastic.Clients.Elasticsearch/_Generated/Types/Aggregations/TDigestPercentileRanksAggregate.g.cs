@@ -33,4 +33,6 @@ public sealed partial class TDigestPercentileRanksAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; init; }
+
+	string IAggregate.Type => "tdigest_percentile_ranks";
 }

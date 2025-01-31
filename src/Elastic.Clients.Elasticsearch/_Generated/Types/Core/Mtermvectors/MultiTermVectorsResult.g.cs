@@ -38,7 +38,6 @@ public sealed partial class MultiTermVectorsResult
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("term_vectors")]
-	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>? TermVectors { get; init; }
 	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }

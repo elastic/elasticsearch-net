@@ -141,6 +141,11 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal SplitIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -148,6 +153,22 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.split";
+
+	/// <summary>
+	/// <para>
+	/// Name of the source index to split.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Target { get => P<Elastic.Clients.Elasticsearch.IndexName>("target"); set => PR("target", value); }
 
 	/// <summary>
 	/// <para>

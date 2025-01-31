@@ -288,6 +288,11 @@ public sealed partial class FindFieldStructureRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class FindFieldStructureRequest : PlainRequest<FindFieldStructureRequestParameters>
 {
+	[JsonConstructor]
+	internal FindFieldStructureRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureFindFieldStructure;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

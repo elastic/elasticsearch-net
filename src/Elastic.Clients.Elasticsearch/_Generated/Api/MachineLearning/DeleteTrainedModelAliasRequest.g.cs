@@ -48,6 +48,11 @@ public sealed partial class DeleteTrainedModelAliasRequest : PlainRequest<Delete
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteTrainedModelAliasRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteTrainedModelAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -55,6 +60,22 @@ public sealed partial class DeleteTrainedModelAliasRequest : PlainRequest<Delete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_trained_model_alias";
+
+	/// <summary>
+	/// <para>
+	/// The model alias to delete.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// The trained model ID to which the model alias refers.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
 /// <summary>

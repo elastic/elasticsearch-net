@@ -71,6 +71,7 @@ public sealed partial class GetComponentTemplateRequestParameters : RequestParam
 /// </summary>
 public sealed partial class GetComponentTemplateRequest : PlainRequest<GetComponentTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public GetComponentTemplateRequest()
 	{
 	}
@@ -86,6 +87,15 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.get_component_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of component template names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

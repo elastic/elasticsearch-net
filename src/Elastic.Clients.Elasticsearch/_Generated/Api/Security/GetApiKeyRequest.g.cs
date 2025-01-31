@@ -110,6 +110,11 @@ public sealed partial class GetApiKeyRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetApiKeyRequest : PlainRequest<GetApiKeyRequestParameters>
 {
+	[JsonConstructor]
+	internal GetApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

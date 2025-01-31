@@ -60,6 +60,11 @@ public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingR
 	{
 	}
 
+	[JsonConstructor]
+	internal PutRoleMappingRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutRoleMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -67,6 +72,14 @@ public sealed partial class PutRoleMappingRequest : PlainRequest<PutRoleMappingR
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.put_role_mapping";
+
+	/// <summary>
+	/// <para>
+	/// Role-mapping name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

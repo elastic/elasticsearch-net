@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class CcrStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<CcrStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowStats = System.Text.Json.JsonEncodedText.Encode("auto_follow_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowStats = System.Text.Json.JsonEncodedText.Encode("follow_stats");
+
+	public override CcrStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats> propAutoFollowStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats> propFollowStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAutoFollowStats.TryRead(ref reader, options, PropAutoFollowStats))
+			{
+				continue;
+			}
+
+			if (propFollowStats.TryRead(ref reader, options, PropFollowStats))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CcrStatsResponse
+		{
+			AutoFollowStats = propAutoFollowStats.Value
+,
+			FollowStats = propFollowStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CcrStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAutoFollowStats, value.AutoFollowStats);
+		writer.WriteProperty(options, PropFollowStats, value.FollowStats);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CcrStatsResponseConverter))]
 public sealed partial class CcrStatsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("auto_follow_stats")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats AutoFollowStats { get; init; }
-	[JsonInclude, JsonPropertyName("follow_stats")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats FollowStats { get; init; }
 }

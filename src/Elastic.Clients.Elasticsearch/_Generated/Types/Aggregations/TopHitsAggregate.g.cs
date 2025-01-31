@@ -33,4 +33,6 @@ public sealed partial class TopHitsAggregate : IAggregate
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<object> Hits { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "top_hits";
 }

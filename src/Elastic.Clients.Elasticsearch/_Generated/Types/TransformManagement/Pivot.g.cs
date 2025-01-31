@@ -27,50 +27,46 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class PivotConverter : JsonConverter<Pivot>
+internal sealed partial class PivotConverter : System.Text.Json.Serialization.JsonConverter<Pivot>
 {
-	public override Pivot Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new Pivot();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropGroupBy = System.Text.Json.JsonEncodedText.Encode("group_by");
 
-				if (property == "group_by")
-				{
-					variant.GroupBy = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>?>(ref reader, options);
-					continue;
-				}
+	public override Pivot Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>?> propGroupBy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
+			{
+				continue;
 			}
+
+			if (propGroupBy.TryRead(ref reader, options, PropGroupBy))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Pivot
+		{
+			Aggregations = propAggregations.Value
+,
+			GroupBy = propGroupBy.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Pivot value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Pivot value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.GroupBy is not null)
-		{
-			writer.WritePropertyName("group_by");
-			JsonSerializer.Serialize(writer, value.GroupBy, options);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropGroupBy, value.GroupBy);
 		writer.WriteEndObject();
 	}
 }

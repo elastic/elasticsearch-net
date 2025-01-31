@@ -22,50 +22,256 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PutJobResponseConverter : System.Text.Json.Serialization.JsonConverter<PutJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyOpen = System.Text.Json.JsonEncodedText.Encode("allow_lazy_open");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundPersistInterval = System.Text.Json.JsonEncodedText.Encode("background_persist_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomSettings = System.Text.Json.JsonEncodedText.Encode("custom_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days");
+	private static readonly System.Text.Json.JsonEncodedText PropDataDescription = System.Text.Json.JsonEncodedText.Encode("data_description");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeedConfig = System.Text.Json.JsonEncodedText.Encode("datafeed_config");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropJobType = System.Text.Json.JsonEncodedText.Encode("job_type");
+	private static readonly System.Text.Json.JsonEncodedText PropJobVersion = System.Text.Json.JsonEncodedText.Encode("job_version");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotId = System.Text.Json.JsonEncodedText.Encode("model_snapshot_id");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
+	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsIndexName = System.Text.Json.JsonEncodedText.Encode("results_index_name");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsRetentionDays = System.Text.Json.JsonEncodedText.Encode("results_retention_days");
+
+	public override PutJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAllowLazyOpen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead> propAnalysisConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits> propAnalysisLimits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
+		LocalJsonValue<DateTimeOffset> propCreateTime = default;
+		LocalJsonValue<object?> propCustomSettings = default;
+		LocalJsonValue<long> propDailyModelSnapshotRetentionAfterDays = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription> propDataDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeed?> propDatafeedConfig = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propGroups = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<string> propJobType = default;
+		LocalJsonValue<string> propJobVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig?> propModelPlotConfig = default;
+		LocalJsonValue<string?> propModelSnapshotId = default;
+		LocalJsonValue<long> propModelSnapshotRetentionDays = default;
+		LocalJsonValue<long?> propRenormalizationWindowDays = default;
+		LocalJsonValue<string> propResultsIndexName = default;
+		LocalJsonValue<long?> propResultsRetentionDays = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyOpen.TryRead(ref reader, options, PropAllowLazyOpen))
+			{
+				continue;
+			}
+
+			if (propAnalysisConfig.TryRead(ref reader, options, PropAnalysisConfig))
+			{
+				continue;
+			}
+
+			if (propAnalysisLimits.TryRead(ref reader, options, PropAnalysisLimits))
+			{
+				continue;
+			}
+
+			if (propBackgroundPersistInterval.TryRead(ref reader, options, PropBackgroundPersistInterval))
+			{
+				continue;
+			}
+
+			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			{
+				continue;
+			}
+
+			if (propCustomSettings.TryRead(ref reader, options, PropCustomSettings))
+			{
+				continue;
+			}
+
+			if (propDailyModelSnapshotRetentionAfterDays.TryRead(ref reader, options, PropDailyModelSnapshotRetentionAfterDays))
+			{
+				continue;
+			}
+
+			if (propDataDescription.TryRead(ref reader, options, PropDataDescription))
+			{
+				continue;
+			}
+
+			if (propDatafeedConfig.TryRead(ref reader, options, PropDatafeedConfig))
+			{
+				continue;
+			}
+
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propGroups.TryRead(ref reader, options, PropGroups))
+			{
+				continue;
+			}
+
+			if (propJobId.TryRead(ref reader, options, PropJobId))
+			{
+				continue;
+			}
+
+			if (propJobType.TryRead(ref reader, options, PropJobType))
+			{
+				continue;
+			}
+
+			if (propJobVersion.TryRead(ref reader, options, PropJobVersion))
+			{
+				continue;
+			}
+
+			if (propModelPlotConfig.TryRead(ref reader, options, PropModelPlotConfig))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotId.TryRead(ref reader, options, PropModelSnapshotId))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotRetentionDays.TryRead(ref reader, options, PropModelSnapshotRetentionDays))
+			{
+				continue;
+			}
+
+			if (propRenormalizationWindowDays.TryRead(ref reader, options, PropRenormalizationWindowDays))
+			{
+				continue;
+			}
+
+			if (propResultsIndexName.TryRead(ref reader, options, PropResultsIndexName))
+			{
+				continue;
+			}
+
+			if (propResultsRetentionDays.TryRead(ref reader, options, PropResultsRetentionDays))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutJobResponse
+		{
+			AllowLazyOpen = propAllowLazyOpen.Value
+,
+			AnalysisConfig = propAnalysisConfig.Value
+,
+			AnalysisLimits = propAnalysisLimits.Value
+,
+			BackgroundPersistInterval = propBackgroundPersistInterval.Value
+,
+			CreateTime = propCreateTime.Value
+,
+			CustomSettings = propCustomSettings.Value
+,
+			DailyModelSnapshotRetentionAfterDays = propDailyModelSnapshotRetentionAfterDays.Value
+,
+			DataDescription = propDataDescription.Value
+,
+			DatafeedConfig = propDatafeedConfig.Value
+,
+			Description = propDescription.Value
+,
+			Groups = propGroups.Value
+,
+			JobId = propJobId.Value
+,
+			JobType = propJobType.Value
+,
+			JobVersion = propJobVersion.Value
+,
+			ModelPlotConfig = propModelPlotConfig.Value
+,
+			ModelSnapshotId = propModelSnapshotId.Value
+,
+			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value
+,
+			RenormalizationWindowDays = propRenormalizationWindowDays.Value
+,
+			ResultsIndexName = propResultsIndexName.Value
+,
+			ResultsRetentionDays = propResultsRetentionDays.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen);
+		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig);
+		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits);
+		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
+		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings);
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays);
+		writer.WriteProperty(options, PropDataDescription, value.DataDescription);
+		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig);
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropGroups, value.Groups);
+		writer.WriteProperty(options, PropJobId, value.JobId);
+		writer.WriteProperty(options, PropJobType, value.JobType);
+		writer.WriteProperty(options, PropJobVersion, value.JobVersion);
+		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig);
+		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays);
+		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutJobResponseConverter))]
 public sealed partial class PutJobResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool AllowLazyOpen { get; init; }
-	[JsonInclude, JsonPropertyName("analysis_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead AnalysisConfig { get; init; }
-	[JsonInclude, JsonPropertyName("analysis_limits")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits AnalysisLimits { get; init; }
-	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; init; }
-	[JsonInclude, JsonPropertyName("create_time")]
 	public DateTimeOffset CreateTime { get; init; }
-	[JsonInclude, JsonPropertyName("custom_settings")]
 	public object? CustomSettings { get; init; }
-	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long DailyModelSnapshotRetentionAfterDays { get; init; }
-	[JsonInclude, JsonPropertyName("data_description")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; init; }
-	[JsonInclude, JsonPropertyName("datafeed_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Datafeed? DatafeedConfig { get; init; }
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
-	[JsonInclude, JsonPropertyName("groups")]
 	public IReadOnlyCollection<string>? Groups { get; init; }
-	[JsonInclude, JsonPropertyName("job_id")]
 	public string JobId { get; init; }
-	[JsonInclude, JsonPropertyName("job_type")]
 	public string JobType { get; init; }
-	[JsonInclude, JsonPropertyName("job_version")]
 	public string JobVersion { get; init; }
-	[JsonInclude, JsonPropertyName("model_plot_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; init; }
-	[JsonInclude, JsonPropertyName("model_snapshot_id")]
 	public string? ModelSnapshotId { get; init; }
-	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long ModelSnapshotRetentionDays { get; init; }
-	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; init; }
-	[JsonInclude, JsonPropertyName("results_index_name")]
 	public string ResultsIndexName { get; init; }
-	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; init; }
 }

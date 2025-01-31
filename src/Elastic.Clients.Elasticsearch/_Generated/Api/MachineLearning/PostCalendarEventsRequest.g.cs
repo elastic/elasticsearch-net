@@ -45,6 +45,11 @@ public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalenda
 	{
 	}
 
+	[JsonConstructor]
+	internal PostCalendarEventsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPostCalendarEvents;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -52,6 +57,14 @@ public sealed partial class PostCalendarEventsRequest : PlainRequest<PostCalenda
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.post_calendar_events";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
 	/// <summary>
 	/// <para>

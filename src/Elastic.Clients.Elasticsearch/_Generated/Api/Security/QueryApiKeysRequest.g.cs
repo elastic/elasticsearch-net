@@ -55,98 +55,86 @@ public sealed partial class QueryApiKeysRequestParameters : RequestParameters
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<QueryApiKeysRequest>
+internal sealed partial class QueryApiKeysRequestConverter : System.Text.Json.Serialization.JsonConverter<QueryApiKeysRequest>
 {
-	public override QueryApiKeysRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override QueryApiKeysRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new QueryApiKeysRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?> propAggregations = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?> propQuery = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search_after")
-				{
-					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propFrom.TryRead(ref reader, options, PropFrom))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryRead(ref reader, options, PropSearchAfter))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryApiKeysRequest
+		{
+			Aggregations = propAggregations.Value
+	,
+			From = propFrom.Value
+	,
+			Query = propQuery.Value
+	,
+			SearchAfter = propSearchAfter.Value
+	,
+			Size = propSize.Value
+	,
+			Sort = propSort.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryApiKeysRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryApiKeysRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.SearchAfter is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, value.SearchAfter, options);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropFrom, value.From);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
 		writer.WriteEndObject();
 	}
 }
@@ -162,7 +150,8 @@ internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<Query
 [JsonConverter(typeof(QueryApiKeysRequestConverter))]
 public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysRequestParameters>
 {
-	public QueryApiKeysRequest()
+	[JsonConstructor]
+	internal QueryApiKeysRequest()
 	{
 	}
 
@@ -179,7 +168,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Determines whether aggregation names are prefixed by their respective types in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -188,7 +176,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
 	/// <summary>
@@ -196,7 +183,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 
 	/// <summary>
@@ -208,7 +194,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
 
 	/// <summary>
@@ -218,7 +203,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -231,7 +215,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Query { get; set; }
 
 	/// <summary>
@@ -239,7 +222,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Search after definition
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
@@ -249,7 +231,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -258,8 +239,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 

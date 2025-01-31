@@ -39,12 +39,16 @@ public sealed partial class SparseVectorQuery
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal SparseVectorQuery()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static SparseVectorQuery InferenceId(Elastic.Clients.Elasticsearch.Id id) => new SparseVectorQuery("inference_id", id);
 
@@ -113,143 +117,109 @@ public sealed partial class SparseVectorQuery
 	}
 }
 
-internal sealed partial class SparseVectorQueryConverter : JsonConverter<SparseVectorQuery>
+internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Serialization.JsonConverter<SparseVectorQuery>
 {
-	public override SparseVectorQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune");
+	private static readonly System.Text.Json.JsonEncodedText PropPruningConfig = System.Text.Json.JsonEncodedText.Encode("pruning_config");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
+
+	public override SparseVectorQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propPrune = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?> propPruningConfig = default;
+		LocalJsonValue<string?> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propPrune.TryRead(ref reader, options, PropPrune))
+			{
+				continue;
+			}
+
+			if (propPruningConfig.TryRead(ref reader, options, PropPruningConfig))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantInferenceId))
+			{
+				variantType = VariantInferenceId.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Id?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		Elastic.Clients.Elasticsearch.Field fieldValue = default;
-		bool? pruneValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? pruningConfigValue = default;
-		string? queryValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SparseVectorQuery
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "field")
-			{
-				fieldValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "prune")
-			{
-				pruneValue = JsonSerializer.Deserialize<bool?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "pruning_config")
-			{
-				pruningConfigValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "query")
-			{
-				queryValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "inference_id")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SparseVectorQuery' from the response.");
-		}
-
-		var result = new SparseVectorQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Field = fieldValue;
-		result.Prune = pruneValue;
-		result.PruningConfig = pruningConfigValue;
-		result.Query = queryValue;
-		result.QueryName = queryNameValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value
+	,
+			Field = propField.Value
+	,
+			Prune = propPrune.Value
+	,
+			PruningConfig = propPruningConfig.Value
+	,
+			Query = propQuery.Value
+	,
+			QueryName = propQueryName.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, SparseVectorQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SparseVectorQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
+			case "":
+				break;
+			case "inference_id":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(SparseVectorQuery)}'.");
 		}
 
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.Prune.HasValue)
-		{
-			writer.WritePropertyName("prune");
-			writer.WriteBooleanValue(value.Prune.Value);
-		}
-
-		if (value.PruningConfig is not null)
-		{
-			writer.WritePropertyName("pruning_config");
-			JsonSerializer.Serialize(writer, value.PruningConfig, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Query))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(value.Query);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "inference_id":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Id>(writer, (Elastic.Clients.Elasticsearch.Id)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropPrune, value.Prune);
+		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
 		writer.WriteEndObject();
 	}
 }

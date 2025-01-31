@@ -22,13 +22,64 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ScriptsPainlessExecuteResponseConverter<TResult> : System.Text.Json.Serialization.JsonConverter<ScriptsPainlessExecuteResponse<TResult>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+
+	public override ScriptsPainlessExecuteResponse<TResult> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<TResult> propResult = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propResult.TryRead(ref reader, options, PropResult, typeof(SourceMarker<TResult>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ScriptsPainlessExecuteResponse<TResult>
+		{
+			Result = propResult.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ScriptsPainlessExecuteResponse<TResult> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropResult, value.Result, null, typeof(SourceMarker<TResult>));
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class ScriptsPainlessExecuteResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(ScriptsPainlessExecuteResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(ScriptsPainlessExecuteResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(ScriptsPainlessExecuteResponseConverterFactory))]
 public sealed partial class ScriptsPainlessExecuteResponse<TResult> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("result")]
-	[SourceConverter]
 	public TResult Result { get; init; }
 }

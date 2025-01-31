@@ -22,31 +22,163 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class GetResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<GetResponse<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnored = System.Text.Json.JsonEncodedText.Encode("_ignored");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override GetResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValues?> propFields = default;
+		LocalJsonValue<bool> propFound = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propIgnored = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<TDocument?> propSource = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propFound.TryRead(ref reader, options, PropFound))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIgnored.TryRead(ref reader, options, PropIgnored))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryRead(ref reader, options, PropPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propRouting.TryRead(ref reader, options, PropRouting))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryRead(ref reader, options, PropSeqNo))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TDocument?>)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetResponse<TDocument>
+		{
+			Fields = propFields.Value
+,
+			Found = propFound.Value
+,
+			Id = propId.Value
+,
+			Ignored = propIgnored.Value
+,
+			Index = propIndex.Value
+,
+			PrimaryTerm = propPrimaryTerm.Value
+,
+			Routing = propRouting.Value
+,
+			SeqNo = propSeqNo.Value
+,
+			Source = propSource.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropFound, value.Found);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIgnored, value.Ignored);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm);
+		writer.WriteProperty(options, PropRouting, value.Routing);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo);
+		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class GetResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(GetResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(GetResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(GetResponseConverterFactory))]
 public sealed partial class GetResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
-	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TDocument? Source { get; init; }
-	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 }

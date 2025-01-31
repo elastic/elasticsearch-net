@@ -264,6 +264,11 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateByQueryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -271,6 +276,16 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "update_by_query";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -59,6 +59,11 @@ public sealed partial class GrantApiKeyRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequestParameters>
 {
+	[JsonConstructor]
+	internal GrantApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGrantApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

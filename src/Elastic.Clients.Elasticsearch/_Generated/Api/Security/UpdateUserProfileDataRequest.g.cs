@@ -70,6 +70,11 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateUserProfileDataRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateUserProfileData;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -77,6 +82,14 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.update_user_profile_data";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>

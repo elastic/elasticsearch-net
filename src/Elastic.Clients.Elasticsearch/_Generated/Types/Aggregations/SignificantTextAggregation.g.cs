@@ -27,6 +27,200 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class SignificantTextAggregationConverter : System.Text.Json.Serialization.JsonConverter<SignificantTextAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundFilter = System.Text.Json.JsonEncodedText.Encode("background_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropChiSquare = System.Text.Json.JsonEncodedText.Encode("chi_square");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFilterDuplicateText = System.Text.Json.JsonEncodedText.Encode("filter_duplicate_text");
+	private static readonly System.Text.Json.JsonEncodedText PropGnd = System.Text.Json.JsonEncodedText.Encode("gnd");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropJlh = System.Text.Json.JsonEncodedText.Encode("jlh");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMutualInformation = System.Text.Json.JsonEncodedText.Encode("mutual_information");
+	private static readonly System.Text.Json.JsonEncodedText PropPercentage = System.Text.Json.JsonEncodedText.Encode("percentage");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptHeuristic = System.Text.Json.JsonEncodedText.Encode("script_heuristic");
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSourceFields = System.Text.Json.JsonEncodedText.Encode("source_fields");
+
+	public override SignificantTextAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propBackgroundFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic?> propChiSquare = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?> propExecutionHint = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<bool?> propFilterDuplicateText = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic?> propGnd = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?> propInclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.EmptyObject?> propJlh = default;
+		LocalJsonValue<long?> propMinDocCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic?> propMutualInformation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic?> propPercentage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic?> propScriptHeuristic = default;
+		LocalJsonValue<long?> propShardMinDocCount = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propSourceFields = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackgroundFilter.TryRead(ref reader, options, PropBackgroundFilter))
+			{
+				continue;
+			}
+
+			if (propChiSquare.TryRead(ref reader, options, PropChiSquare))
+			{
+				continue;
+			}
+
+			if (propExclude.TryRead(ref reader, options, PropExclude))
+			{
+				continue;
+			}
+
+			if (propExecutionHint.TryRead(ref reader, options, PropExecutionHint))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propFilterDuplicateText.TryRead(ref reader, options, PropFilterDuplicateText))
+			{
+				continue;
+			}
+
+			if (propGnd.TryRead(ref reader, options, PropGnd))
+			{
+				continue;
+			}
+
+			if (propInclude.TryRead(ref reader, options, PropInclude))
+			{
+				continue;
+			}
+
+			if (propJlh.TryRead(ref reader, options, PropJlh))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			{
+				continue;
+			}
+
+			if (propMutualInformation.TryRead(ref reader, options, PropMutualInformation))
+			{
+				continue;
+			}
+
+			if (propPercentage.TryRead(ref reader, options, PropPercentage))
+			{
+				continue;
+			}
+
+			if (propScriptHeuristic.TryRead(ref reader, options, PropScriptHeuristic))
+			{
+				continue;
+			}
+
+			if (propShardMinDocCount.TryRead(ref reader, options, PropShardMinDocCount))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryRead(ref reader, options, PropShardSize))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSourceFields.TryRead(ref reader, options, PropSourceFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SignificantTextAggregation
+		{
+			BackgroundFilter = propBackgroundFilter.Value
+,
+			ChiSquare = propChiSquare.Value
+,
+			Exclude = propExclude.Value
+,
+			ExecutionHint = propExecutionHint.Value
+,
+			Field = propField.Value
+,
+			FilterDuplicateText = propFilterDuplicateText.Value
+,
+			Gnd = propGnd.Value
+,
+			Include = propInclude.Value
+,
+			Jlh = propJlh.Value
+,
+			MinDocCount = propMinDocCount.Value
+,
+			MutualInformation = propMutualInformation.Value
+,
+			Percentage = propPercentage.Value
+,
+			ScriptHeuristic = propScriptHeuristic.Value
+,
+			ShardMinDocCount = propShardMinDocCount.Value
+,
+			ShardSize = propShardSize.Value
+,
+			Size = propSize.Value
+,
+			SourceFields = propSourceFields.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SignificantTextAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBackgroundFilter, value.BackgroundFilter);
+		writer.WriteProperty(options, PropChiSquare, value.ChiSquare);
+		writer.WriteProperty(options, PropExclude, value.Exclude);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropFilterDuplicateText, value.FilterDuplicateText);
+		writer.WriteProperty(options, PropGnd, value.Gnd);
+		writer.WriteProperty(options, PropInclude, value.Include);
+		writer.WriteProperty(options, PropJlh, value.Jlh);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
+		writer.WriteProperty(options, PropMutualInformation, value.MutualInformation);
+		writer.WriteProperty(options, PropPercentage, value.Percentage);
+		writer.WriteProperty(options, PropScriptHeuristic, value.ScriptHeuristic);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SignificantTextAggregationConverter))]
 public sealed partial class SignificantTextAggregation
 {
 	/// <summary>
@@ -34,7 +228,6 @@ public sealed partial class SignificantTextAggregation
 	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("background_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilter { get; set; }
 
 	/// <summary>
@@ -42,7 +235,6 @@ public sealed partial class SignificantTextAggregation
 	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("chi_square")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
 
 	/// <summary>
@@ -50,7 +242,6 @@ public sealed partial class SignificantTextAggregation
 	/// Values to exclude.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
@@ -58,7 +249,6 @@ public sealed partial class SignificantTextAggregation
 	/// Determines whether the aggregation will use field values directly or global ordinals.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
@@ -66,7 +256,6 @@ public sealed partial class SignificantTextAggregation
 	/// The field from which to return significant text.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -74,7 +263,6 @@ public sealed partial class SignificantTextAggregation
 	/// Whether to out duplicate text to deal with noisy data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter_duplicate_text")]
 	public bool? FilterDuplicateText { get; set; }
 
 	/// <summary>
@@ -82,7 +270,6 @@ public sealed partial class SignificantTextAggregation
 	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("gnd")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
 
 	/// <summary>
@@ -90,7 +277,6 @@ public sealed partial class SignificantTextAggregation
 	/// Values to include.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
 	/// <summary>
@@ -98,7 +284,6 @@ public sealed partial class SignificantTextAggregation
 	/// Use JLH score as the significance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("jlh")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Jlh { get; set; }
 
 	/// <summary>
@@ -106,7 +291,6 @@ public sealed partial class SignificantTextAggregation
 	/// Only return values that are found in more than <c>min_doc_count</c> hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
@@ -114,7 +298,6 @@ public sealed partial class SignificantTextAggregation
 	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mutual_information")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
 
 	/// <summary>
@@ -122,7 +305,6 @@ public sealed partial class SignificantTextAggregation
 	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("percentage")]
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
 
 	/// <summary>
@@ -130,7 +312,6 @@ public sealed partial class SignificantTextAggregation
 	/// Customized score, implemented via a script.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_heuristic")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
 
 	/// <summary>
@@ -139,7 +320,6 @@ public sealed partial class SignificantTextAggregation
 	/// Values will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
@@ -148,7 +328,6 @@ public sealed partial class SignificantTextAggregation
 	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -156,7 +335,6 @@ public sealed partial class SignificantTextAggregation
 	/// The number of buckets returned out of the overall terms list.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -164,8 +342,6 @@ public sealed partial class SignificantTextAggregation
 	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(SignificantTextAggregation significantTextAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantText(significantTextAggregation);

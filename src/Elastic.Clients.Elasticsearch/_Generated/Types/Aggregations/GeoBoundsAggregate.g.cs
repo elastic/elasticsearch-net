@@ -33,4 +33,6 @@ public sealed partial class GeoBoundsAggregate : IAggregate
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "geo_bounds";
 }

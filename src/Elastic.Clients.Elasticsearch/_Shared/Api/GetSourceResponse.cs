@@ -3,28 +3,20 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
-using System.IO;
+
+using Elastic.Transport.Extensions;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class GetSourceResponse<TDocument> : ISelfDeserializable
+public partial class GetSourceResponse<TDocument> : ISelfTwoWaySerializable
 {
 	public TDocument Body { get; set; }
 
-	public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) =>
+		settings.SourceSerializer.Serialize(Body, writer);
 
-		using var stream = new MemoryStream();
-
-		var writer = new Utf8JsonWriter(stream);
-		jsonDoc.WriteTo(writer);
-		writer.Flush();
-		stream.Position = 0;
-
-		var body = settings.SourceSerializer.Deserialize<TDocument>(stream);
-
-		Body = body;
-	}
+	public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings) =>
+		Body = settings.SourceSerializer.Deserialize<TDocument>(ref reader);
 }

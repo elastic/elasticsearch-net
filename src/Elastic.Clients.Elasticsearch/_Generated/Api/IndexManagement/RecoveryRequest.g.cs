@@ -103,6 +103,7 @@ public sealed partial class RecoveryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParameters>
 {
+	[JsonConstructor]
 	public RecoveryRequest()
 	{
 	}
@@ -118,6 +119,16 @@ public sealed partial class RecoveryRequest : PlainRequest<RecoveryRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.recovery";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

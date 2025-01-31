@@ -59,6 +59,11 @@ public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepos
 	{
 	}
 
+	[JsonConstructor]
+	internal CleanupRepositoryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotCleanupRepository;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -66,6 +71,14 @@ public sealed partial class CleanupRepositoryRequest : PlainRequest<CleanupRepos
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.cleanup_repository";
+
+	/// <summary>
+	/// <para>
+	/// Snapshot repository to clean up.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>

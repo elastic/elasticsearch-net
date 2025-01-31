@@ -35,4 +35,6 @@ public sealed partial class MatrixStatsAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields>? Fields { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "matrix_stats";
 }

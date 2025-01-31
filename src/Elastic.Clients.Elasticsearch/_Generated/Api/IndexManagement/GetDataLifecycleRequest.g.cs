@@ -68,6 +68,11 @@ public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecy
 	{
 	}
 
+	[JsonConstructor]
+	internal GetDataLifecycleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -75,6 +80,16 @@ public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecy
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_data_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

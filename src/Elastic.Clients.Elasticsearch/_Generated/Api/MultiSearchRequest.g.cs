@@ -144,6 +144,7 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequestParameters>, IStreamSerializable
 {
+	[JsonConstructor]
 	public MultiSearchRequest()
 	{
 	}
@@ -159,6 +160,14 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "msearch";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases to search.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

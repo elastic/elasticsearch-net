@@ -66,6 +66,11 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 	{
 	}
 
+	[JsonConstructor]
+	internal PutPipelineRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -73,6 +78,14 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ingest.put_pipeline";
+
+	/// <summary>
+	/// <para>
+	/// ID of the ingest pipeline to create or update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

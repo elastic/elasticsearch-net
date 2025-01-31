@@ -44,6 +44,11 @@ public sealed partial class GetTokenRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetTokenRequest : PlainRequest<GetTokenRequestParameters>
 {
+	[JsonConstructor]
+	internal GetTokenRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetToken;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

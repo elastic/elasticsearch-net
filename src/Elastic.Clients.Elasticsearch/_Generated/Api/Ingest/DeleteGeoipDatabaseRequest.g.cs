@@ -60,6 +60,11 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteGeoipDatabaseRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeleteGeoipDatabase;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -67,6 +72,14 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.delete_geoip_database";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of geoip database configurations to delete
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

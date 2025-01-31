@@ -47,6 +47,11 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal PutFilterRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutFilter;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -54,6 +59,14 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_filter";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -53,6 +53,11 @@ public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAu
 	{
 	}
 
+	[JsonConstructor]
+	internal PauseAutoFollowPatternRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPauseAutoFollowPattern;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -60,6 +65,14 @@ public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAu
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.pause_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The name of the auto follow pattern that should pause discovering new indices to follow.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

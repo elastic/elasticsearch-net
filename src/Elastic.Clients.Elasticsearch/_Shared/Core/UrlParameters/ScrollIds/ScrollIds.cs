@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -97,24 +99,27 @@ public sealed class ScrollIds : IUrlParameter, IEnumerable<ScrollId>, IEquatable
 	string IUrlParameter.GetString(ITransportConfiguration? settings) => ToString();
 }
 
-internal sealed class ScrollIdsConverter : JsonConverter<ScrollIds>
+internal sealed class ScrollIdsConverter :
+	JsonConverter<ScrollIds>
 {
-	public override ScrollIds? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override ScrollIds Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Expected {JsonTokenType.StartArray} token but read '{reader.TokenType}' token for ScrollIds.");
-
-		return JsonSerializer.Deserialize<string[]>(ref reader, options);
+		return reader.TokenType switch
+		{
+			JsonTokenType.String => new ScrollIds([reader.ReadValue<ScrollId>(options)]),
+			JsonTokenType.StartArray => new ScrollIds(reader.ReadValue<List<ScrollId>>(options)),
+			_ => throw new JsonException($"Expected JSON '{JsonTokenType.String}' or '{JsonTokenType.StartArray}' token, but got '{reader.TokenType}'.")
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, ScrollIds value, JsonSerializerOptions options)
 	{
-		if (value is null)
+		if (value.Ids.Count == 1)
 		{
-			writer.WriteNullValue();
+			writer.WriteValue(options, value.Ids[0]);
 			return;
 		}
 
-		JsonSerializer.Serialize(writer, value.Ids, options);
+		writer.WriteValue(options, value.Ids);
 	}
 }

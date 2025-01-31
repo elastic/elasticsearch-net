@@ -44,6 +44,11 @@ public sealed partial class GetBuiltinPrivilegesRequestParameters : RequestParam
 /// </summary>
 public sealed partial class GetBuiltinPrivilegesRequest : PlainRequest<GetBuiltinPrivilegesRequestParameters>
 {
+	[JsonConstructor]
+	internal GetBuiltinPrivilegesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetBuiltinPrivileges;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

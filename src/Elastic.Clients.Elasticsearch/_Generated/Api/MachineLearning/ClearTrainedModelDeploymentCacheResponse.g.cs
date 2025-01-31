@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ClearTrainedModelDeploymentCacheResponseConverter : System.Text.Json.Serialization.JsonConverter<ClearTrainedModelDeploymentCacheResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCleared = System.Text.Json.JsonEncodedText.Encode("cleared");
+
+	public override ClearTrainedModelDeploymentCacheResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propCleared = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCleared.TryRead(ref reader, options, PropCleared))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClearTrainedModelDeploymentCacheResponse
+		{
+			Cleared = propCleared.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearTrainedModelDeploymentCacheResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCleared, value.Cleared);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClearTrainedModelDeploymentCacheResponseConverter))]
 public sealed partial class ClearTrainedModelDeploymentCacheResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("cleared")]
 	public bool Cleared { get; init; }
 }

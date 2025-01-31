@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetModelSnapshotsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetModelSnapshotsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshots = System.Text.Json.JsonEncodedText.Encode("model_snapshots");
+
+	public override GetModelSnapshotsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot>> propModelSnapshots = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propModelSnapshots.TryRead(ref reader, options, PropModelSnapshots))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetModelSnapshotsResponse
+		{
+			Count = propCount.Value
+,
+			ModelSnapshots = propModelSnapshots.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetModelSnapshotsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropModelSnapshots, value.ModelSnapshots);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetModelSnapshotsResponseConverter))]
 public sealed partial class GetModelSnapshotsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("model_snapshots")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot> ModelSnapshots { get; init; }
 }

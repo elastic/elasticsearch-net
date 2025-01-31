@@ -47,6 +47,11 @@ public sealed partial class DeleteFilterRequest : PlainRequest<DeleteFilterReque
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteFilterRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteFilter;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -54,6 +59,14 @@ public sealed partial class DeleteFilterRequest : PlainRequest<DeleteFilterReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_filter";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 }
 
 /// <summary>

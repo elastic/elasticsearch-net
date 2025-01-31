@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RenderSearchTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<RenderSearchTemplateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropTemplateOutput = System.Text.Json.JsonEncodedText.Encode("template_output");
+
+	public override RenderSearchTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propTemplateOutput = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propTemplateOutput.TryRead(ref reader, options, PropTemplateOutput))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RenderSearchTemplateResponse
+		{
+			TemplateOutput = propTemplateOutput.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RenderSearchTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropTemplateOutput, value.TemplateOutput);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RenderSearchTemplateResponseConverter))]
 public sealed partial class RenderSearchTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("template_output")]
 	public IReadOnlyDictionary<string, object> TemplateOutput { get; init; }
 }

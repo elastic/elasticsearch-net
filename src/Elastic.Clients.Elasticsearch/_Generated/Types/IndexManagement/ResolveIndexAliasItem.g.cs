@@ -27,11 +27,52 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ResolveIndexAliasItemConverter : System.Text.Json.Serialization.JsonConverter<ResolveIndexAliasItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override ResolveIndexAliasItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
+		LocalJsonValue<string> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ResolveIndexAliasItem
+		{
+			Indices = propIndices.Value
+,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResolveIndexAliasItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ResolveIndexAliasItemConverter))]
 public sealed partial class ResolveIndexAliasItem
 {
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Indices { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

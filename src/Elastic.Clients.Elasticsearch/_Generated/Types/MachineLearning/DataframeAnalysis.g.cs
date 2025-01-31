@@ -39,12 +39,16 @@ public sealed partial class DataframeAnalysis
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal DataframeAnalysis()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static DataframeAnalysis Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification dataframeAnalysisClassification) => new DataframeAnalysis("classification", dataframeAnalysisClassification);
 	public static DataframeAnalysis OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => new DataframeAnalysis("outlier_detection", dataframeAnalysisOutlierDetection);
@@ -63,77 +67,68 @@ public sealed partial class DataframeAnalysis
 	}
 }
 
-internal sealed partial class DataframeAnalysisConverter : JsonConverter<DataframeAnalysis>
+internal sealed partial class DataframeAnalysisConverter : System.Text.Json.Serialization.JsonConverter<DataframeAnalysis>
 {
-	public override DataframeAnalysis Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+
+	public override DataframeAnalysis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantClassification))
+			{
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOutlierDetection))
+			{
+				variantType = VariantOutlierDetection.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegression))
+			{
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "outlier_detection")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "regression")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DataframeAnalysis' from the response.");
-		}
-
-		var result = new DataframeAnalysis(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DataframeAnalysis { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeAnalysis value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeAnalysis value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification)value.Variant, options);
-					break;
-				case "outlier_detection":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification?)value.Variant);
+				break;
+			case "outlier_detection":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection?)value.Variant);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DataframeAnalysis)}'.");
 		}
 
 		writer.WriteEndObject();

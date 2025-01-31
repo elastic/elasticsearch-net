@@ -27,6 +27,80 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class RemoveActionConverter : System.Text.Json.Serialization.JsonConverter<RemoveAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMustExist = System.Text.Json.JsonEncodedText.Encode("must_exist");
+
+	public override RemoveAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexAlias?> propAlias = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<bool?> propMustExist = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlias.TryRead(ref reader, options, PropAlias))
+			{
+				continue;
+			}
+
+			if (propAliases.TryRead(ref reader, options, PropAliases, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>)))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propMustExist.TryRead(ref reader, options, PropMustExist))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RemoveAction
+		{
+			Alias = propAlias.Value
+,
+			Aliases = propAliases.Value
+,
+			Index = propIndex.Value
+,
+			Indices = propIndices.Value
+,
+			MustExist = propMustExist.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemoveAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlias, value.Alias);
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?, Elastic.Clients.Elasticsearch.IndexAlias>));
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropMustExist, value.MustExist);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RemoveActionConverter))]
 public sealed partial class RemoveAction
 {
 	/// <summary>
@@ -35,7 +109,6 @@ public sealed partial class RemoveAction
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
 	/// <summary>
@@ -44,8 +117,6 @@ public sealed partial class RemoveAction
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>
@@ -54,7 +125,6 @@ public sealed partial class RemoveAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -63,7 +133,6 @@ public sealed partial class RemoveAction
 	/// Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
@@ -71,7 +140,6 @@ public sealed partial class RemoveAction
 	/// If <c>true</c>, the alias must exist to perform the action.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(RemoveAction removeAction) => Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction.Remove(removeAction);

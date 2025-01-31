@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+internal sealed partial class GetSlmStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<GetSlmStatusResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropOperationMode = System.Text.Json.JsonEncodedText.Encode("operation_mode");
+
+	public override GetSlmStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LifecycleOperationMode> propOperationMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propOperationMode.TryRead(ref reader, options, PropOperationMode))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetSlmStatusResponse
+		{
+			OperationMode = propOperationMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSlmStatusResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropOperationMode, value.OperationMode);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetSlmStatusResponseConverter))]
 public sealed partial class GetSlmStatusResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("operation_mode")]
 	public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode { get; init; }
 }

@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+internal sealed partial class ClearCursorResponseConverter : System.Text.Json.Serialization.JsonConverter<ClearCursorResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded");
+
+	public override ClearCursorResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propSucceeded = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSucceeded.TryRead(ref reader, options, PropSucceeded))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ClearCursorResponse
+		{
+			Succeeded = propSucceeded.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ClearCursorResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSucceeded, value.Succeeded);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ClearCursorResponseConverter))]
 public sealed partial class ClearCursorResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

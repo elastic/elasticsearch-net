@@ -65,6 +65,11 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApiKeyRequestParameters>
 {
+	[JsonConstructor]
+	internal InvalidateApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

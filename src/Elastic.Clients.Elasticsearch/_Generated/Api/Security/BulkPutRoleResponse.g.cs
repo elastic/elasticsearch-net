@@ -22,10 +22,76 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class BulkPutRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<BulkPutRoleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropNoop = System.Text.Json.JsonEncodedText.Encode("noop");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+
+	public override BulkPutRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<string>?> propCreated = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.BulkError?> propErrors = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propNoop = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propUpdated = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreated.TryRead(ref reader, options, PropCreated))
+			{
+				continue;
+			}
+
+			if (propErrors.TryRead(ref reader, options, PropErrors))
+			{
+				continue;
+			}
+
+			if (propNoop.TryRead(ref reader, options, PropNoop))
+			{
+				continue;
+			}
+
+			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new BulkPutRoleResponse
+		{
+			Created = propCreated.Value
+,
+			Errors = propErrors.Value
+,
+			Noop = propNoop.Value
+,
+			Updated = propUpdated.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, BulkPutRoleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreated, value.Created);
+		writer.WriteProperty(options, PropErrors, value.Errors);
+		writer.WriteProperty(options, PropNoop, value.Noop);
+		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(BulkPutRoleResponseConverter))]
 public sealed partial class BulkPutRoleResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +99,6 @@ public sealed partial class BulkPutRoleResponse : ElasticsearchResponse
 	/// Array of created roles
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("created")]
 	public IReadOnlyCollection<string>? Created { get; init; }
 
 	/// <summary>
@@ -41,7 +106,6 @@ public sealed partial class BulkPutRoleResponse : ElasticsearchResponse
 	/// Present if any updates resulted in errors
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("errors")]
 	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; init; }
 
 	/// <summary>
@@ -49,7 +113,6 @@ public sealed partial class BulkPutRoleResponse : ElasticsearchResponse
 	/// Array of role names without any changes
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("noop")]
 	public IReadOnlyCollection<string>? Noop { get; init; }
 
 	/// <summary>
@@ -57,6 +120,5 @@ public sealed partial class BulkPutRoleResponse : ElasticsearchResponse
 	/// Array of updated roles
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated")]
 	public IReadOnlyCollection<string>? Updated { get; init; }
 }

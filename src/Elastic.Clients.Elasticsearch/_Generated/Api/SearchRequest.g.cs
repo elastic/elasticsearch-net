@@ -273,434 +273,366 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-internal sealed partial class SearchRequestConverter : JsonConverter<SearchRequest>
+internal sealed partial class SearchRequestConverter : System.Text.Json.Serialization.JsonConverter<SearchRequest>
 {
-	public override SearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropDocvalueFields = System.Text.Json.JsonEncodedText.Encode("docvalue_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropExt = System.Text.Json.JsonEncodedText.Encode("ext");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesBoost = System.Text.Json.JsonEncodedText.Encode("indices_boost");
+	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropPit = System.Text.Json.JsonEncodedText.Encode("pit");
+	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("rank");
+	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore");
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggest = System.Text.Json.JsonEncodedText.Encode("suggest");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminateAfter = System.Text.Json.JsonEncodedText.Encode("terminate_after");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackScores = System.Text.Json.JsonEncodedText.Encode("track_scores");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override SearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new SearchRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propDocvalueFields = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<IDictionary<string, object>?> propExt = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Highlight?> propHighlight = default;
+		LocalJsonValue<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?> propIndicesBoost = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?> propKnn = default;
+		LocalJsonValue<double?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?> propPit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propPostFilter = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Rank?> propRank = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?> propRescore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever?> propRetriever = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<ICollection<string>?> propStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Suggester?> propSuggest = default;
+		LocalJsonValue<long?> propTerminateAfter = default;
+		LocalJsonValue<string?> propTimeout = default;
+		LocalJsonValue<bool?> propTrackScores = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?> propTrackTotalHits = default;
+		LocalJsonValue<bool?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "collapse")
-				{
-					variant.Collapse = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "docvalue_fields")
-				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "explain")
-				{
-					variant.Explain = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ext")
-				{
-					variant.Ext = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fields")
-				{
-					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "highlight")
-				{
-					variant.Highlight = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Highlight?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices_boost")
-				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "knn")
-				{
-					variant.Knn = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "min_score")
-				{
-					variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "pit")
-				{
-					variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "post_filter")
-				{
-					variant.PostFilter = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "profile")
-				{
-					variant.Profile = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rank")
-				{
-					variant.Rank = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Rank?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "rescore")
-				{
-					variant.Rescore = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "retriever")
-				{
-					variant.Retriever = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Retriever?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "script_fields")
-				{
-					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search_after")
-				{
-					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "seq_no_primary_term")
-				{
-					variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "slice")
-				{
-					variant.Slice = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SlicedScroll?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_source")
-				{
-					variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stats")
-				{
-					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stored_fields")
-				{
-					variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "suggest")
-				{
-					variant.Suggest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Suggester?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "terminate_after")
-				{
-					variant.TerminateAfter = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "timeout")
-				{
-					variant.Timeout = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_scores")
-				{
-					variant.TrackScores = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "track_total_hits")
-				{
-					variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			{
+				continue;
+			}
+
+			if (propDocvalueFields.TryRead(ref reader, options, PropDocvalueFields))
+			{
+				continue;
+			}
+
+			if (propExplain.TryRead(ref reader, options, PropExplain))
+			{
+				continue;
+			}
+
+			if (propExt.TryRead(ref reader, options, PropExt))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propFrom.TryRead(ref reader, options, PropFrom))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryRead(ref reader, options, PropHighlight))
+			{
+				continue;
+			}
+
+			if (propIndicesBoost.TryRead(ref reader, options, PropIndicesBoost))
+			{
+				continue;
+			}
+
+			if (propKnn.TryRead(ref reader, options, PropKnn, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?, Elastic.Clients.Elasticsearch.KnnSearch>)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			{
+				continue;
+			}
+
+			if (propPit.TryRead(ref reader, options, PropPit))
+			{
+				continue;
+			}
+
+			if (propPostFilter.TryRead(ref reader, options, PropPostFilter))
+			{
+				continue;
+			}
+
+			if (propProfile.TryRead(ref reader, options, PropProfile))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propRank.TryRead(ref reader, options, PropRank))
+			{
+				continue;
+			}
+
+			if (propRescore.TryRead(ref reader, options, PropRescore, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?, Elastic.Clients.Elasticsearch.Core.Search.Rescore>)))
+			{
+				continue;
+			}
+
+			if (propRetriever.TryRead(ref reader, options, PropRetriever))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryRead(ref reader, options, PropScriptFields))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryRead(ref reader, options, PropSearchAfter))
+			{
+				continue;
+			}
+
+			if (propSeqNoPrimaryTerm.TryRead(ref reader, options, PropSeqNoPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSlice.TryRead(ref reader, options, PropSlice))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propStats.TryRead(ref reader, options, PropStats))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryRead(ref reader, options, PropStoredFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propSuggest.TryRead(ref reader, options, PropSuggest))
+			{
+				continue;
+			}
+
+			if (propTerminateAfter.TryRead(ref reader, options, PropTerminateAfter))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryRead(ref reader, options, PropTimeout))
+			{
+				continue;
+			}
+
+			if (propTrackScores.TryRead(ref reader, options, PropTrackScores))
+			{
+				continue;
+			}
+
+			if (propTrackTotalHits.TryRead(ref reader, options, PropTrackTotalHits))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SearchRequest
+		{
+			Aggregations = propAggregations.Value
+	,
+			Collapse = propCollapse.Value
+	,
+			DocvalueFields = propDocvalueFields.Value
+	,
+			Explain = propExplain.Value
+	,
+			Ext = propExt.Value
+	,
+			Fields = propFields.Value
+	,
+			From = propFrom.Value
+	,
+			Highlight = propHighlight.Value
+	,
+			IndicesBoost = propIndicesBoost.Value
+	,
+			Knn = propKnn.Value
+	,
+			MinScore = propMinScore.Value
+	,
+			Pit = propPit.Value
+	,
+			PostFilter = propPostFilter.Value
+	,
+			Profile = propProfile.Value
+	,
+			Query = propQuery.Value
+	,
+			Rank = propRank.Value
+	,
+			Rescore = propRescore.Value
+	,
+			Retriever = propRetriever.Value
+	,
+			RuntimeMappings = propRuntimeMappings.Value
+	,
+			ScriptFields = propScriptFields.Value
+	,
+			SearchAfter = propSearchAfter.Value
+	,
+			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value
+	,
+			Size = propSize.Value
+	,
+			Slice = propSlice.Value
+	,
+			Sort = propSort.Value
+	,
+			Source = propSource.Value
+	,
+			Stats = propStats.Value
+	,
+			StoredFields = propStoredFields.Value
+	,
+			Suggest = propSuggest.Value
+	,
+			TerminateAfter = propTerminateAfter.Value
+	,
+			Timeout = propTimeout.Value
+	,
+			TrackScores = propTrackScores.Value
+	,
+			TrackTotalHits = propTrackTotalHits.Value
+	,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, SearchRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.Collapse is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, value.Collapse, options);
-		}
-
-		if (value.DocvalueFields is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
-		}
-
-		if (value.Explain.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(value.Explain.Value);
-		}
-
-		if (value.Ext is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, value.Ext, options);
-		}
-
-		if (value.Fields is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value.Fields, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Highlight is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, value.Highlight, options);
-		}
-
-		if (value.IndicesBoost is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, value.IndicesBoost, options);
-		}
-
-		if (value.Knn is not null)
-		{
-			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, value.Knn, options);
-		}
-
-		if (value.MinScore.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(value.MinScore.Value);
-		}
-
-		if (value.Pit is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, value.Pit, options);
-		}
-
-		if (value.PostFilter is not null)
-		{
-			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, value.PostFilter, options);
-		}
-
-		if (value.Profile.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(value.Profile.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.Rank is not null)
-		{
-			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, value.Rank, options);
-		}
-
-		if (value.Rescore is not null)
-		{
-			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, value.Rescore, options);
-		}
-
-		if (value.Retriever is not null)
-		{
-			writer.WritePropertyName("retriever");
-			JsonSerializer.Serialize(writer, value.Retriever, options);
-		}
-
-		if (value.RuntimeMappings is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
-		}
-
-		if (value.ScriptFields is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, value.ScriptFields, options);
-		}
-
-		if (value.SearchAfter is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, value.SearchAfter, options);
-		}
-
-		if (value.SeqNoPrimaryTerm.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Slice is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, value.Slice, options);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
-		if (value.Source is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, value.Source, options);
-		}
-
-		if (value.Stats is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, value.Stats, options);
-		}
-
-		if (value.StoredFields is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			new FieldsConverter().Write(writer, value.StoredFields, options);
-		}
-
-		if (value.Suggest is not null)
-		{
-			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, value.Suggest, options);
-		}
-
-		if (value.TerminateAfter.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(value.TerminateAfter.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.Timeout))
-		{
-			writer.WritePropertyName("timeout");
-			writer.WriteStringValue(value.Timeout);
-		}
-
-		if (value.TrackScores.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(value.TrackScores.Value);
-		}
-
-		if (value.TrackTotalHits is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
-		}
-
-		if (value.Version.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(value.Version.Value);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropCollapse, value.Collapse);
+		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields);
+		writer.WriteProperty(options, PropExplain, value.Explain);
+		writer.WriteProperty(options, PropExt, value.Ext);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropFrom, value.From);
+		writer.WriteProperty(options, PropHighlight, value.Highlight);
+		writer.WriteProperty(options, PropIndicesBoost, value.IndicesBoost);
+		writer.WriteProperty(options, PropKnn, value.Knn, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?, Elastic.Clients.Elasticsearch.KnnSearch>));
+		writer.WriteProperty(options, PropMinScore, value.MinScore);
+		writer.WriteProperty(options, PropPit, value.Pit);
+		writer.WriteProperty(options, PropPostFilter, value.PostFilter);
+		writer.WriteProperty(options, PropProfile, value.Profile);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropRank, value.Rank);
+		writer.WriteProperty(options, PropRescore, value.Rescore, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?, Elastic.Clients.Elasticsearch.Core.Search.Rescore>));
+		writer.WriteProperty(options, PropRetriever, value.Retriever);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter);
+		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSlice, value.Slice);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropStats, value.Stats);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropSuggest, value.Suggest);
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter);
+		writer.WriteProperty(options, PropTimeout, value.Timeout);
+		writer.WriteProperty(options, PropTrackScores, value.TrackScores);
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits);
+		writer.WriteProperty(options, PropVersion, value.Version);
 		writer.WriteEndObject();
 	}
 }
@@ -718,6 +650,7 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 [JsonConverter(typeof(SearchRequestConverter))]
 public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 {
+	[JsonConstructor]
 	public SearchRequest()
 	{
 	}
@@ -736,12 +669,20 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
 	/// This behavior applies even if the request targets other open indices.
 	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -749,7 +690,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
@@ -758,7 +698,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the q query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
@@ -767,7 +706,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the q query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
@@ -776,7 +714,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 	/// <summary>
@@ -784,7 +721,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -793,7 +729,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
@@ -802,7 +737,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the q query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
@@ -812,7 +746,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
@@ -822,7 +755,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
 	/// <summary>
@@ -830,7 +762,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
@@ -838,7 +769,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -847,7 +777,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
@@ -856,7 +785,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
@@ -871,7 +799,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -884,7 +811,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// the primary sort of the query targets an indexed field.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
@@ -893,7 +819,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
@@ -902,7 +827,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defaults to index level settings.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 	/// <summary>
@@ -910,7 +834,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -918,7 +841,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -928,7 +850,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// You can change this limit using the <c>search.max_keep_alive</c> cluster-level setting.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
@@ -936,7 +857,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// How distributed term frequencies are calculated for relevance scoring.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -946,7 +866,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
@@ -957,7 +876,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
@@ -965,7 +883,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Specifies which field to use for suggestions.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 	/// <summary>
@@ -974,7 +891,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 	/// <summary>
@@ -983,7 +899,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 	/// <summary>
@@ -992,7 +907,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// This parameter can only be used when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 	/// <summary>
@@ -1000,7 +914,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -1008,7 +921,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defines the aggregations that are run as part of the search request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
@@ -1016,7 +928,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Collapses search results the values of the specified field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
@@ -1025,7 +936,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
@@ -1033,7 +943,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
@@ -1041,7 +950,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ext")]
 	public IDictionary<string, object>? Ext { get; set; }
 
 	/// <summary>
@@ -1050,7 +958,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
@@ -1061,7 +968,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -1069,7 +975,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
@@ -1077,7 +982,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
@@ -1085,8 +989,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("knn")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.KnnSearch))]
 	public ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
 	/// <summary>
@@ -1095,7 +997,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Documents with a lower <c>_score</c> are not included in the search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
 
 	/// <summary>
@@ -1104,7 +1005,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
 	/// <summary>
@@ -1114,7 +1014,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// A post filter has no impact on the aggregation results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 
 	/// <summary>
@@ -1123,7 +1022,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
@@ -1131,7 +1029,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -1139,7 +1036,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defines the Reciprocal Rank Fusion (RRF) to use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rank")]
 	public Elastic.Clients.Elasticsearch.Rank? Rank { get; set; }
 
 	/// <summary>
@@ -1147,8 +1043,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rescore")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
@@ -1156,7 +1050,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retriever")]
 	public Elastic.Clients.Elasticsearch.Retriever? Retriever { get; set; }
 
 	/// <summary>
@@ -1165,7 +1058,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
@@ -1173,7 +1065,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
@@ -1181,7 +1072,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
@@ -1189,7 +1079,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
@@ -1199,7 +1088,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -1207,7 +1095,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Can be used to split a scrolled search into multiple slices that can be consumed independently.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
 	/// <summary>
@@ -1215,8 +1102,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
@@ -1225,7 +1110,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// These fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
@@ -1235,7 +1119,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// You can retrieve these stats using the indices stats API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stats")]
 	public ICollection<string>? Stats { get; set; }
 
 	/// <summary>
@@ -1246,8 +1129,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
 	/// <summary>
@@ -1255,7 +1136,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defines a suggester that provides similar looking terms based on a provided text.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
 	/// <summary>
@@ -1270,7 +1150,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If set to <c>0</c> (default), the query does not terminate early.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
 
 	/// <summary>
@@ -1280,7 +1159,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
 
 	/// <summary>
@@ -1288,7 +1166,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
@@ -1298,7 +1175,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
@@ -1306,7 +1182,6 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
 

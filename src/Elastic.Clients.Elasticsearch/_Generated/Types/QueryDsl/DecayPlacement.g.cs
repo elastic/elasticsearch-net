@@ -27,6 +27,87 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.Text.Json.Serialization.JsonConverter<DecayPlacement<TOrigin, TScale>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDecay = System.Text.Json.JsonEncodedText.Encode("decay");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
+	private static readonly System.Text.Json.JsonEncodedText PropScale = System.Text.Json.JsonEncodedText.Encode("scale");
+
+	public override DecayPlacement<TOrigin, TScale> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propDecay = default;
+		LocalJsonValue<TScale?> propOffset = default;
+		LocalJsonValue<TOrigin?> propOrigin = default;
+		LocalJsonValue<TScale?> propScale = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDecay.TryRead(ref reader, options, PropDecay))
+			{
+				continue;
+			}
+
+			if (propOffset.TryRead(ref reader, options, PropOffset, typeof(SourceMarker<TScale?>)))
+			{
+				continue;
+			}
+
+			if (propOrigin.TryRead(ref reader, options, PropOrigin, typeof(SourceMarker<TOrigin?>)))
+			{
+				continue;
+			}
+
+			if (propScale.TryRead(ref reader, options, PropScale, typeof(SourceMarker<TScale?>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DecayPlacement<TOrigin, TScale>
+		{
+			Decay = propDecay.Value
+,
+			Offset = propOffset.Value
+,
+			Origin = propOrigin.Value
+,
+			Scale = propScale.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DecayPlacement<TOrigin, TScale> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDecay, value.Decay);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, typeof(SourceMarker<TScale?>));
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, typeof(SourceMarker<TOrigin?>));
+		writer.WriteProperty(options, PropScale, value.Scale, null, typeof(SourceMarker<TScale?>));
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class DecayPlacementConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(DecayPlacement<,>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(DecayPlacementConverter<,>).MakeGenericType(args[0], args[1]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(DecayPlacementConverterFactory))]
 public sealed partial class DecayPlacement<TOrigin, TScale>
 {
 	/// <summary>
@@ -34,7 +115,6 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// Defines how documents are scored at the distance given at scale.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("decay")]
 	public double? Decay { get; set; }
 
 	/// <summary>
@@ -42,8 +122,6 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
-	[SourceConverter]
 	public TScale? Offset { get; set; }
 
 	/// <summary>
@@ -51,8 +129,6 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("origin")]
-	[SourceConverter]
 	public TOrigin? Origin { get; set; }
 
 	/// <summary>
@@ -60,7 +136,5 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scale")]
-	[SourceConverter]
 	public TScale? Scale { get; set; }
 }

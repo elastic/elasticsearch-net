@@ -49,6 +49,7 @@ public sealed partial class GetGeoipDatabaseRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatabaseRequestParameters>
 {
+	[JsonConstructor]
 	public GetGeoipDatabaseRequest()
 	{
 	}
@@ -64,6 +65,16 @@ public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatab
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.get_geoip_database";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of database configuration IDs to retrieve.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To get all database configurations, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids? Id { get => P<Elastic.Clients.Elasticsearch.Ids?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

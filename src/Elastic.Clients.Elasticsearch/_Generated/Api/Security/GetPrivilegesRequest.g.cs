@@ -41,6 +41,7 @@ public sealed partial class GetPrivilegesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesRequestParameters>
 {
+	[JsonConstructor]
 	public GetPrivilegesRequest()
 	{
 	}
@@ -60,6 +61,22 @@ public sealed partial class GetPrivilegesRequest : PlainRequest<GetPrivilegesReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_privileges";
+
+	/// <summary>
+	/// <para>
+	/// Application name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Application { get => P<Elastic.Clients.Elasticsearch.Name?>("application"); set => PO("application", value); }
+
+	/// <summary>
+	/// <para>
+	/// Privilege name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
 /// <summary>

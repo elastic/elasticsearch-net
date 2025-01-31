@@ -22,26 +22,124 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class DeleteResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override DeleteResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propForcedRefresh = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<long> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propForcedRefresh.TryRead(ref reader, options, PropForcedRefresh))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryRead(ref reader, options, PropPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propResult.TryRead(ref reader, options, PropResult))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryRead(ref reader, options, PropSeqNo))
+			{
+				continue;
+			}
+
+			if (propShards.TryRead(ref reader, options, PropShards))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteResponse
+		{
+			ForcedRefresh = propForcedRefresh.Value
+,
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			PrimaryTerm = propPrimaryTerm.Value
+,
+			Result = propResult.Value
+,
+			SeqNo = propSeqNo.Value
+,
+			Shards = propShards.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm);
+		writer.WriteProperty(options, PropResult, value.Result);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo);
+		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteResponseConverter))]
 public sealed partial class DeleteResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
-	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
-	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-	[JsonInclude, JsonPropertyName("_version")]
 	public long Version { get; init; }
 }

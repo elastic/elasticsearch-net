@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+internal sealed partial class ExecuteLifecycleResponseConverter : System.Text.Json.Serialization.JsonConverter<ExecuteLifecycleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotName = System.Text.Json.JsonEncodedText.Encode("snapshot_name");
+
+	public override ExecuteLifecycleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propSnapshotName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSnapshotName.TryRead(ref reader, options, PropSnapshotName))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExecuteLifecycleResponse
+		{
+			SnapshotName = propSnapshotName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExecuteLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSnapshotName, value.SnapshotName);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ExecuteLifecycleResponseConverter))]
 public sealed partial class ExecuteLifecycleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("snapshot_name")]
 	public string SnapshotName { get; init; }
 }

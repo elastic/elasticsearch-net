@@ -22,18 +22,80 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ValidateQueryResponseConverter : System.Text.Json.Serialization.JsonConverter<ValidateQueryResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropExplanations = System.Text.Json.JsonEncodedText.Encode("explanations");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropValid = System.Text.Json.JsonEncodedText.Encode("valid");
+
+	public override ValidateQueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propError = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>?> propExplanations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics?> propShards = default;
+		LocalJsonValue<bool> propValid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propError.TryRead(ref reader, options, PropError))
+			{
+				continue;
+			}
+
+			if (propExplanations.TryRead(ref reader, options, PropExplanations))
+			{
+				continue;
+			}
+
+			if (propShards.TryRead(ref reader, options, PropShards))
+			{
+				continue;
+			}
+
+			if (propValid.TryRead(ref reader, options, PropValid))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ValidateQueryResponse
+		{
+			Error = propError.Value
+,
+			Explanations = propExplanations.Value
+,
+			Shards = propShards.Value
+,
+			Valid = propValid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ValidateQueryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropError, value.Error);
+		writer.WriteProperty(options, PropExplanations, value.Explanations);
+		writer.WriteProperty(options, PropShards, value.Shards);
+		writer.WriteProperty(options, PropValid, value.Valid);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ValidateQueryResponseConverter))]
 public sealed partial class ValidateQueryResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("error")]
 	public string? Error { get; init; }
-	[JsonInclude, JsonPropertyName("explanations")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? Explanations { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
-	[JsonInclude, JsonPropertyName("valid")]
 	public bool Valid { get; init; }
 }

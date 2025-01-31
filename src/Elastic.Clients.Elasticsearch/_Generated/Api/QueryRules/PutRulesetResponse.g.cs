@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+internal sealed partial class PutRulesetResponseConverter : System.Text.Json.Serialization.JsonConverter<PutRulesetResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+
+	public override PutRulesetResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propResult.TryRead(ref reader, options, PropResult))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutRulesetResponse
+		{
+			Result = propResult.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRulesetResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropResult, value.Result);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutRulesetResponseConverter))]
 public sealed partial class PutRulesetResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 }

@@ -22,10 +22,123 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.Json.Serialization.JsonConverter<EqlSearchResponse<TEvent>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+	private static readonly System.Text.Json.JsonEncodedText PropShardFailures = System.Text.Json.JsonEncodedText.Encode("shard_failures");
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+
+	public override EqlSearchResponse<TEvent> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent>> propHits = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<bool?> propIsPartial = default;
+		LocalJsonValue<bool?> propIsRunning = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>?> propShardFailures = default;
+		LocalJsonValue<bool?> propTimedOut = default;
+		LocalJsonValue<long?> propTook = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHits.TryRead(ref reader, options, PropHits))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			{
+				continue;
+			}
+
+			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			{
+				continue;
+			}
+
+			if (propShardFailures.TryRead(ref reader, options, PropShardFailures))
+			{
+				continue;
+			}
+
+			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			{
+				continue;
+			}
+
+			if (propTook.TryRead(ref reader, options, PropTook))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new EqlSearchResponse<TEvent>
+		{
+			Hits = propHits.Value
+,
+			Id = propId.Value
+,
+			IsPartial = propIsPartial.Value
+,
+			IsRunning = propIsRunning.Value
+,
+			ShardFailures = propShardFailures.Value
+,
+			TimedOut = propTimedOut.Value
+,
+			Took = propTook.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EqlSearchResponse<TEvent> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHits, value.Hits);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
+		writer.WriteProperty(options, PropShardFailures, value.ShardFailures);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
+		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class EqlSearchResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(EqlSearchResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(EqlSearchResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(EqlSearchResponseConverterFactory))]
 public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +146,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// Contains matching events and sequences. Also contains related metadata.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hits")]
 	public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; init; }
 
 	/// <summary>
@@ -41,7 +153,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// Identifier for the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
 	/// <summary>
@@ -49,7 +160,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// If true, the response does not contain complete search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool? IsPartial { get; init; }
 
 	/// <summary>
@@ -57,7 +167,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// If true, the search request is still executing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_running")]
 	public bool? IsRunning { get; init; }
 
 	/// <summary>
@@ -65,7 +174,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// Contains information about shard failures (if any), in case allow_partial_search_results=true
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? ShardFailures { get; init; }
 
 	/// <summary>
@@ -73,7 +181,6 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// If true, the request timed out before completion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool? TimedOut { get; init; }
 
 	/// <summary>
@@ -81,6 +188,5 @@ public sealed partial class EqlSearchResponse<TEvent> : ElasticsearchResponse
 	/// Milliseconds it took Elasticsearch to execute the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
 }

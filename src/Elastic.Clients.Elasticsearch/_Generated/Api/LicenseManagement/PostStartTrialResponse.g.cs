@@ -22,18 +22,80 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+internal sealed partial class PostStartTrialResponseConverter : System.Text.Json.Serialization.JsonConverter<PostStartTrialResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message");
+	private static readonly System.Text.Json.JsonEncodedText PropTrialWasStarted = System.Text.Json.JsonEncodedText.Encode("trial_was_started");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override PostStartTrialResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string?> propErrorMessage = default;
+		LocalJsonValue<bool> propTrialWasStarted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propErrorMessage.TryRead(ref reader, options, PropErrorMessage))
+			{
+				continue;
+			}
+
+			if (propTrialWasStarted.TryRead(ref reader, options, PropTrialWasStarted))
+			{
+				continue;
+			}
+
+			if (propType.TryRead(ref reader, options, PropType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PostStartTrialResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			ErrorMessage = propErrorMessage.Value
+,
+			TrialWasStarted = propTrialWasStarted.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostStartTrialResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage);
+		writer.WriteProperty(options, PropTrialWasStarted, value.TrialWasStarted);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PostStartTrialResponseConverter))]
 public sealed partial class PostStartTrialResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("error_message")]
 	public string? ErrorMessage { get; init; }
-	[JsonInclude, JsonPropertyName("trial_was_started")]
 	public bool TrialWasStarted { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; init; }
 }

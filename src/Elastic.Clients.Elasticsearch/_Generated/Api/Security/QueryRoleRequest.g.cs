@@ -34,6 +34,79 @@ public sealed partial class QueryRoleRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class QueryRoleRequestConverter : System.Text.Json.Serialization.JsonConverter<QueryRoleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override QueryRoleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleQuery?> propQuery = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryRead(ref reader, options, PropFrom))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryRead(ref reader, options, PropSearchAfter))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryRoleRequest
+		{
+			From = propFrom.Value
+,
+			Query = propQuery.Value
+,
+			SearchAfter = propSearchAfter.Value
+,
+			Size = propSize.Value
+,
+			Sort = propSort.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryRoleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Find roles with a query.
@@ -42,8 +115,14 @@ public sealed partial class QueryRoleRequestParameters : RequestParameters
 /// Get roles in a paginated manner. You can optionally filter the results with a query.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(QueryRoleRequestConverter))]
 public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestParameters>
 {
+	[JsonConstructor]
+	internal QueryRoleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryRole;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -59,7 +138,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -72,7 +150,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// <c>applications.application</c>, <c>applications.privileges</c>, <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.RoleQuery? Query { get; set; }
 
 	/// <summary>
@@ -80,7 +157,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// Search after definition
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
@@ -90,7 +166,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -99,8 +174,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 

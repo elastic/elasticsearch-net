@@ -92,6 +92,11 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 	{
 	}
 
+	[JsonConstructor]
+	internal StopDataFrameAnalyticsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDataFrameAnalytics;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -99,6 +104,16 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.stop_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

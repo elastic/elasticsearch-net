@@ -43,6 +43,199 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
+internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<EqlSearchRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSequenceResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_sequence_results");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseSensitive = System.Text.Json.JsonEncodedText.Encode("case_sensitive");
+	private static readonly System.Text.Json.JsonEncodedText PropEventCategoryField = System.Text.Json.JsonEncodedText.Encode("event_category_field");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSamplesPerKey = System.Text.Json.JsonEncodedText.Encode("max_samples_per_key");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropResultPosition = System.Text.Json.JsonEncodedText.Encode("result_position");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropTiebreakerField = System.Text.Json.JsonEncodedText.Encode("tiebreaker_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+
+	public override EqlSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowPartialSearchResults = default;
+		LocalJsonValue<bool?> propAllowPartialSequenceResults = default;
+		LocalJsonValue<bool?> propCaseSensitive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propEventCategoryField = default;
+		LocalJsonValue<int?> propFetchSize = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<bool?> propKeepOnCompletion = default;
+		LocalJsonValue<int?> propMaxSamplesPerKey = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition?> propResultPosition = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTiebreakerField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTimestampField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowPartialSearchResults.TryRead(ref reader, options, PropAllowPartialSearchResults))
+			{
+				continue;
+			}
+
+			if (propAllowPartialSequenceResults.TryRead(ref reader, options, PropAllowPartialSequenceResults))
+			{
+				continue;
+			}
+
+			if (propCaseSensitive.TryRead(ref reader, options, PropCaseSensitive))
+			{
+				continue;
+			}
+
+			if (propEventCategoryField.TryRead(ref reader, options, PropEventCategoryField))
+			{
+				continue;
+			}
+
+			if (propFetchSize.TryRead(ref reader, options, PropFetchSize))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			{
+				continue;
+			}
+
+			if (propKeepAlive.TryRead(ref reader, options, PropKeepAlive))
+			{
+				continue;
+			}
+
+			if (propKeepOnCompletion.TryRead(ref reader, options, PropKeepOnCompletion))
+			{
+				continue;
+			}
+
+			if (propMaxSamplesPerKey.TryRead(ref reader, options, PropMaxSamplesPerKey))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propResultPosition.TryRead(ref reader, options, PropResultPosition))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propTiebreakerField.TryRead(ref reader, options, PropTiebreakerField))
+			{
+				continue;
+			}
+
+			if (propTimestampField.TryRead(ref reader, options, PropTimestampField))
+			{
+				continue;
+			}
+
+			if (propWaitForCompletionTimeout.TryRead(ref reader, options, PropWaitForCompletionTimeout))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new EqlSearchRequest
+		{
+			AllowPartialSearchResults = propAllowPartialSearchResults.Value
+	,
+			AllowPartialSequenceResults = propAllowPartialSequenceResults.Value
+	,
+			CaseSensitive = propCaseSensitive.Value
+	,
+			EventCategoryField = propEventCategoryField.Value
+	,
+			FetchSize = propFetchSize.Value
+	,
+			Fields = propFields.Value
+	,
+			Filter = propFilter.Value
+	,
+			KeepAlive = propKeepAlive.Value
+	,
+			KeepOnCompletion = propKeepOnCompletion.Value
+	,
+			MaxSamplesPerKey = propMaxSamplesPerKey.Value
+	,
+			Query = propQuery.Value
+	,
+			ResultPosition = propResultPosition.Value
+	,
+			RuntimeMappings = propRuntimeMappings.Value
+	,
+			Size = propSize.Value
+	,
+			TiebreakerField = propTiebreakerField.Value
+	,
+			TimestampField = propTimestampField.Value
+	,
+			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EqlSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults);
+		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults);
+		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive);
+		writer.WriteProperty(options, PropEventCategoryField, value.EventCategoryField);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize);
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion);
+		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropResultPosition, value.ResultPosition);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropTiebreakerField, value.TiebreakerField);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField);
+		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get EQL search results.
@@ -50,9 +243,15 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 /// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(EqlSearchRequestConverter))]
 public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
 {
 	public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	{
+	}
+
+	[JsonConstructor]
+	internal EqlSearchRequest()
 	{
 	}
 
@@ -64,9 +263,13 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 
 	internal override string OperationName => "eql.search";
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>
+	/// The name of the index to scope the operation
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
@@ -74,13 +277,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// If true, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
 	public bool? AllowPartialSearchResults { get; set; }
-	[JsonInclude, JsonPropertyName("allow_partial_sequence_results")]
 	public bool? AllowPartialSequenceResults { get; set; }
-	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
 
 	/// <summary>
@@ -88,7 +287,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Field? EventCategoryField { get; set; }
 
 	/// <summary>
@@ -96,7 +294,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Maximum number of events to search at a time for sequence queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
@@ -104,8 +301,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
@@ -113,12 +308,8 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
-	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
 
 	/// <summary>
@@ -128,7 +319,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_samples_per_key")]
 	public int? MaxSamplesPerKey { get; set; }
 
 	/// <summary>
@@ -136,11 +326,8 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-	[JsonInclude, JsonPropertyName("result_position")]
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
@@ -148,7 +335,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// For basic queries, the maximum number of matching events to return. Defaults to 10
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -156,7 +342,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tiebreaker_field")]
 	public Elastic.Clients.Elasticsearch.Field? TiebreakerField { get; set; }
 
 	/// <summary>
@@ -164,9 +349,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
-	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 

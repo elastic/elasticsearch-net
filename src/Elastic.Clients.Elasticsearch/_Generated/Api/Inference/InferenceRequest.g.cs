@@ -40,11 +40,65 @@ public sealed partial class InferenceRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class InferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<InferenceRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
+
+	public override InferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>> propInput = default;
+		LocalJsonValue<string?> propQuery = default;
+		LocalJsonValue<object?> propTaskSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInput.TryRead(ref reader, options, PropInput, typeof(SingleOrManyMarker<ICollection<string>, string>)))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propTaskSettings.TryRead(ref reader, options, PropTaskSettings))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InferenceRequest
+		{
+			Input = propInput.Value
+	,
+			Query = propQuery.Value
+	,
+			TaskSettings = propTaskSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInput, value.Input, null, typeof(SingleOrManyMarker<ICollection<string>, string>));
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Perform inference on the service
 /// </para>
 /// </summary>
+[JsonConverter(typeof(InferenceRequestConverter))]
 public sealed partial class InferenceRequest : PlainRequest<InferenceRequestParameters>
 {
 	public InferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
@@ -52,6 +106,11 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	}
 
 	public InferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	{
+	}
+
+	[JsonConstructor]
+	internal InferenceRequest()
 	{
 	}
 
@@ -65,10 +124,23 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 	/// <summary>
 	/// <para>
+	/// The inference Id
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies the amount of time to wait for the inference request to complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -77,8 +149,6 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	/// Either a string or an array of strings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("input")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string> Input { get; set; }
 
 	/// <summary>
@@ -87,7 +157,6 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	/// Not required for other tasks.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
 
 	/// <summary>
@@ -95,7 +164,6 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	/// Optional task settings
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_settings")]
 	public object? TaskSettings { get; set; }
 }
 

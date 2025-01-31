@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class DeleteRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteRoleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+
+	public override DeleteRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propFound = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFound.TryRead(ref reader, options, PropFound))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteRoleResponse
+		{
+			Found = propFound.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteRoleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFound, value.Found);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteRoleResponseConverter))]
 public sealed partial class DeleteRoleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 }

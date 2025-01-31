@@ -46,6 +46,11 @@ public sealed partial class UpdateModelSnapshotRequest : PlainRequest<UpdateMode
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateModelSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateModelSnapshot;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -53,6 +58,22 @@ public sealed partial class UpdateModelSnapshotRequest : PlainRequest<UpdateMode
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_model_snapshot";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the model snapshot.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
 	/// <summary>
 	/// <para>

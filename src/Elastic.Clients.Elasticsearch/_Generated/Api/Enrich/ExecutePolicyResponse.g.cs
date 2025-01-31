@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+internal sealed partial class ExecutePolicyResponseConverter : System.Text.Json.Serialization.JsonConverter<ExecutePolicyResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskId = System.Text.Json.JsonEncodedText.Encode("task_id");
+
+	public override ExecutePolicyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus?> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTaskId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStatus.TryRead(ref reader, options, PropStatus))
+			{
+				continue;
+			}
+
+			if (propTaskId.TryRead(ref reader, options, PropTaskId))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExecutePolicyResponse
+		{
+			Status = propStatus.Value
+,
+			TaskId = propTaskId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExecutePolicyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStatus, value.Status);
+		writer.WriteProperty(options, PropTaskId, value.TaskId);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ExecutePolicyResponseConverter))]
 public sealed partial class ExecutePolicyResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus? Status { get; init; }
-	[JsonInclude, JsonPropertyName("task_id")]
 	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get; init; }
 }

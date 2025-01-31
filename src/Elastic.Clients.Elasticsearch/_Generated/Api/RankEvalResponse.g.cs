@@ -22,10 +22,66 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RankEvalResponseConverter : System.Text.Json.Serialization.JsonConverter<RankEvalResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropMetricScore = System.Text.Json.JsonEncodedText.Encode("metric_score");
+
+	public override RankEvalResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail>> propDetails = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propFailures = default;
+		LocalJsonValue<double> propMetricScore = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDetails.TryRead(ref reader, options, PropDetails))
+			{
+				continue;
+			}
+
+			if (propFailures.TryRead(ref reader, options, PropFailures))
+			{
+				continue;
+			}
+
+			if (propMetricScore.TryRead(ref reader, options, PropMetricScore))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RankEvalResponse
+		{
+			Details = propDetails.Value
+,
+			Failures = propFailures.Value
+,
+			MetricScore = propMetricScore.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RankEvalResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDetails, value.Details);
+		writer.WriteProperty(options, PropFailures, value.Failures);
+		writer.WriteProperty(options, PropMetricScore, value.MetricScore);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RankEvalResponseConverter))]
 public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,9 +89,7 @@ public sealed partial class RankEvalResponse : ElasticsearchResponse
 	/// The details section contains one entry for every query in the original requests section, keyed by the search request id
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
 
 	/// <summary>
@@ -43,6 +97,5 @@ public sealed partial class RankEvalResponse : ElasticsearchResponse
 	/// The overall evaluation quality calculated by the defined metric
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
 }

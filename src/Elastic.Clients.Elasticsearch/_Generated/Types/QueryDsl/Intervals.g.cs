@@ -39,12 +39,16 @@ public sealed partial class Intervals
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal Intervals()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static Intervals AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new Intervals("all_of", intervalsAllOf);
 	public static Intervals AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf intervalsAnyOf) => new Intervals("any_of", intervalsAnyOf);
@@ -66,107 +70,104 @@ public sealed partial class Intervals
 	}
 }
 
-internal sealed partial class IntervalsConverter : JsonConverter<Intervals>
+internal sealed partial class IntervalsConverter : System.Text.Json.Serialization.JsonConverter<Intervals>
 {
-	public override Intervals Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAllOf = System.Text.Json.JsonEncodedText.Encode("all_of");
+	private static readonly System.Text.Json.JsonEncodedText VariantAnyOf = System.Text.Json.JsonEncodedText.Encode("any_of");
+	private static readonly System.Text.Json.JsonEncodedText VariantFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
+
+	public override Intervals Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantAllOf))
+			{
+				variantType = VariantAllOf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantAnyOf))
+			{
+				variantType = VariantAnyOf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFuzzy))
+			{
+				variantType = VariantFuzzy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatch))
+			{
+				variantType = VariantMatch.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPrefix))
+			{
+				variantType = VariantPrefix.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWildcard))
+			{
+				variantType = VariantWildcard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "all_of")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "any_of")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fuzzy")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "prefix")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "wildcard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Intervals' from the response.");
-		}
-
-		var result = new Intervals(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Intervals { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, Intervals value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Intervals value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "all_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, options);
-					break;
-				case "any_of":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf)value.Variant, options);
-					break;
-				case "fuzzy":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy)value.Variant, options);
-					break;
-				case "match":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch)value.Variant, options);
-					break;
-				case "prefix":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, options);
-					break;
-				case "wildcard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "all_of":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf?)value.Variant);
+				break;
+			case "any_of":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf?)value.Variant);
+				break;
+			case "fuzzy":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy?)value.Variant);
+				break;
+			case "match":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch?)value.Variant);
+				break;
+			case "prefix":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix?)value.Variant);
+				break;
+			case "wildcard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Intervals)}'.");
 		}
 
 		writer.WriteEndObject();

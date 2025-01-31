@@ -27,47 +27,267 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class HitConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Hit<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("_explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnored = System.Text.Json.JsonEncodedText.Encode("_ignored");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoredFieldValues = System.Text.Json.JsonEncodedText.Encode("ignored_field_values");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchedQueries = System.Text.Json.JsonEncodedText.Encode("matched_queries");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("_nested");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("_node");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("_rank");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("_score");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("_shard");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override Hit<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Explain.Explanation?> propExplanation = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propFields = default;
+		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyCollection<string>>?> propHighlight = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propIgnored = default;
+		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>>?> propIgnoredFieldValues = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>?> propInnerHits = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propMatchedQueries = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity?> propNested = default;
+		LocalJsonValue<string?> propNode = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<int?> propRank = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<double?> propScore = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<string?> propShard = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSort = default;
+		LocalJsonValue<TDocument?> propSource = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExplanation.TryRead(ref reader, options, PropExplanation))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryRead(ref reader, options, PropHighlight))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIgnored.TryRead(ref reader, options, PropIgnored))
+			{
+				continue;
+			}
+
+			if (propIgnoredFieldValues.TryRead(ref reader, options, PropIgnoredFieldValues))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryRead(ref reader, options, PropInnerHits))
+			{
+				continue;
+			}
+
+			if (propMatchedQueries.TryRead(ref reader, options, PropMatchedQueries))
+			{
+				continue;
+			}
+
+			if (propNested.TryRead(ref reader, options, PropNested))
+			{
+				continue;
+			}
+
+			if (propNode.TryRead(ref reader, options, PropNode))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryRead(ref reader, options, PropPrimaryTerm))
+			{
+				continue;
+			}
+
+			if (propRank.TryRead(ref reader, options, PropRank))
+			{
+				continue;
+			}
+
+			if (propRouting.TryRead(ref reader, options, PropRouting))
+			{
+				continue;
+			}
+
+			if (propScore.TryRead(ref reader, options, PropScore))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryRead(ref reader, options, PropSeqNo))
+			{
+				continue;
+			}
+
+			if (propShard.TryRead(ref reader, options, PropShard))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TDocument?>)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Hit<TDocument>
+		{
+			Explanation = propExplanation.Value
+,
+			Fields = propFields.Value
+,
+			Highlight = propHighlight.Value
+,
+			Id = propId.Value
+,
+			Ignored = propIgnored.Value
+,
+			IgnoredFieldValues = propIgnoredFieldValues.Value
+,
+			Index = propIndex.Value
+,
+			InnerHits = propInnerHits.Value
+,
+			MatchedQueries = propMatchedQueries.Value
+,
+			Nested = propNested.Value
+,
+			Node = propNode.Value
+,
+			PrimaryTerm = propPrimaryTerm.Value
+,
+			Rank = propRank.Value
+,
+			Routing = propRouting.Value
+,
+			Score = propScore.Value
+,
+			SeqNo = propSeqNo.Value
+,
+			Shard = propShard.Value
+,
+			Sort = propSort.Value
+,
+			Source = propSource.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Hit<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExplanation, value.Explanation);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropHighlight, value.Highlight);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIgnored, value.Ignored);
+		writer.WriteProperty(options, PropIgnoredFieldValues, value.IgnoredFieldValues);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits);
+		writer.WriteProperty(options, PropMatchedQueries, value.MatchedQueries);
+		writer.WriteProperty(options, PropNested, value.Nested);
+		writer.WriteProperty(options, PropNode, value.Node);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm);
+		writer.WriteProperty(options, PropRank, value.Rank);
+		writer.WriteProperty(options, PropRouting, value.Routing);
+		writer.WriteProperty(options, PropScore, value.Score);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo);
+		writer.WriteProperty(options, PropShard, value.Shard);
+		writer.WriteProperty(options, PropSort, value.Sort);
+		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class HitConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Hit<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(HitConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(HitConverterFactory))]
 public sealed partial class Hit<TDocument>
 {
-	[JsonInclude, JsonPropertyName("_explanation")]
 	public Elastic.Clients.Elasticsearch.Core.Explain.Explanation? Explanation { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("highlight")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string? Id { get; init; }
-	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
-	[JsonInclude, JsonPropertyName("ignored_field_values")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>>? IgnoredFieldValues { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("inner_hits")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
-	[JsonInclude, JsonPropertyName("matched_queries")]
 	public IReadOnlyCollection<string>? MatchedQueries { get; init; }
-	[JsonInclude, JsonPropertyName("_nested")]
 	public Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity? Nested { get; init; }
-	[JsonInclude, JsonPropertyName("_node")]
 	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
-	[JsonInclude, JsonPropertyName("_rank")]
 	public int? Rank { get; init; }
-	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("_score")]
 	public double? Score { get; init; }
-	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("_shard")]
 	public string? Shard { get; init; }
-	[JsonInclude, JsonPropertyName("sort")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TDocument? Source { get; init; }
-	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
 }

@@ -128,6 +128,7 @@ public sealed partial class HealthRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters>
 {
+	[JsonConstructor]
 	public HealthRequest()
 	{
 	}
@@ -143,6 +144,14 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.health";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

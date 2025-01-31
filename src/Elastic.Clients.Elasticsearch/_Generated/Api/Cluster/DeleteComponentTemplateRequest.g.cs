@@ -62,6 +62,11 @@ public sealed partial class DeleteComponentTemplateRequest : PlainRequest<Delete
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteComponentTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterDeleteComponentTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -69,6 +74,14 @@ public sealed partial class DeleteComponentTemplateRequest : PlainRequest<Delete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.delete_component_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of component template names used to limit the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -52,6 +52,11 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsIndexTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -59,6 +64,14 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.exists_index_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -59,6 +59,11 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	{
 	}
 
+	[JsonConstructor]
+	internal SimulateIndexTemplateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -66,6 +71,14 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.simulate_index_template";
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to simulate
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

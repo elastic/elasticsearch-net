@@ -34,15 +34,84 @@ public sealed partial class PutRuleRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class PutRuleRequestConverter : System.Text.Json.Serialization.JsonConverter<PutRuleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropCriteria = System.Text.Json.JsonEncodedText.Encode("criteria");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override PutRuleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions> propActions = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>> propCriteria = default;
+		LocalJsonValue<int?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryRead(ref reader, options, PropActions))
+			{
+				continue;
+			}
+
+			if (propCriteria.TryRead(ref reader, options, PropCriteria, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>)))
+			{
+				continue;
+			}
+
+			if (propPriority.TryRead(ref reader, options, PropPriority))
+			{
+				continue;
+			}
+
+			if (propType.TryRead(ref reader, options, PropType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutRuleRequest
+		{
+			Actions = propActions.Value
+,
+			Criteria = propCriteria.Value
+,
+			Priority = propPriority.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutRuleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions);
+		writer.WriteProperty(options, PropCriteria, value.Criteria, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>));
+		writer.WriteProperty(options, PropPriority, value.Priority);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a query rule.
 /// Create or update a query rule within a query ruleset.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(PutRuleRequestConverter))]
 public sealed partial class PutRuleRequest : PlainRequest<PutRuleRequestParameters>
 {
 	public PutRuleRequest(Elastic.Clients.Elasticsearch.Id rulesetId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("ruleset_id", rulesetId).Required("rule_id", ruleId))
+	{
+	}
+
+	[JsonConstructor]
+	internal PutRuleRequest()
 	{
 	}
 
@@ -54,14 +123,22 @@ public sealed partial class PutRuleRequest : PlainRequest<PutRuleRequestParamete
 
 	internal override string OperationName => "query_rules.put_rule";
 
-	[JsonInclude, JsonPropertyName("actions")]
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query rule within the specified ruleset to be created or updated
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset containing the rule to be created or updated
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
-	[JsonInclude, JsonPropertyName("criteria")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
-	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
