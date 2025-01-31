@@ -6,22 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Elastic.Transport;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 using Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-#else
 using Elastic.Clients.Elasticsearch.Fluent;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 {

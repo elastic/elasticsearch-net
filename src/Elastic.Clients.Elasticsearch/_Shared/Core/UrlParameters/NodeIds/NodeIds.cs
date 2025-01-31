@@ -8,11 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class NodeIds : IEquatable<NodeIds>, IUrlParameter

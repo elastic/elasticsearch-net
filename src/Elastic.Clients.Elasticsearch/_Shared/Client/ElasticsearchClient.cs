@@ -13,17 +13,9 @@ using System.Threading;
 using Elastic.Transport;
 using Elastic.Transport.Diagnostics;
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 using Elastic.Clients.Elasticsearch.Requests;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// A strongly-typed client for communicating with Elasticsearch server endpoints.

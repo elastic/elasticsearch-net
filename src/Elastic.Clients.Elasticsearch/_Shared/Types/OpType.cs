@@ -8,11 +8,7 @@ using System.Text.Json.Serialization;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [JsonConverter(typeof(OpTypeConverter))]
 public partial struct OpType : IStringable

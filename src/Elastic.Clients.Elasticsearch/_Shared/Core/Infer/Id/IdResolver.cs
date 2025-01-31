@@ -7,11 +7,7 @@ using System.Collections.Concurrent;
 using System.Globalization;
 using System.Reflection;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public class IdResolver
 {

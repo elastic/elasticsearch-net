@@ -6,11 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal class PartitionHelper<TDocument> : IEnumerable<IList<TDocument>>
 {

@@ -5,17 +5,9 @@
 using System;
 using System.Text.Json;
 using System.Text;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Aggregations;
-#else
 using Elastic.Clients.Elasticsearch.Aggregations;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 internal static class TermsAggregateSerializationHelper
 {

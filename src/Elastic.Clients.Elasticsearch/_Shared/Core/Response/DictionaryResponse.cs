@@ -7,11 +7,7 @@ using System.Collections.Generic;
 
 using Elastic.Transport.Products.Elasticsearch;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public abstract class DictionaryResponse<TKey, TValue> : ElasticsearchResponse
 {

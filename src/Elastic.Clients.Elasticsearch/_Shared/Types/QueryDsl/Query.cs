@@ -5,11 +5,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
 public partial class Query
 {

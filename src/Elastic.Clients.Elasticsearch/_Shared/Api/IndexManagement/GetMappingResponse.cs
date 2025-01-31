@@ -4,17 +4,9 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Mapping;
-#else
 using Elastic.Clients.Elasticsearch.Mapping;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
-#else
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-#endif
 
 public partial class GetMappingResponse
 {
