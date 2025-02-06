@@ -27,133 +27,123 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRangeQuery>
+internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Serialization.JsonConverter<NumberRangeQuery>
 {
-	public override NumberRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
+	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
+
+	public override NumberRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options);
 		reader.Read();
-		var variant = new NumberRangeQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<double?> propGt = default;
+		LocalJsonValue<double?> propGte = default;
+		LocalJsonValue<double?> propLt = default;
+		LocalJsonValue<double?> propLte = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryRead(ref reader, options, PropBoost))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gt")
-				{
-					variant.Gt = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gte")
-				{
-					variant.Gte = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lt")
-				{
-					variant.Lt = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lte")
-				{
-					variant.Lte = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "relation")
-				{
-					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propGt.TryRead(ref reader, options, PropGt))
+			{
+				continue;
+			}
+
+			if (propGte.TryRead(ref reader, options, PropGte))
+			{
+				continue;
+			}
+
+			if (propLt.TryRead(ref reader, options, PropLt))
+			{
+				continue;
+			}
+
+			if (propLte.TryRead(ref reader, options, PropLte))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			if (propRelation.TryRead(ref reader, options, PropRelation))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new NumberRangeQuery
+		{
+			Boost = propBoost.Value
+,
+			Field = propField.Value
+,
+			Gt = propGt.Value
+,
+			Gte = propGte.Value
+,
+			Lt = propLt.Value
+,
+			Lte = propLte.Value
+,
+			QueryName = propQueryName.Value
+,
+			Relation = propRelation.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, NumberRangeQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, NumberRangeQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize NumberRangeQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field);
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Gt.HasValue)
-		{
-			writer.WritePropertyName("gt");
-			writer.WriteNumberValue(value.Gt.Value);
-		}
-
-		if (value.Gte.HasValue)
-		{
-			writer.WritePropertyName("gte");
-			writer.WriteNumberValue(value.Gte.Value);
-		}
-
-		if (value.Lt.HasValue)
-		{
-			writer.WritePropertyName("lt");
-			writer.WriteNumberValue(value.Lt.Value);
-		}
-
-		if (value.Lte.HasValue)
-		{
-			writer.WritePropertyName("lte");
-			writer.WriteNumberValue(value.Lte.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.Relation is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, value.Relation, options);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropGt, value.Gt);
+		writer.WriteProperty(options, PropGte, value.Gte);
+		writer.WriteProperty(options, PropLt, value.Lt);
+		writer.WriteProperty(options, PropLte, value.Lte);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropRelation, value.Relation);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(NumberRangeQueryConverter))]
-public sealed partial class NumberRangeQuery
+public sealed partial class NumberRangeQuery : IRangeQuery
 {
 	public NumberRangeQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	internal NumberRangeQuery()
+	{
 	}
 
 	/// <summary>
@@ -202,6 +192,8 @@ public sealed partial class NumberRangeQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
+
+	public string Type => "numberrangequery";
 }
 
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>

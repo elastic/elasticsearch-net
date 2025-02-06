@@ -69,6 +69,7 @@ public sealed partial class GetIndexTemplateRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTemplateRequestParameters>
 {
+	[JsonConstructor]
 	public GetIndexTemplateRequest()
 	{
 	}
@@ -84,6 +85,14 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_index_template";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

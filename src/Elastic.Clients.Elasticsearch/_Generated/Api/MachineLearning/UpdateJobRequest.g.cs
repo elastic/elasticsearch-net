@@ -46,6 +46,11 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -53,6 +58,14 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

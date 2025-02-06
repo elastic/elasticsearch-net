@@ -41,46 +41,79 @@ public enum ImpactArea
 	Backup
 }
 
-internal sealed class ImpactAreaConverter : JsonConverter<ImpactArea>
+internal sealed partial class ImpactAreaConverter : System.Text.Json.Serialization.JsonConverter<ImpactArea>
 {
-	public override ImpactArea Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText MemberDeploymentManagement = System.Text.Json.JsonEncodedText.Encode("deployment_management");
+	private static readonly System.Text.Json.JsonEncodedText MemberBackup = System.Text.Json.JsonEncodedText.Encode("backup");
+
+	public override ImpactArea Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSearch))
 		{
-			case "search":
-				return ImpactArea.Search;
-			case "ingest":
-				return ImpactArea.Ingest;
-			case "deployment_management":
-				return ImpactArea.DeploymentManagement;
-			case "backup":
-				return ImpactArea.Backup;
+			return ImpactArea.Search;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIngest))
+		{
+			return ImpactArea.Ingest;
+		}
+
+		if (reader.ValueTextEquals(MemberDeploymentManagement))
+		{
+			return ImpactArea.DeploymentManagement;
+		}
+
+		if (reader.ValueTextEquals(MemberBackup))
+		{
+			return ImpactArea.Backup;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Search;
+		}
+
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Ingest;
+		}
+
+		if (string.Equals(value, MemberDeploymentManagement.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.DeploymentManagement;
+		}
+
+		if (string.Equals(value, MemberBackup.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Backup;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ImpactArea)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ImpactArea value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ImpactArea value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ImpactArea.Search:
-				writer.WriteStringValue("search");
-				return;
+				writer.WriteStringValue(MemberSearch);
+				break;
 			case ImpactArea.Ingest:
-				writer.WriteStringValue("ingest");
-				return;
+				writer.WriteStringValue(MemberIngest);
+				break;
 			case ImpactArea.DeploymentManagement:
-				writer.WriteStringValue("deployment_management");
-				return;
+				writer.WriteStringValue(MemberDeploymentManagement);
+				break;
 			case ImpactArea.Backup:
-				writer.WriteStringValue("backup");
-				return;
+				writer.WriteStringValue(MemberBackup);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ImpactArea)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -97,45 +130,78 @@ public enum IndicatorHealthStatus
 	Green
 }
 
-internal sealed class IndicatorHealthStatusConverter : JsonConverter<IndicatorHealthStatus>
+internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.Serialization.JsonConverter<IndicatorHealthStatus>
 {
-	public override IndicatorHealthStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
+
+	public override IndicatorHealthStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberYellow))
 		{
-			case "yellow":
-				return IndicatorHealthStatus.Yellow;
-			case "unknown":
-				return IndicatorHealthStatus.Unknown;
-			case "red":
-				return IndicatorHealthStatus.Red;
-			case "green":
-				return IndicatorHealthStatus.Green;
+			return IndicatorHealthStatus.Yellow;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberUnknown))
+		{
+			return IndicatorHealthStatus.Unknown;
+		}
+
+		if (reader.ValueTextEquals(MemberRed))
+		{
+			return IndicatorHealthStatus.Red;
+		}
+
+		if (reader.ValueTextEquals(MemberGreen))
+		{
+			return IndicatorHealthStatus.Green;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Yellow;
+		}
+
+		if (string.Equals(value, MemberUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Unknown;
+		}
+
+		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Red;
+		}
+
+		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Green;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndicatorHealthStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, IndicatorHealthStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndicatorHealthStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case IndicatorHealthStatus.Yellow:
-				writer.WriteStringValue("yellow");
-				return;
+				writer.WriteStringValue(MemberYellow);
+				break;
 			case IndicatorHealthStatus.Unknown:
-				writer.WriteStringValue("unknown");
-				return;
+				writer.WriteStringValue(MemberUnknown);
+				break;
 			case IndicatorHealthStatus.Red:
-				writer.WriteStringValue("red");
-				return;
+				writer.WriteStringValue(MemberRed);
+				break;
 			case IndicatorHealthStatus.Green:
-				writer.WriteStringValue("green");
-				return;
+				writer.WriteStringValue(MemberGreen);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(IndicatorHealthStatus)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

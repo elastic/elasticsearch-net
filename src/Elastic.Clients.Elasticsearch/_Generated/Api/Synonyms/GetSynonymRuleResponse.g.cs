@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+internal sealed partial class GetSynonymRuleResponseConverter : System.Text.Json.Serialization.JsonConverter<GetSynonymRuleResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
+
+	public override GetSynonymRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propSynonyms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propSynonyms.TryRead(ref reader, options, PropSynonyms))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetSynonymRuleResponse
+		{
+			Id = propId.Value
+,
+			Synonyms = propSynonyms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSynonymRuleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropSynonyms, value.Synonyms);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetSynonymRuleResponseConverter))]
 public sealed partial class GetSynonymRuleResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +79,6 @@ public sealed partial class GetSynonymRuleResponse : ElasticsearchResponse
 	/// Synonym Rule identifier
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
 
 	/// <summary>
@@ -41,6 +86,5 @@ public sealed partial class GetSynonymRuleResponse : ElasticsearchResponse
 	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("synonyms")]
 	public string Synonyms { get; init; }
 }

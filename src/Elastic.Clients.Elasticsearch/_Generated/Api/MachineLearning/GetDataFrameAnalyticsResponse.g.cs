@@ -22,13 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetDataFrameAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalytics = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics");
+
+	public override GetDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary>> propDataFrameAnalytics = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propDataFrameAnalytics.TryRead(ref reader, options, PropDataFrameAnalytics))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetDataFrameAnalyticsResponse
+		{
+			Count = propCount.Value
+,
+			DataFrameAnalytics = propDataFrameAnalytics.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropDataFrameAnalytics, value.DataFrameAnalytics);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetDataFrameAnalyticsResponseConverter))]
 public sealed partial class GetDataFrameAnalyticsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -36,6 +81,5 @@ public sealed partial class GetDataFrameAnalyticsResponse : ElasticsearchRespons
 	/// An array of data frame analytics job resources, which are sorted by the id value in ascending order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_frame_analytics")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary> DataFrameAnalytics { get; init; }
 }

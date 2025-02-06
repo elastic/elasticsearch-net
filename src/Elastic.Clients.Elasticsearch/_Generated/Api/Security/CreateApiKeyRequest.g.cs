@@ -53,6 +53,11 @@ public sealed partial class CreateApiKeyRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyRequestParameters>
 {
+	[JsonConstructor]
+	internal CreateApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

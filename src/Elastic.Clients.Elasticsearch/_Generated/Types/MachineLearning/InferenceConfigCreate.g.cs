@@ -44,12 +44,16 @@ public sealed partial class InferenceConfigCreate
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal InferenceConfigCreate()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static InferenceConfigCreate Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigCreate("classification", classificationInferenceOptions);
 	public static InferenceConfigCreate FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => new InferenceConfigCreate("fill_mask", fillMaskInferenceOptions);
@@ -75,147 +79,152 @@ public sealed partial class InferenceConfigCreate
 	}
 }
 
-internal sealed partial class InferenceConfigCreateConverter : JsonConverter<InferenceConfigCreate>
+internal sealed partial class InferenceConfigCreateConverter : System.Text.Json.Serialization.JsonConverter<InferenceConfigCreate>
 {
-	public override InferenceConfigCreate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantFillMask = System.Text.Json.JsonEncodedText.Encode("fill_mask");
+	private static readonly System.Text.Json.JsonEncodedText VariantNer = System.Text.Json.JsonEncodedText.Encode("ner");
+	private static readonly System.Text.Json.JsonEncodedText VariantPassThrough = System.Text.Json.JsonEncodedText.Encode("pass_through");
+	private static readonly System.Text.Json.JsonEncodedText VariantQuestionAnswering = System.Text.Json.JsonEncodedText.Encode("question_answering");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextClassification = System.Text.Json.JsonEncodedText.Encode("text_classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextExpansion = System.Text.Json.JsonEncodedText.Encode("text_expansion");
+	private static readonly System.Text.Json.JsonEncodedText VariantZeroShotClassification = System.Text.Json.JsonEncodedText.Encode("zero_shot_classification");
+
+	public override InferenceConfigCreate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantClassification))
+			{
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFillMask))
+			{
+				variantType = VariantFillMask.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNer))
+			{
+				variantType = VariantNer.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPassThrough))
+			{
+				variantType = VariantPassThrough.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantQuestionAnswering))
+			{
+				variantType = VariantQuestionAnswering.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegression))
+			{
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextClassification))
+			{
+				variantType = VariantTextClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextEmbedding))
+			{
+				variantType = VariantTextEmbedding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextExpansion))
+			{
+				variantType = VariantTextExpansion.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantZeroShotClassification))
+			{
+				variantType = VariantZeroShotClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fill_mask")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ner")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "pass_through")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "question_answering")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "regression")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_embedding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_expansion")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "zero_shot_classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfigCreate' from the response.");
-		}
-
-		var result = new InferenceConfigCreate(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InferenceConfigCreate { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, InferenceConfigCreate value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceConfigCreate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, options);
-					break;
-				case "fill_mask":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions)value.Variant, options);
-					break;
-				case "ner":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions)value.Variant, options);
-					break;
-				case "pass_through":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions)value.Variant, options);
-					break;
-				case "question_answering":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions)value.Variant, options);
-					break;
-				case "text_classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions)value.Variant, options);
-					break;
-				case "text_embedding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions)value.Variant, options);
-					break;
-				case "text_expansion":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions)value.Variant, options);
-					break;
-				case "zero_shot_classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?)value.Variant);
+				break;
+			case "fill_mask":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions?)value.Variant);
+				break;
+			case "ner":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions?)value.Variant);
+				break;
+			case "pass_through":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions?)value.Variant);
+				break;
+			case "question_answering":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions?)value.Variant);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?)value.Variant);
+				break;
+			case "text_classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions?)value.Variant);
+				break;
+			case "text_embedding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions?)value.Variant);
+				break;
+			case "text_expansion":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions?)value.Variant);
+				break;
+			case "zero_shot_classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(InferenceConfigCreate)}'.");
 		}
 
 		writer.WriteEndObject();

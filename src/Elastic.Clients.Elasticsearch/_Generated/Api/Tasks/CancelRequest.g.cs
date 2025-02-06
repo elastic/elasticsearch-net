@@ -76,6 +76,7 @@ public sealed partial class CancelRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters>
 {
+	[JsonConstructor]
 	public CancelRequest()
 	{
 	}
@@ -91,6 +92,14 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "tasks.cancel";
+
+	/// <summary>
+	/// <para>
+	/// ID of the task.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId?>("task_id"); set => PO("task_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -41,6 +41,7 @@ public sealed partial class GetInferenceRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceRequestParameters>
 {
+	[JsonConstructor]
 	public GetInferenceRequest()
 	{
 	}
@@ -60,6 +61,22 @@ public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "inference.get";
+
+	/// <summary>
+	/// <para>
+	/// The inference Id
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => P<Elastic.Clients.Elasticsearch.Id?>("inference_id"); set => PO("inference_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 }
 
 /// <summary>

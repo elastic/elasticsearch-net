@@ -46,6 +46,11 @@ public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyReque
 	{
 	}
 
+	[JsonConstructor]
+	internal DeletePolicyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichDeletePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -53,6 +58,14 @@ public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.delete_policy";
+
+	/// <summary>
+	/// <para>
+	/// Enrich policy to delete.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
 /// <summary>

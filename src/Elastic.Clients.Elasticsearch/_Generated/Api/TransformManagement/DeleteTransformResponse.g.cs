@@ -22,10 +22,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class DeleteTransformResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteTransformResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+
+	public override DeleteTransformResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteTransformResponse
+		{
+			Acknowledged = propAcknowledged.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteTransformResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteTransformResponseConverter))]
 public sealed partial class DeleteTransformResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,6 +69,5 @@ public sealed partial class DeleteTransformResponse : ElasticsearchResponse
 	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 }

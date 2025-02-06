@@ -43,51 +43,93 @@ public enum ChildScoreMode
 	Avg
 }
 
-internal sealed class ChildScoreModeConverter : JsonConverter<ChildScoreMode>
+internal sealed partial class ChildScoreModeConverter : System.Text.Json.Serialization.JsonConverter<ChildScoreMode>
 {
-	public override ChildScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+
+	public override ChildScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSum))
 		{
-			case "sum":
-				return ChildScoreMode.Sum;
-			case "none":
-				return ChildScoreMode.None;
-			case "min":
-				return ChildScoreMode.Min;
-			case "max":
-				return ChildScoreMode.Max;
-			case "avg":
-				return ChildScoreMode.Avg;
+			return ChildScoreMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return ChildScoreMode.None;
+		}
+
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return ChildScoreMode.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return ChildScoreMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return ChildScoreMode.Avg;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChildScoreMode.Sum;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChildScoreMode.None;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChildScoreMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChildScoreMode.Max;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChildScoreMode.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ChildScoreMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ChildScoreMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ChildScoreMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ChildScoreMode.Sum:
-				writer.WriteStringValue("sum");
-				return;
+				writer.WriteStringValue(MemberSum);
+				break;
 			case ChildScoreMode.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case ChildScoreMode.Min:
-				writer.WriteStringValue("min");
-				return;
+				writer.WriteStringValue(MemberMin);
+				break;
 			case ChildScoreMode.Max:
-				writer.WriteStringValue("max");
-				return;
+				writer.WriteStringValue(MemberMax);
+				break;
 			case ChildScoreMode.Avg:
-				writer.WriteStringValue("avg");
-				return;
+				writer.WriteStringValue(MemberAvg);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ChildScoreMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -100,36 +142,51 @@ public enum CombinedFieldsOperator
 	And
 }
 
-internal sealed class CombinedFieldsOperatorConverter : JsonConverter<CombinedFieldsOperator>
+internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json.Serialization.JsonConverter<CombinedFieldsOperator>
 {
-	public override CombinedFieldsOperator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and");
+
+	public override CombinedFieldsOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberOr))
 		{
-			case "or":
-				return CombinedFieldsOperator.Or;
-			case "and":
-				return CombinedFieldsOperator.And;
+			return CombinedFieldsOperator.Or;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAnd))
+		{
+			return CombinedFieldsOperator.And;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOr.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CombinedFieldsOperator.Or;
+		}
+
+		if (string.Equals(value, MemberAnd.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CombinedFieldsOperator.And;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(CombinedFieldsOperator)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, CombinedFieldsOperator value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CombinedFieldsOperator value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case CombinedFieldsOperator.Or:
-				writer.WriteStringValue("or");
-				return;
+				writer.WriteStringValue(MemberOr);
+				break;
 			case CombinedFieldsOperator.And:
-				writer.WriteStringValue("and");
-				return;
+				writer.WriteStringValue(MemberAnd);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(CombinedFieldsOperator)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -152,36 +209,51 @@ public enum CombinedFieldsZeroTerms
 	All
 }
 
-internal sealed class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedFieldsZeroTerms>
+internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Json.Serialization.JsonConverter<CombinedFieldsZeroTerms>
 {
-	public override CombinedFieldsZeroTerms Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+
+	public override CombinedFieldsZeroTerms Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNone))
 		{
-			case "none":
-				return CombinedFieldsZeroTerms.None;
-			case "all":
-				return CombinedFieldsZeroTerms.All;
+			return CombinedFieldsZeroTerms.None;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return CombinedFieldsZeroTerms.All;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CombinedFieldsZeroTerms.None;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CombinedFieldsZeroTerms.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(CombinedFieldsZeroTerms)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, CombinedFieldsZeroTerms value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CombinedFieldsZeroTerms value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case CombinedFieldsZeroTerms.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case CombinedFieldsZeroTerms.All:
-				writer.WriteStringValue("all");
-				return;
+				writer.WriteStringValue(MemberAll);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(CombinedFieldsZeroTerms)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -262,76 +334,163 @@ public enum FieldValueFactorModifier
 	Ln
 }
 
-internal sealed class FieldValueFactorModifierConverter : JsonConverter<FieldValueFactorModifier>
+internal sealed partial class FieldValueFactorModifierConverter : System.Text.Json.Serialization.JsonConverter<FieldValueFactorModifier>
 {
-	public override FieldValueFactorModifier Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSquare = System.Text.Json.JsonEncodedText.Encode("square");
+	private static readonly System.Text.Json.JsonEncodedText MemberSqrt = System.Text.Json.JsonEncodedText.Encode("sqrt");
+	private static readonly System.Text.Json.JsonEncodedText MemberReciprocal = System.Text.Json.JsonEncodedText.Encode("reciprocal");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog2p = System.Text.Json.JsonEncodedText.Encode("log2p");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog1p = System.Text.Json.JsonEncodedText.Encode("log1p");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog = System.Text.Json.JsonEncodedText.Encode("log");
+	private static readonly System.Text.Json.JsonEncodedText MemberLn2p = System.Text.Json.JsonEncodedText.Encode("ln2p");
+	private static readonly System.Text.Json.JsonEncodedText MemberLn1p = System.Text.Json.JsonEncodedText.Encode("ln1p");
+	private static readonly System.Text.Json.JsonEncodedText MemberLn = System.Text.Json.JsonEncodedText.Encode("ln");
+
+	public override FieldValueFactorModifier Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSquare))
 		{
-			case "square":
-				return FieldValueFactorModifier.Square;
-			case "sqrt":
-				return FieldValueFactorModifier.Sqrt;
-			case "reciprocal":
-				return FieldValueFactorModifier.Reciprocal;
-			case "none":
-				return FieldValueFactorModifier.None;
-			case "log2p":
-				return FieldValueFactorModifier.Log2p;
-			case "log1p":
-				return FieldValueFactorModifier.Log1p;
-			case "log":
-				return FieldValueFactorModifier.Log;
-			case "ln2p":
-				return FieldValueFactorModifier.Ln2p;
-			case "ln1p":
-				return FieldValueFactorModifier.Ln1p;
-			case "ln":
-				return FieldValueFactorModifier.Ln;
+			return FieldValueFactorModifier.Square;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSqrt))
+		{
+			return FieldValueFactorModifier.Sqrt;
+		}
+
+		if (reader.ValueTextEquals(MemberReciprocal))
+		{
+			return FieldValueFactorModifier.Reciprocal;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return FieldValueFactorModifier.None;
+		}
+
+		if (reader.ValueTextEquals(MemberLog2p))
+		{
+			return FieldValueFactorModifier.Log2p;
+		}
+
+		if (reader.ValueTextEquals(MemberLog1p))
+		{
+			return FieldValueFactorModifier.Log1p;
+		}
+
+		if (reader.ValueTextEquals(MemberLog))
+		{
+			return FieldValueFactorModifier.Log;
+		}
+
+		if (reader.ValueTextEquals(MemberLn2p))
+		{
+			return FieldValueFactorModifier.Ln2p;
+		}
+
+		if (reader.ValueTextEquals(MemberLn1p))
+		{
+			return FieldValueFactorModifier.Ln1p;
+		}
+
+		if (reader.ValueTextEquals(MemberLn))
+		{
+			return FieldValueFactorModifier.Ln;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSquare.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Square;
+		}
+
+		if (string.Equals(value, MemberSqrt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Sqrt;
+		}
+
+		if (string.Equals(value, MemberReciprocal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Reciprocal;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.None;
+		}
+
+		if (string.Equals(value, MemberLog2p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Log2p;
+		}
+
+		if (string.Equals(value, MemberLog1p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Log1p;
+		}
+
+		if (string.Equals(value, MemberLog.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Log;
+		}
+
+		if (string.Equals(value, MemberLn2p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Ln2p;
+		}
+
+		if (string.Equals(value, MemberLn1p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Ln1p;
+		}
+
+		if (string.Equals(value, MemberLn.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FieldValueFactorModifier.Ln;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FieldValueFactorModifier)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FieldValueFactorModifier value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldValueFactorModifier value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FieldValueFactorModifier.Square:
-				writer.WriteStringValue("square");
-				return;
+				writer.WriteStringValue(MemberSquare);
+				break;
 			case FieldValueFactorModifier.Sqrt:
-				writer.WriteStringValue("sqrt");
-				return;
+				writer.WriteStringValue(MemberSqrt);
+				break;
 			case FieldValueFactorModifier.Reciprocal:
-				writer.WriteStringValue("reciprocal");
-				return;
+				writer.WriteStringValue(MemberReciprocal);
+				break;
 			case FieldValueFactorModifier.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case FieldValueFactorModifier.Log2p:
-				writer.WriteStringValue("log2p");
-				return;
+				writer.WriteStringValue(MemberLog2p);
+				break;
 			case FieldValueFactorModifier.Log1p:
-				writer.WriteStringValue("log1p");
-				return;
+				writer.WriteStringValue(MemberLog1p);
+				break;
 			case FieldValueFactorModifier.Log:
-				writer.WriteStringValue("log");
-				return;
+				writer.WriteStringValue(MemberLog);
+				break;
 			case FieldValueFactorModifier.Ln2p:
-				writer.WriteStringValue("ln2p");
-				return;
+				writer.WriteStringValue(MemberLn2p);
+				break;
 			case FieldValueFactorModifier.Ln1p:
-				writer.WriteStringValue("ln1p");
-				return;
+				writer.WriteStringValue(MemberLn1p);
+				break;
 			case FieldValueFactorModifier.Ln:
-				writer.WriteStringValue("ln");
-				return;
+				writer.WriteStringValue(MemberLn);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FieldValueFactorModifier)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -383,56 +542,107 @@ public enum FunctionBoostMode
 	Avg
 }
 
-internal sealed class FunctionBoostModeConverter : JsonConverter<FunctionBoostMode>
+internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Serialization.JsonConverter<FunctionBoostMode>
 {
-	public override FunctionBoostMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+
+	public override FunctionBoostMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSum))
 		{
-			case "sum":
-				return FunctionBoostMode.Sum;
-			case "replace":
-				return FunctionBoostMode.Replace;
-			case "multiply":
-				return FunctionBoostMode.Multiply;
-			case "min":
-				return FunctionBoostMode.Min;
-			case "max":
-				return FunctionBoostMode.Max;
-			case "avg":
-				return FunctionBoostMode.Avg;
+			return FunctionBoostMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberReplace))
+		{
+			return FunctionBoostMode.Replace;
+		}
+
+		if (reader.ValueTextEquals(MemberMultiply))
+		{
+			return FunctionBoostMode.Multiply;
+		}
+
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return FunctionBoostMode.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return FunctionBoostMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return FunctionBoostMode.Avg;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Sum;
+		}
+
+		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Replace;
+		}
+
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Max;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionBoostMode.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FunctionBoostMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FunctionBoostMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FunctionBoostMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FunctionBoostMode.Sum:
-				writer.WriteStringValue("sum");
-				return;
+				writer.WriteStringValue(MemberSum);
+				break;
 			case FunctionBoostMode.Replace:
-				writer.WriteStringValue("replace");
-				return;
+				writer.WriteStringValue(MemberReplace);
+				break;
 			case FunctionBoostMode.Multiply:
-				writer.WriteStringValue("multiply");
-				return;
+				writer.WriteStringValue(MemberMultiply);
+				break;
 			case FunctionBoostMode.Min:
-				writer.WriteStringValue("min");
-				return;
+				writer.WriteStringValue(MemberMin);
+				break;
 			case FunctionBoostMode.Max:
-				writer.WriteStringValue("max");
-				return;
+				writer.WriteStringValue(MemberMax);
+				break;
 			case FunctionBoostMode.Avg:
-				writer.WriteStringValue("avg");
-				return;
+				writer.WriteStringValue(MemberAvg);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FunctionBoostMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -483,56 +693,107 @@ public enum FunctionScoreMode
 	Avg
 }
 
-internal sealed class FunctionScoreModeConverter : JsonConverter<FunctionScoreMode>
+internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Serialization.JsonConverter<FunctionScoreMode>
 {
-	public override FunctionScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+
+	public override FunctionScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSum))
 		{
-			case "sum":
-				return FunctionScoreMode.Sum;
-			case "multiply":
-				return FunctionScoreMode.Multiply;
-			case "min":
-				return FunctionScoreMode.Min;
-			case "max":
-				return FunctionScoreMode.Max;
-			case "first":
-				return FunctionScoreMode.First;
-			case "avg":
-				return FunctionScoreMode.Avg;
+			return FunctionScoreMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMultiply))
+		{
+			return FunctionScoreMode.Multiply;
+		}
+
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return FunctionScoreMode.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return FunctionScoreMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberFirst))
+		{
+			return FunctionScoreMode.First;
+		}
+
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return FunctionScoreMode.Avg;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.Sum;
+		}
+
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.Max;
+		}
+
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.First;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FunctionScoreMode.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FunctionScoreMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FunctionScoreMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FunctionScoreMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FunctionScoreMode.Sum:
-				writer.WriteStringValue("sum");
-				return;
+				writer.WriteStringValue(MemberSum);
+				break;
 			case FunctionScoreMode.Multiply:
-				writer.WriteStringValue("multiply");
-				return;
+				writer.WriteStringValue(MemberMultiply);
+				break;
 			case FunctionScoreMode.Min:
-				writer.WriteStringValue("min");
-				return;
+				writer.WriteStringValue(MemberMin);
+				break;
 			case FunctionScoreMode.Max:
-				writer.WriteStringValue("max");
-				return;
+				writer.WriteStringValue(MemberMax);
+				break;
 			case FunctionScoreMode.First:
-				writer.WriteStringValue("first");
-				return;
+				writer.WriteStringValue(MemberFirst);
+				break;
 			case FunctionScoreMode.Avg:
-				writer.WriteStringValue("avg");
-				return;
+				writer.WriteStringValue(MemberAvg);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FunctionScoreMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -557,41 +818,65 @@ public enum GeoValidationMethod
 	Coerce
 }
 
-internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidationMethod>
+internal sealed partial class GeoValidationMethodConverter : System.Text.Json.Serialization.JsonConverter<GeoValidationMethod>
 {
-	public override GeoValidationMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStrict = System.Text.Json.JsonEncodedText.Encode("strict");
+	private static readonly System.Text.Json.JsonEncodedText MemberIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText MemberCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+
+	public override GeoValidationMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStrict))
 		{
-			case "strict":
-				return GeoValidationMethod.Strict;
-			case "ignore_malformed":
-				return GeoValidationMethod.IgnoreMalformed;
-			case "coerce":
-				return GeoValidationMethod.Coerce;
+			return GeoValidationMethod.Strict;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIgnoreMalformed))
+		{
+			return GeoValidationMethod.IgnoreMalformed;
+		}
+
+		if (reader.ValueTextEquals(MemberCoerce))
+		{
+			return GeoValidationMethod.Coerce;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStrict.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoValidationMethod.Strict;
+		}
+
+		if (string.Equals(value, MemberIgnoreMalformed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoValidationMethod.IgnoreMalformed;
+		}
+
+		if (string.Equals(value, MemberCoerce.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoValidationMethod.Coerce;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GeoValidationMethod)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoValidationMethod value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoValidationMethod value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GeoValidationMethod.Strict:
-				writer.WriteStringValue("strict");
-				return;
+				writer.WriteStringValue(MemberStrict);
+				break;
 			case GeoValidationMethod.IgnoreMalformed:
-				writer.WriteStringValue("ignore_malformed");
-				return;
+				writer.WriteStringValue(MemberIgnoreMalformed);
+				break;
 			case GeoValidationMethod.Coerce:
-				writer.WriteStringValue("coerce");
-				return;
+				writer.WriteStringValue(MemberCoerce);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GeoValidationMethod)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -628,46 +913,79 @@ public enum MultiValueMode
 	Avg
 }
 
-internal sealed class MultiValueModeConverter : JsonConverter<MultiValueMode>
+internal sealed partial class MultiValueModeConverter : System.Text.Json.Serialization.JsonConverter<MultiValueMode>
 {
-	public override MultiValueMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+
+	public override MultiValueMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSum))
 		{
-			case "sum":
-				return MultiValueMode.Sum;
-			case "min":
-				return MultiValueMode.Min;
-			case "max":
-				return MultiValueMode.Max;
-			case "avg":
-				return MultiValueMode.Avg;
+			return MultiValueMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return MultiValueMode.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return MultiValueMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return MultiValueMode.Avg;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MultiValueMode.Sum;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MultiValueMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MultiValueMode.Max;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MultiValueMode.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(MultiValueMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, MultiValueMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiValueMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case MultiValueMode.Sum:
-				writer.WriteStringValue("sum");
-				return;
+				writer.WriteStringValue(MemberSum);
+				break;
 			case MultiValueMode.Min:
-				writer.WriteStringValue("min");
-				return;
+				writer.WriteStringValue(MemberMin);
+				break;
 			case MultiValueMode.Max:
-				writer.WriteStringValue("max");
-				return;
+				writer.WriteStringValue(MemberMax);
+				break;
 			case MultiValueMode.Avg:
-				writer.WriteStringValue("avg");
-				return;
+				writer.WriteStringValue(MemberAvg);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(MultiValueMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -680,38 +998,53 @@ public enum Operator
 	And
 }
 
-internal sealed class OperatorConverter : JsonConverter<Operator>
+internal sealed partial class OperatorConverter : System.Text.Json.Serialization.JsonConverter<Operator>
 {
-	public override Operator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
+	private static readonly System.Text.Json.JsonEncodedText MemberOr1 = System.Text.Json.JsonEncodedText.Encode("OR");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd1 = System.Text.Json.JsonEncodedText.Encode("AND");
+
+	public override Operator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberOr) || reader.ValueTextEquals(MemberOr1))
 		{
-			case "or":
-			case "OR":
-				return Operator.Or;
-			case "and":
-			case "AND":
-				return Operator.And;
+			return Operator.Or;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAnd) || reader.ValueTextEquals(MemberAnd1))
+		{
+			return Operator.And;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOr.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberOr1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Operator.Or;
+		}
+
+		if (string.Equals(value, MemberAnd.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAnd1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Operator.And;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Operator)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, Operator value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Operator value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case Operator.Or:
-				writer.WriteStringValue("or");
-				return;
+				writer.WriteStringValue(MemberOr);
+				break;
 			case Operator.And:
-				writer.WriteStringValue("and");
-				return;
+				writer.WriteStringValue(MemberAnd);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Operator)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -741,41 +1074,65 @@ public enum RangeRelation
 	Contains
 }
 
-internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
+internal sealed partial class RangeRelationConverter : System.Text.Json.Serialization.JsonConverter<RangeRelation>
 {
-	public override RangeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberWithin = System.Text.Json.JsonEncodedText.Encode("within");
+	private static readonly System.Text.Json.JsonEncodedText MemberIntersects = System.Text.Json.JsonEncodedText.Encode("intersects");
+	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
+
+	public override RangeRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberWithin))
 		{
-			case "within":
-				return RangeRelation.Within;
-			case "intersects":
-				return RangeRelation.Intersects;
-			case "contains":
-				return RangeRelation.Contains;
+			return RangeRelation.Within;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIntersects))
+		{
+			return RangeRelation.Intersects;
+		}
+
+		if (reader.ValueTextEquals(MemberContains))
+		{
+			return RangeRelation.Contains;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWithin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RangeRelation.Within;
+		}
+
+		if (string.Equals(value, MemberIntersects.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RangeRelation.Intersects;
+		}
+
+		if (string.Equals(value, MemberContains.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RangeRelation.Contains;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RangeRelation)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, RangeRelation value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RangeRelation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case RangeRelation.Within:
-				writer.WriteStringValue("within");
-				return;
+				writer.WriteStringValue(MemberWithin);
+				break;
 			case RangeRelation.Intersects:
-				writer.WriteStringValue("intersects");
-				return;
+				writer.WriteStringValue(MemberIntersects);
+				break;
 			case RangeRelation.Contains:
-				writer.WriteStringValue("contains");
-				return;
+				writer.WriteStringValue(MemberContains);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RangeRelation)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1008,56 +1365,107 @@ public enum TextQueryType
 	BestFields
 }
 
-internal sealed class TextQueryTypeConverter : JsonConverter<TextQueryType>
+internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serialization.JsonConverter<TextQueryType>
 {
-	public override TextQueryType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPhrasePrefix = System.Text.Json.JsonEncodedText.Encode("phrase_prefix");
+	private static readonly System.Text.Json.JsonEncodedText MemberPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
+	private static readonly System.Text.Json.JsonEncodedText MemberMostFields = System.Text.Json.JsonEncodedText.Encode("most_fields");
+	private static readonly System.Text.Json.JsonEncodedText MemberCrossFields = System.Text.Json.JsonEncodedText.Encode("cross_fields");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolPrefix = System.Text.Json.JsonEncodedText.Encode("bool_prefix");
+	private static readonly System.Text.Json.JsonEncodedText MemberBestFields = System.Text.Json.JsonEncodedText.Encode("best_fields");
+
+	public override TextQueryType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPhrasePrefix))
 		{
-			case "phrase_prefix":
-				return TextQueryType.PhrasePrefix;
-			case "phrase":
-				return TextQueryType.Phrase;
-			case "most_fields":
-				return TextQueryType.MostFields;
-			case "cross_fields":
-				return TextQueryType.CrossFields;
-			case "bool_prefix":
-				return TextQueryType.BoolPrefix;
-			case "best_fields":
-				return TextQueryType.BestFields;
+			return TextQueryType.PhrasePrefix;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberPhrase))
+		{
+			return TextQueryType.Phrase;
+		}
+
+		if (reader.ValueTextEquals(MemberMostFields))
+		{
+			return TextQueryType.MostFields;
+		}
+
+		if (reader.ValueTextEquals(MemberCrossFields))
+		{
+			return TextQueryType.CrossFields;
+		}
+
+		if (reader.ValueTextEquals(MemberBoolPrefix))
+		{
+			return TextQueryType.BoolPrefix;
+		}
+
+		if (reader.ValueTextEquals(MemberBestFields))
+		{
+			return TextQueryType.BestFields;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPhrasePrefix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.PhrasePrefix;
+		}
+
+		if (string.Equals(value, MemberPhrase.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.Phrase;
+		}
+
+		if (string.Equals(value, MemberMostFields.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.MostFields;
+		}
+
+		if (string.Equals(value, MemberCrossFields.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.CrossFields;
+		}
+
+		if (string.Equals(value, MemberBoolPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.BoolPrefix;
+		}
+
+		if (string.Equals(value, MemberBestFields.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TextQueryType.BestFields;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TextQueryType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TextQueryType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TextQueryType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TextQueryType.PhrasePrefix:
-				writer.WriteStringValue("phrase_prefix");
-				return;
+				writer.WriteStringValue(MemberPhrasePrefix);
+				break;
 			case TextQueryType.Phrase:
-				writer.WriteStringValue("phrase");
-				return;
+				writer.WriteStringValue(MemberPhrase);
+				break;
 			case TextQueryType.MostFields:
-				writer.WriteStringValue("most_fields");
-				return;
+				writer.WriteStringValue(MemberMostFields);
+				break;
 			case TextQueryType.CrossFields:
-				writer.WriteStringValue("cross_fields");
-				return;
+				writer.WriteStringValue(MemberCrossFields);
+				break;
 			case TextQueryType.BoolPrefix:
-				writer.WriteStringValue("bool_prefix");
-				return;
+				writer.WriteStringValue(MemberBoolPrefix);
+				break;
 			case TextQueryType.BestFields:
-				writer.WriteStringValue("best_fields");
-				return;
+				writer.WriteStringValue(MemberBestFields);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TextQueryType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1080,35 +1488,50 @@ public enum ZeroTermsQuery
 	All
 }
 
-internal sealed class ZeroTermsQueryConverter : JsonConverter<ZeroTermsQuery>
+internal sealed partial class ZeroTermsQueryConverter : System.Text.Json.Serialization.JsonConverter<ZeroTermsQuery>
 {
-	public override ZeroTermsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+
+	public override ZeroTermsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNone))
 		{
-			case "none":
-				return ZeroTermsQuery.None;
-			case "all":
-				return ZeroTermsQuery.All;
+			return ZeroTermsQuery.None;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return ZeroTermsQuery.All;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ZeroTermsQuery.None;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ZeroTermsQuery.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ZeroTermsQuery)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ZeroTermsQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ZeroTermsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ZeroTermsQuery.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case ZeroTermsQuery.All:
-				writer.WriteStringValue("all");
-				return;
+				writer.WriteStringValue(MemberAll);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ZeroTermsQuery)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

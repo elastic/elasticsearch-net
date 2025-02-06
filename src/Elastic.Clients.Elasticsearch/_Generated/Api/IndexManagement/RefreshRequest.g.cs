@@ -67,6 +67,7 @@ public sealed partial class RefreshRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParameters>
 {
+	[JsonConstructor]
 	public RefreshRequest()
 	{
 	}
@@ -82,6 +83,16 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.refresh";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

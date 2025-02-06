@@ -39,12 +39,16 @@ public sealed partial class DatabaseConfigurationFull
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal DatabaseConfigurationFull()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static DatabaseConfigurationFull Ipinfo(Elastic.Clients.Elasticsearch.Ingest.Ipinfo ipinfo) => new DatabaseConfigurationFull("ipinfo", ipinfo);
 	public static DatabaseConfigurationFull Local(Elastic.Clients.Elasticsearch.Ingest.Local local) => new DatabaseConfigurationFull("local", local);
@@ -72,103 +76,95 @@ public sealed partial class DatabaseConfigurationFull
 	}
 }
 
-internal sealed partial class DatabaseConfigurationFullConverter : JsonConverter<DatabaseConfigurationFull>
+internal sealed partial class DatabaseConfigurationFullConverter : System.Text.Json.Serialization.JsonConverter<DatabaseConfigurationFull>
 {
-	public override DatabaseConfigurationFull Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText VariantIpinfo = System.Text.Json.JsonEncodedText.Encode("ipinfo");
+	private static readonly System.Text.Json.JsonEncodedText VariantLocal = System.Text.Json.JsonEncodedText.Encode("local");
+	private static readonly System.Text.Json.JsonEncodedText VariantMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind");
+	private static readonly System.Text.Json.JsonEncodedText VariantWeb = System.Text.Json.JsonEncodedText.Encode("web");
+
+	public override DatabaseConfigurationFull Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propName = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIpinfo))
+			{
+				variantType = VariantIpinfo.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLocal))
+			{
+				variantType = VariantLocal.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Local?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMaxmind))
+			{
+				variantType = VariantMaxmind.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWeb))
+			{
+				variantType = VariantWeb.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Web?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		string nameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DatabaseConfigurationFull
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "name")
-			{
-				nameValue = JsonSerializer.Deserialize<string>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "ipinfo")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "local")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Local?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "maxmind")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "web")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Web?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DatabaseConfigurationFull' from the response.");
-		}
-
-		var result = new DatabaseConfigurationFull(variantNameValue, variantValue);
-		result.Name = nameValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Name = propName.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, DatabaseConfigurationFull value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DatabaseConfigurationFull value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Name))
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(value.Name);
+			case "":
+				break;
+			case "ipinfo":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo?)value.Variant);
+				break;
+			case "local":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Local?)value.Variant);
+				break;
+			case "maxmind":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Maxmind?)value.Variant);
+				break;
+			case "web":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Web?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DatabaseConfigurationFull)}'.");
 		}
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "ipinfo":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo>(writer, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo)value.Variant, options);
-					break;
-				case "local":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Local>(writer, (Elastic.Clients.Elasticsearch.Ingest.Local)value.Variant, options);
-					break;
-				case "maxmind":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind>(writer, (Elastic.Clients.Elasticsearch.Ingest.Maxmind)value.Variant, options);
-					break;
-				case "web":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Web>(writer, (Elastic.Clients.Elasticsearch.Ingest.Web)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropName, value.Name);
 		writer.WriteEndObject();
 	}
 }

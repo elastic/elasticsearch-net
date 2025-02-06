@@ -64,6 +64,11 @@ public sealed partial class CreateCrossClusterApiKeyRequestParameters : RequestP
 /// </summary>
 public sealed partial class CreateCrossClusterApiKeyRequest : PlainRequest<CreateCrossClusterApiKeyRequestParameters>
 {
+	[JsonConstructor]
+	internal CreateCrossClusterApiKeyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateCrossClusterApiKey;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

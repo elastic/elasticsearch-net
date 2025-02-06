@@ -76,6 +76,11 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal GetAsyncRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -83,6 +88,14 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "sql.get_async";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the search.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

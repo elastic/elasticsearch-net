@@ -39,12 +39,16 @@ public sealed partial class SpanQuery
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal SpanQuery()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static SpanQuery SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new SpanQuery("span_containing", spanContainingQuery);
 	public static SpanQuery SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("span_field_masking", spanFieldMaskingQuery);
@@ -70,147 +74,152 @@ public sealed partial class SpanQuery
 	}
 }
 
-internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
+internal sealed partial class SpanQueryConverter : System.Text.Json.Serialization.JsonConverter<SpanQuery>
 {
-	public override SpanQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanContaining = System.Text.Json.JsonEncodedText.Encode("span_containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanFieldMasking = System.Text.Json.JsonEncodedText.Encode("span_field_masking");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanFirst = System.Text.Json.JsonEncodedText.Encode("span_first");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanGap = System.Text.Json.JsonEncodedText.Encode("span_gap");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanMulti = System.Text.Json.JsonEncodedText.Encode("span_multi");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanNear = System.Text.Json.JsonEncodedText.Encode("span_near");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanNot = System.Text.Json.JsonEncodedText.Encode("span_not");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanOr = System.Text.Json.JsonEncodedText.Encode("span_or");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanTerm = System.Text.Json.JsonEncodedText.Encode("span_term");
+	private static readonly System.Text.Json.JsonEncodedText VariantSpanWithin = System.Text.Json.JsonEncodedText.Encode("span_within");
+
+	public override SpanQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantSpanContaining))
+			{
+				variantType = VariantSpanContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanFieldMasking))
+			{
+				variantType = VariantSpanFieldMasking.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanFirst))
+			{
+				variantType = VariantSpanFirst.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanGap))
+			{
+				variantType = VariantSpanGap.Value;
+				reader.Read();
+				variant = reader.ReadValue<KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanMulti))
+			{
+				variantType = VariantSpanMulti.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanNear))
+			{
+				variantType = VariantSpanNear.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanNot))
+			{
+				variantType = VariantSpanNot.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanOr))
+			{
+				variantType = VariantSpanOr.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanTerm))
+			{
+				variantType = VariantSpanTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSpanWithin))
+			{
+				variantType = VariantSpanWithin.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "span_containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_field_masking")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_first")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_gap")
-			{
-				variantValue = JsonSerializer.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_multi")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_near")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_not")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_or")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "span_within")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SpanQuery' from the response.");
-		}
-
-		var result = new SpanQuery(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SpanQuery { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, SpanQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SpanQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "span_containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)value.Variant, options);
-					break;
-				case "span_field_masking":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
-					break;
-				case "span_first":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)value.Variant, options);
-					break;
-				case "span_gap":
-					JsonSerializer.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>(writer, (KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>)value.Variant, options);
-					break;
-				case "span_multi":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery)value.Variant, options);
-					break;
-				case "span_near":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery)value.Variant, options);
-					break;
-				case "span_not":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery)value.Variant, options);
-					break;
-				case "span_or":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery)value.Variant, options);
-					break;
-				case "span_term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery)value.Variant, options);
-					break;
-				case "span_within":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "span_containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?)value.Variant);
+				break;
+			case "span_field_masking":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?)value.Variant);
+				break;
+			case "span_first":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery?)value.Variant);
+				break;
+			case "span_gap":
+				writer.WriteProperty(options, value.VariantType, (KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>?)value.Variant);
+				break;
+			case "span_multi":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery?)value.Variant);
+				break;
+			case "span_near":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery?)value.Variant);
+				break;
+			case "span_not":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery?)value.Variant);
+				break;
+			case "span_or":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery?)value.Variant);
+				break;
+			case "span_term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery?)value.Variant);
+				break;
+			case "span_within":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(SpanQuery)}'.");
 		}
 
 		writer.WriteEndObject();

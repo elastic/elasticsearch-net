@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
+internal sealed partial class GetFeaturesResponseConverter : System.Text.Json.Serialization.JsonConverter<GetFeaturesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+
+	public override GetFeaturesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature>> propFeatures = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatures.TryRead(ref reader, options, PropFeatures))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetFeaturesResponse
+		{
+			Features = propFeatures.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetFeaturesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatures, value.Features);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetFeaturesResponseConverter))]
 public sealed partial class GetFeaturesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("features")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features { get; init; }
 }

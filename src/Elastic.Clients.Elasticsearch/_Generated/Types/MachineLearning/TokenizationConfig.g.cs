@@ -44,12 +44,16 @@ public sealed partial class TokenizationConfig
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal TokenizationConfig()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static TokenizationConfig Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert", nlpBertTokenizationConfig);
 	public static TokenizationConfig BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert_ja", nlpBertTokenizationConfig);
@@ -69,87 +73,80 @@ public sealed partial class TokenizationConfig
 	}
 }
 
-internal sealed partial class TokenizationConfigConverter : JsonConverter<TokenizationConfig>
+internal sealed partial class TokenizationConfigConverter : System.Text.Json.Serialization.JsonConverter<TokenizationConfig>
 {
-	public override TokenizationConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantBert = System.Text.Json.JsonEncodedText.Encode("bert");
+	private static readonly System.Text.Json.JsonEncodedText VariantBertJa = System.Text.Json.JsonEncodedText.Encode("bert_ja");
+	private static readonly System.Text.Json.JsonEncodedText VariantMpnet = System.Text.Json.JsonEncodedText.Encode("mpnet");
+	private static readonly System.Text.Json.JsonEncodedText VariantRoberta = System.Text.Json.JsonEncodedText.Encode("roberta");
+
+	public override TokenizationConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantBert))
+			{
+				variantType = VariantBert.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantBertJa))
+			{
+				variantType = VariantBertJa.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMpnet))
+			{
+				variantType = VariantMpnet.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRoberta))
+			{
+				variantType = VariantRoberta.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "bert")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "bert_ja")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "mpnet")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "roberta")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'TokenizationConfig' from the response.");
-		}
-
-		var result = new TokenizationConfig(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TokenizationConfig { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, TokenizationConfig value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TokenizationConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "bert":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "bert_ja":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "mpnet":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig)value.Variant, options);
-					break;
-				case "roberta":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "bert":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				break;
+			case "bert_ja":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				break;
+			case "mpnet":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig?)value.Variant);
+				break;
+			case "roberta":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(TokenizationConfig)}'.");
 		}
 
 		writer.WriteEndObject();

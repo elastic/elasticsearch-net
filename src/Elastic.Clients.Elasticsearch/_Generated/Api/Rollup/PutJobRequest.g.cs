@@ -57,6 +57,11 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal PutJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupPutJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -64,6 +69,18 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "rollup.put_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job. This can be any alphanumeric string and uniquely identifies the
+	/// data that is associated with the rollup job. The ID is persistent; it is stored with the rolled
+	/// up data. If you create a job, let it run for a while, then delete the job, the data that the job
+	/// rolled up is still be associated with this job ID. You cannot create a new job with the same ID
+	/// since that could lead to problems with mismatched job configurations.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

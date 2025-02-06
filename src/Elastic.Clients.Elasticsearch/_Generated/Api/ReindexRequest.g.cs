@@ -100,6 +100,11 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
+	[JsonConstructor]
+	internal ReindexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

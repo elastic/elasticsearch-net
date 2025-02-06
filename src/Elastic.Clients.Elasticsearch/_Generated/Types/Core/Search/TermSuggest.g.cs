@@ -27,15 +27,76 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class TermSuggestConverter : System.Text.Json.Serialization.JsonConverter<TermSuggest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+
+	public override TermSuggest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propLength = default;
+		LocalJsonValue<int> propOffset = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>> propOptions = default;
+		LocalJsonValue<string> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLength.TryRead(ref reader, options, PropLength))
+			{
+				continue;
+			}
+
+			if (propOffset.TryRead(ref reader, options, PropOffset))
+			{
+				continue;
+			}
+
+			if (propOptions.TryRead(ref reader, options, PropOptions, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>)))
+			{
+				continue;
+			}
+
+			if (propText.TryRead(ref reader, options, PropText))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TermSuggest
+		{
+			Length = propLength.Value
+,
+			Offset = propOffset.Value
+,
+			Options = propOptions.Value
+,
+			Text = propText.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermSuggest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLength, value.Length);
+		writer.WriteProperty(options, PropOffset, value.Offset);
+		writer.WriteProperty(options, PropOptions, value.Options, null, typeof(SingleOrManyMarker<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>));
+		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TermSuggestConverter))]
 public sealed partial class TermSuggest : ISuggest
 {
-	[JsonInclude, JsonPropertyName("length")]
 	public int Length { get; init; }
-	[JsonInclude, JsonPropertyName("offset")]
 	public int Offset { get; init; }
-	[JsonInclude, JsonPropertyName("options")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption))]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption> Options { get; init; }
-	[JsonInclude, JsonPropertyName("text")]
 	public string Text { get; init; }
+
+	string ISuggest.Type => "term";
 }

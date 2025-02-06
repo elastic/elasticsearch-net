@@ -68,51 +68,93 @@ public enum ShardsStatsStage
 	Done
 }
 
-internal sealed class ShardsStatsStageConverter : JsonConverter<ShardsStatsStage>
+internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Serialization.JsonConverter<ShardsStatsStage>
 {
-	public override ShardsStatsStage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinalize = System.Text.Json.JsonEncodedText.Encode("FINALIZE");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("FAILURE");
+	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE");
+
+	public override ShardsStatsStage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStarted))
 		{
-			case "STARTED":
-				return ShardsStatsStage.Started;
-			case "INIT":
-				return ShardsStatsStage.Init;
-			case "FINALIZE":
-				return ShardsStatsStage.Finalize;
-			case "FAILURE":
-				return ShardsStatsStage.Failure;
-			case "DONE":
-				return ShardsStatsStage.Done;
+			return ShardsStatsStage.Started;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberInit))
+		{
+			return ShardsStatsStage.Init;
+		}
+
+		if (reader.ValueTextEquals(MemberFinalize))
+		{
+			return ShardsStatsStage.Finalize;
+		}
+
+		if (reader.ValueTextEquals(MemberFailure))
+		{
+			return ShardsStatsStage.Failure;
+		}
+
+		if (reader.ValueTextEquals(MemberDone))
+		{
+			return ShardsStatsStage.Done;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Started;
+		}
+
+		if (string.Equals(value, MemberInit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Init;
+		}
+
+		if (string.Equals(value, MemberFinalize.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Finalize;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Failure;
+		}
+
+		if (string.Equals(value, MemberDone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Done;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShardsStatsStage)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ShardsStatsStage value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardsStatsStage value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ShardsStatsStage.Started:
-				writer.WriteStringValue("STARTED");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
 			case ShardsStatsStage.Init:
-				writer.WriteStringValue("INIT");
-				return;
+				writer.WriteStringValue(MemberInit);
+				break;
 			case ShardsStatsStage.Finalize:
-				writer.WriteStringValue("FINALIZE");
-				return;
+				writer.WriteStringValue(MemberFinalize);
+				break;
 			case ShardsStatsStage.Failure:
-				writer.WriteStringValue("FAILURE");
-				return;
+				writer.WriteStringValue(MemberFailure);
+				break;
 			case ShardsStatsStage.Done:
-				writer.WriteStringValue("DONE");
-				return;
+				writer.WriteStringValue(MemberDone);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ShardsStatsStage)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -135,60 +177,120 @@ public enum SnapshotSort
 	Duration
 }
 
-internal sealed class SnapshotSortConverter : JsonConverter<SnapshotSort>
+internal sealed partial class SnapshotSortConverter : System.Text.Json.Serialization.JsonConverter<SnapshotSort>
 {
-	public override SnapshotSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText MemberShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailedShardCount = System.Text.Json.JsonEncodedText.Encode("failed_shard_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberDuration = System.Text.Json.JsonEncodedText.Encode("duration");
+
+	public override SnapshotSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStartTime))
 		{
-			case "start_time":
-				return SnapshotSort.StartTime;
-			case "shard_count":
-				return SnapshotSort.ShardCount;
-			case "repository":
-				return SnapshotSort.Repository;
-			case "name":
-				return SnapshotSort.Name;
-			case "index_count":
-				return SnapshotSort.IndexCount;
-			case "failed_shard_count":
-				return SnapshotSort.FailedShardCount;
-			case "duration":
-				return SnapshotSort.Duration;
+			return SnapshotSort.StartTime;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberShardCount))
+		{
+			return SnapshotSort.ShardCount;
+		}
+
+		if (reader.ValueTextEquals(MemberRepository))
+		{
+			return SnapshotSort.Repository;
+		}
+
+		if (reader.ValueTextEquals(MemberName))
+		{
+			return SnapshotSort.Name;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexCount))
+		{
+			return SnapshotSort.IndexCount;
+		}
+
+		if (reader.ValueTextEquals(MemberFailedShardCount))
+		{
+			return SnapshotSort.FailedShardCount;
+		}
+
+		if (reader.ValueTextEquals(MemberDuration))
+		{
+			return SnapshotSort.Duration;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStartTime.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.StartTime;
+		}
+
+		if (string.Equals(value, MemberShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.ShardCount;
+		}
+
+		if (string.Equals(value, MemberRepository.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Repository;
+		}
+
+		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Name;
+		}
+
+		if (string.Equals(value, MemberIndexCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.IndexCount;
+		}
+
+		if (string.Equals(value, MemberFailedShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.FailedShardCount;
+		}
+
+		if (string.Equals(value, MemberDuration.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Duration;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SnapshotSort)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, SnapshotSort value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnapshotSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case SnapshotSort.StartTime:
-				writer.WriteStringValue("start_time");
-				return;
+				writer.WriteStringValue(MemberStartTime);
+				break;
 			case SnapshotSort.ShardCount:
-				writer.WriteStringValue("shard_count");
-				return;
+				writer.WriteStringValue(MemberShardCount);
+				break;
 			case SnapshotSort.Repository:
-				writer.WriteStringValue("repository");
-				return;
+				writer.WriteStringValue(MemberRepository);
+				break;
 			case SnapshotSort.Name:
-				writer.WriteStringValue("name");
-				return;
+				writer.WriteStringValue(MemberName);
+				break;
 			case SnapshotSort.IndexCount:
-				writer.WriteStringValue("index_count");
-				return;
+				writer.WriteStringValue(MemberIndexCount);
+				break;
 			case SnapshotSort.FailedShardCount:
-				writer.WriteStringValue("failed_shard_count");
-				return;
+				writer.WriteStringValue(MemberFailedShardCount);
+				break;
 			case SnapshotSort.Duration:
-				writer.WriteStringValue("duration");
-				return;
+				writer.WriteStringValue(MemberDuration);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SnapshotSort)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

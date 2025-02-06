@@ -27,27 +27,157 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionSuggestOptionConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<CompletionSuggestOption<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText PropScore0 = System.Text.Json.JsonEncodedText.Encode("_score");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+
+	public override CompletionSuggestOption<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCollateMatch = default;
+		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>?> propContexts = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propFields = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string?> propIndex = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<double?> propScore = default;
+		LocalJsonValue<double?> propScore0 = default;
+		LocalJsonValue<TDocument?> propSource = default;
+		LocalJsonValue<string> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollateMatch.TryRead(ref reader, options, PropCollateMatch))
+			{
+				continue;
+			}
+
+			if (propContexts.TryRead(ref reader, options, PropContexts))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propRouting.TryRead(ref reader, options, PropRouting))
+			{
+				continue;
+			}
+
+			if (propScore.TryRead(ref reader, options, PropScore))
+			{
+				continue;
+			}
+
+			if (propScore0.TryRead(ref reader, options, PropScore0))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource, typeof(SourceMarker<TDocument?>)))
+			{
+				continue;
+			}
+
+			if (propText.TryRead(ref reader, options, PropText))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CompletionSuggestOption<TDocument>
+		{
+			CollateMatch = propCollateMatch.Value
+,
+			Contexts = propContexts.Value
+,
+			Fields = propFields.Value
+,
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			Routing = propRouting.Value
+,
+			Score = propScore.Value
+,
+			Score0 = propScore0.Value
+,
+			Source = propSource.Value
+,
+			Text = propText.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CompletionSuggestOption<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch);
+		writer.WriteProperty(options, PropContexts, value.Contexts);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropRouting, value.Routing);
+		writer.WriteProperty(options, PropScore, value.Score);
+		writer.WriteProperty(options, PropScore0, value.Score0);
+		writer.WriteProperty(options, PropSource, value.Source, null, typeof(SourceMarker<TDocument?>));
+		writer.WriteProperty(options, PropText, value.Text);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class CompletionSuggestOptionConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(CompletionSuggestOption<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(CompletionSuggestOptionConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(CompletionSuggestOptionConverterFactory))]
 public sealed partial class CompletionSuggestOption<TDocument>
 {
-	[JsonInclude, JsonPropertyName("collate_match")]
 	public bool? CollateMatch { get; init; }
-	[JsonInclude, JsonPropertyName("contexts")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? Contexts { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string? Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string? Index { get; init; }
-	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("score")]
 	public double? Score { get; init; }
-	[JsonInclude, JsonPropertyName("_score")]
 	public double? Score0 { get; init; }
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TDocument? Source { get; init; }
-	[JsonInclude, JsonPropertyName("text")]
 	public string Text { get; init; }
 }

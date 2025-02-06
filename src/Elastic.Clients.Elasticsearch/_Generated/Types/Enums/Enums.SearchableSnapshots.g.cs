@@ -39,40 +39,64 @@ public enum StatsLevel
 	Cluster
 }
 
-internal sealed class StatsLevelConverter : JsonConverter<StatsLevel>
+internal sealed partial class StatsLevelConverter : System.Text.Json.Serialization.JsonConverter<StatsLevel>
 {
-	public override StatsLevel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText MemberCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+
+	public override StatsLevel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberShards))
 		{
-			case "shards":
-				return StatsLevel.Shards;
-			case "indices":
-				return StatsLevel.Indices;
-			case "cluster":
-				return StatsLevel.Cluster;
+			return StatsLevel.Shards;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberIndices))
+		{
+			return StatsLevel.Indices;
+		}
+
+		if (reader.ValueTextEquals(MemberCluster))
+		{
+			return StatsLevel.Cluster;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberShards.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Shards;
+		}
+
+		if (string.Equals(value, MemberIndices.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Indices;
+		}
+
+		if (string.Equals(value, MemberCluster.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Cluster;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(StatsLevel)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, StatsLevel value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StatsLevel value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case StatsLevel.Shards:
-				writer.WriteStringValue("shards");
-				return;
+				writer.WriteStringValue(MemberShards);
+				break;
 			case StatsLevel.Indices:
-				writer.WriteStringValue("indices");
-				return;
+				writer.WriteStringValue(MemberIndices);
+				break;
 			case StatsLevel.Cluster:
-				writer.WriteStringValue("cluster");
-				return;
+				writer.WriteStringValue(MemberCluster);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(StatsLevel)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

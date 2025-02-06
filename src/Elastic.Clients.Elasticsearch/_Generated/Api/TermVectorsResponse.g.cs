@@ -22,23 +22,102 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class TermVectorsResponseConverter : System.Text.Json.Serialization.JsonConverter<TermVectorsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectors = System.Text.Json.JsonEncodedText.Encode("term_vectors");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override TermVectorsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propFound = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>?> propTermVectors = default;
+		LocalJsonValue<long> propTook = default;
+		LocalJsonValue<long> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFound.TryRead(ref reader, options, PropFound))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propTermVectors.TryRead(ref reader, options, PropTermVectors))
+			{
+				continue;
+			}
+
+			if (propTook.TryRead(ref reader, options, PropTook))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TermVectorsResponse
+		{
+			Found = propFound.Value
+,
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			TermVectors = propTermVectors.Value
+,
+			Took = propTook.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermVectorsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFound, value.Found);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropTermVectors, value.TermVectors);
+		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TermVectorsResponseConverter))]
 public sealed partial class TermVectorsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string? Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("term_vectors")]
-	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>? TermVectors { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
-	[JsonInclude, JsonPropertyName("_version")]
 	public long Version { get; init; }
 }

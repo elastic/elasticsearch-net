@@ -22,20 +22,108 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ExplainResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<ExplainResponse<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched");
+
+	public override ExplainResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail?> propExplanation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.InlineGet<TDocument>?> propGet = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<bool> propMatched = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExplanation.TryRead(ref reader, options, PropExplanation))
+			{
+				continue;
+			}
+
+			if (propGet.TryRead(ref reader, options, PropGet))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propMatched.TryRead(ref reader, options, PropMatched))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExplainResponse<TDocument>
+		{
+			Explanation = propExplanation.Value
+,
+			Get = propGet.Value
+,
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			Matched = propMatched.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExplainResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExplanation, value.Explanation);
+		writer.WriteProperty(options, PropGet, value.Get);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropMatched, value.Matched);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class ExplainResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(ExplainResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(ExplainResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(ExplainResponseConverterFactory))]
 public sealed partial class ExplainResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("explanation")]
 	public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; init; }
-	[JsonInclude, JsonPropertyName("get")]
 	public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; init; }
-	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("matched")]
 	public bool Matched { get; init; }
 }

@@ -27,18 +27,144 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class PassthroughObjectPropertyConverter : System.Text.Json.Serialization.JsonConverter<PassthroughObjectProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override PassthroughObjectProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<int?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<bool?> propTimeSeriesDimension = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryRead(ref reader, options, PropEnabled))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propPriority.TryRead(ref reader, options, PropPriority))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propStore.TryRead(ref reader, options, PropStore))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesDimension.TryRead(ref reader, options, PropTimeSeriesDimension))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PassthroughObjectProperty
+		{
+			CopyTo = propCopyTo.Value
+,
+			Dynamic = propDynamic.Value
+,
+			Enabled = propEnabled.Value
+,
+			Fields = propFields.Value
+,
+			IgnoreAbove = propIgnoreAbove.Value
+,
+			Meta = propMeta.Value
+,
+			Priority = propPriority.Value
+,
+			Properties = propProperties.Value
+,
+			Store = propStore.Value
+,
+			TimeSeriesDimension = propTimeSeriesDimension.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PassthroughObjectProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropEnabled, value.Enabled);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropPriority, value.Priority);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropStore, value.Store);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PassthroughObjectPropertyConverter))]
 public sealed partial class PassthroughObjectProperty : IProperty
 {
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -46,18 +172,12 @@ public sealed partial class PassthroughObjectProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "passthrough";
 }
 

@@ -27,6 +27,180 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SimpleQueryStringQueryConverter : System.Text.Json.Serialization.JsonConverter<SimpleQueryStringQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzeWildcard = System.Text.Json.JsonEncodedText.Encode("analyze_wildcard");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultOperator = System.Text.Json.JsonEncodedText.Encode("default_operator");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyMaxExpansions = System.Text.Json.JsonEncodedText.Encode("fuzzy_max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyPrefixLength = System.Text.Json.JsonEncodedText.Encode("fuzzy_prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropQuoteFieldSuffix = System.Text.Json.JsonEncodedText.Encode("quote_field_suffix");
+
+	public override SimpleQueryStringQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<bool?> propAnalyzeWildcard = default;
+		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator?> propDefaultOperator = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag?> propFlags = default;
+		LocalJsonValue<int?> propFuzzyMaxExpansions = default;
+		LocalJsonValue<int?> propFuzzyPrefixLength = default;
+		LocalJsonValue<bool?> propFuzzyTranspositions = default;
+		LocalJsonValue<bool?> propLenient = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<string?> propQuoteFieldSuffix = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			{
+				continue;
+			}
+
+			if (propAnalyzeWildcard.TryRead(ref reader, options, PropAnalyzeWildcard))
+			{
+				continue;
+			}
+
+			if (propAutoGenerateSynonymsPhraseQuery.TryRead(ref reader, options, PropAutoGenerateSynonymsPhraseQuery))
+			{
+				continue;
+			}
+
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propDefaultOperator.TryRead(ref reader, options, PropDefaultOperator))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(FieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propFlags.TryRead(ref reader, options, PropFlags))
+			{
+				continue;
+			}
+
+			if (propFuzzyMaxExpansions.TryRead(ref reader, options, PropFuzzyMaxExpansions))
+			{
+				continue;
+			}
+
+			if (propFuzzyPrefixLength.TryRead(ref reader, options, PropFuzzyPrefixLength))
+			{
+				continue;
+			}
+
+			if (propFuzzyTranspositions.TryRead(ref reader, options, PropFuzzyTranspositions))
+			{
+				continue;
+			}
+
+			if (propLenient.TryRead(ref reader, options, PropLenient))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			if (propQuoteFieldSuffix.TryRead(ref reader, options, PropQuoteFieldSuffix))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SimpleQueryStringQuery
+		{
+			Analyzer = propAnalyzer.Value
+,
+			AnalyzeWildcard = propAnalyzeWildcard.Value
+,
+			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value
+,
+			Boost = propBoost.Value
+,
+			DefaultOperator = propDefaultOperator.Value
+,
+			Fields = propFields.Value
+,
+			Flags = propFlags.Value
+,
+			FuzzyMaxExpansions = propFuzzyMaxExpansions.Value
+,
+			FuzzyPrefixLength = propFuzzyPrefixLength.Value
+,
+			FuzzyTranspositions = propFuzzyTranspositions.Value
+,
+			Lenient = propLenient.Value
+,
+			MinimumShouldMatch = propMinimumShouldMatch.Value
+,
+			Query = propQuery.Value
+,
+			QueryName = propQueryName.Value
+,
+			QuoteFieldSuffix = propQuoteFieldSuffix.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SimpleQueryStringQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
+		writer.WriteProperty(options, PropAnalyzeWildcard, value.AnalyzeWildcard);
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery);
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropDefaultOperator, value.DefaultOperator);
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(FieldsMarker));
+		writer.WriteProperty(options, PropFlags, value.Flags);
+		writer.WriteProperty(options, PropFuzzyMaxExpansions, value.FuzzyMaxExpansions);
+		writer.WriteProperty(options, PropFuzzyPrefixLength, value.FuzzyPrefixLength);
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions);
+		writer.WriteProperty(options, PropLenient, value.Lenient);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
+		writer.WriteProperty(options, PropQuoteFieldSuffix, value.QuoteFieldSuffix);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SimpleQueryStringQueryConverter))]
 public sealed partial class SimpleQueryStringQuery
 {
 	/// <summary>
@@ -34,7 +208,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Analyzer used to convert text in the query string into tokens.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -42,7 +215,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
@@ -50,7 +222,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
@@ -61,7 +232,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -69,7 +239,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Default boolean logic used to interpret text in the query string if no operators are specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
 	/// <summary>
@@ -80,8 +249,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -89,7 +256,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// List of enabled operators for the simple query string syntax.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("flags")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? Flags { get; set; }
 
 	/// <summary>
@@ -97,7 +263,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Maximum number of terms to which the query expands for fuzzy matching.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 
 	/// <summary>
@@ -105,7 +270,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Number of beginning characters left unchanged for fuzzy matching.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
 
 	/// <summary>
@@ -113,7 +277,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
 
 	/// <summary>
@@ -121,7 +284,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
 
 	/// <summary>
@@ -129,7 +291,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -137,9 +298,7 @@ public sealed partial class SimpleQueryStringQuery
 	/// Query string in the simple query string syntax you wish to parse and use for search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -147,7 +306,6 @@ public sealed partial class SimpleQueryStringQuery
 	/// Suffix appended to quoted text in the query string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);

@@ -50,6 +50,11 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteAsyncSearchRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -57,6 +62,14 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "async_search.delete";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the async search.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>

@@ -27,6 +27,150 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class CsvProcessorConverter : System.Text.Json.Serialization.JsonConverter<CsvProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropEmptyValue = System.Text.Json.JsonEncodedText.Encode("empty_value");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropQuote = System.Text.Json.JsonEncodedText.Encode("quote");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetFields = System.Text.Json.JsonEncodedText.Encode("target_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropTrim = System.Text.Json.JsonEncodedText.Encode("trim");
+
+	public override CsvProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<object?> propEmptyValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propQuote = default;
+		LocalJsonValue<string?> propSeparator = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propTargetFields = default;
+		LocalJsonValue<bool?> propTrim = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propEmptyValue.TryRead(ref reader, options, PropEmptyValue))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propIf.TryRead(ref reader, options, PropIf))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryRead(ref reader, options, PropIgnoreMissing))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			{
+				continue;
+			}
+
+			if (propQuote.TryRead(ref reader, options, PropQuote))
+			{
+				continue;
+			}
+
+			if (propSeparator.TryRead(ref reader, options, PropSeparator))
+			{
+				continue;
+			}
+
+			if (propTag.TryRead(ref reader, options, PropTag))
+			{
+				continue;
+			}
+
+			if (propTargetFields.TryRead(ref reader, options, PropTargetFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propTrim.TryRead(ref reader, options, PropTrim))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CsvProcessor
+		{
+			Description = propDescription.Value
+,
+			EmptyValue = propEmptyValue.Value
+,
+			Field = propField.Value
+,
+			If = propIf.Value
+,
+			IgnoreFailure = propIgnoreFailure.Value
+,
+			IgnoreMissing = propIgnoreMissing.Value
+,
+			OnFailure = propOnFailure.Value
+,
+			Quote = propQuote.Value
+,
+			Separator = propSeparator.Value
+,
+			Tag = propTag.Value
+,
+			TargetFields = propTargetFields.Value
+,
+			Trim = propTrim.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CsvProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropEmptyValue, value.EmptyValue);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropIf, value.If);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
+		writer.WriteProperty(options, PropQuote, value.Quote);
+		writer.WriteProperty(options, PropSeparator, value.Separator);
+		writer.WriteProperty(options, PropTag, value.Tag);
+		writer.WriteProperty(options, PropTargetFields, value.TargetFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropTrim, value.Trim);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CsvProcessorConverter))]
 public sealed partial class CsvProcessor
 {
 	/// <summary>
@@ -35,7 +179,6 @@ public sealed partial class CsvProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -45,7 +188,6 @@ public sealed partial class CsvProcessor
 	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("empty_value")]
 	public object? EmptyValue { get; set; }
 
 	/// <summary>
@@ -53,7 +195,6 @@ public sealed partial class CsvProcessor
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
@@ -61,7 +202,6 @@ public sealed partial class CsvProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
@@ -69,7 +209,6 @@ public sealed partial class CsvProcessor
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -77,7 +216,6 @@ public sealed partial class CsvProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -85,7 +223,6 @@ public sealed partial class CsvProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
@@ -93,7 +230,6 @@ public sealed partial class CsvProcessor
 	/// Quote used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("quote")]
 	public string? Quote { get; set; }
 
 	/// <summary>
@@ -101,7 +237,6 @@ public sealed partial class CsvProcessor
 	/// Separator used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	/// <summary>
@@ -110,7 +245,6 @@ public sealed partial class CsvProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -118,8 +252,6 @@ public sealed partial class CsvProcessor
 	/// The array of fields to assign extracted values to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
 
 	/// <summary>
@@ -127,7 +259,6 @@ public sealed partial class CsvProcessor
 	/// Trim whitespaces in unquoted fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trim")]
 	public bool? Trim { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(CsvProcessor csvProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Csv(csvProcessor);

@@ -38,4 +38,6 @@ public sealed partial class UnmappedRareTermsAggregate : IAggregate
 	public IReadOnlyCollection<object> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "umrareterms";
 }

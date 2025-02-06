@@ -103,6 +103,7 @@ public sealed partial class ForcemergeRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ForcemergeRequest : PlainRequest<ForcemergeRequestParameters>
 {
+	[JsonConstructor]
 	public ForcemergeRequest()
 	{
 	}
@@ -118,6 +119,14 @@ public sealed partial class ForcemergeRequest : PlainRequest<ForcemergeRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.forcemerge";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

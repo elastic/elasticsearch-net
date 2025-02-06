@@ -41,6 +41,11 @@ public sealed partial class ClearCursorRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
 {
+	[JsonConstructor]
+	internal ClearCursorRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlClearCursor;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class CloseJobResponseConverter : System.Text.Json.Serialization.JsonConverter<CloseJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClosed = System.Text.Json.JsonEncodedText.Encode("closed");
+
+	public override CloseJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propClosed = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClosed.TryRead(ref reader, options, PropClosed))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CloseJobResponse
+		{
+			Closed = propClosed.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CloseJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClosed, value.Closed);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CloseJobResponseConverter))]
 public sealed partial class CloseJobResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("closed")]
 	public bool Closed { get; init; }
 }

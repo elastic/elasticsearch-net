@@ -42,6 +42,11 @@ public sealed partial class TranslateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class TranslateRequest : PlainRequest<TranslateRequestParameters>
 {
+	[JsonConstructor]
+	internal TranslateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlTranslate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

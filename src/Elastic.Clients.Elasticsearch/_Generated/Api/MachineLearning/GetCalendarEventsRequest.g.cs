@@ -79,6 +79,11 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	{
 	}
 
+	[JsonConstructor]
+	internal GetCalendarEventsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCalendarEvents;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -86,6 +91,14 @@ public sealed partial class GetCalendarEventsRequest : PlainRequest<GetCalendarE
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_calendar_events";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
 	/// <summary>
 	/// <para>

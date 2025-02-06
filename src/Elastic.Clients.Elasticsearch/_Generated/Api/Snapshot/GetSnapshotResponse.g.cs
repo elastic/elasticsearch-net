@@ -22,10 +22,76 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<GetSnapshotResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRemaining = System.Text.Json.JsonEncodedText.Encode("remaining");
+	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override GetSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propRemaining = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>?> propResponses = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>?> propSnapshots = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRemaining.TryRead(ref reader, options, PropRemaining))
+			{
+				continue;
+			}
+
+			if (propResponses.TryRead(ref reader, options, PropResponses))
+			{
+				continue;
+			}
+
+			if (propSnapshots.TryRead(ref reader, options, PropSnapshots))
+			{
+				continue;
+			}
+
+			if (propTotal.TryRead(ref reader, options, PropTotal))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetSnapshotResponse
+		{
+			Remaining = propRemaining.Value
+,
+			Responses = propResponses.Value
+,
+			Snapshots = propSnapshots.Value
+,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRemaining, value.Remaining);
+		writer.WriteProperty(options, PropResponses, value.Responses);
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots);
+		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetSnapshotResponseConverter))]
 public sealed partial class GetSnapshotResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,11 +99,8 @@ public sealed partial class GetSnapshotResponse : ElasticsearchResponse
 	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the next field value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("remaining")]
 	public int Remaining { get; init; }
-	[JsonInclude, JsonPropertyName("responses")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? Responses { get; init; }
-	[JsonInclude, JsonPropertyName("snapshots")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; init; }
 
 	/// <summary>
@@ -45,6 +108,5 @@ public sealed partial class GetSnapshotResponse : ElasticsearchResponse
 	/// The total number of snapshots that match the request when ignoring size limit or after query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

@@ -54,6 +54,7 @@ public sealed partial class PreviewTransformRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransformRequestParameters>
 {
+	[JsonConstructor]
 	public PreviewTransformRequest()
 	{
 	}
@@ -69,6 +70,15 @@ public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransf
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "transform.preview_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform
+	/// configuration details in the request body.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? TransformId { get => P<Elastic.Clients.Elasticsearch.Id?>("transform_id"); set => PO("transform_id", value); }
 
 	/// <summary>
 	/// <para>

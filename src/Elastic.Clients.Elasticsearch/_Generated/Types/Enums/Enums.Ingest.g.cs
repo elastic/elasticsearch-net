@@ -49,66 +49,135 @@ public enum ConvertType
 	Auto
 }
 
-internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
+internal sealed partial class ConvertTypeConverter : System.Text.Json.Serialization.JsonConverter<ConvertType>
 {
-	public override ConvertType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
+	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("integer");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
+	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
+
+	public override ConvertType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberString))
 		{
-			case "string":
-				return ConvertType.String;
-			case "long":
-				return ConvertType.Long;
-			case "ip":
-				return ConvertType.Ip;
-			case "integer":
-				return ConvertType.Integer;
-			case "float":
-				return ConvertType.Float;
-			case "double":
-				return ConvertType.Double;
-			case "boolean":
-				return ConvertType.Boolean;
-			case "auto":
-				return ConvertType.Auto;
+			return ConvertType.String;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberLong))
+		{
+			return ConvertType.Long;
+		}
+
+		if (reader.ValueTextEquals(MemberIp))
+		{
+			return ConvertType.Ip;
+		}
+
+		if (reader.ValueTextEquals(MemberInteger))
+		{
+			return ConvertType.Integer;
+		}
+
+		if (reader.ValueTextEquals(MemberFloat))
+		{
+			return ConvertType.Float;
+		}
+
+		if (reader.ValueTextEquals(MemberDouble))
+		{
+			return ConvertType.Double;
+		}
+
+		if (reader.ValueTextEquals(MemberBoolean))
+		{
+			return ConvertType.Boolean;
+		}
+
+		if (reader.ValueTextEquals(MemberAuto))
+		{
+			return ConvertType.Auto;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.String;
+		}
+
+		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Long;
+		}
+
+		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Ip;
+		}
+
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Integer;
+		}
+
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Float;
+		}
+
+		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Double;
+		}
+
+		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Boolean;
+		}
+
+		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConvertType.Auto;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ConvertType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ConvertType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ConvertType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ConvertType.String:
-				writer.WriteStringValue("string");
-				return;
+				writer.WriteStringValue(MemberString);
+				break;
 			case ConvertType.Long:
-				writer.WriteStringValue("long");
-				return;
+				writer.WriteStringValue(MemberLong);
+				break;
 			case ConvertType.Ip:
-				writer.WriteStringValue("ip");
-				return;
+				writer.WriteStringValue(MemberIp);
+				break;
 			case ConvertType.Integer:
-				writer.WriteStringValue("integer");
-				return;
+				writer.WriteStringValue(MemberInteger);
+				break;
 			case ConvertType.Float:
-				writer.WriteStringValue("float");
-				return;
+				writer.WriteStringValue(MemberFloat);
+				break;
 			case ConvertType.Double:
-				writer.WriteStringValue("double");
-				return;
+				writer.WriteStringValue(MemberDouble);
+				break;
 			case ConvertType.Boolean:
-				writer.WriteStringValue("boolean");
-				return;
+				writer.WriteStringValue(MemberBoolean);
+				break;
 			case ConvertType.Auto:
-				writer.WriteStringValue("auto");
-				return;
+				writer.WriteStringValue(MemberAuto);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ConvertType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -127,51 +196,93 @@ public enum FingerprintDigest
 	Md5
 }
 
-internal sealed class FingerprintDigestConverter : JsonConverter<FingerprintDigest>
+internal sealed partial class FingerprintDigestConverter : System.Text.Json.Serialization.JsonConverter<FingerprintDigest>
 {
-	public override FingerprintDigest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSha512 = System.Text.Json.JsonEncodedText.Encode("SHA-512");
+	private static readonly System.Text.Json.JsonEncodedText MemberSha256 = System.Text.Json.JsonEncodedText.Encode("SHA-256");
+	private static readonly System.Text.Json.JsonEncodedText MemberSha1 = System.Text.Json.JsonEncodedText.Encode("SHA-1");
+	private static readonly System.Text.Json.JsonEncodedText MemberMurmurhash3 = System.Text.Json.JsonEncodedText.Encode("MurmurHash3");
+	private static readonly System.Text.Json.JsonEncodedText MemberMd5 = System.Text.Json.JsonEncodedText.Encode("MD5");
+
+	public override FingerprintDigest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSha512))
 		{
-			case "SHA-512":
-				return FingerprintDigest.Sha512;
-			case "SHA-256":
-				return FingerprintDigest.Sha256;
-			case "SHA-1":
-				return FingerprintDigest.Sha1;
-			case "MurmurHash3":
-				return FingerprintDigest.Murmurhash3;
-			case "MD5":
-				return FingerprintDigest.Md5;
+			return FingerprintDigest.Sha512;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSha256))
+		{
+			return FingerprintDigest.Sha256;
+		}
+
+		if (reader.ValueTextEquals(MemberSha1))
+		{
+			return FingerprintDigest.Sha1;
+		}
+
+		if (reader.ValueTextEquals(MemberMurmurhash3))
+		{
+			return FingerprintDigest.Murmurhash3;
+		}
+
+		if (reader.ValueTextEquals(MemberMd5))
+		{
+			return FingerprintDigest.Md5;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSha512.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FingerprintDigest.Sha512;
+		}
+
+		if (string.Equals(value, MemberSha256.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FingerprintDigest.Sha256;
+		}
+
+		if (string.Equals(value, MemberSha1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FingerprintDigest.Sha1;
+		}
+
+		if (string.Equals(value, MemberMurmurhash3.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FingerprintDigest.Murmurhash3;
+		}
+
+		if (string.Equals(value, MemberMd5.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FingerprintDigest.Md5;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FingerprintDigest)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FingerprintDigest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FingerprintDigest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FingerprintDigest.Sha512:
-				writer.WriteStringValue("SHA-512");
-				return;
+				writer.WriteStringValue(MemberSha512);
+				break;
 			case FingerprintDigest.Sha256:
-				writer.WriteStringValue("SHA-256");
-				return;
+				writer.WriteStringValue(MemberSha256);
+				break;
 			case FingerprintDigest.Sha1:
-				writer.WriteStringValue("SHA-1");
-				return;
+				writer.WriteStringValue(MemberSha1);
+				break;
 			case FingerprintDigest.Murmurhash3:
-				writer.WriteStringValue("MurmurHash3");
-				return;
+				writer.WriteStringValue(MemberMurmurhash3);
+				break;
 			case FingerprintDigest.Md5:
-				writer.WriteStringValue("MD5");
-				return;
+				writer.WriteStringValue(MemberMd5);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FingerprintDigest)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -184,36 +295,51 @@ public enum GeoGridTargetFormat
 	Geojson
 }
 
-internal sealed class GeoGridTargetFormatConverter : JsonConverter<GeoGridTargetFormat>
+internal sealed partial class GeoGridTargetFormatConverter : System.Text.Json.Serialization.JsonConverter<GeoGridTargetFormat>
 {
-	public override GeoGridTargetFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberWkt = System.Text.Json.JsonEncodedText.Encode("wkt");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeojson = System.Text.Json.JsonEncodedText.Encode("geojson");
+
+	public override GeoGridTargetFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberWkt))
 		{
-			case "wkt":
-				return GeoGridTargetFormat.Wkt;
-			case "geojson":
-				return GeoGridTargetFormat.Geojson;
+			return GeoGridTargetFormat.Wkt;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGeojson))
+		{
+			return GeoGridTargetFormat.Geojson;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWkt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoGridTargetFormat.Wkt;
+		}
+
+		if (string.Equals(value, MemberGeojson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoGridTargetFormat.Geojson;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GeoGridTargetFormat)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoGridTargetFormat value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoGridTargetFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GeoGridTargetFormat.Wkt:
-				writer.WriteStringValue("wkt");
-				return;
+				writer.WriteStringValue(MemberWkt);
+				break;
 			case GeoGridTargetFormat.Geojson:
-				writer.WriteStringValue("geojson");
-				return;
+				writer.WriteStringValue(MemberGeojson);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GeoGridTargetFormat)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -228,41 +354,65 @@ public enum GeoGridTileType
 	Geohash
 }
 
-internal sealed class GeoGridTileTypeConverter : JsonConverter<GeoGridTileType>
+internal sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serialization.JsonConverter<GeoGridTileType>
 {
-	public override GeoGridTileType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
+
+	public override GeoGridTileType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberGeotile))
 		{
-			case "geotile":
-				return GeoGridTileType.Geotile;
-			case "geohex":
-				return GeoGridTileType.Geohex;
-			case "geohash":
-				return GeoGridTileType.Geohash;
+			return GeoGridTileType.Geotile;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGeohex))
+		{
+			return GeoGridTileType.Geohex;
+		}
+
+		if (reader.ValueTextEquals(MemberGeohash))
+		{
+			return GeoGridTileType.Geohash;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoGridTileType.Geotile;
+		}
+
+		if (string.Equals(value, MemberGeohex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoGridTileType.Geohex;
+		}
+
+		if (string.Equals(value, MemberGeohash.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GeoGridTileType.Geohash;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GeoGridTileType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoGridTileType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoGridTileType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GeoGridTileType.Geotile:
-				writer.WriteStringValue("geotile");
-				return;
+				writer.WriteStringValue(MemberGeotile);
+				break;
 			case GeoGridTileType.Geohex:
-				writer.WriteStringValue("geohex");
-				return;
+				writer.WriteStringValue(MemberGeohex);
+				break;
 			case GeoGridTileType.Geohash:
-				writer.WriteStringValue("geohash");
-				return;
+				writer.WriteStringValue(MemberGeohash);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GeoGridTileType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -285,36 +435,51 @@ public enum JsonProcessorConflictStrategy
 	Merge
 }
 
-internal sealed class JsonProcessorConflictStrategyConverter : JsonConverter<JsonProcessorConflictStrategy>
+internal sealed partial class JsonProcessorConflictStrategyConverter : System.Text.Json.Serialization.JsonConverter<JsonProcessorConflictStrategy>
 {
-	public override JsonProcessorConflictStrategy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
+	private static readonly System.Text.Json.JsonEncodedText MemberMerge = System.Text.Json.JsonEncodedText.Encode("merge");
+
+	public override JsonProcessorConflictStrategy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberReplace))
 		{
-			case "replace":
-				return JsonProcessorConflictStrategy.Replace;
-			case "merge":
-				return JsonProcessorConflictStrategy.Merge;
+			return JsonProcessorConflictStrategy.Replace;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMerge))
+		{
+			return JsonProcessorConflictStrategy.Merge;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JsonProcessorConflictStrategy.Replace;
+		}
+
+		if (string.Equals(value, MemberMerge.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JsonProcessorConflictStrategy.Merge;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(JsonProcessorConflictStrategy)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, JsonProcessorConflictStrategy value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, JsonProcessorConflictStrategy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case JsonProcessorConflictStrategy.Replace:
-				writer.WriteStringValue("replace");
-				return;
+				writer.WriteStringValue(MemberReplace);
+				break;
 			case JsonProcessorConflictStrategy.Merge:
-				writer.WriteStringValue("merge");
-				return;
+				writer.WriteStringValue(MemberMerge);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(JsonProcessorConflictStrategy)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -327,36 +492,51 @@ public enum ShapeType
 	GeoShape
 }
 
-internal sealed class ShapeTypeConverter : JsonConverter<ShapeType>
+internal sealed partial class ShapeTypeConverter : System.Text.Json.Serialization.JsonConverter<ShapeType>
 {
-	public override ShapeType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberShape = System.Text.Json.JsonEncodedText.Encode("shape");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape");
+
+	public override ShapeType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberShape))
 		{
-			case "shape":
-				return ShapeType.Shape;
-			case "geo_shape":
-				return ShapeType.GeoShape;
+			return ShapeType.Shape;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGeoShape))
+		{
+			return ShapeType.GeoShape;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberShape.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShapeType.Shape;
+		}
+
+		if (string.Equals(value, MemberGeoShape.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShapeType.GeoShape;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShapeType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ShapeType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShapeType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ShapeType.Shape:
-				writer.WriteStringValue("shape");
-				return;
+				writer.WriteStringValue(MemberShape);
+				break;
 			case ShapeType.GeoShape:
-				writer.WriteStringValue("geo_shape");
-				return;
+				writer.WriteStringValue(MemberGeoShape);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ShapeType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -375,50 +555,92 @@ public enum UserAgentProperty
 	Device
 }
 
-internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProperty>
+internal sealed partial class UserAgentPropertyConverter : System.Text.Json.Serialization.JsonConverter<UserAgentProperty>
 {
-	public override UserAgentProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
+	private static readonly System.Text.Json.JsonEncodedText MemberOriginal = System.Text.Json.JsonEncodedText.Encode("original");
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText MemberDevice = System.Text.Json.JsonEncodedText.Encode("device");
+
+	public override UserAgentProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberVersion))
 		{
-			case "version":
-				return UserAgentProperty.Version;
-			case "os":
-				return UserAgentProperty.Os;
-			case "original":
-				return UserAgentProperty.Original;
-			case "name":
-				return UserAgentProperty.Name;
-			case "device":
-				return UserAgentProperty.Device;
+			return UserAgentProperty.Version;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberOs))
+		{
+			return UserAgentProperty.Os;
+		}
+
+		if (reader.ValueTextEquals(MemberOriginal))
+		{
+			return UserAgentProperty.Original;
+		}
+
+		if (reader.ValueTextEquals(MemberName))
+		{
+			return UserAgentProperty.Name;
+		}
+
+		if (reader.ValueTextEquals(MemberDevice))
+		{
+			return UserAgentProperty.Device;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberVersion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UserAgentProperty.Version;
+		}
+
+		if (string.Equals(value, MemberOs.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UserAgentProperty.Os;
+		}
+
+		if (string.Equals(value, MemberOriginal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UserAgentProperty.Original;
+		}
+
+		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UserAgentProperty.Name;
+		}
+
+		if (string.Equals(value, MemberDevice.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UserAgentProperty.Device;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(UserAgentProperty)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, UserAgentProperty value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UserAgentProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case UserAgentProperty.Version:
-				writer.WriteStringValue("version");
-				return;
+				writer.WriteStringValue(MemberVersion);
+				break;
 			case UserAgentProperty.Os:
-				writer.WriteStringValue("os");
-				return;
+				writer.WriteStringValue(MemberOs);
+				break;
 			case UserAgentProperty.Original:
-				writer.WriteStringValue("original");
-				return;
+				writer.WriteStringValue(MemberOriginal);
+				break;
 			case UserAgentProperty.Name:
-				writer.WriteStringValue("name");
-				return;
+				writer.WriteStringValue(MemberName);
+				break;
 			case UserAgentProperty.Device:
-				writer.WriteStringValue("device");
-				return;
+				writer.WriteStringValue(MemberDevice);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(UserAgentProperty)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

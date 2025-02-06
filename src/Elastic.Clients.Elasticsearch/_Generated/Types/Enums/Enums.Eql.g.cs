@@ -47,35 +47,50 @@ public enum ResultPosition
 	Head
 }
 
-internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
+internal sealed partial class ResultPositionConverter : System.Text.Json.Serialization.JsonConverter<ResultPosition>
 {
-	public override ResultPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTail = System.Text.Json.JsonEncodedText.Encode("tail");
+	private static readonly System.Text.Json.JsonEncodedText MemberHead = System.Text.Json.JsonEncodedText.Encode("head");
+
+	public override ResultPosition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTail))
 		{
-			case "tail":
-				return ResultPosition.Tail;
-			case "head":
-				return ResultPosition.Head;
+			return ResultPosition.Tail;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberHead))
+		{
+			return ResultPosition.Head;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTail.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ResultPosition.Tail;
+		}
+
+		if (string.Equals(value, MemberHead.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ResultPosition.Head;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ResultPosition)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResultPosition value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ResultPosition.Tail:
-				writer.WriteStringValue("tail");
-				return;
+				writer.WriteStringValue(MemberTail);
+				break;
 			case ResultPosition.Head:
-				writer.WriteStringValue("head");
-				return;
+				writer.WriteStringValue(MemberHead);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ResultPosition)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

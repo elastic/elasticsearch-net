@@ -45,6 +45,11 @@ public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymReq
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteSynonymRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsDeleteSynonym;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -52,6 +57,14 @@ public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "synonyms.delete_synonym";
+
+	/// <summary>
+	/// <para>
+	/// The id of the synonyms set to be deleted
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>

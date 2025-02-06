@@ -53,6 +53,11 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 	{
 	}
 
+	[JsonConstructor]
+	internal SearchApplicationSearchRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -60,6 +65,14 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_application.search";
+
+	/// <summary>
+	/// <para>
+	/// The name of the search application to be searched.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

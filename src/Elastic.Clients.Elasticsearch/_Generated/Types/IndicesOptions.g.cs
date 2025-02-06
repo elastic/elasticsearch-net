@@ -27,12 +27,76 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class IndicesOptionsConverter : System.Text.Json.Serialization.JsonConverter<IndicesOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoIndices = System.Text.Json.JsonEncodedText.Encode("allow_no_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropExpandWildcards = System.Text.Json.JsonEncodedText.Encode("expand_wildcards");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreThrottled = System.Text.Json.JsonEncodedText.Encode("ignore_throttled");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
+
+	public override IndicesOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowNoIndices = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?> propExpandWildcards = default;
+		LocalJsonValue<bool?> propIgnoreThrottled = default;
+		LocalJsonValue<bool?> propIgnoreUnavailable = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowNoIndices.TryRead(ref reader, options, PropAllowNoIndices))
+			{
+				continue;
+			}
+
+			if (propExpandWildcards.TryRead(ref reader, options, PropExpandWildcards, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>)))
+			{
+				continue;
+			}
+
+			if (propIgnoreThrottled.TryRead(ref reader, options, PropIgnoreThrottled))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnavailable.TryRead(ref reader, options, PropIgnoreUnavailable))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IndicesOptions
+		{
+			AllowNoIndices = propAllowNoIndices.Value
+,
+			ExpandWildcards = propExpandWildcards.Value
+,
+			IgnoreThrottled = propIgnoreThrottled.Value
+,
+			IgnoreUnavailable = propIgnoreUnavailable.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndicesOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices);
+		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?, Elastic.Clients.Elasticsearch.ExpandWildcard>));
+		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled);
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
 /// to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(IndicesOptionsConverter))]
 public sealed partial class IndicesOptions
 {
 	/// <summary>
@@ -42,7 +106,6 @@ public sealed partial class IndicesOptions
 	/// a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_no_indices")]
 	public bool? AllowNoIndices { get; set; }
 
 	/// <summary>
@@ -52,8 +115,6 @@ public sealed partial class IndicesOptions
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expand_wildcards")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.ExpandWildcard))]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
 	/// <summary>
@@ -61,7 +122,6 @@ public sealed partial class IndicesOptions
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_throttled")]
 	public bool? IgnoreThrottled { get; set; }
 
 	/// <summary>
@@ -69,7 +129,6 @@ public sealed partial class IndicesOptions
 	/// If true, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
 }
 

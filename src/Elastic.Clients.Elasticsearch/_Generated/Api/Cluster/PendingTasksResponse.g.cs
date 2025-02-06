@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class PendingTasksResponseConverter : System.Text.Json.Serialization.JsonConverter<PendingTasksResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropTasks = System.Text.Json.JsonEncodedText.Encode("tasks");
+
+	public override PendingTasksResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask>> propTasks = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propTasks.TryRead(ref reader, options, PropTasks))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PendingTasksResponse
+		{
+			Tasks = propTasks.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PendingTasksResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropTasks, value.Tasks);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PendingTasksResponseConverter))]
 public sealed partial class PendingTasksResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("tasks")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTask> Tasks { get; init; }
 }

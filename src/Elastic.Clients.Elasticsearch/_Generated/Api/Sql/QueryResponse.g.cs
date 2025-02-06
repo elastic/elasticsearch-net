@@ -22,10 +22,86 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+internal sealed partial class QueryResponseConverter : System.Text.Json.Serialization.JsonConverter<QueryResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropColumns = System.Text.Json.JsonEncodedText.Encode("columns");
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+
+	public override QueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>?> propColumns = default;
+		LocalJsonValue<string?> propCursor = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<bool?> propIsPartial = default;
+		LocalJsonValue<bool?> propIsRunning = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propColumns.TryRead(ref reader, options, PropColumns))
+			{
+				continue;
+			}
+
+			if (propCursor.TryRead(ref reader, options, PropCursor))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIsPartial.TryRead(ref reader, options, PropIsPartial))
+			{
+				continue;
+			}
+
+			if (propIsRunning.TryRead(ref reader, options, PropIsRunning))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryResponse
+		{
+			Columns = propColumns.Value
+,
+			Cursor = propCursor.Value
+,
+			Id = propId.Value
+,
+			IsPartial = propIsPartial.Value
+,
+			IsRunning = propIsRunning.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropColumns, value.Columns);
+		writer.WriteProperty(options, PropCursor, value.Cursor);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(QueryResponseConverter))]
 public sealed partial class QueryResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +109,6 @@ public sealed partial class QueryResponse : ElasticsearchResponse
 	/// Column headings for the search results. Each object is a column.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("columns")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; init; }
 
 	/// <summary>
@@ -42,7 +117,6 @@ public sealed partial class QueryResponse : ElasticsearchResponse
 	/// TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; init; }
 
 	/// <summary>
@@ -52,7 +126,6 @@ public sealed partial class QueryResponse : ElasticsearchResponse
 	/// in the <c>Async-ID</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
 	/// <summary>
@@ -64,7 +137,6 @@ public sealed partial class QueryResponse : ElasticsearchResponse
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool? IsPartial { get; init; }
 
 	/// <summary>
@@ -75,6 +147,5 @@ public sealed partial class QueryResponse : ElasticsearchResponse
 	/// HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_running")]
 	public bool? IsRunning { get; init; }
 }

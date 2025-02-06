@@ -37,35 +37,50 @@ public enum FollowerIndexStatus
 	Active
 }
 
-internal sealed class FollowerIndexStatusConverter : JsonConverter<FollowerIndexStatus>
+internal sealed partial class FollowerIndexStatusConverter : System.Text.Json.Serialization.JsonConverter<FollowerIndexStatus>
 {
-	public override FollowerIndexStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPaused = System.Text.Json.JsonEncodedText.Encode("paused");
+	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active");
+
+	public override FollowerIndexStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPaused))
 		{
-			case "paused":
-				return FollowerIndexStatus.Paused;
-			case "active":
-				return FollowerIndexStatus.Active;
+			return FollowerIndexStatus.Paused;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberActive))
+		{
+			return FollowerIndexStatus.Active;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPaused.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FollowerIndexStatus.Paused;
+		}
+
+		if (string.Equals(value, MemberActive.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FollowerIndexStatus.Active;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FollowerIndexStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FollowerIndexStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowerIndexStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FollowerIndexStatus.Paused:
-				writer.WriteStringValue("paused");
-				return;
+				writer.WriteStringValue(MemberPaused);
+				break;
 			case FollowerIndexStatus.Active:
-				writer.WriteStringValue("active");
-				return;
+				writer.WriteStringValue(MemberActive);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FollowerIndexStatus)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

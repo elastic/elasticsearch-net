@@ -84,6 +84,59 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 }
 
+internal sealed partial class FieldCapsRequestConverter : System.Text.Json.Serialization.JsonConverter<FieldCapsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+
+	public override FieldCapsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryRead(ref reader, options, PropFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propIndexFilter.TryRead(ref reader, options, PropIndexFilter))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FieldCapsRequest
+		{
+			Fields = propFields.Value
+	,
+			IndexFilter = propIndexFilter.Value
+	,
+			RuntimeMappings = propRuntimeMappings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FieldCapsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get the field capabilities.
@@ -97,8 +150,10 @@ public sealed partial class FieldCapsRequestParameters : RequestParameters
 /// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(FieldCapsRequestConverter))]
 public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
 {
+	[JsonConstructor]
 	public FieldCapsRequest()
 	{
 	}
@@ -117,12 +172,18 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If false, the request returns an error if any wildcard expression, index alias,
 	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
 	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -130,7 +191,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
@@ -138,7 +198,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
@@ -146,7 +205,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If <c>true</c>, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -154,7 +212,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If false, empty fields are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
 	/// <summary>
@@ -162,7 +219,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// If true, unmapped fields are included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
 	/// <summary>
@@ -170,7 +226,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// Only return results for fields that have one of the types in the list
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 
 	/// <summary>
@@ -178,8 +233,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// List of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -187,7 +240,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// Allows to filter indices if the provided query rewrites to match_none on every shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
 	/// <summary>
@@ -196,7 +248,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 

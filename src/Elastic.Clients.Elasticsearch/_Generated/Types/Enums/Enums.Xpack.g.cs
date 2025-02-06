@@ -39,40 +39,64 @@ public enum XPackCategory
 	Build
 }
 
-internal sealed class XPackCategoryConverter : JsonConverter<XPackCategory>
+internal sealed partial class XPackCategoryConverter : System.Text.Json.Serialization.JsonConverter<XPackCategory>
 {
-	public override XPackCategory Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberLicense = System.Text.Json.JsonEncodedText.Encode("license");
+	private static readonly System.Text.Json.JsonEncodedText MemberFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText MemberBuild = System.Text.Json.JsonEncodedText.Encode("build");
+
+	public override XPackCategory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberLicense))
 		{
-			case "license":
-				return XPackCategory.License;
-			case "features":
-				return XPackCategory.Features;
-			case "build":
-				return XPackCategory.Build;
+			return XPackCategory.License;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberFeatures))
+		{
+			return XPackCategory.Features;
+		}
+
+		if (reader.ValueTextEquals(MemberBuild))
+		{
+			return XPackCategory.Build;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLicense.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.License;
+		}
+
+		if (string.Equals(value, MemberFeatures.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.Features;
+		}
+
+		if (string.Equals(value, MemberBuild.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.Build;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(XPackCategory)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, XPackCategory value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, XPackCategory value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case XPackCategory.License:
-				writer.WriteStringValue("license");
-				return;
+				writer.WriteStringValue(MemberLicense);
+				break;
 			case XPackCategory.Features:
-				writer.WriteStringValue("features");
-				return;
+				writer.WriteStringValue(MemberFeatures);
+				break;
 			case XPackCategory.Build:
-				writer.WriteStringValue("build");
-				return;
+				writer.WriteStringValue(MemberBuild);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(XPackCategory)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

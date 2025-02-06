@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class StartDatafeedResponseConverter : System.Text.Json.Serialization.JsonConverter<StartDatafeedResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropStarted = System.Text.Json.JsonEncodedText.Encode("started");
+
+	public override StartDatafeedResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<string>> propNode = default;
+		LocalJsonValue<bool> propStarted = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNode.TryRead(ref reader, options, PropNode, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			if (propStarted.TryRead(ref reader, options, PropStarted))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StartDatafeedResponse
+		{
+			Node = propNode.Value
+,
+			Started = propStarted.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StartDatafeedResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNode, value.Node, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteProperty(options, PropStarted, value.Started);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StartDatafeedResponseConverter))]
 public sealed partial class StartDatafeedResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,8 +80,6 @@ public sealed partial class StartDatafeedResponse : ElasticsearchResponse
 	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Node { get; init; }
 
 	/// <summary>
@@ -43,6 +87,5 @@ public sealed partial class StartDatafeedResponse : ElasticsearchResponse
 	/// For a successful response, this value is always <c>true</c>. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("started")]
 	public bool Started { get; init; }
 }

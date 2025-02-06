@@ -39,12 +39,16 @@ public sealed partial class QueryVectorBuilder
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal QueryVectorBuilder()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static QueryVectorBuilder TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => new QueryVectorBuilder("text_embedding", textEmbedding);
 
@@ -61,57 +65,44 @@ public sealed partial class QueryVectorBuilder
 	}
 }
 
-internal sealed partial class QueryVectorBuilderConverter : JsonConverter<QueryVectorBuilder>
+internal sealed partial class QueryVectorBuilderConverter : System.Text.Json.Serialization.JsonConverter<QueryVectorBuilder>
 {
-	public override QueryVectorBuilder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override QueryVectorBuilder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantTextEmbedding))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "text_embedding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextEmbedding?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantTextEmbedding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextEmbedding?>(options);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'QueryVectorBuilder' from the response.");
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new QueryVectorBuilder(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryVectorBuilder { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryVectorBuilder value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryVectorBuilder value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "text_embedding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TextEmbedding>(writer, (Elastic.Clients.Elasticsearch.TextEmbedding)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "text_embedding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextEmbedding?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(QueryVectorBuilder)}'.");
 		}
 
 		writer.WriteEndObject();

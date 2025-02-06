@@ -109,6 +109,11 @@ public sealed partial class GetInfluencersRequest : PlainRequest<GetInfluencersR
 	{
 	}
 
+	[JsonConstructor]
+	internal GetInfluencersRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetInfluencers;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -116,6 +121,14 @@ public sealed partial class GetInfluencersRequest : PlainRequest<GetInfluencersR
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.get_influencers";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

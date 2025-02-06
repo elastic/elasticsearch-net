@@ -49,65 +49,134 @@ public enum EsqlFormat
 	Arrow
 }
 
-internal sealed class EsqlFormatConverter : JsonConverter<EsqlFormat>
+internal sealed partial class EsqlFormatConverter : System.Text.Json.Serialization.JsonConverter<EsqlFormat>
 {
-	public override EsqlFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberYaml = System.Text.Json.JsonEncodedText.Encode("yaml");
+	private static readonly System.Text.Json.JsonEncodedText MemberTxt = System.Text.Json.JsonEncodedText.Encode("txt");
+	private static readonly System.Text.Json.JsonEncodedText MemberTsv = System.Text.Json.JsonEncodedText.Encode("tsv");
+	private static readonly System.Text.Json.JsonEncodedText MemberSmile = System.Text.Json.JsonEncodedText.Encode("smile");
+	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json");
+	private static readonly System.Text.Json.JsonEncodedText MemberCsv = System.Text.Json.JsonEncodedText.Encode("csv");
+	private static readonly System.Text.Json.JsonEncodedText MemberCbor = System.Text.Json.JsonEncodedText.Encode("cbor");
+	private static readonly System.Text.Json.JsonEncodedText MemberArrow = System.Text.Json.JsonEncodedText.Encode("arrow");
+
+	public override EsqlFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberYaml))
 		{
-			case "yaml":
-				return EsqlFormat.Yaml;
-			case "txt":
-				return EsqlFormat.Txt;
-			case "tsv":
-				return EsqlFormat.Tsv;
-			case "smile":
-				return EsqlFormat.Smile;
-			case "json":
-				return EsqlFormat.Json;
-			case "csv":
-				return EsqlFormat.Csv;
-			case "cbor":
-				return EsqlFormat.Cbor;
-			case "arrow":
-				return EsqlFormat.Arrow;
+			return EsqlFormat.Yaml;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberTxt))
+		{
+			return EsqlFormat.Txt;
+		}
+
+		if (reader.ValueTextEquals(MemberTsv))
+		{
+			return EsqlFormat.Tsv;
+		}
+
+		if (reader.ValueTextEquals(MemberSmile))
+		{
+			return EsqlFormat.Smile;
+		}
+
+		if (reader.ValueTextEquals(MemberJson))
+		{
+			return EsqlFormat.Json;
+		}
+
+		if (reader.ValueTextEquals(MemberCsv))
+		{
+			return EsqlFormat.Csv;
+		}
+
+		if (reader.ValueTextEquals(MemberCbor))
+		{
+			return EsqlFormat.Cbor;
+		}
+
+		if (reader.ValueTextEquals(MemberArrow))
+		{
+			return EsqlFormat.Arrow;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYaml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Yaml;
+		}
+
+		if (string.Equals(value, MemberTxt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Txt;
+		}
+
+		if (string.Equals(value, MemberTsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Tsv;
+		}
+
+		if (string.Equals(value, MemberSmile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Smile;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Json;
+		}
+
+		if (string.Equals(value, MemberCsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Csv;
+		}
+
+		if (string.Equals(value, MemberCbor.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Cbor;
+		}
+
+		if (string.Equals(value, MemberArrow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Arrow;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EsqlFormat)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EsqlFormat value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EsqlFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case EsqlFormat.Yaml:
-				writer.WriteStringValue("yaml");
-				return;
+				writer.WriteStringValue(MemberYaml);
+				break;
 			case EsqlFormat.Txt:
-				writer.WriteStringValue("txt");
-				return;
+				writer.WriteStringValue(MemberTxt);
+				break;
 			case EsqlFormat.Tsv:
-				writer.WriteStringValue("tsv");
-				return;
+				writer.WriteStringValue(MemberTsv);
+				break;
 			case EsqlFormat.Smile:
-				writer.WriteStringValue("smile");
-				return;
+				writer.WriteStringValue(MemberSmile);
+				break;
 			case EsqlFormat.Json:
-				writer.WriteStringValue("json");
-				return;
+				writer.WriteStringValue(MemberJson);
+				break;
 			case EsqlFormat.Csv:
-				writer.WriteStringValue("csv");
-				return;
+				writer.WriteStringValue(MemberCsv);
+				break;
 			case EsqlFormat.Cbor:
-				writer.WriteStringValue("cbor");
-				return;
+				writer.WriteStringValue(MemberCbor);
+				break;
 			case EsqlFormat.Arrow:
-				writer.WriteStringValue("arrow");
-				return;
+				writer.WriteStringValue(MemberArrow);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EsqlFormat)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

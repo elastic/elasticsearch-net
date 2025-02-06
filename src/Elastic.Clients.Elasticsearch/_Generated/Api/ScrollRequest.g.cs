@@ -64,6 +64,11 @@ public sealed partial class ScrollRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
 {
+	[JsonConstructor]
+	internal ScrollRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

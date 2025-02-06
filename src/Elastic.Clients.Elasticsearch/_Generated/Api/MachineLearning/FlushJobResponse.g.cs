@@ -22,13 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class FlushJobResponseConverter : System.Text.Json.Serialization.JsonConverter<FlushJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFlushed = System.Text.Json.JsonEncodedText.Encode("flushed");
+	private static readonly System.Text.Json.JsonEncodedText PropLastFinalizedBucketEnd = System.Text.Json.JsonEncodedText.Encode("last_finalized_bucket_end");
+
+	public override FlushJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propFlushed = default;
+		LocalJsonValue<int?> propLastFinalizedBucketEnd = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFlushed.TryRead(ref reader, options, PropFlushed))
+			{
+				continue;
+			}
+
+			if (propLastFinalizedBucketEnd.TryRead(ref reader, options, PropLastFinalizedBucketEnd))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FlushJobResponse
+		{
+			Flushed = propFlushed.Value
+,
+			LastFinalizedBucketEnd = propLastFinalizedBucketEnd.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FlushJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFlushed, value.Flushed);
+		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FlushJobResponseConverter))]
 public sealed partial class FlushJobResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("flushed")]
 	public bool Flushed { get; init; }
 
 	/// <summary>
@@ -37,6 +82,5 @@ public sealed partial class FlushJobResponse : ElasticsearchResponse
 	/// the last bucket that was processed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("last_finalized_bucket_end")]
 	public int? LastFinalizedBucketEnd { get; init; }
 }

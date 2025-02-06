@@ -42,6 +42,7 @@ public sealed partial class GetLifecycleRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleRequestParameters>
 {
+	[JsonConstructor]
 	public GetLifecycleRequest()
 	{
 	}
@@ -57,6 +58,14 @@ public sealed partial class GetLifecycleRequest : PlainRequest<GetLifecycleReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "slm.get_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of snapshot lifecycle policies to retrieve
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? PolicyId { get => P<Elastic.Clients.Elasticsearch.Names?>("policy_id"); set => PO("policy_id", value); }
 }
 
 /// <summary>

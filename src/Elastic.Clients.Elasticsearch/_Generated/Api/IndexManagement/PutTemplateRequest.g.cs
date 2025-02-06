@@ -50,6 +50,89 @@ public sealed partial class PutTemplateRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+internal sealed partial class PutTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<PutTemplateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPatterns = System.Text.Json.JsonEncodedText.Encode("index_patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override PutTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<ICollection<string>?> propIndexPatterns = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
+		LocalJsonValue<int?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryRead(ref reader, options, PropAliases))
+			{
+				continue;
+			}
+
+			if (propIndexPatterns.TryRead(ref reader, options, PropIndexPatterns, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propMappings.TryRead(ref reader, options, PropMappings))
+			{
+				continue;
+			}
+
+			if (propOrder.TryRead(ref reader, options, PropOrder))
+			{
+				continue;
+			}
+
+			if (propSettings.TryRead(ref reader, options, PropSettings))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutTemplateRequest
+		{
+			Aliases = propAliases.Value
+	,
+			IndexPatterns = propIndexPatterns.Value
+	,
+			Mappings = propMappings.Value
+	,
+			Order = propOrder.Value
+	,
+			Settings = propSettings.Value
+	,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases);
+		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropMappings, value.Mappings);
+		writer.WriteProperty(options, PropOrder, value.Order);
+		writer.WriteProperty(options, PropSettings, value.Settings);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update an index template.
@@ -69,9 +152,15 @@ public sealed partial class PutTemplateRequestParameters : RequestParameters
 /// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(PutTemplateRequestConverter))]
 public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequestParameters>
 {
 	public PutTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	{
+	}
+
+	[JsonConstructor]
+	internal PutTemplateRequest()
 	{
 	}
 
@@ -83,7 +172,12 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	internal override string OperationName => "indices.put_template";
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>
+	/// The name of the template
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
@@ -91,7 +185,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// If true, this request cannot replace or update existing index templates.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
@@ -100,7 +193,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -108,7 +200,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
@@ -117,8 +208,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// of indices during creation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_patterns")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? IndexPatterns { get; set; }
 
 	/// <summary>
@@ -126,7 +215,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// Mapping for fields in the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
@@ -139,7 +227,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// 'order' values are merged later, overriding templates with lower values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
 	public int? Order { get; set; }
 
 	/// <summary>
@@ -147,7 +234,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// Configuration options for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
 	/// <summary>
@@ -156,7 +242,6 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 

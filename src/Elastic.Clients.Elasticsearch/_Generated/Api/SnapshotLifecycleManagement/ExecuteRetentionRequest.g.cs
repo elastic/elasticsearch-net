@@ -43,6 +43,11 @@ public sealed partial class ExecuteRetentionRequestParameters : RequestParameter
 /// </summary>
 public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetentionRequestParameters>
 {
+	[JsonConstructor]
+	internal ExecuteRetentionRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementExecuteRetention;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

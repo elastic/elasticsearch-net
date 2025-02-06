@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class BulkResponseConverter : System.Text.Json.Serialization.JsonConverter<BulkResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropIngestTook = System.Text.Json.JsonEncodedText.Encode("ingest_took");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+
+	public override BulkResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propErrors = default;
+		LocalJsonValue<long?> propIngestTook = default;
+		LocalJsonValue<long> propTook = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propErrors.TryRead(ref reader, options, PropErrors))
+			{
+				continue;
+			}
+
+			if (propIngestTook.TryRead(ref reader, options, PropIngestTook))
+			{
+				continue;
+			}
+
+			if (propTook.TryRead(ref reader, options, PropTook))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new BulkResponse
+		{
+			Errors = propErrors.Value
+,
+			IngestTook = propIngestTook.Value
+,
+			Took = propTook.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, BulkResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropErrors, value.Errors);
+		writer.WriteProperty(options, PropIngestTook, value.IngestTook);
+		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(BulkResponseConverter))]
 public sealed partial class BulkResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("errors")]
 	public bool Errors { get; init; }
-	[JsonInclude, JsonPropertyName("ingest_took")]
 	public long? IngestTook { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

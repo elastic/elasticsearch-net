@@ -51,6 +51,11 @@ public sealed partial class BulkDeleteRoleRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class BulkDeleteRoleRequest : PlainRequest<BulkDeleteRoleRequestParameters>
 {
+	[JsonConstructor]
+	internal BulkDeleteRoleRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityBulkDeleteRole;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

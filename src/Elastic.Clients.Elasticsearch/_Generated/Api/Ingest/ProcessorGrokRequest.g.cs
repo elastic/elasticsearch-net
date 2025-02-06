@@ -44,6 +44,11 @@ public sealed partial class ProcessorGrokRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokRequestParameters>
 {
+	[JsonConstructor]
+	internal ProcessorGrokRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestProcessorGrok;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

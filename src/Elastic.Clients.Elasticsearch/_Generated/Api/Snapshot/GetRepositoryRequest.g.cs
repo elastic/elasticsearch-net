@@ -54,6 +54,7 @@ public sealed partial class GetRepositoryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryRequestParameters>
 {
+	[JsonConstructor]
 	public GetRepositoryRequest()
 	{
 	}
@@ -69,6 +70,14 @@ public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.get_repository";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of repository names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("repository"); set => PO("repository", value); }
 
 	/// <summary>
 	/// <para>

@@ -54,40 +54,64 @@ public enum GroupBy
 	Nodes
 }
 
-internal sealed class GroupByConverter : JsonConverter<GroupBy>
+internal sealed partial class GroupByConverter : System.Text.Json.Serialization.JsonConverter<GroupBy>
 {
-	public override GroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberParents = System.Text.Json.JsonEncodedText.Encode("parents");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+
+	public override GroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberParents))
 		{
-			case "parents":
-				return GroupBy.Parents;
-			case "none":
-				return GroupBy.None;
-			case "nodes":
-				return GroupBy.Nodes;
+			return GroupBy.Parents;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return GroupBy.None;
+		}
+
+		if (reader.ValueTextEquals(MemberNodes))
+		{
+			return GroupBy.Nodes;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberParents.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.Parents;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.None;
+		}
+
+		if (string.Equals(value, MemberNodes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.Nodes;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GroupBy)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GroupBy value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GroupBy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GroupBy.Parents:
-				writer.WriteStringValue("parents");
-				return;
+				writer.WriteStringValue(MemberParents);
+				break;
 			case GroupBy.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case GroupBy.Nodes:
-				writer.WriteStringValue("nodes");
-				return;
+				writer.WriteStringValue(MemberNodes);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GroupBy)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

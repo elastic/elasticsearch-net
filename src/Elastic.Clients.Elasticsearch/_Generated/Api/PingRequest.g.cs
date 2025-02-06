@@ -42,6 +42,11 @@ public sealed partial class PingRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 {
+	[JsonConstructor]
+	internal PingRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePing;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;

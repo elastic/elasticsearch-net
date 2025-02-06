@@ -22,20 +22,91 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+internal sealed partial class PostStartBasicResponseConverter : System.Text.Json.Serialization.JsonConverter<PostStartBasicResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropBasicWasStarted = System.Text.Json.JsonEncodedText.Encode("basic_was_started");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override PostStartBasicResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>>?> propAcknowledge = default;
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<bool> propBasicWasStarted = default;
+		LocalJsonValue<string?> propErrorMessage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledge.TryRead(ref reader, options, PropAcknowledge))
+			{
+				continue;
+			}
+
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propBasicWasStarted.TryRead(ref reader, options, PropBasicWasStarted))
+			{
+				continue;
+			}
+
+			if (propErrorMessage.TryRead(ref reader, options, PropErrorMessage))
+			{
+				continue;
+			}
+
+			if (propType.TryRead(ref reader, options, PropType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PostStartBasicResponse
+		{
+			Acknowledge = propAcknowledge.Value
+,
+			Acknowledged = propAcknowledged.Value
+,
+			BasicWasStarted = propBasicWasStarted.Value
+,
+			ErrorMessage = propErrorMessage.Value
+,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostStartBasicResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledge, value.Acknowledge);
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropBasicWasStarted, value.BasicWasStarted);
+		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PostStartBasicResponseConverter))]
 public sealed partial class PostStartBasicResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("acknowledge")]
 	public IReadOnlyDictionary<string, Union<string, IReadOnlyCollection<string>>>? Acknowledge { get; init; }
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("basic_was_started")]
 	public bool BasicWasStarted { get; init; }
-	[JsonInclude, JsonPropertyName("error_message")]
 	public string? ErrorMessage { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; init; }
 }

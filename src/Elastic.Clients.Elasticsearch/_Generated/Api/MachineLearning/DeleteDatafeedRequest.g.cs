@@ -52,6 +52,11 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteDatafeedRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteDatafeed;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -59,6 +64,17 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_datafeed";
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This
+	/// identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+	/// hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
 	/// <summary>
 	/// <para>

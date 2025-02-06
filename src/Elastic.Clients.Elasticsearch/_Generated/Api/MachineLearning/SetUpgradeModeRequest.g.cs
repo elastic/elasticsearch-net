@@ -68,6 +68,11 @@ public sealed partial class SetUpgradeModeRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SetUpgradeModeRequest : PlainRequest<SetUpgradeModeRequestParameters>
 {
+	[JsonConstructor]
+	internal SetUpgradeModeRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningSetUpgradeMode;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

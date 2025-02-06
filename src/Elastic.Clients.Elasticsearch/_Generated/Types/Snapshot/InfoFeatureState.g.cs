@@ -27,11 +27,52 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class InfoFeatureStateConverter : System.Text.Json.Serialization.JsonConverter<InfoFeatureState>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+
+	public override InfoFeatureState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propFeatureName = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureName.TryRead(ref reader, options, PropFeatureName))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InfoFeatureState
+		{
+			FeatureName = propFeatureName.Value
+,
+			Indices = propIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InfoFeatureState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureName, value.FeatureName);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(InfoFeatureStateConverter))]
 public sealed partial class InfoFeatureState
 {
-	[JsonInclude, JsonPropertyName("feature_name")]
 	public string FeatureName { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Indices { get; init; }
 }

@@ -39,12 +39,16 @@ public sealed partial class IndexModifyDataStreamAction
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal IndexModifyDataStreamAction()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static IndexModifyDataStreamAction AddBackingIndex(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction indexAndDataStreamAction) => new IndexModifyDataStreamAction("add_backing_index", indexAndDataStreamAction);
 	public static IndexModifyDataStreamAction RemoveBackingIndex(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction indexAndDataStreamAction) => new IndexModifyDataStreamAction("remove_backing_index", indexAndDataStreamAction);
@@ -62,67 +66,56 @@ public sealed partial class IndexModifyDataStreamAction
 	}
 }
 
-internal sealed partial class IndexModifyDataStreamActionConverter : JsonConverter<IndexModifyDataStreamAction>
+internal sealed partial class IndexModifyDataStreamActionConverter : System.Text.Json.Serialization.JsonConverter<IndexModifyDataStreamAction>
 {
-	public override IndexModifyDataStreamAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantAddBackingIndex = System.Text.Json.JsonEncodedText.Encode("add_backing_index");
+	private static readonly System.Text.Json.JsonEncodedText VariantRemoveBackingIndex = System.Text.Json.JsonEncodedText.Encode("remove_backing_index");
+
+	public override IndexModifyDataStreamAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantAddBackingIndex))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "add_backing_index")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantAddBackingIndex.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options);
 				continue;
 			}
 
-			if (propertyName == "remove_backing_index")
+			if (reader.ValueTextEquals(VariantRemoveBackingIndex))
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantRemoveBackingIndex.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?>(options);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IndexModifyDataStreamAction' from the response.");
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new IndexModifyDataStreamAction(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IndexModifyDataStreamAction { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, IndexModifyDataStreamAction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexModifyDataStreamAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "add_backing_index":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction)value.Variant, options);
-					break;
-				case "remove_backing_index":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "add_backing_index":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant);
+				break;
+			case "remove_backing_index":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(IndexModifyDataStreamAction)}'.");
 		}
 
 		writer.WriteEndObject();

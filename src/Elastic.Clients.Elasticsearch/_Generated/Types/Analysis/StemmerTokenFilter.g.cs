@@ -27,52 +27,54 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class StemmerTokenFilterConverter : JsonConverter<StemmerTokenFilter>
+internal sealed partial class StemmerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<StemmerTokenFilter>
 {
-	public override StemmerTokenFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new StemmerTokenFilter();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "language" || property == "name")
-				{
-					variant.Language = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage1 = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-				if (property == "version")
-				{
-					variant.Version = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+	public override StemmerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propLanguage = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLanguage.TryRead(ref reader, options, PropLanguage) || propLanguage.TryRead(ref reader, options, PropLanguage1))
+			{
+				continue;
 			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StemmerTokenFilter
+		{
+			Language = propLanguage.Value
+,
+			Version = propVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, StemmerTokenFilter value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StemmerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Language))
-		{
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(value.Language);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("stemmer");
-		if (!string.IsNullOrEmpty(value.Version))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(value.Version);
-		}
-
+		writer.WriteProperty(options, PropLanguage, value.Language);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropVersion, value.Version);
 		writer.WriteEndObject();
 	}
 }

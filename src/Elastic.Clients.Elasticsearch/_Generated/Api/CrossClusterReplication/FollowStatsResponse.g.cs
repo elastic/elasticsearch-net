@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class FollowStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<FollowStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+
+	public override FollowStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats>> propIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FollowStatsResponse
+		{
+			Indices = propIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FollowStatsResponseConverter))]
 public sealed partial class FollowStatsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> Indices { get; init; }
 }

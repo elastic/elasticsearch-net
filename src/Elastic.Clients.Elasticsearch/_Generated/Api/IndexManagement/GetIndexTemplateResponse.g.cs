@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class GetIndexTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<GetIndexTemplateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplates = System.Text.Json.JsonEncodedText.Encode("index_templates");
+
+	public override GetIndexTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem>> propIndexTemplates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndexTemplates.TryRead(ref reader, options, PropIndexTemplates))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetIndexTemplateResponse
+		{
+			IndexTemplates = propIndexTemplates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetIndexTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndexTemplates, value.IndexTemplates);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetIndexTemplateResponseConverter))]
 public sealed partial class GetIndexTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("index_templates")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem> IndexTemplates { get; init; }
 }

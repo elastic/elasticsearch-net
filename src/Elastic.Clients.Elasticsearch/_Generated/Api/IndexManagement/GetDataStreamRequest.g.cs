@@ -70,6 +70,7 @@ public sealed partial class GetDataStreamRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamRequestParameters>
 {
+	[JsonConstructor]
 	public GetDataStreamRequest()
 	{
 	}
@@ -85,6 +86,15 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data stream names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported. If omitted, all data streams are returned.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.DataStreamNames? Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>

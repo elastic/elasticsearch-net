@@ -106,6 +106,11 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal GetIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -113,6 +118,15 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and index aliases used to limit the request.
+	/// Wildcard expressions (*) are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

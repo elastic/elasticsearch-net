@@ -39,12 +39,16 @@ public sealed partial class SmoothingModel
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal SmoothingModel()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static SmoothingModel Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModel("laplace", laplaceSmoothingModel);
 	public static SmoothingModel LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => new SmoothingModel("linear_interpolation", linearInterpolationSmoothingModel);
@@ -63,77 +67,68 @@ public sealed partial class SmoothingModel
 	}
 }
 
-internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingModel>
+internal sealed partial class SmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<SmoothingModel>
 {
-	public override SmoothingModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantLaplace = System.Text.Json.JsonEncodedText.Encode("laplace");
+	private static readonly System.Text.Json.JsonEncodedText VariantLinearInterpolation = System.Text.Json.JsonEncodedText.Encode("linear_interpolation");
+	private static readonly System.Text.Json.JsonEncodedText VariantStupidBackoff = System.Text.Json.JsonEncodedText.Encode("stupid_backoff");
+
+	public override SmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantLaplace))
+			{
+				variantType = VariantLaplace.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLinearInterpolation))
+			{
+				variantType = VariantLinearInterpolation.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantStupidBackoff))
+			{
+				variantType = VariantStupidBackoff.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "laplace")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "linear_interpolation")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "stupid_backoff")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SmoothingModel' from the response.");
-		}
-
-		var result = new SmoothingModel(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SmoothingModel { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, SmoothingModel value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SmoothingModel value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "laplace":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel)value.Variant, options);
-					break;
-				case "linear_interpolation":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel)value.Variant, options);
-					break;
-				case "stupid_backoff":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "laplace":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?)value.Variant);
+				break;
+			case "linear_interpolation":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?)value.Variant);
+				break;
+			case "stupid_backoff":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(SmoothingModel)}'.");
 		}
 
 		writer.WriteEndObject();

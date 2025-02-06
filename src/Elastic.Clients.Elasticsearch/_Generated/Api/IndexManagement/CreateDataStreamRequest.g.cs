@@ -60,6 +60,11 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	{
 	}
 
+	[JsonConstructor]
+	internal CreateDataStreamRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreateDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -67,6 +72,19 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.create_data_stream";
+
+	/// <summary>
+	/// <para>
+	/// Name of the data stream, which must meet the following criteria:
+	/// Lowercase only;
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>#</c>, <c>:</c>, or a space character;
+	/// Cannot start with <c>-</c>, <c>_</c>, <c>+</c>, or <c>.ds-</c>;
+	/// Cannot be <c>.</c> or <c>..</c>;
+	/// Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.DataStreamName Name { get => P<Elastic.Clients.Elasticsearch.DataStreamName>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

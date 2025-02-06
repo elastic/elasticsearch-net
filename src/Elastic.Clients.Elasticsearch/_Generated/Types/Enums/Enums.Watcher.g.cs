@@ -41,45 +41,78 @@ public enum ActionStatusOptions
 	Failure
 }
 
-internal sealed class ActionStatusOptionsConverter : JsonConverter<ActionStatusOptions>
+internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Serialization.JsonConverter<ActionStatusOptions>
 {
-	public override ActionStatusOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
+	private static readonly System.Text.Json.JsonEncodedText MemberSimulated = System.Text.Json.JsonEncodedText.Encode("simulated");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("failure");
+
+	public override ActionStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberThrottled))
 		{
-			case "throttled":
-				return ActionStatusOptions.Throttled;
-			case "success":
-				return ActionStatusOptions.Success;
-			case "simulated":
-				return ActionStatusOptions.Simulated;
-			case "failure":
-				return ActionStatusOptions.Failure;
+			return ActionStatusOptions.Throttled;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSuccess))
+		{
+			return ActionStatusOptions.Success;
+		}
+
+		if (reader.ValueTextEquals(MemberSimulated))
+		{
+			return ActionStatusOptions.Simulated;
+		}
+
+		if (reader.ValueTextEquals(MemberFailure))
+		{
+			return ActionStatusOptions.Failure;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Throttled;
+		}
+
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Success;
+		}
+
+		if (string.Equals(value, MemberSimulated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Simulated;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Failure;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ActionStatusOptions)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ActionStatusOptions value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ActionStatusOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ActionStatusOptions.Throttled:
-				writer.WriteStringValue("throttled");
-				return;
+				writer.WriteStringValue(MemberThrottled);
+				break;
 			case ActionStatusOptions.Success:
-				writer.WriteStringValue("success");
-				return;
+				writer.WriteStringValue(MemberSuccess);
+				break;
 			case ActionStatusOptions.Simulated:
-				writer.WriteStringValue("simulated");
-				return;
+				writer.WriteStringValue(MemberSimulated);
+				break;
 			case ActionStatusOptions.Failure:
-				writer.WriteStringValue("failure");
-				return;
+				writer.WriteStringValue(MemberFailure);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ActionStatusOptions)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

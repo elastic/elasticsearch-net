@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetRecordsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetRecordsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropRecords = System.Text.Json.JsonEncodedText.Encode("records");
+
+	public override GetRecordsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly>> propRecords = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propRecords.TryRead(ref reader, options, PropRecords))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetRecordsResponse
+		{
+			Count = propCount.Value
+,
+			Records = propRecords.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetRecordsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropRecords, value.Records);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetRecordsResponseConverter))]
 public sealed partial class GetRecordsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("records")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Anomaly> Records { get; init; }
 }

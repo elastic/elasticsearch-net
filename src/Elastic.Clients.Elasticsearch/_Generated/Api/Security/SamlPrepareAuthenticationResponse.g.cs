@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class SamlPrepareAuthenticationResponseConverter : System.Text.Json.Serialization.JsonConverter<SamlPrepareAuthenticationResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect");
+
+	public override SamlPrepareAuthenticationResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propRealm = default;
+		LocalJsonValue<string> propRedirect = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propRealm.TryRead(ref reader, options, PropRealm))
+			{
+				continue;
+			}
+
+			if (propRedirect.TryRead(ref reader, options, PropRedirect))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SamlPrepareAuthenticationResponse
+		{
+			Id = propId.Value
+,
+			Realm = propRealm.Value
+,
+			Redirect = propRedirect.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamlPrepareAuthenticationResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropRealm, value.Realm);
+		writer.WriteProperty(options, PropRedirect, value.Redirect);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SamlPrepareAuthenticationResponseConverter))]
 public sealed partial class SamlPrepareAuthenticationResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("realm")]
 	public string Realm { get; init; }
-	[JsonInclude, JsonPropertyName("redirect")]
 	public string Redirect { get; init; }
 }

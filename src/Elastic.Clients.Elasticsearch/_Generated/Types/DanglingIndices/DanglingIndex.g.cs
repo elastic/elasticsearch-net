@@ -27,15 +27,74 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
+internal sealed partial class DanglingIndexConverter : System.Text.Json.Serialization.JsonConverter<DanglingIndex>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("creation_date_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeIds = System.Text.Json.JsonEncodedText.Encode("node_ids");
+
+	public override DanglingIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCreationDateMillis = default;
+		LocalJsonValue<string> propIndexName = default;
+		LocalJsonValue<string> propIndexUuid = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propNodeIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreationDateMillis.TryRead(ref reader, options, PropCreationDateMillis))
+			{
+				continue;
+			}
+
+			if (propIndexName.TryRead(ref reader, options, PropIndexName))
+			{
+				continue;
+			}
+
+			if (propIndexUuid.TryRead(ref reader, options, PropIndexUuid))
+			{
+				continue;
+			}
+
+			if (propNodeIds.TryRead(ref reader, options, PropNodeIds, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DanglingIndex
+		{
+			CreationDateMillis = propCreationDateMillis.Value
+,
+			IndexName = propIndexName.Value
+,
+			IndexUuid = propIndexUuid.Value
+,
+			NodeIds = propNodeIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DanglingIndex value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis);
+		writer.WriteProperty(options, PropIndexName, value.IndexName);
+		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid);
+		writer.WriteProperty(options, PropNodeIds, value.NodeIds, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DanglingIndexConverter))]
 public sealed partial class DanglingIndex
 {
-	[JsonInclude, JsonPropertyName("creation_date_millis")]
 	public long CreationDateMillis { get; init; }
-	[JsonInclude, JsonPropertyName("index_name")]
 	public string IndexName { get; init; }
-	[JsonInclude, JsonPropertyName("index_uuid")]
 	public string IndexUuid { get; init; }
-	[JsonInclude, JsonPropertyName("node_ids")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> NodeIds { get; init; }
 }

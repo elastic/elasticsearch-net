@@ -47,6 +47,11 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 	{
 	}
 
+	[JsonConstructor]
+	internal PutTrainedModelVocabularyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelVocabulary;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -54,6 +59,14 @@ public sealed partial class PutTrainedModelVocabularyRequest : PlainRequest<PutT
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_trained_model_vocabulary";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>

@@ -27,22 +27,96 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class CustomAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<CustomAnalyzer>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropPositionIncrementGap = System.Text.Json.JsonEncodedText.Encode("position_increment_gap");
+	private static readonly System.Text.Json.JsonEncodedText PropPositionOffsetGap = System.Text.Json.JsonEncodedText.Encode("position_offset_gap");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override CustomAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>?> propCharFilter = default;
+		LocalJsonValue<ICollection<string>?> propFilter = default;
+		LocalJsonValue<int?> propPositionIncrementGap = default;
+		LocalJsonValue<int?> propPositionOffsetGap = default;
+		LocalJsonValue<string> propTokenizer = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCharFilter.TryRead(ref reader, options, PropCharFilter, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propPositionIncrementGap.TryRead(ref reader, options, PropPositionIncrementGap))
+			{
+				continue;
+			}
+
+			if (propPositionOffsetGap.TryRead(ref reader, options, PropPositionOffsetGap))
+			{
+				continue;
+			}
+
+			if (propTokenizer.TryRead(ref reader, options, PropTokenizer))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new CustomAnalyzer
+		{
+			CharFilter = propCharFilter.Value
+,
+			Filter = propFilter.Value
+,
+			PositionIncrementGap = propPositionIncrementGap.Value
+,
+			PositionOffsetGap = propPositionOffsetGap.Value
+,
+			Tokenizer = propTokenizer.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CustomAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap);
+		writer.WriteProperty(options, PropPositionOffsetGap, value.PositionOffsetGap);
+		writer.WriteProperty(options, PropTokenizer, value.Tokenizer);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(CustomAnalyzerConverter))]
 public sealed partial class CustomAnalyzer : IAnalyzer
 {
-	[JsonInclude, JsonPropertyName("char_filter")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? CharFilter { get; set; }
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
-	[JsonInclude, JsonPropertyName("position_offset_gap")]
 	public int? PositionOffsetGap { get; set; }
-	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string Tokenizer { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "custom";
 }
 

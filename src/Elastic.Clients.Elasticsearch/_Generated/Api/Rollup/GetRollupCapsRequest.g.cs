@@ -59,6 +59,7 @@ public sealed partial class GetRollupCapsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsRequestParameters>
 {
+	[JsonConstructor]
 	public GetRollupCapsRequest()
 	{
 	}
@@ -74,6 +75,15 @@ public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.get_rollup_caps";
+
+	/// <summary>
+	/// <para>
+	/// Index, indices or index-pattern to return rollup capabilities for.
+	/// <c>_all</c> may be used to fetch rollup capabilities from all jobs.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 }
 
 /// <summary>

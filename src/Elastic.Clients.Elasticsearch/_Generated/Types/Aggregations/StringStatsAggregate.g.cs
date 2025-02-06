@@ -49,4 +49,6 @@ public sealed partial class StringStatsAggregate : IAggregate
 	public int? MinLength { get; init; }
 	[JsonInclude, JsonPropertyName("min_length_as_string")]
 	public string? MinLengthAsString { get; init; }
+
+	string IAggregate.Type => "string_stats";
 }

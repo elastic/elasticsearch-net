@@ -61,6 +61,11 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal EqlGetRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -68,6 +73,14 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "eql.get";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the search.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

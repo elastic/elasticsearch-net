@@ -155,6 +155,11 @@ public sealed partial class RepositoryVerifyIntegrityRequest : PlainRequest<Repo
 	{
 	}
 
+	[JsonConstructor]
+	internal RepositoryVerifyIntegrityRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRepositoryVerifyIntegrity;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -162,6 +167,14 @@ public sealed partial class RepositoryVerifyIntegrityRequest : PlainRequest<Repo
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.repository_verify_integrity";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>

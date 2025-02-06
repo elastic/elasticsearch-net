@@ -27,15 +27,63 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class ThaiAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<ThaiAnalyzer>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override ThaiAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStopwords.TryRead(ref reader, options, PropStopwords, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryRead(ref reader, options, PropStopwordsPath))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ThaiAnalyzer
+		{
+			Stopwords = propStopwords.Value
+,
+			StopwordsPath = propStopwordsPath.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ThaiAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ThaiAnalyzerConverter))]
 public sealed partial class ThaiAnalyzer : IAnalyzer
 {
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "thai";
 }
 

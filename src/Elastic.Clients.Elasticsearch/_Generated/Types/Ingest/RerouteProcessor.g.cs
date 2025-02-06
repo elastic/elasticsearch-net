@@ -27,6 +27,110 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class RerouteProcessorConverter : System.Text.Json.Serialization.JsonConverter<RerouteProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataset = System.Text.Json.JsonEncodedText.Encode("dataset");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDestination = System.Text.Json.JsonEncodedText.Encode("destination");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropNamespace = System.Text.Json.JsonEncodedText.Encode("namespace");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+
+	public override RerouteProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<string>?> propDataset = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<string?> propDestination = default;
+		LocalJsonValue<string?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<ICollection<string>?> propNamespace = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataset.TryRead(ref reader, options, PropDataset, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propDestination.TryRead(ref reader, options, PropDestination))
+			{
+				continue;
+			}
+
+			if (propIf.TryRead(ref reader, options, PropIf))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			{
+				continue;
+			}
+
+			if (propNamespace.TryRead(ref reader, options, PropNamespace, typeof(SingleOrManyMarker<ICollection<string>?, string>)))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			{
+				continue;
+			}
+
+			if (propTag.TryRead(ref reader, options, PropTag))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RerouteProcessor
+		{
+			Dataset = propDataset.Value
+,
+			Description = propDescription.Value
+,
+			Destination = propDestination.Value
+,
+			If = propIf.Value
+,
+			IgnoreFailure = propIgnoreFailure.Value
+,
+			Namespace = propNamespace.Value
+,
+			OnFailure = propOnFailure.Value
+,
+			Tag = propTag.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RerouteProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataset, value.Dataset, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropDestination, value.Destination);
+		writer.WriteProperty(options, PropIf, value.If);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
+		writer.WriteProperty(options, PropNamespace, value.Namespace, null, typeof(SingleOrManyMarker<ICollection<string>?, string>));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
+		writer.WriteProperty(options, PropTag, value.Tag);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RerouteProcessorConverter))]
 public sealed partial class RerouteProcessor
 {
 	/// <summary>
@@ -44,8 +148,6 @@ public sealed partial class RerouteProcessor
 	/// default {{data_stream.dataset}}
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dataset")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Dataset { get; set; }
 
 	/// <summary>
@@ -54,7 +156,6 @@ public sealed partial class RerouteProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -62,7 +163,6 @@ public sealed partial class RerouteProcessor
 	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("destination")]
 	public string? Destination { get; set; }
 
 	/// <summary>
@@ -70,7 +170,6 @@ public sealed partial class RerouteProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
@@ -78,7 +177,6 @@ public sealed partial class RerouteProcessor
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -95,8 +193,6 @@ public sealed partial class RerouteProcessor
 	/// default {{data_stream.namespace}}
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("namespace")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Namespace { get; set; }
 
 	/// <summary>
@@ -104,7 +200,6 @@ public sealed partial class RerouteProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
@@ -113,7 +208,6 @@ public sealed partial class RerouteProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(RerouteProcessor rerouteProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Reroute(rerouteProcessor);

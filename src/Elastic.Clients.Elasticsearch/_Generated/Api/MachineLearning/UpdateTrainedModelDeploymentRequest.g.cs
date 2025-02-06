@@ -45,6 +45,11 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 	{
 	}
 
+	[JsonConstructor]
+	internal UpdateTrainedModelDeploymentRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateTrainedModelDeployment;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -52,6 +57,14 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_trained_model_deployment";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>

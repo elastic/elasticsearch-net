@@ -22,10 +22,66 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DeleteCalendarJobResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteCalendarJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarId = System.Text.Json.JsonEncodedText.Encode("calendar_id");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropJobIds = System.Text.Json.JsonEncodedText.Encode("job_ids");
+
+	public override DeleteCalendarJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propCalendarId = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propJobIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendarId.TryRead(ref reader, options, PropCalendarId))
+			{
+				continue;
+			}
+
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propJobIds.TryRead(ref reader, options, PropJobIds, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteCalendarJobResponse
+		{
+			CalendarId = propCalendarId.Value
+,
+			Description = propDescription.Value
+,
+			JobIds = propJobIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteCalendarJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendarId, value.CalendarId);
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropJobIds, value.JobIds, null, typeof(SingleOrManyMarker<IReadOnlyCollection<string>, string>));
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteCalendarJobResponseConverter))]
 public sealed partial class DeleteCalendarJobResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +89,6 @@ public sealed partial class DeleteCalendarJobResponse : ElasticsearchResponse
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calendar_id")]
 	public string CalendarId { get; init; }
 
 	/// <summary>
@@ -41,7 +96,6 @@ public sealed partial class DeleteCalendarJobResponse : ElasticsearchResponse
 	/// A description of the calendar.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
 
 	/// <summary>
@@ -49,7 +103,5 @@ public sealed partial class DeleteCalendarJobResponse : ElasticsearchResponse
 	/// A list of anomaly detection job identifiers or group names.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_ids")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> JobIds { get; init; }
 }

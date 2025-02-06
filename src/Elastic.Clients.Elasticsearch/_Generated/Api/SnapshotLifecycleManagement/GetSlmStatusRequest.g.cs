@@ -41,6 +41,11 @@ public sealed partial class GetSlmStatusRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetSlmStatusRequest : PlainRequest<GetSlmStatusRequestParameters>
 {
+	[JsonConstructor]
+	internal GetSlmStatusRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

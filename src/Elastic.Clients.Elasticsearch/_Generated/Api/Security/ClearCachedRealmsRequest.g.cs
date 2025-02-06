@@ -54,6 +54,11 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 	{
 	}
 
+	[JsonConstructor]
+	internal ClearCachedRealmsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRealms;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -61,6 +66,14 @@ public sealed partial class ClearCachedRealmsRequest : PlainRequest<ClearCachedR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_realms";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of realms to clear
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Realms { get => P<Elastic.Clients.Elasticsearch.Names>("realms"); set => PR("realms", value); }
 
 	/// <summary>
 	/// <para>

@@ -46,6 +46,11 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 	{
 	}
 
+	[JsonConstructor]
+	internal GetEqlStatusRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -53,6 +58,14 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "eql.get_status";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the search.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>

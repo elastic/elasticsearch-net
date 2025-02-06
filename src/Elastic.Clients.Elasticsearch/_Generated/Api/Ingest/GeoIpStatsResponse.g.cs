@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class GeoIpStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<GeoIpStatsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+
+	public override GeoIpStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics> propStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNodes.TryRead(ref reader, options, PropNodes))
+			{
+				continue;
+			}
+
+			if (propStats.TryRead(ref reader, options, PropStats))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GeoIpStatsResponse
+		{
+			Nodes = propNodes.Value
+,
+			Stats = propStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GeoIpStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNodes, value.Nodes);
+		writer.WriteProperty(options, PropStats, value.Stats);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GeoIpStatsResponseConverter))]
 public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +79,6 @@ public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 	/// Downloaded GeoIP2 databases for each node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
 
 	/// <summary>
@@ -41,6 +86,5 @@ public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 	/// Download statistics for all GeoIP2 databases.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stats")]
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; init; }
 }

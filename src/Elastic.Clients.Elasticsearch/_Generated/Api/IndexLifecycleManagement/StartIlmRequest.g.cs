@@ -46,6 +46,11 @@ public sealed partial class StartIlmRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class StartIlmRequest : PlainRequest<StartIlmRequestParameters>
 {
+	[JsonConstructor]
+	internal StartIlmRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementStart;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

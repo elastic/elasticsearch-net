@@ -22,14 +22,75 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class MultiSearchTemplateResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<MultiSearchTemplateResponse<TDocument>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+
+	public override MultiSearchTemplateResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>>> propResponses = default;
+		LocalJsonValue<long> propTook = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propResponses.TryRead(ref reader, options, PropResponses))
+			{
+				continue;
+			}
+
+			if (propTook.TryRead(ref reader, options, PropTook))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MultiSearchTemplateResponse<TDocument>
+		{
+			Responses = propResponses.Value
+,
+			Took = propTook.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiSearchTemplateResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropResponses, value.Responses);
+		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class MultiSearchTemplateResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(MultiSearchTemplateResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(MultiSearchTemplateResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[JsonConverter(typeof(MultiSearchTemplateResponseConverterFactory))]
 public sealed partial class MultiSearchTemplateResponse<TDocument> : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("responses")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

@@ -39,12 +39,16 @@ public sealed partial class DataframeAnalysisFeatureProcessor
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal DataframeAnalysisFeatureProcessor()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static DataframeAnalysisFeatureProcessor FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding dataframeAnalysisFeatureProcessorFrequencyEncoding) => new DataframeAnalysisFeatureProcessor("frequency_encoding", dataframeAnalysisFeatureProcessorFrequencyEncoding);
 	public static DataframeAnalysisFeatureProcessor MultiEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding dataframeAnalysisFeatureProcessorMultiEncoding) => new DataframeAnalysisFeatureProcessor("multi_encoding", dataframeAnalysisFeatureProcessorMultiEncoding);
@@ -65,97 +69,92 @@ public sealed partial class DataframeAnalysisFeatureProcessor
 	}
 }
 
-internal sealed partial class DataframeAnalysisFeatureProcessorConverter : JsonConverter<DataframeAnalysisFeatureProcessor>
+internal sealed partial class DataframeAnalysisFeatureProcessorConverter : System.Text.Json.Serialization.JsonConverter<DataframeAnalysisFeatureProcessor>
 {
-	public override DataframeAnalysisFeatureProcessor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantFrequencyEncoding = System.Text.Json.JsonEncodedText.Encode("frequency_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantMultiEncoding = System.Text.Json.JsonEncodedText.Encode("multi_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantNGramEncoding = System.Text.Json.JsonEncodedText.Encode("n_gram_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantOneHotEncoding = System.Text.Json.JsonEncodedText.Encode("one_hot_encoding");
+	private static readonly System.Text.Json.JsonEncodedText VariantTargetMeanEncoding = System.Text.Json.JsonEncodedText.Encode("target_mean_encoding");
+
+	public override DataframeAnalysisFeatureProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantFrequencyEncoding))
+			{
+				variantType = VariantFrequencyEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMultiEncoding))
+			{
+				variantType = VariantMultiEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNGramEncoding))
+			{
+				variantType = VariantNGramEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOneHotEncoding))
+			{
+				variantType = VariantOneHotEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTargetMeanEncoding))
+			{
+				variantType = VariantTargetMeanEncoding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "frequency_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "multi_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "n_gram_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "one_hot_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "target_mean_encoding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DataframeAnalysisFeatureProcessor' from the response.");
-		}
-
-		var result = new DataframeAnalysisFeatureProcessor(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DataframeAnalysisFeatureProcessor { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeAnalysisFeatureProcessor value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeAnalysisFeatureProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "frequency_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding)value.Variant, options);
-					break;
-				case "multi_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding)value.Variant, options);
-					break;
-				case "n_gram_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding)value.Variant, options);
-					break;
-				case "one_hot_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding)value.Variant, options);
-					break;
-				case "target_mean_encoding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "frequency_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding?)value.Variant);
+				break;
+			case "multi_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding?)value.Variant);
+				break;
+			case "n_gram_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding?)value.Variant);
+				break;
+			case "one_hot_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding?)value.Variant);
+				break;
+			case "target_mean_encoding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DataframeAnalysisFeatureProcessor)}'.");
 		}
 
 		writer.WriteEndObject();

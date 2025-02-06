@@ -22,10 +22,66 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class UpgradeTransformsResponseConverter : System.Text.Json.Serialization.JsonConverter<UpgradeTransformsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNeedsUpdate = System.Text.Json.JsonEncodedText.Encode("needs_update");
+	private static readonly System.Text.Json.JsonEncodedText PropNoAction = System.Text.Json.JsonEncodedText.Encode("no_action");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+
+	public override UpgradeTransformsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propNeedsUpdate = default;
+		LocalJsonValue<int> propNoAction = default;
+		LocalJsonValue<int> propUpdated = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNeedsUpdate.TryRead(ref reader, options, PropNeedsUpdate))
+			{
+				continue;
+			}
+
+			if (propNoAction.TryRead(ref reader, options, PropNoAction))
+			{
+				continue;
+			}
+
+			if (propUpdated.TryRead(ref reader, options, PropUpdated))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new UpgradeTransformsResponse
+		{
+			NeedsUpdate = propNeedsUpdate.Value
+,
+			NoAction = propNoAction.Value
+,
+			Updated = propUpdated.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UpgradeTransformsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNeedsUpdate, value.NeedsUpdate);
+		writer.WriteProperty(options, PropNoAction, value.NoAction);
+		writer.WriteProperty(options, PropUpdated, value.Updated);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(UpgradeTransformsResponseConverter))]
 public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +89,6 @@ public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
 	/// The number of transforms that need to be upgraded.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("needs_update")]
 	public int NeedsUpdate { get; init; }
 
 	/// <summary>
@@ -41,7 +96,6 @@ public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
 	/// The number of transforms that don’t require upgrading.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("no_action")]
 	public int NoAction { get; init; }
 
 	/// <summary>
@@ -49,6 +103,5 @@ public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
 	/// The number of transforms that have been upgraded.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated")]
 	public int Updated { get; init; }
 }

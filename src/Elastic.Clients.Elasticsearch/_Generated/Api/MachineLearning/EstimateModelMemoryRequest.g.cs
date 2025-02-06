@@ -44,6 +44,11 @@ public sealed partial class EstimateModelMemoryRequestParameters : RequestParame
 /// </summary>
 public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateModelMemoryRequestParameters>
 {
+	[JsonConstructor]
+	internal EstimateModelMemoryRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningEstimateModelMemory;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

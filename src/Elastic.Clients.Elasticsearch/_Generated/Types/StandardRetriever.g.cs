@@ -27,6 +27,100 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class StandardRetrieverConverter : System.Text.Json.Serialization.JsonConverter<StandardRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminateAfter = System.Text.Json.JsonEncodedText.Encode("terminate_after");
+
+	public override StandardRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<int?> propTerminateAfter = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollapse.TryRead(ref reader, options, PropCollapse))
+			{
+				continue;
+			}
+
+			if (propFilter.TryRead(ref reader, options, PropFilter, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryRead(ref reader, options, PropMinScore))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryRead(ref reader, options, PropSearchAfter))
+			{
+				continue;
+			}
+
+			if (propSort.TryRead(ref reader, options, PropSort, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>)))
+			{
+				continue;
+			}
+
+			if (propTerminateAfter.TryRead(ref reader, options, PropTerminateAfter))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new StandardRetriever
+		{
+			Collapse = propCollapse.Value
+,
+			Filter = propFilter.Value
+,
+			MinScore = propMinScore.Value
+,
+			Query = propQuery.Value
+,
+			SearchAfter = propSearchAfter.Value
+,
+			Sort = propSort.Value
+,
+			TerminateAfter = propTerminateAfter.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, StandardRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollapse, value.Collapse);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?, Elastic.Clients.Elasticsearch.QueryDsl.Query>));
+		writer.WriteProperty(options, PropMinScore, value.MinScore);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter);
+		writer.WriteProperty(options, PropSort, value.Sort, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?, Elastic.Clients.Elasticsearch.SortOptions>));
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(StandardRetrieverConverter))]
 public sealed partial class StandardRetriever
 {
 	/// <summary>
@@ -34,7 +128,6 @@ public sealed partial class StandardRetriever
 	/// Collapses the top documents by a specified key into a single top document per key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
@@ -42,8 +135,6 @@ public sealed partial class StandardRetriever
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -51,7 +142,6 @@ public sealed partial class StandardRetriever
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -59,7 +149,6 @@ public sealed partial class StandardRetriever
 	/// Defines a query to retrieve a set of top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -67,7 +156,6 @@ public sealed partial class StandardRetriever
 	/// Defines a search after object parameter used for pagination.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
@@ -75,8 +163,6 @@ public sealed partial class StandardRetriever
 	/// A sort object that that specifies the order of matching documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
@@ -84,7 +170,6 @@ public sealed partial class StandardRetriever
 	/// Maximum number of documents to collect for each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terminate_after")]
 	public int? TerminateAfter { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(StandardRetriever standardRetriever) => Elastic.Clients.Elasticsearch.Retriever.Standard(standardRetriever);

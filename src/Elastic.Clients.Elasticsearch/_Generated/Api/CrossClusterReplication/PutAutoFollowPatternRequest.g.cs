@@ -52,6 +52,11 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	{
 	}
 
+	[JsonConstructor]
+	internal PutAutoFollowPatternRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPutAutoFollowPattern;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -59,6 +64,14 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.put_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The name of the collection of auto-follow patterns.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

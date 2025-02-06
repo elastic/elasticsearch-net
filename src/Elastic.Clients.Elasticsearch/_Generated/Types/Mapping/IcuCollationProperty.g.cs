@@ -27,30 +27,290 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class IcuCollationPropertyConverter : System.Text.Json.Serialization.JsonConverter<IcuCollationProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("case_first");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("case_level");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country");
+	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiragana_quaternary_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variable_top");
+	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant");
+
+	public override IcuCollationProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate?> propAlternate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst?> propCaseFirst = default;
+		LocalJsonValue<bool?> propCaseLevel = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<string?> propCountry = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition?> propDecomposition = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<bool?> propHiraganaQuaternaryMode = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
+		LocalJsonValue<string?> propLanguage = default;
+		LocalJsonValue<IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propNorms = default;
+		LocalJsonValue<string?> propNullValue = default;
+		LocalJsonValue<bool?> propNumeric = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<string?> propRules = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength?> propStrength = default;
+		LocalJsonValue<string?> propVariableTop = default;
+		LocalJsonValue<string?> propVariant = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlternate.TryRead(ref reader, options, PropAlternate))
+			{
+				continue;
+			}
+
+			if (propCaseFirst.TryRead(ref reader, options, PropCaseFirst))
+			{
+				continue;
+			}
+
+			if (propCaseLevel.TryRead(ref reader, options, PropCaseLevel))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propCountry.TryRead(ref reader, options, PropCountry))
+			{
+				continue;
+			}
+
+			if (propDecomposition.TryRead(ref reader, options, PropDecomposition))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryRead(ref reader, options, PropDocValues))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propHiraganaQuaternaryMode.TryRead(ref reader, options, PropHiraganaQuaternaryMode))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryRead(ref reader, options, PropIndexOptions))
+			{
+				continue;
+			}
+
+			if (propLanguage.TryRead(ref reader, options, PropLanguage))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propNorms.TryRead(ref reader, options, PropNorms))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryRead(ref reader, options, PropNullValue))
+			{
+				continue;
+			}
+
+			if (propNumeric.TryRead(ref reader, options, PropNumeric))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propRules.TryRead(ref reader, options, PropRules))
+			{
+				continue;
+			}
+
+			if (propStore.TryRead(ref reader, options, PropStore))
+			{
+				continue;
+			}
+
+			if (propStrength.TryRead(ref reader, options, PropStrength))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVariableTop.TryRead(ref reader, options, PropVariableTop))
+			{
+				continue;
+			}
+
+			if (propVariant.TryRead(ref reader, options, PropVariant))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new IcuCollationProperty
+		{
+			Alternate = propAlternate.Value
+,
+			CaseFirst = propCaseFirst.Value
+,
+			CaseLevel = propCaseLevel.Value
+,
+			CopyTo = propCopyTo.Value
+,
+			Country = propCountry.Value
+,
+			Decomposition = propDecomposition.Value
+,
+			DocValues = propDocValues.Value
+,
+			Dynamic = propDynamic.Value
+,
+			Fields = propFields.Value
+,
+			HiraganaQuaternaryMode = propHiraganaQuaternaryMode.Value
+,
+			IgnoreAbove = propIgnoreAbove.Value
+,
+			Index = propIndex.Value
+,
+			IndexOptions = propIndexOptions.Value
+,
+			Language = propLanguage.Value
+,
+			Meta = propMeta.Value
+,
+			Norms = propNorms.Value
+,
+			NullValue = propNullValue.Value
+,
+			Numeric = propNumeric.Value
+,
+			Properties = propProperties.Value
+,
+			Rules = propRules.Value
+,
+			Store = propStore.Value
+,
+			Strength = propStrength.Value
+,
+			VariableTop = propVariableTop.Value
+,
+			Variant = propVariant.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAlternate, value.Alternate);
+		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst);
+		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropCountry, value.Country);
+		writer.WriteProperty(options, PropDecomposition, value.Decomposition);
+		writer.WriteProperty(options, PropDocValues, value.DocValues);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions);
+		writer.WriteProperty(options, PropLanguage, value.Language);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropNorms, value.Norms);
+		writer.WriteProperty(options, PropNullValue, value.NullValue);
+		writer.WriteProperty(options, PropNumeric, value.Numeric);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropRules, value.Rules);
+		writer.WriteProperty(options, PropStore, value.Store);
+		writer.WriteProperty(options, PropStrength, value.Strength);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteProperty(options, PropVariableTop, value.VariableTop);
+		writer.WriteProperty(options, PropVariant, value.Variant);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(IcuCollationPropertyConverter))]
 public sealed partial class IcuCollationProperty : IProperty
 {
-	[JsonInclude, JsonPropertyName("alternate")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? Alternate { get; set; }
-	[JsonInclude, JsonPropertyName("case_first")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CaseFirst { get; set; }
-	[JsonInclude, JsonPropertyName("case_level")]
 	public bool? CaseLevel { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("country")]
 	public string? Country { get; set; }
-	[JsonInclude, JsonPropertyName("decomposition")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? Decomposition { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("hiragana_quaternary_mode")]
 	public bool? HiraganaQuaternaryMode { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -58,11 +318,8 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Should the field be searchable?
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
 
 	/// <summary>
@@ -70,9 +327,7 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
 
 	/// <summary>
@@ -80,25 +335,16 @@ public sealed partial class IcuCollationProperty : IProperty
 	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("numeric")]
 	public bool? Numeric { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("rules")]
 	public string? Rules { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_collation_keyword";
 
-	[JsonInclude, JsonPropertyName("variable_top")]
 	public string? VariableTop { get; set; }
-	[JsonInclude, JsonPropertyName("variant")]
 	public string? Variant { get; set; }
 }
 

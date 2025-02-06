@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
+internal sealed partial class ListDanglingIndicesResponseConverter : System.Text.Json.Serialization.JsonConverter<ListDanglingIndicesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDanglingIndices = System.Text.Json.JsonEncodedText.Encode("dangling_indices");
+
+	public override ListDanglingIndicesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>> propDanglingIndices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDanglingIndices.TryRead(ref reader, options, PropDanglingIndices))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ListDanglingIndicesResponse
+		{
+			DanglingIndices = propDanglingIndices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ListDanglingIndicesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDanglingIndices, value.DanglingIndices);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ListDanglingIndicesResponseConverter))]
 public sealed partial class ListDanglingIndicesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("dangling_indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> DanglingIndices { get; init; }
 }

@@ -41,46 +41,79 @@ public enum AccessTokenGrantType
 	ClientCredentials
 }
 
-internal sealed class AccessTokenGrantTypeConverter : JsonConverter<AccessTokenGrantType>
+internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<AccessTokenGrantType>
 {
-	public override AccessTokenGrantType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText MemberKerberos = System.Text.Json.JsonEncodedText.Encode("_kerberos");
+	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials");
+
+	public override AccessTokenGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberRefreshToken))
 		{
-			case "refresh_token":
-				return AccessTokenGrantType.RefreshToken;
-			case "password":
-				return AccessTokenGrantType.Password;
-			case "_kerberos":
-				return AccessTokenGrantType.Kerberos;
-			case "client_credentials":
-				return AccessTokenGrantType.ClientCredentials;
+			return AccessTokenGrantType.RefreshToken;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberPassword))
+		{
+			return AccessTokenGrantType.Password;
+		}
+
+		if (reader.ValueTextEquals(MemberKerberos))
+		{
+			return AccessTokenGrantType.Kerberos;
+		}
+
+		if (reader.ValueTextEquals(MemberClientCredentials))
+		{
+			return AccessTokenGrantType.ClientCredentials;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRefreshToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.RefreshToken;
+		}
+
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.Password;
+		}
+
+		if (string.Equals(value, MemberKerberos.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.Kerberos;
+		}
+
+		if (string.Equals(value, MemberClientCredentials.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.ClientCredentials;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(AccessTokenGrantType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, AccessTokenGrantType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AccessTokenGrantType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case AccessTokenGrantType.RefreshToken:
-				writer.WriteStringValue("refresh_token");
-				return;
+				writer.WriteStringValue(MemberRefreshToken);
+				break;
 			case AccessTokenGrantType.Password:
-				writer.WriteStringValue("password");
-				return;
+				writer.WriteStringValue(MemberPassword);
+				break;
 			case AccessTokenGrantType.Kerberos:
-				writer.WriteStringValue("_kerberos");
-				return;
+				writer.WriteStringValue(MemberKerberos);
+				break;
 			case AccessTokenGrantType.ClientCredentials:
-				writer.WriteStringValue("client_credentials");
-				return;
+				writer.WriteStringValue(MemberClientCredentials);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(AccessTokenGrantType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -93,36 +126,51 @@ public enum ApiKeyGrantType
 	AccessToken
 }
 
-internal sealed class ApiKeyGrantTypeConverter : JsonConverter<ApiKeyGrantType>
+internal sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<ApiKeyGrantType>
 {
-	public override ApiKeyGrantType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+
+	public override ApiKeyGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPassword))
 		{
-			case "password":
-				return ApiKeyGrantType.Password;
-			case "access_token":
-				return ApiKeyGrantType.AccessToken;
+			return ApiKeyGrantType.Password;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAccessToken))
+		{
+			return ApiKeyGrantType.AccessToken;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyGrantType.Password;
+		}
+
+		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyGrantType.AccessToken;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ApiKeyGrantType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ApiKeyGrantType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ApiKeyGrantType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ApiKeyGrantType.Password:
-				writer.WriteStringValue("password");
-				return;
+				writer.WriteStringValue(MemberPassword);
+				break;
 			case ApiKeyGrantType.AccessToken:
-				writer.WriteStringValue("access_token");
-				return;
+				writer.WriteStringValue(MemberAccessToken);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ApiKeyGrantType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -135,36 +183,51 @@ public enum ApiKeyType
 	CrossCluster
 }
 
-internal sealed class ApiKeyTypeConverter : JsonConverter<ApiKeyType>
+internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serialization.JsonConverter<ApiKeyType>
 {
-	public override ApiKeyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberRest = System.Text.Json.JsonEncodedText.Encode("rest");
+	private static readonly System.Text.Json.JsonEncodedText MemberCrossCluster = System.Text.Json.JsonEncodedText.Encode("cross_cluster");
+
+	public override ApiKeyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberRest))
 		{
-			case "rest":
-				return ApiKeyType.Rest;
-			case "cross_cluster":
-				return ApiKeyType.CrossCluster;
+			return ApiKeyType.Rest;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberCrossCluster))
+		{
+			return ApiKeyType.CrossCluster;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyType.Rest;
+		}
+
+		if (string.Equals(value, MemberCrossCluster.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyType.CrossCluster;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ApiKeyType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ApiKeyType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ApiKeyType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ApiKeyType.Rest:
-				writer.WriteStringValue("rest");
-				return;
+				writer.WriteStringValue(MemberRest);
+				break;
 			case ApiKeyType.CrossCluster:
-				writer.WriteStringValue("cross_cluster");
-				return;
+				writer.WriteStringValue(MemberCrossCluster);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ApiKeyType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -172,9 +235,11 @@ internal sealed class ApiKeyTypeConverter : JsonConverter<ApiKeyType>
 public readonly partial struct ClusterPrivilege : IEnumStruct<ClusterPrivilege>
 {
 	public ClusterPrivilege(string value) => Value = value;
-
+#if NET7_0_OR_GREATER
+	static ClusterPrivilege IEnumStruct<ClusterPrivilege>.Create(string value) => value;
+#else
 	ClusterPrivilege IEnumStruct<ClusterPrivilege>.Create(string value) => value;
-
+#endif
 	public readonly string Value { get; }
 	public static ClusterPrivilege WriteFleetSecrets { get; } = new ClusterPrivilege("write_fleet_secrets");
 	public static ClusterPrivilege WriteConnectorSecrets { get; } = new ClusterPrivilege("write_connector_secrets");
@@ -268,36 +333,51 @@ public enum GrantType
 	AccessToken
 }
 
-internal sealed class GrantTypeConverter : JsonConverter<GrantType>
+internal sealed partial class GrantTypeConverter : System.Text.Json.Serialization.JsonConverter<GrantType>
 {
-	public override GrantType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+
+	public override GrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPassword))
 		{
-			case "password":
-				return GrantType.Password;
-			case "access_token":
-				return GrantType.AccessToken;
+			return GrantType.Password;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberAccessToken))
+		{
+			return GrantType.AccessToken;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GrantType.Password;
+		}
+
+		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GrantType.AccessToken;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GrantType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GrantType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GrantType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GrantType.Password:
-				writer.WriteStringValue("password");
-				return;
+				writer.WriteStringValue(MemberPassword);
+				break;
 			case GrantType.AccessToken:
-				writer.WriteStringValue("access_token");
-				return;
+				writer.WriteStringValue(MemberAccessToken);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GrantType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -305,9 +385,11 @@ internal sealed class GrantTypeConverter : JsonConverter<GrantType>
 public readonly partial struct IndexPrivilege : IEnumStruct<IndexPrivilege>
 {
 	public IndexPrivilege(string value) => Value = value;
-
+#if NET7_0_OR_GREATER
+	static IndexPrivilege IEnumStruct<IndexPrivilege>.Create(string value) => value;
+#else
 	IndexPrivilege IEnumStruct<IndexPrivilege>.Create(string value) => value;
-
+#endif
 	public readonly string Value { get; }
 	public static IndexPrivilege Write { get; } = new IndexPrivilege("write");
 	public static IndexPrivilege ViewIndexMetadata { get; } = new IndexPrivilege("view_index_metadata");
@@ -354,36 +436,51 @@ public enum RemoteClusterPrivilege
 	MonitorEnrich
 }
 
-internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClusterPrivilege>
+internal sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json.Serialization.JsonConverter<RemoteClusterPrivilege>
 {
-	public override RemoteClusterPrivilege Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberMonitorStats = System.Text.Json.JsonEncodedText.Encode("monitor_stats");
+	private static readonly System.Text.Json.JsonEncodedText MemberMonitorEnrich = System.Text.Json.JsonEncodedText.Encode("monitor_enrich");
+
+	public override RemoteClusterPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberMonitorStats))
 		{
-			case "monitor_stats":
-				return RemoteClusterPrivilege.MonitorStats;
-			case "monitor_enrich":
-				return RemoteClusterPrivilege.MonitorEnrich;
+			return RemoteClusterPrivilege.MonitorStats;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMonitorEnrich))
+		{
+			return RemoteClusterPrivilege.MonitorEnrich;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMonitorStats.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RemoteClusterPrivilege.MonitorStats;
+		}
+
+		if (string.Equals(value, MemberMonitorEnrich.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RemoteClusterPrivilege.MonitorEnrich;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RemoteClusterPrivilege)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, RemoteClusterPrivilege value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemoteClusterPrivilege value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case RemoteClusterPrivilege.MonitorStats:
-				writer.WriteStringValue("monitor_stats");
-				return;
+				writer.WriteStringValue(MemberMonitorStats);
+				break;
 			case RemoteClusterPrivilege.MonitorEnrich:
-				writer.WriteStringValue("monitor_enrich");
-				return;
+				writer.WriteStringValue(MemberMonitorEnrich);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RemoteClusterPrivilege)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -391,9 +488,11 @@ internal sealed class RemoteClusterPrivilegeConverter : JsonConverter<RemoteClus
 public readonly partial struct RestrictionWorkflow : IEnumStruct<RestrictionWorkflow>
 {
 	public RestrictionWorkflow(string value) => Value = value;
-
+#if NET7_0_OR_GREATER
+	static RestrictionWorkflow IEnumStruct<RestrictionWorkflow>.Create(string value) => value;
+#else
 	RestrictionWorkflow IEnumStruct<RestrictionWorkflow>.Create(string value) => value;
-
+#endif
 	public readonly string Value { get; }
 	public static RestrictionWorkflow SearchApplicationQuery { get; } = new RestrictionWorkflow("search_application_query");
 
@@ -419,35 +518,50 @@ public enum TemplateFormat
 	Json
 }
 
-internal sealed class TemplateFormatConverter : JsonConverter<TemplateFormat>
+internal sealed partial class TemplateFormatConverter : System.Text.Json.Serialization.JsonConverter<TemplateFormat>
 {
-	public override TemplateFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
+	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json");
+
+	public override TemplateFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberString))
 		{
-			case "string":
-				return TemplateFormat.String;
-			case "json":
-				return TemplateFormat.Json;
+			return TemplateFormat.String;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberJson))
+		{
+			return TemplateFormat.Json;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TemplateFormat.String;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TemplateFormat.Json;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TemplateFormat)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TemplateFormat value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TemplateFormat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TemplateFormat.String:
-				writer.WriteStringValue("string");
-				return;
+				writer.WriteStringValue(MemberString);
+				break;
 			case TemplateFormat.Json:
-				writer.WriteStringValue("json");
-				return;
+				writer.WriteStringValue(MemberJson);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TemplateFormat)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

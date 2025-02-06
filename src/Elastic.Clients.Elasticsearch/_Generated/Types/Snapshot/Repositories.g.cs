@@ -86,70 +86,62 @@ public sealed partial class RepositoriesDescriptor : IsADictionaryDescriptor<Rep
 	public RepositoriesDescriptor SourceOnly(string repositoryName, SourceOnlyRepository sourceOnlyRepository) => AssignVariant(repositoryName, sourceOnlyRepository);
 }
 
-internal sealed partial class RepositoryInterfaceConverter : JsonConverter<IRepository>
+internal sealed partial class RepositoryInterfaceConverter : System.Text.Json.Serialization.JsonConverter<IRepository>
 {
-	public override IRepository Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override IRepository Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var readerSnapshot = reader;
+		string? discriminator = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			type = readType.ToString();
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator))
+			{
+				break;
+			}
+
+			reader.Skip();
 		}
 
-		switch (type)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			case "azure":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>(ref reader, options);
-			case "gcs":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.GcsRepository>(ref reader, options);
-			case "url":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(ref reader, options);
-			case "s3":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(ref reader, options);
-			case "fs":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository>(ref reader, options);
-			case "source":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IRepository));
-				return null;
-		}
+			"azure" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepository>(options),
+			"gcs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.GcsRepository>(options),
+			"url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(options),
+			"s3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(options),
+			"fs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository>(options),
+			"source" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(options),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(IRepository)}'.")
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, IRepository value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, IRepository value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		switch (value.Type)
 		{
 			case "azure":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.AzureRepository)value);
+				break;
 			case "gcs":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.GcsRepository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.GcsRepository)value);
+				break;
 			case "url":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository)value);
+				break;
 			case "s3":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.S3Repository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.S3Repository)value);
+				break;
 			case "fs":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository)value);
+				break;
 			case "source":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository), options);
-				return;
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository)value);
+				break;
 			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(IRepository)}'.");
 		}
 	}
 }

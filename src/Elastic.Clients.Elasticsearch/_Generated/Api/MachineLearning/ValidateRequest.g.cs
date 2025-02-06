@@ -41,6 +41,11 @@ public sealed partial class ValidateRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ValidateRequest : PlainRequest<ValidateRequestParameters>
 {
+	[JsonConstructor]
+	internal ValidateRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningValidate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

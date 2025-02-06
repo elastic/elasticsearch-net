@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetBucketsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetBucketsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBuckets = System.Text.Json.JsonEncodedText.Encode("buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+
+	public override GetBucketsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary>> propBuckets = default;
+		LocalJsonValue<long> propCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBuckets.TryRead(ref reader, options, PropBuckets))
+			{
+				continue;
+			}
+
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetBucketsResponse
+		{
+			Buckets = propBuckets.Value
+,
+			Count = propCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetBucketsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBuckets, value.Buckets);
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetBucketsResponseConverter))]
 public sealed partial class GetBucketsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary> Buckets { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 }

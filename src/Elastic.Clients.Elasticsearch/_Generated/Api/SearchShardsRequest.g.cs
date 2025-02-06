@@ -93,6 +93,7 @@ public sealed partial class SearchShardsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsRequestParameters>
 {
+	[JsonConstructor]
 	public SearchShardsRequest()
 	{
 	}
@@ -108,6 +109,14 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "search_shards";
+
+	/// <summary>
+	/// <para>
+	/// Returns the indices and shards that a search request would be executed against.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>

@@ -27,24 +27,207 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class SearchAsYouTypePropertyConverter : System.Text.Json.Serialization.JsonConverter<SearchAsYouTypeProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShingleSize = System.Text.Json.JsonEncodedText.Encode("max_shingle_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_quote_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVector = System.Text.Json.JsonEncodedText.Encode("term_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override SearchAsYouTypeProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
+		LocalJsonValue<int?> propMaxShingleSize = default;
+		LocalJsonValue<IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propNorms = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<string?> propSearchAnalyzer = default;
+		LocalJsonValue<string?> propSearchQuoteAnalyzer = default;
+		LocalJsonValue<string?> propSimilarity = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption?> propTermVector = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryRead(ref reader, options, PropCopyTo, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propFields.TryRead(ref reader, options, PropFields))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryRead(ref reader, options, PropIgnoreAbove))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryRead(ref reader, options, PropIndexOptions))
+			{
+				continue;
+			}
+
+			if (propMaxShingleSize.TryRead(ref reader, options, PropMaxShingleSize))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propNorms.TryRead(ref reader, options, PropNorms))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propSearchAnalyzer.TryRead(ref reader, options, PropSearchAnalyzer))
+			{
+				continue;
+			}
+
+			if (propSearchQuoteAnalyzer.TryRead(ref reader, options, PropSearchQuoteAnalyzer))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryRead(ref reader, options, PropSimilarity))
+			{
+				continue;
+			}
+
+			if (propStore.TryRead(ref reader, options, PropStore))
+			{
+				continue;
+			}
+
+			if (propTermVector.TryRead(ref reader, options, PropTermVector))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SearchAsYouTypeProperty
+		{
+			Analyzer = propAnalyzer.Value
+,
+			CopyTo = propCopyTo.Value
+,
+			Dynamic = propDynamic.Value
+,
+			Fields = propFields.Value
+,
+			IgnoreAbove = propIgnoreAbove.Value
+,
+			Index = propIndex.Value
+,
+			IndexOptions = propIndexOptions.Value
+,
+			MaxShingleSize = propMaxShingleSize.Value
+,
+			Meta = propMeta.Value
+,
+			Norms = propNorms.Value
+,
+			Properties = propProperties.Value
+,
+			SearchAnalyzer = propSearchAnalyzer.Value
+,
+			SearchQuoteAnalyzer = propSearchQuoteAnalyzer.Value
+,
+			Similarity = propSimilarity.Value
+,
+			Store = propStore.Value
+,
+			TermVector = propTermVector.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SearchAsYouTypeProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropFields, value.Fields);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions);
+		writer.WriteProperty(options, PropMaxShingleSize, value.MaxShingleSize);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropNorms, value.Norms);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer);
+		writer.WriteProperty(options, PropSearchQuoteAnalyzer, value.SearchQuoteAnalyzer);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity);
+		writer.WriteProperty(options, PropStore, value.Store);
+		writer.WriteProperty(options, PropTermVector, value.TermVector);
+		writer.WriteProperty(options, PropType, value.Type);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SearchAsYouTypePropertyConverter))]
 public sealed partial class SearchAsYouTypeProperty : IProperty
 {
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-	[JsonInclude, JsonPropertyName("max_shingle_size")]
 	public int? MaxShingleSize { get; set; }
 
 	/// <summary>
@@ -52,24 +235,15 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "search_as_you_type";
 }
 

@@ -45,6 +45,11 @@ public sealed partial class DeleteCalendarEventRequest : PlainRequest<DeleteCale
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteCalendarEventRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteCalendarEvent;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -52,6 +57,23 @@ public sealed partial class DeleteCalendarEventRequest : PlainRequest<DeleteCale
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_calendar_event";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the scheduled event.
+	/// You can obtain this identifier by using the get calendar events API.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id EventId { get => P<Elastic.Clients.Elasticsearch.Id>("event_id"); set => PR("event_id", value); }
 }
 
 /// <summary>

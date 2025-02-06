@@ -27,164 +27,153 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class MatchBoolPrefixQueryConverter : JsonConverter<MatchBoolPrefixQuery>
+internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.Serialization.JsonConverter<MatchBoolPrefixQuery>
 {
-	public override MatchBoolPrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override MatchBoolPrefixQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options);
 		reader.Read();
-		var variant = new MatchBoolPrefixQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "analyzer")
-				{
-					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fuzziness")
-				{
-					variant.Fuzziness = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fuzziness?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fuzzy_rewrite")
-				{
-					variant.FuzzyRewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "fuzzy_transpositions")
-				{
-					variant.FuzzyTranspositions = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_expansions")
-				{
-					variant.MaxExpansions = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "minimum_should_match")
-				{
-					variant.MinimumShouldMatch = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MinimumShouldMatch?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "operator")
-				{
-					variant.Operator = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "prefix_length")
-				{
-					variant.PrefixLength = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-			}
+			var value = reader.ReadValue<string>(options);
+			reader.Read();
+			return new MatchBoolPrefixQuery { Query = value };
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
+		LocalJsonValue<string?> propFuzzyRewrite = default;
+		LocalJsonValue<bool?> propFuzzyTranspositions = default;
+		LocalJsonValue<int?> propMaxExpansions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator?> propOperator = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryRead(ref reader, options, PropAnalyzer))
+			{
+				continue;
+			}
+
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propFuzziness.TryRead(ref reader, options, PropFuzziness))
+			{
+				continue;
+			}
+
+			if (propFuzzyRewrite.TryRead(ref reader, options, PropFuzzyRewrite))
+			{
+				continue;
+			}
+
+			if (propFuzzyTranspositions.TryRead(ref reader, options, PropFuzzyTranspositions))
+			{
+				continue;
+			}
+
+			if (propMaxExpansions.TryRead(ref reader, options, PropMaxExpansions))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryRead(ref reader, options, PropMinimumShouldMatch))
+			{
+				continue;
+			}
+
+			if (propOperator.TryRead(ref reader, options, PropOperator))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryRead(ref reader, options, PropPrefixLength))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MatchBoolPrefixQuery
+		{
+			Analyzer = propAnalyzer.Value
+,
+			Boost = propBoost.Value
+,
+			Field = propField.Value
+,
+			Fuzziness = propFuzziness.Value
+,
+			FuzzyRewrite = propFuzzyRewrite.Value
+,
+			FuzzyTranspositions = propFuzzyTranspositions.Value
+,
+			MaxExpansions = propMaxExpansions.Value
+,
+			MinimumShouldMatch = propMinimumShouldMatch.Value
+,
+			Operator = propOperator.Value
+,
+			PrefixLength = propPrefixLength.Value
+,
+			Query = propQuery.Value
+,
+			QueryName = propQueryName.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, MatchBoolPrefixQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MatchBoolPrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize MatchBoolPrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field);
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Analyzer))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(value.Analyzer);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Fuzziness is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, value.Fuzziness, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.FuzzyRewrite))
-		{
-			writer.WritePropertyName("fuzzy_rewrite");
-			writer.WriteStringValue(value.FuzzyRewrite);
-		}
-
-		if (value.FuzzyTranspositions.HasValue)
-		{
-			writer.WritePropertyName("fuzzy_transpositions");
-			writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
-		}
-
-		if (value.MaxExpansions.HasValue)
-		{
-			writer.WritePropertyName("max_expansions");
-			writer.WriteNumberValue(value.MaxExpansions.Value);
-		}
-
-		if (value.MinimumShouldMatch is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
-		}
-
-		if (value.Operator is not null)
-		{
-			writer.WritePropertyName("operator");
-			JsonSerializer.Serialize(writer, value.Operator, options);
-		}
-
-		if (value.PrefixLength.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(value.PrefixLength.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(value.Query);
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer);
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness);
+		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite);
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions);
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch);
+		writer.WriteProperty(options, PropOperator, value.Operator);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -198,6 +187,10 @@ public sealed partial class MatchBoolPrefixQuery
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+
+	internal MatchBoolPrefixQuery()
+	{
 	}
 
 	/// <summary>

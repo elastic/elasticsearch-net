@@ -27,6 +27,110 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class RemoveProcessorConverter : System.Text.Json.Serialization.JsonConverter<RemoveProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropKeep = System.Text.Json.JsonEncodedText.Encode("keep");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+
+	public override RemoveProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propField = default;
+		LocalJsonValue<string?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propKeep = default;
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propIf.TryRead(ref reader, options, PropIf))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryRead(ref reader, options, PropIgnoreFailure))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryRead(ref reader, options, PropIgnoreMissing))
+			{
+				continue;
+			}
+
+			if (propKeep.TryRead(ref reader, options, PropKeep, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryRead(ref reader, options, PropOnFailure))
+			{
+				continue;
+			}
+
+			if (propTag.TryRead(ref reader, options, PropTag))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new RemoveProcessor
+		{
+			Description = propDescription.Value
+,
+			Field = propField.Value
+,
+			If = propIf.Value
+,
+			IgnoreFailure = propIgnoreFailure.Value
+,
+			IgnoreMissing = propIgnoreMissing.Value
+,
+			Keep = propKeep.Value
+,
+			OnFailure = propOnFailure.Value
+,
+			Tag = propTag.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemoveProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropField, value.Field, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropIf, value.If);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing);
+		writer.WriteProperty(options, PropKeep, value.Keep, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure);
+		writer.WriteProperty(options, PropTag, value.Tag);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(RemoveProcessorConverter))]
 public sealed partial class RemoveProcessor
 {
 	/// <summary>
@@ -35,7 +139,6 @@ public sealed partial class RemoveProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,8 +146,6 @@ public sealed partial class RemoveProcessor
 	/// Fields to be removed. Supports template snippets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 
 	/// <summary>
@@ -52,7 +153,6 @@ public sealed partial class RemoveProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
 	/// <summary>
@@ -60,7 +160,6 @@ public sealed partial class RemoveProcessor
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -68,7 +167,6 @@ public sealed partial class RemoveProcessor
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -76,8 +174,6 @@ public sealed partial class RemoveProcessor
 	/// Fields to be kept. When set, all fields other than those specified are removed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("keep")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Keep { get; set; }
 
 	/// <summary>
@@ -85,7 +181,6 @@ public sealed partial class RemoveProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
@@ -94,7 +189,6 @@ public sealed partial class RemoveProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(RemoveProcessor removeProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Remove(removeProcessor);

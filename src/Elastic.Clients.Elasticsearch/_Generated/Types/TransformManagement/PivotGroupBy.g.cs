@@ -39,12 +39,16 @@ public sealed partial class PivotGroupBy
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal PivotGroupBy()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static PivotGroupBy DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupBy("date_histogram", dateHistogramAggregation);
 	public static PivotGroupBy GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => new PivotGroupBy("geotile_grid", geotileGridAggregation);
@@ -64,87 +68,80 @@ public sealed partial class PivotGroupBy
 	}
 }
 
-internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy>
+internal sealed partial class PivotGroupByConverter : System.Text.Json.Serialization.JsonConverter<PivotGroupBy>
 {
-	public override PivotGroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText VariantDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeotileGrid = System.Text.Json.JsonEncodedText.Encode("geotile_grid");
+	private static readonly System.Text.Json.JsonEncodedText VariantHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override PivotGroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (reader.ValueTextEquals(VariantDateHistogram))
+			{
+				variantType = VariantDateHistogram.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeotileGrid))
+			{
+				variantType = VariantGeotileGrid.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantHistogram))
+			{
+				variantType = VariantHistogram.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerms))
+			{
+				variantType = VariantTerms.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "date_histogram")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geotile_grid")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "histogram")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terms")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PivotGroupBy' from the response.");
-		}
-
-		var result = new PivotGroupBy(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PivotGroupBy { VariantType = variantType, Variant = variant };
 	}
 
-	public override void Write(Utf8JsonWriter writer, PivotGroupBy value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PivotGroupBy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "date_histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
-					break;
-				case "geotile_grid":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)value.Variant, options);
-					break;
-				case "histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "date_histogram":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?)value.Variant);
+				break;
+			case "geotile_grid":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?)value.Variant);
+				break;
+			case "histogram":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?)value.Variant);
+				break;
+			case "terms":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(PivotGroupBy)}'.");
 		}
 
 		writer.WriteEndObject();

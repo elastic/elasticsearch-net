@@ -47,6 +47,7 @@ public sealed partial class GetJobsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParameters>
 {
+	[JsonConstructor]
 	public GetJobsRequest()
 	{
 	}
@@ -62,6 +63,15 @@ public sealed partial class GetJobsRequest : PlainRequest<GetJobsRequestParamete
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.get_jobs";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the rollup job.
+	/// If it is <c>_all</c> or omitted, the API returns all rollup jobs.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 }
 
 /// <summary>

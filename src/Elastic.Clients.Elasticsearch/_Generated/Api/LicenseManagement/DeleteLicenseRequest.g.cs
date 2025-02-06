@@ -45,6 +45,11 @@ public sealed partial class DeleteLicenseRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class DeleteLicenseRequest : PlainRequest<DeleteLicenseRequestParameters>
 {
+	[JsonConstructor]
+	internal DeleteLicenseRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

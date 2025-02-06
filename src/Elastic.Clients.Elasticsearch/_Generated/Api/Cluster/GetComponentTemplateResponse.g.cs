@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class GetComponentTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<GetComponentTemplateResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplates = System.Text.Json.JsonEncodedText.Encode("component_templates");
+
+	public override GetComponentTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate>> propComponentTemplates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propComponentTemplates.TryRead(ref reader, options, PropComponentTemplates))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetComponentTemplateResponse
+		{
+			ComponentTemplates = propComponentTemplates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetComponentTemplateResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropComponentTemplates, value.ComponentTemplates);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetComponentTemplateResponseConverter))]
 public sealed partial class GetComponentTemplateResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("component_templates")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> ComponentTemplates { get; init; }
 }

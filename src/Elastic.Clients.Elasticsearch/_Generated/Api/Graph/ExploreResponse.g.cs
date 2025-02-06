@@ -22,20 +22,91 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class ExploreResponseConverter : System.Text.Json.Serialization.JsonConverter<ExploreResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConnections = System.Text.Json.JsonEncodedText.Encode("connections");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropVertices = System.Text.Json.JsonEncodedText.Encode("vertices");
+
+	public override ExploreResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection>> propConnections = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>> propFailures = default;
+		LocalJsonValue<bool> propTimedOut = default;
+		LocalJsonValue<long> propTook = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex>> propVertices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConnections.TryRead(ref reader, options, PropConnections))
+			{
+				continue;
+			}
+
+			if (propFailures.TryRead(ref reader, options, PropFailures))
+			{
+				continue;
+			}
+
+			if (propTimedOut.TryRead(ref reader, options, PropTimedOut))
+			{
+				continue;
+			}
+
+			if (propTook.TryRead(ref reader, options, PropTook))
+			{
+				continue;
+			}
+
+			if (propVertices.TryRead(ref reader, options, PropVertices))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new ExploreResponse
+		{
+			Connections = propConnections.Value
+,
+			Failures = propFailures.Value
+,
+			TimedOut = propTimedOut.Value
+,
+			Took = propTook.Value
+,
+			Vertices = propVertices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExploreResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConnections, value.Connections);
+		writer.WriteProperty(options, PropFailures, value.Failures);
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut);
+		writer.WriteProperty(options, PropTook, value.Took);
+		writer.WriteProperty(options, PropVertices, value.Vertices);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ExploreResponseConverter))]
 public sealed partial class ExploreResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("connections")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> Connections { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures { get; init; }
-	[JsonInclude, JsonPropertyName("timed_out")]
 	public bool TimedOut { get; init; }
-	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
-	[JsonInclude, JsonPropertyName("vertices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> Vertices { get; init; }
 }

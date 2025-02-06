@@ -22,10 +22,86 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+internal sealed partial class GetSearchApplicationResponseConverter : System.Text.Json.Serialization.JsonConverter<GetSearchApplicationResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdatedAtMillis = System.Text.Json.JsonEncodedText.Encode("updated_at_millis");
+
+	public override GetSearchApplicationResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyticsCollectionName = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate?> propTemplate = default;
+		LocalJsonValue<long> propUpdatedAtMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyticsCollectionName.TryRead(ref reader, options, PropAnalyticsCollectionName))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryRead(ref reader, options, PropTemplate))
+			{
+				continue;
+			}
+
+			if (propUpdatedAtMillis.TryRead(ref reader, options, PropUpdatedAtMillis))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetSearchApplicationResponse
+		{
+			AnalyticsCollectionName = propAnalyticsCollectionName.Value
+,
+			Indices = propIndices.Value
+,
+			Name = propName.Value
+,
+			Template = propTemplate.Value
+,
+			UpdatedAtMillis = propUpdatedAtMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetSearchApplicationResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyticsCollectionName, value.AnalyticsCollectionName);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropName, value.Name);
+		writer.WriteProperty(options, PropTemplate, value.Template);
+		writer.WriteProperty(options, PropUpdatedAtMillis, value.UpdatedAtMillis);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetSearchApplicationResponseConverter))]
 public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +109,6 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 	/// Analytics collection associated to the Search Application.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analytics_collection_name")]
 	public string? AnalyticsCollectionName { get; init; }
 
 	/// <summary>
@@ -41,7 +116,6 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 	/// Indices that are part of the Search Application.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<string> Indices { get; init; }
 
 	/// <summary>
@@ -49,7 +123,6 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 	/// Search Application name
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 
 	/// <summary>
@@ -57,7 +130,6 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 	/// Search template to use on search operations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; init; }
 
 	/// <summary>
@@ -65,6 +137,5 @@ public sealed partial class GetSearchApplicationResponse : ElasticsearchResponse
 	/// Last time the Search Application was updated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated_at_millis")]
 	public long UpdatedAtMillis { get; init; }
 }

@@ -37,36 +37,51 @@ public enum GridAggregationType
 	Geohex
 }
 
-internal sealed class GridAggregationTypeConverter : JsonConverter<GridAggregationType>
+internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Serialization.JsonConverter<GridAggregationType>
 {
-	public override GridAggregationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
+
+	public override GridAggregationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberGeotile))
 		{
-			case "geotile":
-				return GridAggregationType.Geotile;
-			case "geohex":
-				return GridAggregationType.Geohex;
+			return GridAggregationType.Geotile;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGeohex))
+		{
+			return GridAggregationType.Geohex;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridAggregationType.Geotile;
+		}
+
+		if (string.Equals(value, MemberGeohex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridAggregationType.Geohex;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GridAggregationType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GridAggregationType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GridAggregationType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GridAggregationType.Geotile:
-				writer.WriteStringValue("geotile");
-				return;
+				writer.WriteStringValue(MemberGeotile);
+				break;
 			case GridAggregationType.Geohex:
-				writer.WriteStringValue("geohex");
-				return;
+				writer.WriteStringValue(MemberGeohex);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GridAggregationType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -81,40 +96,64 @@ public enum GridType
 	Centroid
 }
 
-internal sealed class GridTypeConverter : JsonConverter<GridType>
+internal sealed partial class GridTypeConverter : System.Text.Json.Serialization.JsonConverter<GridType>
 {
-	public override GridType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPoint = System.Text.Json.JsonEncodedText.Encode("point");
+	private static readonly System.Text.Json.JsonEncodedText MemberGrid = System.Text.Json.JsonEncodedText.Encode("grid");
+	private static readonly System.Text.Json.JsonEncodedText MemberCentroid = System.Text.Json.JsonEncodedText.Encode("centroid");
+
+	public override GridType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPoint))
 		{
-			case "point":
-				return GridType.Point;
-			case "grid":
-				return GridType.Grid;
-			case "centroid":
-				return GridType.Centroid;
+			return GridType.Point;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberGrid))
+		{
+			return GridType.Grid;
+		}
+
+		if (reader.ValueTextEquals(MemberCentroid))
+		{
+			return GridType.Centroid;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPoint.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Point;
+		}
+
+		if (string.Equals(value, MemberGrid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Grid;
+		}
+
+		if (string.Equals(value, MemberCentroid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Centroid;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GridType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, GridType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GridType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case GridType.Point:
-				writer.WriteStringValue("point");
-				return;
+				writer.WriteStringValue(MemberPoint);
+				break;
 			case GridType.Grid:
-				writer.WriteStringValue("grid");
-				return;
+				writer.WriteStringValue(MemberGrid);
+				break;
 			case GridType.Centroid:
-				writer.WriteStringValue("centroid");
-				return;
+				writer.WriteStringValue(MemberCentroid);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(GridType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

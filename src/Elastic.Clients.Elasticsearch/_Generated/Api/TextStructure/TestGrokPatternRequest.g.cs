@@ -49,6 +49,11 @@ public sealed partial class TestGrokPatternRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class TestGrokPatternRequest : PlainRequest<TestGrokPatternRequestParameters>
 {
+	[JsonConstructor]
+	internal TestGrokPatternRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.TextStructureTestGrokPattern;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

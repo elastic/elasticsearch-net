@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+internal sealed partial class DeleteInferenceResponseConverter : System.Text.Json.Serialization.JsonConverter<DeleteInferenceResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines");
+
+	public override DeleteInferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propPipelines = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryRead(ref reader, options, PropAcknowledged))
+			{
+				continue;
+			}
+
+			if (propPipelines.TryRead(ref reader, options, PropPipelines))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DeleteInferenceResponse
+		{
+			Acknowledged = propAcknowledged.Value
+,
+			Pipelines = propPipelines.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeleteInferenceResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged);
+		writer.WriteProperty(options, PropPipelines, value.Pipelines);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(DeleteInferenceResponseConverter))]
 public sealed partial class DeleteInferenceResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,8 +79,6 @@ public sealed partial class DeleteInferenceResponse : ElasticsearchResponse
 	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("pipelines")]
 	public IReadOnlyCollection<string> Pipelines { get; init; }
 }

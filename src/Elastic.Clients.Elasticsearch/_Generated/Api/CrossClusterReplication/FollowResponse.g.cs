@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class FollowResponseConverter : System.Text.Json.Serialization.JsonConverter<FollowResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexCreated = System.Text.Json.JsonEncodedText.Encode("follow_index_created");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexShardsAcked = System.Text.Json.JsonEncodedText.Encode("follow_index_shards_acked");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFollowingStarted = System.Text.Json.JsonEncodedText.Encode("index_following_started");
+
+	public override FollowResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propFollowIndexCreated = default;
+		LocalJsonValue<bool> propFollowIndexShardsAcked = default;
+		LocalJsonValue<bool> propIndexFollowingStarted = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFollowIndexCreated.TryRead(ref reader, options, PropFollowIndexCreated))
+			{
+				continue;
+			}
+
+			if (propFollowIndexShardsAcked.TryRead(ref reader, options, PropFollowIndexShardsAcked))
+			{
+				continue;
+			}
+
+			if (propIndexFollowingStarted.TryRead(ref reader, options, PropIndexFollowingStarted))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new FollowResponse
+		{
+			FollowIndexCreated = propFollowIndexCreated.Value
+,
+			FollowIndexShardsAcked = propFollowIndexShardsAcked.Value
+,
+			IndexFollowingStarted = propIndexFollowingStarted.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFollowIndexCreated, value.FollowIndexCreated);
+		writer.WriteProperty(options, PropFollowIndexShardsAcked, value.FollowIndexShardsAcked);
+		writer.WriteProperty(options, PropIndexFollowingStarted, value.IndexFollowingStarted);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(FollowResponseConverter))]
 public sealed partial class FollowResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("follow_index_created")]
 	public bool FollowIndexCreated { get; init; }
-	[JsonInclude, JsonPropertyName("follow_index_shards_acked")]
 	public bool FollowIndexShardsAcked { get; init; }
-	[JsonInclude, JsonPropertyName("index_following_started")]
 	public bool IndexFollowingStarted { get; init; }
 }

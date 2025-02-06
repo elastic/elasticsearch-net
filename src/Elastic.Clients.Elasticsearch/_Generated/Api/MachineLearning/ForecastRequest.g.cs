@@ -51,6 +51,11 @@ public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal ForecastRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningForecast;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -58,6 +63,15 @@ public sealed partial class ForecastRequest : PlainRequest<ForecastRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.forecast";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job. The job must be open when you
+	/// create a forecast; otherwise, an error occurs.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

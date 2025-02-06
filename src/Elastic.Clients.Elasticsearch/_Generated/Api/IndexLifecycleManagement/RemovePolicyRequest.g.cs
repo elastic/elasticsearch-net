@@ -47,6 +47,11 @@ public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyReque
 	{
 	}
 
+	[JsonConstructor]
+	internal RemovePolicyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementRemovePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -54,6 +59,14 @@ public sealed partial class RemovePolicyRequest : PlainRequest<RemovePolicyReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ilm.remove_policy";
+
+	/// <summary>
+	/// <para>
+	/// The name of the index to remove policy on
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 }
 
 /// <summary>

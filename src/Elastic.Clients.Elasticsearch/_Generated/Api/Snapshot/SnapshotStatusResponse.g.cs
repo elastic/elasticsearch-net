@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SnapshotStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<SnapshotStatusResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
+
+	public override SnapshotStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status>> propSnapshots = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSnapshots.TryRead(ref reader, options, PropSnapshots))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new SnapshotStatusResponse
+		{
+			Snapshots = propSnapshots.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnapshotStatusResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(SnapshotStatusResponseConverter))]
 public sealed partial class SnapshotStatusResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("snapshots")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> Snapshots { get; init; }
 }

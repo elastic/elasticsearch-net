@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class GetScriptLanguagesResponseConverter : System.Text.Json.Serialization.JsonConverter<GetScriptLanguagesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLanguageContexts = System.Text.Json.JsonEncodedText.Encode("language_contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropTypesAllowed = System.Text.Json.JsonEncodedText.Encode("types_allowed");
+
+	public override GetScriptLanguagesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext>> propLanguageContexts = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propTypesAllowed = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLanguageContexts.TryRead(ref reader, options, PropLanguageContexts))
+			{
+				continue;
+			}
+
+			if (propTypesAllowed.TryRead(ref reader, options, PropTypesAllowed))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetScriptLanguagesResponse
+		{
+			LanguageContexts = propLanguageContexts.Value
+,
+			TypesAllowed = propTypesAllowed.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetScriptLanguagesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLanguageContexts, value.LanguageContexts);
+		writer.WriteProperty(options, PropTypesAllowed, value.TypesAllowed);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetScriptLanguagesResponseConverter))]
 public sealed partial class GetScriptLanguagesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("language_contexts")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext> LanguageContexts { get; init; }
-	[JsonInclude, JsonPropertyName("types_allowed")]
 	public IReadOnlyCollection<string> TypesAllowed { get; init; }
 }

@@ -29,6 +29,7 @@ public partial class SearchRequest
 	}
 }
 
+// TODO: [JsonConverter(typeof(SearchRequestConverter))]
 public partial class SearchRequest<TInferDocument> : SearchRequest
 {
 	public SearchRequest(Indices? indices) : base(indices)

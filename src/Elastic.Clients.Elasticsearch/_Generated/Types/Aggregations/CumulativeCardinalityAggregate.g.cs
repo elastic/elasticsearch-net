@@ -40,4 +40,6 @@ public sealed partial class CumulativeCardinalityAggregate : IAggregate
 	public long Value { get; init; }
 	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
+
+	string IAggregate.Type => "simple_long_value";
 }

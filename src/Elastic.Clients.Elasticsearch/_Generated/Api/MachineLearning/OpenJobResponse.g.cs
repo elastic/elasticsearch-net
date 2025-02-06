@@ -22,10 +22,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class OpenJobResponseConverter : System.Text.Json.Serialization.JsonConverter<OpenJobResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropOpened = System.Text.Json.JsonEncodedText.Encode("opened");
+
+	public override OpenJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propNode = default;
+		LocalJsonValue<bool> propOpened = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNode.TryRead(ref reader, options, PropNode))
+			{
+				continue;
+			}
+
+			if (propOpened.TryRead(ref reader, options, PropOpened))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new OpenJobResponse
+		{
+			Node = propNode.Value
+,
+			Opened = propOpened.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, OpenJobResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNode, value.Node);
+		writer.WriteProperty(options, PropOpened, value.Opened);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(OpenJobResponseConverter))]
 public sealed partial class OpenJobResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -34,8 +80,6 @@ public sealed partial class OpenJobResponse : ElasticsearchResponse
 	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
 	public string Node { get; init; }
-	[JsonInclude, JsonPropertyName("opened")]
 	public bool Opened { get; init; }
 }

@@ -81,6 +81,139 @@ public sealed partial class PutMappingRequestParameters : RequestParameters
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 }
 
+internal sealed partial class PutMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<PutMappingRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+
+	public override PutMappingRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDateDetection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<ICollection<string>?> propDynamicDateFormats = default;
+		LocalJsonValue<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?> propDynamicTemplates = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.FieldNamesField?> propFieldNames = default;
+		LocalJsonValue<IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<bool?> propNumericDetection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.RoutingField?> propRouting = default;
+		LocalJsonValue<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntime = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceField?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDateDetection.TryRead(ref reader, options, PropDateDetection))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryRead(ref reader, options, PropDynamic))
+			{
+				continue;
+			}
+
+			if (propDynamicDateFormats.TryRead(ref reader, options, PropDynamicDateFormats))
+			{
+				continue;
+			}
+
+			if (propDynamicTemplates.TryRead(ref reader, options, PropDynamicTemplates, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>)))
+			{
+				continue;
+			}
+
+			if (propFieldNames.TryRead(ref reader, options, PropFieldNames))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propNumericDetection.TryRead(ref reader, options, PropNumericDetection))
+			{
+				continue;
+			}
+
+			if (propProperties.TryRead(ref reader, options, PropProperties))
+			{
+				continue;
+			}
+
+			if (propRouting.TryRead(ref reader, options, PropRouting))
+			{
+				continue;
+			}
+
+			if (propRuntime.TryRead(ref reader, options, PropRuntime))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutMappingRequest
+		{
+			DateDetection = propDateDetection.Value
+	,
+			Dynamic = propDynamic.Value
+	,
+			DynamicDateFormats = propDynamicDateFormats.Value
+	,
+			DynamicTemplates = propDynamicTemplates.Value
+	,
+			FieldNames = propFieldNames.Value
+	,
+			Meta = propMeta.Value
+	,
+			NumericDetection = propNumericDetection.Value
+	,
+			Properties = propProperties.Value
+	,
+			Routing = propRouting.Value
+	,
+			Runtime = propRuntime.Value
+	,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutMappingRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDateDetection, value.DateDetection);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic);
+		writer.WriteProperty(options, PropDynamicDateFormats, value.DynamicDateFormats);
+		writer.WriteProperty(options, PropDynamicTemplates, value.DynamicTemplates, null, typeof(SingleOrManyMarker<ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?, IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>));
+		writer.WriteProperty(options, PropFieldNames, value.FieldNames);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropNumericDetection, value.NumericDetection);
+		writer.WriteProperty(options, PropProperties, value.Properties);
+		writer.WriteProperty(options, PropRouting, value.Routing);
+		writer.WriteProperty(options, PropRuntime, value.Runtime);
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update field mappings.
@@ -89,9 +222,15 @@ public sealed partial class PutMappingRequestParameters : RequestParameters
 /// For data streams, these changes are applied to all backing indices by default.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(PutMappingRequestConverter))]
 public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
 {
 	public PutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	{
+	}
+
+	[JsonConstructor]
+	internal PutMappingRequest()
 	{
 	}
 
@@ -105,11 +244,17 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of index names the mapping should be added to (supports wildcards); use <c>_all</c> or omit to add the mapping on all indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
 	/// This behavior applies even if the request targets other open indices.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -120,7 +265,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
@@ -128,7 +272,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -137,7 +280,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -146,7 +288,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -154,7 +295,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
 	/// <summary>
@@ -162,7 +302,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Controls whether dynamic date detection is enabled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
 
 	/// <summary>
@@ -170,7 +309,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Controls whether new fields are added dynamically.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 	/// <summary>
@@ -180,7 +318,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// a new date field is added instead of string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 
 	/// <summary>
@@ -188,8 +325,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dynamic_templates")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	/// <summary>
@@ -197,7 +332,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Control whether field names are enabled for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
 	/// <summary>
@@ -207,7 +341,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// application-specific metadata.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
@@ -215,7 +348,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Automatically map strings into numeric data types for all fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
 
 	/// <summary>
@@ -240,7 +372,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// </item>
 	/// </list>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 	/// <summary>
@@ -248,7 +379,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Enable making a routing value required on indexed documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
 	/// <summary>
@@ -256,7 +386,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Mapping of runtime fields for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 
 	/// <summary>
@@ -264,7 +393,6 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// Control whether the _source field is enabled on the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 }
 

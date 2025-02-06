@@ -39,12 +39,16 @@ public sealed partial class Rescore
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal Rescore()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static Rescore LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank learningToRank) => new Rescore("learning_to_rank", learningToRank);
 	public static Rescore Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery rescoreQuery) => new Rescore("query", rescoreQuery);
@@ -65,83 +69,71 @@ public sealed partial class Rescore
 	}
 }
 
-internal sealed partial class RescoreConverter : JsonConverter<Rescore>
+internal sealed partial class RescoreConverter : System.Text.Json.Serialization.JsonConverter<Rescore>
 {
-	public override Rescore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropWindowSize = System.Text.Json.JsonEncodedText.Encode("window_size");
+	private static readonly System.Text.Json.JsonEncodedText VariantLearningToRank = System.Text.Json.JsonEncodedText.Encode("learning_to_rank");
+	private static readonly System.Text.Json.JsonEncodedText VariantQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Rescore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propWindowSize = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propWindowSize.TryRead(ref reader, options, PropWindowSize))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLearningToRank))
+			{
+				variantType = VariantLearningToRank.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantQuery))
+			{
+				variantType = VariantQuery.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		int? windowSizeValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Rescore
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "window_size")
-			{
-				windowSizeValue = JsonSerializer.Deserialize<int?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "learning_to_rank")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "query")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Rescore' from the response.");
-		}
-
-		var result = new Rescore(variantNameValue, variantValue);
-		result.WindowSize = windowSizeValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			WindowSize = propWindowSize.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Rescore value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Rescore value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.WindowSize.HasValue)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("window_size");
-			writer.WriteNumberValue(value.WindowSize.Value);
+			case "":
+				break;
+			case "learning_to_rank":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?)value.Variant);
+				break;
+			case "query":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Rescore)}'.");
 		}
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "learning_to_rank":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank)value.Variant, options);
-					break;
-				case "query":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>(writer, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropWindowSize, value.WindowSize);
 		writer.WriteEndObject();
 	}
 }

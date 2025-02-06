@@ -22,13 +22,78 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class GetServiceCredentialsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetServiceCredentialsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesCredentials = System.Text.Json.JsonEncodedText.Encode("nodes_credentials");
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccount = System.Text.Json.JsonEncodedText.Encode("service_account");
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
+
+	public override GetServiceCredentialsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.NodesCredentials> propNodesCredentials = default;
+		LocalJsonValue<string> propServiceAccount = default;
+		LocalJsonValue<IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>>> propTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propNodesCredentials.TryRead(ref reader, options, PropNodesCredentials))
+			{
+				continue;
+			}
+
+			if (propServiceAccount.TryRead(ref reader, options, PropServiceAccount))
+			{
+				continue;
+			}
+
+			if (propTokens.TryRead(ref reader, options, PropTokens))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetServiceCredentialsResponse
+		{
+			Count = propCount.Value
+,
+			NodesCredentials = propNodesCredentials.Value
+,
+			ServiceAccount = propServiceAccount.Value
+,
+			Tokens = propTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetServiceCredentialsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropNodesCredentials, value.NodesCredentials);
+		writer.WriteProperty(options, PropServiceAccount, value.ServiceAccount);
+		writer.WriteProperty(options, PropTokens, value.Tokens);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetServiceCredentialsResponseConverter))]
 public sealed partial class GetServiceCredentialsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -36,10 +101,7 @@ public sealed partial class GetServiceCredentialsResponse : ElasticsearchRespons
 	/// Contains service account credentials collected from all nodes of the cluster
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes_credentials")]
 	public Elastic.Clients.Elasticsearch.Security.NodesCredentials NodesCredentials { get; init; }
-	[JsonInclude, JsonPropertyName("service_account")]
 	public string ServiceAccount { get; init; }
-	[JsonInclude, JsonPropertyName("tokens")]
 	public IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> Tokens { get; init; }
 }

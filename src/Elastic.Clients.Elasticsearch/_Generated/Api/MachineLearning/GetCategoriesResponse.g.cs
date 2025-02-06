@@ -22,14 +22,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class GetCategoriesResponseConverter : System.Text.Json.Serialization.JsonConverter<GetCategoriesResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCategories = System.Text.Json.JsonEncodedText.Encode("categories");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+
+	public override GetCategoriesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Category>> propCategories = default;
+		LocalJsonValue<long> propCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCategories.TryRead(ref reader, options, PropCategories))
+			{
+				continue;
+			}
+
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetCategoriesResponse
+		{
+			Categories = propCategories.Value
+,
+			Count = propCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetCategoriesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCategories, value.Categories);
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetCategoriesResponseConverter))]
 public sealed partial class GetCategoriesResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("categories")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Category> Categories { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
 }

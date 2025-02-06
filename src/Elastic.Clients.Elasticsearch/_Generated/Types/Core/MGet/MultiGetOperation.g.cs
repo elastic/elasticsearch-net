@@ -27,6 +27,100 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
+internal sealed partial class MultiGetOperationConverter : System.Text.Json.Serialization.JsonConverter<MultiGetOperation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
+	public override MultiGetOperation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<long?> propVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propIndex.TryRead(ref reader, options, PropIndex))
+			{
+				continue;
+			}
+
+			if (propRouting.TryRead(ref reader, options, PropRouting))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryRead(ref reader, options, PropStoredFields, typeof(SingleOrManyFieldsMarker)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			if (propVersionType.TryRead(ref reader, options, PropVersionType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new MultiGetOperation
+		{
+			Id = propId.Value
+,
+			Index = propIndex.Value
+,
+			Routing = propRouting.Value
+,
+			Source = propSource.Value
+,
+			StoredFields = propStoredFields.Value
+,
+			Version = propVersion.Value
+,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MultiGetOperation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropIndex, value.Index);
+		writer.WriteProperty(options, PropRouting, value.Routing);
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, typeof(SingleOrManyFieldsMarker));
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteProperty(options, PropVersionType, value.VersionType);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(MultiGetOperationConverter))]
 public sealed partial class MultiGetOperation
 {
 	/// <summary>
@@ -34,7 +128,6 @@ public sealed partial class MultiGetOperation
 	/// The unique document ID.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
@@ -42,7 +135,6 @@ public sealed partial class MultiGetOperation
 	/// The index that contains the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -50,7 +142,6 @@ public sealed partial class MultiGetOperation
 	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -58,7 +149,6 @@ public sealed partial class MultiGetOperation
 	/// If <c>false</c>, excludes all _source fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
@@ -66,12 +156,8 @@ public sealed partial class MultiGetOperation
 	/// The stored fields you want to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 

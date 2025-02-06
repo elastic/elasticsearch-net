@@ -65,6 +65,11 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 	{
 	}
 
+	[JsonConstructor]
+	internal ResetJobRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningResetJob;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -72,6 +77,14 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.reset_job";
+
+	/// <summary>
+	/// <para>
+	/// The ID of the job to reset.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>

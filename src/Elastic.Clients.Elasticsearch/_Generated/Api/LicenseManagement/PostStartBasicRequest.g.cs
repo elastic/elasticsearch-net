@@ -58,6 +58,11 @@ public sealed partial class PostStartBasicRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PostStartBasicRequest : PlainRequest<PostStartBasicRequestParameters>
 {
+	[JsonConstructor]
+	internal PostStartBasicRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementPostStartBasic;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

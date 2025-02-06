@@ -119,6 +119,11 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	{
 	}
 
+	[JsonConstructor]
+	internal ExistsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -126,6 +131,23 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "exists";
+
+	/// <summary>
+	/// <para>
+	/// Identifier of the document.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases.
+	/// Supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

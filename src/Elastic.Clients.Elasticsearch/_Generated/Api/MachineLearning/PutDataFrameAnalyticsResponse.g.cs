@@ -22,36 +22,179 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PutDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<PutDataFrameAnalyticsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropAuthorization = System.Text.Json.JsonEncodedText.Encode("authorization");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override PutDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAllowLazyStart = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields?> propAnalyzedFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization?> propAuthorization = default;
+		LocalJsonValue<long> propCreateTime = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination> propDest = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<int> propMaxNumThreads = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<string> propModelMemoryLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource> propSource = default;
+		LocalJsonValue<string> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyStart.TryRead(ref reader, options, PropAllowLazyStart))
+			{
+				continue;
+			}
+
+			if (propAnalysis.TryRead(ref reader, options, PropAnalysis))
+			{
+				continue;
+			}
+
+			if (propAnalyzedFields.TryRead(ref reader, options, PropAnalyzedFields))
+			{
+				continue;
+			}
+
+			if (propAuthorization.TryRead(ref reader, options, PropAuthorization))
+			{
+				continue;
+			}
+
+			if (propCreateTime.TryRead(ref reader, options, PropCreateTime))
+			{
+				continue;
+			}
+
+			if (propDescription.TryRead(ref reader, options, PropDescription))
+			{
+				continue;
+			}
+
+			if (propDest.TryRead(ref reader, options, PropDest))
+			{
+				continue;
+			}
+
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propMaxNumThreads.TryRead(ref reader, options, PropMaxNumThreads))
+			{
+				continue;
+			}
+
+			if (propMeta.TryRead(ref reader, options, PropMeta))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryRead(ref reader, options, PropModelMemoryLimit))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			if (propVersion.TryRead(ref reader, options, PropVersion))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutDataFrameAnalyticsResponse
+		{
+			AllowLazyStart = propAllowLazyStart.Value
+,
+			Analysis = propAnalysis.Value
+,
+			AnalyzedFields = propAnalyzedFields.Value
+,
+			Authorization = propAuthorization.Value
+,
+			CreateTime = propCreateTime.Value
+,
+			Description = propDescription.Value
+,
+			Dest = propDest.Value
+,
+			Id = propId.Value
+,
+			MaxNumThreads = propMaxNumThreads.Value
+,
+			Meta = propMeta.Value
+,
+			ModelMemoryLimit = propModelMemoryLimit.Value
+,
+			Source = propSource.Value
+,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart);
+		writer.WriteProperty(options, PropAnalysis, value.Analysis);
+		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields);
+		writer.WriteProperty(options, PropAuthorization, value.Authorization);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime);
+		writer.WriteProperty(options, PropDescription, value.Description);
+		writer.WriteProperty(options, PropDest, value.Dest);
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads);
+		writer.WriteProperty(options, PropMeta, value.Meta);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit);
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteProperty(options, PropVersion, value.Version);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PutDataFrameAnalyticsResponseConverter))]
 public sealed partial class PutDataFrameAnalyticsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("allow_lazy_start")]
 	public bool AllowLazyStart { get; init; }
-	[JsonInclude, JsonPropertyName("analysis")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; init; }
-	[JsonInclude, JsonPropertyName("analyzed_fields")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; init; }
-	[JsonInclude, JsonPropertyName("authorization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization? Authorization { get; init; }
-	[JsonInclude, JsonPropertyName("create_time")]
 	public long CreateTime { get; init; }
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; init; }
-	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int MaxNumThreads { get; init; }
-	[JsonInclude, JsonPropertyName("_meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string ModelMemoryLimit { get; init; }
-	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
 	public string Version { get; init; }
 }

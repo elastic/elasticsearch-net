@@ -7,6 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 [JsonConverter(typeof(SourceConfigConverter))]
@@ -45,19 +47,12 @@ internal class SourceConfigConverter : JsonConverter<SourceConfig>
 {
 	public override SourceConfig? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		switch (reader.TokenType)
+		if (reader.TokenType is JsonTokenType.True or JsonTokenType.False)
 		{
-			case JsonTokenType.True:
-			case JsonTokenType.False:
-				var value = reader.GetBoolean();
-				return new SourceConfig(value);
-
-			case JsonTokenType.StartObject:
-				var sourceFilter = JsonSerializer.Deserialize<SourceFilter>(ref reader, options);
-				return new SourceConfig(sourceFilter);
+			return new SourceConfig(reader.GetBoolean());
 		}
 
-		return null;
+		return new SourceConfig(reader.ReadValue<SourceFilter>(options));
 	}
 
 	public override void Write(Utf8JsonWriter writer, SourceConfig value, JsonSerializerOptions options)
@@ -68,7 +63,7 @@ internal class SourceConfigConverter : JsonConverter<SourceConfig>
 		}
 		else
 		{
-			JsonSerializer.Serialize(writer, value.Item2, options);
+			writer.WriteValue(options, value.Item2);
 		}
 	}
 }

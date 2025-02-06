@@ -57,86 +57,191 @@ public enum QueryRuleCriteriaType
 	Always
 }
 
-internal sealed class QueryRuleCriteriaTypeConverter : JsonConverter<QueryRuleCriteriaType>
+internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Serialization.JsonConverter<QueryRuleCriteriaType>
 {
-	public override QueryRuleCriteriaType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSuffix = System.Text.Json.JsonEncodedText.Encode("suffix");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText MemberFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText MemberExactFuzzy = System.Text.Json.JsonEncodedText.Encode("exact_fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
+	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always");
+
+	public override QueryRuleCriteriaType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSuffix))
 		{
-			case "suffix":
-				return QueryRuleCriteriaType.Suffix;
-			case "prefix":
-				return QueryRuleCriteriaType.Prefix;
-			case "lte":
-				return QueryRuleCriteriaType.Lte;
-			case "lt":
-				return QueryRuleCriteriaType.Lt;
-			case "gte":
-				return QueryRuleCriteriaType.Gte;
-			case "gt":
-				return QueryRuleCriteriaType.Gt;
-			case "global":
-				return QueryRuleCriteriaType.Global;
-			case "fuzzy":
-				return QueryRuleCriteriaType.Fuzzy;
-			case "exact_fuzzy":
-				return QueryRuleCriteriaType.ExactFuzzy;
-			case "exact":
-				return QueryRuleCriteriaType.Exact;
-			case "contains":
-				return QueryRuleCriteriaType.Contains;
-			case "always":
-				return QueryRuleCriteriaType.Always;
+			return QueryRuleCriteriaType.Suffix;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberPrefix))
+		{
+			return QueryRuleCriteriaType.Prefix;
+		}
+
+		if (reader.ValueTextEquals(MemberLte))
+		{
+			return QueryRuleCriteriaType.Lte;
+		}
+
+		if (reader.ValueTextEquals(MemberLt))
+		{
+			return QueryRuleCriteriaType.Lt;
+		}
+
+		if (reader.ValueTextEquals(MemberGte))
+		{
+			return QueryRuleCriteriaType.Gte;
+		}
+
+		if (reader.ValueTextEquals(MemberGt))
+		{
+			return QueryRuleCriteriaType.Gt;
+		}
+
+		if (reader.ValueTextEquals(MemberGlobal))
+		{
+			return QueryRuleCriteriaType.Global;
+		}
+
+		if (reader.ValueTextEquals(MemberFuzzy))
+		{
+			return QueryRuleCriteriaType.Fuzzy;
+		}
+
+		if (reader.ValueTextEquals(MemberExactFuzzy))
+		{
+			return QueryRuleCriteriaType.ExactFuzzy;
+		}
+
+		if (reader.ValueTextEquals(MemberExact))
+		{
+			return QueryRuleCriteriaType.Exact;
+		}
+
+		if (reader.ValueTextEquals(MemberContains))
+		{
+			return QueryRuleCriteriaType.Contains;
+		}
+
+		if (reader.ValueTextEquals(MemberAlways))
+		{
+			return QueryRuleCriteriaType.Always;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSuffix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Suffix;
+		}
+
+		if (string.Equals(value, MemberPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Prefix;
+		}
+
+		if (string.Equals(value, MemberLte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Lte;
+		}
+
+		if (string.Equals(value, MemberLt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Lt;
+		}
+
+		if (string.Equals(value, MemberGte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Gte;
+		}
+
+		if (string.Equals(value, MemberGt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Gt;
+		}
+
+		if (string.Equals(value, MemberGlobal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Global;
+		}
+
+		if (string.Equals(value, MemberFuzzy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Fuzzy;
+		}
+
+		if (string.Equals(value, MemberExactFuzzy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.ExactFuzzy;
+		}
+
+		if (string.Equals(value, MemberExact.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Exact;
+		}
+
+		if (string.Equals(value, MemberContains.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Contains;
+		}
+
+		if (string.Equals(value, MemberAlways.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleCriteriaType.Always;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(QueryRuleCriteriaType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryRuleCriteriaType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryRuleCriteriaType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case QueryRuleCriteriaType.Suffix:
-				writer.WriteStringValue("suffix");
-				return;
+				writer.WriteStringValue(MemberSuffix);
+				break;
 			case QueryRuleCriteriaType.Prefix:
-				writer.WriteStringValue("prefix");
-				return;
+				writer.WriteStringValue(MemberPrefix);
+				break;
 			case QueryRuleCriteriaType.Lte:
-				writer.WriteStringValue("lte");
-				return;
+				writer.WriteStringValue(MemberLte);
+				break;
 			case QueryRuleCriteriaType.Lt:
-				writer.WriteStringValue("lt");
-				return;
+				writer.WriteStringValue(MemberLt);
+				break;
 			case QueryRuleCriteriaType.Gte:
-				writer.WriteStringValue("gte");
-				return;
+				writer.WriteStringValue(MemberGte);
+				break;
 			case QueryRuleCriteriaType.Gt:
-				writer.WriteStringValue("gt");
-				return;
+				writer.WriteStringValue(MemberGt);
+				break;
 			case QueryRuleCriteriaType.Global:
-				writer.WriteStringValue("global");
-				return;
+				writer.WriteStringValue(MemberGlobal);
+				break;
 			case QueryRuleCriteriaType.Fuzzy:
-				writer.WriteStringValue("fuzzy");
-				return;
+				writer.WriteStringValue(MemberFuzzy);
+				break;
 			case QueryRuleCriteriaType.ExactFuzzy:
-				writer.WriteStringValue("exact_fuzzy");
-				return;
+				writer.WriteStringValue(MemberExactFuzzy);
+				break;
 			case QueryRuleCriteriaType.Exact:
-				writer.WriteStringValue("exact");
-				return;
+				writer.WriteStringValue(MemberExact);
+				break;
 			case QueryRuleCriteriaType.Contains:
-				writer.WriteStringValue("contains");
-				return;
+				writer.WriteStringValue(MemberContains);
+				break;
 			case QueryRuleCriteriaType.Always:
-				writer.WriteStringValue("always");
-				return;
+				writer.WriteStringValue(MemberAlways);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(QueryRuleCriteriaType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -149,35 +254,50 @@ public enum QueryRuleType
 	Exclude
 }
 
-internal sealed class QueryRuleTypeConverter : JsonConverter<QueryRuleType>
+internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<QueryRuleType>
 {
-	public override QueryRuleType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+
+	public override QueryRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberPinned))
 		{
-			case "pinned":
-				return QueryRuleType.Pinned;
-			case "exclude":
-				return QueryRuleType.Exclude;
+			return QueryRuleType.Pinned;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberExclude))
+		{
+			return QueryRuleType.Exclude;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPinned.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleType.Pinned;
+		}
+
+		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return QueryRuleType.Exclude;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(QueryRuleType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryRuleType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryRuleType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case QueryRuleType.Pinned:
-				writer.WriteStringValue("pinned");
-				return;
+				writer.WriteStringValue(MemberPinned);
+				break;
 			case QueryRuleType.Exclude:
-				writer.WriteStringValue("exclude");
-				return;
+				writer.WriteStringValue(MemberExclude);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(QueryRuleType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

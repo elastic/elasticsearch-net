@@ -48,6 +48,11 @@ public sealed partial class ListDanglingIndicesRequestParameters : RequestParame
 /// </summary>
 public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDanglingIndicesRequestParameters>
 {
+	[JsonConstructor]
+	internal ListDanglingIndicesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.DanglingIndicesListDanglingIndices;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

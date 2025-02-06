@@ -42,6 +42,11 @@ public sealed partial class GetIlmStatusRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetIlmStatusRequest : PlainRequest<GetIlmStatusRequestParameters>
 {
+	[JsonConstructor]
+	internal GetIlmStatusRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

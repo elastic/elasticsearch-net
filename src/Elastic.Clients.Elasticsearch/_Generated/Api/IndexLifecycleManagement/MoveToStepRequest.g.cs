@@ -61,6 +61,11 @@ public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal MoveToStepRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMoveToStep;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -69,6 +74,13 @@ public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestPa
 
 	internal override string OperationName => "ilm.move_to_step";
 
+	/// <summary>
+	/// <para>
+	/// The name of the index whose lifecycle step is to change
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 	[JsonInclude, JsonPropertyName("current_step")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
 	[JsonInclude, JsonPropertyName("next_step")]

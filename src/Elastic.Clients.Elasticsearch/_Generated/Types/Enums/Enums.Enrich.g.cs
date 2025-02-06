@@ -41,46 +41,79 @@ public enum EnrichPolicyPhase
 	Complete
 }
 
-internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPhase>
+internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Serialization.JsonConverter<EnrichPolicyPhase>
 {
-	public override EnrichPolicyPhase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED");
+	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberComplete = System.Text.Json.JsonEncodedText.Encode("COMPLETE");
+
+	public override EnrichPolicyPhase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberScheduled))
 		{
-			case "SCHEDULED":
-				return EnrichPolicyPhase.Scheduled;
-			case "RUNNING":
-				return EnrichPolicyPhase.Running;
-			case "FAILED":
-				return EnrichPolicyPhase.Failed;
-			case "COMPLETE":
-				return EnrichPolicyPhase.Complete;
+			return EnrichPolicyPhase.Scheduled;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberRunning))
+		{
+			return EnrichPolicyPhase.Running;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return EnrichPolicyPhase.Failed;
+		}
+
+		if (reader.ValueTextEquals(MemberComplete))
+		{
+			return EnrichPolicyPhase.Complete;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScheduled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Scheduled;
+		}
+
+		if (string.Equals(value, MemberRunning.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Running;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Failed;
+		}
+
+		if (string.Equals(value, MemberComplete.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Complete;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EnrichPolicyPhase)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EnrichPolicyPhase value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrichPolicyPhase value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case EnrichPolicyPhase.Scheduled:
-				writer.WriteStringValue("SCHEDULED");
-				return;
+				writer.WriteStringValue(MemberScheduled);
+				break;
 			case EnrichPolicyPhase.Running:
-				writer.WriteStringValue("RUNNING");
-				return;
+				writer.WriteStringValue(MemberRunning);
+				break;
 			case EnrichPolicyPhase.Failed:
-				writer.WriteStringValue("FAILED");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case EnrichPolicyPhase.Complete:
-				writer.WriteStringValue("COMPLETE");
-				return;
+				writer.WriteStringValue(MemberComplete);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EnrichPolicyPhase)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -95,40 +128,64 @@ public enum PolicyType
 	GeoMatch
 }
 
-internal sealed class PolicyTypeConverter : JsonConverter<PolicyType>
+internal sealed partial class PolicyTypeConverter : System.Text.Json.Serialization.JsonConverter<PolicyType>
 {
-	public override PolicyType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText MemberMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match");
+
+	public override PolicyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberRange))
 		{
-			case "range":
-				return PolicyType.Range;
-			case "match":
-				return PolicyType.Match;
-			case "geo_match":
-				return PolicyType.GeoMatch;
+			return PolicyType.Range;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberMatch))
+		{
+			return PolicyType.Match;
+		}
+
+		if (reader.ValueTextEquals(MemberGeoMatch))
+		{
+			return PolicyType.GeoMatch;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.Range;
+		}
+
+		if (string.Equals(value, MemberMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.Match;
+		}
+
+		if (string.Equals(value, MemberGeoMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.GeoMatch;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PolicyType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, PolicyType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PolicyType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case PolicyType.Range:
-				writer.WriteStringValue("range");
-				return;
+				writer.WriteStringValue(MemberRange);
+				break;
 			case PolicyType.Match:
-				writer.WriteStringValue("match");
-				return;
+				writer.WriteStringValue(MemberMatch);
+				break;
 			case PolicyType.GeoMatch:
-				writer.WriteStringValue("geo_match");
-				return;
+				writer.WriteStringValue(MemberGeoMatch);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(PolicyType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

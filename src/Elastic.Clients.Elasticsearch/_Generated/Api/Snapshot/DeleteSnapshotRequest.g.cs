@@ -51,6 +51,11 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 	{
 	}
 
+	[JsonConstructor]
+	internal DeleteSnapshotRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -58,6 +63,22 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "snapshot.delete";
+
+	/// <summary>
+	/// <para>
+	/// A repository name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshot names
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>

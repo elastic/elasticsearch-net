@@ -27,137 +27,187 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DatafeedConverter : JsonConverter<Datafeed>
+internal sealed partial class DatafeedConverter : System.Text.Json.Serialization.JsonConverter<Datafeed>
 {
-	public override Datafeed Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropAuthorization = System.Text.Json.JsonEncodedText.Encode("authorization");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingConfig = System.Text.Json.JsonEncodedText.Encode("chunking_config");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeedId = System.Text.Json.JsonEncodedText.Encode("datafeed_id");
+	private static readonly System.Text.Json.JsonEncodedText PropDelayedDataCheckConfig = System.Text.Json.JsonEncodedText.Encode("delayed_data_check_config");
+	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexes = System.Text.Json.JsonEncodedText.Encode("indexes");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesOptions = System.Text.Json.JsonEncodedText.Encode("indices_options");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxEmptySearches = System.Text.Json.JsonEncodedText.Encode("max_empty_searches");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryDelay = System.Text.Json.JsonEncodedText.Encode("query_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollSize = System.Text.Json.JsonEncodedText.Encode("scroll_size");
+
+	public override Datafeed Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? aggregations = default;
-		Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization? authorization = default;
-		Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig = default;
-		string datafeedId = default;
-		Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig delayedDataCheckConfig = default;
-		Elastic.Clients.Elasticsearch.Duration? frequency = default;
-		IReadOnlyCollection<string>? indexes = default;
-		IReadOnlyCollection<string> indices = default;
-		Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions = default;
-		string jobId = default;
-		int? maxEmptySearches = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.Query query = default;
-		Elastic.Clients.Elasticsearch.Duration? queryDelay = default;
-		IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings = default;
-		IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields = default;
-		int? scrollSize = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization?> propAuthorization = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig?> propChunkingConfig = default;
+		LocalJsonValue<string> propDatafeedId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig> propDelayedDataCheckConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
+		LocalJsonValue<IReadOnlyCollection<string>?> propIndexes = default;
+		LocalJsonValue<IReadOnlyCollection<string>> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndicesOptions?> propIndicesOptions = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<int?> propMaxEmptySearches = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryDelay = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<int?> propScrollSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryRead(ref reader, options, PropAggregations) || propAggregations.TryRead(ref reader, options, PropAggregations1))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					aggregations = JsonSerializer.Deserialize<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "authorization")
-				{
-					authorization = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "chunking_config")
-				{
-					chunkingConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "datafeed_id")
-				{
-					datafeedId = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "delayed_data_check_config")
-				{
-					delayedDataCheckConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig>(ref reader, options);
-					continue;
-				}
-
-				if (property == "frequency")
-				{
-					frequency = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indexes")
-				{
-					indexes = JsonSerializer.Deserialize<IReadOnlyCollection<string>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices")
-				{
-					indices = JsonSerializer.Deserialize<IReadOnlyCollection<string>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices_options")
-				{
-					indicesOptions = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndicesOptions?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "job_id")
-				{
-					jobId = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_empty_searches")
-				{
-					maxEmptySearches = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query_delay")
-				{
-					queryDelay = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					runtimeMappings = JsonSerializer.Deserialize<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "script_fields")
-				{
-					scriptFields = JsonSerializer.Deserialize<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "scroll_size")
-				{
-					scrollSize = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propAuthorization.TryRead(ref reader, options, PropAuthorization))
+			{
+				continue;
+			}
+
+			if (propChunkingConfig.TryRead(ref reader, options, PropChunkingConfig))
+			{
+				continue;
+			}
+
+			if (propDatafeedId.TryRead(ref reader, options, PropDatafeedId))
+			{
+				continue;
+			}
+
+			if (propDelayedDataCheckConfig.TryRead(ref reader, options, PropDelayedDataCheckConfig))
+			{
+				continue;
+			}
+
+			if (propFrequency.TryRead(ref reader, options, PropFrequency))
+			{
+				continue;
+			}
+
+			if (propIndexes.TryRead(ref reader, options, PropIndexes))
+			{
+				continue;
+			}
+
+			if (propIndices.TryRead(ref reader, options, PropIndices))
+			{
+				continue;
+			}
+
+			if (propIndicesOptions.TryRead(ref reader, options, PropIndicesOptions))
+			{
+				continue;
+			}
+
+			if (propJobId.TryRead(ref reader, options, PropJobId))
+			{
+				continue;
+			}
+
+			if (propMaxEmptySearches.TryRead(ref reader, options, PropMaxEmptySearches))
+			{
+				continue;
+			}
+
+			if (propQuery.TryRead(ref reader, options, PropQuery))
+			{
+				continue;
+			}
+
+			if (propQueryDelay.TryRead(ref reader, options, PropQueryDelay))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryRead(ref reader, options, PropRuntimeMappings))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryRead(ref reader, options, PropScriptFields))
+			{
+				continue;
+			}
+
+			if (propScrollSize.TryRead(ref reader, options, PropScrollSize))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return new Datafeed { Aggregations = aggregations, Authorization = authorization, ChunkingConfig = chunkingConfig, DatafeedId = datafeedId, DelayedDataCheckConfig = delayedDataCheckConfig, Frequency = frequency, Indexes = indexes, Indices = indices, IndicesOptions = indicesOptions, JobId = jobId, MaxEmptySearches = maxEmptySearches, Query = query, QueryDelay = queryDelay, RuntimeMappings = runtimeMappings, ScriptFields = scriptFields, ScrollSize = scrollSize };
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Datafeed
+		{
+			Aggregations = propAggregations.Value
+,
+			Authorization = propAuthorization.Value
+,
+			ChunkingConfig = propChunkingConfig.Value
+,
+			DatafeedId = propDatafeedId.Value
+,
+			DelayedDataCheckConfig = propDelayedDataCheckConfig.Value
+,
+			Frequency = propFrequency.Value
+,
+			Indexes = propIndexes.Value
+,
+			Indices = propIndices.Value
+,
+			IndicesOptions = propIndicesOptions.Value
+,
+			JobId = propJobId.Value
+,
+			MaxEmptySearches = propMaxEmptySearches.Value
+,
+			Query = propQuery.Value
+,
+			QueryDelay = propQueryDelay.Value
+,
+			RuntimeMappings = propRuntimeMappings.Value
+,
+			ScriptFields = propScriptFields.Value
+,
+			ScrollSize = propScrollSize.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Datafeed value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Datafeed value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'Datafeed' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregations, value.Aggregations);
+		writer.WriteProperty(options, PropAuthorization, value.Authorization);
+		writer.WriteProperty(options, PropChunkingConfig, value.ChunkingConfig);
+		writer.WriteProperty(options, PropDatafeedId, value.DatafeedId);
+		writer.WriteProperty(options, PropDelayedDataCheckConfig, value.DelayedDataCheckConfig);
+		writer.WriteProperty(options, PropFrequency, value.Frequency);
+		writer.WriteProperty(options, PropIndexes, value.Indexes);
+		writer.WriteProperty(options, PropIndices, value.Indices);
+		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions);
+		writer.WriteProperty(options, PropJobId, value.JobId);
+		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches);
+		writer.WriteProperty(options, PropQuery, value.Query);
+		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings);
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields);
+		writer.WriteProperty(options, PropScrollSize, value.ScrollSize);
+		writer.WriteEndObject();
 	}
 }
 

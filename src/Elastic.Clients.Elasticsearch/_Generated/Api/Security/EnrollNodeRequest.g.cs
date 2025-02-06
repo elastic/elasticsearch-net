@@ -44,6 +44,11 @@ public sealed partial class EnrollNodeRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class EnrollNodeRequest : PlainRequest<EnrollNodeRequestParameters>
 {
+	[JsonConstructor]
+	internal EnrollNodeRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnrollNode;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

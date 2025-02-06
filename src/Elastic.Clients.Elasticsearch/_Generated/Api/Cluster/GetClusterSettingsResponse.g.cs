@@ -22,16 +22,69 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class GetClusterSettingsResponseConverter : System.Text.Json.Serialization.JsonConverter<GetClusterSettingsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
+	private static readonly System.Text.Json.JsonEncodedText PropPersistent = System.Text.Json.JsonEncodedText.Encode("persistent");
+	private static readonly System.Text.Json.JsonEncodedText PropTransient = System.Text.Json.JsonEncodedText.Encode("transient");
+
+	public override GetClusterSettingsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyDictionary<string, object>?> propDefaults = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propPersistent = default;
+		LocalJsonValue<IReadOnlyDictionary<string, object>> propTransient = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDefaults.TryRead(ref reader, options, PropDefaults))
+			{
+				continue;
+			}
+
+			if (propPersistent.TryRead(ref reader, options, PropPersistent))
+			{
+				continue;
+			}
+
+			if (propTransient.TryRead(ref reader, options, PropTransient))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new GetClusterSettingsResponse
+		{
+			Defaults = propDefaults.Value
+,
+			Persistent = propPersistent.Value
+,
+			Transient = propTransient.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, GetClusterSettingsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDefaults, value.Defaults);
+		writer.WriteProperty(options, PropPersistent, value.Persistent);
+		writer.WriteProperty(options, PropTransient, value.Transient);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(GetClusterSettingsResponseConverter))]
 public sealed partial class GetClusterSettingsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("defaults")]
 	public IReadOnlyDictionary<string, object>? Defaults { get; init; }
-	[JsonInclude, JsonPropertyName("persistent")]
 	public IReadOnlyDictionary<string, object> Persistent { get; init; }
-	[JsonInclude, JsonPropertyName("transient")]
 	public IReadOnlyDictionary<string, object> Transient { get; init; }
 }

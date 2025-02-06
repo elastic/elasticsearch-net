@@ -46,12 +46,16 @@ public sealed partial class DatabaseConfiguration
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal DatabaseConfiguration()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static DatabaseConfiguration Ipinfo(Elastic.Clients.Elasticsearch.Ingest.Ipinfo ipinfo) => new DatabaseConfiguration("ipinfo", ipinfo);
 	public static DatabaseConfiguration Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind) => new DatabaseConfiguration("maxmind", maxmind);
@@ -77,83 +81,71 @@ public sealed partial class DatabaseConfiguration
 	}
 }
 
-internal sealed partial class DatabaseConfigurationConverter : JsonConverter<DatabaseConfiguration>
+internal sealed partial class DatabaseConfigurationConverter : System.Text.Json.Serialization.JsonConverter<DatabaseConfiguration>
 {
-	public override DatabaseConfiguration Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText VariantIpinfo = System.Text.Json.JsonEncodedText.Encode("ipinfo");
+	private static readonly System.Text.Json.JsonEncodedText VariantMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind");
+
+	public override DatabaseConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propName.TryRead(ref reader, options, PropName))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIpinfo))
+			{
+				variantType = VariantIpinfo.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMaxmind))
+			{
+				variantType = VariantMaxmind.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		Elastic.Clients.Elasticsearch.Name nameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new DatabaseConfiguration
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "name")
-			{
-				nameValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "ipinfo")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "maxmind")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DatabaseConfiguration' from the response.");
-		}
-
-		var result = new DatabaseConfiguration(variantNameValue, variantValue);
-		result.Name = nameValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Name = propName.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, DatabaseConfiguration value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DatabaseConfiguration value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Name is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, value.Name, options);
+			case "":
+				break;
+			case "ipinfo":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo?)value.Variant);
+				break;
+			case "maxmind":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Maxmind?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(DatabaseConfiguration)}'.");
 		}
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "ipinfo":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Ipinfo>(writer, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo)value.Variant, options);
-					break;
-				case "maxmind":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.Maxmind>(writer, (Elastic.Clients.Elasticsearch.Ingest.Maxmind)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropName, value.Name);
 		writer.WriteEndObject();
 	}
 }

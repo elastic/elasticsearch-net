@@ -42,6 +42,7 @@ public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Request
 /// </summary>
 public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<PreviewDataFrameAnalyticsRequestParameters>
 {
+	[JsonConstructor]
 	public PreviewDataFrameAnalyticsRequest()
 	{
 	}
@@ -57,6 +58,14 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : PlainRequest<Prev
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.preview_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

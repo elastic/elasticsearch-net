@@ -45,6 +45,11 @@ public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServi
 	{
 	}
 
+	[JsonConstructor]
+	internal GetServiceCredentialsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetServiceCredentials;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -52,6 +57,22 @@ public sealed partial class GetServiceCredentialsRequest : PlainRequest<GetServi
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_service_credentials";
+
+	/// <summary>
+	/// <para>
+	/// Name of the namespace.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the service name.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Service { get => P<Elastic.Clients.Elasticsearch.Name>("service"); set => PR("service", value); }
 }
 
 /// <summary>

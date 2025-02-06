@@ -37,36 +37,51 @@ public enum EcsCompatibilityType
 	Disabled
 }
 
-internal sealed class EcsCompatibilityTypeConverter : JsonConverter<EcsCompatibilityType>
+internal sealed partial class EcsCompatibilityTypeConverter : System.Text.Json.Serialization.JsonConverter<EcsCompatibilityType>
 {
-	public override EcsCompatibilityType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberV1 = System.Text.Json.JsonEncodedText.Encode("v1");
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
+
+	public override EcsCompatibilityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberV1))
 		{
-			case "v1":
-				return EcsCompatibilityType.V1;
-			case "disabled":
-				return EcsCompatibilityType.Disabled;
+			return EcsCompatibilityType.V1;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberDisabled))
+		{
+			return EcsCompatibilityType.Disabled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberV1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EcsCompatibilityType.V1;
+		}
+
+		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EcsCompatibilityType.Disabled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EcsCompatibilityType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, EcsCompatibilityType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, EcsCompatibilityType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case EcsCompatibilityType.V1:
-				writer.WriteStringValue("v1");
-				return;
+				writer.WriteStringValue(MemberV1);
+				break;
 			case EcsCompatibilityType.Disabled:
-				writer.WriteStringValue("disabled");
-				return;
+				writer.WriteStringValue(MemberDisabled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(EcsCompatibilityType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -83,45 +98,78 @@ public enum FormatType
 	Delimited
 }
 
-internal sealed class FormatTypeConverter : JsonConverter<FormatType>
+internal sealed partial class FormatTypeConverter : System.Text.Json.Serialization.JsonConverter<FormatType>
 {
-	public override FormatType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberXml = System.Text.Json.JsonEncodedText.Encode("xml");
+	private static readonly System.Text.Json.JsonEncodedText MemberSemiStructuredText = System.Text.Json.JsonEncodedText.Encode("semi_structured_text");
+	private static readonly System.Text.Json.JsonEncodedText MemberNdjson = System.Text.Json.JsonEncodedText.Encode("ndjson");
+	private static readonly System.Text.Json.JsonEncodedText MemberDelimited = System.Text.Json.JsonEncodedText.Encode("delimited");
+
+	public override FormatType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberXml))
 		{
-			case "xml":
-				return FormatType.Xml;
-			case "semi_structured_text":
-				return FormatType.SemiStructuredText;
-			case "ndjson":
-				return FormatType.Ndjson;
-			case "delimited":
-				return FormatType.Delimited;
+			return FormatType.Xml;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSemiStructuredText))
+		{
+			return FormatType.SemiStructuredText;
+		}
+
+		if (reader.ValueTextEquals(MemberNdjson))
+		{
+			return FormatType.Ndjson;
+		}
+
+		if (reader.ValueTextEquals(MemberDelimited))
+		{
+			return FormatType.Delimited;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberXml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FormatType.Xml;
+		}
+
+		if (string.Equals(value, MemberSemiStructuredText.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FormatType.SemiStructuredText;
+		}
+
+		if (string.Equals(value, MemberNdjson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FormatType.Ndjson;
+		}
+
+		if (string.Equals(value, MemberDelimited.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FormatType.Delimited;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FormatType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FormatType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FormatType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FormatType.Xml:
-				writer.WriteStringValue("xml");
-				return;
+				writer.WriteStringValue(MemberXml);
+				break;
 			case FormatType.SemiStructuredText:
-				writer.WriteStringValue("semi_structured_text");
-				return;
+				writer.WriteStringValue(MemberSemiStructuredText);
+				break;
 			case FormatType.Ndjson:
-				writer.WriteStringValue("ndjson");
-				return;
+				writer.WriteStringValue(MemberNdjson);
+				break;
 			case FormatType.Delimited:
-				writer.WriteStringValue("delimited");
-				return;
+				writer.WriteStringValue(MemberDelimited);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FormatType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

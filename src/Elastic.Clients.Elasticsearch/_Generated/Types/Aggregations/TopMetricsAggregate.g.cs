@@ -33,4 +33,6 @@ public sealed partial class TopMetricsAggregate : IAggregate
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 	[JsonInclude, JsonPropertyName("top")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; init; }
+
+	string IAggregate.Type => "top_metrics";
 }

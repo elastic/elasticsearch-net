@@ -65,6 +65,11 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal PutScriptRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -72,6 +77,24 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "put_script";
+
+	/// <summary>
+	/// <para>
+	/// Context in which the script or search template should run.
+	/// To prevent errors, the API immediately compiles the script or template in this context.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Context { get => P<Elastic.Clients.Elasticsearch.Name?>("context"); set => PO("context", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the stored script or search template.
+	/// Must be unique within the cluster.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>

@@ -22,10 +22,66 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class QueryUserResponseConverter : System.Text.Json.Serialization.JsonConverter<QueryUserResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropUsers = System.Text.Json.JsonEncodedText.Encode("users");
+
+	public override QueryUserResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propTotal = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser>> propUsers = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryRead(ref reader, options, PropCount))
+			{
+				continue;
+			}
+
+			if (propTotal.TryRead(ref reader, options, PropTotal))
+			{
+				continue;
+			}
+
+			if (propUsers.TryRead(ref reader, options, PropUsers))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new QueryUserResponse
+		{
+			Count = propCount.Value
+,
+			Total = propTotal.Value
+,
+			Users = propUsers.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, QueryUserResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count);
+		writer.WriteProperty(options, PropTotal, value.Total);
+		writer.WriteProperty(options, PropUsers, value.Users);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(QueryUserResponseConverter))]
 public sealed partial class QueryUserResponse : ElasticsearchResponse
 {
 	/// <summary>
@@ -33,7 +89,6 @@ public sealed partial class QueryUserResponse : ElasticsearchResponse
 	/// The number of users returned in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
 
 	/// <summary>
@@ -41,7 +96,6 @@ public sealed partial class QueryUserResponse : ElasticsearchResponse
 	/// The total number of users found.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 
 	/// <summary>
@@ -49,6 +103,5 @@ public sealed partial class QueryUserResponse : ElasticsearchResponse
 	/// A list of user information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("users")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> Users { get; init; }
 }

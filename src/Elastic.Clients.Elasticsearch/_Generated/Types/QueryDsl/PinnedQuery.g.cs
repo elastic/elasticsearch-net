@@ -39,12 +39,16 @@ public sealed partial class PinnedQuery
 			throw new ArgumentNullException(nameof(variant));
 		if (string.IsNullOrWhiteSpace(variantName))
 			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
+		VariantType = variantName;
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal PinnedQuery()
+	{
+	}
+
+	public object Variant { get; internal set; }
+	public string VariantType { get; internal set; }
 
 	public static PinnedQuery Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => new PinnedQuery("docs", pinnedDoc);
 	public static PinnedQuery Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => new PinnedQuery("ids", id);
@@ -83,111 +87,91 @@ public sealed partial class PinnedQuery
 	}
 }
 
-internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
+internal sealed partial class PinnedQueryConverter : System.Text.Json.Serialization.JsonConverter<PinnedQuery>
 {
-	public override PinnedQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
+
+	public override PinnedQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propOrganic = default;
+		LocalJsonValue<string?> propQueryName = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			throw new JsonException("Expected start token.");
+			if (propBoost.TryRead(ref reader, options, PropBoost))
+			{
+				continue;
+			}
+
+			if (propOrganic.TryRead(ref reader, options, PropOrganic))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryRead(ref reader, options, PropQueryName))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDocs))
+			{
+				variantType = VariantDocs.Value;
+				reader.Read();
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(options);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIds))
+			{
+				variantType = VariantIds.Value;
+				reader.Read();
+				variant = reader.ReadValue<ICollection<Elastic.Clients.Elasticsearch.Id>?>(options);
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.Query organicValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PinnedQuery
 		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "organic")
-			{
-				organicValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "docs")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ids")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Id>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
-		}
-
-		var result = new PinnedQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Organic = organicValue;
-		result.QueryName = queryNameValue;
-		return result;
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value
+	,
+			Organic = propOrganic.Value
+	,
+			QueryName = propQueryName.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PinnedQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
+			case "":
+				break;
+			case "docs":
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?)value.Variant);
+				break;
+			case "ids":
+				writer.WriteProperty(options, value.VariantType, (ICollection<Elastic.Clients.Elasticsearch.Id>?)value.Variant);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(PinnedQuery)}'.");
 		}
 
-		if (value.Organic is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, value.Organic, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "docs":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
-					break;
-				case "ids":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
-					break;
-			}
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost);
+		writer.WriteProperty(options, PropOrganic, value.Organic);
+		writer.WriteProperty(options, PropQueryName, value.QueryName);
 		writer.WriteEndObject();
 	}
 }

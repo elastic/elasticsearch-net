@@ -41,46 +41,79 @@ public enum AllocationExplainDecision
 	Always
 }
 
-internal sealed class AllocationExplainDecisionConverter : JsonConverter<AllocationExplainDecision>
+internal sealed partial class AllocationExplainDecisionConverter : System.Text.Json.Serialization.JsonConverter<AllocationExplainDecision>
 {
-	public override AllocationExplainDecision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("YES");
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottle = System.Text.Json.JsonEncodedText.Encode("THROTTLE");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("NO");
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("ALWAYS");
+
+	public override AllocationExplainDecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberYes))
 		{
-			case "YES":
-				return AllocationExplainDecision.Yes;
-			case "THROTTLE":
-				return AllocationExplainDecision.Throttle;
-			case "NO":
-				return AllocationExplainDecision.No;
-			case "ALWAYS":
-				return AllocationExplainDecision.Always;
+			return AllocationExplainDecision.Yes;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberThrottle))
+		{
+			return AllocationExplainDecision.Throttle;
+		}
+
+		if (reader.ValueTextEquals(MemberNo))
+		{
+			return AllocationExplainDecision.No;
+		}
+
+		if (reader.ValueTextEquals(MemberAlways))
+		{
+			return AllocationExplainDecision.Always;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AllocationExplainDecision.Yes;
+		}
+
+		if (string.Equals(value, MemberThrottle.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AllocationExplainDecision.Throttle;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AllocationExplainDecision.No;
+		}
+
+		if (string.Equals(value, MemberAlways.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AllocationExplainDecision.Always;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(AllocationExplainDecision)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, AllocationExplainDecision value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AllocationExplainDecision value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case AllocationExplainDecision.Yes:
-				writer.WriteStringValue("YES");
-				return;
+				writer.WriteStringValue(MemberYes);
+				break;
 			case AllocationExplainDecision.Throttle:
-				writer.WriteStringValue("THROTTLE");
-				return;
+				writer.WriteStringValue(MemberThrottle);
+				break;
 			case AllocationExplainDecision.No:
-				writer.WriteStringValue("NO");
-				return;
+				writer.WriteStringValue(MemberNo);
+				break;
 			case AllocationExplainDecision.Always:
-				writer.WriteStringValue("ALWAYS");
-				return;
+				writer.WriteStringValue(MemberAlways);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(AllocationExplainDecision)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -105,66 +138,135 @@ public enum Decision
 	AllocationDelayed
 }
 
-internal sealed class DecisionConverter : JsonConverter<Decision>
+internal sealed partial class DecisionConverter : System.Text.Json.Serialization.JsonConverter<Decision>
 {
-	public override Decision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
+	private static readonly System.Text.Json.JsonEncodedText MemberWorseBalance = System.Text.Json.JsonEncodedText.Encode("worse_balance");
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
+	private static readonly System.Text.Json.JsonEncodedText MemberNoValidShardCopy = System.Text.Json.JsonEncodedText.Encode("no_valid_shard_copy");
+	private static readonly System.Text.Json.JsonEncodedText MemberNoAttempt = System.Text.Json.JsonEncodedText.Encode("no_attempt");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+	private static readonly System.Text.Json.JsonEncodedText MemberAwaitingInfo = System.Text.Json.JsonEncodedText.Encode("awaiting_info");
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationDelayed = System.Text.Json.JsonEncodedText.Encode("allocation_delayed");
+
+	public override Decision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberYes))
 		{
-			case "yes":
-				return Decision.Yes;
-			case "worse_balance":
-				return Decision.WorseBalance;
-			case "throttled":
-				return Decision.Throttled;
-			case "no_valid_shard_copy":
-				return Decision.NoValidShardCopy;
-			case "no_attempt":
-				return Decision.NoAttempt;
-			case "no":
-				return Decision.No;
-			case "awaiting_info":
-				return Decision.AwaitingInfo;
-			case "allocation_delayed":
-				return Decision.AllocationDelayed;
+			return Decision.Yes;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberWorseBalance))
+		{
+			return Decision.WorseBalance;
+		}
+
+		if (reader.ValueTextEquals(MemberThrottled))
+		{
+			return Decision.Throttled;
+		}
+
+		if (reader.ValueTextEquals(MemberNoValidShardCopy))
+		{
+			return Decision.NoValidShardCopy;
+		}
+
+		if (reader.ValueTextEquals(MemberNoAttempt))
+		{
+			return Decision.NoAttempt;
+		}
+
+		if (reader.ValueTextEquals(MemberNo))
+		{
+			return Decision.No;
+		}
+
+		if (reader.ValueTextEquals(MemberAwaitingInfo))
+		{
+			return Decision.AwaitingInfo;
+		}
+
+		if (reader.ValueTextEquals(MemberAllocationDelayed))
+		{
+			return Decision.AllocationDelayed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.Yes;
+		}
+
+		if (string.Equals(value, MemberWorseBalance.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.WorseBalance;
+		}
+
+		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.Throttled;
+		}
+
+		if (string.Equals(value, MemberNoValidShardCopy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.NoValidShardCopy;
+		}
+
+		if (string.Equals(value, MemberNoAttempt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.NoAttempt;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.No;
+		}
+
+		if (string.Equals(value, MemberAwaitingInfo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.AwaitingInfo;
+		}
+
+		if (string.Equals(value, MemberAllocationDelayed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Decision.AllocationDelayed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Decision)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, Decision value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Decision value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case Decision.Yes:
-				writer.WriteStringValue("yes");
-				return;
+				writer.WriteStringValue(MemberYes);
+				break;
 			case Decision.WorseBalance:
-				writer.WriteStringValue("worse_balance");
-				return;
+				writer.WriteStringValue(MemberWorseBalance);
+				break;
 			case Decision.Throttled:
-				writer.WriteStringValue("throttled");
-				return;
+				writer.WriteStringValue(MemberThrottled);
+				break;
 			case Decision.NoValidShardCopy:
-				writer.WriteStringValue("no_valid_shard_copy");
-				return;
+				writer.WriteStringValue(MemberNoValidShardCopy);
+				break;
 			case Decision.NoAttempt:
-				writer.WriteStringValue("no_attempt");
-				return;
+				writer.WriteStringValue(MemberNoAttempt);
+				break;
 			case Decision.No:
-				writer.WriteStringValue("no");
-				return;
+				writer.WriteStringValue(MemberNo);
+				break;
 			case Decision.AwaitingInfo:
-				writer.WriteStringValue("awaiting_info");
-				return;
+				writer.WriteStringValue(MemberAwaitingInfo);
+				break;
 			case Decision.AllocationDelayed:
-				writer.WriteStringValue("allocation_delayed");
-				return;
+				writer.WriteStringValue(MemberAllocationDelayed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Decision)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -203,100 +305,232 @@ public enum UnassignedInformationReason
 	AllocationFailed
 }
 
-internal sealed class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
+internal sealed partial class UnassignedInformationReasonConverter : System.Text.Json.Serialization.JsonConverter<UnassignedInformationReason>
 {
-	public override UnassignedInformationReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberRerouteCancelled = System.Text.Json.JsonEncodedText.Encode("REROUTE_CANCELLED");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplicaAdded = System.Text.Json.JsonEncodedText.Encode("REPLICA_ADDED");
+	private static readonly System.Text.Json.JsonEncodedText MemberReinitialized = System.Text.Json.JsonEncodedText.Encode("REINITIALIZED");
+	private static readonly System.Text.Json.JsonEncodedText MemberReallocatedReplica = System.Text.Json.JsonEncodedText.Encode("REALLOCATED_REPLICA");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaryFailed = System.Text.Json.JsonEncodedText.Encode("PRIMARY_FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberNodeLeft = System.Text.Json.JsonEncodedText.Encode("NODE_LEFT");
+	private static readonly System.Text.Json.JsonEncodedText MemberNewIndexRestored = System.Text.Json.JsonEncodedText.Encode("NEW_INDEX_RESTORED");
+	private static readonly System.Text.Json.JsonEncodedText MemberManualAllocation = System.Text.Json.JsonEncodedText.Encode("MANUAL_ALLOCATION");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexReopened = System.Text.Json.JsonEncodedText.Encode("INDEX_REOPENED");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCreated = System.Text.Json.JsonEncodedText.Encode("INDEX_CREATED");
+	private static readonly System.Text.Json.JsonEncodedText MemberForcedEmptyPrimary = System.Text.Json.JsonEncodedText.Encode("FORCED_EMPTY_PRIMARY");
+	private static readonly System.Text.Json.JsonEncodedText MemberExistingIndexRestored = System.Text.Json.JsonEncodedText.Encode("EXISTING_INDEX_RESTORED");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanglingIndexImported = System.Text.Json.JsonEncodedText.Encode("DANGLING_INDEX_IMPORTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberClusterRecovered = System.Text.Json.JsonEncodedText.Encode("CLUSTER_RECOVERED");
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationFailed = System.Text.Json.JsonEncodedText.Encode("ALLOCATION_FAILED");
+
+	public override UnassignedInformationReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberRerouteCancelled))
 		{
-			case "REROUTE_CANCELLED":
-				return UnassignedInformationReason.RerouteCancelled;
-			case "REPLICA_ADDED":
-				return UnassignedInformationReason.ReplicaAdded;
-			case "REINITIALIZED":
-				return UnassignedInformationReason.Reinitialized;
-			case "REALLOCATED_REPLICA":
-				return UnassignedInformationReason.ReallocatedReplica;
-			case "PRIMARY_FAILED":
-				return UnassignedInformationReason.PrimaryFailed;
-			case "NODE_LEFT":
-				return UnassignedInformationReason.NodeLeft;
-			case "NEW_INDEX_RESTORED":
-				return UnassignedInformationReason.NewIndexRestored;
-			case "MANUAL_ALLOCATION":
-				return UnassignedInformationReason.ManualAllocation;
-			case "INDEX_REOPENED":
-				return UnassignedInformationReason.IndexReopened;
-			case "INDEX_CREATED":
-				return UnassignedInformationReason.IndexCreated;
-			case "FORCED_EMPTY_PRIMARY":
-				return UnassignedInformationReason.ForcedEmptyPrimary;
-			case "EXISTING_INDEX_RESTORED":
-				return UnassignedInformationReason.ExistingIndexRestored;
-			case "DANGLING_INDEX_IMPORTED":
-				return UnassignedInformationReason.DanglingIndexImported;
-			case "CLUSTER_RECOVERED":
-				return UnassignedInformationReason.ClusterRecovered;
-			case "ALLOCATION_FAILED":
-				return UnassignedInformationReason.AllocationFailed;
+			return UnassignedInformationReason.RerouteCancelled;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberReplicaAdded))
+		{
+			return UnassignedInformationReason.ReplicaAdded;
+		}
+
+		if (reader.ValueTextEquals(MemberReinitialized))
+		{
+			return UnassignedInformationReason.Reinitialized;
+		}
+
+		if (reader.ValueTextEquals(MemberReallocatedReplica))
+		{
+			return UnassignedInformationReason.ReallocatedReplica;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimaryFailed))
+		{
+			return UnassignedInformationReason.PrimaryFailed;
+		}
+
+		if (reader.ValueTextEquals(MemberNodeLeft))
+		{
+			return UnassignedInformationReason.NodeLeft;
+		}
+
+		if (reader.ValueTextEquals(MemberNewIndexRestored))
+		{
+			return UnassignedInformationReason.NewIndexRestored;
+		}
+
+		if (reader.ValueTextEquals(MemberManualAllocation))
+		{
+			return UnassignedInformationReason.ManualAllocation;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexReopened))
+		{
+			return UnassignedInformationReason.IndexReopened;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexCreated))
+		{
+			return UnassignedInformationReason.IndexCreated;
+		}
+
+		if (reader.ValueTextEquals(MemberForcedEmptyPrimary))
+		{
+			return UnassignedInformationReason.ForcedEmptyPrimary;
+		}
+
+		if (reader.ValueTextEquals(MemberExistingIndexRestored))
+		{
+			return UnassignedInformationReason.ExistingIndexRestored;
+		}
+
+		if (reader.ValueTextEquals(MemberDanglingIndexImported))
+		{
+			return UnassignedInformationReason.DanglingIndexImported;
+		}
+
+		if (reader.ValueTextEquals(MemberClusterRecovered))
+		{
+			return UnassignedInformationReason.ClusterRecovered;
+		}
+
+		if (reader.ValueTextEquals(MemberAllocationFailed))
+		{
+			return UnassignedInformationReason.AllocationFailed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerouteCancelled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.RerouteCancelled;
+		}
+
+		if (string.Equals(value, MemberReplicaAdded.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ReplicaAdded;
+		}
+
+		if (string.Equals(value, MemberReinitialized.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.Reinitialized;
+		}
+
+		if (string.Equals(value, MemberReallocatedReplica.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ReallocatedReplica;
+		}
+
+		if (string.Equals(value, MemberPrimaryFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.PrimaryFailed;
+		}
+
+		if (string.Equals(value, MemberNodeLeft.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.NodeLeft;
+		}
+
+		if (string.Equals(value, MemberNewIndexRestored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.NewIndexRestored;
+		}
+
+		if (string.Equals(value, MemberManualAllocation.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ManualAllocation;
+		}
+
+		if (string.Equals(value, MemberIndexReopened.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.IndexReopened;
+		}
+
+		if (string.Equals(value, MemberIndexCreated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.IndexCreated;
+		}
+
+		if (string.Equals(value, MemberForcedEmptyPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ForcedEmptyPrimary;
+		}
+
+		if (string.Equals(value, MemberExistingIndexRestored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ExistingIndexRestored;
+		}
+
+		if (string.Equals(value, MemberDanglingIndexImported.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.DanglingIndexImported;
+		}
+
+		if (string.Equals(value, MemberClusterRecovered.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.ClusterRecovered;
+		}
+
+		if (string.Equals(value, MemberAllocationFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return UnassignedInformationReason.AllocationFailed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(UnassignedInformationReason)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, UnassignedInformationReason value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case UnassignedInformationReason.RerouteCancelled:
-				writer.WriteStringValue("REROUTE_CANCELLED");
-				return;
+				writer.WriteStringValue(MemberRerouteCancelled);
+				break;
 			case UnassignedInformationReason.ReplicaAdded:
-				writer.WriteStringValue("REPLICA_ADDED");
-				return;
+				writer.WriteStringValue(MemberReplicaAdded);
+				break;
 			case UnassignedInformationReason.Reinitialized:
-				writer.WriteStringValue("REINITIALIZED");
-				return;
+				writer.WriteStringValue(MemberReinitialized);
+				break;
 			case UnassignedInformationReason.ReallocatedReplica:
-				writer.WriteStringValue("REALLOCATED_REPLICA");
-				return;
+				writer.WriteStringValue(MemberReallocatedReplica);
+				break;
 			case UnassignedInformationReason.PrimaryFailed:
-				writer.WriteStringValue("PRIMARY_FAILED");
-				return;
+				writer.WriteStringValue(MemberPrimaryFailed);
+				break;
 			case UnassignedInformationReason.NodeLeft:
-				writer.WriteStringValue("NODE_LEFT");
-				return;
+				writer.WriteStringValue(MemberNodeLeft);
+				break;
 			case UnassignedInformationReason.NewIndexRestored:
-				writer.WriteStringValue("NEW_INDEX_RESTORED");
-				return;
+				writer.WriteStringValue(MemberNewIndexRestored);
+				break;
 			case UnassignedInformationReason.ManualAllocation:
-				writer.WriteStringValue("MANUAL_ALLOCATION");
-				return;
+				writer.WriteStringValue(MemberManualAllocation);
+				break;
 			case UnassignedInformationReason.IndexReopened:
-				writer.WriteStringValue("INDEX_REOPENED");
-				return;
+				writer.WriteStringValue(MemberIndexReopened);
+				break;
 			case UnassignedInformationReason.IndexCreated:
-				writer.WriteStringValue("INDEX_CREATED");
-				return;
+				writer.WriteStringValue(MemberIndexCreated);
+				break;
 			case UnassignedInformationReason.ForcedEmptyPrimary:
-				writer.WriteStringValue("FORCED_EMPTY_PRIMARY");
-				return;
+				writer.WriteStringValue(MemberForcedEmptyPrimary);
+				break;
 			case UnassignedInformationReason.ExistingIndexRestored:
-				writer.WriteStringValue("EXISTING_INDEX_RESTORED");
-				return;
+				writer.WriteStringValue(MemberExistingIndexRestored);
+				break;
 			case UnassignedInformationReason.DanglingIndexImported:
-				writer.WriteStringValue("DANGLING_INDEX_IMPORTED");
-				return;
+				writer.WriteStringValue(MemberDanglingIndexImported);
+				break;
 			case UnassignedInformationReason.ClusterRecovered:
-				writer.WriteStringValue("CLUSTER_RECOVERED");
-				return;
+				writer.WriteStringValue(MemberClusterRecovered);
+				break;
 			case UnassignedInformationReason.AllocationFailed:
-				writer.WriteStringValue("ALLOCATION_FAILED");
-				return;
+				writer.WriteStringValue(MemberAllocationFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(UnassignedInformationReason)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

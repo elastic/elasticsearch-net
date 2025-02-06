@@ -34,6 +34,39 @@ public sealed partial class PutSynonymRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<PutSynonymRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
+
+	public override PutSynonymRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>> propSynonymsSet = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSynonymsSet.TryRead(ref reader, options, PropSynonymsSet, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>, Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>)))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PutSynonymRequest
+		{
+			SynonymsSet = propSynonymsSet.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutSynonymRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, typeof(SingleOrManyMarker<ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>, Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a synonym set.
@@ -41,9 +74,15 @@ public sealed partial class PutSynonymRequestParameters : RequestParameters
 /// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// </summary>
+[JsonConverter(typeof(PutSynonymRequestConverter))]
 public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestParameters>
 {
 	public PutSynonymRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	{
+	}
+
+	[JsonConstructor]
+	internal PutSynonymRequest()
 	{
 	}
 
@@ -57,11 +96,16 @@ public sealed partial class PutSynonymRequest : PlainRequest<PutSynonymRequestPa
 
 	/// <summary>
 	/// <para>
+	/// The id of the synonyms set to be created or updated
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The synonym set information to update
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("synonyms_set")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.SynonymRule))]
 	public ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> SynonymsSet { get; set; }
 }
 

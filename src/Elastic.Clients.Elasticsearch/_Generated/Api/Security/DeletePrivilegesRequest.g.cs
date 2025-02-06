@@ -51,6 +51,11 @@ public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivile
 	{
 	}
 
+	[JsonConstructor]
+	internal DeletePrivilegesRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDeletePrivileges;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -58,6 +63,22 @@ public sealed partial class DeletePrivilegesRequest : PlainRequest<DeletePrivile
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.delete_privileges";
+
+	/// <summary>
+	/// <para>
+	/// Application name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
+
+	/// <summary>
+	/// <para>
+	/// Privilege name
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>

@@ -44,6 +44,7 @@ public sealed partial class GetServiceAccountsRequestParameters : RequestParamet
 /// </summary>
 public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceAccountsRequestParameters>
 {
+	[JsonConstructor]
 	public GetServiceAccountsRequest()
 	{
 	}
@@ -63,6 +64,22 @@ public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceA
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_service_accounts";
+
+	/// <summary>
+	/// <para>
+	/// Name of the namespace. Omit this parameter to retrieve information about all service accounts. If you omit this parameter, you must also omit the <c>service</c> parameter.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Namespace { get => P<string?>("namespace"); set => PO("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the service name. Omit this parameter to retrieve information about all service accounts that belong to the specified <c>namespace</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Service { get => P<string?>("service"); set => PO("service", value); }
 }
 
 /// <summary>

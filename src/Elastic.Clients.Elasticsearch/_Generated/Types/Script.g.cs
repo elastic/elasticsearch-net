@@ -27,6 +27,86 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ScriptConverter : System.Text.Json.Serialization.JsonConverter<Script>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang");
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Script Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<string?>(options);
+			return new Script { Source = value };
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScriptLanguage?> propLang = default;
+		LocalJsonValue<IDictionary<string, string>?> propOptions = default;
+		LocalJsonValue<IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryRead(ref reader, options, PropId))
+			{
+				continue;
+			}
+
+			if (propLang.TryRead(ref reader, options, PropLang))
+			{
+				continue;
+			}
+
+			if (propOptions.TryRead(ref reader, options, PropOptions))
+			{
+				continue;
+			}
+
+			if (propParams.TryRead(ref reader, options, PropParams))
+			{
+				continue;
+			}
+
+			if (propSource.TryRead(ref reader, options, PropSource))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Script
+		{
+			Id = propId.Value
+,
+			Lang = propLang.Value
+,
+			Options = propOptions.Value
+,
+			Params = propParams.Value
+,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Script value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id);
+		writer.WriteProperty(options, PropLang, value.Lang);
+		writer.WriteProperty(options, PropOptions, value.Options);
+		writer.WriteProperty(options, PropParams, value.Params);
+		writer.WriteProperty(options, PropSource, value.Source);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(ScriptConverter))]
 public sealed partial class Script
 {
 	/// <summary>
@@ -34,7 +114,6 @@ public sealed partial class Script
 	/// The <c>id</c> for a stored script.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -42,9 +121,7 @@ public sealed partial class Script
 	/// Specifies the language the script is written in.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
-	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, string>? Options { get; set; }
 
 	/// <summary>
@@ -53,7 +130,6 @@ public sealed partial class Script
 	/// Use parameters instead of hard-coded values to decrease compile time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
@@ -61,7 +137,6 @@ public sealed partial class Script
 	/// The script source.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Script script) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter.Script(script);

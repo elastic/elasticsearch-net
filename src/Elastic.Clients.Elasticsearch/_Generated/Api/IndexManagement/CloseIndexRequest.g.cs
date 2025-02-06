@@ -114,6 +114,11 @@ public sealed partial class CloseIndexRequest : PlainRequest<CloseIndexRequestPa
 	{
 	}
 
+	[JsonConstructor]
+	internal CloseIndexRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -121,6 +126,14 @@ public sealed partial class CloseIndexRequest : PlainRequest<CloseIndexRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.close";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of index names used to limit the request.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>

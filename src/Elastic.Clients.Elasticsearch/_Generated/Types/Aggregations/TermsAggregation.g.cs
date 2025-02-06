@@ -27,6 +27,200 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class TermsAggregationConverter : System.Text.Json.Serialization.JsonConverter<TermsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollectMode = System.Text.Json.JsonEncodedText.Encode("collect_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingBucket = System.Text.Json.JsonEncodedText.Encode("missing_bucket");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingOrder = System.Text.Json.JsonEncodedText.Encode("missing_order");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropShowTermDocCountError = System.Text.Json.JsonEncodedText.Encode("show_term_doc_count_error");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
+
+	public override TermsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?> propCollectMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?> propExecutionHint = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?> propInclude = default;
+		LocalJsonValue<int?> propMinDocCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue?> propMissing = default;
+		LocalJsonValue<bool?> propMissingBucket = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?> propMissingOrder = default;
+		LocalJsonValue<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<long?> propShardMinDocCount = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<bool?> propShowTermDocCountError = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<string?> propValueType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollectMode.TryRead(ref reader, options, PropCollectMode))
+			{
+				continue;
+			}
+
+			if (propExclude.TryRead(ref reader, options, PropExclude))
+			{
+				continue;
+			}
+
+			if (propExecutionHint.TryRead(ref reader, options, PropExecutionHint))
+			{
+				continue;
+			}
+
+			if (propField.TryRead(ref reader, options, PropField))
+			{
+				continue;
+			}
+
+			if (propFormat.TryRead(ref reader, options, PropFormat))
+			{
+				continue;
+			}
+
+			if (propInclude.TryRead(ref reader, options, PropInclude))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryRead(ref reader, options, PropMinDocCount))
+			{
+				continue;
+			}
+
+			if (propMissing.TryRead(ref reader, options, PropMissing))
+			{
+				continue;
+			}
+
+			if (propMissingBucket.TryRead(ref reader, options, PropMissingBucket))
+			{
+				continue;
+			}
+
+			if (propMissingOrder.TryRead(ref reader, options, PropMissingOrder))
+			{
+				continue;
+			}
+
+			if (propOrder.TryRead(ref reader, options, PropOrder, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>)))
+			{
+				continue;
+			}
+
+			if (propScript.TryRead(ref reader, options, PropScript))
+			{
+				continue;
+			}
+
+			if (propShardMinDocCount.TryRead(ref reader, options, PropShardMinDocCount))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryRead(ref reader, options, PropShardSize))
+			{
+				continue;
+			}
+
+			if (propShowTermDocCountError.TryRead(ref reader, options, PropShowTermDocCountError))
+			{
+				continue;
+			}
+
+			if (propSize.TryRead(ref reader, options, PropSize))
+			{
+				continue;
+			}
+
+			if (propValueType.TryRead(ref reader, options, PropValueType))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new TermsAggregation
+		{
+			CollectMode = propCollectMode.Value
+,
+			Exclude = propExclude.Value
+,
+			ExecutionHint = propExecutionHint.Value
+,
+			Field = propField.Value
+,
+			Format = propFormat.Value
+,
+			Include = propInclude.Value
+,
+			MinDocCount = propMinDocCount.Value
+,
+			Missing = propMissing.Value
+,
+			MissingBucket = propMissingBucket.Value
+,
+			MissingOrder = propMissingOrder.Value
+,
+			Order = propOrder.Value
+,
+			Script = propScript.Value
+,
+			ShardMinDocCount = propShardMinDocCount.Value
+,
+			ShardSize = propShardSize.Value
+,
+			ShowTermDocCountError = propShowTermDocCountError.Value
+,
+			Size = propSize.Value
+,
+			ValueType = propValueType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollectMode, value.CollectMode);
+		writer.WriteProperty(options, PropExclude, value.Exclude);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint);
+		writer.WriteProperty(options, PropField, value.Field);
+		writer.WriteProperty(options, PropFormat, value.Format);
+		writer.WriteProperty(options, PropInclude, value.Include);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount);
+		writer.WriteProperty(options, PropMissing, value.Missing);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket);
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder);
+		writer.WriteProperty(options, PropOrder, value.Order, null, typeof(SingleOrManyMarker<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?, KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>));
+		writer.WriteProperty(options, PropScript, value.Script);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize);
+		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError);
+		writer.WriteProperty(options, PropSize, value.Size);
+		writer.WriteProperty(options, PropValueType, value.ValueType);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(TermsAggregationConverter))]
 public sealed partial class TermsAggregation
 {
 	/// <summary>
@@ -34,7 +228,6 @@ public sealed partial class TermsAggregation
 	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 	/// <summary>
@@ -43,7 +236,6 @@ public sealed partial class TermsAggregation
 	/// Accepts regular expressions and partitions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
@@ -51,7 +243,6 @@ public sealed partial class TermsAggregation
 	/// Determines whether the aggregation will use field values directly or global ordinals.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
@@ -59,9 +250,7 @@ public sealed partial class TermsAggregation
 	/// The field from which to return terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -70,7 +259,6 @@ public sealed partial class TermsAggregation
 	/// Accepts regular expressions and partitions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
 	/// <summary>
@@ -78,7 +266,6 @@ public sealed partial class TermsAggregation
 	/// Only return values that are found in more than <c>min_doc_count</c> hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
@@ -87,11 +274,8 @@ public sealed partial class TermsAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("missing_bucket")]
 	public bool? MissingBucket { get; set; }
-	[JsonInclude, JsonPropertyName("missing_order")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
 	/// <summary>
@@ -100,10 +284,7 @@ public sealed partial class TermsAggregation
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -112,7 +293,6 @@ public sealed partial class TermsAggregation
 	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
@@ -121,7 +301,6 @@ public sealed partial class TermsAggregation
 	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -129,7 +308,6 @@ public sealed partial class TermsAggregation
 	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
@@ -137,7 +315,6 @@ public sealed partial class TermsAggregation
 	/// The number of buckets returned out of the overall terms list.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -145,7 +322,6 @@ public sealed partial class TermsAggregation
 	/// Coerced unmapped fields into the specified type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("value_type")]
 	public string? ValueType { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Terms(termsAggregation);

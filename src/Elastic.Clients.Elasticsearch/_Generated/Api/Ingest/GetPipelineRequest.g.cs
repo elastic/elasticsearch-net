@@ -57,6 +57,7 @@ public sealed partial class GetPipelineRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequestParameters>
 {
+	[JsonConstructor]
 	public GetPipelineRequest()
 	{
 	}
@@ -72,6 +73,16 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.get_pipeline";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of pipeline IDs to retrieve.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To get all ingest pipelines, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>

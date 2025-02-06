@@ -41,46 +41,79 @@ public enum AppliesTo
 	Actual
 }
 
-internal sealed class AppliesToConverter : JsonConverter<AppliesTo>
+internal sealed partial class AppliesToConverter : System.Text.Json.Serialization.JsonConverter<AppliesTo>
 {
-	public override AppliesTo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTypical = System.Text.Json.JsonEncodedText.Encode("typical");
+	private static readonly System.Text.Json.JsonEncodedText MemberTime = System.Text.Json.JsonEncodedText.Encode("time");
+	private static readonly System.Text.Json.JsonEncodedText MemberDiffFromTypical = System.Text.Json.JsonEncodedText.Encode("diff_from_typical");
+	private static readonly System.Text.Json.JsonEncodedText MemberActual = System.Text.Json.JsonEncodedText.Encode("actual");
+
+	public override AppliesTo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTypical))
 		{
-			case "typical":
-				return AppliesTo.Typical;
-			case "time":
-				return AppliesTo.Time;
-			case "diff_from_typical":
-				return AppliesTo.DiffFromTypical;
-			case "actual":
-				return AppliesTo.Actual;
+			return AppliesTo.Typical;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberTime))
+		{
+			return AppliesTo.Time;
+		}
+
+		if (reader.ValueTextEquals(MemberDiffFromTypical))
+		{
+			return AppliesTo.DiffFromTypical;
+		}
+
+		if (reader.ValueTextEquals(MemberActual))
+		{
+			return AppliesTo.Actual;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTypical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AppliesTo.Typical;
+		}
+
+		if (string.Equals(value, MemberTime.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AppliesTo.Time;
+		}
+
+		if (string.Equals(value, MemberDiffFromTypical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AppliesTo.DiffFromTypical;
+		}
+
+		if (string.Equals(value, MemberActual.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AppliesTo.Actual;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(AppliesTo)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, AppliesTo value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, AppliesTo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case AppliesTo.Typical:
-				writer.WriteStringValue("typical");
-				return;
+				writer.WriteStringValue(MemberTypical);
+				break;
 			case AppliesTo.Time:
-				writer.WriteStringValue("time");
-				return;
+				writer.WriteStringValue(MemberTime);
+				break;
 			case AppliesTo.DiffFromTypical:
-				writer.WriteStringValue("diff_from_typical");
-				return;
+				writer.WriteStringValue(MemberDiffFromTypical);
+				break;
 			case AppliesTo.Actual:
-				writer.WriteStringValue("actual");
-				return;
+				writer.WriteStringValue(MemberActual);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(AppliesTo)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -93,36 +126,51 @@ public enum CategorizationStatus
 	Ok
 }
 
-internal sealed class CategorizationStatusConverter : JsonConverter<CategorizationStatus>
+internal sealed partial class CategorizationStatusConverter : System.Text.Json.Serialization.JsonConverter<CategorizationStatus>
 {
-	public override CategorizationStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberWarn = System.Text.Json.JsonEncodedText.Encode("warn");
+	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok");
+
+	public override CategorizationStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberWarn))
 		{
-			case "warn":
-				return CategorizationStatus.Warn;
-			case "ok":
-				return CategorizationStatus.Ok;
+			return CategorizationStatus.Warn;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberOk))
+		{
+			return CategorizationStatus.Ok;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWarn.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CategorizationStatus.Warn;
+		}
+
+		if (string.Equals(value, MemberOk.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CategorizationStatus.Ok;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(CategorizationStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, CategorizationStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CategorizationStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case CategorizationStatus.Warn:
-				writer.WriteStringValue("warn");
-				return;
+				writer.WriteStringValue(MemberWarn);
+				break;
 			case CategorizationStatus.Ok:
-				writer.WriteStringValue("ok");
-				return;
+				writer.WriteStringValue(MemberOk);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(CategorizationStatus)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -137,41 +185,65 @@ public enum ChunkingMode
 	Auto
 }
 
-internal sealed class ChunkingModeConverter : JsonConverter<ChunkingMode>
+internal sealed partial class ChunkingModeConverter : System.Text.Json.Serialization.JsonConverter<ChunkingMode>
 {
-	public override ChunkingMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberOff = System.Text.Json.JsonEncodedText.Encode("off");
+	private static readonly System.Text.Json.JsonEncodedText MemberManual = System.Text.Json.JsonEncodedText.Encode("manual");
+	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
+
+	public override ChunkingMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberOff))
 		{
-			case "off":
-				return ChunkingMode.Off;
-			case "manual":
-				return ChunkingMode.Manual;
-			case "auto":
-				return ChunkingMode.Auto;
+			return ChunkingMode.Off;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberManual))
+		{
+			return ChunkingMode.Manual;
+		}
+
+		if (reader.ValueTextEquals(MemberAuto))
+		{
+			return ChunkingMode.Auto;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOff.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChunkingMode.Off;
+		}
+
+		if (string.Equals(value, MemberManual.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChunkingMode.Manual;
+		}
+
+		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ChunkingMode.Auto;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ChunkingMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ChunkingMode value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ChunkingMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ChunkingMode.Off:
-				writer.WriteStringValue("off");
-				return;
+				writer.WriteStringValue(MemberOff);
+				break;
 			case ChunkingMode.Manual:
-				writer.WriteStringValue("manual");
-				return;
+				writer.WriteStringValue(MemberManual);
+				break;
 			case ChunkingMode.Auto:
-				writer.WriteStringValue("auto");
-				return;
+				writer.WriteStringValue(MemberAuto);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ChunkingMode)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -188,46 +260,79 @@ public enum ConditionOperator
 	Gt
 }
 
-internal sealed class ConditionOperatorConverter : JsonConverter<ConditionOperator>
+internal sealed partial class ConditionOperatorConverter : System.Text.Json.Serialization.JsonConverter<ConditionOperator>
 {
-	public override ConditionOperator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt");
+
+	public override ConditionOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberLte))
 		{
-			case "lte":
-				return ConditionOperator.Lte;
-			case "lt":
-				return ConditionOperator.Lt;
-			case "gte":
-				return ConditionOperator.Gte;
-			case "gt":
-				return ConditionOperator.Gt;
+			return ConditionOperator.Lte;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberLt))
+		{
+			return ConditionOperator.Lt;
+		}
+
+		if (reader.ValueTextEquals(MemberGte))
+		{
+			return ConditionOperator.Gte;
+		}
+
+		if (reader.ValueTextEquals(MemberGt))
+		{
+			return ConditionOperator.Gt;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConditionOperator.Lte;
+		}
+
+		if (string.Equals(value, MemberLt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConditionOperator.Lt;
+		}
+
+		if (string.Equals(value, MemberGte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConditionOperator.Gte;
+		}
+
+		if (string.Equals(value, MemberGt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ConditionOperator.Gt;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ConditionOperator)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ConditionOperator value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ConditionOperator value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ConditionOperator.Lte:
-				writer.WriteStringValue("lte");
-				return;
+				writer.WriteStringValue(MemberLte);
+				break;
 			case ConditionOperator.Lt:
-				writer.WriteStringValue("lt");
-				return;
+				writer.WriteStringValue(MemberLt);
+				break;
 			case ConditionOperator.Gte:
-				writer.WriteStringValue("gte");
-				return;
+				writer.WriteStringValue(MemberGte);
+				break;
 			case ConditionOperator.Gt:
-				writer.WriteStringValue("gt");
-				return;
+				writer.WriteStringValue(MemberGt);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ConditionOperator)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -244,46 +349,79 @@ public enum DatafeedState
 	Started
 }
 
-internal sealed class DatafeedStateConverter : JsonConverter<DatafeedState>
+internal sealed partial class DatafeedStateConverter : System.Text.Json.Serialization.JsonConverter<DatafeedState>
 {
-	public override DatafeedState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+
+	public override DatafeedState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStopping))
 		{
-			case "stopping":
-				return DatafeedState.Stopping;
-			case "stopped":
-				return DatafeedState.Stopped;
-			case "starting":
-				return DatafeedState.Starting;
-			case "started":
-				return DatafeedState.Started;
+			return DatafeedState.Stopping;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return DatafeedState.Stopped;
+		}
+
+		if (reader.ValueTextEquals(MemberStarting))
+		{
+			return DatafeedState.Starting;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return DatafeedState.Started;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DatafeedState.Stopping;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DatafeedState.Stopped;
+		}
+
+		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DatafeedState.Starting;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DatafeedState.Started;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(DatafeedState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, DatafeedState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DatafeedState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case DatafeedState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
+				writer.WriteStringValue(MemberStopping);
+				break;
 			case DatafeedState.Stopped:
-				writer.WriteStringValue("stopped");
-				return;
+				writer.WriteStringValue(MemberStopped);
+				break;
 			case DatafeedState.Starting:
-				writer.WriteStringValue("starting");
-				return;
+				writer.WriteStringValue(MemberStarting);
+				break;
 			case DatafeedState.Started:
-				writer.WriteStringValue("started");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(DatafeedState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -302,51 +440,93 @@ public enum DataframeState
 	Failed
 }
 
-internal sealed class DataframeStateConverter : JsonConverter<DataframeState>
+internal sealed partial class DataframeStateConverter : System.Text.Json.Serialization.JsonConverter<DataframeState>
 {
-	public override DataframeState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+
+	public override DataframeState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStopping))
 		{
-			case "stopping":
-				return DataframeState.Stopping;
-			case "stopped":
-				return DataframeState.Stopped;
-			case "starting":
-				return DataframeState.Starting;
-			case "started":
-				return DataframeState.Started;
-			case "failed":
-				return DataframeState.Failed;
+			return DataframeState.Stopping;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return DataframeState.Stopped;
+		}
+
+		if (reader.ValueTextEquals(MemberStarting))
+		{
+			return DataframeState.Starting;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return DataframeState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return DataframeState.Failed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DataframeState.Stopping;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DataframeState.Stopped;
+		}
+
+		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DataframeState.Starting;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DataframeState.Started;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DataframeState.Failed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(DataframeState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DataframeState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case DataframeState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
+				writer.WriteStringValue(MemberStopping);
+				break;
 			case DataframeState.Stopped:
-				writer.WriteStringValue("stopped");
-				return;
+				writer.WriteStringValue(MemberStopped);
+				break;
 			case DataframeState.Starting:
-				writer.WriteStringValue("starting");
-				return;
+				writer.WriteStringValue(MemberStarting);
+				break;
 			case DataframeState.Started:
-				writer.WriteStringValue("started");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
 			case DataframeState.Failed:
-				writer.WriteStringValue("failed");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(DataframeState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -376,41 +556,65 @@ public enum DeploymentAllocationState
 	FullyAllocated
 }
 
-internal sealed class DeploymentAllocationStateConverter : JsonConverter<DeploymentAllocationState>
+internal sealed partial class DeploymentAllocationStateConverter : System.Text.Json.Serialization.JsonConverter<DeploymentAllocationState>
 {
-	public override DeploymentAllocationState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberFullyAllocated = System.Text.Json.JsonEncodedText.Encode("fully_allocated");
+
+	public override DeploymentAllocationState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStarting))
 		{
-			case "starting":
-				return DeploymentAllocationState.Starting;
-			case "started":
-				return DeploymentAllocationState.Started;
-			case "fully_allocated":
-				return DeploymentAllocationState.FullyAllocated;
+			return DeploymentAllocationState.Starting;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return DeploymentAllocationState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberFullyAllocated))
+		{
+			return DeploymentAllocationState.FullyAllocated;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAllocationState.Starting;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAllocationState.Started;
+		}
+
+		if (string.Equals(value, MemberFullyAllocated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAllocationState.FullyAllocated;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(DeploymentAllocationState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, DeploymentAllocationState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeploymentAllocationState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case DeploymentAllocationState.Starting:
-				writer.WriteStringValue("starting");
-				return;
+				writer.WriteStringValue(MemberStarting);
+				break;
 			case DeploymentAllocationState.Started:
-				writer.WriteStringValue("started");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
 			case DeploymentAllocationState.FullyAllocated:
-				writer.WriteStringValue("fully_allocated");
-				return;
+				writer.WriteStringValue(MemberFullyAllocated);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(DeploymentAllocationState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -447,46 +651,79 @@ public enum DeploymentAssignmentState
 	Failed
 }
 
-internal sealed class DeploymentAssignmentStateConverter : JsonConverter<DeploymentAssignmentState>
+internal sealed partial class DeploymentAssignmentStateConverter : System.Text.Json.Serialization.JsonConverter<DeploymentAssignmentState>
 {
-	public override DeploymentAssignmentState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+
+	public override DeploymentAssignmentState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStopping))
 		{
-			case "stopping":
-				return DeploymentAssignmentState.Stopping;
-			case "starting":
-				return DeploymentAssignmentState.Starting;
-			case "started":
-				return DeploymentAssignmentState.Started;
-			case "failed":
-				return DeploymentAssignmentState.Failed;
+			return DeploymentAssignmentState.Stopping;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberStarting))
+		{
+			return DeploymentAssignmentState.Starting;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return DeploymentAssignmentState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return DeploymentAssignmentState.Failed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAssignmentState.Stopping;
+		}
+
+		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAssignmentState.Starting;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAssignmentState.Started;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DeploymentAssignmentState.Failed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(DeploymentAssignmentState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, DeploymentAssignmentState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DeploymentAssignmentState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case DeploymentAssignmentState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
+				writer.WriteStringValue(MemberStopping);
+				break;
 			case DeploymentAssignmentState.Starting:
-				writer.WriteStringValue("starting");
-				return;
+				writer.WriteStringValue(MemberStarting);
+				break;
 			case DeploymentAssignmentState.Started:
-				writer.WriteStringValue("started");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
 			case DeploymentAssignmentState.Failed:
-				writer.WriteStringValue("failed");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(DeploymentAssignmentState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -503,46 +740,79 @@ public enum ExcludeFrequent
 	All
 }
 
-internal sealed class ExcludeFrequentConverter : JsonConverter<ExcludeFrequent>
+internal sealed partial class ExcludeFrequentConverter : System.Text.Json.Serialization.JsonConverter<ExcludeFrequent>
 {
-	public override ExcludeFrequent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberOver = System.Text.Json.JsonEncodedText.Encode("over");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberBy = System.Text.Json.JsonEncodedText.Encode("by");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+
+	public override ExcludeFrequent Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberOver))
 		{
-			case "over":
-				return ExcludeFrequent.Over;
-			case "none":
-				return ExcludeFrequent.None;
-			case "by":
-				return ExcludeFrequent.By;
-			case "all":
-				return ExcludeFrequent.All;
+			return ExcludeFrequent.Over;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return ExcludeFrequent.None;
+		}
+
+		if (reader.ValueTextEquals(MemberBy))
+		{
+			return ExcludeFrequent.By;
+		}
+
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return ExcludeFrequent.All;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOver.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ExcludeFrequent.Over;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ExcludeFrequent.None;
+		}
+
+		if (string.Equals(value, MemberBy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ExcludeFrequent.By;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ExcludeFrequent.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ExcludeFrequent)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ExcludeFrequent value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ExcludeFrequent value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case ExcludeFrequent.Over:
-				writer.WriteStringValue("over");
-				return;
+				writer.WriteStringValue(MemberOver);
+				break;
 			case ExcludeFrequent.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case ExcludeFrequent.By:
-				writer.WriteStringValue("by");
-				return;
+				writer.WriteStringValue(MemberBy);
+				break;
 			case ExcludeFrequent.All:
-				writer.WriteStringValue("all");
-				return;
+				writer.WriteStringValue(MemberAll);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(ExcludeFrequent)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -555,36 +825,51 @@ public enum FilterType
 	Exclude
 }
 
-internal sealed class FilterTypeConverter : JsonConverter<FilterType>
+internal sealed partial class FilterTypeConverter : System.Text.Json.Serialization.JsonConverter<FilterType>
 {
-	public override FilterType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+
+	public override FilterType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberInclude))
 		{
-			case "include":
-				return FilterType.Include;
-			case "exclude":
-				return FilterType.Exclude;
+			return FilterType.Include;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberExclude))
+		{
+			return FilterType.Exclude;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FilterType.Include;
+		}
+
+		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FilterType.Exclude;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FilterType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FilterType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, FilterType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case FilterType.Include:
-				writer.WriteStringValue("include");
-				return;
+				writer.WriteStringValue(MemberInclude);
+				break;
 			case FilterType.Exclude:
-				writer.WriteStringValue("exclude");
-				return;
+				writer.WriteStringValue(MemberExclude);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(FilterType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -633,51 +918,93 @@ public enum Include
 	Definition
 }
 
-internal sealed class IncludeConverter : JsonConverter<Include>
+internal sealed partial class IncludeConverter : System.Text.Json.Serialization.JsonConverter<Include>
 {
-	public override Include Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance");
+	private static readonly System.Text.Json.JsonEncodedText MemberHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters");
+	private static readonly System.Text.Json.JsonEncodedText MemberFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefinitionStatus = System.Text.Json.JsonEncodedText.Encode("definition_status");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
+
+	public override Include Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTotalFeatureImportance))
 		{
-			case "total_feature_importance":
-				return Include.TotalFeatureImportance;
-			case "hyperparameters":
-				return Include.Hyperparameters;
-			case "feature_importance_baseline":
-				return Include.FeatureImportanceBaseline;
-			case "definition_status":
-				return Include.DefinitionStatus;
-			case "definition":
-				return Include.Definition;
+			return Include.TotalFeatureImportance;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberHyperparameters))
+		{
+			return Include.Hyperparameters;
+		}
+
+		if (reader.ValueTextEquals(MemberFeatureImportanceBaseline))
+		{
+			return Include.FeatureImportanceBaseline;
+		}
+
+		if (reader.ValueTextEquals(MemberDefinitionStatus))
+		{
+			return Include.DefinitionStatus;
+		}
+
+		if (reader.ValueTextEquals(MemberDefinition))
+		{
+			return Include.Definition;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTotalFeatureImportance.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Include.TotalFeatureImportance;
+		}
+
+		if (string.Equals(value, MemberHyperparameters.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Include.Hyperparameters;
+		}
+
+		if (string.Equals(value, MemberFeatureImportanceBaseline.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Include.FeatureImportanceBaseline;
+		}
+
+		if (string.Equals(value, MemberDefinitionStatus.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Include.DefinitionStatus;
+		}
+
+		if (string.Equals(value, MemberDefinition.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Include.Definition;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Include)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, Include value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Include value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case Include.TotalFeatureImportance:
-				writer.WriteStringValue("total_feature_importance");
-				return;
+				writer.WriteStringValue(MemberTotalFeatureImportance);
+				break;
 			case Include.Hyperparameters:
-				writer.WriteStringValue("hyperparameters");
-				return;
+				writer.WriteStringValue(MemberHyperparameters);
+				break;
 			case Include.FeatureImportanceBaseline:
-				writer.WriteStringValue("feature_importance_baseline");
-				return;
+				writer.WriteStringValue(MemberFeatureImportanceBaseline);
+				break;
 			case Include.DefinitionStatus:
-				writer.WriteStringValue("definition_status");
-				return;
+				writer.WriteStringValue(MemberDefinitionStatus);
+				break;
 			case Include.Definition:
-				writer.WriteStringValue("definition");
-				return;
+				writer.WriteStringValue(MemberDefinition);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Include)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -692,41 +1019,65 @@ public enum JobBlockedReason
 	Delete
 }
 
-internal sealed class JobBlockedReasonConverter : JsonConverter<JobBlockedReason>
+internal sealed partial class JobBlockedReasonConverter : System.Text.Json.Serialization.JsonConverter<JobBlockedReason>
 {
-	public override JobBlockedReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberRevert = System.Text.Json.JsonEncodedText.Encode("revert");
+	private static readonly System.Text.Json.JsonEncodedText MemberReset = System.Text.Json.JsonEncodedText.Encode("reset");
+	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete");
+
+	public override JobBlockedReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberRevert))
 		{
-			case "revert":
-				return JobBlockedReason.Revert;
-			case "reset":
-				return JobBlockedReason.Reset;
-			case "delete":
-				return JobBlockedReason.Delete;
+			return JobBlockedReason.Revert;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberReset))
+		{
+			return JobBlockedReason.Reset;
+		}
+
+		if (reader.ValueTextEquals(MemberDelete))
+		{
+			return JobBlockedReason.Delete;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRevert.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobBlockedReason.Revert;
+		}
+
+		if (string.Equals(value, MemberReset.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobBlockedReason.Reset;
+		}
+
+		if (string.Equals(value, MemberDelete.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobBlockedReason.Delete;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(JobBlockedReason)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, JobBlockedReason value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, JobBlockedReason value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case JobBlockedReason.Revert:
-				writer.WriteStringValue("revert");
-				return;
+				writer.WriteStringValue(MemberRevert);
+				break;
 			case JobBlockedReason.Reset:
-				writer.WriteStringValue("reset");
-				return;
+				writer.WriteStringValue(MemberReset);
+				break;
 			case JobBlockedReason.Delete:
-				writer.WriteStringValue("delete");
-				return;
+				writer.WriteStringValue(MemberDelete);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(JobBlockedReason)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -773,51 +1124,93 @@ public enum JobState
 	Closed
 }
 
-internal sealed class JobStateConverter : JsonConverter<JobState>
+internal sealed partial class JobStateConverter : System.Text.Json.Serialization.JsonConverter<JobState>
 {
-	public override JobState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberOpening = System.Text.Json.JsonEncodedText.Encode("opening");
+	private static readonly System.Text.Json.JsonEncodedText MemberOpened = System.Text.Json.JsonEncodedText.Encode("opened");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText MemberClosing = System.Text.Json.JsonEncodedText.Encode("closing");
+	private static readonly System.Text.Json.JsonEncodedText MemberClosed = System.Text.Json.JsonEncodedText.Encode("closed");
+
+	public override JobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberOpening))
 		{
-			case "opening":
-				return JobState.Opening;
-			case "opened":
-				return JobState.Opened;
-			case "failed":
-				return JobState.Failed;
-			case "closing":
-				return JobState.Closing;
-			case "closed":
-				return JobState.Closed;
+			return JobState.Opening;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberOpened))
+		{
+			return JobState.Opened;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return JobState.Failed;
+		}
+
+		if (reader.ValueTextEquals(MemberClosing))
+		{
+			return JobState.Closing;
+		}
+
+		if (reader.ValueTextEquals(MemberClosed))
+		{
+			return JobState.Closed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOpening.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobState.Opening;
+		}
+
+		if (string.Equals(value, MemberOpened.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobState.Opened;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobState.Failed;
+		}
+
+		if (string.Equals(value, MemberClosing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobState.Closing;
+		}
+
+		if (string.Equals(value, MemberClosed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return JobState.Closed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(JobState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, JobState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, JobState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case JobState.Opening:
-				writer.WriteStringValue("opening");
-				return;
+				writer.WriteStringValue(MemberOpening);
+				break;
 			case JobState.Opened:
-				writer.WriteStringValue("opened");
-				return;
+				writer.WriteStringValue(MemberOpened);
+				break;
 			case JobState.Failed:
-				writer.WriteStringValue("failed");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case JobState.Closing:
-				writer.WriteStringValue("closing");
-				return;
+				writer.WriteStringValue(MemberClosing);
+				break;
 			case JobState.Closed:
-				writer.WriteStringValue("closed");
-				return;
+				writer.WriteStringValue(MemberClosed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(JobState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -832,41 +1225,65 @@ public enum MemoryStatus
 	HardLimit
 }
 
-internal sealed class MemoryStatusConverter : JsonConverter<MemoryStatus>
+internal sealed partial class MemoryStatusConverter : System.Text.Json.Serialization.JsonConverter<MemoryStatus>
 {
-	public override MemoryStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSoftLimit = System.Text.Json.JsonEncodedText.Encode("soft_limit");
+	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok");
+	private static readonly System.Text.Json.JsonEncodedText MemberHardLimit = System.Text.Json.JsonEncodedText.Encode("hard_limit");
+
+	public override MemoryStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSoftLimit))
 		{
-			case "soft_limit":
-				return MemoryStatus.SoftLimit;
-			case "ok":
-				return MemoryStatus.Ok;
-			case "hard_limit":
-				return MemoryStatus.HardLimit;
+			return MemoryStatus.SoftLimit;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberOk))
+		{
+			return MemoryStatus.Ok;
+		}
+
+		if (reader.ValueTextEquals(MemberHardLimit))
+		{
+			return MemoryStatus.HardLimit;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSoftLimit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MemoryStatus.SoftLimit;
+		}
+
+		if (string.Equals(value, MemberOk.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MemoryStatus.Ok;
+		}
+
+		if (string.Equals(value, MemberHardLimit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MemoryStatus.HardLimit;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(MemoryStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, MemoryStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, MemoryStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case MemoryStatus.SoftLimit:
-				writer.WriteStringValue("soft_limit");
-				return;
+				writer.WriteStringValue(MemberSoftLimit);
+				break;
 			case MemoryStatus.Ok:
-				writer.WriteStringValue("ok");
-				return;
+				writer.WriteStringValue(MemberOk);
+				break;
 			case MemoryStatus.HardLimit:
-				writer.WriteStringValue("hard_limit");
-				return;
+				writer.WriteStringValue(MemberHardLimit);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(MemoryStatus)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -910,51 +1327,93 @@ public enum RoutingState
 	Failed
 }
 
-internal sealed class RoutingStateConverter : JsonConverter<RoutingState>
+internal sealed partial class RoutingStateConverter : System.Text.Json.Serialization.JsonConverter<RoutingState>
 {
-	public override RoutingState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+
+	public override RoutingState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStopping))
 		{
-			case "stopping":
-				return RoutingState.Stopping;
-			case "stopped":
-				return RoutingState.Stopped;
-			case "starting":
-				return RoutingState.Starting;
-			case "started":
-				return RoutingState.Started;
-			case "failed":
-				return RoutingState.Failed;
+			return RoutingState.Stopping;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return RoutingState.Stopped;
+		}
+
+		if (reader.ValueTextEquals(MemberStarting))
+		{
+			return RoutingState.Starting;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return RoutingState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return RoutingState.Failed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RoutingState.Stopping;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RoutingState.Stopped;
+		}
+
+		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RoutingState.Starting;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RoutingState.Started;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RoutingState.Failed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RoutingState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, RoutingState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RoutingState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case RoutingState.Stopping:
-				writer.WriteStringValue("stopping");
-				return;
+				writer.WriteStringValue(MemberStopping);
+				break;
 			case RoutingState.Stopped:
-				writer.WriteStringValue("stopped");
-				return;
+				writer.WriteStringValue(MemberStopped);
+				break;
 			case RoutingState.Starting:
-				writer.WriteStringValue("starting");
-				return;
+				writer.WriteStringValue(MemberStarting);
+				break;
 			case RoutingState.Started:
-				writer.WriteStringValue("started");
-				return;
+				writer.WriteStringValue(MemberStarted);
+				break;
 			case RoutingState.Failed:
-				writer.WriteStringValue("failed");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RoutingState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -977,36 +1436,51 @@ public enum RuleAction
 	SkipModelUpdate
 }
 
-internal sealed class RuleActionConverter : JsonConverter<RuleAction>
+internal sealed partial class RuleActionConverter : System.Text.Json.Serialization.JsonConverter<RuleAction>
 {
-	public override RuleAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result");
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipModelUpdate = System.Text.Json.JsonEncodedText.Encode("skip_model_update");
+
+	public override RuleAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSkipResult))
 		{
-			case "skip_result":
-				return RuleAction.SkipResult;
-			case "skip_model_update":
-				return RuleAction.SkipModelUpdate;
+			return RuleAction.SkipResult;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSkipModelUpdate))
+		{
+			return RuleAction.SkipModelUpdate;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSkipResult.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RuleAction.SkipResult;
+		}
+
+		if (string.Equals(value, MemberSkipModelUpdate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RuleAction.SkipModelUpdate;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RuleAction)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, RuleAction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, RuleAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case RuleAction.SkipResult:
-				writer.WriteStringValue("skip_result");
-				return;
+				writer.WriteStringValue(MemberSkipResult);
+				break;
 			case RuleAction.SkipModelUpdate:
-				writer.WriteStringValue("skip_model_update");
-				return;
+				writer.WriteStringValue(MemberSkipModelUpdate);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(RuleAction)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1023,46 +1497,79 @@ public enum SnapshotUpgradeState
 	Failed
 }
 
-internal sealed class SnapshotUpgradeStateConverter : JsonConverter<SnapshotUpgradeState>
+internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.Serialization.JsonConverter<SnapshotUpgradeState>
 {
-	public override SnapshotUpgradeState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberSavingNewState = System.Text.Json.JsonEncodedText.Encode("saving_new_state");
+	private static readonly System.Text.Json.JsonEncodedText MemberLoadingOldState = System.Text.Json.JsonEncodedText.Encode("loading_old_state");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+
+	public override SnapshotUpgradeState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberStopped))
 		{
-			case "stopped":
-				return SnapshotUpgradeState.Stopped;
-			case "saving_new_state":
-				return SnapshotUpgradeState.SavingNewState;
-			case "loading_old_state":
-				return SnapshotUpgradeState.LoadingOldState;
-			case "failed":
-				return SnapshotUpgradeState.Failed;
+			return SnapshotUpgradeState.Stopped;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSavingNewState))
+		{
+			return SnapshotUpgradeState.SavingNewState;
+		}
+
+		if (reader.ValueTextEquals(MemberLoadingOldState))
+		{
+			return SnapshotUpgradeState.LoadingOldState;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return SnapshotUpgradeState.Failed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotUpgradeState.Stopped;
+		}
+
+		if (string.Equals(value, MemberSavingNewState.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotUpgradeState.SavingNewState;
+		}
+
+		if (string.Equals(value, MemberLoadingOldState.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotUpgradeState.LoadingOldState;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotUpgradeState.Failed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SnapshotUpgradeState)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, SnapshotUpgradeState value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnapshotUpgradeState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case SnapshotUpgradeState.Stopped:
-				writer.WriteStringValue("stopped");
-				return;
+				writer.WriteStringValue(MemberStopped);
+				break;
 			case SnapshotUpgradeState.SavingNewState:
-				writer.WriteStringValue("saving_new_state");
-				return;
+				writer.WriteStringValue(MemberSavingNewState);
+				break;
 			case SnapshotUpgradeState.LoadingOldState:
-				writer.WriteStringValue("loading_old_state");
-				return;
+				writer.WriteStringValue(MemberLoadingOldState);
+				break;
 			case SnapshotUpgradeState.Failed:
-				writer.WriteStringValue("failed");
-				return;
+				writer.WriteStringValue(MemberFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(SnapshotUpgradeState)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1077,41 +1584,65 @@ public enum TokenizationTruncate
 	First
 }
 
-internal sealed class TokenizationTruncateConverter : JsonConverter<TokenizationTruncate>
+internal sealed partial class TokenizationTruncateConverter : System.Text.Json.Serialization.JsonConverter<TokenizationTruncate>
 {
-	public override TokenizationTruncate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
+
+	public override TokenizationTruncate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberSecond))
 		{
-			case "second":
-				return TokenizationTruncate.Second;
-			case "none":
-				return TokenizationTruncate.None;
-			case "first":
-				return TokenizationTruncate.First;
+			return TokenizationTruncate.Second;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return TokenizationTruncate.None;
+		}
+
+		if (reader.ValueTextEquals(MemberFirst))
+		{
+			return TokenizationTruncate.First;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenizationTruncate.Second;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenizationTruncate.None;
+		}
+
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenizationTruncate.First;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TokenizationTruncate)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TokenizationTruncate value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TokenizationTruncate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TokenizationTruncate.Second:
-				writer.WriteStringValue("second");
-				return;
+				writer.WriteStringValue(MemberSecond);
+				break;
 			case TokenizationTruncate.None:
-				writer.WriteStringValue("none");
-				return;
+				writer.WriteStringValue(MemberNone);
+				break;
 			case TokenizationTruncate.First:
-				writer.WriteStringValue("first");
-				return;
+				writer.WriteStringValue(MemberFirst);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TokenizationTruncate)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1142,41 +1673,65 @@ public enum TrainedModelType
 	LangIdent
 }
 
-internal sealed class TrainedModelTypeConverter : JsonConverter<TrainedModelType>
+internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Serialization.JsonConverter<TrainedModelType>
 {
-	public override TrainedModelType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTreeEnsemble = System.Text.Json.JsonEncodedText.Encode("tree_ensemble");
+	private static readonly System.Text.Json.JsonEncodedText MemberPytorch = System.Text.Json.JsonEncodedText.Encode("pytorch");
+	private static readonly System.Text.Json.JsonEncodedText MemberLangIdent = System.Text.Json.JsonEncodedText.Encode("lang_ident");
+
+	public override TrainedModelType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTreeEnsemble))
 		{
-			case "tree_ensemble":
-				return TrainedModelType.TreeEnsemble;
-			case "pytorch":
-				return TrainedModelType.Pytorch;
-			case "lang_ident":
-				return TrainedModelType.LangIdent;
+			return TrainedModelType.TreeEnsemble;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberPytorch))
+		{
+			return TrainedModelType.Pytorch;
+		}
+
+		if (reader.ValueTextEquals(MemberLangIdent))
+		{
+			return TrainedModelType.LangIdent;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTreeEnsemble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TrainedModelType.TreeEnsemble;
+		}
+
+		if (string.Equals(value, MemberPytorch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TrainedModelType.Pytorch;
+		}
+
+		if (string.Equals(value, MemberLangIdent.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TrainedModelType.LangIdent;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TrainedModelType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TrainedModelType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TrainedModelType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TrainedModelType.TreeEnsemble:
-				writer.WriteStringValue("tree_ensemble");
-				return;
+				writer.WriteStringValue(MemberTreeEnsemble);
+				break;
 			case TrainedModelType.Pytorch:
-				writer.WriteStringValue("pytorch");
-				return;
+				writer.WriteStringValue(MemberPytorch);
+				break;
 			case TrainedModelType.LangIdent:
-				writer.WriteStringValue("lang_ident");
-				return;
+				writer.WriteStringValue(MemberLangIdent);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TrainedModelType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }
 
@@ -1189,35 +1744,50 @@ public enum TrainingPriority
 	Low
 }
 
-internal sealed class TrainingPriorityConverter : JsonConverter<TrainingPriority>
+internal sealed partial class TrainingPriorityConverter : System.Text.Json.Serialization.JsonConverter<TrainingPriority>
 {
-	public override TrainingPriority Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
+	private static readonly System.Text.Json.JsonEncodedText MemberLow = System.Text.Json.JsonEncodedText.Encode("low");
+
+	public override TrainingPriority Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberNormal))
 		{
-			case "normal":
-				return TrainingPriority.Normal;
-			case "low":
-				return TrainingPriority.Low;
+			return TrainingPriority.Normal;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberLow))
+		{
+			return TrainingPriority.Low;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TrainingPriority.Normal;
+		}
+
+		if (string.Equals(value, MemberLow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TrainingPriority.Low;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TrainingPriority)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TrainingPriority value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TrainingPriority value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TrainingPriority.Normal:
-				writer.WriteStringValue("normal");
-				return;
+				writer.WriteStringValue(MemberNormal);
+				break;
 			case TrainingPriority.Low:
-				writer.WriteStringValue("low");
-				return;
+				writer.WriteStringValue(MemberLow);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TrainingPriority)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

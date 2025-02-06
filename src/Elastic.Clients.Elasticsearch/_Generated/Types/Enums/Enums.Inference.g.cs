@@ -41,45 +41,78 @@ public enum TaskType
 	Completion
 }
 
-internal sealed class TaskTypeConverter : JsonConverter<TaskType>
+internal sealed partial class TaskTypeConverter : System.Text.Json.Serialization.JsonConverter<TaskType>
 {
-	public override TaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+
+	public override TaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.String);
+		if (reader.ValueTextEquals(MemberTextEmbedding))
 		{
-			case "text_embedding":
-				return TaskType.TextEmbedding;
-			case "sparse_embedding":
-				return TaskType.SparseEmbedding;
-			case "rerank":
-				return TaskType.Rerank;
-			case "completion":
-				return TaskType.Completion;
+			return TaskType.TextEmbedding;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
+		{
+			return TaskType.SparseEmbedding;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return TaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return TaskType.Completion;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.TextEmbedding;
+		}
+
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.SparseEmbedding;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.Completion;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TaskType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TaskType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, TaskType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
 			case TaskType.TextEmbedding:
-				writer.WriteStringValue("text_embedding");
-				return;
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
 			case TaskType.SparseEmbedding:
-				writer.WriteStringValue("sparse_embedding");
-				return;
+				writer.WriteStringValue(MemberSparseEmbedding);
+				break;
 			case TaskType.Rerank:
-				writer.WriteStringValue("rerank");
-				return;
+				writer.WriteStringValue(MemberRerank);
+				break;
 			case TaskType.Completion:
-				writer.WriteStringValue("completion");
-				return;
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(TaskType)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
 }

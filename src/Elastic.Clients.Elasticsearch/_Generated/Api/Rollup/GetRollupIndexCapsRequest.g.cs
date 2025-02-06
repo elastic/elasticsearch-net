@@ -59,6 +59,11 @@ public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIn
 	{
 	}
 
+	[JsonConstructor]
+	internal GetRollupIndexCapsRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupGetRollupIndexCaps;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -66,6 +71,15 @@ public sealed partial class GetRollupIndexCapsRequest : PlainRequest<GetRollupIn
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.get_rollup_index_caps";
+
+	/// <summary>
+	/// <para>
+	/// Data stream or index to check for rollup capabilities.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Ids Index { get => P<Elastic.Clients.Elasticsearch.Ids>("index"); set => PR("index", value); }
 }
 
 /// <summary>

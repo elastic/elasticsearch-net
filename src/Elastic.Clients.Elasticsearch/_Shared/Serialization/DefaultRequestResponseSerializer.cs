@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -49,10 +50,54 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		CancellationToken cancellationToken = default)
 	{
 		if (data is IStreamSerializable streamSerializable)
+		{
 			return streamSerializable.SerializeAsync(stream, _settings, SerializationFormatting.None);
+		}
 
 		return base.SerializeAsync(data, stream, formatting, cancellationToken);
 	}
+
+	public override T Deserialize<T>(Stream stream)
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
+		{
+			
+		}
+
+		return base.Deserialize<T>(stream);
+	}
+
+	public override object? Deserialize(Type type, Stream stream)
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(type))
+		{
+			
+		}
+
+		return base.Deserialize(type, stream);
+	}
+
+	public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
+		{
+			
+		}
+
+		return base.DeserializeAsync<T>(stream, cancellationToken);
+	}
+
+	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(type))
+		{
+			
+		}
+
+		return base.DeserializeAsync(type, stream, cancellationToken);
+	}
+
+	protected override bool SupportsFastPath(Type type) => !typeof(IStreamSerializable).IsAssignableFrom(type);
 
 	/// <summary>
 	/// Links the <see cref="JsonSerializerOptions"/> of this serializer to the given <see cref="IElasticsearchClientSettings"/>.
@@ -95,12 +140,19 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 	private static IReadOnlyCollection<JsonConverter> CreateDefaultBuiltInConverters(IElasticsearchClientSettings settings) =>
 	[
+		// For context aware JsonConverter/JsonConverterFactory implementations.
+		new ContextProvider<IElasticsearchClientSettings>(settings),
+
+		new SelfSerializableConverterFactory(settings), // For descriptors
 		new KeyValuePairConverterFactory(settings),
 		new ObjectToInferredTypesConverter(),
-		new SourceConverterFactory(settings),
-		new SelfSerializableConverterFactory(settings),
-		new SelfDeserializableConverterFactory(settings),
-		new SelfTwoWaySerializableConverterFactory(settings),
+
+		// Marker types
+		new SourceMarkerConverterFactory(settings),
+		new SingleOrManyMarkerConverterFactory(),
+		new FieldsMarkerConverter(),
+		new SingleOrManyFieldsMarkerConverter(),
+
 		// Explicitly registered before `IsADictionaryConverterFactory` as we want this specialised converter to match
 		new FieldValuesConverter(),
 		new IsADictionaryConverterFactory(),
@@ -108,9 +160,12 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 		new DictionaryResponseConverterFactory(settings),
 		new UnionConverter(),
 		// TODO: Remove after https://github.com/elastic/elasticsearch-specification/issues/2238 is implemented
+
+		new StringifiedBoolConverter(),
+		new StringifiedIntConverter(),
 		new StringifiedLongConverter(),
-		new StringifiedIntegerConverter(),
-		new StringifiedBoolConverter()
+		new StringifiedSingleConverter(),
+		new StringifiedDoubleConverter(),
 	];
 
 	private static void MutateOptions(JsonSerializerOptions options)

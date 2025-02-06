@@ -22,12 +22,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PostCalendarEventsResponseConverter : System.Text.Json.Serialization.JsonConverter<PostCalendarEventsResponse>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events");
+
+	public override PostCalendarEventsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>> propEvents = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEvents.TryRead(ref reader, options, PropEvents))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new PostCalendarEventsResponse
+		{
+			Events = propEvents.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PostCalendarEventsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEvents, value.Events);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(PostCalendarEventsResponseConverter))]
 public sealed partial class PostCalendarEventsResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> Events { get; init; }
 }

@@ -61,6 +61,11 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 	{
 	}
 
+	[JsonConstructor]
+	internal StartDatafeedRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDatafeed;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -68,6 +73,16 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.start_datafeed";
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+	/// alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
 	/// <summary>
 	/// <para>

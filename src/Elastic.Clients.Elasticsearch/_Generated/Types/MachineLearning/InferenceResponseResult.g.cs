@@ -27,6 +27,120 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class InferenceResponseResultConverter : System.Text.Json.Serialization.JsonConverter<InferenceResponseResult>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEntities = System.Text.Json.JsonEncodedText.Encode("entities");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportance = System.Text.Json.JsonEncodedText.Encode("feature_importance");
+	private static readonly System.Text.Json.JsonEncodedText PropIsTruncated = System.Text.Json.JsonEncodedText.Encode("is_truncated");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedValue = System.Text.Json.JsonEncodedText.Encode("predicted_value");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedValueSequence = System.Text.Json.JsonEncodedText.Encode("predicted_value_sequence");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionProbability = System.Text.Json.JsonEncodedText.Encode("prediction_probability");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionScore = System.Text.Json.JsonEncodedText.Encode("prediction_score");
+	private static readonly System.Text.Json.JsonEncodedText PropTopClasses = System.Text.Json.JsonEncodedText.Encode("top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropWarning = System.Text.Json.JsonEncodedText.Encode("warning");
+
+	public override InferenceResponseResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>?> propEntities = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>?> propFeatureImportance = default;
+		LocalJsonValue<bool?> propIsTruncated = default;
+		LocalJsonValue<IReadOnlyCollection<object>?> propPredictedValue = default;
+		LocalJsonValue<string?> propPredictedValueSequence = default;
+		LocalJsonValue<double?> propPredictionProbability = default;
+		LocalJsonValue<double?> propPredictionScore = default;
+		LocalJsonValue<IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry>?> propTopClasses = default;
+		LocalJsonValue<string?> propWarning = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEntities.TryRead(ref reader, options, PropEntities))
+			{
+				continue;
+			}
+
+			if (propFeatureImportance.TryRead(ref reader, options, PropFeatureImportance))
+			{
+				continue;
+			}
+
+			if (propIsTruncated.TryRead(ref reader, options, PropIsTruncated))
+			{
+				continue;
+			}
+
+			if (propPredictedValue.TryRead(ref reader, options, PropPredictedValue, typeof(SingleOrManyMarker<IReadOnlyCollection<object>?, object>)))
+			{
+				continue;
+			}
+
+			if (propPredictedValueSequence.TryRead(ref reader, options, PropPredictedValueSequence))
+			{
+				continue;
+			}
+
+			if (propPredictionProbability.TryRead(ref reader, options, PropPredictionProbability))
+			{
+				continue;
+			}
+
+			if (propPredictionScore.TryRead(ref reader, options, PropPredictionScore))
+			{
+				continue;
+			}
+
+			if (propTopClasses.TryRead(ref reader, options, PropTopClasses))
+			{
+				continue;
+			}
+
+			if (propWarning.TryRead(ref reader, options, PropWarning))
+			{
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new InferenceResponseResult
+		{
+			Entities = propEntities.Value
+,
+			FeatureImportance = propFeatureImportance.Value
+,
+			IsTruncated = propIsTruncated.Value
+,
+			PredictedValue = propPredictedValue.Value
+,
+			PredictedValueSequence = propPredictedValueSequence.Value
+,
+			PredictionProbability = propPredictionProbability.Value
+,
+			PredictionScore = propPredictionScore.Value
+,
+			TopClasses = propTopClasses.Value
+,
+			Warning = propWarning.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, InferenceResponseResult value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEntities, value.Entities);
+		writer.WriteProperty(options, PropFeatureImportance, value.FeatureImportance);
+		writer.WriteProperty(options, PropIsTruncated, value.IsTruncated);
+		writer.WriteProperty(options, PropPredictedValue, value.PredictedValue, null, typeof(SingleOrManyMarker<IReadOnlyCollection<object>?, object>));
+		writer.WriteProperty(options, PropPredictedValueSequence, value.PredictedValueSequence);
+		writer.WriteProperty(options, PropPredictionProbability, value.PredictionProbability);
+		writer.WriteProperty(options, PropPredictionScore, value.PredictionScore);
+		writer.WriteProperty(options, PropTopClasses, value.TopClasses);
+		writer.WriteProperty(options, PropWarning, value.Warning);
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(InferenceResponseResultConverter))]
 public sealed partial class InferenceResponseResult
 {
 	/// <summary>
@@ -34,7 +148,6 @@ public sealed partial class InferenceResponseResult
 	/// If the model is trained for named entity recognition (NER) tasks, the response contains the recognized entities.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("entities")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>? Entities { get; init; }
 
 	/// <summary>
@@ -42,7 +155,6 @@ public sealed partial class InferenceResponseResult
 	/// The feature importance for the inference results. Relevant only for classification or regression models
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>? FeatureImportance { get; init; }
 
 	/// <summary>
@@ -51,7 +163,6 @@ public sealed partial class InferenceResponseResult
 	/// is present only when it is true.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_truncated")]
 	public bool? IsTruncated { get; init; }
 
 	/// <summary>
@@ -65,8 +176,6 @@ public sealed partial class InferenceResponseResult
 	/// For classification models, it may be an integer, double, boolean or string depending on prediction type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("predicted_value")]
-	[SingleOrManyCollectionConverter(typeof(object))]
 	public IReadOnlyCollection<object>? PredictedValue { get; init; }
 
 	/// <summary>
@@ -76,7 +185,6 @@ public sealed partial class InferenceResponseResult
 	/// Additionally
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("predicted_value_sequence")]
 	public string? PredictedValueSequence { get; init; }
 
 	/// <summary>
@@ -84,7 +192,6 @@ public sealed partial class InferenceResponseResult
 	/// Specifies a probability for the predicted value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prediction_probability")]
 	public double? PredictionProbability { get; init; }
 
 	/// <summary>
@@ -92,7 +199,6 @@ public sealed partial class InferenceResponseResult
 	/// Specifies a confidence score for the predicted value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prediction_score")]
 	public double? PredictionScore { get; init; }
 
 	/// <summary>
@@ -101,7 +207,6 @@ public sealed partial class InferenceResponseResult
 	/// class entries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("top_classes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry>? TopClasses { get; init; }
 
 	/// <summary>
@@ -109,6 +214,5 @@ public sealed partial class InferenceResponseResult
 	/// If the request failed, the response contains the reason for the failure.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("warning")]
 	public string? Warning { get; init; }
 }

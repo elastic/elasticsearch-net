@@ -33,4 +33,6 @@ public sealed partial class VariableWidthHistogramAggregate : IAggregate
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	string IAggregate.Type => "variable_width_histogram";
 }

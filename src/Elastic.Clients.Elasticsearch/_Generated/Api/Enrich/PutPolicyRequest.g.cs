@@ -46,6 +46,11 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	{
 	}
 
+	[JsonConstructor]
+	internal PutPolicyRequest()
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -53,6 +58,14 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "enrich.put_policy";
+
+	/// <summary>
+	/// <para>
+	/// Name of the enrich policy to create or update.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
