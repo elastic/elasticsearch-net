@@ -71,7 +71,28 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 			return EnrichPolicyPhase.Complete;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(EnrichPolicyPhase)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScheduled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Scheduled;
+		}
+
+		if (string.Equals(value, MemberRunning.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Running;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Failed;
+		}
+
+		if (string.Equals(value, MemberComplete.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EnrichPolicyPhase.Complete;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EnrichPolicyPhase)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EnrichPolicyPhase value, System.Text.Json.JsonSerializerOptions options)
@@ -131,7 +152,23 @@ internal sealed partial class PolicyTypeConverter : System.Text.Json.Serializati
 			return PolicyType.GeoMatch;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PolicyType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.Range;
+		}
+
+		if (string.Equals(value, MemberMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.Match;
+		}
+
+		if (string.Equals(value, MemberGeoMatch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PolicyType.GeoMatch;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PolicyType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PolicyType value, System.Text.Json.JsonSerializerOptions options)

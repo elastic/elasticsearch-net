@@ -142,7 +142,7 @@ public sealed partial class MultiSearchRequestParameters : RequestParameters
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequestParameters>
 {
 	[JsonConstructor]
 	public MultiSearchRequest()
@@ -265,28 +265,6 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (Searches is null)
-			return;
-		foreach (var item in Searches)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (Searches is null)
-			return;
-		foreach (var item in Searches)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
 }
 
 /// <summary>

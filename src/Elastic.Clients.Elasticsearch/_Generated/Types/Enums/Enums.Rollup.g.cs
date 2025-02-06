@@ -79,7 +79,33 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 			return IndexingJobState.Aborting;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndexingJobState)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexingJobState.Stopping;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexingJobState.Stopped;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexingJobState.Started;
+		}
+
+		if (string.Equals(value, MemberIndexing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexingJobState.Indexing;
+		}
+
+		if (string.Equals(value, MemberAborting.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexingJobState.Aborting;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndexingJobState)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexingJobState value, System.Text.Json.JsonSerializerOptions options)
@@ -158,7 +184,33 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 			return Metric.Avg;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(Metric)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberValueCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Metric.ValueCount;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Metric.Sum;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Metric.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Metric.Max;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Metric.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Metric)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Metric value, System.Text.Json.JsonSerializerOptions options)

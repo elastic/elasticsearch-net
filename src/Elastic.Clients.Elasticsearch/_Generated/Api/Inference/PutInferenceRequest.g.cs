@@ -34,6 +34,19 @@ public sealed partial class PutInferenceRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<PutInferenceRequest>
+{
+	public override PutInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new PutInferenceRequest { InferenceConfig = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.InferenceConfig);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create an inference endpoint.
@@ -49,7 +62,8 @@ public sealed partial class PutInferenceRequestParameters : RequestParameters
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
-public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(PutInferenceRequestConverter))]
+public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceRequestParameters>
 {
 	public PutInferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
@@ -77,7 +91,6 @@ public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceReque
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
 	/// <summary>
@@ -85,19 +98,8 @@ public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceReque
 	/// The task type
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, InferenceConfig, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		InferenceConfig = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(ref reader);
-	}
 }
 
 /// <summary>

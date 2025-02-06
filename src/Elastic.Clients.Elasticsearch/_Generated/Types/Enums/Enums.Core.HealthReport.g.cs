@@ -71,7 +71,28 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 			return ImpactArea.Backup;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ImpactArea)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Search;
+		}
+
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Ingest;
+		}
+
+		if (string.Equals(value, MemberDeploymentManagement.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.DeploymentManagement;
+		}
+
+		if (string.Equals(value, MemberBackup.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ImpactArea.Backup;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ImpactArea)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ImpactArea value, System.Text.Json.JsonSerializerOptions options)
@@ -139,7 +160,28 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 			return IndicatorHealthStatus.Green;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndicatorHealthStatus)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Yellow;
+		}
+
+		if (string.Equals(value, MemberUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Unknown;
+		}
+
+		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Red;
+		}
+
+		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndicatorHealthStatus.Green;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndicatorHealthStatus)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndicatorHealthStatus value, System.Text.Json.JsonSerializerOptions options)

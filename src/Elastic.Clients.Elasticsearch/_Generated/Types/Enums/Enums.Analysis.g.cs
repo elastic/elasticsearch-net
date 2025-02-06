@@ -63,7 +63,23 @@ internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Js
 			return DelimitedPayloadEncoding.Float;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(DelimitedPayloadEncoding)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DelimitedPayloadEncoding.Integer;
+		}
+
+		if (string.Equals(value, MemberIdentity.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DelimitedPayloadEncoding.Identity;
+		}
+
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return DelimitedPayloadEncoding.Float;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(DelimitedPayloadEncoding)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, DelimitedPayloadEncoding value, System.Text.Json.JsonSerializerOptions options)
@@ -112,7 +128,18 @@ internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serializ
 			return EdgeNGramSide.Back;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(EdgeNGramSide)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFront.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EdgeNGramSide.Front;
+		}
+
+		if (string.Equals(value, MemberBack.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EdgeNGramSide.Back;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EdgeNGramSide)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EdgeNGramSide value, System.Text.Json.JsonSerializerOptions options)
@@ -158,7 +185,18 @@ internal sealed partial class IcuCollationAlternateConverter : System.Text.Json.
 			return IcuCollationAlternate.NonIgnorable;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationAlternate)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberShifted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationAlternate.Shifted;
+		}
+
+		if (string.Equals(value, MemberNonIgnorable.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationAlternate.NonIgnorable;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuCollationAlternate)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationAlternate value, System.Text.Json.JsonSerializerOptions options)
@@ -204,7 +242,18 @@ internal sealed partial class IcuCollationCaseFirstConverter : System.Text.Json.
 			return IcuCollationCaseFirst.Lower;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationCaseFirst)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUpper.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationCaseFirst.Upper;
+		}
+
+		if (string.Equals(value, MemberLower.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationCaseFirst.Lower;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuCollationCaseFirst)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationCaseFirst value, System.Text.Json.JsonSerializerOptions options)
@@ -250,7 +299,18 @@ internal sealed partial class IcuCollationDecompositionConverter : System.Text.J
 			return IcuCollationDecomposition.Identical;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationDecomposition)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationDecomposition.No;
+		}
+
+		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationDecomposition.Identical;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuCollationDecomposition)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationDecomposition value, System.Text.Json.JsonSerializerOptions options)
@@ -320,7 +380,33 @@ internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.S
 			return IcuCollationStrength.Identical;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuCollationStrength)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTertiary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationStrength.Tertiary;
+		}
+
+		if (string.Equals(value, MemberSecondary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationStrength.Secondary;
+		}
+
+		if (string.Equals(value, MemberQuaternary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationStrength.Quaternary;
+		}
+
+		if (string.Equals(value, MemberPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationStrength.Primary;
+		}
+
+		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuCollationStrength.Identical;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuCollationStrength)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuCollationStrength value, System.Text.Json.JsonSerializerOptions options)
@@ -375,7 +461,18 @@ internal sealed partial class IcuNormalizationModeConverter : System.Text.Json.S
 			return IcuNormalizationMode.Compose;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuNormalizationMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDecompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuNormalizationMode.Decompose;
+		}
+
+		if (string.Equals(value, MemberCompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuNormalizationMode.Compose;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuNormalizationMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuNormalizationMode value, System.Text.Json.JsonSerializerOptions options)
@@ -429,7 +526,23 @@ internal sealed partial class IcuNormalizationTypeConverter : System.Text.Json.S
 			return IcuNormalizationType.Nfc;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuNormalizationType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNfkcCf.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuNormalizationType.NfkcCf;
+		}
+
+		if (string.Equals(value, MemberNfkc.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuNormalizationType.Nfkc;
+		}
+
+		if (string.Equals(value, MemberNfc.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuNormalizationType.Nfc;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuNormalizationType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuNormalizationType value, System.Text.Json.JsonSerializerOptions options)
@@ -478,7 +591,18 @@ internal sealed partial class IcuTransformDirectionConverter : System.Text.Json.
 			return IcuTransformDirection.Forward;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IcuTransformDirection)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberReverse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuTransformDirection.Reverse;
+		}
+
+		if (string.Equals(value, MemberForward.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IcuTransformDirection.Forward;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IcuTransformDirection)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IcuTransformDirection value, System.Text.Json.JsonSerializerOptions options)
@@ -524,7 +648,18 @@ internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serializ
 			return KeepTypesMode.Exclude;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(KeepTypesMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return KeepTypesMode.Include;
+		}
+
+		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return KeepTypesMode.Exclude;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(KeepTypesMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, KeepTypesMode value, System.Text.Json.JsonSerializerOptions options)
@@ -578,7 +713,23 @@ internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Js
 			return KuromojiTokenizationMode.Extended;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(KuromojiTokenizationMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return KuromojiTokenizationMode.Search;
+		}
+
+		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return KuromojiTokenizationMode.Normal;
+		}
+
+		if (string.Equals(value, MemberExtended.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return KuromojiTokenizationMode.Extended;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(KuromojiTokenizationMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, KuromojiTokenizationMode value, System.Text.Json.JsonSerializerOptions options)
@@ -883,7 +1034,178 @@ internal sealed partial class LanguageConverter : System.Text.Json.Serialization
 			return Language.Arabic;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(Language)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTurkish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Turkish;
+		}
+
+		if (string.Equals(value, MemberThai.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Thai;
+		}
+
+		if (string.Equals(value, MemberSwedish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Swedish;
+		}
+
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Spanish;
+		}
+
+		if (string.Equals(value, MemberSorani.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Sorani;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Russian;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Romanian;
+		}
+
+		if (string.Equals(value, MemberPortuguese.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Portuguese;
+		}
+
+		if (string.Equals(value, MemberPersian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Persian;
+		}
+
+		if (string.Equals(value, MemberNorwegian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Norwegian;
+		}
+
+		if (string.Equals(value, MemberLatvian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Latvian;
+		}
+
+		if (string.Equals(value, MemberItalian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Italian;
+		}
+
+		if (string.Equals(value, MemberIrish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Irish;
+		}
+
+		if (string.Equals(value, MemberIndonesian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Indonesian;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Hungarian;
+		}
+
+		if (string.Equals(value, MemberHindi.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Hindi;
+		}
+
+		if (string.Equals(value, MemberGreek.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Greek;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.German;
+		}
+
+		if (string.Equals(value, MemberGalician.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Galician;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.French;
+		}
+
+		if (string.Equals(value, MemberFinnish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Finnish;
+		}
+
+		if (string.Equals(value, MemberEstonian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Estonian;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.English;
+		}
+
+		if (string.Equals(value, MemberDutch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Dutch;
+		}
+
+		if (string.Equals(value, MemberDanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Danish;
+		}
+
+		if (string.Equals(value, MemberCzech.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Czech;
+		}
+
+		if (string.Equals(value, MemberCjk.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Cjk;
+		}
+
+		if (string.Equals(value, MemberChinese.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Chinese;
+		}
+
+		if (string.Equals(value, MemberCatalan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Catalan;
+		}
+
+		if (string.Equals(value, MemberBulgarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Bulgarian;
+		}
+
+		if (string.Equals(value, MemberBrazilian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Brazilian;
+		}
+
+		if (string.Equals(value, MemberBasque.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Basque;
+		}
+
+		if (string.Equals(value, MemberArmenian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Armenian;
+		}
+
+		if (string.Equals(value, MemberArabic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Language.Arabic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Language)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Language value, System.Text.Json.JsonSerializerOptions options)
@@ -1033,7 +1355,23 @@ internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Ser
 			return NoriDecompoundMode.Discard;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(NoriDecompoundMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NoriDecompoundMode.None;
+		}
+
+		if (string.Equals(value, MemberMixed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NoriDecompoundMode.Mixed;
+		}
+
+		if (string.Equals(value, MemberDiscard.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NoriDecompoundMode.Discard;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(NoriDecompoundMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NoriDecompoundMode value, System.Text.Json.JsonSerializerOptions options)
@@ -1162,7 +1500,68 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			return PhoneticEncoder.BeiderMorse;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticEncoder)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Soundex;
+		}
+
+		if (string.Equals(value, MemberRefinedSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (string.Equals(value, MemberNysiis.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Nysiis;
+		}
+
+		if (string.Equals(value, MemberMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Metaphone;
+		}
+
+		if (string.Equals(value, MemberKoelnerphonetik.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Koelnerphonetik;
+		}
+
+		if (string.Equals(value, MemberHaasephonetik.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Haasephonetik;
+		}
+
+		if (string.Equals(value, MemberDoubleMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.DoubleMetaphone;
+		}
+
+		if (string.Equals(value, MemberDaitchMokotoff.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.DaitchMokotoff;
+		}
+
+		if (string.Equals(value, MemberCologne.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Cologne;
+		}
+
+		if (string.Equals(value, MemberCaverphone2.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Caverphone2;
+		}
+
+		if (string.Equals(value, MemberCaverphone1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.Caverphone1;
+		}
+
+		if (string.Equals(value, MemberBeiderMorse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticEncoder.BeiderMorse;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PhoneticEncoder)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticEncoder value, System.Text.Json.JsonSerializerOptions options)
@@ -1318,7 +1717,68 @@ internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Seria
 			return PhoneticLanguage.Any;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticLanguage)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Spanish;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Russian;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Romanian;
+		}
+
+		if (string.Equals(value, MemberPolish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Polish;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Hungarian;
+		}
+
+		if (string.Equals(value, MemberHebrew.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Hebrew;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.German;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.French;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.English;
+		}
+
+		if (string.Equals(value, MemberCyrillic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Cyrillic;
+		}
+
+		if (string.Equals(value, MemberCommon.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Common;
+		}
+
+		if (string.Equals(value, MemberAny.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticLanguage.Any;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PhoneticLanguage)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticLanguage value, System.Text.Json.JsonSerializerOptions options)
@@ -1402,7 +1862,23 @@ internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Seria
 			return PhoneticNameType.Ashkenazi;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticNameType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSephardic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticNameType.Sephardic;
+		}
+
+		if (string.Equals(value, MemberGeneric.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticNameType.Generic;
+		}
+
+		if (string.Equals(value, MemberAshkenazi.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticNameType.Ashkenazi;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PhoneticNameType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticNameType value, System.Text.Json.JsonSerializerOptions options)
@@ -1451,7 +1927,18 @@ internal sealed partial class PhoneticRuleTypeConverter : System.Text.Json.Seria
 			return PhoneticRuleType.Approx;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(PhoneticRuleType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberExact.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticRuleType.Exact;
+		}
+
+		if (string.Equals(value, MemberApprox.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return PhoneticRuleType.Approx;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(PhoneticRuleType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, PhoneticRuleType value, System.Text.Json.JsonSerializerOptions options)
@@ -1657,7 +2144,118 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return SnowballLanguage.Armenian;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SnowballLanguage)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTurkish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Turkish;
+		}
+
+		if (string.Equals(value, MemberSwedish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Swedish;
+		}
+
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Spanish;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Russian;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Romanian;
+		}
+
+		if (string.Equals(value, MemberPortuguese.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Portuguese;
+		}
+
+		if (string.Equals(value, MemberPorter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Porter;
+		}
+
+		if (string.Equals(value, MemberNorwegian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Norwegian;
+		}
+
+		if (string.Equals(value, MemberLovins.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Lovins;
+		}
+
+		if (string.Equals(value, MemberKp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Kp;
+		}
+
+		if (string.Equals(value, MemberItalian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Italian;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Hungarian;
+		}
+
+		if (string.Equals(value, MemberGerman2.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.German2;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.German;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.French;
+		}
+
+		if (string.Equals(value, MemberFinnish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Finnish;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.English;
+		}
+
+		if (string.Equals(value, MemberDutch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Dutch;
+		}
+
+		if (string.Equals(value, MemberDanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Danish;
+		}
+
+		if (string.Equals(value, MemberCatalan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Catalan;
+		}
+
+		if (string.Equals(value, MemberBasque.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Basque;
+		}
+
+		if (string.Equals(value, MemberArmenian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnowballLanguage.Armenian;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SnowballLanguage)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnowballLanguage value, System.Text.Json.JsonSerializerOptions options)
@@ -1763,7 +2361,18 @@ internal sealed partial class SynonymFormatConverter : System.Text.Json.Serializ
 			return SynonymFormat.Solr;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SynonymFormat)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWordnet.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SynonymFormat.Wordnet;
+		}
+
+		if (string.Equals(value, MemberSolr.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SynonymFormat.Solr;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SynonymFormat)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SynonymFormat value, System.Text.Json.JsonSerializerOptions options)
@@ -1841,7 +2450,38 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			return TokenChar.Custom;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TokenChar)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWhitespace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Whitespace;
+		}
+
+		if (string.Equals(value, MemberSymbol.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Symbol;
+		}
+
+		if (string.Equals(value, MemberPunctuation.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Punctuation;
+		}
+
+		if (string.Equals(value, MemberLetter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Letter;
+		}
+
+		if (string.Equals(value, MemberDigit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Digit;
+		}
+
+		if (string.Equals(value, MemberCustom.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TokenChar.Custom;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TokenChar)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TokenChar value, System.Text.Json.JsonSerializerOptions options)

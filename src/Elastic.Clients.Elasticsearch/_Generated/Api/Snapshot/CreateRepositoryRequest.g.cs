@@ -54,6 +54,19 @@ public sealed partial class CreateRepositoryRequestParameters : RequestParameter
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 }
 
+internal sealed partial class CreateRepositoryRequestConverter : System.Text.Json.Serialization.JsonConverter<CreateRepositoryRequest>
+{
+	public override CreateRepositoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new CreateRepositoryRequest { Repository = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateRepositoryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Repository);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a snapshot repository.
@@ -62,7 +75,8 @@ public sealed partial class CreateRepositoryRequestParameters : RequestParameter
 /// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
 /// </para>
 /// </summary>
-public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(CreateRepositoryRequestConverter))]
+public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>
 {
 	public CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
@@ -86,7 +100,6 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	/// A repository name
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
@@ -94,7 +107,6 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -102,7 +114,6 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	/// Explicit operation timeout
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -110,19 +121,8 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	/// Whether to verify the repository after creation
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Repository { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Repository, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		Repository = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(ref reader);
-	}
 }
 
 /// <summary>

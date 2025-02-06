@@ -78,7 +78,23 @@ internal sealed partial class GroupByConverter : System.Text.Json.Serialization.
 			return GroupBy.Nodes;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(GroupBy)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberParents.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.Parents;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.None;
+		}
+
+		if (string.Equals(value, MemberNodes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GroupBy.Nodes;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GroupBy)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GroupBy value, System.Text.Json.JsonSerializerOptions options)

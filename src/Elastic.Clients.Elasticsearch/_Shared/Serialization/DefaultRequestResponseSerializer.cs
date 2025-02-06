@@ -50,9 +50,51 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		CancellationToken cancellationToken = default)
 	{
 		if (data is IStreamSerializable streamSerializable)
+		{
 			return streamSerializable.SerializeAsync(stream, _settings, SerializationFormatting.None);
+		}
 
 		return base.SerializeAsync(data, stream, formatting, cancellationToken);
+	}
+
+	public override T Deserialize<T>(Stream stream)
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
+		{
+			
+		}
+
+		return base.Deserialize<T>(stream);
+	}
+
+	public override object? Deserialize(Type type, Stream stream)
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(type))
+		{
+			
+		}
+
+		return base.Deserialize(type, stream);
+	}
+
+	public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
+		{
+			
+		}
+
+		return base.DeserializeAsync<T>(stream, cancellationToken);
+	}
+
+	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	{
+		if (typeof(IStreamSerializable).IsAssignableFrom(type))
+		{
+			
+		}
+
+		return base.DeserializeAsync(type, stream, cancellationToken);
 	}
 
 	protected override bool SupportsFastPath(Type type) => !typeof(IStreamSerializable).IsAssignableFrom(type);
@@ -102,7 +144,6 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 		new ContextProvider<IElasticsearchClientSettings>(settings),
 
 		new SelfSerializableConverterFactory(settings), // For descriptors
-		new SelfTwoWaySerializableConverterFactory(settings), // For some requests
 		new KeyValuePairConverterFactory(settings),
 		new ObjectToInferredTypesConverter(),
 

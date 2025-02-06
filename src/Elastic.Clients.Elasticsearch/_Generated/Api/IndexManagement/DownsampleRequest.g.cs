@@ -34,6 +34,19 @@ public sealed partial class DownsampleRequestParameters : RequestParameters
 {
 }
 
+internal sealed partial class DownsampleRequestConverter : System.Text.Json.Serialization.JsonConverter<DownsampleRequest>
+{
+	public override DownsampleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new DownsampleRequest { Config = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, DownsampleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Config);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Downsample an index.
@@ -47,7 +60,8 @@ public sealed partial class DownsampleRequestParameters : RequestParameters
 /// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
-public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(DownsampleRequestConverter))]
+public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>
 {
 	public DownsampleRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex) : base(r => r.Required("index", index).Required("target_index", targetIndex))
 	{
@@ -71,7 +85,6 @@ public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestPa
 	/// Name of the time series index to downsample.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
@@ -79,19 +92,8 @@ public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestPa
 	/// Name of the index to create.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexName TargetIndex { get => P<Elastic.Clients.Elasticsearch.IndexName>("target_index"); set => PR("target_index", value); }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Config, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		Config = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(ref reader);
-	}
 }
 
 /// <summary>

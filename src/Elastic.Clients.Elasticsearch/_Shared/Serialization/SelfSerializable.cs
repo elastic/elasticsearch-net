@@ -10,9 +10,3 @@ internal interface ISelfSerializable
 {
 	void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 }
-
-internal interface ISelfTwoWaySerializable
-{
-	void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-	void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-}

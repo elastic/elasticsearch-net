@@ -77,7 +77,7 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 /// Run multiple templated searches.
 /// </para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>
 {
 	[JsonConstructor]
 	public MultiSearchTemplateRequest()
@@ -148,28 +148,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
 }
 
 /// <summary>

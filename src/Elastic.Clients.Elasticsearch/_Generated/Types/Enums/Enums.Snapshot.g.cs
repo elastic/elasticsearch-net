@@ -104,7 +104,33 @@ internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Seria
 			return ShardsStatsStage.Done;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ShardsStatsStage)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Started;
+		}
+
+		if (string.Equals(value, MemberInit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Init;
+		}
+
+		if (string.Equals(value, MemberFinalize.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Finalize;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Failure;
+		}
+
+		if (string.Equals(value, MemberDone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardsStatsStage.Done;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShardsStatsStage)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardsStatsStage value, System.Text.Json.JsonSerializerOptions options)
@@ -199,7 +225,43 @@ internal sealed partial class SnapshotSortConverter : System.Text.Json.Serializa
 			return SnapshotSort.Duration;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SnapshotSort)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStartTime.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.StartTime;
+		}
+
+		if (string.Equals(value, MemberShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.ShardCount;
+		}
+
+		if (string.Equals(value, MemberRepository.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Repository;
+		}
+
+		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Name;
+		}
+
+		if (string.Equals(value, MemberIndexCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.IndexCount;
+		}
+
+		if (string.Equals(value, MemberFailedShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.FailedShardCount;
+		}
+
+		if (string.Equals(value, MemberDuration.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SnapshotSort.Duration;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SnapshotSort)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SnapshotSort value, System.Text.Json.JsonSerializerOptions options)

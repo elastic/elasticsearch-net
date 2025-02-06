@@ -95,7 +95,43 @@ internal sealed partial class SqlFormatConverter : System.Text.Json.Serializatio
 			return SqlFormat.Cbor;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SqlFormat)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYaml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Yaml;
+		}
+
+		if (string.Equals(value, MemberTxt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Txt;
+		}
+
+		if (string.Equals(value, MemberTsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Tsv;
+		}
+
+		if (string.Equals(value, MemberSmile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Smile;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Json;
+		}
+
+		if (string.Equals(value, MemberCsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Csv;
+		}
+
+		if (string.Equals(value, MemberCbor.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SqlFormat.Cbor;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SqlFormat)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SqlFormat value, System.Text.Json.JsonSerializerOptions options)

@@ -12,7 +12,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class MultiSearchResponse<TDocument>
+public partial class MultiSearchTemplateResponse<TDocument>
 {
 	public override bool IsValidResponse => base.IsValidResponse && (Responses?.All(b => b.Item1 is not null && b.Item1.Status == 200) ?? true);
 
@@ -20,25 +20,25 @@ public partial class MultiSearchResponse<TDocument>
 	public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;
 }
 
-public sealed partial class MultiSearchRequestDescriptor<TDocument>
+public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument>
 {
 	internal override void BeforeRequest() => TypedKeys(true);
 }
 
-public sealed partial class MultiSearchRequestDescriptor
+public sealed partial class MultiSearchTemplateRequestDescriptor
 {
 	internal override void BeforeRequest() => TypedKeys(true);
 }
 
-public partial class MultiSearchRequest : IStreamSerializable
+public partial class MultiSearchTemplateRequest : IStreamSerializable
 {
 	internal override void BeforeRequest() => TypedKeys = true;
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
-		if (Searches is null)
+		if (SearchTemplates is null)
 			return;
-		foreach (var item in Searches)
+		foreach (var item in SearchTemplates)
 		{
 			if (item is IStreamSerializable serializable)
 				serializable.Serialize(stream, settings, formatting);
@@ -47,9 +47,9 @@ public partial class MultiSearchRequest : IStreamSerializable
 
 	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
-		if (Searches is null)
+		if (SearchTemplates is null)
 			return;
-		foreach (var item in Searches)
+		foreach (var item in SearchTemplates)
 		{
 			if (item is IStreamSerializable serializable)
 				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);

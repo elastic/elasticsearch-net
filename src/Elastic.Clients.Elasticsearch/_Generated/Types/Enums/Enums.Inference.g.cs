@@ -71,7 +71,28 @@ internal sealed partial class TaskTypeConverter : System.Text.Json.Serialization
 			return TaskType.Completion;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TaskType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.TextEmbedding;
+		}
+
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.SparseEmbedding;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TaskType.Completion;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TaskType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TaskType value, System.Text.Json.JsonSerializerOptions options)

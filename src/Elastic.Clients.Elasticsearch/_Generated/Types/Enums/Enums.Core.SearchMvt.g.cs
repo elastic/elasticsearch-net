@@ -55,7 +55,18 @@ internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Se
 			return GridAggregationType.Geohex;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(GridAggregationType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridAggregationType.Geotile;
+		}
+
+		if (string.Equals(value, MemberGeohex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridAggregationType.Geohex;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GridAggregationType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GridAggregationType value, System.Text.Json.JsonSerializerOptions options)
@@ -109,7 +120,23 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 			return GridType.Centroid;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(GridType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPoint.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Point;
+		}
+
+		if (string.Equals(value, MemberGrid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Grid;
+		}
+
+		if (string.Equals(value, MemberCentroid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GridType.Centroid;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GridType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GridType value, System.Text.Json.JsonSerializerOptions options)

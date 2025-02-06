@@ -63,7 +63,23 @@ internal sealed partial class FeatureConverter : System.Text.Json.Serialization.
 			return Feature.Aliases;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(Feature)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSettings.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Feature.Settings;
+		}
+
+		if (string.Equals(value, MemberMappings.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Feature.Mappings;
+		}
+
+		if (string.Equals(value, MemberAliases.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Feature.Aliases;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Feature)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Feature value, System.Text.Json.JsonSerializerOptions options)
@@ -119,7 +135,28 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 			return IndexCheckOnStartup.Checksum;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndexCheckOnStartup)}'.");
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.String)
+		{
+			throw new System.Text.Json.JsonException($"Unknown member of type '{reader.TokenType}' for enum '{nameof(IndexCheckOnStartup)}'.");
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexCheckOnStartup.True;
+		}
+
+		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexCheckOnStartup.False;
+		}
+
+		if (string.Equals(value, MemberChecksum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexCheckOnStartup.Checksum;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndexCheckOnStartup)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexCheckOnStartup value, System.Text.Json.JsonSerializerOptions options)
@@ -168,7 +205,18 @@ internal sealed partial class IndexMetadataStateConverter : System.Text.Json.Ser
 			return IndexMetadataState.Close;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndexMetadataState)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberOpen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexMetadataState.Open;
+		}
+
+		if (string.Equals(value, MemberClose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexMetadataState.Close;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndexMetadataState)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexMetadataState value, System.Text.Json.JsonSerializerOptions options)
@@ -230,7 +278,28 @@ internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Te
 			return IndexRoutingAllocationOptions.All;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndexRoutingAllocationOptions)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingAllocationOptions.Primaries;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingAllocationOptions.None;
+		}
+
+		if (string.Equals(value, MemberNewPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingAllocationOptions.NewPrimaries;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingAllocationOptions.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndexRoutingAllocationOptions)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexRoutingAllocationOptions value, System.Text.Json.JsonSerializerOptions options)
@@ -298,7 +367,28 @@ internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Tex
 			return IndexRoutingRebalanceOptions.All;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(IndexRoutingRebalanceOptions)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberReplicas.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingRebalanceOptions.Replicas;
+		}
+
+		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingRebalanceOptions.Primaries;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingRebalanceOptions.None;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return IndexRoutingRebalanceOptions.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(IndexRoutingRebalanceOptions)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, IndexRoutingRebalanceOptions value, System.Text.Json.JsonSerializerOptions options)
@@ -358,7 +448,23 @@ internal sealed partial class ManagedByConverter : System.Text.Json.Serializatio
 			return ManagedBy.Datastream;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ManagedBy)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUnmanaged.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ManagedBy.Unmanaged;
+		}
+
+		if (string.Equals(value, MemberIlm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ManagedBy.Ilm;
+		}
+
+		if (string.Equals(value, MemberDatastream.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ManagedBy.Datastream;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ManagedBy)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ManagedBy value, System.Text.Json.JsonSerializerOptions options)
@@ -407,7 +513,18 @@ internal sealed partial class NumericFielddataFormatConverter : System.Text.Json
 			return NumericFielddataFormat.Array;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(NumericFielddataFormat)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NumericFielddataFormat.Disabled;
+		}
+
+		if (string.Equals(value, MemberArray.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NumericFielddataFormat.Array;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(NumericFielddataFormat)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NumericFielddataFormat value, System.Text.Json.JsonSerializerOptions options)
@@ -453,7 +570,18 @@ internal sealed partial class SegmentSortMissingConverter : System.Text.Json.Ser
 			return SegmentSortMissing.First;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SegmentSortMissing)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortMissing.Last;
+		}
+
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortMissing.First;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SegmentSortMissing)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SegmentSortMissing value, System.Text.Json.JsonSerializerOptions options)
@@ -501,7 +629,18 @@ internal sealed partial class SegmentSortModeConverter : System.Text.Json.Serial
 			return SegmentSortMode.Max;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SegmentSortMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMin1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMax1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortMode.Max;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SegmentSortMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SegmentSortMode value, System.Text.Json.JsonSerializerOptions options)
@@ -549,7 +688,18 @@ internal sealed partial class SegmentSortOrderConverter : System.Text.Json.Seria
 			return SegmentSortOrder.Asc;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SegmentSortOrder)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDesc.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberDesc1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortOrder.Desc;
+		}
+
+		if (string.Equals(value, MemberAsc.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAsc1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SegmentSortOrder.Asc;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SegmentSortOrder)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SegmentSortOrder value, System.Text.Json.JsonSerializerOptions options)
@@ -611,7 +761,28 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 			return ShardRoutingState.Initializing;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ShardRoutingState)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUnassigned.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardRoutingState.Unassigned;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardRoutingState.Started;
+		}
+
+		if (string.Equals(value, MemberRelocating.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardRoutingState.Relocating;
+		}
+
+		if (string.Equals(value, MemberInitializing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardRoutingState.Initializing;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShardRoutingState)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardRoutingState value, System.Text.Json.JsonSerializerOptions options)
@@ -671,7 +842,23 @@ internal sealed partial class ShardStoreAllocationConverter : System.Text.Json.S
 			return ShardStoreAllocation.Primary;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ShardStoreAllocation)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUnused.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreAllocation.Unused;
+		}
+
+		if (string.Equals(value, MemberReplica.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreAllocation.Replica;
+		}
+
+		if (string.Equals(value, MemberPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreAllocation.Primary;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShardStoreAllocation)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardStoreAllocation value, System.Text.Json.JsonSerializerOptions options)
@@ -756,7 +943,28 @@ internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Seria
 			return ShardStoreStatus.All;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ShardStoreStatus)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreStatus.Yellow;
+		}
+
+		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreStatus.Red;
+		}
+
+		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreStatus.Green;
+		}
+
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ShardStoreStatus.All;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ShardStoreStatus)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ShardStoreStatus value, System.Text.Json.JsonSerializerOptions options)
@@ -882,7 +1090,18 @@ internal sealed partial class TranslogDurabilityConverter : System.Text.Json.Ser
 			return TranslogDurability.Async;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TranslogDurability)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRequest.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRequest1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TranslogDurability.Request;
+		}
+
+		if (string.Equals(value, MemberAsync.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAsync1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TranslogDurability.Async;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TranslogDurability)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TranslogDurability value, System.Text.Json.JsonSerializerOptions options)

@@ -63,7 +63,23 @@ internal sealed partial class StatsLevelConverter : System.Text.Json.Serializati
 			return StatsLevel.Cluster;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(StatsLevel)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberShards.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Shards;
+		}
+
+		if (string.Equals(value, MemberIndices.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Indices;
+		}
+
+		if (string.Equals(value, MemberCluster.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StatsLevel.Cluster;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(StatsLevel)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StatsLevel value, System.Text.Json.JsonSerializerOptions options)

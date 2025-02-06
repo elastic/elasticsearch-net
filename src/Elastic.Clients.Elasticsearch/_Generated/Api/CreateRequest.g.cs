@@ -87,6 +87,36 @@ public sealed partial class CreateRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+internal sealed partial class CreateRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<CreateRequest<TDocument>>
+{
+	public override CreateRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new CreateRequest<TDocument> { Document = reader.ReadValue<TDocument>(options, typeof(SourceMarker<TDocument>)) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, CreateRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Document, typeof(SourceMarker<TDocument>));
+	}
+}
+
+internal sealed partial class CreateRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(CreateRequest<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(CreateRequestConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
 /// <summary>
 /// <para>
 /// Index a document.
@@ -94,7 +124,8 @@ public sealed partial class CreateRequestParameters : RequestParameters
 /// If the target is an index and the document already exists, the request updates the document and increments its version.
 /// </para>
 /// </summary>
-public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(CreateRequestConverterFactory))]
+public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>
 {
 	public CreateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
@@ -118,7 +149,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Unique identifier for the document.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
@@ -128,7 +158,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// If the target doesn’t exist and doesn’t match a data stream template, this request creates the index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
@@ -138,7 +167,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
@@ -147,7 +175,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -155,7 +182,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -163,7 +189,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -172,7 +197,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// The specified version must match the current version of the document for the request to succeed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
@@ -180,7 +204,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Specific version type: <c>external</c>, <c>external_gte</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
@@ -189,19 +212,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	public TDocument Document { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		settings.SourceSerializer.Serialize(Document, writer);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		Document = settings.SourceSerializer.Deserialize<TDocument>(ref reader);
-	}
 }
 
 /// <summary>

@@ -63,7 +63,23 @@ internal sealed partial class XPackCategoryConverter : System.Text.Json.Serializ
 			return XPackCategory.Build;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(XPackCategory)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLicense.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.License;
+		}
+
+		if (string.Equals(value, MemberFeatures.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.Features;
+		}
+
+		if (string.Equals(value, MemberBuild.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return XPackCategory.Build;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(XPackCategory)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, XPackCategory value, System.Text.Json.JsonSerializerOptions options)

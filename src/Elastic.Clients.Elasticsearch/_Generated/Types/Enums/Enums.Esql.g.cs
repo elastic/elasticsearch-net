@@ -103,7 +103,48 @@ internal sealed partial class EsqlFormatConverter : System.Text.Json.Serializati
 			return EsqlFormat.Arrow;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(EsqlFormat)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYaml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Yaml;
+		}
+
+		if (string.Equals(value, MemberTxt.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Txt;
+		}
+
+		if (string.Equals(value, MemberTsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Tsv;
+		}
+
+		if (string.Equals(value, MemberSmile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Smile;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Json;
+		}
+
+		if (string.Equals(value, MemberCsv.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Csv;
+		}
+
+		if (string.Equals(value, MemberCbor.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Cbor;
+		}
+
+		if (string.Equals(value, MemberArrow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return EsqlFormat.Arrow;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(EsqlFormat)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, EsqlFormat value, System.Text.Json.JsonSerializerOptions options)

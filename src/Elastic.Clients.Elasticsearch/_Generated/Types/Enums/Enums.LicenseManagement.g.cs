@@ -71,7 +71,28 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			return LicenseStatus.Active;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(LicenseStatus)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberValid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseStatus.Valid;
+		}
+
+		if (string.Equals(value, MemberInvalid.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseStatus.Invalid;
+		}
+
+		if (string.Equals(value, MemberExpired.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseStatus.Expired;
+		}
+
+		if (string.Equals(value, MemberActive.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseStatus.Active;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(LicenseStatus)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, LicenseStatus value, System.Text.Json.JsonSerializerOptions options)
@@ -179,7 +200,53 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			return LicenseType.Basic;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(LicenseType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTrial.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Trial;
+		}
+
+		if (string.Equals(value, MemberStandard.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Standard;
+		}
+
+		if (string.Equals(value, MemberSilver.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Silver;
+		}
+
+		if (string.Equals(value, MemberPlatinum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Platinum;
+		}
+
+		if (string.Equals(value, MemberMissing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Missing;
+		}
+
+		if (string.Equals(value, MemberGold.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Gold;
+		}
+
+		if (string.Equals(value, MemberEnterprise.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Enterprise;
+		}
+
+		if (string.Equals(value, MemberDev.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Dev;
+		}
+
+		if (string.Equals(value, MemberBasic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return LicenseType.Basic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(LicenseType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, LicenseType value, System.Text.Json.JsonSerializerOptions options)

@@ -40,12 +40,26 @@ public sealed partial class PutSearchApplicationRequestParameters : RequestParam
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
+internal sealed partial class PutSearchApplicationRequestConverter : System.Text.Json.Serialization.JsonConverter<PutSearchApplicationRequest>
+{
+	public override PutSearchApplicationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new PutSearchApplicationRequest { SearchApplication = reader.ReadValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutSearchApplicationRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.SearchApplication);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a search application.
 /// </para>
 /// </summary>
-public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(PutSearchApplicationRequestConverter))]
+public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>
 {
 	public PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
@@ -69,7 +83,6 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 	/// The name of the search application to be created or updated.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
@@ -77,19 +90,8 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, SearchApplication, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		SearchApplication = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(ref reader);
-	}
 }
 
 /// <summary>

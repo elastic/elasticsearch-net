@@ -65,7 +65,18 @@ internal sealed partial class ResultPositionConverter : System.Text.Json.Seriali
 			return ResultPosition.Head;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ResultPosition)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTail.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ResultPosition.Tail;
+		}
+
+		if (string.Equals(value, MemberHead.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ResultPosition.Head;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ResultPosition)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ResultPosition value, System.Text.Json.JsonSerializerOptions options)

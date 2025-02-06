@@ -51,12 +51,26 @@ public sealed partial class PutIpLocationDatabaseRequestParameters : RequestPara
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutIpLocationDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<PutIpLocationDatabaseRequest>
+{
+	public override PutIpLocationDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new PutIpLocationDatabaseRequest { Configuration = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, PutIpLocationDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Configuration);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update an IP geolocation database configuration.
 /// </para>
 /// </summary>
-public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLocationDatabaseRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(PutIpLocationDatabaseRequestConverter))]
+public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLocationDatabaseRequestParameters>
 {
 	public PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
@@ -80,7 +94,6 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// The database configuration identifier.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
@@ -90,7 +103,6 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -100,19 +112,8 @@ public sealed partial class PutIpLocationDatabaseRequest : PlainRequest<PutIpLoc
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Configuration { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Configuration, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		Configuration = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(ref reader);
-	}
 }
 
 /// <summary>

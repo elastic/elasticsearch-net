@@ -34,12 +34,26 @@ public sealed partial class ValidateDetectorRequestParameters : RequestParameter
 {
 }
 
+internal sealed partial class ValidateDetectorRequestConverter : System.Text.Json.Serialization.JsonConverter<ValidateDetectorRequest>
+{
+	public override ValidateDetectorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new ValidateDetectorRequest { Detector = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(options) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, ValidateDetectorRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Detector);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Validate an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetectorRequestParameters>, ISelfTwoWaySerializable
+[JsonConverter(typeof(ValidateDetectorRequestConverter))]
+public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetectorRequestParameters>
 {
 	[JsonConstructor]
 	internal ValidateDetectorRequest()
@@ -55,16 +69,6 @@ public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetec
 	internal override string OperationName => "ml.validate_detector";
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
-
-	void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Detector, options);
-	}
-
-	void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		Detector = settings.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(ref reader);
-	}
 }
 
 /// <summary>

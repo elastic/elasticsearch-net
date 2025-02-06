@@ -71,7 +71,28 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 			return ActionStatusOptions.Failure;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ActionStatusOptions)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Throttled;
+		}
+
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Success;
+		}
+
+		if (string.Equals(value, MemberSimulated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Simulated;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ActionStatusOptions.Failure;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ActionStatusOptions)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ActionStatusOptions value, System.Text.Json.JsonSerializerOptions options)

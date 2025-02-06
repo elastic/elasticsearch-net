@@ -55,7 +55,18 @@ internal sealed partial class FollowerIndexStatusConverter : System.Text.Json.Se
 			return FollowerIndexStatus.Active;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(FollowerIndexStatus)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPaused.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FollowerIndexStatus.Paused;
+		}
+
+		if (string.Equals(value, MemberActive.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return FollowerIndexStatus.Active;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(FollowerIndexStatus)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, FollowerIndexStatus value, System.Text.Json.JsonSerializerOptions options)

@@ -71,7 +71,28 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 			return AccessTokenGrantType.ClientCredentials;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(AccessTokenGrantType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRefreshToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.RefreshToken;
+		}
+
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.Password;
+		}
+
+		if (string.Equals(value, MemberKerberos.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.Kerberos;
+		}
+
+		if (string.Equals(value, MemberClientCredentials.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return AccessTokenGrantType.ClientCredentials;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(AccessTokenGrantType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, AccessTokenGrantType value, System.Text.Json.JsonSerializerOptions options)
@@ -123,7 +144,18 @@ internal sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serial
 			return ApiKeyGrantType.AccessToken;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ApiKeyGrantType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyGrantType.Password;
+		}
+
+		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyGrantType.AccessToken;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ApiKeyGrantType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ApiKeyGrantType value, System.Text.Json.JsonSerializerOptions options)
@@ -169,7 +201,18 @@ internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serializati
 			return ApiKeyType.CrossCluster;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ApiKeyType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyType.Rest;
+		}
+
+		if (string.Equals(value, MemberCrossCluster.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ApiKeyType.CrossCluster;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ApiKeyType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ApiKeyType value, System.Text.Json.JsonSerializerOptions options)
@@ -308,7 +351,18 @@ internal sealed partial class GrantTypeConverter : System.Text.Json.Serializatio
 			return GrantType.AccessToken;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(GrantType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GrantType.Password;
+		}
+
+		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GrantType.AccessToken;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GrantType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GrantType value, System.Text.Json.JsonSerializerOptions options)
@@ -400,7 +454,18 @@ internal sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json
 			return RemoteClusterPrivilege.MonitorEnrich;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(RemoteClusterPrivilege)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMonitorStats.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RemoteClusterPrivilege.MonitorStats;
+		}
+
+		if (string.Equals(value, MemberMonitorEnrich.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RemoteClusterPrivilege.MonitorEnrich;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RemoteClusterPrivilege)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RemoteClusterPrivilege value, System.Text.Json.JsonSerializerOptions options)
@@ -471,7 +536,18 @@ internal sealed partial class TemplateFormatConverter : System.Text.Json.Seriali
 			return TemplateFormat.Json;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TemplateFormat)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TemplateFormat.String;
+		}
+
+		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TemplateFormat.Json;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TemplateFormat)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TemplateFormat value, System.Text.Json.JsonSerializerOptions options)

@@ -84,7 +84,23 @@ internal sealed partial class BoundaryScannerConverter : System.Text.Json.Serial
 			return BoundaryScanner.Chars;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(BoundaryScanner)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberWord.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return BoundaryScanner.Word;
+		}
+
+		if (string.Equals(value, MemberSentence.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return BoundaryScanner.Sentence;
+		}
+
+		if (string.Equals(value, MemberChars.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return BoundaryScanner.Chars;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(BoundaryScanner)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, BoundaryScanner value, System.Text.Json.JsonSerializerOptions options)
@@ -133,7 +149,18 @@ internal sealed partial class HighlighterEncoderConverter : System.Text.Json.Ser
 			return HighlighterEncoder.Default;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(HighlighterEncoder)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberHtml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterEncoder.Html;
+		}
+
+		if (string.Equals(value, MemberDefault.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterEncoder.Default;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(HighlighterEncoder)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlighterEncoder value, System.Text.Json.JsonSerializerOptions options)
@@ -179,7 +206,18 @@ internal sealed partial class HighlighterFragmenterConverter : System.Text.Json.
 			return HighlighterFragmenter.Simple;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(HighlighterFragmenter)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSpan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterFragmenter.Span;
+		}
+
+		if (string.Equals(value, MemberSimple.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterFragmenter.Simple;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(HighlighterFragmenter)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlighterFragmenter value, System.Text.Json.JsonSerializerOptions options)
@@ -217,7 +255,13 @@ internal sealed partial class HighlighterOrderConverter : System.Text.Json.Seria
 			return HighlighterOrder.Score;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(HighlighterOrder)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterOrder.Score;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(HighlighterOrder)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlighterOrder value, System.Text.Json.JsonSerializerOptions options)
@@ -252,7 +296,13 @@ internal sealed partial class HighlighterTagsSchemaConverter : System.Text.Json.
 			return HighlighterTagsSchema.Styled;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(HighlighterTagsSchema)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStyled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return HighlighterTagsSchema.Styled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(HighlighterTagsSchema)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, HighlighterTagsSchema value, System.Text.Json.JsonSerializerOptions options)
@@ -390,7 +440,33 @@ internal sealed partial class ScoreModeConverter : System.Text.Json.Serializatio
 			return ScoreMode.Avg;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ScoreMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTotal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ScoreMode.Total;
+		}
+
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ScoreMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ScoreMode.Min;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ScoreMode.Max;
+		}
+
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ScoreMode.Avg;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ScoreMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ScoreMode value, System.Text.Json.JsonSerializerOptions options)
@@ -494,7 +570,33 @@ internal sealed partial class StringDistanceConverter : System.Text.Json.Seriali
 			return StringDistance.DamerauLevenshtein;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(StringDistance)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNgram.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StringDistance.Ngram;
+		}
+
+		if (string.Equals(value, MemberLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StringDistance.Levenshtein;
+		}
+
+		if (string.Equals(value, MemberJaroWinkler.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StringDistance.JaroWinkler;
+		}
+
+		if (string.Equals(value, MemberInternal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StringDistance.Internal;
+		}
+
+		if (string.Equals(value, MemberDamerauLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return StringDistance.DamerauLevenshtein;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(StringDistance)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, StringDistance value, System.Text.Json.JsonSerializerOptions options)
@@ -559,7 +661,18 @@ internal sealed partial class SuggestSortConverter : System.Text.Json.Serializat
 			return SuggestSort.Frequency;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SuggestSort)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SuggestSort.Score;
+		}
+
+		if (string.Equals(value, MemberFrequency.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SuggestSort.Frequency;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SuggestSort)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SuggestSort value, System.Text.Json.JsonSerializerOptions options)
@@ -615,7 +728,18 @@ internal sealed partial class TotalHitsRelationConverter : System.Text.Json.Seri
 			return TotalHitsRelation.Eq;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TotalHitsRelation)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TotalHitsRelation.Gte;
+		}
+
+		if (string.Equals(value, MemberEq.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TotalHitsRelation.Eq;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TotalHitsRelation)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TotalHitsRelation value, System.Text.Json.JsonSerializerOptions options)

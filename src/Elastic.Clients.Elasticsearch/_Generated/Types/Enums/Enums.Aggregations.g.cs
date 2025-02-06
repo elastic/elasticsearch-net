@@ -111,7 +111,48 @@ internal sealed partial class CalendarIntervalConverter : System.Text.Json.Seria
 			return CalendarInterval.Day;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(CalendarInterval)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYear.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberYear1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Year;
+		}
+
+		if (string.Equals(value, MemberWeek.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberWeek1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Week;
+		}
+
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberSecond1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Second;
+		}
+
+		if (string.Equals(value, MemberQuarter.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberQuarter1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Quarter;
+		}
+
+		if (string.Equals(value, MemberMonth.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMonth1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Month;
+		}
+
+		if (string.Equals(value, MemberMinute.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMinute1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Minute;
+		}
+
+		if (string.Equals(value, MemberHour.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberHour1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Hour;
+		}
+
+		if (string.Equals(value, MemberDay.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberDay1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CalendarInterval.Day;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(CalendarInterval)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CalendarInterval value, System.Text.Json.JsonSerializerOptions options)
@@ -224,7 +265,33 @@ internal sealed partial class CardinalityExecutionModeConverter : System.Text.Js
 			return CardinalityExecutionMode.Direct;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(CardinalityExecutionMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSegmentOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CardinalityExecutionMode.SegmentOrdinals;
+		}
+
+		if (string.Equals(value, MemberSaveTimeHeuristic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CardinalityExecutionMode.SaveTimeHeuristic;
+		}
+
+		if (string.Equals(value, MemberSaveMemoryHeuristic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CardinalityExecutionMode.SaveMemoryHeuristic;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CardinalityExecutionMode.GlobalOrdinals;
+		}
+
+		if (string.Equals(value, MemberDirect.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return CardinalityExecutionMode.Direct;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(CardinalityExecutionMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, CardinalityExecutionMode value, System.Text.Json.JsonSerializerOptions options)
@@ -304,7 +371,23 @@ internal sealed partial class GapPolicyConverter : System.Text.Json.Serializatio
 			return GapPolicy.InsertZeros;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(GapPolicy)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSkip.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GapPolicy.Skip;
+		}
+
+		if (string.Equals(value, MemberKeepValues.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GapPolicy.KeepValues;
+		}
+
+		if (string.Equals(value, MemberInsertZeros.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return GapPolicy.InsertZeros;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(GapPolicy)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, GapPolicy value, System.Text.Json.JsonSerializerOptions options)
@@ -385,7 +468,38 @@ internal sealed partial class MinimumIntervalConverter : System.Text.Json.Serial
 			return MinimumInterval.Day;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(MinimumInterval)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberYear.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Year;
+		}
+
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Second;
+		}
+
+		if (string.Equals(value, MemberMonth.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Month;
+		}
+
+		if (string.Equals(value, MemberMinute.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Minute;
+		}
+
+		if (string.Equals(value, MemberHour.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Hour;
+		}
+
+		if (string.Equals(value, MemberDay.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MinimumInterval.Day;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(MinimumInterval)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MinimumInterval value, System.Text.Json.JsonSerializerOptions options)
@@ -451,7 +565,23 @@ internal sealed partial class MissingOrderConverter : System.Text.Json.Serializa
 			return MissingOrder.Default;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(MissingOrder)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MissingOrder.Last;
+		}
+
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MissingOrder.First;
+		}
+
+		if (string.Equals(value, MemberDefault.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return MissingOrder.Default;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(MissingOrder)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, MissingOrder value, System.Text.Json.JsonSerializerOptions options)
@@ -562,7 +692,38 @@ internal sealed partial class NormalizeMethodConverter : System.Text.Json.Serial
 			return NormalizeMethod.Mean;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(NormalizeMethod)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberZScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.ZScore;
+		}
+
+		if (string.Equals(value, MemberSoftmax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.Softmax;
+		}
+
+		if (string.Equals(value, MemberRescale0100.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.Rescale0100;
+		}
+
+		if (string.Equals(value, MemberRescale01.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.Rescale01;
+		}
+
+		if (string.Equals(value, MemberPercentOfSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.PercentOfSum;
+		}
+
+		if (string.Equals(value, MemberMean.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return NormalizeMethod.Mean;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(NormalizeMethod)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, NormalizeMethod value, System.Text.Json.JsonSerializerOptions options)
@@ -630,7 +791,18 @@ internal sealed partial class RateModeConverter : System.Text.Json.Serialization
 			return RateMode.Sum;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(RateMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberValueCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RateMode.ValueCount;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return RateMode.Sum;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(RateMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, RateMode value, System.Text.Json.JsonSerializerOptions options)
@@ -699,7 +871,23 @@ internal sealed partial class SamplerAggregationExecutionHintConverter : System.
 			return SamplerAggregationExecutionHint.BytesHash;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(SamplerAggregationExecutionHint)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMap.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SamplerAggregationExecutionHint.Map;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SamplerAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		if (string.Equals(value, MemberBytesHash.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return SamplerAggregationExecutionHint.BytesHash;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(SamplerAggregationExecutionHint)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, SamplerAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
@@ -758,7 +946,18 @@ internal sealed partial class TermsAggregationCollectModeConverter : System.Text
 			return TermsAggregationCollectMode.BreadthFirst;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TermsAggregationCollectMode)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDepthFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationCollectMode.DepthFirst;
+		}
+
+		if (string.Equals(value, MemberBreadthFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationCollectMode.BreadthFirst;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TermsAggregationCollectMode)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsAggregationCollectMode value, System.Text.Json.JsonSerializerOptions options)
@@ -820,7 +1019,28 @@ internal sealed partial class TermsAggregationExecutionHintConverter : System.Te
 			return TermsAggregationExecutionHint.GlobalOrdinals;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TermsAggregationExecutionHint)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMap.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationExecutionHint.Map;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinalsLowCardinality.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinalsHash.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationExecutionHint.GlobalOrdinalsHash;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TermsAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TermsAggregationExecutionHint)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TermsAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
@@ -895,7 +1115,23 @@ internal sealed partial class TTestTypeConverter : System.Text.Json.Serializatio
 			return TTestType.Heteroscedastic;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(TTestType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPaired.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TTestType.Paired;
+		}
+
+		if (string.Equals(value, MemberHomoscedastic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TTestType.Homoscedastic;
+		}
+
+		if (string.Equals(value, MemberHeteroscedastic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return TTestType.Heteroscedastic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(TTestType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, TTestType value, System.Text.Json.JsonSerializerOptions options)
@@ -1008,7 +1244,58 @@ internal sealed partial class ValueTypeConverter : System.Text.Json.Serializatio
 			return ValueType.Boolean;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown value '{reader.GetString()}' for enum '{nameof(ValueType)}'.");
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.String;
+		}
+
+		if (string.Equals(value, MemberNumeric.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Numeric;
+		}
+
+		if (string.Equals(value, MemberNumber.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Number;
+		}
+
+		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Long;
+		}
+
+		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Ip;
+		}
+
+		if (string.Equals(value, MemberGeoPoint.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.GeoPoint;
+		}
+
+		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Double;
+		}
+
+		if (string.Equals(value, MemberDateNanos.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.DateNanos;
+		}
+
+		if (string.Equals(value, MemberDate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Date;
+		}
+
+		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return ValueType.Boolean;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(ValueType)}'.");
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, ValueType value, System.Text.Json.JsonSerializerOptions options)
