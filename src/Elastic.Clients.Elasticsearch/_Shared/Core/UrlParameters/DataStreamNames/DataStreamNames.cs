@@ -6,16 +6,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(DataStreamNamesConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class DataStreamNames : IUrlParameter, IEnumerable<DataStreamName>, IEquatable<DataStreamNames>
+public sealed class DataStreamNames :
+	IUrlParameter,
+	IEnumerable<DataStreamName>,
+	IEquatable<DataStreamNames>
+#if NET7_0_OR_GREATER
+	, IParsable<DataStreamNames>
+#endif
 {
 	internal readonly IList<DataStreamName> Names;
 
@@ -96,6 +104,44 @@ public sealed class DataStreamNames : IUrlParameter, IEnumerable<DataStreamName>
 	}
 
 	string IUrlParameter.GetString(ITransportConfiguration? settings) => ToString();
+
+	#region IParsable
+
+	public static DataStreamNames Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out DataStreamNames? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new DataStreamNames();
+			return true;
+		}
+
+		var names = new List<DataStreamName>();
+		foreach (var item in list)
+		{
+			if (!DataStreamName.TryParse(item, provider, out var name))
+			{
+				result = null;
+				return false;
+			}
+
+			names.Add(name);
+		}
+
+		result = new DataStreamNames(names);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class DataStreamNamesConverter : JsonConverter<DataStreamNames>

@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -19,6 +20,9 @@ public sealed class Fields :
 	IEquatable<Fields>,
 	IEnumerable<Field>,
 	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Fields>
+#endif
 {
 	internal readonly List<Field> ListOfFields;
 
@@ -182,6 +186,44 @@ public sealed class Fields :
 	public IEnumerator<Field> GetEnumerator() => ListOfFields.GetEnumerator();
 
 	#endregion IEnumerable
+
+	#region IParsable
+
+	public static Fields Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Fields? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new Fields();
+			return true;
+		}
+
+		var fields = new List<Field>();
+		foreach (var item in list)
+		{
+			if (!Field.TryParse(item, provider, out var field))
+			{
+				result = null;
+				return false;
+			}
+
+			fields.Add(field);
+		}
+
+		result = new Fields(fields);
+		return true;
+	}
+
+	#endregion IParsable
 
 	#region IUrlParameter
 

@@ -4,15 +4,22 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(ScrollIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class ScrollId : IEquatable<ScrollId>, IUrlParameter
+public sealed class ScrollId :
+	IEquatable<ScrollId>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<ScrollId>
+#endif
 {
 	internal ScrollId(string scrollId) => Id = scrollId;
 
@@ -53,6 +60,26 @@ public sealed class ScrollId : IEquatable<ScrollId>, IUrlParameter
 			return (TypeHashCode * 23) ^ (Id.GetHashCode());
 		}
 	}
+
+	#region IParsable
+
+	public static ScrollId Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out ScrollId? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new ScrollId(s);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class ScrollIdConverter : JsonConverter<ScrollId>

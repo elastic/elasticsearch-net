@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,7 +12,11 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(OpTypeConverter))]
-public partial struct OpType : IStringable
+public readonly struct OpType :
+	IStringable
+#if NET7_0_OR_GREATER
+	, IParsable<OpType>
+#endif
 {
 	public static OpType Index = new("index");
 	public static OpType Create = new("create");
@@ -23,6 +28,27 @@ public partial struct OpType : IStringable
 	public static implicit operator OpType(string v) => new(v);
 
 	public string GetString() => Value ?? string.Empty;
+
+	#region IParsable
+
+	public static OpType Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		out OpType result)
+	{
+		if (s is null)
+		{
+			result = default;
+			return false;
+		}
+
+		result = new OpType(s);
+		return string.Equals(s, "index", StringComparison.OrdinalIgnoreCase) ||
+			   string.Equals(s, "create", StringComparison.OrdinalIgnoreCase);
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class OpTypeConverter :

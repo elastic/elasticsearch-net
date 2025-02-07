@@ -58,7 +58,11 @@ public abstract class Descriptor<TDescriptor> : Descriptor
 	protected TDescriptor Self => _self;
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => FluentAssign.Assign(_self, value, assign);
+	protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign)
+	{
+		assign(_self, value);
+		return _self;
+	}
 }
 
 public abstract class SerializableDescriptor<TDescriptor> : Descriptor<TDescriptor>, ISelfSerializable

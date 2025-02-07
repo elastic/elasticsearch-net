@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -17,7 +18,13 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(ScrollIdsConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class ScrollIds : IUrlParameter, IEnumerable<ScrollId>, IEquatable<ScrollIds>
+public sealed class ScrollIds :
+	IUrlParameter,
+	IEnumerable<ScrollId>,
+	IEquatable<ScrollIds>
+#if NET7_0_OR_GREATER
+	, IParsable<ScrollIds>
+#endif
 {
 	internal readonly IList<ScrollId> Ids;
 
@@ -97,6 +104,44 @@ public sealed class ScrollIds : IUrlParameter, IEnumerable<ScrollId>, IEquatable
 	}
 
 	string IUrlParameter.GetString(ITransportConfiguration? settings) => ToString();
+
+	#region IParsable
+
+	public static ScrollIds Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out ScrollIds? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new ScrollIds();
+			return true;
+		}
+
+		var ids = new List<ScrollId>();
+		foreach (var item in list)
+		{
+			if (!ScrollId.TryParse(item, provider, out var name))
+			{
+				result = null;
+				return false;
+			}
+
+			ids.Add(name);
+		}
+
+		result = new ScrollIds(ids);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class ScrollIdsConverter :

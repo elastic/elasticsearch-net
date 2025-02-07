@@ -24,6 +24,9 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class Field :
 	IEquatable<Field>,
 	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Field>
+#endif
 {
 	private readonly object _comparisonValue;
 	private readonly Type? _type;
@@ -196,6 +199,26 @@ public sealed class Field :
 	}
 
 	#endregion Equality
+
+	#region IParsable
+
+	public static Field Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Field? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Field(s);
+		return true;
+	}
+
+	#endregion IParsable
 
 	#region IUrlParameter
 
