@@ -4,7 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -29,7 +33,7 @@ public partial class SearchRequest
 	}
 }
 
-// TODO: [JsonConverter(typeof(SearchRequestConverter))]
+[JsonConverter(typeof(SearchRequestOfTConverterFactory))]
 public partial class SearchRequest<TInferDocument> : SearchRequest
 {
 	public SearchRequest(Indices? indices) : base(indices)
@@ -61,7 +65,7 @@ public sealed partial class SearchRequestDescriptor<TDocument>
 	internal override void BeforeRequest()
 	{
 		if (AggregationsValue is not null || /*AggregationsDescriptor is not null || AggregationsDescriptorAction is not null ||*/
-		    SuggestValue is not null || SuggestDescriptor is not null || SuggestDescriptorAction is not null)
+			SuggestValue is not null || SuggestDescriptor is not null || SuggestDescriptorAction is not null)
 		{
 			TypedKeys(true);
 		}
@@ -76,4 +80,28 @@ public sealed partial class SearchRequestDescriptor<TDocument>
 
 		return base.ResolveUrl(routeValues, settings);
 	}
+}
+
+internal sealed class SearchRequestOfTConverterFactory :
+	JsonConverterFactory
+{
+	public override bool CanConvert(Type typeToConvert) =>
+		typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SearchRequest<>);
+
+	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+
+		return (JsonConverter)Activator.CreateInstance(typeof(SearchRequestOfTConverter<>).MakeGenericType(args[0]));
+	}
+}
+
+internal sealed class SearchRequestOfTConverter<T> :
+	JsonConverter<SearchRequest<T>>
+{
+	public override SearchRequest<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+		throw new NotSupportedException();
+
+	public override void Write(Utf8JsonWriter writer, SearchRequest<T> value, JsonSerializerOptions options) =>
+		writer.WriteValue(options, (SearchRequest)value);
 }
