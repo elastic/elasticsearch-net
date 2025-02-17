@@ -168,10 +168,10 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	{
 	}
 
-	//[JsonConstructor]
-	//internal IndexRequest()
-	//{
-	//}
+	[JsonConstructor]
+	public IndexRequest() : this(typeof(TDocument))
+	{
+	}
 
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceIndex;
 

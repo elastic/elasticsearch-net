@@ -202,7 +202,7 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 	}
 
 	[JsonConstructor]
-	internal TermVectorsRequest()
+	public TermVectorsRequest() : this(typeof(TDocument))
 	{
 	}
 
